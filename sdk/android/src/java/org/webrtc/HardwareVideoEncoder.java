@@ -12,6 +12,7 @@ package org.webrtc;
 
 import android.media.MediaCodec;
 import android.media.MediaCodecInfo;
+import android.media.MediaCodecInfo.CodecCapabilities;
 import android.media.MediaFormat;
 import android.opengl.GLES20;
 import android.os.Build;
@@ -41,6 +42,13 @@ class HardwareVideoEncoder implements VideoEncoder {
 
   private static final int VIDEO_AVC_PROFILE_HIGH = 8;
   private static final int VIDEO_AVC_LEVEL_3 = 0x100;
+
+  // Encoding statistics feature added in API v33.
+  private static final String FEATURE_EncodingStatistics = "encoding-statistics";
+  private static final String KEY_VIDEO_ENCODING_STATISTICS_LEVEL =
+      "video-encoding-statistics-level";
+  private static final int VIDEO_ENCODING_STATISTICS_LEVEL_1 = 1;
+  private static final String KEY_VIDEO_QP_AVERAGE = "video-qp-average";
 
   private static final int MAX_VIDEO_FRAMERATE = 30;
 
@@ -168,6 +176,9 @@ class HardwareVideoEncoder implements VideoEncoder {
   // value to send exceptions thrown during release back to the encoder thread.
   @Nullable private volatile Exception shutdownException;
 
+  // True if collection of encoding statistics is enabled.
+  private boolean isEncodingStatisticsEnabled;
+
   /**
    * Creates a new HardwareVideoEncoder with the given codecName, codecType, colorFormat, key frame
    * intervals, and bitrateAdjuster.
@@ -220,8 +231,9 @@ class HardwareVideoEncoder implements VideoEncoder {
     adjustedBitrate = bitrateAdjuster.getAdjustedBitrateBps();
 
     Logging.d(TAG,
-        "initEncode: " + width + " x " + height + ". @ " + settings.startBitrate
-            + "kbps. Fps: " + settings.maxFramerate + " Use surface mode: " + useSurfaceMode);
+        "initEncode: " + codecType.mimeType() + " " + width + " x " + height + ". @ "
+            + settings.startBitrate + "kbps. Fps: " + settings.maxFramerate
+            + " Use surface mode: " + useSurfaceMode);
     return initEncodeInternal();
   }
 
@@ -230,6 +242,8 @@ class HardwareVideoEncoder implements VideoEncoder {
 
     nextPresentationTimestampUs = 0;
     lastKeyFrameNs = -1;
+
+    isEncodingStatisticsEnabled = false;
 
     try {
       codec = mediaCodecWrapperFactory.createByCodecName(codecName);
@@ -263,6 +277,24 @@ class HardwareVideoEncoder implements VideoEncoder {
             Logging.w(TAG, "Unknown profile level id: " + profileLevelId);
         }
       }
+
+      if (Build.VERSION.SDK_INT >= 33) {
+        // WebRTC quality scaler, which adjusts resolution and/or frame rate based on encoded QP,
+        // expects QP to be in native bitstream range for given codec. Native QP range for VP8 is
+        // [0, 127] and for VP9 is [0, 255]. MediaCodec VP8 and VP9 encoders (perhaps not all)
+        // return QP in range [0, 64], which is libvpx API specific range. Due to this mismatch we
+        // can't use QP feedback from these codecs.
+        if (codecType != VideoCodecMimeType.VP8 && codecType != VideoCodecMimeType.VP9) {
+          MediaCodecInfo codecInfo = codec.getCodecInfo();
+          CodecCapabilities codecCaps = codecInfo.getCapabilitiesForType(codecType.mimeType());
+          if (codecCaps.isFeatureSupported(FEATURE_EncodingStatistics)) {
+            format.setInteger(
+                KEY_VIDEO_ENCODING_STATISTICS_LEVEL, VIDEO_ENCODING_STATISTICS_LEVEL_1);
+            isEncodingStatisticsEnabled = true;
+          }
+        }
+      }
+
       Logging.d(TAG, "Format: " + format);
       codec.configure(
           format, null /* surface */, null /* crypto */, MediaCodec.CONFIGURE_FLAG_ENCODE);
@@ -611,21 +643,30 @@ class HardwareVideoEncoder implements VideoEncoder {
 
         outputBuffersBusyCount.increment();
         EncodedImage.Builder builder = outputBuilders.poll();
-        EncodedImage encodedImage = builder
-                                        .setBuffer(frameBuffer,
-                                            () -> {
-                                              // This callback should not throw any exceptions since
-                                              // it may be called on an arbitrary thread.
-                                              // Check bug webrtc:11230 for more details.
-                                              try {
-                                                codec.releaseOutputBuffer(index, false);
-                                              } catch (Exception e) {
-                                                Logging.e(TAG, "releaseOutputBuffer failed", e);
-                                              }
-                                              outputBuffersBusyCount.decrement();
-                                            })
-                                        .setFrameType(frameType)
-                                        .createEncodedImage();
+        builder
+            .setBuffer(frameBuffer,
+                () -> {
+                  // This callback should not throw any exceptions since
+                  // it may be called on an arbitrary thread.
+                  // Check bug webrtc:11230 for more details.
+                  try {
+                    codec.releaseOutputBuffer(index, false);
+                  } catch (Exception e) {
+                    Logging.e(TAG, "releaseOutputBuffer failed", e);
+                  }
+                  outputBuffersBusyCount.decrement();
+                })
+            .setFrameType(frameType);
+
+        if (isEncodingStatisticsEnabled) {
+          MediaFormat format = codec.getOutputFormat(index);
+          if (format.containsKey(KEY_VIDEO_QP_AVERAGE)) {
+            int qp = format.getInteger(KEY_VIDEO_QP_AVERAGE);
+            builder.setQp(qp);
+          }
+        }
+
+        EncodedImage encodedImage = builder.createEncodedImage();
         // TODO(mellem):  Set codec-specific info.
         callback.onEncodedFrame(encodedImage, new CodecSpecificInfo());
         // Note that the callback may have retained the image.
