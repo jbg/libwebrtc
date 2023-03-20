@@ -85,6 +85,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "06b8f71b_5f4c5759",
+        "filename": "pc/sctp_utils.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-03-20T17:43:17Z",
+      "side": 1,
+      "message": "thinking a bit about it, yes, Detach in constructor for StreamId makes sense (otherwise it would be hard to pass StreamId value between sequences), \nyes, with special constructor that creates SequenceChecker in detached state it would be nicer,\n\nBut I still feel SequenceChecker doesn\u0027t belong to a type that is designed just to pass data around, to the type without active logic.\n\nhttp://go/cpp-primer#thread-compatible\n“Data classes should be thread-compatible by default to minimize unnecessary locking and match the behavior of builtin types and the STL container classes.”",
+      "parentUuid": "c5f476ef_fbeff382",
+      "revId": "d8a3d3511d82040e0928f6c236c51cdb75b4582d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d41e7231_83919dff",
         "filename": "pc/sctp_utils.h",
         "patchSetId": 9
