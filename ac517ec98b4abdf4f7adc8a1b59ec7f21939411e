@@ -160,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6751716c_34bf24dd",
+        "filename": "pc/sctp_data_channel.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-20T10:07:00Z",
+      "side": 1,
+      "message": "That logic depends on multiple assumptions that are very far apart in the code (that initial state is kConnecting, and that handshake state will jump straight to kHandshakeReady in cosntructor if the role is kNone, which is from base.negotiated in InternalDataChannelInit constructor - if anyone modifies any of these places,it is good to have a DCHECK that breaks if they did not connect all the dots.\n\nFrankly, I don\u0027t understand why this does not fail for any reasonable use case - if we have a prenegotiated channel and call UpdateState before we\u0027re connected to transport, it SHOULD fail.\n\nBut perhaps connecting to transport is the first event that causes UpdateState() to be called.",
+      "parentUuid": "2ab655cc_8edc32f6",
+      "revId": "ac517ec98b4abdf4f7adc8a1b59ec7f21939411e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1999af46_1702f681",
         "filename": "pc/sctp_data_channel.h",
         "patchSetId": 18

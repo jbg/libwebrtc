@@ -123,6 +123,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfa2ab02_016398e5",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 27
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-20T10:07:00Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4f649b77_56b6c0f8",
+      "revId": "1149b1fa77ec3d39cfbb3f402b0e25bdc1b18cf6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e3d68de_3abdeee3",
@@ -189,6 +207,24 @@
       "side": 1,
       "message": "The production code does the same (which is why I made this class mimic that and honor the `set_transport_available()` setting). The other example is the `id` field which can be overwritten.\nAs for the `connected_to_transport` flag, the place where knowledge exists about whether or not a transport is connected to the controller, is with the controller.\nAn alternative could be to not have this as part of the InternalDataChannelInit struct but rather pass it as an argument to `SctpDataChannel::Create` - wdyt?",
       "parentUuid": "101b9fba_48de68a0",
+      "revId": "1149b1fa77ec3d39cfbb3f402b0e25bdc1b18cf6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69036113_1b9f9813",
+        "filename": "pc/test/fake_data_channel_controller.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-20T10:07:00Z",
+      "side": 1,
+      "message": "I like the separate argument better, despite usually being suspicious of adding more parameters to long parameter lists.\n\nBut it\u0027s \"a matter of style\" level, not \"breakage\" level.",
+      "parentUuid": "ac061dc2_e2fbee93",
       "revId": "1149b1fa77ec3d39cfbb3f402b0e25bdc1b18cf6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
