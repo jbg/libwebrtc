@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4f58122b_eda07299",
+        "filename": "logging/rtc_event_log/dependency_descriptor_encoder_decoder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-20T10:31:37Z",
+      "side": 1,
+      "message": "The problem in this case is that we can\u0027t replace an `else if` with that macro.\n\nInstead I would have to keep the `else if` check and then have `RTC_PARSE_CHECK_OR_RETURN_MESSAGE(false, \"Not all required fields present\")` inside the block.\n\nOr I could create a `RTC_PARSE_RETURN` macro that simply returns a `RtcEventLogParseStatus::Error`.",
+      "parentUuid": "7ade5d18_674f71c2",
+      "range": {
+        "startLine": 197,
+        "startChar": 1,
+        "endLine": 199,
+        "endChar": 0
+      },
+      "revId": "1e16fc020dc118ea5da6ba6b901041d52ba40397",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ce6f77f_303ff63a",
         "filename": "logging/rtc_event_log/dependency_descriptor_encoder_decoder.cc",
         "patchSetId": 5
