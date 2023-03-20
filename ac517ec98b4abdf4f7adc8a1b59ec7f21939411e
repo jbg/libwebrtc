@@ -142,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ab655cc_8edc32f6",
+        "filename": "pc/sctp_data_channel.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-20T09:21:07Z",
+      "side": 1,
+      "message": "hmm... I removed it because `kConnecting` is the first state. When the channel id is preconfigured, the state will always be `kConnecting`. I can re-introduce it but do you think that logic does not make sense?",
+      "parentUuid": "d8c2fb7b_3c3eed7f",
+      "revId": "ac517ec98b4abdf4f7adc8a1b59ec7f21939411e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1999af46_1702f681",
         "filename": "pc/sctp_data_channel.h",
         "patchSetId": 18

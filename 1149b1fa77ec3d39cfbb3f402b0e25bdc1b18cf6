@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0fef515_d5894c19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-20T09:21:07Z",
+      "side": 1,
+      "message": "I added a comment to point out where it\u0027s set. If it\u0027s not set correctly, there are a few tests that will break.",
+      "parentUuid": "f2648d0a_69cc860e",
+      "revId": "1149b1fa77ec3d39cfbb3f402b0e25bdc1b18cf6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2fa07301_e1d538db",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-03-20T05:10:02Z",
       "side": 1,
       "message": "\"Instead of this approach, have a ..\" -\u003e \"Instead of this approach, we should have a..\" - to make it clear that it\u0027s a forward looking statement.",
+      "revId": "1149b1fa77ec3d39cfbb3f402b0e25bdc1b18cf6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2a397bb_abcc616b",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 27
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-20T09:21:07Z",
+      "side": 1,
+      "message": "Done. Also moved this comment now.",
+      "parentUuid": "2fa07301_e1d538db",
       "revId": "1149b1fa77ec3d39cfbb3f402b0e25bdc1b18cf6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -52,6 +88,41 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "189c31bf_28a0e7cc",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 27
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-20T09:21:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d20b298_6778cfde",
+      "revId": "1149b1fa77ec3d39cfbb3f402b0e25bdc1b18cf6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f649b77_56b6c0f8",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 27
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-20T09:21:07Z",
+      "side": 1,
+      "message": "Here\u0027s where the `connected_to_transport` flag is set.",
+      "revId": "1149b1fa77ec3d39cfbb3f402b0e25bdc1b18cf6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e3d68de_3abdeee3",
@@ -69,6 +140,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb71c8e9_11927529",
+        "filename": "pc/sctp_data_channel.cc",
+        "patchSetId": 27
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-20T09:21:07Z",
+      "side": 1,
+      "message": "Thanks. Updated comment to reflect that. I\u0027ll follow up on it in another CL.",
+      "parentUuid": "0e3d68de_3abdeee3",
+      "revId": "1149b1fa77ec3d39cfbb3f402b0e25bdc1b18cf6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "101b9fba_48de68a0",
@@ -82,6 +171,24 @@
       "writtenOn": "2023-03-20T05:10:02Z",
       "side": 1,
       "message": "This looks ugly. You have a controller function overriding the parameter that is passed to it. The connected_to_transport flag should either override the controller\u0027s knowledge or never be visible to the caller.\n\n(This is test code. The good part is that it made me look for and not find where you set connected_to_transport in the init parameters elsewhere.)",
+      "revId": "1149b1fa77ec3d39cfbb3f402b0e25bdc1b18cf6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac061dc2_e2fbee93",
+        "filename": "pc/test/fake_data_channel_controller.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-20T09:21:07Z",
+      "side": 1,
+      "message": "The production code does the same (which is why I made this class mimic that and honor the `set_transport_available()` setting). The other example is the `id` field which can be overwritten.\nAs for the `connected_to_transport` flag, the place where knowledge exists about whether or not a transport is connected to the controller, is with the controller.\nAn alternative could be to not have this as part of the InternalDataChannelInit struct but rather pass it as an argument to `SctpDataChannel::Create` - wdyt?",
+      "parentUuid": "101b9fba_48de68a0",
       "revId": "1149b1fa77ec3d39cfbb3f402b0e25bdc1b18cf6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
