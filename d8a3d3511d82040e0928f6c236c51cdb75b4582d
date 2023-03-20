@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "3e1f2084_19284c4c",
+        "filename": "pc/data_channel_controller.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-20T17:21:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "500090c7_4fd65544",
+      "range": {
+        "startLine": 127,
+        "startChar": 27,
+        "endLine": 127,
+        "endChar": 46
+      },
+      "revId": "d8a3d3511d82040e0928f6c236c51cdb75b4582d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "fcdc7077_45f7d4e9",
         "filename": "pc/sctp_utils.cc",
         "patchSetId": 9
@@ -43,6 +67,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c5f476ef_fbeff382",
+        "filename": "pc/sctp_utils.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-20T17:21:30Z",
+      "side": 1,
+      "message": "One expectation is usage in SctpDataChannel. I\u0027m working on removing thread hops there and expect that at least for some time, a channel ID will be constructed on one thread and used on another.\n\nGood point about `RTC_DCHECK_RUN_ON(\u0026sid.thread_checker_)` - done.\n\nStreamId is very new btw, so I\u0027m fine with removing the thread checker from it. The reason it\u0027s there is mostly my own paranoia as I\u0027m updating datachannel code to have fewer thread hops and want things to break if I\u0027ve missed something as I move code around.\n\nI can remove the checker in this CL if you prefer?",
+      "parentUuid": "fcdc7077_45f7d4e9",
+      "revId": "d8a3d3511d82040e0928f6c236c51cdb75b4582d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d41e7231_83919dff",
         "filename": "pc/sctp_utils.h",
         "patchSetId": 9
@@ -54,6 +96,24 @@
       "writtenOn": "2023-03-20T15:43:28Z",
       "side": 1,
       "message": "I suspect moving implementation of the copy constructor and copy assign operator would slightly decrease binary size, because it would be easier for compiler to notice that copy/assign is same as copy/assign an integer, cheaper than a function call.",
+      "revId": "d8a3d3511d82040e0928f6c236c51cdb75b4582d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcdd4104_e49f9da1",
+        "filename": "pc/sctp_utils.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-20T17:21:30Z",
+      "side": 1,
+      "message": "That made me wonder if we shouldn\u0027t make it easier to inline constructors like in this case and remove the need to (somewhat commonly) do a `sequence_checker_.Detach()` inside a constructor. Wdyt?\n\nhttps://webrtc-review.googlesource.com/c/src/+/298445",
+      "parentUuid": "d41e7231_83919dff",
       "revId": "d8a3d3511d82040e0928f6c236c51cdb75b4582d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -77,6 +137,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b76a4d71_d53e25f5",
+        "filename": "pc/sctp_utils.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-20T17:21:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6facbfee_ae5cbd24",
+      "revId": "d8a3d3511d82040e0928f6c236c51cdb75b4582d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "31a6b4e2_d650477c",
         "filename": "pc/sctp_utils.h",
         "patchSetId": 9
@@ -88,6 +166,24 @@
       "writtenOn": "2023-03-20T15:43:28Z",
       "side": 1,
       "message": "may be move assign operator next to the copy constructor, for easier discoverability.\n\n\nhttps://google.github.io/styleguide/cppguide.html#Declaration_Order\n\n3. Constructors and *assignment operators*\n4. Destructor\n5. All other functions",
+      "revId": "d8a3d3511d82040e0928f6c236c51cdb75b4582d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17af0189_18f52045",
+        "filename": "pc/sctp_utils.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-20T17:21:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31a6b4e2_d650477c",
       "revId": "d8a3d3511d82040e0928f6c236c51cdb75b4582d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
