@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d644a04e_94fd1a15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-20T12:33:53Z",
+      "side": 1,
+      "message": "Need a re-LGTM :)",
+      "revId": "d4d5592fd2d8b72056ceeb39ddb0a18d3472c6b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
