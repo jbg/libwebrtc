@@ -73,6 +73,8 @@ struct InternalDataChannelInit : public DataChannelInit {
   // Set by the `DataChannelController` prior to creating an instance of
   // `SctpDataChannel`, to indicate whether or not a transport already exists.
   bool connected_to_transport = false;
+  // Optional flag from PC that may be used during initialization for stream id.
+  absl::optional<bool> is_caller;
 };
 
 // Helper class to allocate unique IDs for SCTP DataChannels.
