@@ -106,6 +106,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "975a311d_334b15a7",
+        "filename": "logging/rtc_event_log/dependency_descriptor_encoder_decoder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-20T12:15:11Z",
+      "side": 1,
+      "message": "Added a `RTP_PARSE_RETURN_ERROR` macro.",
+      "parentUuid": "242ca178_6dc90fae",
+      "range": {
+        "startLine": 197,
+        "startChar": 1,
+        "endLine": 199,
+        "endChar": 0
+      },
+      "revId": "1e16fc020dc118ea5da6ba6b901041d52ba40397",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ce6f77f_303ff63a",
@@ -119,6 +143,30 @@
       "writtenOn": "2023-03-16T14:15:59Z",
       "side": 1,
       "message": "Same here\nRTC_PARSE_CHECK_OR_RETURN_MESSAGE(condition, message)",
+      "range": {
+        "startLine": 200,
+        "startChar": 10,
+        "endLine": 202,
+        "endChar": 23
+      },
+      "revId": "1e16fc020dc118ea5da6ba6b901041d52ba40397",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b4b7536_0c552544",
+        "filename": "logging/rtc_event_log/dependency_descriptor_encoder_decoder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-20T12:15:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ce6f77f_303ff63a",
       "range": {
         "startLine": 200,
         "startChar": 10,
@@ -152,6 +200,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58af8ebe_b3e307dd",
+        "filename": "logging/rtc_event_log/dependency_descriptor_encoder_decoder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-20T12:15:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cf71c7a_01a95f2b",
+      "range": {
+        "startLine": 208,
+        "startChar": 2,
+        "endLine": 208,
+        "endChar": 27
+      },
+      "revId": "1e16fc020dc118ea5da6ba6b901041d52ba40397",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85f98f8c_77dfb8c0",
@@ -165,6 +237,30 @@
       "writtenOn": "2023-03-16T14:15:59Z",
       "side": 1,
       "message": "And here",
+      "range": {
+        "startLine": 212,
+        "startChar": 4,
+        "endLine": 212,
+        "endChar": 29
+      },
+      "revId": "1e16fc020dc118ea5da6ba6b901041d52ba40397",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c3d09eb_92750fab",
+        "filename": "logging/rtc_event_log/dependency_descriptor_encoder_decoder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-20T12:15:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85f98f8c_77dfb8c0",
       "range": {
         "startLine": 212,
         "startChar": 4,
