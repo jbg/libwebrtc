@@ -1,0 +1,176 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c9ff8c3_9164ac5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2023-03-20T15:18:33Z",
+      "side": 1,
+      "message": "Also please fix tests",
+      "revId": "627c418e52f0efcb8f53da260d209a6c2a0aa9ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de9f9015_478d8544",
+        "filename": "api/test/video_quality_analyzer_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2023-03-20T15:18:33Z",
+      "side": 1,
+      "message": "I think comments should be swapped between these two functions",
+      "range": {
+        "startLine": 153,
+        "startChar": 5,
+        "endLine": 154,
+        "endChar": 29
+      },
+      "revId": "627c418e52f0efcb8f53da260d209a6c2a0aa9ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaa6af21_9f1c2184",
+        "filename": "api/test/video_quality_analyzer_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2023-03-20T15:18:33Z",
+      "side": 1,
+      "message": "Maybe `OnPeerPauseAllStreamsFrom(sender_peer_name, receiver_peer_name)`\nAnd then `OnResumeAllStreamsFrom(sender_peer_name, receiver_peer_name)`?",
+      "range": {
+        "startLine": 155,
+        "startChar": 15,
+        "endLine": 155,
+        "endChar": 39
+      },
+      "revId": "627c418e52f0efcb8f53da260d209a6c2a0aa9ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaf54eff_2a1b9f78",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2023-03-20T15:18:33Z",
+      "side": 1,
+      "message": "Take index for sender_peer_name:\n\nRTC_CHECK(peers_-\u003eHasName(sender_peer_name));\nsize_t sender_peer_index \u003d peers_-\u003eindex(sender_peer_name);",
+      "revId": "627c418e52f0efcb8f53da260d209a6c2a0aa9ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cb1cec8_66b3a7b7",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2023-03-20T15:18:33Z",
+      "side": 1,
+      "message": "This is very late populated structure, so prefer to use what we have in DVQA directly. I think either `stream_states_` or `stream_to_sender_` will suite here. First one probably will be better. It has `sender()` method, so you will be able to filter out the ones you need and pause them directly.",
+      "range": {
+        "startLine": 737,
+        "startChar": 20,
+        "endLine": 737,
+        "endChar": 53
+      },
+      "revId": "627c418e52f0efcb8f53da260d209a6c2a0aa9ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0d5da62_e10a6e8e",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2023-03-20T15:18:33Z",
+      "side": 1,
+      "message": "Apply comments from previous method",
+      "range": {
+        "startLine": 751,
+        "startChar": 34,
+        "endLine": 751,
+        "endChar": 59
+      },
+      "revId": "627c418e52f0efcb8f53da260d209a6c2a0aa9ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cefd2bb_2e7dcad9",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2284,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2023-03-20T15:18:33Z",
+      "side": 1,
+      "message": "Let\u0027s also add at least one test with 2 streams to check that is paused both of them",
+      "range": {
+        "startLine": 2284,
+        "startChar": 7,
+        "endLine": 2284,
+        "endChar": 56
+      },
+      "revId": "627c418e52f0efcb8f53da260d209a6c2a0aa9ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad1b9f89_489e61bb",
+        "filename": "test/pc/e2e/analyzer/video/dvqa/pausable_state.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2023-03-20T15:18:33Z",
+      "side": 1,
+      "message": "Let\u0027s also add tests on both methods that they do nothing when called second time",
+      "range": {
+        "startLine": 21,
+        "startChar": 20,
+        "endLine": 21,
+        "endChar": 25
+      },
+      "revId": "627c418e52f0efcb8f53da260d209a6c2a0aa9ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
