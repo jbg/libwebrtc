@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "500090c7_4fd65544",
+        "filename": "pc/data_channel_controller.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-03-20T15:43:28Z",
+      "side": 1,
+      "message": "StreamId documentation tells it is a uint16_t wrapper, which suggests it is small enough class to be passed by value\n\n(looking at implimentation it is de-facto std::optional\u003cuint16_t\u003e, which is still looks smaller than sizeof(void*), so passing by value should be slightly more efficient. Specially if it\u0027s copy constructor would be moved to the header file so that it could be inlined)",
+      "range": {
+        "startLine": 127,
+        "startChar": 27,
+        "endLine": 127,
+        "endChar": 46
+      },
+      "revId": "d8a3d3511d82040e0928f6c236c51cdb75b4582d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcdc7077_45f7d4e9",
+        "filename": "pc/sctp_utils.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-03-20T15:43:28Z",
+      "side": 1,
+      "message": "why Detach?\n\nwhat is the expected threading model for the StreamId,\n\ne.g. shouldn\u0027t you check here \nRTC_DCHECK_RUN_ON(\u0026sid.thread_checker_) ?\n\nif you detach, do you risk assign StreamId value on one thread, and reading it on another. one.\n\nUnrelated to this change it fills StreamId shouldn\u0027t have thread checker at all - it looks like a value, not a class that perform actions, so instead classes that use stream id should guard its members, and it should be totally fine and trivial to pass stream to another task queue [by value]:\n\nStreamId sid \u003d sid_;\ntask_queue_-\u003ePostTask([sid, other_value] { UseSid(sid); });",
+      "revId": "d8a3d3511d82040e0928f6c236c51cdb75b4582d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d41e7231_83919dff",
+        "filename": "pc/sctp_utils.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-03-20T15:43:28Z",
+      "side": 1,
+      "message": "I suspect moving implementation of the copy constructor and copy assign operator would slightly decrease binary size, because it would be easier for compiler to notice that copy/assign is same as copy/assign an integer, cheaper than a function call.",
+      "revId": "d8a3d3511d82040e0928f6c236c51cdb75b4582d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6facbfee_ae5cbd24",
+        "filename": "pc/sctp_utils.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-03-20T15:43:28Z",
+      "side": 1,
+      "message": "don\u0027t add move constructor: copy constructor is as efficient as the move\n\nhttps://google.github.io/styleguide/cppguide.html#Copy_Constructors\n“Move operations for copyable types are strictly a performance optimization and are a potential source of bugs and complexity, so avoid defining them unless they are significantly more efficient than the corresponding copy operations.”",
+      "revId": "d8a3d3511d82040e0928f6c236c51cdb75b4582d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31a6b4e2_d650477c",
+        "filename": "pc/sctp_utils.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-03-20T15:43:28Z",
+      "side": 1,
+      "message": "may be move assign operator next to the copy constructor, for easier discoverability.\n\n\nhttps://google.github.io/styleguide/cppguide.html#Declaration_Order\n\n3. Constructors and *assignment operators*\n4. Destructor\n5. All other functions",
+      "revId": "d8a3d3511d82040e0928f6c236c51cdb75b4582d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
