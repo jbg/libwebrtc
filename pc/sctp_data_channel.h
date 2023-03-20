@@ -70,6 +70,11 @@ struct InternalDataChannelInit : public DataChannelInit {
   bool IsValid() const;
 
   OpenHandshakeRole open_handshake_role;
+  // Optional flag from PC that's used for non-prenegotiated stream ids.
+  // When generating channel stream IDs, they must be generated with adherence
+  // to what the DTLS connection role is.
+  // See: https://www.rfc-editor.org/rfc/rfc8832.html#name-protocol-overview
+  absl::optional<bool> is_caller;
 };
 
 // Helper class to allocate unique IDs for SCTP DataChannels.
