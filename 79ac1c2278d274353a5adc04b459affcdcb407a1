@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01238b98_ba923d60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-20T15:07:27Z",
+      "side": 1,
+      "message": "Hi Danil - this CL is similar and related to the other CL I just sent your way.",
+      "revId": "79ac1c2278d274353a5adc04b459affcdcb407a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
