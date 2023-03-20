@@ -886,6 +886,19 @@ class PeerConnectionSimulcastWithMediaFlowTests
     return transceiver_or_error.value();
   }
 
+  bool HasSenderVideoCodecCapability(
+      rtc::scoped_refptr<PeerConnectionTestWrapper> pc_wrapper,
+      absl::string_view codec_name) {
+    std::vector<RtpCodecCapability> codecs =
+        pc_wrapper->pc_factory()
+            ->GetRtpSenderCapabilities(cricket::MEDIA_TYPE_VIDEO)
+            .codecs;
+    return std::find_if(codecs.begin(), codecs.end(),
+                        [&codec_name](const RtpCodecCapability& codec) {
+                          return absl::EqualsIgnoreCase(codec.name, codec_name);
+                        }) != codecs.end();
+  }
+
   std::vector<RtpCodecCapability> GetCapabilitiesAndRestrictToCodec(
       rtc::scoped_refptr<PeerConnectionTestWrapper> pc_wrapper,
       absl::string_view codec_name) {
@@ -1499,6 +1512,12 @@ TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
       "WebRTC-AllowDisablingLegacyScalability/Enabled/");
 
   rtc::scoped_refptr<PeerConnectionTestWrapper> local_pc_wrapper = CreatePc();
+  // TODO(https://crbug.com/webrtc/15011): Expand testing support for AV1 or
+  // allow compile time checks so that gates like this isn't needed at runtime.
+  if (!HasSenderVideoCodecCapability(local_pc_wrapper, "AV1")) {
+    RTC_LOG(LS_WARNING) << "\n***\nAV1 is not available, skipping test.\n***";
+    return;
+  }
   rtc::scoped_refptr<PeerConnectionTestWrapper> remote_pc_wrapper = CreatePc();
   ExchangeIceCandidates(local_pc_wrapper, remote_pc_wrapper);
 
