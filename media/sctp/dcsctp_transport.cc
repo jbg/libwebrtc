@@ -37,6 +37,8 @@ namespace webrtc {
 
 namespace {
 using ::dcsctp::SendPacketStatus;
+using ::webrtc::RTCError;
+using ::webrtc::RTCErrorType;
 
 // When there is packet loss for a long time, the SCTP retry timers will use
 // exponential backoff, which can grow to very long durations and when the
@@ -257,10 +259,9 @@ bool DcSctpTransport::ResetStream(int sid) {
   return true;
 }
 
-bool DcSctpTransport::SendData(int sid,
-                               const SendDataParams& params,
-                               const rtc::CopyOnWriteBuffer& payload,
-                               cricket::SendDataResult* result) {
+RTCError DcSctpTransport::SendData(int sid,
+                                   const SendDataParams& params,
+                                   const rtc::CopyOnWriteBuffer& payload) {
   RTC_DCHECK_RUN_ON(network_thread_);
   RTC_DLOG(LS_VERBOSE) << debug_name_ << "->SendData(sid=" << sid
                        << ", type=" << static_cast<int>(params.type)
@@ -269,8 +270,7 @@ bool DcSctpTransport::SendData(int sid,
   if (!socket_) {
     RTC_LOG(LS_ERROR) << debug_name_
                       << "->SendData(...): Transport is not started.";
-    *result = cricket::SDR_ERROR;
-    return false;
+    return RTCError(RTCErrorType::INVALID_STATE);
   }
 
   // It is possible for a message to be sent from the signaling thread at the
@@ -284,8 +284,7 @@ bool DcSctpTransport::SendData(int sid,
   if (stream_state == stream_states_.end()) {
     RTC_LOG(LS_VERBOSE) << "Skipping message on non-open stream with sid: "
                         << sid;
-    *result = cricket::SDR_ERROR;
-    return false;
+    return RTCError(RTCErrorType::INVALID_STATE);
   }
 
   if (stream_state->second.closure_initiated ||
@@ -293,8 +292,7 @@ bool DcSctpTransport::SendData(int sid,
       stream_state->second.outgoing_reset_done) {
     RTC_LOG(LS_VERBOSE) << "Skipping message on closing stream with sid: "
                         << sid;
-    *result = cricket::SDR_ERROR;
-    return false;
+    return RTCError(RTCErrorType::INVALID_STATE);
   }
 
   auto max_message_size = socket_->options().max_message_size;
@@ -304,8 +302,7 @@ bool DcSctpTransport::SendData(int sid,
                            "Trying to send packet bigger "
                            "than the max message size: "
                         << payload.size() << " vs max of " << max_message_size;
-    *result = cricket::SDR_ERROR;
-    return false;
+    return RTCError(RTCErrorType::INVALID_RANGE);
   }
 
   std::vector<uint8_t> message_payload(payload.cdata(),
@@ -337,24 +334,26 @@ bool DcSctpTransport::SendData(int sid,
     send_options.max_retransmissions = *params.max_rtx_count;
   }
 
-  auto error = socket_->Send(std::move(message), send_options);
+  dcsctp::SendStatus error = socket_->Send(std::move(message), send_options);
+  RTCError return_code(RTCErrorType::NETWORK_ERROR);
   switch (error) {
     case dcsctp::SendStatus::kSuccess:
-      *result = cricket::SDR_SUCCESS;
+      return_code.set_type(RTCErrorType::NONE);
       break;
     case dcsctp::SendStatus::kErrorResourceExhaustion:
-      *result = cricket::SDR_BLOCK;
+      return_code.set_type(RTCErrorType::RESOURCE_EXHAUSTED);
       ready_to_send_data_ = false;
       break;
-    default:
+    default: {
+      auto message = dcsctp::ToString(error);
       RTC_LOG(LS_ERROR) << debug_name_
                         << "->SendData(...): send() failed with error "
-                        << dcsctp::ToString(error) << ".";
-      *result = cricket::SDR_ERROR;
-      break;
+                        << message << ".";
+      return_code.set_message(std::string(message));
+    } break;
   }
 
-  return *result == cricket::SDR_SUCCESS;
+  return return_code;
 }
 
 bool DcSctpTransport::ReadyToSendData() {
