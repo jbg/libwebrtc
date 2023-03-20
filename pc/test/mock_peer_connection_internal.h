@@ -231,7 +231,6 @@ class MockPeerConnectionInternal : public PeerConnectionInternal {
   MOCK_METHOD(cricket::PortAllocator*, port_allocator, (), (override));
   MOCK_METHOD(LegacyStatsCollector*, legacy_stats, (), (override));
   MOCK_METHOD(PeerConnectionObserver*, Observer, (), (const, override));
-  MOCK_METHOD(bool, GetSctpSslRole, (rtc::SSLRole*), (override));
   MOCK_METHOD(absl::optional<rtc::SSLRole>,
               GetSctpSslRole_n,
               (absl::optional<bool>),
