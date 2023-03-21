@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45c42340_74cbe8be",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2023-03-21T13:09:23Z",
+      "side": 1,
+      "message": "IIRC it\u0027s recommended to name it \"unused\", the same below",
+      "range": {
+        "startLine": 731,
+        "startChar": 14,
+        "endLine": 731,
+        "endChar": 26
+      },
+      "revId": "6ac6a1722978fe00352e0b48294a0b7955175242",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5fa3e47_80bc31a9",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2177,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2023-03-21T13:09:23Z",
+      "side": 1,
+      "message": "I think we don\u0027t need it",
+      "range": {
+        "startLine": 2177,
+        "startChar": 2,
+        "endLine": 2177,
+        "endChar": 39
+      },
+      "revId": "6ac6a1722978fe00352e0b48294a0b7955175242",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
