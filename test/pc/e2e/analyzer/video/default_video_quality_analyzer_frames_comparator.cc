@@ -546,16 +546,17 @@ void DefaultVideoQualityAnalyzerFramesComparator::ProcessComparison(
 
     if (frame_stats.prev_frame_rendered_time.IsFinite() &&
         frame_stats.rendered_time.IsFinite()) {
+      RTC_DCHECK(frame_stats.time_between_rendered_frames.has_value());
       stats->time_between_rendered_frames_ms.AddSample(
-          StatsSample(frame_stats.time_between_rendered_frames,
+          StatsSample(*frame_stats.time_between_rendered_frames,
                       frame_stats.rendered_time, metadata));
       TimeDelta average_time_between_rendered_frames = TimeDelta::Millis(
           stats->time_between_rendered_frames_ms.GetAverage());
-      if (frame_stats.time_between_rendered_frames >
+      if (*frame_stats.time_between_rendered_frames >
           std::max(kFreezeThreshold + average_time_between_rendered_frames,
                    3 * average_time_between_rendered_frames)) {
         stats->freeze_time_ms.AddSample(
-            StatsSample(frame_stats.time_between_rendered_frames,
+            StatsSample(*frame_stats.time_between_rendered_frames,
                         frame_stats.rendered_time, metadata));
         auto freeze_end_it =
             stream_last_freeze_end_time_.find(comparison.stats_key);
