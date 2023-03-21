@@ -1395,14 +1395,15 @@ PeerConnection::CreateDataChannelOrError(const std::string& label,
 
   bool first_datachannel = !data_channel_controller_.HasUsedDataChannels();
 
-  std::unique_ptr<InternalDataChannelInit> internal_config;
+  InternalDataChannelInit internal_config;
   if (config) {
-    internal_config.reset(new InternalDataChannelInit(*config));
+    internal_config = InternalDataChannelInit(*config);
   }
+  internal_config.is_caller = sdp_handler_->is_caller();
   // TODO(bugs.webrtc.org/12796): Return a more specific error.
   rtc::scoped_refptr<DataChannelInterface> channel(
       data_channel_controller_.InternalCreateDataChannelWithProxy(
-          label, internal_config.get()));
+          label, internal_config));
   if (!channel.get()) {
     return RTCError(RTCErrorType::INTERNAL_ERROR,
                     "Data channel creation failed");
@@ -2229,27 +2230,6 @@ void PeerConnection::StopRtcEventLog_w() {
   if (event_log_) {
     event_log_->StopLogging();
   }
-}
-
-bool PeerConnection::GetSctpSslRole(rtc::SSLRole* role) {
-  RTC_DCHECK_RUN_ON(signaling_thread());
-  if (!sctp_mid_s_ || !data_channel_controller_.data_channel_transport()) {
-    RTC_LOG(LS_INFO) << "Non-rejected SCTP m= section is needed to get the "
-                        "SSL Role of the SCTP transport.";
-    return false;
-  }
-
-  absl::optional<rtc::SSLRole> dtls_role = network_thread()->BlockingCall(
-      [this, is_caller = sdp_handler_->is_caller()] {
-        RTC_DCHECK_RUN_ON(network_thread());
-        return GetSctpSslRole_n(is_caller);
-      });
-  if (!dtls_role) {
-    return false;
-  }
-
-  *role = *dtls_role;
-  return true;
 }
 
 absl::optional<rtc::SSLRole> PeerConnection::GetSctpSslRole_n(

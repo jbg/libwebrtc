@@ -320,7 +320,6 @@ class FakePeerConnectionBase : public PeerConnectionInternal {
   cricket::PortAllocator* port_allocator() override { return nullptr; }
   LegacyStatsCollector* legacy_stats() override { return nullptr; }
   PeerConnectionObserver* Observer() const override { return nullptr; }
-  bool GetSctpSslRole(rtc::SSLRole* role) override { return false; }
   absl::optional<rtc::SSLRole> GetSctpSslRole_n(
       absl::optional<bool> is_caller) override {
     return absl::nullopt;
