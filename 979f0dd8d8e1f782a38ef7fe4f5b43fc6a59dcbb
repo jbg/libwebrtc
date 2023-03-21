@@ -16,6 +16,52 @@
       "message": "Hi Danil - do you mind taking one last look? The +1 vote got reset.",
       "revId": "979f0dd8d8e1f782a38ef7fe4f5b43fc6a59dcbb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45f1849c_ca1c4978",
+        "filename": "pc/sctp_utils.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-03-21T09:39:58Z",
+      "side": 1,
+      "message": "or can use `\u003d default;`\n(optional would be initialized to nullopt by default)",
+      "range": {
+        "startLine": 38,
+        "startChar": 13,
+        "endLine": 38,
+        "endChar": 36
+      },
+      "revId": "979f0dd8d8e1f782a38ef7fe4f5b43fc6a59dcbb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "348b7562_f818d441",
+        "filename": "pc/sctp_utils.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-03-21T09:39:58Z",
+      "side": 1,
+      "message": "with sequence checker removed you can now use `\u003d default;`\nboth for copy constructor and copy assign operator.",
+      "range": {
+        "startLine": 43,
+        "startChar": 2,
+        "endLine": 47,
+        "endChar": 3
+      },
+      "revId": "979f0dd8d8e1f782a38ef7fe4f5b43fc6a59dcbb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
