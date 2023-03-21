@@ -719,32 +719,36 @@ void DefaultVideoQualityAnalyzer::UnregisterParticipantInCall(
   }
 }
 
-void DefaultVideoQualityAnalyzer::OnPeerStartedReceiveVideoStream(
+void DefaultVideoQualityAnalyzer::OnPeerPauseSenderStreams(
     absl::string_view peer_name,
-    absl::string_view stream_label) {
+    absl::string_view sender_peer_name) {
   MutexLock lock(&mutex_);
   RTC_CHECK(peers_->HasName(peer_name));
   size_t peer_index = peers_->index(peer_name);
-  RTC_CHECK(streams_.HasName(stream_label));
-  size_t stream_index = streams_.index(stream_label);
+  RTC_CHECK(peers_->HasName(sender_peer_name));
+  size_t sender_peer_index = peers_->index(sender_peer_name);
 
-  auto it = stream_states_.find(stream_index);
-  RTC_CHECK(it != stream_states_.end());
-  it->second.GetPausableState(peer_index)->Resume();
+  for (auto& [stream_index, stream_state] : stream_states_) {
+    if (stream_state.sender() == sender_peer_index) {
+      stream_state.GetPausableState(peer_index)->Pause();
+    }
+  }
 }
 
-void DefaultVideoQualityAnalyzer::OnPeerStoppedReceiveVideoStream(
+void DefaultVideoQualityAnalyzer::OnPeerResumeSenderStreams(
     absl::string_view peer_name,
-    absl::string_view stream_label) {
+    absl::string_view sender_peer_name) {
   MutexLock lock(&mutex_);
   RTC_CHECK(peers_->HasName(peer_name));
   size_t peer_index = peers_->index(peer_name);
-  RTC_CHECK(streams_.HasName(stream_label));
-  size_t stream_index = streams_.index(stream_label);
+  RTC_CHECK(peers_->HasName(sender_peer_name));
+  size_t sender_peer_index = peers_->index(sender_peer_name);
 
-  auto it = stream_states_.find(stream_index);
-  RTC_CHECK(it != stream_states_.end());
-  it->second.GetPausableState(peer_index)->Pause();
+  for (auto& [stream_index, stream_state] : stream_states_) {
+    if (stream_state.sender() == sender_peer_index) {
+      stream_state.GetPausableState(peer_index)->Resume();
+    }
+  }
 }
 
 void DefaultVideoQualityAnalyzer::Stop() {
