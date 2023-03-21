@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b6ba19e4_0f1263e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-21T07:42:52Z",
+      "side": 1,
+      "message": "Yes. The bug# is intended to go into the registry that Evan Shrubsole is working on integrating with the code so that trying to use unregistered extensions will cause failures (DCHECK or annoying log messages).\n\nJust put the end date at 6 months from now, saying \"end date depends on test results and may be adjusted\" in the bug.",
+      "parentUuid": "9581ed39_93f9e0ac",
+      "revId": "2640906b430370b8ca915446ef2e4e052aec0d16",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57dc1c6c_293059f2",
         "filename": "p2p/base/stun_port_unittest.cc",
         "patchSetId": 6

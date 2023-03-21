@@ -36,6 +36,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0550d04_5f85d015",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-21T07:42:52Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "02981cf0_c1211208",
+      "revId": "7c117abb6562ae8a811dc964b0bd29c1bdf2a152",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48b2be09_19162b9d",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "It is easier to understand if you look at the trickle ice results without and with this trial:\nCurrent behaviour:\nTime\tType\tFoundation\tProtocol\tAddress\tPort    Priority\n0.005\thost\t1971598990\tudp\t        ivp6\t59127\t126 | 32552 | 255\t\t\n0.006\thost\t1596620361\tudp\t        ivp6\t59128\t126 | 32296 | 255\t\t\n0.007\thost\t2977913606\tudp\t        ipv4\t59129\t126 | 32030 | 255\t\t\n0.133\tsrflx\t1668537993\tudp\t        public\t59129\t100 | 32030 | 255\t\n0.326\trelay\t1801629496\tudp\t        relay   33502\t  2 | 32033 | 255\t\n0.443\trelay\t2512944044\tudp\t        relay   38125\t  1 | 32032 | 255\t\n\nWith fieldtrial:\n0.005\thost\t423566306\tudp         ivp6\t60199\t126 | 32584 | 255\t\t\n0.006\thost\t3629926425\tudp         ipv6\t60200\t126 | 32328 | 255\t\t\n0.007\thost\t2199399195\tudp         ipv4    60201\t126 | 32062 | 255\t\t\n0.135\tsrflx\t2182633789\tudp         public  60201\t100 | 32062 | 255\t\n0.297\trelay\t4266968432\tudp         relay   39657\t  2 | 32033 | 255\t\n0.418\trelay\t2157651944\tudp         relay   31414\t  1 | 32032 | 255\t\n\nWith the field trial we have (priority\u00260x00ffffff) of relay candidates strictly lower than the (priority\u00260x00ffffff) of srflx candidates.\nThe \u00260x00ffffff comes from https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/p2p/base/connection.cc;drc\u003d7a0b88f6d5c015fd3c280b58c7a99d8e1dca28ac;l\u003d228",
       "parentUuid": "48b2be09_19162b9d",
+      "revId": "7c117abb6562ae8a811dc964b0bd29c1bdf2a152",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a92d9b2b_89bd80bc",
+        "filename": "api/candidate.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-21T07:42:52Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "88356050_dc451892",
       "revId": "7c117abb6562ae8a811dc964b0bd29c1bdf2a152",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
