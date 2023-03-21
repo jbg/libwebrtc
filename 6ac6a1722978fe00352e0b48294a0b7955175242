@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "683561e0_9164ba34",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2023-03-21T13:19:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45c42340_74cbe8be",
+      "range": {
+        "startLine": 731,
+        "startChar": 14,
+        "endLine": 731,
+        "endChar": 26
+      },
+      "revId": "6ac6a1722978fe00352e0b48294a0b7955175242",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5fa3e47_80bc31a9",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-21T13:09:23Z",
       "side": 1,
       "message": "I think we don\u0027t need it",
+      "range": {
+        "startLine": 2177,
+        "startChar": 2,
+        "endLine": 2177,
+        "endChar": 39
+      },
+      "revId": "6ac6a1722978fe00352e0b48294a0b7955175242",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e0cd4fe_0a1104db",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2177,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2023-03-21T13:19:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5fa3e47_80bc31a9",
       "range": {
         "startLine": 2177,
         "startChar": 2,
