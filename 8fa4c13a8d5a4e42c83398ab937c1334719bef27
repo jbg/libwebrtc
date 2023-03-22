@@ -72,6 +72,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f64ddb6_fb5dc0f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-03-22T19:37:43Z",
+      "side": 1,
+      "message": "I\u0027m sorry, I\u0027m sometimes bad at explaining things. \n\nIn the past we would either settle on DmaBufs or MemFD buffers, not having an option to fallback in case we fail for some reason. This was not even supported by PipeWire before. Now, with the new DmaBuf support where modifiers are mandatory, we have a way to try something else, because it\u0027s part of the process where we try one of the modifiers, drop it if we fail and try another one or fallback to MemFD buffers in case we run out of modifiers. \n\nThis change avoids using DmaBufs in the first case, where only one or the other buffer type can be used without having option to renegotiate, because this will not be supported by the compositor. I believe it\u0027s better to use less efficient, but reliable screen sharing rather than trying to use more efficient buffers that have no guarantee to work. This also has a potential benefit for modern compositors, because  advertising DmaBuf support without modifiers might be confusing for potentially buggy implementation on their side.",
+      "parentUuid": "eadaaab4_b44b4c73",
+      "range": {
+        "startLine": 14,
+        "startChar": 46,
+        "endLine": 16,
+        "endChar": 9
+      },
+      "revId": "8fa4c13a8d5a4e42c83398ab937c1334719bef27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1d31737_833eb52d",
