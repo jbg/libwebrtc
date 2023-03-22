@@ -155,7 +155,7 @@ void TaskQueuePacedSender::EnqueuePackets(
 }
 
 void TaskQueuePacedSender::RemovePacketsForSsrc(uint32_t ssrc) {
-  task_queue_.RunOrPost([this, ssrc]() {
+  task_queue_.TaskQueueForPost()->PostTask([this, ssrc] {
     RTC_DCHECK_RUN_ON(&task_queue_);
     pacing_controller_.RemovePacketsForSsrc(ssrc);
     MaybeProcessPackets(Timestamp::MinusInfinity());
