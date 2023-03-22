@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b20bb7b3_da771419",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-22T08:24:17Z",
+      "side": 1,
+      "message": "Looks OK in and of itself.\n\nA different technique for supporting _n and _s variants (and the one I used for sctp_mid, I think) is to have the method that sets the value on the network thread do a PostTask() to the signalling thread to set the same value there. This is an improvement in performance if the value is looked up multiple times on the signalling thread, and avoids the BlockingCall.\n\nThis is only OK if the setting of the value can\u0027t result in a thread race, of course.",
+      "revId": "1262a266779614807b119bf4842952a7d56cf246",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
