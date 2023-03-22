@@ -16,6 +16,24 @@
       "message": "Looks OK in and of itself.\n\nA different technique for supporting _n and _s variants (and the one I used for sctp_mid, I think) is to have the method that sets the value on the network thread do a PostTask() to the signalling thread to set the same value there. This is an improvement in performance if the value is looked up multiple times on the signalling thread, and avoids the BlockingCall.\n\nThis is only OK if the setting of the value can\u0027t result in a thread race, of course.",
       "revId": "1262a266779614807b119bf4842952a7d56cf246",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26e133a1_e200f8cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-22T15:20:32Z",
+      "side": 1,
+      "message": "Yup and that optimization sticks around. This change will to facilitate code in the DataChannelController that\u0027s moving to the network thread. There wasn\u0027t a way to get to the logic that GetSctpSslRole() has from the network thread, but this CL adds it. Once we can do that from the DCC, we can also do other things at the same time such as allocating stream ids. Currently these operations require a few hops. They also end up initializing state on the signaling thread that is needed on the network thread.",
+      "parentUuid": "b20bb7b3_da771419",
+      "revId": "1262a266779614807b119bf4842952a7d56cf246",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
