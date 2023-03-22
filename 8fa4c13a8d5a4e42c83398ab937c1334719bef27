@@ -48,6 +48,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eadaaab4_b44b4c73",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-03-22T17:31:23Z",
+      "side": 1,
+      "message": "Got it. So after this change if we fail to import DmaBufs we will fallback to MemFD buffers and previously we did not.",
+      "parentUuid": "d7bf2fb9_0a711886",
+      "range": {
+        "startLine": 14,
+        "startChar": 46,
+        "endLine": 16,
+        "endChar": 9
+      },
+      "revId": "8fa4c13a8d5a4e42c83398ab937c1334719bef27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1d31737_833eb52d",
