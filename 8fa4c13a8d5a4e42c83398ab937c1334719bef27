@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7bf2fb9_0a711886",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-03-22T17:24:01Z",
+      "side": 1,
+      "message": "We are saying that we don\u0027t support DmaBufs used by old compositors that don\u0027t implemented it according to: https://gitlab.freedesktop.org/pipewire/pipewire/-/blob/master/doc/dma-buf.dox\n\nTo make it short, we require DmaBufs modifiers to be announced by the server in order to use DmaBufs. We didn\u0027t require it before to support old compositors that didn\u0027t implement this new DmaBuf negotiation process. Also compositors that don\u0027t use this will definitely not support renegotiation as this is something PipeWire introduced with the new DmaBuf negotiation process. Not supporting renegotiation means that if we fail to import DmaBufs (without a modifier) provided by an old compositor, we will never recover (or fallback to anything else), because there is no way to renegotiate, while when we use MemFD buffers (even though there are less effecient), we are at least making sure it will work all the time.",
+      "parentUuid": "798f3e6f_8187c5f1",
+      "range": {
+        "startLine": 14,
+        "startChar": 46,
+        "endLine": 16,
+        "endChar": 9
+      },
+      "revId": "8fa4c13a8d5a4e42c83398ab937c1334719bef27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1d31737_833eb52d",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-22T16:55:05Z",
       "side": 1,
       "message": "We should file new bugs for the individual issues we\u0027re fixing now that it\u0027s shipped for better tracking.",
+      "range": {
+        "startLine": 18,
+        "startChar": 5,
+        "endLine": 18,
+        "endChar": 17
+      },
+      "revId": "8fa4c13a8d5a4e42c83398ab937c1334719bef27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76b35868_fdbf33d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-03-22T17:24:01Z",
+      "side": 1,
+      "message": "Yes, we should, I was me just being lazy 😊\n\nI\u0027ll open a new one.",
+      "parentUuid": "b1d31737_833eb52d",
       "range": {
         "startLine": 18,
         "startChar": 5,
