@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "798f3e6f_8187c5f1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-03-22T16:55:05Z",
+      "side": 1,
+      "message": "So to clarify; we\u0027re now saying that if the compositor doesn\u0027t support the renogtiation process we just fall back to MemFD? And the current state is that if they didn\u0027t support renogiation they were just broken?",
+      "range": {
+        "startLine": 14,
+        "startChar": 46,
+        "endLine": 16,
+        "endChar": 9
+      },
+      "revId": "8fa4c13a8d5a4e42c83398ab937c1334719bef27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1d31737_833eb52d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-03-22T16:55:05Z",
+      "side": 1,
+      "message": "We should file new bugs for the individual issues we\u0027re fixing now that it\u0027s shipped for better tracking.",
+      "range": {
+        "startLine": 18,
+        "startChar": 5,
+        "endLine": 18,
+        "endChar": 17
+      },
+      "revId": "8fa4c13a8d5a4e42c83398ab937c1334719bef27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c7cd95c_9aa3d430",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-03-22T16:55:05Z",
+      "side": 1,
+      "message": "LGTM, but want some clarity on the commit description",
+      "revId": "8fa4c13a8d5a4e42c83398ab937c1334719bef27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
