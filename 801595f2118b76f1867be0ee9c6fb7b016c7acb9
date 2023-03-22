@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34b58055_8c1098f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-03-22T10:35:58Z",
+      "side": 1,
+      "message": "Not strong reason, just a minor cleanup:\none less TODO, less code, a bit less binary size.\n(look like these parameters were part of some experiments long time ago)",
+      "revId": "801595f2118b76f1867be0ee9c6fb7b016c7acb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
