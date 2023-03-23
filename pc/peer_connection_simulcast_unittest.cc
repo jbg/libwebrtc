@@ -1412,13 +1412,8 @@ TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
               Optional(std::string("L3T3_KEY")));
 }
 
-// TODO(https://crbug.com/webrtc/14884): A field trial shouldn't be needed to
-// get spec-compliant behavior!
 TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
        SendingThreeEncodings_VP9_Simulcast) {
-  test::ScopedFieldTrials field_trials(
-      "WebRTC-AllowDisablingLegacyScalability/Enabled/");
-
   rtc::scoped_refptr<PeerConnectionTestWrapper> local_pc_wrapper = CreatePc();
   rtc::scoped_refptr<PeerConnectionTestWrapper> remote_pc_wrapper = CreatePc();
   ExchangeIceCandidates(local_pc_wrapper, remote_pc_wrapper);
@@ -1433,13 +1428,16 @@ TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
   transceiver->SetCodecPreferences(codecs);
 
   // Opt-in to spec-compliant simulcast by explicitly setting the
-  // `scalability_mode`.
+  // `scalability_mode` and `scale_resolution_down_by` parameters.
   rtc::scoped_refptr<RtpSenderInterface> sender = transceiver->sender();
   RtpParameters parameters = sender->GetParameters();
   ASSERT_EQ(parameters.encodings.size(), 3u);
   parameters.encodings[0].scalability_mode = "L1T3";
+  parameters.encodings[0].scale_resolution_down_by = 4;
   parameters.encodings[1].scalability_mode = "L1T3";
+  parameters.encodings[1].scale_resolution_down_by = 2;
   parameters.encodings[2].scalability_mode = "L1T3";
+  parameters.encodings[2].scale_resolution_down_by = 1;
   sender->SetParameters(parameters);
 
   NegotiateWithSimulcastTweaks(local_pc_wrapper, remote_pc_wrapper, layers);
@@ -1483,11 +1481,6 @@ TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
 // changes from 1 (legacy SVC) to 3 (standard simulcast).
 TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
        SendingThreeEncodings_VP9_FromLegacyToSingleActiveWithScalability) {
-  // TODO(https://crbug.com/webrtc/14884): A field trial shouldn't be needed to
-  // get spec-compliant behavior!
-  test::ScopedFieldTrials field_trials(
-      "WebRTC-AllowDisablingLegacyScalability/Enabled/");
-
   rtc::scoped_refptr<PeerConnectionTestWrapper> local_pc_wrapper = CreatePc();
   rtc::scoped_refptr<PeerConnectionTestWrapper> remote_pc_wrapper = CreatePc();
   ExchangeIceCandidates(local_pc_wrapper, remote_pc_wrapper);
@@ -1515,6 +1508,7 @@ TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
   ASSERT_EQ(parameters.encodings.size(), 3u);
   parameters.encodings[0].active = true;
   parameters.encodings[0].scalability_mode = "L2T2_KEY";
+  parameters.encodings[0].scale_resolution_down_by = 1.0;
   parameters.encodings[1].active = false;
   parameters.encodings[1].scalability_mode = absl::nullopt;
   parameters.encodings[2].active = false;
@@ -1545,11 +1539,6 @@ TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
 
 TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
        SendingThreeEncodings_VP9_AllLayersInactive) {
-  // TODO(https://crbug.com/webrtc/14884): A field trial shouldn't be needed to
-  // get spec-compliant behavior!
-  test::ScopedFieldTrials field_trials(
-      "WebRTC-AllowDisablingLegacyScalability/Enabled/");
-
   rtc::scoped_refptr<PeerConnectionTestWrapper> local_pc_wrapper = CreatePc();
   rtc::scoped_refptr<PeerConnectionTestWrapper> remote_pc_wrapper = CreatePc();
   ExchangeIceCandidates(local_pc_wrapper, remote_pc_wrapper);
@@ -1588,6 +1577,7 @@ TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
   parameters = sender->GetParameters();
   ASSERT_EQ(parameters.encodings.size(), 3u);
   parameters.encodings[0].scalability_mode = "L1T3";
+  parameters.encodings[0].scale_resolution_down_by = 1.0;
   parameters.encodings[0].active = false;
   parameters.encodings[1].active = false;
   parameters.encodings[2].active = false;
@@ -1603,14 +1593,8 @@ TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
   EXPECT_EQ(*outbound_rtps[2]->bytes_sent, 0u);
 }
 
-// TODO(https://crbug.com/webrtc/15005): A field trial shouldn't be needed to
-// get spec-compliant behavior! The same field trial is also used for VP9
-// simulcast (https://crbug.com/webrtc/14884).
 TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
        SendingThreeEncodings_AV1_Simulcast) {
-  test::ScopedFieldTrials field_trials(
-      "WebRTC-AllowDisablingLegacyScalability/Enabled/");
-
   rtc::scoped_refptr<PeerConnectionTestWrapper> local_pc_wrapper = CreatePc();
   // TODO(https://crbug.com/webrtc/15011): Expand testing support for AV1 or
   // allow compile time checks so that gates like this isn't needed at runtime.
@@ -1636,8 +1620,11 @@ TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
   RtpParameters parameters = sender->GetParameters();
   ASSERT_EQ(parameters.encodings.size(), 3u);
   parameters.encodings[0].scalability_mode = "L1T3";
+  parameters.encodings[0].scale_resolution_down_by = 4;
   parameters.encodings[1].scalability_mode = "L1T3";
+  parameters.encodings[1].scale_resolution_down_by = 2;
   parameters.encodings[2].scalability_mode = "L1T3";
+  parameters.encodings[2].scale_resolution_down_by = 1;
   sender->SetParameters(parameters);
 
   NegotiateWithSimulcastTweaks(local_pc_wrapper, remote_pc_wrapper, layers);
