@@ -370,17 +370,19 @@ size_t PacketBuffer::NumSamplesInBuffer(size_t last_decoded_length) const {
 
 size_t PacketBuffer::GetSpanSamples(size_t last_decoded_length,
                                     size_t sample_rate,
-                                    bool count_dtx_waiting_time) const {
+                                    bool count_waiting_time) const {
   if (buffer_.size() == 0) {
     return 0;
   }
 
   size_t span = buffer_.back().timestamp - buffer_.front().timestamp;
-  if (buffer_.back().frame && buffer_.back().frame->Duration() > 0) {
+  size_t waiting_time_samples = rtc::dchecked_cast<size_t>(
+      buffer_.back().waiting_time->ElapsedMs() * (sample_rate / 1000));
+  if (count_waiting_time) {
+    span += waiting_time_samples;
+  } else if (buffer_.back().frame && buffer_.back().frame->Duration() > 0) {
     size_t duration = buffer_.back().frame->Duration();
-    if (count_dtx_waiting_time && buffer_.back().frame->IsDtxPacket()) {
-      size_t waiting_time_samples = rtc::dchecked_cast<size_t>(
-          buffer_.back().waiting_time->ElapsedMs() * (sample_rate / 1000));
+    if (buffer_.back().frame->IsDtxPacket()) {
       duration = std::max(duration, waiting_time_samples);
     }
     span += duration;
