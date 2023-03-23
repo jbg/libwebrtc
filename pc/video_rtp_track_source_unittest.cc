@@ -62,6 +62,17 @@ TEST(VideoRtpTrackSourceTest, EnablesEncodingOutputOnceOnAddingTwoSinks) {
   source->AddEncodedSink(&sink2);
 }
 
+TEST(VideoRtpTrackSourceTest, EnablesEncodingOutputOnAddingSinkTwice) {
+  MockCallback mock_callback;
+  EXPECT_CALL(mock_callback, OnGenerateKeyFrame).Times(0);
+  auto source = MakeSource(&mock_callback);
+  MockSink sink;
+  EXPECT_CALL(mock_callback, OnEncodedSinkEnabled(true));
+  source->AddEncodedSink(&sink);
+  EXPECT_CALL(mock_callback, OnEncodedSinkEnabled(true));
+  source->AddEncodedSink(&sink);
+}
+
 TEST(VideoRtpTrackSourceTest, DisablesEncodingOutputOnOneSinkRemoved) {
   MockCallback mock_callback;
   EXPECT_CALL(mock_callback, OnGenerateKeyFrame).Times(0);
