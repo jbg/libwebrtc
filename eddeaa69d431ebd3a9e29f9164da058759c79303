@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "950dc76c_e60d7c02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-03-23T15:32:50Z",
+      "side": 1,
+      "message": "I tried, but didn\u0027t manage to reproduce the scenario discovered by the fuzzer.",
+      "parentUuid": "1559bd52_a1685eda",
+      "revId": "eddeaa69d431ebd3a9e29f9164da058759c79303",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7103cd34_e7cc0c81",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-03-23T13:52:38Z",
       "side": 1,
       "message": "nit: Maybe expand the log a little? E.g. a line like \"Failed to add seq 234 to feedback packet\" might be more easy to understand in log file than just \"Failed to add 234\"\n(if logging is even needed)",
+      "range": {
+        "startLine": 361,
+        "startChar": 8,
+        "endLine": 361,
+        "endChar": 52
+      },
+      "revId": "eddeaa69d431ebd3a9e29f9164da058759c79303",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fca40589_078ceab0",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-03-23T15:32:50Z",
+      "side": 1,
+      "message": "I think this log is not needed: if would just imply feedback need to be send in multiple packets.\n\nInstead I\u0027ve expanded the log message about the scenario that should never happen.",
+      "parentUuid": "7103cd34_e7cc0c81",
       "range": {
         "startLine": 361,
         "startChar": 8,
