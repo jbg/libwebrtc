@@ -848,6 +848,10 @@ INSTANTIATE_TEST_SUITE_P(NumberOfSendEncodings,
                          ::testing::Range(0, kMaxLayersInMetricsTest));
 #endif
 
+// TODO(https://crbug.com/webrtc/15018): Investigate heap-use-after free during
+// shutdown of the test that is flakily happening on bots but not locally.
+#if !defined(ADDRESS_SANITIZER)
+
 // Inherits some helper methods from PeerConnectionSimulcastTests but
 // uses real threads and PeerConnectionTestWrapper to create fake media streams
 // with flowing media and establish connections.
@@ -1620,5 +1624,7 @@ TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
   EXPECT_THAT(*outbound_rtps[1]->scalability_mode, StrEq("L1T3"));
   EXPECT_THAT(*outbound_rtps[2]->scalability_mode, StrEq("L1T3"));
 }
+
+#endif  // !defined(ADDRESS_SANITIZER)
 
 }  // namespace webrtc
