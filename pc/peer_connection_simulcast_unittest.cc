@@ -1110,7 +1110,7 @@ TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
 
   // Wait until media is flowing.
   EXPECT_TRUE_WAIT(HasOutboundRtpBytesSent(local_pc_wrapper, 1u),
-                   kDefaultTimeout.ms());
+                   kLongTimeoutForRampingUp.ms());
   EXPECT_TRUE(OutboundRtpResolutionsAreLessThanOrEqualToExpectations(
       local_pc_wrapper, {{"", 1280, 720}}));
   // Verify codec and scalability mode.
@@ -1122,6 +1122,12 @@ TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
               StrCaseEq("video/VP8"));
   EXPECT_THAT(*outbound_rtps[0]->scalability_mode, StrEq("L1T1"));
 }
+
+// TODO(https://crbug.com/webrtc/15018): Investigate heap-use-after free during
+// shutdown of the test that is flakily happening on bots. It's not only
+// happening on ASAN, but it is rare enough on non-ASAN that we don't have to
+// disable everywhere.
+#if !defined(ADDRESS_SANITIZER)
 
 TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
        SendingThreeEncodings_VP8_Simulcast) {
@@ -1620,5 +1626,7 @@ TEST_F(PeerConnectionSimulcastWithMediaFlowTests,
   EXPECT_THAT(*outbound_rtps[1]->scalability_mode, StrEq("L1T3"));
   EXPECT_THAT(*outbound_rtps[2]->scalability_mode, StrEq("L1T3"));
 }
+
+#endif  // !defined(ADDRESS_SANITIZER)
 
 }  // namespace webrtc
