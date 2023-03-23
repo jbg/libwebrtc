@@ -1816,6 +1816,28 @@ RTCError SdpOfferAnswerHandler::ApplyLocalDescription(
     local_ice_credentials_to_replace_->ClearIceCredentials();
   }
 
+  // This is terrible as it integrates SDP munging and new APIs.
+  if (type == SdpType::kAnswer && IsUnifiedPlan()) {
+    for (const auto& content :
+         current_local_description_->description()->contents()) {
+      auto transceiver = transceivers()->FindByMid(content.name);
+      RTC_DCHECK(transceiver);
+      auto extension_capabilities =
+          transceiver->GetHeaderExtensionsToNegotiate();
+      // Set the capability of every extension we see here to "sendrecv".
+      for (auto& ext : content.media_description()->rtp_header_extensions()) {
+        auto it = absl::c_find_if(extension_capabilities,
+                                  [&ext](const RtpHeaderExtensionCapability c) {
+                                    return ext.uri == c.uri;
+                                  });
+        if (it != extension_capabilities.end()) {
+          it->direction = RtpTransceiverDirection::kSendRecv;
+        }
+      }
+      transceiver->SetHeaderExtensionsToNegotiate(extension_capabilities);
+    }
+  }
+
   return RTCError::OK();
 }
 
