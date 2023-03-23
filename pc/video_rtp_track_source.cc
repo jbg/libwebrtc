@@ -61,9 +61,10 @@ void VideoRtpTrackSource::AddEncodedSink(
   size_t size = 0;
   {
     MutexLock lock(&mu_);
-    RTC_DCHECK(std::find(encoded_sinks_.begin(), encoded_sinks_.end(), sink) ==
-               encoded_sinks_.end());
-    encoded_sinks_.push_back(sink);
+    if (std::find(encoded_sinks_.begin(), encoded_sinks_.end(), sink) ==
+        encoded_sinks_.end()) {
+      encoded_sinks_.push_back(sink);
+    }
     size = encoded_sinks_.size();
   }
   if (size == 1 && callback_) {
