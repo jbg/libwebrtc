@@ -3234,11 +3234,18 @@ void SdpOfferAnswerHandler::AllocateSctpSids() {
     return;
   }
 
-  absl::optional<rtc::SSLRole> role =
-      network_thread()->BlockingCall([this, is_caller = is_caller()] {
-        RTC_DCHECK_RUN_ON(network_thread());
-        return pc_->GetSctpSslRole_n(is_caller);
-      });
+  absl::optional<rtc::SSLRole> role = network_thread()->BlockingCall([this] {
+    RTC_DCHECK_RUN_ON(network_thread());
+    return pc_->GetSctpSslRole_n();
+  });
+
+  if (!role && pc_->sctp_mid()) {
+    // This works fine if we are the offerer, but can be a mistake if
+    // we are the answerer and the remote offer is ACTIVE. In that
+    // case, we will guess the role wrong.
+    // TODO(bugs.webrtc.org/13668): Check if this actually happens.
+    role = is_caller() ? rtc::SSL_SERVER : rtc::SSL_CLIENT;
+  }
 
   if (role) {
     // TODO(webrtc:11547): Make this call on the network thread too once
