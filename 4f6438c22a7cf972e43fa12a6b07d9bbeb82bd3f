@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f63612e2_ba17346a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-24T19:25:14Z",
+      "side": 1,
+      "message": "Interesting to scratch at this itch at 4AM ... I think I know what we *should* do now to make the \"guessing\" be correct in all cases, but will take another CL.",
+      "revId": "4f6438c22a7cf972e43fa12a6b07d9bbeb82bd3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ca4090f_34b6263a",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 1406,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-24T19:25:14Z",
+      "side": 1,
+      "message": "This guesswork is guessing wrong (returning SSL_CLIENT \u003d ACTIVE) if remote offer has role ACTIVE, but we\u0027ll be able to detect that by looking at the SDP. So this is solvable for that case, but I guess it\u0027s for another CL.",
+      "revId": "4f6438c22a7cf972e43fa12a6b07d9bbeb82bd3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f969e981_6b49ae8f",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 3242,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-24T19:25:14Z",
+      "side": 1,
+      "message": "For style, can you expose a method called GuessSslRole on the sdp_offer_answer interface and call it from both pc and here?\nThat will get us all the logic in a single place for fixing (and sdp_offer_answer also has access to the local/remote offers, so it\u0027s logically the right place for it).",
+      "revId": "4f6438c22a7cf972e43fa12a6b07d9bbeb82bd3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

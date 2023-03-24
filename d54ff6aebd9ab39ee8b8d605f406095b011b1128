@@ -104,6 +104,24 @@
       "parentUuid": "11738ea7_9334e0bd",
       "revId": "d54ff6aebd9ab39ee8b8d605f406095b011b1128",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a760490_9508a492",
+        "filename": "pc/sctp_data_channel.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-24T19:25:14Z",
+      "side": 1,
+      "message": "This is an improvement, and doesn\u0027t hinder removing the guessing later.\n\nThe phases of establishing an SCTP session are:\n\nWhen being the offerer:\n- Before negotiation: Neither is_caller nor sctp_mid exists\n- After setting an offer as local description: is_caller is known (true), sctp_mid is known, but we don\u0027t know SSL role for sure (or if we\u0027ll eventually get an SCTP sesison).\n- After setting an answer as remote description: We know is_caller, sctp_mid and that we\u0027ll get the SCTP channel established (m-section wasn\u0027t rejected). (Special case: The SCTP m-section was rejected. Close datachannels.) We MAY know SSL role (if we offered actpass and got back active or passive; if the other end is a webrtc implmeentation, it will be active).\n- After the TLS handshake: We know SSL role for sure.\n\nWhen being the answerer:\n- After setting an offer as remote description: We know is_caller (false), and if there was an SCTP session, we know the SCTP mid. We also know the SSL role, since if the remote offer was actpass or passive, we\u0027ll answer active, and if the remote offer was active, we\u0027re passive. Special case: No SCTP m\u003d line. We don\u0027t know for sure if the remote doesn\u0027t support it or just didn\u0027t offer it. Not sure what we do in this case (logic would say fire a negotiationnneded event and generate a subsequent offer, but I don\u0027t think we tested this).\n- After the TLS handshake: We know that TLS obeyed the protocol. There should be an error surfaced somewhere if it didn\u0027t.\n\nInteresting to go through this in my head - I hadn\u0027t realized that \"guessing\" would always be correct if we get an SCTP session and are not the offerer.",
+      "parentUuid": "7dc2795c_128b8986",
+      "revId": "d54ff6aebd9ab39ee8b8d605f406095b011b1128",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
