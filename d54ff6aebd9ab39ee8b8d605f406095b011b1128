@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1b9a21e_26cb14c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-24T07:50:58Z",
+      "side": 1,
+      "message": "I wish I had killed that guessing logic for SSL role earlier....",
+      "revId": "d54ff6aebd9ab39ee8b8d605f406095b011b1128",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fd23d27_edc0c1ce",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-24T07:50:58Z",
+      "side": 1,
+      "message": "Note that I am very suspicious of the is_caller derived logic in PC for GetSctpSslRole. I would be much happier if we could return absl::nullopt for that case, but I\u0027m not sure what would break. See TODO over there.",
+      "revId": "d54ff6aebd9ab39ee8b8d605f406095b011b1128",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11738ea7_9334e0bd",
+        "filename": "pc/sctp_data_channel.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-03-24T07:50:58Z",
+      "side": 1,
+      "message": "This doesn\u0027t belong in InternalDataChannelInit. Either it should be the value of ssl_role, or it should not exist at all. If you want to preserve the guessing logic for SSL role, do it as early as possible.",
+      "revId": "d54ff6aebd9ab39ee8b8d605f406095b011b1128",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
