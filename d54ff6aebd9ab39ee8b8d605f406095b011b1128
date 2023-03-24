@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc0ca0e3_81f1bd7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-24T14:56:09Z",
+      "side": 1,
+      "message": "I get that but I don\u0027t think we should remove the guessing logic right now since we don\u0027t know what could happen if we do. 😊\nBelow I\u0027m assuming that removing it is outside the scope of this cl.\n(things would certainly be simpler without it though)",
+      "parentUuid": "d1b9a21e_26cb14c0",
+      "revId": "d54ff6aebd9ab39ee8b8d605f406095b011b1128",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6fd23d27_edc0c1ce",
@@ -35,6 +53,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf0dd789_e6314974",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-24T14:56:09Z",
+      "side": 1,
+      "message": "Yup, I\u0027m aware of it.",
+      "parentUuid": "6fd23d27_edc0c1ce",
+      "revId": "d54ff6aebd9ab39ee8b8d605f406095b011b1128",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11738ea7_9334e0bd",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-03-24T07:50:58Z",
       "side": 1,
       "message": "This doesn\u0027t belong in InternalDataChannelInit. Either it should be the value of ssl_role, or it should not exist at all. If you want to preserve the guessing logic for SSL role, do it as early as possible.",
+      "revId": "d54ff6aebd9ab39ee8b8d605f406095b011b1128",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dc2795c_128b8986",
+        "filename": "pc/sctp_data_channel.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-24T14:56:09Z",
+      "side": 1,
+      "message": "OK, so since we\u0027re not removing the guessing logic (not exist at all) and that the other option (be of type SslRole) is a bit vague, I tried to do what you\u0027re asking, but you might not like it 😊\n\nSo to make sure we\u0027re on the same page, here\u0027s to recap the order of operations:\n\n* The operation of creating a data channel starts on the signaling thread.\n* The knowledge of `is_caller` is on the signaling thread.\n* The knowledge of the dtls role, sits on the network thread.\n* The guessing logic does not kick in unless the dtls role is first checked.\n* If no `sctp_mid` is set, we don\u0027t return a specific role, but might still\n  create a channel object.\n* Some (most) parts of initializing a channel object, involve the network thread\n  and we don\u0027t want to have multiple blocking calls when instantiating a channel.\n\nHaving the `is_caller` value as part of the init struct, was intended to get that flag as early as possible. Then that flag is used to get the role in the correct context and only when needed.\n\nI\u0027ve now changed the type in the init struct to be `absl::optional\u003crtc::SSLRole\u003e fallback_ssl_role`.\n\nThe fallback flag is only set when an `sctp_mid` is set (consistent with how the code worked before). When it is set, it is set based on the `is_caller()` state (also consistent with how the code worked before).\n\nThis removes the guessing logic from `GetSctpSslRole_n`, but now, in order to stay true to the previous functionality, it\u0027s is in two places instead: `SdpOfferAnswerHandler::AllocateSctpSids` and `PeerConnection::CreateDataChannelOrError`.\n\nArguably the `fallback_ssl_role` flag is also a part of the guessing logic, so that\u0027s in `DataChannelController::InternalCreateSctpDataChannel` too.\n\nSo as a result, the guessing logic is even more spread than before. On the plus side, there\u0027s no `is_caller` flag in the init struct.",
+      "parentUuid": "11738ea7_9334e0bd",
       "revId": "d54ff6aebd9ab39ee8b8d605f406095b011b1128",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
