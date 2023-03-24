@@ -15,13 +15,17 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import android.media.MediaCodec;
 import android.media.MediaCodecInfo;
+import android.media.MediaCodecInfo.CodecCapabilities;
+import android.media.MediaCodecInfo.CodecProfileLevel;
 import android.media.MediaFormat;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import androidx.test.runner.AndroidJUnit4;
 import java.nio.ByteBuffer;
@@ -34,6 +38,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.MediaCodecInfoBuilder;
 import org.webrtc.EncodedImage;
 import org.webrtc.EncodedImage.FrameType;
 import org.webrtc.FakeMediaCodecWrapper.State;
@@ -59,6 +64,7 @@ public class HardwareVideoEncoderTest {
       /* numberOfSimulcastStreams= */ 1,
       /* automaticResizeOn= */ true,
       /* capabilities= */ new VideoEncoder.Capabilities(false /* lossNotification */));
+  private static final String CODEC_NAME = "org.webrtc.testencoder";
   private static final long POLL_DELAY_MS = 10;
   private static final long DELIVER_ENCODED_IMAGE_DELAY_MS = 10;
   private static final EncodeInfo ENCODE_INFO_KEY_FRAME =
@@ -137,7 +143,7 @@ public class HardwareVideoEncoderTest {
     public TestEncoder build() {
       return new TestEncoder((String name)
                                  -> fakeMediaCodecWrapper,
-          "org.webrtc.testencoder", codecType,
+          CODEC_NAME, codecType,
           /* surfaceColorFormat= */ null,
           /* yuvColorFormat= */ MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420Planar,
           /* params= */ new HashMap<>(),
@@ -191,6 +197,95 @@ public class HardwareVideoEncoderTest {
 
     assertThat(fakeMediaCodecWrapper.getConfiguredFlags())
         .isEqualTo(MediaCodec.CONFIGURE_FLAG_ENCODE);
+  }
+
+  @Test
+  @Config(minSdk = VERSION_CODES.TIRAMISU)
+  public void encodingStatistics_unsupported_disabled() throws InterruptedException {
+    MediaFormat supportedFormat = new MediaFormat();
+    supportedFormat.setString(MediaFormat.KEY_MIME, VideoCodecMimeType.AV1.mimeType());
+    supportedFormat.setFeatureEnabled(CodecCapabilities.FEATURE_EncodingStatistics, false);
+
+    MediaCodecInfo codecInfo = createMediaCodecInfo(supportedFormat);
+    doReturn(codecInfo).when(fakeMediaCodecWrapper).getCodecInfo();
+
+    TestEncoder encoder = new TestEncoderBuilder().setCodecType(VideoCodecMimeType.AV1).build();
+
+    assertThat(encoder.initEncode(TEST_ENCODER_SETTINGS, mockEncoderCallback))
+        .isEqualTo(VideoCodecStatus.OK);
+
+    MediaFormat configuredFormat = fakeMediaCodecWrapper.getConfiguredFormat();
+    assertThat(configuredFormat).isNotNull();
+    assertThat(configuredFormat.containsKey(MediaFormat.KEY_VIDEO_ENCODING_STATISTICS_LEVEL))
+        .isFalse();
+
+    // Verify that QP is not set in encoded frame even if reported by MediaCodec.
+    MediaFormat outputFormat = new MediaFormat();
+    outputFormat.setInteger(MediaFormat.KEY_VIDEO_QP_AVERAGE, 123);
+    doReturn(outputFormat).when(fakeMediaCodecWrapper).getOutputFormat(any());
+
+    encoder.encode(createTestVideoFrame(/* timestampNs= */ 42), ENCODE_INFO_KEY_FRAME);
+
+    byte[] outputData = CodecTestHelper.generateRandomData(100);
+    fakeMediaCodecWrapper.addOutputData(outputData,
+        /* presentationTimestampUs= */ 0,
+        /* flags= */ MediaCodec.BUFFER_FLAG_SYNC_FRAME);
+
+    encoder.waitDeliverEncodedImage();
+
+    ArgumentCaptor<EncodedImage> videoFrameCaptor = ArgumentCaptor.forClass(EncodedImage.class);
+    verify(mockEncoderCallback)
+        .onEncodedFrame(videoFrameCaptor.capture(), any(CodecSpecificInfo.class));
+
+    EncodedImage videoFrame = videoFrameCaptor.getValue();
+    assertThat(videoFrame).isNotNull();
+    assertThat(videoFrame.qp).isNull();
+  }
+
+  @Test
+  @Config(minSdk = VERSION_CODES.TIRAMISU)
+  public void encodingStatistics_supported_enabled() throws InterruptedException {
+    MediaFormat supportedFormat = new MediaFormat();
+    supportedFormat.setString(MediaFormat.KEY_MIME, VideoCodecMimeType.AV1.mimeType());
+    supportedFormat.setFeatureEnabled(CodecCapabilities.FEATURE_EncodingStatistics, true);
+
+    MediaCodecInfo codecInfo = createMediaCodecInfo(supportedFormat);
+    doReturn(codecInfo).when(fakeMediaCodecWrapper).getCodecInfo();
+
+    TestEncoder encoder = new TestEncoderBuilder().setCodecType(VideoCodecMimeType.AV1).build();
+
+    assertThat(encoder.initEncode(TEST_ENCODER_SETTINGS, mockEncoderCallback))
+        .isEqualTo(VideoCodecStatus.OK);
+
+    MediaFormat configuredFormat = fakeMediaCodecWrapper.getConfiguredFormat();
+    assertThat(configuredFormat).isNotNull();
+    assertThat(configuredFormat.containsKey(MediaFormat.KEY_VIDEO_ENCODING_STATISTICS_LEVEL))
+        .isTrue();
+    assertThat(configuredFormat.getInteger(MediaFormat.KEY_VIDEO_ENCODING_STATISTICS_LEVEL))
+        .isEqualTo(MediaFormat.VIDEO_ENCODING_STATISTICS_LEVEL_1);
+
+    // Verify that QP is set in encoded frame.
+    MediaFormat outputFormat = new MediaFormat();
+    outputFormat.setInteger(MediaFormat.KEY_VIDEO_QP_AVERAGE, 123);
+    doReturn(outputFormat).when(fakeMediaCodecWrapper).getOutputFormat(anyInt());
+
+    encoder.encode(createTestVideoFrame(/* timestampNs= */ 42), ENCODE_INFO_KEY_FRAME);
+
+    byte[] outputData = CodecTestHelper.generateRandomData(100);
+    fakeMediaCodecWrapper.addOutputData(outputData,
+        /* presentationTimestampUs= */ 0,
+        /* flags= */ MediaCodec.BUFFER_FLAG_SYNC_FRAME);
+
+    encoder.waitDeliverEncodedImage();
+
+    ArgumentCaptor<EncodedImage> videoFrameCaptor = ArgumentCaptor.forClass(EncodedImage.class);
+    verify(mockEncoderCallback)
+        .onEncodedFrame(videoFrameCaptor.capture(), any(CodecSpecificInfo.class));
+
+    EncodedImage videoFrame = videoFrameCaptor.getValue();
+    assertThat(videoFrame).isNotNull();
+    assertThat(videoFrame.qp).isNotNull();
+    assertThat(videoFrame.qp).isEqualTo(123);
   }
 
   @Test
@@ -366,5 +461,23 @@ public class HardwareVideoEncoderTest {
     long frameDurationMs = SECONDS.toMicros(1) / 30;
     assertThat(timestampCaptor.getAllValues())
         .containsExactly(0L, frameDurationMs, 2 * frameDurationMs);
+  }
+
+  private static MediaCodecInfo createMediaCodecInfo(MediaFormat format) {
+    CodecProfileLevel profileLevel = new CodecProfileLevel();
+    profileLevel.profile = 0;
+    profileLevel.level = 0;
+
+    return MediaCodecInfoBuilder.newBuilder()
+        .setName(CODEC_NAME)
+        .setIsHardwareAccelerated(true)
+        .setIsEncoder(true)
+        .setCapabilities(new CodecCapabilities[] {
+            MediaCodecInfoBuilder.CodecCapabilitiesBuilder.newBuilder()
+                .setMediaFormat(format)
+                .setProfileLevels(new CodecProfileLevel[] {profileLevel})
+                .setColorFormats(new int[] {CodecCapabilities.COLOR_FormatYUV420Planar})
+                .build()})
+        .build();
   }
 }
