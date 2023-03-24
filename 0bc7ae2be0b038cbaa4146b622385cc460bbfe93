@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50cfe2a7_b6dfa859",
+        "filename": "pc/peer_connection_header_extension_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-03-24T11:53:28Z",
+      "side": 1,
+      "message": "TODO to make spec-compliant and delete this test?",
+      "revId": "0bc7ae2be0b038cbaa4146b622385cc460bbfe93",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28a26a30_52d60f3a",
+        "filename": "pc/peer_connection_header_extension_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-03-24T11:53:28Z",
+      "side": 1,
+      "message": "nit: naming suggestion for test \"FollowUpOfferContainsMungedExtension\"",
+      "revId": "0bc7ae2be0b038cbaa4146b622385cc460bbfe93",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "605a20db_4902bc4f",
+        "filename": "pc/peer_connection_header_extension_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-03-24T11:53:28Z",
+      "side": 1,
+      "message": "https://w3c.github.io/webrtc-extensions/#modifications-to-existing-procedures-0 says that [[HeaderExtensionsToNegotiate]] is updated to whatever was in the remote SDP \"offer\".\n\nSo according to this, you shouldn\u0027t need set it to kSendRecv because it should already have been updated to kSendRecv based on being present in the SDP.\n\nI thought the spec only said this if the transceiver was created by the remote SDP, but apparently the spec says to do this even if the transceiver already existed... we should add test coverage for both the \"transceiver created by SDP\" and \"transceiver already existed and there is an remote follow up offer after it was negotiated\".\n\nEither fix or add a TODO to fix if you want to get the regression tests in first?",
+      "revId": "0bc7ae2be0b038cbaa4146b622385cc460bbfe93",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
