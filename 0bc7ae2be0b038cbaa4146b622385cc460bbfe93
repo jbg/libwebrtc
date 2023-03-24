@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dadb942_4c18da36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-03-24T14:17:16Z",
+      "side": 1,
+      "message": "sprang@: can you take a look at the fake_media_engine change please?\nIf you also know why a payload type of 0 is rejected (i.e. not considered a common codec)... ,-)",
+      "revId": "0bc7ae2be0b038cbaa4146b622385cc460bbfe93",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50cfe2a7_b6dfa859",
@@ -14,6 +31,24 @@
       "writtenOn": "2023-03-24T11:53:28Z",
       "side": 1,
       "message": "TODO to make spec-compliant and delete this test?",
+      "revId": "0bc7ae2be0b038cbaa4146b622385cc460bbfe93",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "820e954b_058fdb0e",
+        "filename": "pc/peer_connection_header_extension_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-03-24T14:17:16Z",
+      "side": 1,
+      "message": "I have the solution to make it spec compliant again in the *next* CL (the one that says \"terrible hack\")",
+      "parentUuid": "50cfe2a7_b6dfa859",
       "revId": "0bc7ae2be0b038cbaa4146b622385cc460bbfe93",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -35,6 +70,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbb57daf_83147d75",
+        "filename": "pc/peer_connection_header_extension_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-03-24T14:17:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28a26a30_52d60f3a",
+      "revId": "0bc7ae2be0b038cbaa4146b622385cc460bbfe93",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "605a20db_4902bc4f",
@@ -48,6 +101,24 @@
       "writtenOn": "2023-03-24T11:53:28Z",
       "side": 1,
       "message": "https://w3c.github.io/webrtc-extensions/#modifications-to-existing-procedures-0 says that [[HeaderExtensionsToNegotiate]] is updated to whatever was in the remote SDP \"offer\".\n\nSo according to this, you shouldn\u0027t need set it to kSendRecv because it should already have been updated to kSendRecv based on being present in the SDP.\n\nI thought the spec only said this if the transceiver was created by the remote SDP, but apparently the spec says to do this even if the transceiver already existed... we should add test coverage for both the \"transceiver created by SDP\" and \"transceiver already existed and there is an remote follow up offer after it was negotiated\".\n\nEither fix or add a TODO to fix if you want to get the regression tests in first?",
+      "revId": "0bc7ae2be0b038cbaa4146b622385cc460bbfe93",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbe41081_69ca6c7f",
+        "filename": "pc/peer_connection_header_extension_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-03-24T14:17:16Z",
+      "side": 1,
+      "message": "We agreed to fix the spec, we shouldn\u0027t let the remote control our preferences (but sadly we might need to allow SDP munging to change them...)",
+      "parentUuid": "605a20db_4902bc4f",
       "revId": "0bc7ae2be0b038cbaa4146b622385cc460bbfe93",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
