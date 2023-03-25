@@ -122,6 +122,24 @@
       "parentUuid": "7dc2795c_128b8986",
       "revId": "d54ff6aebd9ab39ee8b8d605f406095b011b1128",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18c78841_21aa0fa9",
+        "filename": "pc/sctp_data_channel.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-25T09:55:40Z",
+      "side": 1,
+      "message": "Great summary. I included it with the todo in the new GuessSslRole method.",
+      "parentUuid": "8a760490_9508a492",
+      "revId": "d54ff6aebd9ab39ee8b8d605f406095b011b1128",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

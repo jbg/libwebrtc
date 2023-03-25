@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d10f75a_87c1c1a1",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 1406,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-25T09:55:40Z",
+      "side": 1,
+      "message": "Added that information to the TODO.",
+      "parentUuid": "5ca4090f_34b6263a",
+      "revId": "4f6438c22a7cf972e43fa12a6b07d9bbeb82bd3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f969e981_6b49ae8f",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-03-24T19:25:14Z",
       "side": 1,
       "message": "For style, can you expose a method called GuessSslRole on the sdp_offer_answer interface and call it from both pc and here?\nThat will get us all the logic in a single place for fixing (and sdp_offer_answer also has access to the local/remote offers, so it\u0027s logically the right place for it).",
+      "revId": "4f6438c22a7cf972e43fa12a6b07d9bbeb82bd3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02422081_affa3285",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 3242,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-03-25T09:55:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f969e981_6b49ae8f",
       "revId": "4f6438c22a7cf972e43fa12a6b07d9bbeb82bd3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
