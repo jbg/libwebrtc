@@ -3134,7 +3134,7 @@ void SdpOfferAnswerHandler::OnOperationsChainEmpty() {
   }
 }
 
-absl::optional<bool> SdpOfferAnswerHandler::is_caller() {
+absl::optional<bool> SdpOfferAnswerHandler::is_caller() const {
   RTC_DCHECK_RUN_ON(signaling_thread());
   return is_caller_;
 }
@@ -3234,17 +3234,33 @@ void SdpOfferAnswerHandler::AllocateSctpSids() {
     return;
   }
 
-  absl::optional<rtc::SSLRole> role =
-      network_thread()->BlockingCall([this, is_caller = is_caller()] {
-        RTC_DCHECK_RUN_ON(network_thread());
-        return pc_->GetSctpSslRole_n(is_caller);
-      });
+  absl::optional<rtc::SSLRole> role = network_thread()->BlockingCall([this] {
+    RTC_DCHECK_RUN_ON(network_thread());
+    return pc_->GetSctpSslRole_n();
+  });
+
+  if (!role) {
+    role = GuessSslRole();
+  }
 
   if (role) {
     // TODO(webrtc:11547): Make this call on the network thread too once
     // `AllocateSctpSids` has been updated.
     data_channel_controller()->AllocateSctpSids(*role);
   }
+}
+
+absl::optional<rtc::SSLRole> SdpOfferAnswerHandler::GuessSslRole() const {
+  RTC_DCHECK_RUN_ON(signaling_thread());
+  if (!pc_->sctp_mid())
+    return absl::nullopt;
+  // This works fine if we are the offerer, but can be a mistake if
+  // we are the answerer and the remote offer is ACTIVE. In that
+  // case, we will guess the role wrong.
+  // TODO(bugs.webrtc.org/13668): This^ guesswork is guessing wrong (returning
+  // SSL_CLIENT = ACTIVE) if remote offer has role ACTIVE, but we'll be able
+  // to detect that by looking at the SDP.
+  return is_caller() ? rtc::SSL_SERVER : rtc::SSL_CLIENT;
 }
 
 bool SdpOfferAnswerHandler::CheckIfNegotiationIsNeeded() {
