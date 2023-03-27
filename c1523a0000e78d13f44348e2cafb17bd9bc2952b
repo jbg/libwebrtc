@@ -16,6 +16,74 @@
       "message": "+1 for me, but give deadbeef a chance to look at it before submitting again - he may know of other reasons to worry.",
       "revId": "c1523a0000e78d13f44348e2cafb17bd9bc2952b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65d9d5a1_3d43bda1",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1910,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2023-03-27T21:55:35Z",
+      "side": 1,
+      "message": "If codecs[0] is RED/ulpfec/etc this won\u0027t end up working",
+      "revId": "c1523a0000e78d13f44348e2cafb17bd9bc2952b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da3ba06b_c93432c9",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1911,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2023-03-27T21:55:35Z",
+      "side": 1,
+      "message": "I still don\u0027t feel good about the parsing logic not being symmetrical with the SDP generation logic. I would prefer if this specifically checked the name of the codec as IsRtcpFeedbackApplicable does",
+      "revId": "c1523a0000e78d13f44348e2cafb17bd9bc2952b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73060917_ea79865c",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2931,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2023-03-27T21:55:35Z",
+      "side": 1,
+      "message": "I don\u0027t understand how the parts of this relating to audio codecs is relevant. Logic about whether the implementation supports something or not belongs elsewhere (like media_session.cc). webrtc_sdp.cc is just meant to convert between the string and structured representation of SDP to the fullest extent possible based on the relevant RFCs.",
+      "revId": "c1523a0000e78d13f44348e2cafb17bd9bc2952b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f37bb1a0_ef312b72",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2949,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2023-03-27T21:55:35Z",
+      "side": 1,
+      "message": "Do we want to call this in every call of AddFeedbackParameter, or only in UpdateFromWildcardCodecs? Supposing someone does explicitly add an rtcp-fb attribute for a FEC codec (meaning with its specific payload type, not *), would it make sense to ignore it?",
+      "revId": "c1523a0000e78d13f44348e2cafb17bd9bc2952b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
