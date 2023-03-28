@@ -1816,6 +1816,33 @@ RTCError SdpOfferAnswerHandler::ApplyLocalDescription(
     local_ice_credentials_to_replace_->ClearIceCredentials();
   }
 
+  // This integrates the RTP Header Extension Control API and local SDP munging
+  // for backward compability reasons. If something was enabled in the local
+  // description via SDP munging, consider it non-stopped in the API as well
+  // so that is shows up in subsequent offers/answers.
+  if (type == SdpType::kAnswer && IsUnifiedPlan()) {
+    for (const auto& content :
+         current_local_description_->description()->contents()) {
+      auto transceiver = transceivers()->FindByMid(content.name);
+      if (!transceiver) {
+        continue;
+      }
+      auto extension_capabilities =
+          transceiver->GetHeaderExtensionsToNegotiate();
+      // Set the capability of every extension we see here to "sendrecv".
+      for (auto& ext : content.media_description()->rtp_header_extensions()) {
+        auto it = absl::c_find_if(extension_capabilities,
+                                  [&ext](const RtpHeaderExtensionCapability c) {
+                                    return ext.uri == c.uri;
+                                  });
+        if (it != extension_capabilities.end()) {
+          it->direction = RtpTransceiverDirection::kSendRecv;
+        }
+      }
+      transceiver->SetHeaderExtensionsToNegotiate(extension_capabilities);
+    }
+  }
+
   return RTCError::OK();
 }
 
