@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '4750e820fbcd52d30a0f194b89e34bf01f3ad740',
+  'chromium_revision': '1ebe30b9b207ab8c33ca7666480628e3a5bc3c1a',
 
   # Fetch the prebuilt binaries for llvm-cov and llvm-profdata. Needed to
   # process the raw profiles produced by instrumented targets (built with
@@ -25,7 +25,7 @@ vars = {
 
   # By default, download the fuchsia sdk from the public sdk directory.
   'fuchsia_sdk_cipd_prefix': 'fuchsia/sdk/gn/',
-  'fuchsia_version': 'version:12.20230327.2.1',
+  'fuchsia_version': 'version:12.20230327.3.1',
   # By default, download the fuchsia images from the fuchsia GCS bucket.
   'fuchsia_images_bucket': 'fuchsia',
   'checkout_fuchsia': False,
@@ -48,7 +48,7 @@ deps = {
   'src/base':
     'https://chromium.googlesource.com/chromium/src/base@eb6d71e75c21421c38b227e7c7a40da7b063b5ac',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@c3d12ea422852389eae45b29ae7395cf9194e8ec',
+    'https://chromium.googlesource.com/chromium/src/build@052437a6e1026cdd12607e3c5b4438ed90546d09',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@c97a3b8902379b6e6f705202db03d415d790ebac',
   # Gradle 6.6.1. Used for testing Android Studio project generation for WebRTC.
@@ -61,9 +61,9 @@ deps = {
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@da1cc679eccc701d048a8144c08cd4aa77a82453',
+    'https://chromium.googlesource.com/chromium/src/testing@b6cd9a238ba99a5a28fe261ead8f6c8dfe8b9f68',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@3f6c13b812a0f0a3339db4b98ff6c4bde0ff1670',
+    'https://chromium.googlesource.com/chromium/src/third_party@b3b628e94405cff6f3c0ca539bd073b595234c9c',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -336,7 +336,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@b1edcefc9e49f8581ec894c0198db54a7ff4c602',
+    'https://chromium.googlesource.com/chromium/src/tools@e6b3a61e14252c3a743bfae3b8bf9a0c36b5b271',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
