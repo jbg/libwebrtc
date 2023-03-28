@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4df2dd2_5482ec08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-03-28T16:23:38Z",
+      "side": 1,
+      "message": "Please also check the initial comment on PS1.\n\nI am somewhat worried we are creating precedence for looking at SDP munging but...",
+      "revId": "cbb7a87d2c1296d00e630ae738a492dac84de9a4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20d70747_d56a57f7",
+        "filename": "pc/media_session_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2021,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-03-28T16:23:38Z",
+      "side": 1,
+      "message": "This basically reverts the test to the state before the revert.\nI am not sure the test makes much sense since it creates an offer, does not do anything with it, changes things and asserts on the second offer.\n\nBut why would we throw away a passing test ;-)",
+      "revId": "cbb7a87d2c1296d00e630ae738a492dac84de9a4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
