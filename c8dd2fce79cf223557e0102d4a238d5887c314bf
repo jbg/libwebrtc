@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3b1f43d_19a7ae2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2023-03-29T06:57:54Z",
+      "side": 1,
+      "message": "LGTM with one comment.",
+      "revId": "c8dd2fce79cf223557e0102d4a238d5887c314bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "224bf3b1_a1ef5f3f",
+        "filename": "modules/audio_coding/neteq/neteq_impl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2023-03-29T06:57:54Z",
+      "side": 1,
+      "message": "Why not `RTC_GUARDED_BY(mutex_)`?",
+      "range": {
+        "startLine": 379,
+        "startChar": 43,
+        "endLine": 379,
+        "endChar": 62
+      },
+      "revId": "c8dd2fce79cf223557e0102d4a238d5887c314bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
