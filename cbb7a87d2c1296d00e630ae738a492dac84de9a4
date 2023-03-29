@@ -86,6 +86,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5baea019_397b18d5",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1819,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-03-29T09:48:06Z",
+      "side": 1,
+      "message": "Done! But don\u0027t make me write up conceptual documentation on SDP munging please :-)",
+      "parentUuid": "1676d056_4d4c8ef8",
+      "revId": "cbb7a87d2c1296d00e630ae738a492dac84de9a4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "045c7473_67b103f5",
