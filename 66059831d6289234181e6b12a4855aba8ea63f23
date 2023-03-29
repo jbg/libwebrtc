@@ -52,6 +52,24 @@
       "parentUuid": "10a372ed_efcc9bf6",
       "revId": "66059831d6289234181e6b12a4855aba8ea63f23",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0170fdb_92a84968",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-03-29T12:47:55Z",
+      "side": 1,
+      "message": "It is unclear how long it will take to update Robolectric. I made changes to encoder wrapper that allow testing encoding statistics without MediaCodecInfoBuilder.\n\nPTAL.",
+      "parentUuid": "6ab31e2f_7c5b2a3e",
+      "revId": "66059831d6289234181e6b12a4855aba8ea63f23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
