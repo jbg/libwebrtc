@@ -34,6 +34,24 @@
       "parentUuid": "ad2621e8_115b1a8e",
       "revId": "32fde81046bfabcb49d71c5caef5c394e64ea891",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df8cda04_5fd675c0",
+        "filename": "pc/peer_connection_header_extension_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-03-30T14:45:58Z",
+      "side": 1,
+      "message": "This as a result of SDP munging, not the header extensions API. Existing condition:\nhttps://jsfiddle.net/fippo/t3kdzo47/\nNote how the reordering is retained...",
+      "parentUuid": "07dacda3_52391fad",
+      "revId": "32fde81046bfabcb49d71c5caef5c394e64ea891",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
