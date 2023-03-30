@@ -16,6 +16,24 @@
       "message": "Wondering if we\u0027d want to do the munging for kOffer as well? Fine to do in a follow up CL or explain why this is not the case, but SLD munging seems to apply to both offers and answers",
       "revId": "a08dc484f10641ddf8912e8416a5837cc056d92e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92f70d8f_ae5cd71c",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1848,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-03-30T11:25:02Z",
+      "side": 1,
+      "message": "Such local SDP munging assumes hardcoding... but I think you are right, let me check...",
+      "parentUuid": "6bf5fbb9_58405d41",
+      "revId": "a08dc484f10641ddf8912e8416a5837cc056d92e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
