@@ -70,6 +70,24 @@
       "parentUuid": "df8cda04_5fd675c0",
       "revId": "32fde81046bfabcb49d71c5caef5c394e64ea891",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "720b4ca0_8fb8b6f6",
+        "filename": "pc/peer_connection_header_extension_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-03-31T08:46:59Z",
+      "side": 1,
+      "message": "Agreed. I think we can measure how often header extension munging is done \"soon\" and then consider forbidding it once we launched the new API as alternative",
+      "parentUuid": "5f485018_121d2c20",
+      "revId": "32fde81046bfabcb49d71c5caef5c394e64ea891",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
