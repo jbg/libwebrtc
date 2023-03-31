@@ -144,6 +144,7 @@ class SharedScreenCastStreamPrivate {
   uint32_t frame_rate_ = 60;
 
   bool use_damage_region_ = true;
+  DesktopRegion last_damage_region_;
 
   // Specifies whether the pipewire stream has been initialized with a request
   // to embed cursor into the captured frames.
@@ -158,7 +159,9 @@ class SharedScreenCastStreamPrivate {
   void ProcessBuffer(pw_buffer* buffer);
   bool ProcessMemFDBuffer(pw_buffer* buffer,
                           DesktopFrame& frame,
-                          const DesktopVector& offset);
+                          DesktopFrame* previous_frame,
+                          const DesktopVector& offset,
+                          bool effectively_new_frame);
   bool ProcessDMABuffer(pw_buffer* buffer,
                         DesktopFrame& frame,
                         const DesktopVector& offset);
@@ -373,8 +376,7 @@ void SharedScreenCastStreamPrivate::OnRenegotiateFormat(void* data, uint64_t) {
         SPA_RECTANGLE(that->width_, that->height_);
     struct spa_fraction frame_rate = SPA_FRACTION(that->frame_rate_, 1);
 
-    for (uint32_t format : {SPA_VIDEO_FORMAT_BGRA, SPA_VIDEO_FORMAT_RGBA,
-                            SPA_VIDEO_FORMAT_BGRx, SPA_VIDEO_FORMAT_RGBx}) {
+    for (uint32_t format : {SPA_VIDEO_FORMAT_BGRx}) {
       if (!that->modifiers_.empty()) {
         params.push_back(
             BuildFormat(&builder, format, that->modifiers_,
@@ -498,8 +500,7 @@ bool SharedScreenCastStreamPrivate::StartScreenCastStream(
       set_resolution = true;
     }
     struct spa_fraction default_frame_rate = SPA_FRACTION(frame_rate_, 1);
-    for (uint32_t format : {SPA_VIDEO_FORMAT_BGRA, SPA_VIDEO_FORMAT_RGBA,
-                            SPA_VIDEO_FORMAT_BGRx, SPA_VIDEO_FORMAT_RGBx}) {
+    for (uint32_t format : {SPA_VIDEO_FORMAT_BGRx}) {
       // Modifiers can be used with PipeWire >= 0.3.33
       if (has_required_pw_client_version && has_required_pw_server_version) {
         modifiers_ = egl_dmabuf_->QueryDmaBufModifiers(format);
@@ -830,12 +831,16 @@ void SharedScreenCastStreamPrivate::ProcessBuffer(pw_buffer* buffer) {
     std::unique_ptr<DesktopFrame> frame(new BasicDesktopFrame(
         DesktopSize(frame_size_.width(), frame_size_.height())));
     queue_.ReplaceCurrentFrame(SharedDesktopFrame::Wrap(std::move(frame)));
+    last_damage_region_.Clear();
   }
+
+  UpdateFrameUpdatedRegions(spa_buffer, *queue_.current_frame());
+  bool effectively_new_frame = !queue_.previous_frame() || !queue_.previous_frame()->size().equals(frame_size_);
 
   bool bufferProcessed = false;
   if (spa_buffer->datas[0].type == SPA_DATA_MemFd) {
     bufferProcessed =
-        ProcessMemFDBuffer(buffer, *queue_.current_frame(), offset);
+        ProcessMemFDBuffer(buffer, *queue_.current_frame(), queue_.previous_frame(), offset, effectively_new_frame);
   } else if (spa_buffer->datas[0].type == SPA_DATA_DmaBuf) {
     bufferProcessed = ProcessDMABuffer(buffer, *queue_.current_frame(), offset);
   }
@@ -847,22 +852,21 @@ void SharedScreenCastStreamPrivate::ProcessBuffer(pw_buffer* buffer) {
     return;
   }
 
-  if (spa_video_format_.format == SPA_VIDEO_FORMAT_RGBx ||
-      spa_video_format_.format == SPA_VIDEO_FORMAT_RGBA) {
-    uint8_t* tmp_src = queue_.current_frame()->data();
-    for (int i = 0; i < frame_size_.height(); ++i) {
-      // If both sides decided to go with the RGBx format we need to convert
-      // it to BGRx to match color format expected by WebRTC.
-      ConvertRGBxToBGRx(tmp_src, queue_.current_frame()->stride());
-      tmp_src += queue_.current_frame()->stride();
-    }
-  }
+  // if (spa_video_format_.format == SPA_VIDEO_FORMAT_RGBx ||
+  //     spa_video_format_.format == SPA_VIDEO_FORMAT_RGBA) {
+  //   uint8_t* tmp_src = queue_.current_frame()->data();
+  //   for (int i = 0; i < frame_size_.height(); ++i) {
+  //     // If both sides decided to go with the RGBx format we need to convert
+  //     // it to BGRx to match color format expected by WebRTC.
+  //     ConvertRGBxToBGRx(tmp_src, queue_.current_frame()->stride());
+  //     tmp_src += queue_.current_frame()->stride();
+  //   }
+  // }
 
   if (observer_) {
     observer_->OnDesktopFrameChanged();
   }
 
-  UpdateFrameUpdatedRegions(spa_buffer, *queue_.current_frame());
   queue_.current_frame()->set_may_contain_cursor(is_cursor_embedded_);
 
   if (callback_) {
@@ -874,11 +878,27 @@ void SharedScreenCastStreamPrivate::ProcessBuffer(pw_buffer* buffer) {
   }
 }
 
+#define USE_DAMAGE_REGION 1
+
+// // Returns the largest multiple of `n` that is <= `x`.
+// // `n` must be a power of 2. `nMask` is ~(`n` - 1).
+// static int DownToMultiple(int x, int nMask) {
+//   return (x & nMask);
+// }
+// 
+// // Returns the smallest multiple of `n` that is >= `x`.
+// // `n` must be a power of 2. `nMask` is ~(`n` - 1).
+// static int UpToMultiple(int x, int n, int nMask) {
+//   return ((x + n - 1) & nMask);
+// }
+
 RTC_NO_SANITIZE("cfi-icall")
 bool SharedScreenCastStreamPrivate::ProcessMemFDBuffer(
     pw_buffer* buffer,
     DesktopFrame& frame,
-    const DesktopVector& offset) {
+    DesktopFrame* previous_frame,
+    const DesktopVector& offset,
+    bool effectively_new_frame) {
   spa_buffer* spa_buffer = buffer->buffer;
   ScopedBuf map;
   uint8_t* src = nullptr;
@@ -904,9 +924,69 @@ bool SharedScreenCastStreamPrivate::ProcessMemFDBuffer(
   uint8_t* updated_src =
       src + (src_stride * offset.y()) + (kBytesPerPixel * offset.x());
 
-  frame.CopyPixelsFrom(
-      updated_src, (src_stride - (kBytesPerPixel * offset.x())),
-      DesktopRect::MakeWH(frame.size().width(), frame.size().height()));
+  const int stride = src_stride - (kBytesPerPixel * offset.x());
+
+  int64_t capture_start_time_nanos = rtc::TimeNanos();
+
+  // DesktopRect frame_rect = DesktopRect::MakeWH(frame.size().width(), frame.size().height());
+
+  if (effectively_new_frame || !use_damage_region_ || damage_region_.is_empty()) {
+    frame.CopyPixelsFrom(
+        updated_src, stride,
+        DesktopRect::MakeWH(frame.size().width(), frame.size().height()));
+  } else {
+    // This is just to test that when overlaying on the previous frame,
+    // everything works ok. And it does work ok!
+    // frame.CopyPixelsFrom(
+    //     previous_frame->data(), previous_frame->stride(),
+    //     DesktopRect::MakeWH(frame.size().width(), frame.size().height()));
+
+    // for (DesktopRegion::Iterator it(last_damage_region_); !it.IsAtEnd();
+    //      it.Advance()) {
+    //   const DesktopRect& r = it.rect();
+    //   frame.CopyPixelsFrom(*previous_frame, r.top_left(), r);
+    // }
+
+    for (DesktopRegion::Iterator it(damage_region_); !it.IsAtEnd();
+         it.Advance()) {
+      const auto& rect = it.rect();
+
+      // constexpr int log_grid_size = 4;
+      // constexpr int grid_size = 1 << log_grid_size;
+      // constexpr int grid_size_mask = ~(grid_size - 1);
+      // const int rect_left = DownToMultiple(rect.left(), grid_size_mask);
+      // const int rect_right = UpToMultiple(rect.right(), grid_size, grid_size_mask);
+      // const int rect_top = DownToMultiple(rect.top(), grid_size_mask);
+      // const int rect_bottom = UpToMultiple(rect.bottom(), grid_size, grid_size_mask);
+      // DesktopRect new_rect = DesktopRect::MakeLTRB(rect_left, rect_top, rect_right, rect_bottom);
+      // new_rect.IntersectWith(frame_rect);
+      // frame.CopyPixelsFrom(
+      //   src + rect_top * stride + rect_left * DesktopFrame::kBytesPerPixel,
+      //   stride, new_rect);
+
+      constexpr int offset = 1 << 8;
+      const int rect_top = std::max(rect.top() - offset, 0);
+      const int rect_left = std::max(rect.left() - offset, 0);
+      const int rect_width = std::min(
+        rect.width() + 2 * offset, frame.size().width() - rect_left);
+      const int rect_height = std::min(
+        rect.height() + 2 * offset, frame.size().height() - rect_top);
+      frame.CopyPixelsFrom(
+        src + rect_top * stride + rect_left * DesktopFrame::kBytesPerPixel,
+        stride, DesktopRect::MakeXYWH(rect_left, rect_top, rect_width,
+                                      rect_height));
+
+      // frame.CopyPixelsFrom(
+      //   src + rect.top() * stride + rect.left() * DesktopFrame::kBytesPerPixel,
+      //   stride, DesktopRect::MakeXYWH(rect.left(), rect.top(), rect.width(),
+      //                                 rect.height()));
+    }
+  }
+  RTC_LOG(LS_ERROR) << ">>> Time to copy pixels:"
+                    << (rtc::TimeNanos() - capture_start_time_nanos) /
+                             rtc::kNumNanosecsPerMillisec;
+
+//  last_damage_region_ = frame.updated_region();
 
   return true;
 }
