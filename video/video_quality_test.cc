@@ -842,7 +842,6 @@ void VideoQualityTest::SetupVideo(Transport* send_transport,
       } else if (params_.video[video_idx].codec == "VP9") {
         VideoCodecVP9 vp9_settings = VideoEncoder::GetDefaultVp9Settings();
         vp9_settings.denoisingOn = false;
-        vp9_settings.automaticResizeOn = false;
         vp9_settings.numberOfTemporalLayers = static_cast<unsigned char>(
             params_.video[video_idx].num_temporal_layers);
         vp9_settings.numberOfSpatialLayers = static_cast<unsigned char>(
@@ -865,7 +864,6 @@ void VideoQualityTest::SetupVideo(Transport* send_transport,
       vp9_settings.numberOfSpatialLayers =
           static_cast<unsigned char>(params_.ss[video_idx].num_spatial_layers);
       vp9_settings.interLayerPred = params_.ss[video_idx].inter_layer_pred;
-      vp9_settings.automaticResizeOn = false;
       video_encoder_configs_[video_idx].encoder_specific_settings =
           rtc::make_ref_counted<VideoEncoderConfig::Vp9EncoderSpecificSettings>(
               vp9_settings);
@@ -873,49 +871,6 @@ void VideoQualityTest::SetupVideo(Transport* send_transport,
                     1);
       // Min bitrate will be enforced by spatial layer config instead.
       video_encoder_configs_[video_idx].simulcast_layers[0].min_bitrate_bps = 0;
-    } else if (params_.video[video_idx].automatic_scaling) {
-      if (params_.video[video_idx].codec == "VP8") {
-        VideoCodecVP8 vp8_settings = VideoEncoder::GetDefaultVp8Settings();
-        vp8_settings.automaticResizeOn = true;
-        video_encoder_configs_[video_idx].encoder_specific_settings =
-            rtc::make_ref_counted<
-                VideoEncoderConfig::Vp8EncoderSpecificSettings>(vp8_settings);
-      } else if (params_.video[video_idx].codec == "VP9") {
-        VideoCodecVP9 vp9_settings = VideoEncoder::GetDefaultVp9Settings();
-        // Only enable quality scaler for single spatial layer.
-        vp9_settings.automaticResizeOn =
-            params_.ss[video_idx].num_spatial_layers == 1;
-        video_encoder_configs_[video_idx].encoder_specific_settings =
-            rtc::make_ref_counted<
-                VideoEncoderConfig::Vp9EncoderSpecificSettings>(vp9_settings);
-      } else if (params_.video[video_idx].codec == "H264") {
-        // Quality scaling is always on for H.264.
-      } else if (params_.video[video_idx].codec == cricket::kAv1CodecName) {
-        // TODO(bugs.webrtc.org/11404): Propagate the flag to
-        // aom_codec_enc_cfg_t::rc_resize_mode in Av1 encoder wrapper.
-        // Until then do nothing, specially do not crash.
-      } else {
-        RTC_DCHECK_NOTREACHED()
-            << "Automatic scaling not supported for codec "
-            << params_.video[video_idx].codec << ", stream " << video_idx;
-      }
-    } else {
-      // Default mode. Single SL, no automatic_scaling,
-      if (params_.video[video_idx].codec == "VP8") {
-        VideoCodecVP8 vp8_settings = VideoEncoder::GetDefaultVp8Settings();
-        vp8_settings.automaticResizeOn = false;
-        video_encoder_configs_[video_idx].encoder_specific_settings =
-            rtc::make_ref_counted<
-                VideoEncoderConfig::Vp8EncoderSpecificSettings>(vp8_settings);
-      } else if (params_.video[video_idx].codec == "VP9") {
-        VideoCodecVP9 vp9_settings = VideoEncoder::GetDefaultVp9Settings();
-        vp9_settings.automaticResizeOn = false;
-        video_encoder_configs_[video_idx].encoder_specific_settings =
-            rtc::make_ref_counted<
-                VideoEncoderConfig::Vp9EncoderSpecificSettings>(vp9_settings);
-      } else if (params_.video[video_idx].codec == "H264") {
-        video_encoder_configs_[video_idx].encoder_specific_settings = nullptr;
-      }
     }
     total_streams_used += num_video_substreams;
   }

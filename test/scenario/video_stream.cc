@@ -145,10 +145,8 @@ CreateVp9SpecificSettings(VideoStreamConfig video_config) {
 
   if (conf.content_type == kScreen || vp9.numberOfTemporalLayers > 1 ||
       vp9.numberOfSpatialLayers > 1) {
-    vp9.automaticResizeOn = false;
     vp9.denoisingOn = false;
   } else {
-    vp9.automaticResizeOn = conf.single.automatic_scaling;
     vp9.denoisingOn = conf.single.denoising;
   }
   return rtc::make_ref_counted<VideoEncoderConfig::Vp9EncoderSpecificSettings>(
@@ -166,10 +164,8 @@ CreateVp8SpecificSettings(VideoStreamConfig config) {
       ScalabilityModeToNumTemporalLayers(scalability_mode);
   if (vp8_settings.numberOfTemporalLayers > 1 ||
       config.encoder.simulcast_streams.size() > 1) {
-    vp8_settings.automaticResizeOn = false;
     vp8_settings.denoisingOn = false;
   } else {
-    vp8_settings.automaticResizeOn = config.encoder.single.automatic_scaling;
     vp8_settings.denoisingOn = config.encoder.single.denoising;
   }
   return rtc::make_ref_counted<VideoEncoderConfig::Vp8EncoderSpecificSettings>(

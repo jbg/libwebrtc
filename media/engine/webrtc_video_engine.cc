@@ -352,21 +352,6 @@ int NumActiveStreams(const webrtc::RtpParameters& rtp_parameters) {
   return res;
 }
 
-absl::optional<int> NumSpatialLayersFromEncoding(
-    const webrtc::RtpParameters& rtp_parameters,
-    size_t idx) {
-  if (idx >= rtp_parameters.encodings.size())
-    return absl::nullopt;
-
-  absl::optional<webrtc::ScalabilityMode> scalability_mode =
-      webrtc::ScalabilityModeFromString(
-          rtp_parameters.encodings[idx].scalability_mode.value_or(""));
-  return scalability_mode
-             ? absl::optional<int>(
-                   ScalabilityModeToNumSpatialLayers(*scalability_mode))
-             : absl::nullopt;
-}
-
 std::map<uint32_t, webrtc::VideoSendStream::StreamStats>
 MergeInfoAboutOutboundRtpSubstreams(
     const std::map<uint32_t, webrtc::VideoSendStream::StreamStats>&
@@ -511,11 +496,6 @@ WebRtcVideoChannel::WebRtcVideoSendStream::ConfigureVideoEncoderSettings(
     const VideoCodec& codec) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
   bool is_screencast = parameters_.options.is_screencast.value_or(false);
-  // No automatic resizing when using simulcast or screencast, or when
-  // disabled by field trial flag.
-  bool automatic_resize = !disable_automatic_resize_ && !is_screencast &&
-                          (parameters_.config.rtp.ssrcs.size() == 1 ||
-                           NumActiveStreams(rtp_parameters_) == 1);
 
   bool denoising;
   bool codec_default_denoising = false;
@@ -533,7 +513,6 @@ WebRtcVideoChannel::WebRtcVideoSendStream::ConfigureVideoEncoderSettings(
   if (absl::EqualsIgnoreCase(codec.name, kVp8CodecName)) {
     webrtc::VideoCodecVP8 vp8_settings =
         webrtc::VideoEncoder::GetDefaultVp8Settings();
-    vp8_settings.automaticResizeOn = automatic_resize;
     // VP8 denoising is enabled by default.
     vp8_settings.denoisingOn = codec_default_denoising ? true : denoising;
     return rtc::make_ref_counted<
@@ -553,14 +532,7 @@ WebRtcVideoChannel::WebRtcVideoSendStream::ConfigureVideoEncoderSettings(
 
     // VP9 denoising is disabled by default.
     vp9_settings.denoisingOn = codec_default_denoising ? true : denoising;
-    // Disable automatic resize if more than one spatial layer is requested.
-    bool vp9_automatic_resize = automatic_resize;
-    absl::optional<int> num_spatial_layers =
-        NumSpatialLayersFromEncoding(rtp_parameters_, /*idx=*/0);
-    if (num_spatial_layers && *num_spatial_layers > 1) {
-      vp9_automatic_resize = false;
-    }
-    vp9_settings.automaticResizeOn = vp9_automatic_resize;
+
     if (!is_screencast) {
       webrtc::FieldTrialFlag interlayer_pred_experiment_enabled("Enabled");
       webrtc::FieldTrialEnum<webrtc::InterLayerPredMode> inter_layer_pred_mode(

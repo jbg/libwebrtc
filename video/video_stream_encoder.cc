@@ -2157,47 +2157,19 @@ EncodedImageCallback::Result VideoStreamEncoder::OnEncodedImage(
                        "timestamp", encoded_image.Timestamp());
 
   const size_t simulcast_index = encoded_image.SimulcastIndex().value_or(0);
-  const VideoCodecType codec_type = codec_specific_info
-                                        ? codec_specific_info->codecType
-                                        : VideoCodecType::kVideoCodecGeneric;
   EncodedImage image_copy =
       AugmentEncodedImage(encoded_image, codec_specific_info);
 
   // Post a task because `send_codec_` requires `encoder_queue_` lock and we
   // need to update on quality convergence.
-  unsigned int image_width = image_copy._encodedWidth;
-  unsigned int image_height = image_copy._encodedHeight;
-  encoder_queue_.PostTask([this, codec_type, image_width, image_height,
-                           simulcast_index,
+  encoder_queue_.PostTask([this, simulcast_index,
                            at_target_quality = image_copy.IsAtTargetQuality()] {
     RTC_DCHECK_RUN_ON(&encoder_queue_);
 
     // Let the frame cadence adapter know about quality convergence.
-    if (frame_cadence_adapter_)
+    if (frame_cadence_adapter_) {
       frame_cadence_adapter_->UpdateLayerQualityConvergence(simulcast_index,
                                                             at_target_quality);
-
-    // Currently, the internal quality scaler is used for VP9 instead of the
-    // webrtc qp scaler (in the no-svc case or if only a single spatial layer is
-    // encoded). It has to be explicitly detected and reported to adaptation
-    // metrics.
-    if (codec_type == VideoCodecType::kVideoCodecVP9 &&
-        send_codec_.VP9()->automaticResizeOn) {
-      unsigned int expected_width = send_codec_.width;
-      unsigned int expected_height = send_codec_.height;
-      int num_active_layers = 0;
-      for (int i = 0; i < send_codec_.VP9()->numberOfSpatialLayers; ++i) {
-        if (send_codec_.spatialLayers[i].active) {
-          ++num_active_layers;
-          expected_width = send_codec_.spatialLayers[i].width;
-          expected_height = send_codec_.spatialLayers[i].height;
-        }
-      }
-      RTC_DCHECK_LE(num_active_layers, 1)
-          << "VP9 quality scaling is enabled for "
-             "SVC with several active layers.";
-      encoder_stats_observer_->OnEncoderInternalScalerUpdate(
-          image_width < expected_width || image_height < expected_height);
     }
   });
 

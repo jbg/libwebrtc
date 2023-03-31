@@ -287,6 +287,8 @@ void PictureIdTest::SetVideoEncoderConfig(int num_streams) {
     stream.scale_resolution_down_by = scale_factor;
     scale_factor *= 2.0;
   }
+
+  degradation_preference_ = DegradationPreference::DISABLED;
 }
 
 void PictureIdTest::TestPictureIdContinuousAfterReconfigure(

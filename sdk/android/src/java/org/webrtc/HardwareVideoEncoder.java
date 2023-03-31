@@ -123,7 +123,6 @@ class HardwareVideoEncoder implements VideoEncoder {
 
   // --- Set on initialize and immutable until release.
   private Callback callback;
-  private boolean automaticResizeOn;
 
   // --- Valid and immutable while an encoding session is running.
   @Nullable private MediaCodecWrapper codec;
@@ -206,7 +205,6 @@ class HardwareVideoEncoder implements VideoEncoder {
     encodeThreadChecker.checkIsOnValidThread();
 
     this.callback = callback;
-    automaticResizeOn = settings.automaticResizeOn;
 
     this.width = settings.width;
     this.height = settings.height;
@@ -491,16 +489,14 @@ class HardwareVideoEncoder implements VideoEncoder {
 
   @Override
   public ScalingSettings getScalingSettings() {
-    if (automaticResizeOn) {
-      if (codecType == VideoCodecMimeType.VP8) {
-        final int kLowVp8QpThreshold = 29;
-        final int kHighVp8QpThreshold = 95;
-        return new ScalingSettings(kLowVp8QpThreshold, kHighVp8QpThreshold);
-      } else if (codecType == VideoCodecMimeType.H264) {
-        final int kLowH264QpThreshold = 24;
-        final int kHighH264QpThreshold = 37;
-        return new ScalingSettings(kLowH264QpThreshold, kHighH264QpThreshold);
-      }
+    if (codecType == VideoCodecMimeType.VP8) {
+      final int kLowVp8QpThreshold = 29;
+      final int kHighVp8QpThreshold = 95;
+      return new ScalingSettings(kLowVp8QpThreshold, kHighVp8QpThreshold);
+    } else if (codecType == VideoCodecMimeType.H264) {
+      final int kLowH264QpThreshold = 24;
+      final int kHighH264QpThreshold = 37;
+      return new ScalingSettings(kLowH264QpThreshold, kHighH264QpThreshold);
     }
     return ScalingSettings.OFF;
   }

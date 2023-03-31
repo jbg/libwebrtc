@@ -120,7 +120,7 @@ void MultiStreamTester::RunTest() {
           30, *task_queue_factory);
       frame_generators[i] = frame_generator;
       send_streams[i]->SetSource(frame_generator,
-                                 DegradationPreference::MAINTAIN_FRAMERATE);
+                                 DegradationPreference::DISABLED);
       frame_generator->Init();
       frame_generator->Start();
     }

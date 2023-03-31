@@ -118,7 +118,6 @@ std::string CodecSpecificToString(const VideoCodec& codec) {
       ss << "\nnum_temporal_layers: "
          << static_cast<int>(codec.VP8().numberOfTemporalLayers);
       ss << "\ndenoising: " << codec.VP8().denoisingOn;
-      ss << "\nautomatic_resize: " << codec.VP8().automaticResizeOn;
       ss << "\nkey_frame_interval: " << codec.VP8().keyFrameInterval;
       break;
     case kVideoCodecVP9:
@@ -129,7 +128,6 @@ std::string CodecSpecificToString(const VideoCodec& codec) {
       ss << "\ndenoising: " << codec.VP9().denoisingOn;
       ss << "\nkey_frame_interval: " << codec.VP9().keyFrameInterval;
       ss << "\nadaptive_qp_mode: " << codec.VP9().adaptiveQpMode;
-      ss << "\nautomatic_resize: " << codec.VP9().automaticResizeOn;
       ss << "\nflexible_mode: " << codec.VP9().flexibleMode;
       break;
     case kVideoCodecH264:
@@ -226,7 +224,6 @@ void VideoCodecTestFixtureImpl::Config::SetCodecSettings(
       codec_settings.VP8()->numberOfTemporalLayers =
           static_cast<uint8_t>(num_temporal_layers);
       codec_settings.VP8()->denoisingOn = denoising_on;
-      codec_settings.VP8()->automaticResizeOn = spatial_resize_on;
       codec_settings.VP8()->keyFrameInterval = kBaseKeyFrameInterval;
       break;
     case kVideoCodecVP9:
@@ -234,7 +231,6 @@ void VideoCodecTestFixtureImpl::Config::SetCodecSettings(
           static_cast<uint8_t>(num_temporal_layers);
       codec_settings.VP9()->denoisingOn = denoising_on;
       codec_settings.VP9()->keyFrameInterval = kBaseKeyFrameInterval;
-      codec_settings.VP9()->automaticResizeOn = spatial_resize_on;
       codec_settings.VP9()->numberOfSpatialLayers =
           static_cast<uint8_t>(num_spatial_layers);
       break;

@@ -83,8 +83,6 @@ class SendStatisticsProxy : public VideoStreamEncoderObserver,
       const VideoCodec& codec,
       const VideoBitrateAllocation& allocation) override;
 
-  void OnEncoderInternalScalerUpdate(bool is_scaled) override;
-
   void OnMinPixelLimitReached() override;
   void OnInitialQualityResolutionAdaptDown() override;
 
@@ -299,8 +297,6 @@ class SendStatisticsProxy : public VideoStreamEncoderObserver,
   // Indicates if the latest bitrate allocation had layers disabled by low
   // available bandwidth.
   bool bw_limited_layers_ RTC_GUARDED_BY(mutex_);
-  // Indicastes if the encoder internally downscales input image.
-  bool internal_encoder_scaler_ RTC_GUARDED_BY(mutex_);
   Adaptations adaptation_limitations_ RTC_GUARDED_BY(mutex_);
 
   struct EncoderChangeEvent {

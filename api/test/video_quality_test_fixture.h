@@ -58,6 +58,7 @@ class VideoQualityTestFixtureInterface {
       int min_transmit_bps = 0;
       bool ulpfec = false;
       bool flexfec = false;
+      // TODO(ssilkin): Update tests and remove.
       bool automatic_scaling = false;
       std::string clip_path;  // "Generator" to generate frames instead.
       size_t capture_device_index = 0;

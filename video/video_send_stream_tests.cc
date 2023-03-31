@@ -3421,7 +3421,6 @@ void VideoSendStreamTest::TestVp9NonFlexMode(
       encoder_config->frame_drop_enabled = false;
 
       vp9_settings_.flexibleMode = false;
-      vp9_settings_.automaticResizeOn = false;
       vp9_settings_.keyFrameInterval = kKeyFrameInterval;
       if (!use_scalability_mode_identifier_) {
         vp9_settings_.numberOfTemporalLayers = params_.num_temporal_layers;

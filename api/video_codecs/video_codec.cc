@@ -33,7 +33,6 @@ constexpr char kPayloadNameMultiplex[] = "Multiplex";
 bool VideoCodecVP8::operator==(const VideoCodecVP8& other) const {
   return (numberOfTemporalLayers == other.numberOfTemporalLayers &&
           denoisingOn == other.denoisingOn &&
-          automaticResizeOn == other.automaticResizeOn &&
           keyFrameInterval == other.keyFrameInterval);
 }
 
@@ -42,7 +41,6 @@ bool VideoCodecVP9::operator==(const VideoCodecVP9& other) const {
           denoisingOn == other.denoisingOn &&
           keyFrameInterval == other.keyFrameInterval &&
           adaptiveQpMode == other.adaptiveQpMode &&
-          automaticResizeOn == other.automaticResizeOn &&
           numberOfSpatialLayers == other.numberOfSpatialLayers &&
           flexibleMode == other.flexibleMode);
 }

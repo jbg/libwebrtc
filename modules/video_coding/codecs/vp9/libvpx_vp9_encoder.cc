@@ -685,13 +685,9 @@ int LibvpxVp9Encoder::InitEncode(const VideoCodec* inst,
   // put some key-frames at will even in VPX_KF_DISABLED kf_mode.
   config_->kf_max_dist = inst->VP9().keyFrameInterval;
   config_->kf_min_dist = config_->kf_max_dist;
-  if (quality_scaler_experiment_.enabled) {
-    // In that experiment webrtc wide quality scaler is used instead of libvpx
-    // internal scaler.
-    config_->rc_resize_allowed = 0;
-  } else {
-    config_->rc_resize_allowed = inst->VP9().automaticResizeOn ? 1 : 0;
-  }
+  // Disable internal resolution scaler.
+  config_->rc_resize_allowed = 0;
+
   // Determine number of threads based on the image size and #cores.
   config_->g_threads =
       NumberOfThreads(config_->g_w, config_->g_h, settings.number_of_cores);
@@ -1823,12 +1819,12 @@ VideoEncoder::EncoderInfo LibvpxVp9Encoder::GetEncoderInfo() const {
   EncoderInfo info;
   info.supports_native_handle = false;
   info.implementation_name = "libvpx";
-  if (quality_scaler_experiment_.enabled && inited_ &&
-      codec_.VP9().automaticResizeOn) {
+  if (quality_scaler_experiment_.enabled && inited_) {
     info.scaling_settings = VideoEncoder::ScalingSettings(
         quality_scaler_experiment_.low_qp, quality_scaler_experiment_.high_qp);
   } else {
-    info.scaling_settings = VideoEncoder::ScalingSettings::kOff;
+    info.scaling_settings =
+        VideoEncoder::ScalingSettings(kLowVp9QpThreshold, kHighVp9QpThreshold);
   }
   info.has_trusted_rate_controller = trusted_rate_controller_;
   info.is_hardware_accelerated = false;

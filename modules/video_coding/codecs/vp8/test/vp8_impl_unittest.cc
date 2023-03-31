@@ -531,19 +531,8 @@ TEST_F(TestVp8Impl, EncoderWith2TemporalLayers) {
   EncodeAndExpectFrameWith(NextInputFrame(), 1);
 }
 
-TEST_F(TestVp8Impl, ScalingDisabledIfAutomaticResizeOff) {
-  codec_settings_.VP8()->automaticResizeOn = false;
-  EXPECT_EQ(WEBRTC_VIDEO_CODEC_OK,
-            encoder_->InitEncode(&codec_settings_, kSettings));
-
-  VideoEncoder::ScalingSettings settings =
-      encoder_->GetEncoderInfo().scaling_settings;
-  EXPECT_FALSE(settings.thresholds.has_value());
-}
-
-TEST_F(TestVp8Impl, ScalingEnabledIfAutomaticResizeOn) {
+TEST_F(TestVp8Impl, ScalingSettings) {
   codec_settings_.SetFrameDropEnabled(true);
-  codec_settings_.VP8()->automaticResizeOn = true;
   EXPECT_EQ(WEBRTC_VIDEO_CODEC_OK,
             encoder_->InitEncode(&codec_settings_, kSettings));
 
