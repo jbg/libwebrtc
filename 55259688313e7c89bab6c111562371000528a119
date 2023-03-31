@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef746807_79fa2f86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2023-03-31T06:25:18Z",
+      "side": 1,
+      "message": "LGTM with one comment.",
+      "revId": "55259688313e7c89bab6c111562371000528a119",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a938fc94_13a8f3b2",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2023-03-31T06:25:18Z",
+      "side": 1,
+      "message": "You don\u0027t have to perpetuate this archaic pattern. I think we can safely assume that a modern compiler will know how to optimally calculate a multiplication by 4. 😊",
+      "range": {
+        "startLine": 313,
+        "startChar": 30,
+        "endLine": 313,
+        "endChar": 45
+      },
+      "revId": "55259688313e7c89bab6c111562371000528a119",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
