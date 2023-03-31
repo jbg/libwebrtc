@@ -46,6 +46,30 @@
       },
       "revId": "9de6d750956c2e25f6ab332a7168a8ed21eec6b4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35ecb749_3a6d8947",
+        "filename": "pc/test/peer_connection_test_wrapper.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-03-31T12:44:34Z",
+      "side": 1,
+      "message": "Ah, I\u0027m not sure what the failures are, but it could happen that we have to use this [1] function to match the SdpVideoFormat with the supported SdpVideoFormats of the VideoEncoderFactory.\n\nIf you feel like this is more than what you signed up for then I can take a look at the VideoEncoderFactory side of things :)\n\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/api/video_codecs/sdp_video_format.cc;l\u003d139;drc\u003d48340c1e35efad5fb0253025dcc36b3a9573e258",
+      "parentUuid": "ccabc943_765ae9ed",
+      "range": {
+        "startLine": 125,
+        "startChar": 14,
+        "endLine": 125,
+        "endChar": 46
+      },
+      "revId": "9de6d750956c2e25f6ab332a7168a8ed21eec6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
