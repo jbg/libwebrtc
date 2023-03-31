@@ -51,6 +51,10 @@ class VideoEncoderFactoryTemplate : public VideoEncoderFactory {
 
   std::unique_ptr<VideoEncoder> CreateVideoEncoder(
       const SdpVideoFormat& format) override {
+    printf(
+        "!!! ----------------- CreateVideoEncoder: %s --------------------- "
+        "!!!\n",
+        format.ToString().c_str());
     return CreateVideoEncoderInternal<Ts...>(format);
   }
 
