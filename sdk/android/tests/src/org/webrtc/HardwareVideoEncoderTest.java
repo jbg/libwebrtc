@@ -10,11 +10,14 @@
 
 package org.webrtc;
 
+import static android.media.MediaCodec.BUFFER_FLAG_CODEC_CONFIG;
+import static android.media.MediaCodec.BUFFER_FLAG_SYNC_FRAME;
 import static com.google.common.truth.Truth.assertThat;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -25,6 +28,7 @@ import android.media.MediaFormat;
 import android.os.Bundle;
 import androidx.test.runner.AndroidJUnit4;
 import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Before;
@@ -232,7 +236,7 @@ public class HardwareVideoEncoderTest {
     byte[] outputData = CodecTestHelper.generateRandomData(100);
     fakeMediaCodecWrapper.addOutputData(outputData,
         /* presentationTimestampUs= */ 0,
-        /* flags= */ MediaCodec.BUFFER_FLAG_SYNC_FRAME);
+        /* flags= */ BUFFER_FLAG_SYNC_FRAME);
 
     encoder.waitDeliverEncodedImage();
 
@@ -366,5 +370,43 @@ public class HardwareVideoEncoderTest {
     long frameDurationMs = SECONDS.toMicros(1) / 30;
     assertThat(timestampCaptor.getAllValues())
         .containsExactly(0L, frameDurationMs, 2 * frameDurationMs);
+  }
+
+  private testConfigBuffer(VideoCodecType codecType, boolean keyFrame, String expected) {
+    byte[] configBytes = "config".getBytes(Charset.defaultCharset());
+    byte[] frameBytes = "frame".getBytes(Charset.defaultCharset());
+    byte[] expectedBytes = expected.getBytes(Charset.defaultCharset());
+
+    InternalMediaCodecVideoEncoder encoder =
+        new TestEncoderBuilder().setCodecType(VideoCodecType.H264).build();
+    encoder.initEncode(TEST_ENCODER_SETTINGS, mockEncoderCallback);
+
+    encoder.encode(createTestVideoFrame(/* timestampNs= */ 0), ENCODE_INFO_DELTA_FRAME);
+    fakeMediaCodecWrapper.addOutputData(
+        configBytes, /* presentationTimestampUs= */ 0, /* flags= */ BUFFER_FLAG_CODEC_CONFIG);
+    fakeMediaCodecWrapper.addOutputData(frameBytes, /* presentationTimestampUs= */ 0,
+        /* flags= */ keyFrame ? BUFFER_FLAG_SYNC_FRAME : 0);
+    shadowOf(encoder.getCodecLooper()).idleFor(POLL_DELAY_MS);
+
+    verify(mockEncoderCallback)
+        .onEncodedFrame(
+            argThat(
+                (EncodedImage encoded) -> encoded.buffer.equals(ByteBuffer.wrap(expectedBytes)))),
+            nullable(CodecSpecificInfo.class));
+  }
+
+  @Test
+  public void encode_configBuffer() {
+    // Verify that encoder wrapper prepends config buffer to H264 and H265 keyframes.
+    testConfigBuffer(VideoCodecType.VP8, /*keyFrame=*/true, "frame");
+    testConfigBuffer(VideoCodecType.VP9, /*keyFrame=*/true, "frame");
+    testConfigBuffer(VideoCodecType.AV1, /*keyFrame=*/true, "frame");
+    testConfigBuffer(VideoCodecType.H264, /*keyFrame=*/true, "configframe");
+    testConfigBuffer(VideoCodecType.H265, /*keyFrame=*/true, "configframe");
+    testConfigBuffer(VideoCodecType.VP8, /*keyFrame=*/false, "frame");
+    testConfigBuffer(VideoCodecType.VP9, /*keyFrame=*/false, "frame");
+    testConfigBuffer(VideoCodecType.AV1, /*keyFrame=*/false, "frame");
+    testConfigBuffer(VideoCodecType.H264, /*keyFrame=*/false, "frame");
+    testConfigBuffer(VideoCodecType.H265, /*keyFrame=*/false, "frame");
   }
 }
