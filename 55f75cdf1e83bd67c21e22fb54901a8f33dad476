@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "01ad73fa_4f5f774c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-04-03T12:26:07Z",
+      "side": 1,
+      "message": "Vp9SingleSpatialLayerBitratesAreConsistent has been updated to pass.",
+      "parentUuid": "f850ddda_2d2a2ddd",
+      "revId": "55f75cdf1e83bd67c21e22fb54901a8f33dad476",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c7f88cc5_fbe55e44",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2023-03-23T12:19:02Z",
       "side": 1,
       "message": "For reference, this is IsSinglecastOrAllNonFirstLayersInactive:\n\nhttps://webrtc-review.googlesource.com/c/src/+/298881/4/api/video_codecs/video_codec.cc",
+      "revId": "55f75cdf1e83bd67c21e22fb54901a8f33dad476",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cba7477_e573016b",
+        "filename": "modules/video_coding/video_codec_initializer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-04-03T12:26:07Z",
+      "side": 1,
+      "message": "IsSinglecastOrAllNonFirstLayersInactive is no longer needed, using numberOfSimulcastStreams instead.",
+      "parentUuid": "91370440_9d3e33cf",
       "revId": "55f75cdf1e83bd67c21e22fb54901a8f33dad476",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
