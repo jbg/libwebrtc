@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b59c5a80_f2b0fdfe",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoEncoder.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-04-03T05:59:36Z",
+      "side": 1,
+      "message": "missed check.",
+      "range": {
+        "startLine": 611,
+        "startChar": 24,
+        "endLine": 611,
+        "endChar": 44
+      },
+      "revId": "d9d38e3c4858ab48bb2ad0fede94c69302d56510",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
