@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "196adfd1_2d48cdd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2023-04-03T15:06:13Z",
+      "side": 1,
+      "message": "I\u0027m not sure this is the right solution. If we hit problems because we don\u0027t immediately set the target bitrate for a recreated send stream, then that should be fixed instead.",
+      "revId": "4b8c389e00fcfa80edc36a6d6ff6c8ed78896a71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
