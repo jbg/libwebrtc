@@ -16,6 +16,29 @@
       "message": "I\u0027m not sure this is the right solution. If we hit problems because we don\u0027t immediately set the target bitrate for a recreated send stream, then that should be fixed instead.",
       "revId": "4b8c389e00fcfa80edc36a6d6ff6c8ed78896a71",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6c20317_ef24db17",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-04-03T15:15:45Z",
+      "side": 1,
+      "message": "why minBitrate?\nstartBitrate looks like a better fit.",
+      "range": {
+        "startLine": 227,
+        "startChar": 45,
+        "endLine": 227,
+        "endChar": 55
+      },
+      "revId": "4b8c389e00fcfa80edc36a6d6ff6c8ed78896a71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
