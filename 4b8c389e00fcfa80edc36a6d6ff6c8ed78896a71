@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32f74434_387cc7b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20109
+      },
+      "writtenOn": "2023-04-03T16:49:45Z",
+      "side": 1,
+      "message": "Hi Erik,\nI agree, the issue could be fixed if the encoder could get the target bitrate right after the initialization. But, I am not sure whether this is doable. For example, it may take time for BWE be able to provide accurate estimation at the beginning of the call.\n\nI think the startBitrate, which Danil suggested, could be a good fix.\nIn fact, the openh264 encoder uses the startBitrate\nhttps://chromium.googlesource.com/external/webrtc/+/refs/heads/master/modules/video_coding/codecs/h264/h264_encoder_impl.cc#293\n\nWe can align the libaom setting with the 264 encoder\u0027s setting.",
+      "parentUuid": "196adfd1_2d48cdd3",
+      "revId": "4b8c389e00fcfa80edc36a6d6ff6c8ed78896a71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6c20317_ef24db17",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-04-03T15:15:45Z",
       "side": 1,
       "message": "why minBitrate?\nstartBitrate looks like a better fit.",
+      "range": {
+        "startLine": 227,
+        "startChar": 45,
+        "endLine": 227,
+        "endChar": 55
+      },
+      "revId": "4b8c389e00fcfa80edc36a6d6ff6c8ed78896a71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ecb23ee_86ee7b67",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 20109
+      },
+      "writtenOn": "2023-04-03T16:49:45Z",
+      "side": 1,
+      "message": "I agree. The startBitrate would be the better setting. I would revise the patch accordingly.",
+      "parentUuid": "b6c20317_ef24db17",
       "range": {
         "startLine": 227,
         "startChar": 45,
