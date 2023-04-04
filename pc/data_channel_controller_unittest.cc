@@ -59,6 +59,11 @@ class DataChannelControllerTest : public ::testing::Test {
     network_thread_.Stop();
   }
 
+  void Shutdown(DataChannelController& dcc) {
+    network_thread_.BlockingCall([&] { dcc.TeardownDataChannelTransport_n(); });
+    dcc.PrepareForShutdown();
+  }
+
   test::RunLoop run_loop_;
   rtc::Thread network_thread_;
   rtc::scoped_refptr<NiceMock<MockPeerConnectionInternal>> pc_;
@@ -76,6 +81,7 @@ TEST_F(DataChannelControllerTest, CreateDataChannelEarlyRelease) {
   auto channel = ret.MoveValue();
   // DCC still holds a reference to the channel. Release this reference early.
   channel = nullptr;
+  Shutdown(dcc);
 }
 
 TEST_F(DataChannelControllerTest, CreateDataChannelEarlyClose) {
@@ -89,8 +95,10 @@ TEST_F(DataChannelControllerTest, CreateDataChannelEarlyClose) {
   EXPECT_TRUE(dcc.HasDataChannelsForTest());
   EXPECT_TRUE(dcc.HasUsedDataChannels());
   channel->Close();
+  run_loop_.Flush();
   EXPECT_FALSE(dcc.HasDataChannelsForTest());
   EXPECT_TRUE(dcc.HasUsedDataChannels());
+  Shutdown(dcc);
 }
 
 TEST_F(DataChannelControllerTest, CreateDataChannelLateRelease) {
@@ -99,6 +107,7 @@ TEST_F(DataChannelControllerTest, CreateDataChannelLateRelease) {
       "label", InternalDataChannelInit(DataChannelInit()));
   ASSERT_TRUE(ret.ok());
   auto channel = ret.MoveValue();
+  Shutdown(*dcc.get());
   dcc.reset();
   channel = nullptr;
 }
@@ -109,6 +118,7 @@ TEST_F(DataChannelControllerTest, CloseAfterControllerDestroyed) {
       "label", InternalDataChannelInit(DataChannelInit()));
   ASSERT_TRUE(ret.ok());
   auto channel = ret.MoveValue();
+  Shutdown(*dcc.get());
   dcc.reset();
   channel->Close();
 }
@@ -179,6 +189,8 @@ TEST_F(DataChannelControllerTest, MaxChannels) {
       EXPECT_TRUE(ret.ok());
     }
   }
+
+  Shutdown(dcc);
 }
 
 // Test that while a data channel is in the `kClosing` state, its StreamId does
@@ -224,6 +236,8 @@ TEST_F(DataChannelControllerTest, NoStreamIdReuseWhileClosing) {
                          "label3", InternalDataChannelInit(DataChannelInit()))
                       .MoveValue();
   EXPECT_EQ(channel3->id(), channel1->id());
+
+  Shutdown(dcc);
 }
 
 }  // namespace
