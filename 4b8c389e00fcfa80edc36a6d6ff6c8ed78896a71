@@ -54,6 +54,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28096a91_12926467",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20109
+      },
+      "writtenOn": "2023-04-04T05:19:09Z",
+      "side": 1,
+      "message": "Hi Erik,\nThank you for the information. \nIn my local test, libaom encodes a frame between re-initializing encoder and setting rate during a call. I am not sure whether this is the case in the upstream WebRTC. There may be some implementation difference between our product and upstream. \nBut, I agree that aligning with other implementations seems like a good idea.",
+      "parentUuid": "0d42e606_eabd453e",
+      "revId": "4b8c389e00fcfa80edc36a6d6ff6c8ed78896a71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6c20317_ef24db17",
