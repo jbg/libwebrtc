@@ -196,10 +196,10 @@ class AudioSendStream final : public webrtc::AudioSendStream,
   webrtc::voe::AudioLevel audio_level_ RTC_GUARDED_BY(audio_level_lock_);
 
   BitrateAllocatorInterface* const bitrate_allocator_
-      RTC_GUARDED_BY(rtp_transport_queue_);
-  // Constrains cached to be accessed from `rtp_transport_queue_`.
+      RTC_GUARDED_BY(worker_thread_checker_);
   absl::optional<AudioSendStream::TargetAudioBitrateConstraints>
-      cached_constraints_ RTC_GUARDED_BY(rtp_transport_queue_) = absl::nullopt;
+      cached_constraints_ RTC_GUARDED_BY(worker_thread_checker_) =
+          absl::nullopt;
   RtpTransportControllerSendInterface* const rtp_transport_;
 
   RtpRtcpInterface* const rtp_rtcp_module_;
