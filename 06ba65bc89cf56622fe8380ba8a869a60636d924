@@ -16,6 +16,23 @@
       "message": "Good!",
       "revId": "06ba65bc89cf56622fe8380ba8a869a60636d924",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c4dcce8_2e1cb435",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-04-05T13:01:21Z",
+      "side": 1,
+      "message": "Mirko, can you take a look since Björn is OOO?",
+      "revId": "06ba65bc89cf56622fe8380ba8a869a60636d924",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
