@@ -34,6 +34,24 @@
       "parentUuid": "55946809_36777f31",
       "revId": "284df7305109a864ca7e3525f2d968e35cd1a564",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4498584a_13a2c10c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2023-04-05T11:57:33Z",
+      "side": 1,
+      "message": "Ack.\nAlso, fyi, we do always call SetRates() after creating/recreating encoders if we have ever received a target bitrate. See https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/video/video_stream_encoder.cc;l\u003d1390\n\nIf you\u0027re seeing something different it would be great if you could provide a repro case.",
+      "parentUuid": "c08f3ce8_6e455507",
+      "revId": "284df7305109a864ca7e3525f2d968e35cd1a564",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
