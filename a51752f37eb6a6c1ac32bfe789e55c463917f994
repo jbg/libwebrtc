@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48883260_19014fd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20109
+      },
+      "writtenOn": "2023-04-05T20:35:12Z",
+      "side": 1,
+      "message": "Hi Erik,\n\nI fixed unit tests. Could you help me start dry run again?\nThank you.\n\n\n[\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d] Running 14 tests from 1 test suite.\n[----------] Global test environment set-up.\n[----------] 14 tests from LibaomAv1EncoderTest\n[ RUN      ] LibaomAv1EncoderTest.CanCreate\n[       OK ] LibaomAv1EncoderTest.CanCreate (0 ms)\n[ RUN      ] LibaomAv1EncoderTest.InitAndRelease\n(libaom_av1_encoder.cc:197): Scalability mode is not set, using \u0027L1T1\u0027.\n[       OK ] LibaomAv1EncoderTest.InitAndRelease (2 ms)\n[ RUN      ] LibaomAv1EncoderTest.NoBitrateOnTopLayerRefecltedInActiveDecodeTargets\n[       OK ] LibaomAv1EncoderTest.NoBitrateOnTopLayerRefecltedInActiveDecodeTargets (18 ms)\n[ RUN      ] LibaomAv1EncoderTest.SpatialScalabilityInTemporalUnitReportedAsDeltaFrame\n[       OK ] LibaomAv1EncoderTest.SpatialScalabilityInTemporalUnitReportedAsDeltaFrame (15 ms)\n[ RUN      ] LibaomAv1EncoderTest.NoBitrateOnTopSpatialLayerProduceDeltaFrames\n[       OK ] LibaomAv1EncoderTest.NoBitrateOnTopSpatialLayerProduceDeltaFrames (24 ms)\n[ RUN      ] LibaomAv1EncoderTest.SetsEndOfPictureForLastFrameInTemporalUnit\n[       OK ] LibaomAv1EncoderTest.SetsEndOfPictureForLastFrameInTemporalUnit (38 ms)\n[ RUN      ] LibaomAv1EncoderTest.CheckOddDimensionsWithSpatialLayers\n[       OK ] LibaomAv1EncoderTest.CheckOddDimensionsWithSpatialLayers (161 ms)\n[ RUN      ] LibaomAv1EncoderTest.EncoderInfoWithoutResolutionBitrateLimits\n[       OK ] LibaomAv1EncoderTest.EncoderInfoWithoutResolutionBitrateLimits (0 ms)\n[ RUN      ] LibaomAv1EncoderTest.EncoderInfoWithBitrateLimitsFromFieldTrial\n(field_trial.cc:164): Setting field trial string:WebRTC-Av1-GetEncoderInfoOverride/frame_size_pixels:123|456|789,min_start_bitrate_bps:11000|22000|33000,min_bitrate_bps:44000|55000|66000,max_bitrate_bps:77000|88000|99000/\n(field_trial.cc:164): Setting field trial string:\n[       OK ] LibaomAv1EncoderTest.EncoderInfoWithBitrateLimitsFromFieldTrial (0 ms)\n[ RUN      ] LibaomAv1EncoderTest.EncoderInfoProvidesFpsAllocation\n[       OK ] LibaomAv1EncoderTest.EncoderInfoProvidesFpsAllocation (1 ms)\n[ RUN      ] LibaomAv1EncoderTest.PopulatesEncodedFrameSize\n[       OK ] LibaomAv1EncoderTest.PopulatesEncodedFrameSize (18 ms)\n[ RUN      ] LibaomAv1EncoderTest.RtpTimestampWrap\n[       OK ] LibaomAv1EncoderTest.RtpTimestampWrap (23 ms)\n[ RUN      ] LibaomAv1EncoderTest.TestCaptureTimeId\n[       OK ] LibaomAv1EncoderTest.TestCaptureTimeId (17 ms)\n[ RUN      ] LibaomAv1EncoderTest.AdheresToTargetBitrateDespiteUnevenFrameTiming\n[       OK ] LibaomAv1EncoderTest.AdheresToTargetBitrateDespiteUnevenFrameTiming (932 ms)\n[----------] 14 tests from LibaomAv1EncoderTest (1257 ms total)\n\n[----------] Global test environment tear-down\n[\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d] 14 tests from 1 test suite ran. (1258 ms total)\n[  PASSED  ] 14 tests.",
+      "revId": "a51752f37eb6a6c1ac32bfe789e55c463917f994",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
