@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72c62a9e_29668b82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-04-07T10:09:48Z",
+      "side": 1,
+      "message": "This addresses the current import issue.",
+      "revId": "ed5caaa8ba7d0ec57ce1d65c60ca23b5dcec84a7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
