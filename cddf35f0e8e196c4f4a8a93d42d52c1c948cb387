@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70590439_61d77948",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-04-11T09:29:13Z",
+      "side": 1,
+      "message": "Asa, could you please take a look at changes in quality scaling tests and other parts you are familiar with?",
+      "revId": "cddf35f0e8e196c4f4a8a93d42d52c1c948cb387",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
