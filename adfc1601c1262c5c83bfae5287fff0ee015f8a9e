@@ -16,6 +16,24 @@
       "message": "maybe I\u0027m reading this wrong - but low_limit was previously TargetLevelMs * (3 / 4) - doesn\u0027t this raise the low_limit, and thus make us decelerate more often?",
       "revId": "adfc1601c1262c5c83bfae5287fff0ee015f8a9e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91f6777d_ad328fd1",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-04-11T20:21:00Z",
+      "side": 1,
+      "message": "Correct. It\u0027s possible that keeping the low limit would further reduce deceleration (note that the overall change is a very big improvement). I removed it to simplify things, it doesn\u0027t make as much sense conceptually anymore since we increase the high limit instead, but I can run a few more tests to see if it is worth keeping.",
+      "parentUuid": "24040f44_0a53272c",
+      "revId": "adfc1601c1262c5c83bfae5287fff0ee015f8a9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
