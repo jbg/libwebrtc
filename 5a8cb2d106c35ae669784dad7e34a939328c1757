@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b337399_3660ce14",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer_frame_in_flight.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2023-04-11T10:46:08Z",
+      "side": 1,
+      "message": "Will follow up in the next CL",
+      "parentUuid": "fdbd4ffe_bacd2ec3",
+      "range": {
+        "startLine": 38,
+        "startChar": 39,
+        "endLine": 38,
+        "endChar": 66
+      },
+      "revId": "5a8cb2d106c35ae669784dad7e34a939328c1757",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85788cbd_45aae9d2",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-04T13:40:06Z",
       "side": 1,
       "message": "This might be misleading.\n\nI would remove it (IIUC this is form the moment the analyzer got to know the frame, not that it sees the same frame arriving multiple times).",
+      "range": {
+        "startLine": 129,
+        "startChar": 42,
+        "endLine": 129,
+        "endChar": 60
+      },
+      "revId": "5a8cb2d106c35ae669784dad7e34a939328c1757",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e57b206_d946f5bd",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer_shared_objects.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2023-04-11T10:46:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85788cbd_45aae9d2",
       "range": {
         "startLine": 129,
         "startChar": 42,

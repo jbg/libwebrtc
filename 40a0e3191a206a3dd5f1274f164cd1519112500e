@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39c71b3d_16180b27",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2150,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2023-04-11T10:46:08Z",
+      "side": 0,
+      "message": "Because rate is computed using whole test duration, without accounting for the pause in the middle",
+      "parentUuid": "93a80f0c_b4dd4a26",
+      "range": {
+        "startLine": 2150,
+        "startChar": 57,
+        "endLine": 2150,
+        "endChar": 74
+      },
+      "revId": "40a0e3191a206a3dd5f1274f164cd1519112500e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d5a5843_46812786",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-04T13:40:06Z",
       "side": 0,
       "message": "Since we have not removed these yet, should we keep the expectations?",
+      "range": {
+        "startLine": 2151,
+        "startChar": 32,
+        "endLine": 2151,
+        "endChar": 50
+      },
+      "revId": "40a0e3191a206a3dd5f1274f164cd1519112500e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "258ade1c_b5db06a3",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2151,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2023-04-11T10:46:08Z",
+      "side": 0,
+      "message": "Done. Because we actually want to remove them, I will keep them only in one test",
+      "parentUuid": "5d5a5843_46812786",
       "range": {
         "startLine": 2151,
         "startChar": 32,
