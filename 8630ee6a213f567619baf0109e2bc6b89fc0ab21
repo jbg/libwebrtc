@@ -16,6 +16,23 @@
       "message": "Lets start cleaning.",
       "revId": "8630ee6a213f567619baf0109e2bc6b89fc0ab21",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abcc64e8_d099628f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-04-11T08:53:59Z",
+      "side": 1,
+      "message": "Jakob as an owner?",
+      "revId": "8630ee6a213f567619baf0109e2bc6b89fc0ab21",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
