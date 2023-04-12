@@ -34,6 +34,24 @@
       "parentUuid": "24040f44_0a53272c",
       "revId": "adfc1601c1262c5c83bfae5287fff0ee015f8a9e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a907be6_6f824671",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 14634
+      },
+      "writtenOn": "2023-04-12T00:22:12Z",
+      "side": 1,
+      "message": "Ah I see - you\u0027re talking about the deceleration reduction we get by not immediately accelerating after receiving a spike, when followed by another spike.\n\nI was picturing a slightly different case - of preventing deceleration when \u0027riding\u0027 spikes smaller than TargetLevelMs. \nLets say we often get spikes of 150ms delay, and our target delay is calculated at 200ms. \nThen, if we currently 100ms into a spike, and thus playout_delay_ms is currently 100, it\u0027s debatable whether we actually need to start decelerating, even though playout delay is far below the target level - if 90% of spikes are less than 150ms, its likely we will get the packet we need in 50ms, and won\u0027t underrun, with no time scaling needed. \nOr maybe we\u0027re thinking of the same thing, just smearing the gap in different directions..",
+      "parentUuid": "91f6777d_ad328fd1",
+      "revId": "adfc1601c1262c5c83bfae5287fff0ee015f8a9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
