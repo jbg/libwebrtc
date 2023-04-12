@@ -16,6 +16,23 @@
       "message": "not sure it is a good idea to restore unpromised (and untested) functionality.",
       "revId": "e5056de56532b045fb864065355bb57a9a7c00ef",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0f49357_30213b01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-04-12T09:09:08Z",
+      "side": 1,
+      "message": "Thank you for forward fixing this.",
+      "revId": "e5056de56532b045fb864065355bb57a9a7c00ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
