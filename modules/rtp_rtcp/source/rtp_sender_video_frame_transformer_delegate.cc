@@ -33,6 +33,7 @@ class TransformableVideoSenderFrame : public TransformableVideoFrameInterface {
       uint32_t ssrc,
       std::vector<uint32_t> csrcs)
       : encoded_data_(encoded_image.GetEncodedData()),
+        pre_transform_payload_size_(encoded_image.size()),
         header_(video_header),
         frame_type_(encoded_image._frameType),
         payload_type_(payload_type),
@@ -56,6 +57,10 @@ class TransformableVideoSenderFrame : public TransformableVideoFrameInterface {
 
   void SetData(rtc::ArrayView<const uint8_t> data) override {
     encoded_data_ = EncodedImageBuffer::Create(data.data(), data.size());
+  }
+
+  size_t GetPreTransformPayloadSize() const override {
+    return pre_transform_payload_size_;
   }
 
   uint32_t GetTimestamp() const override { return timestamp_; }
@@ -94,6 +99,7 @@ class TransformableVideoSenderFrame : public TransformableVideoFrameInterface {
 
  private:
   rtc::scoped_refptr<EncodedImageBufferInterface> encoded_data_;
+  const size_t pre_transform_payload_size_;
   RTPVideoHeader header_;
   const VideoFrameType frame_type_;
   const uint8_t payload_type_;
@@ -170,6 +176,7 @@ void RTPSenderVideoFrameTransformerDelegate::SendVideo(
                      transformed_video_frame->GetTimestamp(),
                      transformed_video_frame->GetCaptureTimeMs(),
                      transformed_video_frame->GetData(),
+                     transformed_video_frame->GetPreTransformPayloadSize(),
                      transformed_video_frame->GetHeader(),
                      transformed_video_frame->GetExpectedRetransmissionTimeMs(),
                      transformed_video_frame->Metadata().GetCsrcs());
