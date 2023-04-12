@@ -23,7 +23,6 @@
 #include "api/test/metrics/global_metrics_logger_and_exporter.h"
 #include "api/test/metrics/metrics_exporter.h"
 #include "api/test/metrics/metrics_set_proto_file_exporter.h"
-#include "api/test/metrics/print_result_proxy_metrics_exporter.h"
 #include "api/test/metrics/stdout_metrics_exporter.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/event_tracer.h"
@@ -36,7 +35,6 @@
 #include "test/field_trial.h"
 #include "test/gtest.h"
 #include "test/test_flags.h"
-#include "test/testsupport/perf_test.h"
 #include "test/testsupport/resources_dir_flag.h"
 
 #if defined(WEBRTC_WIN)
@@ -187,7 +185,6 @@ class TestMainImpl : public TestMain {
     rtc::test::InitTestSuite(
         RUN_ALL_TESTS, argc, argv,
         absl::GetFlag(FLAGS_write_perf_output_on_ios),
-        absl::GetFlag(FLAGS_export_perf_results_new_api),
         absl::GetFlag(FLAGS_webrtc_test_metrics_output_path), metrics_to_plot);
     rtc::test::RunTestsFromIOSApp();
     int exit_code = 0;
@@ -195,37 +192,20 @@ class TestMainImpl : public TestMain {
     int exit_code = RUN_ALL_TESTS();
 
     std::vector<std::unique_ptr<test::MetricsExporter>> exporters;
-    if (absl::GetFlag(FLAGS_export_perf_results_new_api)) {
-      exporters.push_back(std::make_unique<test::StdoutMetricsExporter>());
-      if (!absl::GetFlag(FLAGS_webrtc_test_metrics_output_path).empty()) {
-        exporters.push_back(
-            std::make_unique<webrtc::test::MetricsSetProtoFileExporter>(
-                webrtc::test::MetricsSetProtoFileExporter::Options(
-                    absl::GetFlag(FLAGS_webrtc_test_metrics_output_path))));
-      }
-      if (!absl::GetFlag(FLAGS_isolated_script_test_perf_output).empty()) {
-        exporters.push_back(
-            std::make_unique<test::ChromePerfDashboardMetricsExporter>(
-                absl::GetFlag(FLAGS_isolated_script_test_perf_output)));
-      }
-    } else {
+    exporters.push_back(std::make_unique<test::StdoutMetricsExporter>());
+    if (!absl::GetFlag(FLAGS_isolated_script_test_perf_output).empty()) {
       exporters.push_back(
-          std::make_unique<test::PrintResultProxyMetricsExporter>());
+          std::make_unique<test::ChromePerfDashboardMetricsExporter>(
+              absl::GetFlag(FLAGS_isolated_script_test_perf_output)));
+    }
+    if (!absl::GetFlag(FLAGS_webrtc_test_metrics_output_path).empty()) {
+      exporters.push_back(
+          std::make_unique<webrtc::test::MetricsSetProtoFileExporter>(
+              webrtc::test::MetricsSetProtoFileExporter::Options(
+                  absl::GetFlag(FLAGS_webrtc_test_metrics_output_path))));
     }
     test::ExportPerfMetric(*test::GetGlobalMetricsLogger(),
                            std::move(exporters));
-    if (!absl::GetFlag(FLAGS_export_perf_results_new_api)) {
-      std::string perf_output_file =
-          absl::GetFlag(FLAGS_isolated_script_test_perf_output);
-      if (!perf_output_file.empty()) {
-        if (!webrtc::test::WritePerfResults(perf_output_file)) {
-          return 1;
-        }
-      }
-      if (metrics_to_plot) {
-        webrtc::test::PrintPlottableResults(*metrics_to_plot);
-      }
-    }
 
     std::string result_filename =
         absl::GetFlag(FLAGS_isolated_script_test_output);

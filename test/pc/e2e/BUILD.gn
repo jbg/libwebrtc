@@ -224,7 +224,6 @@ if (!build_with_chromium) {
         ":test_peer_factory",
         "../..:field_trial",
         "../..:fileutils",
-        "../..:perf_test",
         "../../../api:audio_quality_analyzer_api",
         "../../../api:libjingle_peerconnection_api",
         "../../../api:media_stream_interface",
@@ -453,7 +452,6 @@ if (!build_with_chromium) {
 
     deps = [
       ":metric_metadata_keys",
-      "../..:perf_test",
       "../../../api:audio_quality_analyzer_api",
       "../../../api:rtc_stats_api",
       "../../../api:stats_observer_interface",
@@ -479,7 +477,6 @@ if (!build_with_chromium) {
       "network_quality_metrics_reporter.h",
     ]
     deps = [
-      "../..:perf_test",
       "../../../api:network_emulation_manager_api",
       "../../../api:peer_connection_quality_test_fixture_api",
       "../../../api:rtc_stats_api",
@@ -504,7 +501,6 @@ if (!build_with_chromium) {
     ]
     deps = [
       ":metric_metadata_keys",
-      "../..:perf_test",
       "../../../api:array_view",
       "../../../api:network_emulation_manager_api",
       "../../../api:peer_connection_quality_test_fixture_api",
@@ -537,7 +533,6 @@ if (!build_with_chromium) {
     ]
     deps = [
       ":metric_metadata_keys",
-      "../..:perf_test",
       "../../../api:network_emulation_manager_api",
       "../../../api:peer_connection_quality_test_fixture_api",
       "../../../api:rtc_stats_api",

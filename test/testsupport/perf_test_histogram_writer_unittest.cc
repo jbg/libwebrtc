@@ -13,6 +13,7 @@
 #include <memory>
 #include <string>
 
+#include "api/test/metrics/metric.h"
 #include "test/gtest.h"
 #include "third_party/catapult/tracing/tracing/value/histogram.h"
 
@@ -25,7 +26,8 @@ TEST(PerfHistogramWriterUnittest, TestSimpleHistogram) {
   std::unique_ptr<PerfTestResultWriter> writer =
       std::unique_ptr<PerfTestResultWriter>(CreateHistogramWriter());
 
-  writer->LogResult("-", "-", 0, "ms", false, ImproveDirection::kNone);
+  writer->LogResult("-", "-", 0, "ms", false,
+                    ImprovementDirection::kNeitherIsBetter);
 
   proto::HistogramSet histogram_set;
   EXPECT_TRUE(histogram_set.ParseFromString(writer->Serialize()))
@@ -40,7 +42,7 @@ TEST(PerfHistogramWriterUnittest, TestListOfValuesHistogram) {
 
   std::vector<double> samples{0, 1, 2};
   writer->LogResultList("-", "-", samples, "ms", false,
-                        ImproveDirection::kNone);
+                        ImprovementDirection::kNeitherIsBetter);
 
   proto::HistogramSet histogram_set;
   EXPECT_TRUE(histogram_set.ParseFromString(writer->Serialize()))
@@ -58,7 +60,7 @@ TEST(PerfHistogramWriterUnittest, WritesSamplesAndUserStory) {
       std::unique_ptr<PerfTestResultWriter>(CreateHistogramWriter());
 
   writer->LogResult("measurement", "user_story", 15e7, "Hz", false,
-                    ImproveDirection::kBiggerIsBetter);
+                    ImprovementDirection::kBiggerIsBetter);
 
   proto::HistogramSet histogram_set;
   histogram_set.ParseFromString(writer->Serialize());
@@ -84,11 +86,11 @@ TEST(PerfHistogramWriterUnittest, WritesOneHistogramPerMeasurementAndStory) {
       std::unique_ptr<PerfTestResultWriter>(CreateHistogramWriter());
 
   writer->LogResult("measurement", "story1", 1, "ms", false,
-                    ImproveDirection::kNone);
+                    ImprovementDirection::kNeitherIsBetter);
   writer->LogResult("measurement", "story1", 2, "ms", false,
-                    ImproveDirection::kNone);
+                    ImprovementDirection::kNeitherIsBetter);
   writer->LogResult("measurement", "story2", 2, "ms", false,
-                    ImproveDirection::kNone);
+                    ImprovementDirection::kNeitherIsBetter);
 
   proto::HistogramSet histogram_set;
   histogram_set.ParseFromString(writer->Serialize());
@@ -116,7 +118,7 @@ TEST(PerfHistogramWriterUnittest, IgnoresError) {
       std::unique_ptr<PerfTestResultWriter>(CreateHistogramWriter());
 
   writer->LogResultMeanAndError("-", "-", 17, 12345, "ms", false,
-                                ImproveDirection::kNone);
+                                ImprovementDirection::kNeitherIsBetter);
 
   proto::HistogramSet histogram_set;
   histogram_set.ParseFromString(writer->Serialize());
@@ -131,7 +133,7 @@ TEST(PerfHistogramWriterUnittest, WritesDecibelIntoMeasurementName) {
       std::unique_ptr<PerfTestResultWriter>(CreateHistogramWriter());
 
   writer->LogResult("measurement", "-", 0, "dB", false,
-                    ImproveDirection::kNone);
+                    ImprovementDirection::kNeitherIsBetter);
 
   proto::HistogramSet histogram_set;
   histogram_set.ParseFromString(writer->Serialize());
@@ -147,7 +149,7 @@ TEST(PerfHistogramWriterUnittest, WritesFpsIntoMeasurementName) {
       std::unique_ptr<PerfTestResultWriter>(CreateHistogramWriter());
 
   writer->LogResult("measurement", "-", 0, "fps", false,
-                    ImproveDirection::kNone);
+                    ImprovementDirection::kNeitherIsBetter);
 
   proto::HistogramSet histogram_set;
   histogram_set.ParseFromString(writer->Serialize());
@@ -161,7 +163,8 @@ TEST(PerfHistogramWriterUnittest, WritesPercentIntoMeasurementName) {
   std::unique_ptr<PerfTestResultWriter> writer =
       std::unique_ptr<PerfTestResultWriter>(CreateHistogramWriter());
 
-  writer->LogResult("measurement", "-", 0, "%", false, ImproveDirection::kNone);
+  writer->LogResult("measurement", "-", 0, "%", false,
+                    ImprovementDirection::kNeitherIsBetter);
 
   proto::HistogramSet histogram_set;
   histogram_set.ParseFromString(writer->Serialize());
@@ -176,7 +179,8 @@ TEST(PerfHistogramWriterUnittest, BitsPerSecondIsConvertedToBytes) {
   std::unique_ptr<PerfTestResultWriter> writer =
       std::unique_ptr<PerfTestResultWriter>(CreateHistogramWriter());
 
-  writer->LogResult("-", "-", 1024, "bps", false, ImproveDirection::kNone);
+  writer->LogResult("-", "-", 1024, "bps", false,
+                    ImprovementDirection::kNeitherIsBetter);
 
   proto::HistogramSet histogram_set;
   histogram_set.ParseFromString(writer->Serialize());
@@ -190,11 +194,11 @@ TEST(PerfHistogramWriterUnittest, ParsesDirection) {
       std::unique_ptr<PerfTestResultWriter>(CreateHistogramWriter());
 
   writer->LogResult("measurement1", "-", 0, "bps", false,
-                    ImproveDirection::kBiggerIsBetter);
+                    ImprovementDirection::kBiggerIsBetter);
   writer->LogResult("measurement2", "-", 0, "frames", false,
-                    ImproveDirection::kSmallerIsBetter);
+                    ImprovementDirection::kSmallerIsBetter);
   writer->LogResult("measurement3", "-", 0, "sigma", false,
-                    ImproveDirection::kNone);
+                    ImprovementDirection::kNeitherIsBetter);
 
   proto::HistogramSet histogram_set;
   histogram_set.ParseFromString(writer->Serialize());
