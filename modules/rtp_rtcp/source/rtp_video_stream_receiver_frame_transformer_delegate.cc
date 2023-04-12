@@ -27,7 +27,8 @@ class TransformableVideoReceiverFrame
   TransformableVideoReceiverFrame(std::unique_ptr<RtpFrameObject> frame,
                                   uint32_t ssrc)
       : frame_(std::move(frame)),
-        metadata_(frame_->GetRtpVideoHeader().GetAsMetadata()) {
+        metadata_(frame_->GetRtpVideoHeader().GetAsMetadata()),
+        pre_transform_payload_size_(frame_->size()) {
     metadata_.SetSsrc(ssrc);
     metadata_.SetCsrcs(frame_->Csrcs());
   }
@@ -36,6 +37,10 @@ class TransformableVideoReceiverFrame
   // Implements TransformableVideoFrameInterface.
   rtc::ArrayView<const uint8_t> GetData() const override {
     return *frame_->GetEncodedData();
+  }
+
+  size_t GetPreTransformPayloadSize() const override {
+    return pre_transform_payload_size_;
   }
 
   void SetData(rtc::ArrayView<const uint8_t> data) override {
@@ -67,6 +72,7 @@ class TransformableVideoReceiverFrame
  private:
   std::unique_ptr<RtpFrameObject> frame_;
   VideoFrameMetadata metadata_;
+  size_t pre_transform_payload_size_;
 };
 }  // namespace
 

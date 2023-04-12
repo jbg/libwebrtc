@@ -57,6 +57,7 @@ class TransformableVideoFrameInterface : public TransformableFrameInterface {
  public:
   virtual ~TransformableVideoFrameInterface() = default;
   virtual bool IsKeyFrame() const = 0;
+  virtual size_t GetPreTransformPayloadSize() const = 0;
 
   virtual VideoFrameMetadata Metadata() const = 0;
 
