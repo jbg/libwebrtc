@@ -52,12 +52,13 @@ class FakeDecodeFromFile : public AudioDecoder {
                      int16_t* decoded,
                      SpeechType* speech_type) override;
 
-  int PacketDuration(const uint8_t* encoded, size_t encoded_len) const override;
+  // Read `samples` from the input file and write the results to `destination`.
+  // Location in file is determined by `timestamp`.
+  void ReadFromFile(uint32_t timestamp, size_t samples, int16_t* destination);
 
-  // Helper method. Writes `timestamp`, `samples` and
-  // `original_payload_size_bytes` to `encoded` in a format that the
-  // FakeDecodeFromFile decoder will understand. `encoded` must be at least 12
-  // bytes long.
+  // Helper method. Writes `timestamp`, `samples` and `dtx` to `encoded` in a
+  // format that the FakeDecodeFromFile decoder will understand. `encoded` must
+  // be at least 12 bytes long.
   static void PrepareEncoded(uint32_t timestamp,
                              size_t samples,
                              size_t original_payload_size_bytes,
@@ -68,8 +69,6 @@ class FakeDecodeFromFile : public AudioDecoder {
   absl::optional<uint32_t> next_timestamp_from_input_;
   const int sample_rate_hz_;
   const bool stereo_;
-  size_t last_decoded_length_ = 0;
-  bool cng_mode_ = false;
 };
 
 }  // namespace test
