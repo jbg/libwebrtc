@@ -368,7 +368,6 @@ rtc_library("rtc_internal_video_codecs") {
     ":codec",
     ":media_constants",
     ":rtc_media_base",
-    ":rtc_simulcast_encoder_adapter",
     "../api/video:encoded_image",
     "../api/video:video_bitrate_allocation",
     "../api/video:video_frame",
@@ -554,6 +553,7 @@ rtc_library("rtc_media_engine_defaults") {
   deps = [
     ":rtc_audio_video",
     ":rtc_internal_video_codecs",
+    ":rtc_simulcast_encoder_adapter",
     "../api/audio_codecs:builtin_audio_decoder_factory",
     "../api/audio_codecs:builtin_audio_encoder_factory",
     "../api/task_queue:default_task_queue_factory",
