@@ -52,6 +52,24 @@
       "parentUuid": "91f6777d_ad328fd1",
       "revId": "adfc1601c1262c5c83bfae5287fff0ee015f8a9e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c1a599e_abb57c4c",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-04-12T01:11:13Z",
+      "side": 1,
+      "message": "Ah I see what you mean. That case is handled by the way the way we measure the playout delay. Assuming the delay spike is shorter than 2s (size of the packet history which is somewhat arbitrarily chosen), then the estimated playout delay will not change.",
+      "parentUuid": "9a907be6_6f824671",
+      "revId": "adfc1601c1262c5c83bfae5287fff0ee015f8a9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
