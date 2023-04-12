@@ -70,6 +70,24 @@
       "parentUuid": "9a907be6_6f824671",
       "revId": "adfc1601c1262c5c83bfae5287fff0ee015f8a9e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37d50e40_132b4884",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 14634
+      },
+      "writtenOn": "2023-04-12T01:23:17Z",
+      "side": 1,
+      "message": "Right, its coming back to me now - this is the whole point of stable playout delay in the first place. I was thinking of the old \u0027buffer_level_samples\u0027 when thinking of GetPlayoutDelayMs, not the new way",
+      "parentUuid": "1c1a599e_abb57c4c",
+      "revId": "adfc1601c1262c5c83bfae5287fff0ee015f8a9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
