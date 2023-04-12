@@ -141,12 +141,6 @@ VideoQualityAnalyzerInjectionHelper::CreateFramePreprocessor(
       std::move(sinks));
 }
 
-std::unique_ptr<rtc::VideoSinkInterface<VideoFrame>>
-VideoQualityAnalyzerInjectionHelper::CreateVideoSink(
-    absl::string_view peer_name) {
-  return std::make_unique<AnalyzingVideoSink2>(peer_name, this);
-}
-
 std::unique_ptr<AnalyzingVideoSink>
 VideoQualityAnalyzerInjectionHelper::CreateVideoSink(
     absl::string_view peer_name,

@@ -75,9 +75,6 @@ class VideoQualityAnalyzerInjectionHelper : public StatsObserverInterface {
   // `output_dump_file_name` in its VideoConfig, which was used for
   // CreateFramePreprocessor(...), then video also will be written
   // into that file.
-  // TODO(titovartem): Remove method with `peer_name` only parameter.
-  std::unique_ptr<rtc::VideoSinkInterface<VideoFrame>> CreateVideoSink(
-      absl::string_view peer_name);
   std::unique_ptr<AnalyzingVideoSink> CreateVideoSink(
       absl::string_view peer_name,
       const VideoSubscription& subscription,
@@ -106,23 +103,6 @@ class VideoQualityAnalyzerInjectionHelper : public StatsObserverInterface {
   void Stop();
 
  private:
-  // Deprecated, to be removed when old API isn't used anymore.
-  class AnalyzingVideoSink2 final : public rtc::VideoSinkInterface<VideoFrame> {
-   public:
-    explicit AnalyzingVideoSink2(absl::string_view peer_name,
-                                 VideoQualityAnalyzerInjectionHelper* helper)
-        : peer_name_(peer_name), helper_(helper) {}
-    ~AnalyzingVideoSink2() override = default;
-
-    void OnFrame(const VideoFrame& frame) override {
-      helper_->OnFrame(peer_name_, frame);
-    }
-
-   private:
-    const std::string peer_name_;
-    VideoQualityAnalyzerInjectionHelper* const helper_;
-  };
-
   struct ReceiverStream {
     ReceiverStream(absl::string_view peer_name, absl::string_view stream_label)
         : peer_name(peer_name), stream_label(stream_label) {}
