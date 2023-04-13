@@ -72,19 +72,13 @@ class WgcCaptureSession final {
       ABI::Windows::Graphics::Capture::IGraphicsCaptureItem* sender,
       IInspectable* event_args);
 
-  // Event handler for `frame_pool_`'s FrameArrived event.
-  HRESULT OnFrameArrived(
-      ABI::Windows::Graphics::Capture::IDirect3D11CaptureFramePool* sender,
-      IInspectable* event_args);
-
   // Process the captured frame and copy it to the `queue_`.
   HRESULT ProcessFrame();
 
-  void RemoveEventHandlers();
+  void RemoveEventHandler();
 
   bool allow_zero_hertz() const { return allow_zero_hertz_; }
 
-  std::unique_ptr<EventRegistrationToken> frame_arrived_token_;
   std::unique_ptr<EventRegistrationToken> item_closed_token_;
 
   // A Direct3D11 Device provided by the caller. We use this to create an
