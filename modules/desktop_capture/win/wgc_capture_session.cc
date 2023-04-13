@@ -100,7 +100,7 @@ WgcCaptureSession::WgcCaptureSession(ComPtr<ID3D11Device> d3d11_device,
       size_(size) {}
 
 WgcCaptureSession::~WgcCaptureSession() {
-  RemoveEventHandlers();
+  RemoveEventHandler();
 }
 
 HRESULT WgcCaptureSession::StartCapture(const DesktopCaptureOptions& options) {
@@ -166,17 +166,6 @@ HRESULT WgcCaptureSession::StartCapture(const DesktopCaptureOptions& options) {
     return hr;
   }
 
-  // Because `WgcCapturerWin` created a `DispatcherQueue`, and we created
-  // `frame_pool_` via `Create`, the `FrameArrived` event will be delivered on
-  // the current thread.
-  frame_arrived_token_ = std::make_unique<EventRegistrationToken>();
-  auto frame_arrived_handler =
-      Microsoft::WRL::Callback<ABI::Windows::Foundation::ITypedEventHandler<
-          WGC::Direct3D11CaptureFramePool*, IInspectable*>>(
-          this, &WgcCaptureSession::OnFrameArrived);
-  hr = frame_pool_->add_FrameArrived(frame_arrived_handler.Get(),
-                                     frame_arrived_token_.get());
-
   hr = frame_pool_->CreateCaptureSession(item_.Get(), &session_);
   if (FAILED(hr)) {
     RecordStartCaptureResult(StartCaptureResult::kCreateCaptureSessionFailed);
@@ -228,12 +217,30 @@ bool WgcCaptureSession::GetFrame(std::unique_ptr<DesktopFrame>* output_frame) {
   const int max_sleep_count = 10;
   const int sleep_time_ms = 20;
 
+  HRESULT hr;
+
+  // Frame #1: asking for the first frame requires some extra handling to ensure
+  // that at least one frame is available and added to the shared queue.
   int sleep_count = 0;
   while (!queue_.current_frame() && sleep_count < max_sleep_count) {
     sleep_count++;
     empty_frame_credit_count_ = sleep_count + 1;
     webrtc::SleepMs(sleep_time_ms);
-    ProcessFrame();
+    hr = ProcessFrame();
+    if (FAILED(hr)) {
+      RTC_DLOG(LS_WARNING) << "ProcessFrame failed during startup: " << hr;
+    }
+  }
+
+  // Frame #N (N > 1). Try to acquire a new captured frame and copy it to the
+  // `queue_`. This is the default path which will be executed for all
+  // GetFrame() calls expect for the first.
+  const bool first_call_to_get_frame = (sleep_count > 0);
+  if (!first_call_to_get_frame) {
+    hr = ProcessFrame();
+    if (FAILED(hr)) {
+      RTC_DLOG(LS_WARNING) << "ProcessFrame failed: " << hr;
+    }
   }
 
   // Return a NULL frame and false as `result` if we still don't have a valid
@@ -281,17 +288,6 @@ HRESULT WgcCaptureSession::CreateMappedTexture(
   return d3d11_device_->CreateTexture2D(&map_desc, nullptr, &mapped_texture_);
 }
 
-HRESULT WgcCaptureSession::OnFrameArrived(
-    WGC::IDirect3D11CaptureFramePool* sender,
-    IInspectable* event_args) {
-  RTC_DCHECK_RUN_ON(&sequence_checker_);
-  HRESULT hr = ProcessFrame();
-  if (FAILED(hr)) {
-    RTC_DLOG(LS_WARNING) << "ProcessFrame failed: " << hr;
-  }
-  return hr;
-}
-
 HRESULT WgcCaptureSession::ProcessFrame() {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
 
@@ -302,11 +298,6 @@ HRESULT WgcCaptureSession::ProcessFrame() {
   }
 
   RTC_DCHECK(is_capture_started_);
-
-  queue_.MoveToNextFrame();
-  if (queue_.current_frame() && queue_.current_frame()->IsShared()) {
-    RTC_DLOG(LS_VERBOSE) << "Overwriting frame that is still shared.";
-  }
 
   ComPtr<WGC::IDirect3D11CaptureFrame> capture_frame;
   HRESULT hr = frame_pool_->TryGetNextFrame(&capture_frame);
@@ -324,6 +315,11 @@ HRESULT WgcCaptureSession::ProcessFrame() {
       RecordGetFrameResult(GetFrameResult::kFrameDropped);
     }
     return E_FAIL;
+  }
+
+  queue_.MoveToNextFrame();
+  if (queue_.current_frame() && queue_.current_frame()->IsShared()) {
+    RTC_DLOG(LS_VERBOSE) << "Overwriting frame that is still shared.";
   }
 
   // We need to get `capture_frame` as an `ID3D11Texture2D` so that we can get
@@ -435,12 +431,8 @@ HRESULT WgcCaptureSession::ProcessFrame() {
   // Make a copy of the data pointed to by `map_info.pData` to the preallocated
   // `current_frame` so we are free to unmap our texture.
   uint8_t* src_data = static_cast<uint8_t*>(map_info.pData);
-  uint8_t* dst_data = current_frame->data();
-  for (int i = 0; i < image_height; i++) {
-    memcpy(dst_data, src_data, current_frame->stride());
-    dst_data += current_frame->stride();
-    src_data += map_info.RowPitch;
-  }
+  current_frame->CopyPixelsFrom(src_data, current_frame->stride(),
+                                DesktopRect::MakeSize(current_frame->size()));
 
   d3d_context->Unmap(mapped_texture_.Get(), 0);
 
@@ -484,7 +476,7 @@ HRESULT WgcCaptureSession::OnItemClosed(WGC::IGraphicsCaptureItem* sender,
   RTC_LOG(LS_INFO) << "Capture target has been closed.";
   item_closed_ = true;
 
-  RemoveEventHandlers();
+  RemoveEventHandler();
 
   // Do not attempt to free resources in the OnItemClosed handler, as this
   // causes a race where we try to delete the item that is calling us. Removing
@@ -494,16 +486,8 @@ HRESULT WgcCaptureSession::OnItemClosed(WGC::IGraphicsCaptureItem* sender,
   return S_OK;
 }
 
-void WgcCaptureSession::RemoveEventHandlers() {
+void WgcCaptureSession::RemoveEventHandler() {
   HRESULT hr;
-  if (frame_pool_ && frame_arrived_token_) {
-    hr = frame_pool_->remove_FrameArrived(*frame_arrived_token_);
-    frame_arrived_token_.reset();
-    if (FAILED(hr)) {
-      RTC_LOG(LS_WARNING) << "Failed to remove FrameArrived event handler: "
-                          << hr;
-    }
-  }
   if (item_ && item_closed_token_) {
     hr = item_->remove_Closed(*item_closed_token_);
     item_closed_token_.reset();
