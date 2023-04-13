@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cfd42a04_084a1a17",
+        "filename": "api/frame_transformer_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 6549
+      },
+      "writtenOn": "2023-04-13T08:03:41Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s a good point. :)",
+      "parentUuid": "f1d268b3_4488cfa8",
+      "revId": "fee9b9c96ff0d2301a92dfd15bd21f16845b677a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a18932d4_0aea0c9c",
         "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
         "patchSetId": 2
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "51710393_3e11a30a",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 6549
+      },
+      "writtenOn": "2023-04-13T08:03:41Z",
+      "side": 1,
+      "message": "I kind of wonder if those heuristics really make sense, even for the packetization overhead? If we\u0027re putting relatively high overhead on each frame we should be compensating for it. For video it\u0027s not easy to get to packetization overhead above ~20% though. For audio it\u0027s more common.\n\nI\u0027ll have to look into what this does though:\nhttps://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/webrtc/call/rtp_video_sender.cc;l\u003d883;drc\u003d837cc12de25a288edf3ac222f7265c9936e69552\n\nseems like it does the same thing again...? What is encoder_overhead_rate?",
+      "parentUuid": "a18932d4_0aea0c9c",
+      "revId": "fee9b9c96ff0d2301a92dfd15bd21f16845b677a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "201994f4_e87e213b",
         "filename": "modules/rtp_rtcp/source/rtp_sender_video.h",
         "patchSetId": 2
@@ -65,6 +101,24 @@
       "writtenOn": "2023-04-13T06:30:12Z",
       "side": 1,
       "message": "Naming nit: \"encoder_output_size\" to make it clearer that this is used for encoder feedback? Also means it makes more sense for the majority of senders which don\u0027t have a transform installed.",
+      "revId": "fee9b9c96ff0d2301a92dfd15bd21f16845b677a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e16e9be_f9c1be13",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 6549
+      },
+      "writtenOn": "2023-04-13T08:03:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "201994f4_e87e213b",
       "revId": "fee9b9c96ff0d2301a92dfd15bd21f16845b677a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
