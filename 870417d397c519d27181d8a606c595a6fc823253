@@ -33,6 +33,24 @@
       "message": "IIUC, the largest possible negative `diff` would be -2^32/(2*90000) seconds \u003d -06:37:40, meaning that this would only be a problem if there was an RTP timestamp wrap-around happening between 00:00:00 and 06:37:40 on 1970-01-01? If that\u0027s correct, I guess this means that the flaky tests start their clocks close to the 1970 epoch?",
       "revId": "870417d397c519d27181d8a606c595a6fc823253",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28d929d7_b168cd34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2023-04-13T15:30:36Z",
+      "side": 1,
+      "message": "It\u0027s a good point, I failed to find where the clock was initialized for these tests but this would probably be another way to fix the flakiness.\n@hbos, maybe you have more insight ?",
+      "parentUuid": "381ac0e3_d46dd436",
+      "revId": "870417d397c519d27181d8a606c595a6fc823253",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
