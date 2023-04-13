@@ -39,6 +39,30 @@
       },
       "revId": "ae73c3595691e6fed3db778ba22bc3c805094049",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "291d404c_5d8ccdd7",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-04-13T19:26:01Z",
+      "side": 1,
+      "message": "Thanks for great feedback Alex. It\u0027s getting late but I tried your approach.\nAs is, we always hit the `\"Frame pool was empty \u003d\u003e kFrameDropped.\"` since the new\nversion does not start by building up a non zero `empty_frame_credit_count_`.\n\n```\nif (!capture_frame) {\n    // Avoid logging errors while we still have credits (or allowance) to\n    // consider this condition as expected and not as an error.\n    if (empty_frame_credit_count_ \u003d\u003d 0) {\n      RTC_DLOG(LS_WARNING) \u003c\u003c \"Frame pool was empty \u003d\u003e kFrameDropped.\";\n      RecordGetFrameResult(GetFrameResult::kFrameDropped);\n    }\n    return E_FAIL;\n  }\n```",
+      "parentUuid": "3e4987db_84c709ed",
+      "range": {
+        "startLine": 224,
+        "startChar": 0,
+        "endLine": 244,
+        "endChar": 3
+      },
+      "revId": "ae73c3595691e6fed3db778ba22bc3c805094049",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
