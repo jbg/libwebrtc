@@ -66,6 +66,54 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "10a7ecd9_4c8d92ea",
+        "filename": "modules/audio_coding/neteq/tools/fake_decode_from_file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-04-13T14:23:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3dbe3992_e66d5c2b",
+      "range": {
+        "startLine": 55,
+        "startChar": 44,
+        "endLine": 55,
+        "endChar": 49
+      },
+      "revId": "0cc173438fce023d9c68129ac51f7020a660c5f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3efbb37a_0e82009f",
+        "filename": "modules/audio_coding/neteq/tools/fake_decode_from_file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-04-13T14:23:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f032642b_409a005c",
+      "range": {
+        "startLine": 55,
+        "startChar": 5,
+        "endLine": 55,
+        "endChar": 9
+      },
+      "revId": "0cc173438fce023d9c68129ac51f7020a660c5f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "1aa7473c_c128c4f4",
         "filename": "modules/audio_coding/neteq/tools/neteq_replacement_input.cc",
         "patchSetId": 2
@@ -77,6 +125,30 @@
       "writtenOn": "2023-04-13T06:20:45Z",
       "side": 1,
       "message": "No need to fix now, but I wonder in how many places we have this \"magic number\". Would feel less dirty if this was a number we could tie to the Opus codec implementation itself.",
+      "range": {
+        "startLine": 108,
+        "startChar": 51,
+        "endLine": 108,
+        "endChar": 52
+      },
+      "revId": "0cc173438fce023d9c68129ac51f7020a660c5f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78f52262_9562420b",
+        "filename": "modules/audio_coding/neteq/tools/neteq_replacement_input.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-04-13T14:23:54Z",
+      "side": 1,
+      "message": "Agreed.",
+      "parentUuid": "1aa7473c_c128c4f4",
       "range": {
         "startLine": 108,
         "startChar": 51,
