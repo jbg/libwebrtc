@@ -468,10 +468,12 @@ bool RTPSenderVideo::SendVideo(
     uint32_t rtp_timestamp,
     int64_t capture_time_ms,
     rtc::ArrayView<const uint8_t> payload,
+    size_t encoder_output_size,
     RTPVideoHeader video_header,
     absl::optional<int64_t> expected_retransmission_time_ms) {
   return SendVideo(payload_type, codec_type, rtp_timestamp, capture_time_ms,
-                   payload, video_header, expected_retransmission_time_ms,
+                   payload, encoder_output_size, video_header,
+                   expected_retransmission_time_ms,
                    /*csrcs=*/{});
 }
 
@@ -481,6 +483,7 @@ bool RTPSenderVideo::SendVideo(
     uint32_t rtp_timestamp,
     int64_t capture_time_ms,
     rtc::ArrayView<const uint8_t> payload,
+    size_t encoder_output_size,
     RTPVideoHeader video_header,
     absl::optional<int64_t> expected_retransmission_time_ms,
     std::vector<uint32_t> csrcs) {
@@ -745,7 +748,7 @@ bool RTPSenderVideo::SendVideo(
     }
   }
 
-  LogAndSendToNetwork(std::move(rtp_packets), payload.size());
+  LogAndSendToNetwork(std::move(rtp_packets), encoder_output_size);
 
   // Update details about the last sent frame.
   last_rotation_ = video_header.rotation;
@@ -788,7 +791,8 @@ bool RTPSenderVideo::SendEncodedImage(
         expected_retransmission_time_ms);
   }
   return SendVideo(payload_type, codec_type, rtp_timestamp,
-                   encoded_image.capture_time_ms_, encoded_image, video_header,
+                   encoded_image.capture_time_ms_, encoded_image,
+                   encoded_image.size(), video_header,
                    expected_retransmission_time_ms, rtp_sender_->Csrcs());
 }
 
