@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "527130d9_2a210117",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-04-13T06:30:12Z",
+      "side": 1,
+      "message": "Generally LGTM. Some quick comments, sorry if they\u0027re a bit premature.",
+      "revId": "fee9b9c96ff0d2301a92dfd15bd21f16845b677a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1d268b3_4488cfa8",
+        "filename": "api/frame_transformer_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-04-13T06:30:12Z",
+      "side": 1,
+      "message": "Don\u0027t think this needs to be in the API - the transformer code in eg Chrome knows how big the payload data is before it does its transform! Just define it in the implementation in rtp_sender_video_frame_transformer_delegate.cc.",
+      "revId": "fee9b9c96ff0d2301a92dfd15bd21f16845b677a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a18932d4_0aea0c9c",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-04-13T06:30:12Z",
+      "side": 1,
+      "message": "Should we propagate the difference between \"transform overhead\" and \"packetization overhead\" further? Currently this gets stored as packetization_overhead_bitrate_ and so we have heuristics like eg [1] which may or may not apply to transform overhead in the same way.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/webrtc/call/rtp_video_sender.cc;drc\u003d837cc12de25a288edf3ac222f7265c9936e69552;l\u003d872",
+      "revId": "fee9b9c96ff0d2301a92dfd15bd21f16845b677a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "201994f4_e87e213b",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-04-13T06:30:12Z",
+      "side": 1,
+      "message": "Naming nit: \"encoder_output_size\" to make it clearer that this is used for encoder feedback? Also means it makes more sense for the majority of senders which don\u0027t have a transform installed.",
+      "revId": "fee9b9c96ff0d2301a92dfd15bd21f16845b677a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
