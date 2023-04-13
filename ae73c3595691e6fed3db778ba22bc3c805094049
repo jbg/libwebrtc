@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0709792_31fdc608",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-04-13T17:16:03Z",
+      "side": 1,
+      "message": "LGTM, one proposed cleanup",
+      "revId": "ae73c3595691e6fed3db778ba22bc3c805094049",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e4987db_84c709ed",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-04-13T17:16:03Z",
+      "side": 1,
+      "message": "Maybe this should go into a helper method like `EnsureFrame()` and I think maybe it would make since if the logic was like:\n```\nHRESULT hr \u003d ProcessFrame();\nif (SUCCEEDED(hr)) {\n  CHECK(queue_.current_frame());\n  return;\n}\n\n// We failed to process the frame, but we do have a frame so just return that.\nif (queue_.current_frame()) {\n  // LOG ERROR\n  return\n}\n\n// Process Frame failed and we don\u0027t have a current frame. This could indicate\n// a startup path where we may need to try/wait a few times to ensure that we\n// have a frame.\nconst int max_sleep_count\nconst int sleep_time_ms\nint sleep_count \u003d 0;\nwhile (!queue_.currnt_frame() \u0026\u0026 sleep_count \u003e 0) {\n....\n}\n\n```",
+      "range": {
+        "startLine": 224,
+        "startChar": 0,
+        "endLine": 244,
+        "endChar": 3
+      },
+      "revId": "ae73c3595691e6fed3db778ba22bc3c805094049",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
