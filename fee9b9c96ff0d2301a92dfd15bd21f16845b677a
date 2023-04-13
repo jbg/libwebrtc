@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba122a37_ea64afcf",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-04-13T08:13:26Z",
+      "side": 1,
+      "message": "Yeah, it\u0027s as much a mystery to me...\n\nWith regards to just this cl, renaming the existing fields which mention packetization (\"packetization_overhead_bitrate_\" etc) to be less specific, something like \"post_encoding_overhead_\", would be enough for me. It avoids the risk of someone later coming through, thinking this overhead is only due to packetization and tweaking stuff, when in fact it might include eg a whole 10MB depth map frame or something.",
+      "parentUuid": "51710393_3e11a30a",
+      "revId": "fee9b9c96ff0d2301a92dfd15bd21f16845b677a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "201994f4_e87e213b",
         "filename": "modules/rtp_rtcp/source/rtp_sender_video.h",
         "patchSetId": 2
