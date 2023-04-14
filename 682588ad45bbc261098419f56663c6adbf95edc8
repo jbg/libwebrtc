@@ -16,6 +16,24 @@
       "message": "Right, I missed that in the initial implementation because I didn\u0027t need it for Chromium. Looks good to me.",
       "revId": "682588ad45bbc261098419f56663c6adbf95edc8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccaee685_5c06d7d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-04-14T14:42:50Z",
+      "side": 1,
+      "message": "That\u0027s what I assumed, otherwise you would hit same issue :).\n\nJust for the reference, it is used here in FF:\nhttps://searchfox.org/mozilla-central/source/dom/media/systemservices/CamerasParent.cpp#902\n\nand the function in WebRTC is implemented here:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/video_capture/video_capture_impl.cc;l\u003d28",
+      "parentUuid": "de8bc58d_a671a70e",
+      "revId": "682588ad45bbc261098419f56663c6adbf95edc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
