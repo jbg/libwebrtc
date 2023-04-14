@@ -51,6 +51,24 @@
       "parentUuid": "381ac0e3_d46dd436",
       "revId": "870417d397c519d27181d8a606c595a6fc823253",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0b71cc2_b81d3e44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2023-04-14T07:00:54Z",
+      "side": 1,
+      "message": "Yeah, I also looked into the test code, but couldn\u0027t find any obvious usage of simulated clocks there. I presume that a regular gtest would use the system clock, unless explicitly overridden?",
+      "parentUuid": "28d929d7_b168cd34",
+      "revId": "870417d397c519d27181d8a606c595a6fc823253",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
