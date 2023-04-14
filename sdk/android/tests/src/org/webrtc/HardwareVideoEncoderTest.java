@@ -18,6 +18,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -32,7 +33,6 @@ import static org.webrtc.VideoCodecMimeType.VP9;
 import android.media.MediaCodec;
 import android.media.MediaCodecInfo;
 import android.media.MediaFormat;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import androidx.test.runner.AndroidJUnit4;
 import java.nio.ByteBuffer;
@@ -45,6 +45,7 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.robolectric.annotation.Config;
 import org.webrtc.EncodedImage;
 import org.webrtc.EncodedImage.FrameType;
@@ -182,16 +183,12 @@ public class HardwareVideoEncoderTest {
     return new VideoFrame(testBuffer, /* rotation= */ 0, timestampNs);
   }
 
-  @Mock VideoEncoder.Callback mockEncoderCallback;
-  private FakeMediaCodecWrapper fakeMediaCodecWrapper;
+  @Mock private VideoEncoder.Callback mockEncoderCallback;
+  @Spy private FakeMediaCodecWrapper fakeMediaCodecWrapper;
 
   @Before
   public void setUp() {
     MockitoAnnotations.initMocks(this);
-    MediaFormat inputFormat = new MediaFormat();
-    MediaFormat outputFormat = new MediaFormat();
-    // TODO(sakal): Add more details to output format as needed.
-    fakeMediaCodecWrapper = spy(new FakeMediaCodecWrapper(inputFormat, outputFormat));
   }
 
   @Test
@@ -540,5 +537,54 @@ public class HardwareVideoEncoderTest {
   @Test
   public void encode_h265KeyFrame_emptyConfig_configNotPrepended() throws InterruptedException {
     encodeWithConfigBuffer(H265, /*keyFrame=*/true, /* emptyConfig= */ true, "frame");
+  }
+
+  private void encodeWithStride(int stride, int sliceHeight, int expectedBufferSize)
+      throws InterruptedException {
+    MediaFormat inputFormat = new MediaFormat();
+    inputFormat.setInteger(MediaFormat.KEY_STRIDE, stride);
+    inputFormat.setInteger(MediaFormat.KEY_SLICE_HEIGHT, sliceHeight);
+    doReturn(inputFormat).when(fakeMediaCodecWrapper).getInputFormat();
+
+    TestEncoder encoder = new TestEncoderBuilder().build();
+    encoder.initEncode(TEST_ENCODER_SETTINGS, mockEncoderCallback);
+    encoder.encode(createTestVideoFrame(/* timestampNs= */ 0), ENCODE_INFO_DELTA_FRAME);
+
+    ArgumentCaptor<Integer> indexCaptor = ArgumentCaptor.forClass(Integer.class);
+    ArgumentCaptor<Integer> sizeCaptor = ArgumentCaptor.forClass(Integer.class);
+    verify(fakeMediaCodecWrapper)
+        .queueInputBuffer(
+            /*index=*/anyInt(), /*offset=*/eq(0), /*size=*/eq(expectedBufferSize),
+            /*presentationTimeUs=*/anyLong(), /*flags=*/anyInt());
+  }
+
+  @Test
+  public void encode_invalidStride_ignored() throws InterruptedException {
+    encodeWithStride(/*stride=*/TEST_ENCODER_SETTINGS.width / 2,
+        /*sliceHeight=*/TEST_ENCODER_SETTINGS.height,
+        /*expectedBufferSize=*/TEST_ENCODER_SETTINGS.width * TEST_ENCODER_SETTINGS.height * 3 / 2);
+  }
+
+  @Test
+  public void encode_invalidSliceHeight_ignored() throws InterruptedException {
+    encodeWithStride(/*stride=*/TEST_ENCODER_SETTINGS.width,
+        /*sliceHeight=*/TEST_ENCODER_SETTINGS.height / 2,
+        /*expectedBufferSize=*/TEST_ENCODER_SETTINGS.width * TEST_ENCODER_SETTINGS.height * 3 / 2);
+  }
+
+  @Test
+  public void encode_validStride_applied() throws InterruptedException {
+    encodeWithStride(/*stride=*/TEST_ENCODER_SETTINGS.width * 2,
+        /*sliceHeight=*/TEST_ENCODER_SETTINGS.height,
+        /*expectedBufferSize=*/TEST_ENCODER_SETTINGS.width * 2 * TEST_ENCODER_SETTINGS.height * 3
+            / 2);
+  }
+
+  @Test
+  public void encode_validSliceHeight_applied() throws InterruptedException {
+    encodeWithStride(/*stride=*/TEST_ENCODER_SETTINGS.width,
+        /*sliceHeight=*/TEST_ENCODER_SETTINGS.height * 2,
+        /*expectedBufferSize=*/TEST_ENCODER_SETTINGS.width * TEST_ENCODER_SETTINGS.height * 2 * 3
+            / 2);
   }
 }
