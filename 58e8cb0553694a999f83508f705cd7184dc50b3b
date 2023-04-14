@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b72317d_2356724f",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-04-14T16:50:42Z",
+      "side": 1,
+      "message": "Why can\u0027t we just use queue_.current_frame() instead of this bool? (For all it\u0027s usages it looks like it should be fine?)",
+      "range": {
+        "startLine": 237,
+        "startChar": 24,
+        "endLine": 237,
+        "endChar": 42
+      },
+      "revId": "58e8cb0553694a999f83508f705cd7184dc50b3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb3086af_2295e297",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-04-14T16:50:42Z",
+      "side": 1,
+      "message": "We essentially handle the case where this is false right below here; so maybe we shouldn\u0027t DCHECK?",
+      "range": {
+        "startLine": 245,
+        "startChar": 0,
+        "endLine": 245,
+        "endChar": 33
+      },
+      "revId": "58e8cb0553694a999f83508f705cd7184dc50b3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
