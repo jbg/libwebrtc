@@ -282,9 +282,7 @@ class HardwareVideoEncoder implements VideoEncoder {
         textureEglBase.makeCurrent();
       }
 
-      MediaFormat inputFormat = codec.getInputFormat();
-      stride = getStride(inputFormat, width);
-      sliceHeight = getSliceHeight(inputFormat, height);
+      updateInputFormat(codec.getInputFormat());
 
       codec.start();
     } catch (IllegalStateException e) {
@@ -382,9 +380,6 @@ class HardwareVideoEncoder implements VideoEncoder {
       requestKeyFrame(videoFrame.getTimestampNs());
     }
 
-    // Number of bytes in the video buffer. Y channel is sampled at one byte per pixel; U and V are
-    // subsampled at one byte per four pixels.
-    int bufferSize = videoFrameBuffer.getHeight() * videoFrameBuffer.getWidth() * 3 / 2;
     EncodedImage.Builder builder = EncodedImage.builder()
                                        .setCaptureTimeNs(videoFrame.getTimestampNs())
                                        .setEncodedWidth(videoFrame.getBuffer().getWidth())
@@ -402,8 +397,7 @@ class HardwareVideoEncoder implements VideoEncoder {
     if (useSurfaceMode) {
       returnValue = encodeTextureBuffer(videoFrame, presentationTimestampUs);
     } else {
-      returnValue =
-          encodeByteBuffer(videoFrame, presentationTimestampUs, videoFrameBuffer, bufferSize);
+      returnValue = encodeByteBuffer(videoFrame, presentationTimestampUs, videoFrameBuffer);
     }
 
     // Check if the queue was successful.
@@ -434,8 +428,8 @@ class HardwareVideoEncoder implements VideoEncoder {
     return VideoCodecStatus.OK;
   }
 
-  private VideoCodecStatus encodeByteBuffer(VideoFrame videoFrame, long presentationTimestampUs,
-      VideoFrame.Buffer videoFrameBuffer, int bufferSize) {
+  private VideoCodecStatus encodeByteBuffer(
+      VideoFrame videoFrame, long presentationTimestampUs, VideoFrame.Buffer videoFrameBuffer) {
     encodeThreadChecker.checkIsOnValidThread();
     // No timeout.  Don't block for an input buffer, drop frames if the encoder falls behind.
     int index;
@@ -462,6 +456,7 @@ class HardwareVideoEncoder implements VideoEncoder {
     fillInputBuffer(buffer, videoFrameBuffer);
 
     try {
+      int bufferSize = stride * sliceHeight * 3 / 2;
       codec.queueInputBuffer(
           index, 0 /* offset */, bufferSize, presentationTimestampUs, 0 /* flags */);
     } catch (IllegalStateException e) {
@@ -697,20 +692,26 @@ class HardwareVideoEncoder implements VideoEncoder {
     return sharedContext != null && surfaceColorFormat != null;
   }
 
-  private static int getStride(MediaFormat inputFormat, int width) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && inputFormat != null
-        && inputFormat.containsKey(MediaFormat.KEY_STRIDE)) {
-      return inputFormat.getInteger(MediaFormat.KEY_STRIDE);
-    }
-    return width;
-  }
+  /** Fetches stride and slice height from input media format */
+  private void updateInputFormat(MediaFormat format) {
+    Logging.d(TAG, "updateInputFormat format: " + format);
 
-  private static int getSliceHeight(MediaFormat inputFormat, int height) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && inputFormat != null
-        && inputFormat.containsKey(MediaFormat.KEY_SLICE_HEIGHT)) {
-      return inputFormat.getInteger(MediaFormat.KEY_SLICE_HEIGHT);
+    stride = width;
+    sliceHeight = height;
+
+    if (format == null) {
+      return;
     }
-    return height;
+
+    if (format.containsKey(MediaFormat.KEY_STRIDE)) {
+      stride = format.getInteger(MediaFormat.KEY_STRIDE);
+      stride = Math.max(stride, width);
+    }
+
+    if (format.containsKey(MediaFormat.KEY_SLICE_HEIGHT)) {
+      sliceHeight = format.getInteger(MediaFormat.KEY_SLICE_HEIGHT);
+      sliceHeight = Math.max(sliceHeight, height);
+    }
   }
 
   protected boolean isEncodingStatisticsSupported() {
