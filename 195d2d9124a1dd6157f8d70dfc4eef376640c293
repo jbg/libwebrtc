@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29813f82_6e2f3740",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-04-17T08:34:51Z",
+      "side": 1,
+      "message": "Nice!",
+      "revId": "195d2d9124a1dd6157f8d70dfc4eef376640c293",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c2c9aa2_83cd3896",
+        "filename": "call/rtp_video_sender.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-04-17T08:34:51Z",
+      "side": 1,
+      "message": "Could we get a \"Bps\" suffix to clarify the unit, and that this is a rate rather than eg bytes per frame.",
+      "range": {
+        "startLine": 164,
+        "startChar": 11,
+        "endLine": 164,
+        "endChar": 32
+      },
+      "revId": "195d2d9124a1dd6157f8d70dfc4eef376640c293",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3fea3a3_6f464030",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-04-17T08:34:51Z",
+      "side": 1,
+      "message": "Don\u0027t you have issues with existing usages of this method?\nActually, I added this version without csrcs to preserve the interface used by external integrators, so you could leave this first method signature unchanged and use a default encoder_output_size of payload.size().",
+      "revId": "195d2d9124a1dd6157f8d70dfc4eef376640c293",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acac522b_69eec0e5",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-04-17T08:34:51Z",
+      "side": 1,
+      "message": "Update the comment too",
+      "revId": "195d2d9124a1dd6157f8d70dfc4eef376640c293",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0348c919_540ac044",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video_frame_transformer_delegate_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-04-17T08:34:51Z",
+      "side": 1,
+      "message": "encoder_output_size",
+      "revId": "195d2d9124a1dd6157f8d70dfc4eef376640c293",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
