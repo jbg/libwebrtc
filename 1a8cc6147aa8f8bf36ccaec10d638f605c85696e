@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed81ded6_4ec0bcfd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14634
+      },
+      "writtenOn": "2023-04-17T19:39:08Z",
+      "side": 1,
+      "message": "starting with the largest, /modules \n\nI\u0027ll probably do one more for /rtc_base, one for /sdk, then one or two more for all the rest",
+      "revId": "1a8cc6147aa8f8bf36ccaec10d638f605c85696e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2de6588a_1c6543e0",
+        "filename": "modules/audio_coding/codecs/ilbc/filtered_cb_vecs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 14634
+      },
+      "writtenOn": "2023-04-17T19:39:08Z",
+      "side": 1,
+      "message": "Note that some of the files in this diff, (like ilibc/*, or modules/third_party/g711/g711.h, etc.) are actually copy-pasted from external source code. (likely why they were excluded initially in https://webrtc-review.googlesource.com/c/src/+/144051) \n\nSo I could see the argument to exclude them from formatting (avoid unnecessary conflicts when \u0027re-copy pasting\u0027/diffing with those sources). But, I also see the argument to format. \n\nThoughts? \n\nI think I\u0027m inclined towards the latter as I consider the copy-paste meaning \u0027we own this now\u0027, plus the actual formatting changes to these files are small, but don\u0027t feel strongly either way",
+      "revId": "1a8cc6147aa8f8bf36ccaec10d638f605c85696e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
