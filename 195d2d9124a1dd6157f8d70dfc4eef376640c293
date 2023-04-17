@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ab222b9_26f87363",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2023-04-17T08:51:43Z",
+      "side": 1,
+      "message": "Resolved these in the new CL.",
+      "revId": "195d2d9124a1dd6157f8d70dfc4eef376640c293",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c2c9aa2_83cd3896",
@@ -31,6 +48,30 @@
       "writtenOn": "2023-04-17T08:34:51Z",
       "side": 1,
       "message": "Could we get a \"Bps\" suffix to clarify the unit, and that this is a rate rather than eg bytes per frame.",
+      "range": {
+        "startLine": 164,
+        "startChar": 11,
+        "endLine": 164,
+        "endChar": 32
+      },
+      "revId": "195d2d9124a1dd6157f8d70dfc4eef376640c293",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffa5ce1a_5ab8ddf5",
+        "filename": "call/rtp_video_sender.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2023-04-17T08:51:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c2c9aa2_83cd3896",
       "range": {
         "startLine": 164,
         "startChar": 11,
@@ -60,6 +101,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dd4820d9_a800619c",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2023-04-17T08:51:43Z",
+      "side": 1,
+      "message": "Ah, thanks, that sounds good!",
+      "parentUuid": "b3fea3a3_6f464030",
+      "revId": "195d2d9124a1dd6157f8d70dfc4eef376640c293",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "acac522b_69eec0e5",
         "filename": "modules/rtp_rtcp/source/rtp_sender_video.h",
         "patchSetId": 4
@@ -71,6 +130,24 @@
       "writtenOn": "2023-04-17T08:34:51Z",
       "side": 1,
       "message": "Update the comment too",
+      "revId": "195d2d9124a1dd6157f8d70dfc4eef376640c293",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "feba1fe5_71098d3e",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2023-04-17T08:51:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acac522b_69eec0e5",
       "revId": "195d2d9124a1dd6157f8d70dfc4eef376640c293",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -88,6 +165,24 @@
       "writtenOn": "2023-04-17T08:34:51Z",
       "side": 1,
       "message": "encoder_output_size",
+      "revId": "195d2d9124a1dd6157f8d70dfc4eef376640c293",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "843c6dc1_d6bf2858",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video_frame_transformer_delegate_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2023-04-17T08:51:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0348c919_540ac044",
       "revId": "195d2d9124a1dd6157f8d70dfc4eef376640c293",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
