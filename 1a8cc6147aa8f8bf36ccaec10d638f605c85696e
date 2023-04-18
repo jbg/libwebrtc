@@ -33,6 +33,23 @@
       "message": "Note that some of the files in this diff, (like ilibc/*, or modules/third_party/g711/g711.h, etc.) are actually copy-pasted from external source code. (likely why they were excluded initially in https://webrtc-review.googlesource.com/c/src/+/144051) \n\nSo I could see the argument to exclude them from formatting (avoid unnecessary conflicts when \u0027re-copy pasting\u0027/diffing with those sources). But, I also see the argument to format. \n\nThoughts? \n\nI think I\u0027m inclined towards the latter as I consider the copy-paste meaning \u0027we own this now\u0027, plus the actual formatting changes to these files are small, but don\u0027t feel strongly either way",
       "revId": "1a8cc6147aa8f8bf36ccaec10d638f605c85696e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcb17fe4_81563c66",
+        "filename": "modules/audio_device/win/audio_device_core_win.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-04-18T07:10:07Z",
+      "side": 1,
+      "message": "this comment should likely be moved too",
+      "revId": "1a8cc6147aa8f8bf36ccaec10d638f605c85696e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
