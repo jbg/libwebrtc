@@ -16,6 +16,74 @@
       "message": "Adding hta@ for root owner approval.",
       "revId": "3c073b27db0dde8b805d50037e1f317dfc71c73e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c80d4fce_2cb5900d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-04-18T19:41:08Z",
+      "side": 1,
+      "message": "Approving. Found 3 places where formatting brought out strangeness; not blockers.",
+      "revId": "3c073b27db0dde8b805d50037e1f317dfc71c73e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2424e8e4_37b97d44",
+        "filename": "modules/audio_coding/codecs/builtin_audio_decoder_factory_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-04-18T19:41:08Z",
+      "side": 1,
+      "message": "Seems that clang is confused between \"this is an one-line initalizer\" vs \"this is a list of values\". But not queasy enough to be worth resolving.",
+      "revId": "3c073b27db0dde8b805d50037e1f317dfc71c73e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b09c6f0_a60ed390",
+        "filename": "modules/desktop_capture/desktop_frame_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-04-18T19:41:08Z",
+      "side": 1,
+      "message": "This set of changes (initializers to TestData) appears to strictly reduce readability. Should the code owners be flagged to take care of it post-submit?",
+      "revId": "3c073b27db0dde8b805d50037e1f317dfc71c73e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1733e8bf_162d033c",
+        "filename": "modules/video_capture/windows/device_info_ds.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-04-18T19:41:08Z",
+      "side": 1,
+      "message": "Completely unclear to me what the justification for the extra space is, or whether it affects function. I guess it doesn\u0027t.",
+      "revId": "3c073b27db0dde8b805d50037e1f317dfc71c73e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
