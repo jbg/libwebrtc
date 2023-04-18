@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0c2ebe5_0a10d4dc",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2023-04-18T13:14:38Z",
+      "side": 0,
+      "message": "Will the QualityScaler not be enabled for multiple spatial layers now (if supported by the degradation preference)?\n(And same for vp8 simulcast above)",
+      "range": {
+        "startLine": 561,
+        "startChar": 6,
+        "endLine": 561,
+        "endChar": 34
+      },
+      "revId": "e1e94ad4c884fea7f6aa528d04b0962252d4a70b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
