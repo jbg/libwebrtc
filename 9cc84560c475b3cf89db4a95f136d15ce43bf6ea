@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03423296_6e4bbcb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-04-18T10:37:18Z",
+      "side": 1,
+      "message": "Relanding after looking at what caused the rollback issue was. The difference can be seen by diffing the first and second patchsets.",
+      "revId": "9cc84560c475b3cf89db4a95f136d15ce43bf6ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
