@@ -50,6 +50,24 @@
       "message": "this comment should likely be moved too",
       "revId": "1a8cc6147aa8f8bf36ccaec10d638f605c85696e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa6a77e1_849ad69f",
+        "filename": "modules/audio_device/win/audio_device_core_win.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 14634
+      },
+      "writtenOn": "2023-04-18T18:18:53Z",
+      "side": 1,
+      "message": "thanks, good catch",
+      "parentUuid": "bcb17fe4_81563c66",
+      "revId": "1a8cc6147aa8f8bf36ccaec10d638f605c85696e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
