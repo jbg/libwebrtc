@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14183879_ae452ea8",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 956,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-04-18T09:57:09Z",
+      "side": 1,
+      "message": "may be \nif constexpr (!std::is_same_v\u003cC, VideoCodec\u003e) {\n\nhttps://en.cppreference.com/w/cpp/types/is_same\nhttps://en.cppreference.com/w/cpp/language/if#Constexpr_if\n\n(i.e. no need to introduce new trait IsVideoCodec)\n\n\nbtw, may be it would be more readable if this statement check what it is rather than what it is not, would this be the same?\nif constexpr (std::is_same_v\u003cC, AudioCodec\u003e)",
+      "range": {
+        "startLine": 956,
+        "startChar": 3,
+        "endLine": 956,
+        "endChar": 34
+      },
+      "revId": "04a2b15b487aa517fae59271b04c50d8b5c64083",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
