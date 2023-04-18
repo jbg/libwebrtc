@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5acbe401_aea9781d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-04-18T18:53:43Z",
+      "side": 1,
+      "message": "Adding hta@ for root owner approval.",
+      "revId": "3c073b27db0dde8b805d50037e1f317dfc71c73e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

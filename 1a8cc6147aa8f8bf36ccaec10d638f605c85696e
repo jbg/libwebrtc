@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e9a791f4_d68e468e",
+        "filename": "modules/audio_coding/codecs/ilbc/filtered_cb_vecs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-04-18T18:53:43Z",
+      "side": 1,
+      "message": "Yes, I think it is fine to format.\n\nI don\u0027t foresee any updates done by copy/paste on these folders.",
+      "parentUuid": "2de6588a_1c6543e0",
+      "revId": "1a8cc6147aa8f8bf36ccaec10d638f605c85696e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bcb17fe4_81563c66",
         "filename": "modules/audio_device/win/audio_device_core_win.h",
         "patchSetId": 1
