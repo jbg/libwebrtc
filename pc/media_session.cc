@@ -941,6 +941,11 @@ static const C* GetAssociatedCodecForRtx(const std::vector<C>& codec_list,
   return associated_codec;
 }
 
+template <typename T>
+struct IsVideoCodec : std::false_type {};
+template <>
+struct IsVideoCodec<VideoCodec> : std::true_type {};
+
 // Find the codec in `codec_list` that `red_codec` is associated with.
 template <class C>
 static const C* GetAssociatedCodecForRed(const std::vector<C>& codec_list,
@@ -948,8 +953,10 @@ static const C* GetAssociatedCodecForRed(const std::vector<C>& codec_list,
   std::string fmtp;
   if (!red_codec.GetParam(kCodecParamNotInNameValueFormat, &fmtp)) {
     // Normal for video/RED.
-    RTC_LOG(LS_WARNING) << "RED codec " << red_codec.name
-                        << " is missing an associated payload type.";
+    if (!IsVideoCodec<C>::value) {
+      RTC_LOG(LS_WARNING) << "RED codec " << red_codec.name
+                          << " is missing an associated payload type.";
+    }
     return nullptr;
   }
 
