@@ -16,6 +16,24 @@
       "message": "Is there a bug filed for this?",
       "revId": "220edce2ca1b15e01c26c5be0eb160157d88c706",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5b75f66_bf20e567",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15839
+      },
+      "writtenOn": "2023-04-19T13:33:57Z",
+      "side": 1,
+      "message": "Yes, this bug related to ice GATHER_CONTINUALLY",
+      "parentUuid": "422bce4f_e774b2cd",
+      "revId": "220edce2ca1b15e01c26c5be0eb160157d88c706",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
