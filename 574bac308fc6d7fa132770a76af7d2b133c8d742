@@ -22,6 +22,30 @@
       },
       "revId": "574bac308fc6d7fa132770a76af7d2b133c8d742",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3a8c6a6_351d6e42",
+        "filename": "sdk/android/tests/src/org/webrtc/HardwareVideoEncoderTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-04-19T07:03:06Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "1cae5cc7_ca2f00e2",
+      "range": {
+        "startLine": 590,
+        "startChar": 0,
+        "endLine": 592,
+        "endChar": 80
+      },
+      "revId": "574bac308fc6d7fa132770a76af7d2b133c8d742",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
