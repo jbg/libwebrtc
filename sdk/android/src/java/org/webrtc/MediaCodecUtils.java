@@ -50,8 +50,8 @@ class MediaCodecUtils {
 
   // Color formats supported by hardware encoder - in order of preference.
   static final int[] ENCODER_COLOR_FORMATS = {
-      MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420Planar,
       MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar,
+      MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420Planar,
       MediaCodecInfo.CodecCapabilities.COLOR_QCOM_FormatYUV420SemiPlanar,
       MediaCodecUtils.COLOR_QCOM_FORMATYUV420PackedSemiPlanar32m};
 
