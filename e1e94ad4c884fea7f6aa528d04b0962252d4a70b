@@ -22,6 +22,30 @@
       },
       "revId": "e1e94ad4c884fea7f6aa528d04b0962252d4a70b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec03974d_11603a10",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-04-19T07:52:27Z",
+      "side": 0,
+      "message": "It won\u0027t be enabled for these cases.\n\nis_quality_scaling_allowed [1] \u003dfalse in screencast and simulcast/svc:\n\n  encoder_config.is_quality_scaling_allowed \u003d\n      !disable_automatic_resize_ \u0026\u0026 !is_screencast \u0026\u0026\n      (parameters_.config.rtp.ssrcs.size() \u003d\u003d 1 ||\n       NumActiveStreams(rtp_parameters_) \u003d\u003d 1);\n\nResource manager disables [2] scaling if is_quality_scaling_allowed\u003dfalse:\n\nconst bool quality_scaling_allowed \u003d\n      IsResolutionScalingEnabled(degradation_preference_) \u0026\u0026\n      (scaling_settings.thresholds.has_value() ||\n       (encoder_settings_.has_value() \u0026\u0026\n        encoder_settings_-\u003eencoder_config().is_quality_scaling_allowed)) \u0026\u0026\n      encoder_info.is_qp_trusted.value_or(true);\n       \n[1] https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/webrtc/media/engine/webrtc_video_engine.cc;drc\u003dc848268ab176c66004275454b4ec3eca922e8e99;l\u003d2606\n\n[2] https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/webrtc/video/adaptation/video_stream_encoder_resource_manager.cc;l\u003d601",
+      "parentUuid": "b0c2ebe5_0a10d4dc",
+      "range": {
+        "startLine": 561,
+        "startChar": 6,
+        "endLine": 561,
+        "endChar": 34
+      },
+      "revId": "e1e94ad4c884fea7f6aa528d04b0962252d4a70b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
