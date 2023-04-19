@@ -34,6 +34,24 @@
       "parentUuid": "422bce4f_e774b2cd",
       "revId": "220edce2ca1b15e01c26c5be0eb160157d88c706",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1ad6640_37ed895c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-04-19T13:38:07Z",
+      "side": 1,
+      "message": "Please link to it from the description:\n\nBug: webrtc:\u003cbug nr\u003e",
+      "parentUuid": "f5b75f66_bf20e567",
+      "revId": "220edce2ca1b15e01c26c5be0eb160157d88c706",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
