@@ -22,6 +22,30 @@
       },
       "revId": "3e70278a227d9b1208086749284cf69fd7fd7acd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d09837d_83d26b18",
+        "filename": "rtc_base/experiments/encoder_info_settings.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2023-04-19T14:14:16Z",
+      "side": 1,
+      "message": "You are correct.  The values are identical. My thinking is that the values would serve as a placeholder until they were updated with values from the experiment when it concludes. I\u0027ll delete the entire if statement. \n\nDone.",
+      "parentUuid": "15e69426_1a666a7b",
+      "range": {
+        "startLine": 50,
+        "startChar": 2,
+        "endLine": 56,
+        "endChar": 3
+      },
+      "revId": "3e70278a227d9b1208086749284cf69fd7fd7acd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
