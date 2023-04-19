@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15e69426_1a666a7b",
+        "filename": "rtc_base/experiments/encoder_info_settings.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-04-19T07:12:59Z",
+      "side": 1,
+      "message": "Seems the values are identical to default bitrate limits specified below (L58-62). If so, I would remove this code.",
+      "range": {
+        "startLine": 50,
+        "startChar": 2,
+        "endLine": 56,
+        "endChar": 3
+      },
+      "revId": "3e70278a227d9b1208086749284cf69fd7fd7acd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
