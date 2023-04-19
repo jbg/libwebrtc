@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8375cee0_321ca877",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14634
+      },
+      "writtenOn": "2023-04-19T23:26:05Z",
+      "side": 1,
+      "message": "shoot sorry - accidentally removed approvals.\nAlso, can\u0027t add to CQ myself, but marking as auto-submit",
+      "revId": "68e0f600e51707f8138640c6cee162b4def99e04",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
