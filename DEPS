@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '421628df870cf1c81d117fada4d25e9394ee0173',
+  'chromium_revision': '803d409b992cc23e81958849fa81d4c0592bb29b',
 
   # Fetch the prebuilt binaries for llvm-cov and llvm-profdata. Needed to
   # process the raw profiles produced by instrumented targets (built with
@@ -25,7 +25,7 @@ vars = {
 
   # By default, download the fuchsia sdk from the public sdk directory.
   'fuchsia_sdk_cipd_prefix': 'fuchsia/sdk/gn/',
-  'fuchsia_version': 'version:12.20230418.1.1',
+  'fuchsia_version': 'version:12.20230418.3.1',
   # By default, download the fuchsia images from the fuchsia GCS bucket.
   'fuchsia_images_bucket': 'fuchsia',
   'checkout_fuchsia': False,
@@ -57,13 +57,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@edb60d9b96c56a12d8606dec3b8a1d4acd4b65e9',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@70ed3cfa222d992f3883a6988d3c8cefe5ac171c',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@d83681452468af7b2bb631db454f16a0d8d76bcf',
+    'https://chromium.googlesource.com/chromium/src/testing@19cdbbf626121256f85b6acdbe25a0e11ad403f0',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@39fc3a0c85b7c3ed751d458a80f72a9496962759',
+    'https://chromium.googlesource.com/chromium/src/third_party@4ab4ba3f5f489419d27c000267f6a21b90076520',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -336,7 +336,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@5b0479ae0b7b68451e4c5fe369cc38bf18c7b344',
+    'https://chromium.googlesource.com/chromium/src/tools@01bbfa147942019a2d754f1b441d1d540e909e6e',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
