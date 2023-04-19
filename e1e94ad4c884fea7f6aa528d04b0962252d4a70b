@@ -46,6 +46,30 @@
       },
       "revId": "e1e94ad4c884fea7f6aa528d04b0962252d4a70b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a53b350c_98e45896",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2023-04-19T08:50:11Z",
+      "side": 0,
+      "message": "Ok I see. What about one active stream with multiple spatial layers?",
+      "parentUuid": "ec03974d_11603a10",
+      "range": {
+        "startLine": 561,
+        "startChar": 6,
+        "endLine": 561,
+        "endChar": 34
+      },
+      "revId": "e1e94ad4c884fea7f6aa528d04b0962252d4a70b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
