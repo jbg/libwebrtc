@@ -80,7 +80,7 @@
       'dimensions': {
         'os': 'iOS-12.4.1',
         'pool': 'WebRTC',
-        'id': 'build15-a7'
+        'id': 'mac-254-e504'
       }
     }
   },
