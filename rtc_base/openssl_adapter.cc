@@ -15,6 +15,7 @@
 #include <openssl/err.h>
 
 #include "absl/strings/string_view.h"
+#include "rtc_base/strings/string_builder.h"
 #ifdef OPENSSL_IS_BORINGSSL
 #include <openssl/pool.h>
 #endif
@@ -777,35 +778,58 @@ bool OpenSSLAdapter::SSLPostConnectionCheck(SSL* ssl, absl::string_view host) {
   return is_valid_cert_name;
 }
 
-#if !defined(NDEBUG)
-
-// We only use this for tracing and so it is only needed in debug mode
-
-void OpenSSLAdapter::SSLInfoCallback(const SSL* s, int where, int ret) {
-  const char* str = "undefined";
-  int w = where & ~SSL_ST_MASK;
-  if (w & SSL_ST_CONNECT) {
-    str = "SSL_connect";
-  } else if (w & SSL_ST_ACCEPT) {
-    str = "SSL_accept";
+void OpenSSLAdapter::SSLInfoCallback(const SSL* s, int where, int value) {
+  char buf[256];
+  rtc::SimpleStringBuilder log(buf);
+  switch (where) {
+    case SSL_CB_LOOP:
+      log << "loop";
+      break;
+    case SSL_CB_EXIT:
+      log << "exit";
+      break;
+    case SSL_CB_READ:
+      log << "read";
+      break;
+    case SSL_CB_WRITE:
+      log << "write";
+      break;
+    case SSL_CB_ALERT:
+      log << "alert " << SSL_alert_type_string_long(value) << " ",
+          SSL_alert_desc_string_long(value);
+      break;
+    case SSL_CB_READ_ALERT:
+      log << "read_alert " << SSL_alert_type_string_long(value) << " ",
+          SSL_alert_desc_string_long(value);
+      break;
+    case SSL_CB_WRITE_ALERT:
+      log << "write_alert " << SSL_alert_type_string_long(value) << " "
+          << SSL_alert_desc_string_long(value);
+      break;
+    case SSL_CB_ACCEPT_LOOP:
+      log << "accept_loop";
+      break;
+    case SSL_CB_ACCEPT_EXIT:
+      log << "accept_exit";
+      break;
+    case SSL_CB_CONNECT_LOOP:
+      log << "connect_loop";
+      break;
+    case SSL_CB_CONNECT_EXIT:
+      log << "connect_exit";
+      break;
+    case SSL_CB_HANDSHAKE_START:
+      log << "handshake_start";
+      break;
+    case SSL_CB_HANDSHAKE_DONE:
+      log << "handshake_done";
+      break;
+    default:
+      log << "<unknown>";
   }
-  if (where & SSL_CB_LOOP) {
-    RTC_DLOG(LS_VERBOSE) << str << ":" << SSL_state_string_long(s);
-  } else if (where & SSL_CB_ALERT) {
-    str = (where & SSL_CB_READ) ? "read" : "write";
-    RTC_DLOG(LS_INFO) << "SSL3 alert " << str << ":"
-                      << SSL_alert_type_string_long(ret) << ":"
-                      << SSL_alert_desc_string_long(ret);
-  } else if (where & SSL_CB_EXIT) {
-    if (ret == 0) {
-      RTC_DLOG(LS_INFO) << str << ":failed in " << SSL_state_string_long(s);
-    } else if (ret < 0) {
-      RTC_DLOG(LS_INFO) << str << ":error in " << SSL_state_string_long(s);
-    }
-  }
+  log << SSL_state_string_long(s);
+  RTC_LOG(LS_INFO) << log.str();
 }
-
-#endif
 
 #ifdef WEBRTC_USE_CRYPTO_BUFFER_CALLBACK
 // static
