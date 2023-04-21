@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b950552_f8ae1a5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8178
+      },
+      "writtenOn": "2023-04-21T09:49:32Z",
+      "side": 1,
+      "message": "I see ManyCam mentioned in CI, I guess it can handle multiple simultaneous clients. I\u0027ve removed the assumption from the tes that simultaneously streaming the camera should fail. There won\u0027t be much useful coverage in CI then, but locally with a physical device it should work. Feel free to submit to CQ again.",
+      "revId": "82e721bdf87cc620e6bd4d8d9e2f3698d7a30fa2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
