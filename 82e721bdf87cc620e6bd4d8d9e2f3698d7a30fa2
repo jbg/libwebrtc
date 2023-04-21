@@ -16,6 +16,23 @@
       "message": "I see ManyCam mentioned in CI, I guess it can handle multiple simultaneous clients. I\u0027ve removed the assumption from the tes that simultaneously streaming the camera should fail. There won\u0027t be much useful coverage in CI then, but locally with a physical device it should work. Feel free to submit to CQ again.",
       "revId": "82e721bdf87cc620e6bd4d8d9e2f3698d7a30fa2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e8c8130_7c11747f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-04-21T12:00:29Z",
+      "side": 1,
+      "message": "Please don\u0027t remove Per from reviewers. Since you don\u0027t have a @webrtc.org account, the CL will need two CR+1 votes.",
+      "revId": "82e721bdf87cc620e6bd4d8d9e2f3698d7a30fa2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
