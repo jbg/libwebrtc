@@ -16,6 +16,46 @@
       "message": "Please?",
       "revId": "0e69201152302cb8c74480c54abed26705594059",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6ced1b6_e2b6062f",
+        "filename": "rtc_base/openssl_adapter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2023-04-21T22:41:54Z",
+      "side": 1,
+      "message": "read and write would probably be too verbose, I would expect those to be logged with every data channel message. May want to exclude loop and \"unknown\" as well. Or at least use a verbose level for the messages we\u0027re less interested in.",
+      "revId": "0e69201152302cb8c74480c54abed26705594059",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a02096e_51c13354",
+        "filename": "rtc_base/openssl_adapter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 993,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2023-04-21T22:41:54Z",
+      "side": 1,
+      "message": "Do we want to uncomment this for OpenSslAdapter as well?",
+      "range": {
+        "startLine": 993,
+        "startChar": 13,
+        "endLine": 993,
+        "endChar": 19
+      },
+      "revId": "0e69201152302cb8c74480c54abed26705594059",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
