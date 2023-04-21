@@ -16,6 +16,23 @@
       "message": "Thanks for the review! I don\u0027t have permissions to send to CQ, could you help me out?",
       "revId": "cedef9a232719cebfd1a34104b5418e559d03b40",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de93b579_6ef8c2c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-04-21T09:03:52Z",
+      "side": 1,
+      "message": "+perkj@ I think this CL might require a second +1, otherwise it might block some imports to downstream projects. Please review.",
+      "revId": "cedef9a232719cebfd1a34104b5418e559d03b40",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
