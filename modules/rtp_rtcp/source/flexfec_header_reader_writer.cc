@@ -195,11 +195,10 @@ bool FlexfecHeaderReader::ReadFecHeader(
 
   // Store "ULPFECized" packet mask info.
   fec_packet->fec_header_size = FlexfecHeaderSize(packet_mask_size);
-  fec_packet->protected_ssrc = protected_ssrc;
-  fec_packet->seq_num_base = seq_num_base;
-  fec_packet->packet_mask_offset = kPacketMaskOffset;
-  fec_packet->packet_mask_size = packet_mask_size;
-
+  fec_packet->protected_ssrcs.push_back(protected_ssrc);
+  fec_packet->seq_num_bases.push_back(seq_num_base);
+  fec_packet->packet_mask_offsets.push_back(kPacketMaskOffset);
+  fec_packet->packet_mask_sizes.push_back(packet_mask_size);
   // In FlexFEC, all media packets are protected in their entirety.
   fec_packet->protection_length =
       fec_packet->pkt->data.size() - fec_packet->fec_header_size;
