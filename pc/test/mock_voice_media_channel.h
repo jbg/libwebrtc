@@ -146,6 +146,12 @@ class MockVoiceMediaChannel : public VoiceMediaChannel {
               (uint32_t ssrc, std::unique_ptr<webrtc::AudioSinkInterface> sink),
               (override));
   MOCK_METHOD(void,
+              SetAudioLevelCallback,
+              (uint32_t ssrc,
+               absl::AnyInvocable<void(webrtc::Timestamp,
+                                       absl::optional<uint8_t>)> callback),
+              (override));
+  MOCK_METHOD(void,
               SetDefaultRawAudioSink,
               (std::unique_ptr<webrtc::AudioSinkInterface> sink),
               (override));

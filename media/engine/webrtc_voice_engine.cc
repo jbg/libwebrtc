@@ -1196,6 +1196,11 @@ class WebRtcVoiceMediaChannel::WebRtcAudioReceiveStream {
     stream_->SetSink(sink.get());
     raw_audio_sink_ = std::move(sink);
   }
+  void SetAudioLevelCallback(
+      absl::AnyInvocable<void(webrtc::Timestamp, absl::optional<uint8_t>)>
+          callback) {
+    return stream_->SetAudioLevelCallback(std::move(callback));
+  }
 
   void SetOutputVolume(double volume) {
     RTC_DCHECK_RUN_ON(&worker_thread_checker_);
@@ -2501,8 +2506,8 @@ void WebRtcVoiceMediaChannel::SetRawAudioSink(
     uint32_t ssrc,
     std::unique_ptr<webrtc::AudioSinkInterface> sink) {
   RTC_DCHECK_RUN_ON(worker_thread_);
-  RTC_LOG(LS_VERBOSE) << "WebRtcVoiceMediaChannel::SetRawAudioSink: ssrc:"
-                      << ssrc << " " << (sink ? "(ptr)" : "NULL");
+  RTC_DLOG(LS_VERBOSE) << "WebRtcVoiceMediaChannel::SetRawAudioSink: ssrc:"
+                       << ssrc << " " << (sink ? "(ptr)" : "NULL");
   const auto it = recv_streams_.find(ssrc);
   if (it == recv_streams_.end()) {
     RTC_LOG(LS_WARNING) << "SetRawAudioSink: no recv stream " << ssrc;
@@ -2510,11 +2515,22 @@ void WebRtcVoiceMediaChannel::SetRawAudioSink(
   }
   it->second->SetRawAudioSink(std::move(sink));
 }
+void WebRtcVoiceMediaChannel::SetAudioLevelCallback(
+    uint32_t ssrc,
+    absl::AnyInvocable<void(webrtc::Timestamp, absl::optional<uint8_t>)>
+        callback) {
+  const auto it = recv_streams_.find(ssrc);
+  if (it == recv_streams_.end()) {
+    RTC_LOG(LS_WARNING) << "SetRawAudioSink: no recv stream " << ssrc;
+    return;
+  }
+  it->second->SetAudioLevelCallback(std::move(callback));
+}
 
 void WebRtcVoiceMediaChannel::SetDefaultRawAudioSink(
     std::unique_ptr<webrtc::AudioSinkInterface> sink) {
   RTC_DCHECK_RUN_ON(worker_thread_);
-  RTC_LOG(LS_VERBOSE) << "WebRtcVoiceMediaChannel::SetDefaultRawAudioSink:";
+  RTC_DLOG(LS_VERBOSE) << "WebRtcVoiceMediaChannel::SetDefaultRawAudioSink:";
   if (!unsignaled_recv_ssrcs_.empty()) {
     std::unique_ptr<webrtc::AudioSinkInterface> proxy_sink(
         sink ? new ProxySink(sink.get()) : nullptr);
