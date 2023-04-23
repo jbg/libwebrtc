@@ -226,6 +226,10 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
   void SetRawAudioSink(
       uint32_t ssrc,
       std::unique_ptr<webrtc::AudioSinkInterface> sink) override;
+  void SetAudioLevelCallback(
+      uint32_t ssrc,
+      absl::AnyInvocable<void(webrtc::Timestamp, absl::optional<uint8_t>)>
+          callback) override;
   // Will set the audio sink on the latest unsignaled stream, future or
   // current. Only one stream at a time will use the sink.
   void SetDefaultRawAudioSink(

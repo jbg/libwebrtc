@@ -349,6 +349,12 @@ void AudioReceiveStreamImpl::SetSink(AudioSinkInterface* sink) {
   channel_receive_->SetSink(sink);
 }
 
+void AudioReceiveStreamImpl::SetAudioLevelCallback(
+    absl::AnyInvocable<void(Timestamp, absl::optional<uint8_t>)> callback) {
+  RTC_DCHECK_RUN_ON(&worker_thread_checker_);
+  source_tracker_.SetAudioLevelCallback(remote_ssrc(), std::move(callback));
+}
+
 void AudioReceiveStreamImpl::SetGain(float gain) {
   RTC_DCHECK_RUN_ON(&worker_thread_checker_);
   channel_receive_->SetChannelOutputVolumeScaling(gain);
