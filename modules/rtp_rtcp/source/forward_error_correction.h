@@ -18,6 +18,7 @@
 #include <memory>
 #include <vector>
 
+#include "absl/container/inlined_vector.h"
 #include "api/scoped_refptr.h"
 #include "api/units/timestamp.h"
 #include "modules/include/module_fec_types.h"
@@ -126,16 +127,20 @@ class ForwardErrorCorrection {
     ReceivedFecPacket();
     ~ReceivedFecPacket();
 
+    // SSRC count is retreived from the RTP header's CSRC count field (4 bits).
+    static constexpr size_t kMaxSsrcsNum = 15;
+
     // List of media packets that this FEC packet protects.
     ProtectedPacketList protected_packets;
     // RTP header fields.
     uint32_t ssrc;
     // FEC header fields.
     size_t fec_header_size;
-    uint32_t protected_ssrc;
-    uint16_t seq_num_base;
-    size_t packet_mask_offset;  // Relative start of FEC header.
-    size_t packet_mask_size;
+    absl::InlinedVector<uint32_t, kMaxSsrcsNum> protected_ssrcs;
+    absl::InlinedVector<uint16_t, kMaxSsrcsNum> seq_num_bases;
+    absl::InlinedVector<size_t, kMaxSsrcsNum>
+        packet_mask_offsets;  // Relative start of FEC header.
+    absl::InlinedVector<size_t, kMaxSsrcsNum> packet_mask_sizes;
     size_t protection_length;
     // Raw data.
     rtc::scoped_refptr<ForwardErrorCorrection::Packet> pkt;
