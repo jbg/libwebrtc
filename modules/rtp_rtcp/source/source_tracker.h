@@ -17,6 +17,7 @@
 #include <utility>
 #include <vector>
 
+#include "absl/functional/any_invocable.h"
 #include "absl/types/optional.h"
 #include "api/rtp_packet_infos.h"
 #include "api/task_queue/pending_task_safety_flag.h"
@@ -59,6 +60,11 @@ class SourceTracker {
   // Returns the current audio level for a remote source or absl::nullopt if no
   // data exists (e.g has expired or hasn't been received).
   absl::optional<uint8_t> GetAudioLevel(uint32_t ssrc) const;
+
+  void SetAudioLevelCallback(
+      uint32_t ssrc,
+      absl::AnyInvocable<void(Timestamp, absl::optional<uint8_t>)>
+          level_callback);
 
  private:
   struct SourceKey {
@@ -140,6 +146,12 @@ class SourceTracker {
   // pruning in const functions.
   mutable SourceList list_ RTC_GUARDED_BY(worker_thread_);
   mutable SourceMap map_ RTC_GUARDED_BY(worker_thread_);
+  mutable std::unordered_map<
+      SourceKey,
+      absl::AnyInvocable<void(Timestamp, absl::optional<uint8_t>)>,
+      SourceKeyHasher,
+      SourceKeyComparator>
+      level_callbacks_ RTC_GUARDED_BY(worker_thread_);
   ScopedTaskSafety worker_safety_;
 };
 

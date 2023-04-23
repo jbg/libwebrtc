@@ -66,6 +66,11 @@ void SourceTracker::OnFrameDeliveredInternal(
     entry.absolute_capture_time = packet_info.absolute_capture_time();
     entry.local_capture_clock_offset = packet_info.local_capture_clock_offset();
     entry.rtp_timestamp = packet_info.rtp_timestamp();
+
+    auto callback = level_callbacks_.find(key);
+    if (callback != level_callbacks_.end()) {
+      callback->second(entry.timestamp, entry.audio_level);
+    }
   }
 
   PruneEntries(now);
@@ -108,6 +113,19 @@ absl::optional<uint8_t> SourceTracker::GetAudioLevel(uint32_t ssrc) const {
   return entry.audio_level;
 }
 
+void SourceTracker::SetAudioLevelCallback(
+    uint32_t ssrc,
+    absl::AnyInvocable<void(Timestamp, absl::optional<uint8_t>)>
+        level_callback) {
+  RTC_DCHECK_RUN_ON(worker_thread_);
+  SourceKey key(RtpSourceType::SSRC, ssrc);
+  if (level_callback) {
+    level_callbacks_.emplace(key, std::move(level_callback));
+  } else {
+    level_callbacks_.erase(key);
+  }
+}
+
 SourceTracker::SourceEntry& SourceTracker::UpdateEntry(const SourceKey& key) {
   // We intentionally do |find() + emplace()|, instead of checking the return
   // value of `emplace()`, for performance reasons. It's much more likely for
@@ -128,6 +146,13 @@ SourceTracker::SourceEntry& SourceTracker::UpdateEntry(const SourceKey& key) {
 void SourceTracker::PruneEntries(Timestamp now) const {
   Timestamp prune = now - kTimeout;
   while (!list_.empty() && list_.back().second.timestamp < prune) {
+    if (list_.back().first.source_type == RtpSourceType::SSRC) {
+      auto callback = level_callbacks_.find(list_.back().first);
+      if (callback != level_callbacks_.end()) {
+        callback->second(list_.back().second.timestamp, absl::nullopt);
+      }
+    }
+
     map_.erase(list_.back().first);
     list_.pop_back();
   }
