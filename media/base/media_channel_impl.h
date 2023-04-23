@@ -541,6 +541,13 @@ class VoiceMediaReceiveChannel : public VoiceMediaReceiveChannelInterface {
       std::unique_ptr<webrtc::AudioSinkInterface> sink) override {
     return impl()->SetRawAudioSink(ssrc, std::move(sink));
   }
+  void SetAudioLevelCallback(
+      uint32_t ssrc,
+      absl::AnyInvocable<void(webrtc::Timestamp, absl::optional<uint8_t>)>
+          callback) override {
+    return impl()->SetAudioLevelCallback(ssrc, std::move(callback));
+  }
+
   void SetDefaultRawAudioSink(
       std::unique_ptr<webrtc::AudioSinkInterface> sink) override {
     return impl()->SetDefaultRawAudioSink(std::move(sink));

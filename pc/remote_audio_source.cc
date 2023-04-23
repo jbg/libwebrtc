@@ -78,11 +78,17 @@ void RemoteAudioSource::Start(
   // Register for callbacks immediately before AddSink so that we always get
   // notified when a channel goes out of scope (signaled when "AudioDataProxy"
   // is destroyed).
-  RTC_DCHECK(media_channel);
-  ssrc ? media_channel->SetRawAudioSink(*ssrc,
-                                        std::make_unique<AudioDataProxy>(this))
-       : media_channel->SetDefaultRawAudioSink(
-             std::make_unique<AudioDataProxy>(this));
+  auto proxy = std::make_unique<AudioDataProxy>(this);
+  if (ssrc) {
+    media_channel->SetRawAudioSink(*ssrc, std::move(proxy));
+    media_channel->SetAudioLevelCallback(
+        *ssrc, [this](Timestamp ts, absl::optional<uint8_t> level) {
+          RTC_DCHECK_RUN_ON(worker_thread_);
+          RTC_LOG(LS_ERROR) << "TODO handle levels";
+        });
+  } else {
+    media_channel->SetDefaultRawAudioSink(std::move(proxy));
+  }
 }
 
 void RemoteAudioSource::Stop(
@@ -90,8 +96,12 @@ void RemoteAudioSource::Stop(
     absl::optional<uint32_t> ssrc) {
   RTC_DCHECK_RUN_ON(worker_thread_);
   RTC_DCHECK(media_channel);
-  ssrc ? media_channel->SetRawAudioSink(*ssrc, nullptr)
-       : media_channel->SetDefaultRawAudioSink(nullptr);
+  if (ssrc) {
+    media_channel->SetRawAudioSink(*ssrc, nullptr);
+    media_channel->SetAudioLevelCallback(*ssrc, nullptr);
+  } else {
+    media_channel->SetDefaultRawAudioSink(nullptr);
+  }
 }
 
 void RemoteAudioSource::SetState(SourceState new_state) {
