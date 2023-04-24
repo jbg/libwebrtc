@@ -50,6 +50,23 @@
       "message": "Small, long overdue cleanup, need a second +1",
       "revId": "f634b3f61dc828ed40d749d58bccc3c647912a5c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cc65193_82f79bf9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-04-24T16:11:14Z",
+      "side": 1,
+      "message": "Nice!",
+      "revId": "f634b3f61dc828ed40d749d58bccc3c647912a5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
