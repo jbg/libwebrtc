@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e193bbf_e51f2dc4",
+        "filename": "video/full_stack_tests.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 747,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2023-04-24T06:03:50Z",
+      "side": 1,
+      "message": "nit: can\u0027t these be left at default values then?",
+      "range": {
+        "startLine": 746,
+        "startChar": 0,
+        "endLine": 747,
+        "endChar": 41
+      },
+      "revId": "4c497e1924ec0757cb3cce228a297785750e1767",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
