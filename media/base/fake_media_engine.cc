@@ -201,6 +201,10 @@ void FakeVoiceMediaChannel::SetRawAudioSink(
     std::unique_ptr<webrtc::AudioSinkInterface> sink) {
   sink_ = std::move(sink);
 }
+void FakeVoiceMediaChannel::SetAudioLevelCallback(
+    absl::optional<uint32_t> ssrc,
+    absl::AnyInvocable<void(webrtc::Timestamp, absl::optional<uint8_t>)>
+        callback) {}
 void FakeVoiceMediaChannel::SetDefaultRawAudioSink(
     std::unique_ptr<webrtc::AudioSinkInterface> sink) {
   sink_ = std::move(sink);
