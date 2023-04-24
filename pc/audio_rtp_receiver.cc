@@ -327,8 +327,10 @@ void AudioRtpReceiver::SetMediaChannel(
   RTC_DCHECK_RUN_ON(worker_thread_);
   RTC_DCHECK(media_channel == nullptr ||
              media_channel->media_type() == media_type());
-  if (!media_channel && media_channel_)
+  if (!media_channel && media_channel_) {
     SetOutputVolume_w(0.0);
+    source_->Stop(media_channel_, signaled_ssrc_);
+  }
 
   media_channel ? worker_thread_safety_->SetAlive()
                 : worker_thread_safety_->SetNotAlive();
