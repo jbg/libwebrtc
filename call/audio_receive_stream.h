@@ -16,6 +16,7 @@
 #include <string>
 #include <vector>
 
+#include "absl/functional/any_invocable.h"
 #include "absl/types/optional.h"
 #include "api/audio_codecs/audio_decoder_factory.h"
 #include "api/call/transport.h"
@@ -180,6 +181,11 @@ class AudioReceiveStreamInterface : public MediaReceiveStreamInterface {
   // is being pulled+rendered and/or if audio is being pulled for the purposes
   // of feeding to the AEC.
   virtual void SetSink(AudioSinkInterface* sink) = 0;
+
+  // TODO(tommi): document.
+  virtual void SetAudioLevelCallback(
+      absl::AnyInvocable<void(Timestamp, absl::optional<uint8_t>)>
+          callback) = 0;
 
   // Sets playback gain of the stream, applied when mixing, and thus after it
   // is potentially forwarded to any attached AudioSinkInterface implementation.
