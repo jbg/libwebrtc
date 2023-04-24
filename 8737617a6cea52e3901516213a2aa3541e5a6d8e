@@ -34,6 +34,24 @@
       "parentUuid": "bdb44dcd_81f52951",
       "revId": "8737617a6cea52e3901516213a2aa3541e5a6d8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12aa13a5_bb065403",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-04-24T05:44:24Z",
+      "side": 1,
+      "message": "It can be - I\u0027d just like Jonas to double check this since it\u0027s a bit surprising to me that the signal wasn\u0027t already being propagated in this function and am wondering if there\u0027s a reason for it.",
+      "parentUuid": "ae1e0780_a28fbb94",
+      "revId": "8737617a6cea52e3901516213a2aa3541e5a6d8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
