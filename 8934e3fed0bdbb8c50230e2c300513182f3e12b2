@@ -22,6 +22,30 @@
       },
       "revId": "8934e3fed0bdbb8c50230e2c300513182f3e12b2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19706dc1_80d7c3bd",
+        "filename": "modules/audio_device/include/test_audio_device_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2023-04-24T12:50:19Z",
+      "side": 1,
+      "message": "ASSERT can\u0027t be used in method that have to return value.",
+      "parentUuid": "1fc99025_51ec986e",
+      "range": {
+        "startLine": 227,
+        "startChar": 14,
+        "endLine": 227,
+        "endChar": 30
+      },
+      "revId": "8934e3fed0bdbb8c50230e2c300513182f3e12b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
