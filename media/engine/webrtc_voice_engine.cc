@@ -1196,6 +1196,15 @@ class WebRtcVoiceMediaChannel::WebRtcAudioReceiveStream {
     stream_->SetSink(sink.get());
     raw_audio_sink_ = std::move(sink);
   }
+  void SetAudioLevelCallback(
+      absl::AnyInvocable<void(webrtc::Timestamp, absl::optional<uint8_t>)>
+          callback) {
+    stream_->SetAudioLevelCallback(std::move(callback));
+  }
+  absl::AnyInvocable<void(webrtc::Timestamp, absl::optional<uint8_t>)>
+  RemoveAudioLevelCallback() {
+    return stream_->RemoveAudioLevelCallback();
+  }
 
   void SetOutputVolume(double volume) {
     RTC_DCHECK_RUN_ON(&worker_thread_checker_);
@@ -1241,8 +1250,8 @@ class WebRtcVoiceMediaChannel::WebRtcAudioReceiveStream {
 
  private:
   webrtc::SequenceChecker worker_thread_checker_;
-  webrtc::Call* call_ = nullptr;
-  webrtc::AudioReceiveStreamInterface* const stream_ = nullptr;
+  webrtc::Call* const call_;
+  webrtc::AudioReceiveStreamInterface* const stream_;
   std::unique_ptr<webrtc::AudioSinkInterface> raw_audio_sink_
       RTC_GUARDED_BY(worker_thread_checker_);
 };
@@ -1967,6 +1976,10 @@ bool WebRtcVoiceMediaChannel::RemoveRecvStream(uint32_t ssrc) {
   MaybeDeregisterUnsignaledRecvStream(ssrc);
 
   it->second->SetRawAudioSink(nullptr);
+  auto cb = it->second->RemoveAudioLevelCallback();
+  if (cb && GetUnsignaledSsrc()) {
+    default_level_callback_ = std::move(cb);
+  }
   delete it->second;
   recv_streams_.erase(it);
   return true;
@@ -2205,6 +2218,18 @@ bool WebRtcVoiceMediaChannel::MaybeCreateDefaultReceiveStream(
     RTC_LOG(LS_WARNING) << "Could not create unsignaled receive stream.";
     return false;
   }
+
+  absl::optional<uint32_t> previous_unsignaled_ssrc = GetUnsignaledSsrc();
+  if (previous_unsignaled_ssrc) {
+    RTC_DCHECK(!default_level_callback_);
+    const auto it = recv_streams_.find(*previous_unsignaled_ssrc);
+    // Audio callbacks can only be attached to one stream at a time, so we hook
+    // it up to the *latest* unsignaled stream we've seen. Here we clear
+    // previously set callbacks before assigning them to the latest ssrc.
+    default_level_callback_ = it->second->RemoveAudioLevelCallback();
+    it->second->SetRawAudioSink(nullptr);
+  }
+
   unsignaled_recv_ssrcs_.push_back(ssrc);
   RTC_HISTOGRAM_COUNTS_LINEAR("WebRTC.Audio.NumOfUnsignaledStreams",
                               unsignaled_recv_ssrcs_.size(), 1, 100, 101);
@@ -2221,18 +2246,17 @@ bool WebRtcVoiceMediaChannel::MaybeCreateDefaultReceiveStream(
   SetOutputVolume(ssrc, default_recv_volume_);
   SetBaseMinimumPlayoutDelayMs(ssrc, default_recv_base_minimum_delay_ms_);
 
-  // The default sink can only be attached to one stream at a time, so we hook
-  // it up to the *latest* unsignaled stream we've seen, in order to support
-  // the case where the SSRC of one unsignaled stream changes.
   if (default_sink_) {
-    for (uint32_t drop_ssrc : unsignaled_recv_ssrcs_) {
-      auto it = recv_streams_.find(drop_ssrc);
-      it->second->SetRawAudioSink(nullptr);
-    }
     std::unique_ptr<webrtc::AudioSinkInterface> proxy_sink(
         new ProxySink(default_sink_.get()));
     SetRawAudioSink(ssrc, std::move(proxy_sink));
   }
+
+  if (default_level_callback_) {
+    const auto it = recv_streams_.find(ssrc);
+    it->second->SetAudioLevelCallback(std::move(default_level_callback_));
+  }
+
   return true;
 }
 
@@ -2501,8 +2525,8 @@ void WebRtcVoiceMediaChannel::SetRawAudioSink(
     uint32_t ssrc,
     std::unique_ptr<webrtc::AudioSinkInterface> sink) {
   RTC_DCHECK_RUN_ON(worker_thread_);
-  RTC_LOG(LS_VERBOSE) << "WebRtcVoiceMediaChannel::SetRawAudioSink: ssrc:"
-                      << ssrc << " " << (sink ? "(ptr)" : "NULL");
+  RTC_DLOG(LS_VERBOSE) << "WebRtcVoiceMediaChannel::SetRawAudioSink: ssrc:"
+                       << ssrc << " " << (sink ? "(ptr)" : "NULL");
   const auto it = recv_streams_.find(ssrc);
   if (it == recv_streams_.end()) {
     RTC_LOG(LS_WARNING) << "SetRawAudioSink: no recv stream " << ssrc;
@@ -2514,13 +2538,47 @@ void WebRtcVoiceMediaChannel::SetRawAudioSink(
 void WebRtcVoiceMediaChannel::SetDefaultRawAudioSink(
     std::unique_ptr<webrtc::AudioSinkInterface> sink) {
   RTC_DCHECK_RUN_ON(worker_thread_);
-  RTC_LOG(LS_VERBOSE) << "WebRtcVoiceMediaChannel::SetDefaultRawAudioSink:";
+  RTC_DLOG(LS_VERBOSE) << "WebRtcVoiceMediaChannel::SetDefaultRawAudioSink:";
   if (!unsignaled_recv_ssrcs_.empty()) {
     std::unique_ptr<webrtc::AudioSinkInterface> proxy_sink(
         sink ? new ProxySink(sink.get()) : nullptr);
     SetRawAudioSink(unsignaled_recv_ssrcs_.back(), std::move(proxy_sink));
   }
   default_sink_ = std::move(sink);
+}
+
+void WebRtcVoiceMediaChannel::SetAudioLevelCallback(
+    absl::optional<uint32_t> ssrc,
+    absl::AnyInvocable<void(webrtc::Timestamp, absl::optional<uint8_t>)>
+        callback) {
+  WebRtcAudioReceiveStream* stream = nullptr;
+  if (!ssrc) {
+    ssrc = GetUnsignaledSsrc();
+    if (!ssrc) {
+      default_level_callback_ = std::move(callback);
+      return;
+    }
+    auto it = recv_streams_.find(*ssrc);
+    RTC_DCHECK(it != recv_streams_.end()) << "We should have a receive stream";
+    stream = it->second;
+  } else {
+    auto it = recv_streams_.find(*ssrc);
+    if (it != recv_streams_.end())
+      stream = it->second;
+  }
+
+  RTC_DCHECK(!default_level_callback_);
+
+  if (!stream) {
+    RTC_LOG(LS_WARNING) << "No matching receive stream.";
+    return;
+  }
+
+  if (callback) {
+    stream->SetAudioLevelCallback(std::move(callback));
+  } else {
+    stream->RemoveAudioLevelCallback();
+  }
 }
 
 std::vector<webrtc::RtpSource> WebRtcVoiceMediaChannel::GetSources(
