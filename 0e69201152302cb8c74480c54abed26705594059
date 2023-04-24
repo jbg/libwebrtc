@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0007fae1_d7e96e14",
+        "filename": "rtc_base/openssl_adapter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-04-24T18:52:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6ced1b6_e2b6062f",
+      "revId": "0e69201152302cb8c74480c54abed26705594059",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a02096e_51c13354",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-04-21T22:41:54Z",
       "side": 1,
       "message": "Do we want to uncomment this for OpenSslAdapter as well?",
+      "range": {
+        "startLine": 993,
+        "startChar": 13,
+        "endLine": 993,
+        "endChar": 19
+      },
+      "revId": "0e69201152302cb8c74480c54abed26705594059",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19262c70_e31a1a55",
+        "filename": "rtc_base/openssl_adapter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 993,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-04-24T18:52:18Z",
+      "side": 1,
+      "message": "When is this code used? I thought we only use openssl_stream_adapter.cc.",
+      "parentUuid": "3a02096e_51c13354",
       "range": {
         "startLine": 993,
         "startChar": 13,
