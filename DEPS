@@ -2713,12 +2713,20 @@ include_rules = [
   "+absl/strings/escaping.h",
   "+absl/strings/match.h",
   "+absl/strings/str_replace.h",
-  "+absl/strings/string_view.h",
   "+absl/types/optional.h",
   "+absl/types/variant.h",
 
   # Abseil flags are allowed in tests and tools.
   "+absl/flags",
+
+  # TODO(bugs.webrc.org/15121): Block string_view when migration is complete.
+  # Abseil blocklist.
+  "+absl/strings/string_view.h",
+  "-absl/strings/str_cat.h",
+  "-absl/strings/str_join.h",
+  "-absl/strings/str_split.h",
+  "-absl/synchronization/mutex.h",
+  "-absl/types/span.h",
 ]
 
 specific_include_rules = {
