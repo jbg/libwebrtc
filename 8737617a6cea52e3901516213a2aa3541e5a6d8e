@@ -88,6 +88,23 @@
       "tag": "mailMessageId\u003d\u003cCAECWRdfscK1v-kTaEtBa0cS\u003dTAY37r8Ff45xQtjt-EW-wLDuww@mail.gmail.com\u003e",
       "revId": "8737617a6cea52e3901516213a2aa3541e5a6d8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "488fb4ae_80c37b8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-04-24T16:16:10Z",
+      "side": 1,
+      "message": "Looking at the code,\nTo me it seems like UpdateNetworksOnce will trigger the SignalNetworksChanged()\n\nUnder which condition is it that that does not happen ?",
+      "revId": "8737617a6cea52e3901516213a2aa3541e5a6d8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
