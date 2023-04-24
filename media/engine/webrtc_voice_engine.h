@@ -230,6 +230,10 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
   // current. Only one stream at a time will use the sink.
   void SetDefaultRawAudioSink(
       std::unique_ptr<webrtc::AudioSinkInterface> sink) override;
+  void SetAudioLevelCallback(
+      absl::optional<uint32_t> ssrc,
+      absl::AnyInvocable<void(webrtc::Timestamp, absl::optional<uint8_t>)>
+          callback) override;
 
   std::vector<webrtc::RtpSource> GetSources(uint32_t ssrc) const override;
 
@@ -328,6 +332,8 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
 
   // Sink for latest unsignaled stream - may be set before the stream exists.
   std::unique_ptr<webrtc::AudioSinkInterface> default_sink_;
+  absl::AnyInvocable<void(webrtc::Timestamp, absl::optional<uint8_t>)>
+      default_level_callback_;
   // Default SSRC to use for RTCP receiver reports in case of no signaled
   // send streams. See: https://code.google.com/p/webrtc/issues/detail?id=4740
   // and https://code.google.com/p/chromium/issues/detail?id=547661
