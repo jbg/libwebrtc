@@ -31,7 +31,6 @@ will generate a shared library.
 * `absl::InlinedVector`
 * `absl::WrapUnique`
 * `absl::optional` and related stuff from `absl/types/optional.h`.
-* `absl::string_view`
 * The functions in `absl/strings/ascii.h`, `absl/strings/match.h`,
   and `absl/strings/str_replace.h`.
 * The functions in `absl/strings/escaping.h`.
@@ -74,6 +73,10 @@ before C++20 is finalized. We should just keep using `rtc::ArrayView`
 and avoid `absl::Span` until C++20 is finalized and the Abseil team
 has decided if they will change `absl::Span` to match.
 [Bug](https://bugs.webrtc.org/9214).
+
+### `absl::string_view`
+
+*Use `std::string_view` instead.*
 
 ### `absl::StrCat`, `absl::StrAppend`, `absl::StrJoin`, `absl::StrSplit`
 
