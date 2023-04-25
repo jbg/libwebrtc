@@ -25,9 +25,11 @@ class TransformableVideoReceiverFrame
     : public TransformableVideoFrameInterface {
  public:
   TransformableVideoReceiverFrame(std::unique_ptr<RtpFrameObject> frame,
-                                  uint32_t ssrc)
+                                  uint32_t ssrc,
+                                  RtpVideoFrameReceiver* receiver)
       : frame_(std::move(frame)),
-        metadata_(frame_->GetRtpVideoHeader().GetAsMetadata()) {
+        metadata_(frame_->GetRtpVideoHeader().GetAsMetadata()),
+        receiver_(receiver) {
     metadata_.SetSsrc(ssrc);
     metadata_.SetCsrcs(frame_->Csrcs());
   }
@@ -64,9 +66,12 @@ class TransformableVideoReceiverFrame
 
   Direction GetDirection() const override { return Direction::kReceiver; }
 
+  const RtpVideoFrameReceiver* Receiver() { return receiver_; }
+
  private:
   std::unique_ptr<RtpFrameObject> frame_;
   VideoFrameMetadata metadata_;
+  RtpVideoFrameReceiver* receiver_;
 };
 }  // namespace
 
@@ -98,8 +103,8 @@ void RtpVideoStreamReceiverFrameTransformerDelegate::TransformFrame(
     std::unique_ptr<RtpFrameObject> frame) {
   RTC_DCHECK_RUN_ON(&network_sequence_checker_);
   frame_transformer_->Transform(
-      std::make_unique<TransformableVideoReceiverFrame>(std::move(frame),
-                                                        ssrc_));
+      std::make_unique<TransformableVideoReceiverFrame>(std::move(frame), ssrc_,
+                                                        receiver_));
 }
 
 void RtpVideoStreamReceiverFrameTransformerDelegate::OnTransformedFrame(
@@ -121,7 +126,16 @@ void RtpVideoStreamReceiverFrameTransformerDelegate::ManageFrame(
       TransformableFrameInterface::Direction::kReceiver) {
     auto transformed_frame = absl::WrapUnique(
         static_cast<TransformableVideoReceiverFrame*>(frame.release()));
-    receiver_->ManageFrame(std::move(*transformed_frame).ExtractFrame());
+    auto frame_receiver = transformed_frame->Receiver();
+    std::unique_ptr<RtpFrameObject> frame_object =
+        std::move(*transformed_frame).ExtractFrame();
+    if (frame_receiver != receiver_) {
+      // From a different receiver! Set first and last sequence number to frame
+      // id.
+      frame_object->SetFirstSeqNum(frame_object->Id());
+      frame_object->SetLastSeqNum(frame_object->Id());
+    }
+    receiver_->ManageFrame(std::move(frame_object));
   } else {
     RTC_CHECK_EQ(frame->GetDirection(),
                  TransformableFrameInterface::Direction::kSender);
