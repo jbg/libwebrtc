@@ -105,6 +105,24 @@
       "message": "Looking at the code,\nTo me it seems like UpdateNetworksOnce will trigger the SignalNetworksChanged()\n\nUnder which condition is it that that does not happen ?",
       "revId": "8737617a6cea52e3901516213a2aa3541e5a6d8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa31f4e7_564e7b37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15839
+      },
+      "writtenOn": "2023-04-25T01:37:32Z",
+      "side": 1,
+      "message": "If testing on Android or iOS, if the network is disconnected for more than a certain amount of time (e.g. 30 seconds), and the network is later restored (with a new network), although the network status has clearly changed, ICE regather does not obtain a new address. If tracing back, it is found that UpdateNetworksOnce did not trigger SignalNetworksChanged.",
+      "parentUuid": "488fb4ae_80c37b8c",
+      "revId": "8737617a6cea52e3901516213a2aa3541e5a6d8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
