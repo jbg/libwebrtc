@@ -67,6 +67,23 @@
       "message": "Nice!",
       "revId": "f634b3f61dc828ed40d749d58bccc3c647912a5c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "138e0ec8_7da74b59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-04-25T07:39:25Z",
+      "side": 1,
+      "message": "GICE shall hereafter be interpreted as \"gone ice\"!",
+      "revId": "f634b3f61dc828ed40d749d58bccc3c647912a5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
