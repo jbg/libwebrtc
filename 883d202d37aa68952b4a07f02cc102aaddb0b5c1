@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba708bfd_aa46c567",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14634
+      },
+      "writtenOn": "2023-04-25T01:19:17Z",
+      "side": 1,
+      "message": "to be landed only after the rest of the formatting diffs have landed",
+      "revId": "883d202d37aa68952b4a07f02cc102aaddb0b5c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
