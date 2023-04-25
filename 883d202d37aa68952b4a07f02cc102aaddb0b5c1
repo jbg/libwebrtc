@@ -39,6 +39,30 @@
       },
       "revId": "883d202d37aa68952b4a07f02cc102aaddb0b5c1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "925dc422_770379a6",
+        "filename": "codereview.settings",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 14634
+      },
+      "writtenOn": "2023-04-25T18:01:02Z",
+      "side": 1,
+      "message": "yeah, that\u0027s valid. However, I expect it to be rare enough that a DEPS roll leads to more than a few lines formatted differently. \n\nOne solution could be to have autoroller run a full format whenever incrementing the DEPS. Another could be some other bot which periodically checks and submits a reformat if needed.\n\nBut... I think in reality, it will be rare enough that manual fixing is totally fine. \nHow about, I\u0027ll promise to submit a new full reformat the first time this happens, and if it happens a second time we\u0027ll turn it off/create a better solution?  :)\n\nFor reference on speed of change: https://github.com/llvm/llvm-project/commits/main/clang/lib/Format",
+      "parentUuid": "c36205f3_45ee701b",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 28
+      },
+      "revId": "883d202d37aa68952b4a07f02cc102aaddb0b5c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
