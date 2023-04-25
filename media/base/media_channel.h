@@ -32,6 +32,7 @@
 #include "api/transport/data_channel_transport_interface.h"
 #include "api/transport/rtp/rtp_source.h"
 #include "api/units/time_delta.h"
+#include "api/units/timestamp.h"
 #include "api/video/video_content_type.h"
 #include "api/video/video_sink_interface.h"
 #include "api/video/video_source_interface.h"
@@ -494,6 +495,7 @@ struct VoiceReceiverInfo : public MediaReceiverInfo {
   int jitter_buffer_preferred_ms = 0;
   int delay_estimate_ms = 0;
   int audio_level = 0;
+  absl::optional<uint8_t> rtp_audio_level;
   // Stats below correspond to similarly-named fields in the WebRTC stats spec.
   // https://w3c.github.io/webrtc-stats/#dom-rtcinboundrtpstreamstats
   double total_output_energy = 0.0;
@@ -911,6 +913,10 @@ class VoiceMediaReceiveChannelInterface : public MediaReceiveChannelInterface {
   virtual void SetRawAudioSink(
       uint32_t ssrc,
       std::unique_ptr<webrtc::AudioSinkInterface> sink) = 0;
+  virtual void SetAudioLevelCallback(
+      absl::optional<uint32_t> ssrc,
+      absl::AnyInvocable<void(webrtc::Timestamp, absl::optional<uint8_t>)>
+          callback) = 0;
   virtual void SetDefaultRawAudioSink(
       std::unique_ptr<webrtc::AudioSinkInterface> sink) = 0;
   virtual bool GetStats(VoiceMediaReceiveInfo* stats, bool reset_legacy) = 0;

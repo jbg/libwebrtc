@@ -63,6 +63,8 @@ void SourceTracker::OnFrameDeliveredInternal(
     entry.absolute_capture_time = packet_info.absolute_capture_time();
     entry.local_capture_clock_offset = packet_info.local_capture_clock_offset();
     entry.rtp_timestamp = packet_info.rtp_timestamp();
+
+    FireAudioLevelCallback(key, entry.timestamp, entry.audio_level);
   }
 
   PruneEntries(now);
@@ -89,6 +91,44 @@ std::vector<RtpSource> SourceTracker::GetSources() const {
   return sources;
 }
 
+absl::optional<uint8_t> SourceTracker::GetAudioLevel(uint32_t ssrc) const {
+  RTC_DCHECK_RUN_ON(worker_thread_);
+
+  Timestamp now = clock_->CurrentTime();
+  PruneEntries(now);
+
+  SourceKey key(RtpSourceType::SSRC, ssrc);
+  auto map_it = map_.find(key);
+  if (map_it == map_.end())
+    return absl::nullopt;
+  SourceList::iterator pair = map_it->second;
+  const SourceEntry& entry = pair->second;
+  return entry.audio_level;
+}
+
+void SourceTracker::SetAudioLevelCallback(
+    uint32_t ssrc,
+    absl::AnyInvocable<void(Timestamp, absl::optional<uint8_t>)>
+        level_callback) {
+  RTC_DCHECK_RUN_ON(worker_thread_);
+  RTC_DCHECK(level_callback);
+  SourceKey key(RtpSourceType::SSRC, ssrc);
+  RTC_DCHECK(level_callbacks_.find(key) == level_callbacks_.end());
+  level_callbacks_.emplace(key, std::move(level_callback));
+}
+
+absl::AnyInvocable<void(Timestamp, absl::optional<uint8_t>)>
+SourceTracker::RemoveAudioLevelCallback(uint32_t ssrc) {
+  RTC_DCHECK_RUN_ON(worker_thread_);
+  SourceKey key(RtpSourceType::SSRC, ssrc);
+  auto it = level_callbacks_.find(key);
+  if (it == level_callbacks_.end())
+    return nullptr;
+  auto ret = std::move(it->second);
+  level_callbacks_.erase(it);
+  return ret;
+}
+
 SourceTracker::SourceEntry& SourceTracker::UpdateEntry(const SourceKey& key) {
   // We intentionally do |find() + emplace()|, instead of checking the return
   // value of `emplace()`, for performance reasons. It's much more likely for
@@ -109,9 +149,22 @@ SourceTracker::SourceEntry& SourceTracker::UpdateEntry(const SourceKey& key) {
 void SourceTracker::PruneEntries(Timestamp now) const {
   Timestamp prune = now - kTimeout;
   while (!list_.empty() && list_.back().second.timestamp < prune) {
-    map_.erase(list_.back().first);
+    const auto& key = list_.back().first;
+    if (key.source_type == RtpSourceType::SSRC)
+      FireAudioLevelCallback(key, list_.back().second.timestamp, absl::nullopt);
+
+    map_.erase(key);
     list_.pop_back();
   }
+}
+
+void SourceTracker::FireAudioLevelCallback(
+    const SourceKey& key,
+    Timestamp timestamp,
+    absl::optional<uint8_t> level) const {
+  auto callback = level_callbacks_.find(key);
+  if (callback != level_callbacks_.end())
+    callback->second(timestamp, level);
 }
 
 }  // namespace webrtc

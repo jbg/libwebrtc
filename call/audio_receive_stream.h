@@ -16,6 +16,7 @@
 #include <string>
 #include <vector>
 
+#include "absl/functional/any_invocable.h"
 #include "absl/types/optional.h"
 #include "api/audio_codecs/audio_decoder_factory.h"
 #include "api/call/transport.h"
@@ -48,6 +49,7 @@ class AudioReceiveStreamInterface : public MediaReceiveStreamInterface {
     uint32_t jitter_buffer_preferred_ms = 0;
     uint32_t delay_estimate_ms = 0;
     int32_t audio_level = -1;
+    absl::optional<uint8_t> rtp_audio_level;
     // Stats below correspond to similarly-named fields in the WebRTC stats
     // spec. https://w3c.github.io/webrtc-stats/#dom-rtcmediastreamtrackstats
     double total_output_energy = 0.0;
@@ -179,6 +181,13 @@ class AudioReceiveStreamInterface : public MediaReceiveStreamInterface {
   // is being pulled+rendered and/or if audio is being pulled for the purposes
   // of feeding to the AEC.
   virtual void SetSink(AudioSinkInterface* sink) = 0;
+
+  // TODO(tommi): document.
+  virtual void SetAudioLevelCallback(
+      absl::AnyInvocable<void(Timestamp, absl::optional<uint8_t>)>
+          callback) = 0;
+  virtual absl::AnyInvocable<void(Timestamp, absl::optional<uint8_t>)>
+  RemoveAudioLevelCallback() = 0;
 
   // Sets playback gain of the stream, applied when mixing, and thus after it
   // is potentially forwarded to any attached AudioSinkInterface implementation.
