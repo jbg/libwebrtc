@@ -16,6 +16,29 @@
       "message": "to be landed only after the rest of the formatting diffs have landed",
       "revId": "883d202d37aa68952b4a07f02cc102aaddb0b5c1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c36205f3_45ee701b",
+        "filename": "codereview.settings",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-04-25T06:49:59Z",
+      "side": 1,
+      "message": "Part of me it tempted to land this one.\n\nOne thing I am worried is that X months from now, something in clang-format will change and that will be a change in the DEPS file (pointing to a new version of the compiler tools) and I suspect this will not trigger a full format. From that moment on, all the people touching any file will upload CLs with more changes compared to the ones they wanted to make.\n\nDoes this make sense?",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 28
+      },
+      "revId": "883d202d37aa68952b4a07f02cc102aaddb0b5c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
