@@ -123,6 +123,24 @@
       "parentUuid": "488fb4ae_80c37b8c",
       "revId": "8737617a6cea52e3901516213a2aa3541e5a6d8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4463d035_e12ffb1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-04-25T06:20:13Z",
+      "side": 1,
+      "message": "ok,\n\nso UpdateNetworksOnce checks 3 conditions before SignalNetworksChanged\n\n1) start_count, this basically means that no one is currently using the object. I.e even if we signal, no one should listen.\n\n(reading this, it sounds racy...but it\u0027s probably not \"your case\")\n\n2) error, there was an error when reading the network list\n\n3) no-change, the code does not detect that there is a change.\n\n---\n\nCan you check which of these conditions you \"hit\",\n\na fix should probably be here instead...\n\n/Jonas",
+      "tag": "mailMessageId\u003d\u003cCAECWRdc8egFvKySfnhAsved2hisseC_s887bkPh05dSae4v9ow@mail.gmail.com\u003e",
+      "revId": "8737617a6cea52e3901516213a2aa3541e5a6d8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
