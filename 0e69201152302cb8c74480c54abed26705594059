@@ -98,6 +98,30 @@
       },
       "revId": "0e69201152302cb8c74480c54abed26705594059",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "134fd7ab_af19a6f1",
+        "filename": "rtc_base/openssl_adapter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 993,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2023-04-25T02:11:59Z",
+      "side": 1,
+      "message": "I forgot, this isn\u0027t used in Chrome but it\u0027s used for connections to TLS TURN servers in native apps. Will leave it up to you.",
+      "parentUuid": "19262c70_e31a1a55",
+      "range": {
+        "startLine": 993,
+        "startChar": 13,
+        "endLine": 993,
+        "endChar": 19
+      },
+      "revId": "0e69201152302cb8c74480c54abed26705594059",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
