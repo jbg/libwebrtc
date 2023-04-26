@@ -284,6 +284,24 @@
       "message": "Can you add a test that exercises the case where this makes a difference?",
       "revId": "8737617a6cea52e3901516213a2aa3541e5a6d8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "befd2701_204ab7e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15839
+      },
+      "writtenOn": "2023-04-26T13:02:18Z",
+      "side": 1,
+      "message": "Hello,\n\nThe test scenario is very simple, two WebRTC clients, Alice and Bob, both use the GATHER_CONTINUALLY mode of the peer connection. After Alice and Bob are connected successfully, the following operations are performed:\n\n1. Keep Alice’s network environment unchanged.\n2. Disconnect Bob’s network until the ice state changes from 2 (connected)-\u003e 4 (fail)-\u003e 5 (disconnect).\n3. Restore Bob’s network.\n\nFor these three steps, if the original WebRTC code is used, Alice and Bob will not be able to restore the connection.\n\nWith the current patch, the ice state will continue to change from 5 to 2, which conforms to the GATHER_CONTINUALLY semantics.\n\nThe relevant key code and logs are provided earlier, and you can analyze them yourself. You can also independently verify the test scenario as described by me.\n\nCombined with the previous records, my description should be detailed enough. The rest needs to be analyzed and verified by everyone, and new ideas and insights are also welcome.",
+      "parentUuid": "5a62e843_18c91b09",
+      "revId": "8737617a6cea52e3901516213a2aa3541e5a6d8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
