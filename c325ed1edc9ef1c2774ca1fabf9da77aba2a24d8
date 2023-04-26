@@ -22,6 +22,23 @@
       },
       "revId": "c325ed1edc9ef1c2774ca1fabf9da77aba2a24d8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "581cbc80_63083c4c",
+        "filename": "modules/rtp_rtcp/source/ulpfec_header_reader_writer_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-04-26T08:17:11Z",
+      "side": 1,
+      "message": "or\nusing ::testing::SizeIs;\n...\nASSERT_THAT(read_packet.protected_ssrcs, SizeIs(1));\n\nthen in case of error the message would include the full array, including its values instead or printing just it\u0027s size.\n\nbetter yet - you can combine Size matcher and element value matcher:\n\nEXPECT_THAT(read_packet.protected_ssrcs, ElementsAre(kMediaSsrc));\n\ninstead of having two matchers:\nASSERT_EQ(read_packet.protected_ssrcs.size(), 1U);\nEXPECT_EQ(kMediaSsrc, read_packet.protected_ssrcs[0]);",
+      "revId": "c325ed1edc9ef1c2774ca1fabf9da77aba2a24d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
