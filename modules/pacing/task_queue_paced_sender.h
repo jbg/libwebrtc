@@ -58,7 +58,8 @@ class TaskQueuePacedSender : public RtpPacketPacer, public RtpPacketSender {
       const FieldTrialsView& field_trials,
       TimeDelta max_hold_back_window,
       int max_hold_back_window_in_packets,
-      absl::optional<TimeDelta> burst_interval = absl::nullopt);
+      absl::optional<TimeDelta> burst_interval = absl::nullopt,
+      TransportSendBatchController* send_batch_controller = nullptr);
 
   ~TaskQueuePacedSender() override;
 
