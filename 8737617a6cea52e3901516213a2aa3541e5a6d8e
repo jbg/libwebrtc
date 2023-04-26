@@ -177,6 +177,24 @@
       "parentUuid": "6c0222a4_958622a1",
       "revId": "8737617a6cea52e3901516213a2aa3541e5a6d8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2065b870_c9366bd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15839
+      },
+      "writtenOn": "2023-04-26T08:25:21Z",
+      "side": 1,
+      "message": "Hello,\n\nThere is some difference, and the problem lies in the different density of SignalNetworksChanged. \n\nIn GATHER_CONTINUALLY mode, when the PC is in ICE disconnect or fail state, the filtered SignalNetworksChanged after UpdateNetworksOnce is too sparse to activate the ICE regathering process, resulting in the inability to enter the ICE connected state even after the network is restored. \n\nThis is the necessity of current bugfix.",
+      "parentUuid": "1a8af74b_6045936c",
+      "revId": "8737617a6cea52e3901516213a2aa3541e5a6d8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
