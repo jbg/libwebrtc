@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56c38096_790ab5a3",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-04-26T08:13:48Z",
+      "side": 1,
+      "message": "2nd parameter isn\u0027t \u0027max size\u0027,  but \u0027max number of elements to store inline\u0027\n\nInlinedVector would store up to \u003c2nd paramter\u003e elements inline, and would become an std::vector underneath if there are more entries.\n\nSo, to avoid spending too much memory here it might be better to use smaller size, so that vector would be inlined in a typical use case and allocate in a rare case when lots of SSRCs are protected.\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/abseil-cpp/absl/container/inlined_vector.h;l\u003d65-67;drc\u003d24b05ec85c4ff3834f894322d1478d2df19d0635\n\n(or do not worry, picking right container might be premature optimization)",
+      "range": {
+        "startLine": 139,
+        "startChar": 34,
+        "endLine": 139,
+        "endChar": 46
+      },
+      "revId": "c325ed1edc9ef1c2774ca1fabf9da77aba2a24d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
