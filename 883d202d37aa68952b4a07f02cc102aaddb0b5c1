@@ -87,6 +87,30 @@
       },
       "revId": "883d202d37aa68952b4a07f02cc102aaddb0b5c1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e23f6dc_304fd867",
+        "filename": "codereview.settings",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-04-26T10:28:16Z",
+      "side": 1,
+      "message": "Can we detect if a DEPS roll modifying clang-format affects the result of clang-format --full and make it submit a CL that 1) fixes all formatting and 2) adds itself to the ignore-this-cl-for-blame file?",
+      "parentUuid": "1c650673_fab03850",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 28
+      },
+      "revId": "883d202d37aa68952b4a07f02cc102aaddb0b5c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
