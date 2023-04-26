@@ -20,6 +20,7 @@
 #include <vector>
 
 #include "absl/types/optional.h"
+#include "api/call/transport.h"
 #include "api/field_trials_view.h"
 #include "api/function_view.h"
 #include "api/transport/field_trial_based_config.h"
@@ -87,6 +88,7 @@ class PacingController {
 
   PacingController(Clock* clock,
                    PacketSender* packet_sender,
+                   TransportSendBatchController* send_batch_controller,
                    const FieldTrialsView& field_trials);
 
   ~PacingController();
@@ -245,6 +247,7 @@ class PacingController {
   bool include_overhead_;
 
   int circuit_breaker_threshold_;
+  TransportSendBatchController* send_batch_controller_;
 };
 }  // namespace webrtc
 

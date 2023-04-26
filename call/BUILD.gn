@@ -115,6 +115,7 @@ rtc_library("rtp_interfaces") {
     "../api:network_state_predictor_api",
     "../api:rtp_headers",
     "../api:rtp_parameters",
+    "../api:transport_api",
     "../api/crypto:options",
     "../api/rtc_event_log",
     "../api/transport:bitrate_settings",
