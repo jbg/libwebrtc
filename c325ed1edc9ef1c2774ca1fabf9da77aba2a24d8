@@ -20,6 +20,63 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e60edcb3_47c9ed25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-04-26T11:15:42Z",
+      "side": 1,
+      "message": "few more nits,\notherwise lg",
+      "revId": "c325ed1edc9ef1c2774ca1fabf9da77aba2a24d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "220b1ec1_5439a901",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-04-26T11:15:42Z",
+      "side": 1,
+      "message": "when comparing for equality, prefer to put variable 1st, constant - 2nd\ni.e. \nRTC_CHECK_EQ(fec_packet-\u003eprotected_ssrcs.size(), 1);\nsame as you would write\nif (fec_packet-\u003eprotected_ssrcs.size() \u003d\u003d 1) {... }",
+      "revId": "c325ed1edc9ef1c2774ca1fabf9da77aba2a24d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a5c00e2_ac4eb912",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-04-26T11:15:42Z",
+      "side": 1,
+      "message": "I think RTC_CHECK_EQ uses compare that is safe when comparing signed and unsigned integers (and as fast), i.e. no need to convert constant to the [U]nsigned.\n\n[unlike EXPECT_EQ - that macro is outside of control of webrtc developers]",
+      "range": {
+        "startLine": 411,
+        "startChar": 15,
+        "endLine": 411,
+        "endChar": 17
+      },
+      "revId": "c325ed1edc9ef1c2774ca1fabf9da77aba2a24d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "56c38096_790ab5a3",
         "filename": "modules/rtp_rtcp/source/forward_error_correction.h",
         "patchSetId": 6
