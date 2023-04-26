@@ -267,6 +267,23 @@
       "parentUuid": "f13bcf32_c4d97d96",
       "revId": "8737617a6cea52e3901516213a2aa3541e5a6d8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a62e843_18c91b09",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-04-26T11:55:11Z",
+      "side": 1,
+      "message": "Can you add a test that exercises the case where this makes a difference?",
+      "revId": "8737617a6cea52e3901516213a2aa3541e5a6d8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
