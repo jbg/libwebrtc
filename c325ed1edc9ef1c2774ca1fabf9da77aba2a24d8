@@ -100,6 +100,29 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b36b1604_3aa00d0d",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-04-26T11:20:41Z",
+      "side": 1,
+      "message": "The size of the 4 new vector, will they always be the same?\n\nIf yes, then it might be safer/cleaner to add single vector,\nsomething like\n\n```\nstruct PickAGoodNameMaybeProtectedStream {\n  uint32_t ssrc;\n  uint16_t seq_num_base;\n  size_t packet_mask_offset;\n  size_t packet_mask_size;\n};\nabsl::InlinedVector\u003cProtectedStream, 2\u003e protected_streams;\n...\n\n.protected_streams \u003d {{.ssrc \u003d fec_packet-\u003essrc,  // Due to RED.\n  .seq_num_base \u003d seq_num_base,\n  .packet_mask_offset \u003d kPacketMaskOffset,\n  .packet_mask_size \u003d packet_mask_size}};\n```",
+      "range": {
+        "startLine": 143,
+        "startChar": 46,
+        "endLine": 143,
+        "endChar": 63
+      },
+      "revId": "c325ed1edc9ef1c2774ca1fabf9da77aba2a24d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "581cbc80_63083c4c",
         "filename": "modules/rtp_rtcp/source/ulpfec_header_reader_writer_unittest.cc",
         "patchSetId": 6
