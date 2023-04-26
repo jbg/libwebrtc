@@ -63,6 +63,30 @@
       },
       "revId": "883d202d37aa68952b4a07f02cc102aaddb0b5c1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c650673_fab03850",
+        "filename": "codereview.settings",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-04-26T07:03:48Z",
+      "side": 1,
+      "message": "\u003e yeah, that\u0027s valid. However, I expect it to be rare enough that a DEPS roll leads to more than a few lines formatted differently. \n\u003e \n\u003e One solution could be to have autoroller run a full format whenever incrementing the DEPS. Another could be some other bot which periodically checks and submits a reformat if needed.\n\u003e \n\u003e But... I think in reality, it will be rare enough that manual fixing is totally fine. \n\u003e How about, I\u0027ll promise to submit a new full reformat the first time this happens, and if it happens a second time we\u0027ll turn it off/create a better solution?  :)\n\u003e \n\u003e For reference on speed of change: https://github.com/llvm/llvm-project/commits/main/clang/lib/Format\n\nSounds good to me. I think a bot that checks periodically and sends out CLs is a better option (keeps the roller simple and without the need to have different folks reviewing it).\n\nSee also https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d15082#c11.",
+      "parentUuid": "925dc422_770379a6",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 28
+      },
+      "revId": "883d202d37aa68952b4a07f02cc102aaddb0b5c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
