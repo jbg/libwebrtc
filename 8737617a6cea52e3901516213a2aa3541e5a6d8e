@@ -213,6 +213,24 @@
       "tag": "mailMessageId\u003d\u003cCAECWRdf4F4UBfP7zJYEY0khQuvnGyCzkQFzvNDqrKhTJ5WWbaA@mail.gmail.com\u003e",
       "revId": "8737617a6cea52e3901516213a2aa3541e5a6d8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0586cdc3_58588b74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15839
+      },
+      "writtenOn": "2023-04-26T09:14:47Z",
+      "side": 1,
+      "message": "There are more than two SignalNetworksChanged events, and I am not sure which SignalNetworksChanged event activated the ICE gather and the subsequent process. \n\nBut from my testing, it seems that the limited number of SignalNetworksChanged events filtered by UpdateNetworksOnce may miss the opportunity to activate the ICE gather. \n\nOn the other hand, the subsequent regather scheduler eats up repeated calls, so we don’t need to worry about calling costs.",
+      "parentUuid": "67b3841f_ef4cdb4f",
+      "revId": "8737617a6cea52e3901516213a2aa3541e5a6d8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
