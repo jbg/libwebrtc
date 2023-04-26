@@ -195,6 +195,24 @@
       "parentUuid": "1a8af74b_6045936c",
       "revId": "8737617a6cea52e3901516213a2aa3541e5a6d8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67b3841f_ef4cdb4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-04-26T08:53:51Z",
+      "side": 1,
+      "message": "but your patch only changes so that SignalNetworksChanged is called twice in a row, or ?? (since you explained that the conditions in",
+      "tag": "mailMessageId\u003d\u003cCAECWRdf4F4UBfP7zJYEY0khQuvnGyCzkQFzvNDqrKhTJ5WWbaA@mail.gmail.com\u003e",
+      "revId": "8737617a6cea52e3901516213a2aa3541e5a6d8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
