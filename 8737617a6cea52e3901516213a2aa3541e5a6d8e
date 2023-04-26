@@ -249,6 +249,24 @@
       "parentUuid": "0586cdc3_58588b74",
       "revId": "8737617a6cea52e3901516213a2aa3541e5a6d8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7d0e79d_219d1a41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15839
+      },
+      "writtenOn": "2023-04-26T09:29:29Z",
+      "side": 1,
+      "message": "Compared with the previous log, you can observe that the SignalNetworksChanged, which is controlled by UpdateNetworksOnce and too precise, cannot effectively drive the transition from \n\n`standardized IceConnectionState 5 \u003d\u003e 2` \n\nwhich is very important for the PC.",
+      "parentUuid": "f13bcf32_c4d97d96",
+      "revId": "8737617a6cea52e3901516213a2aa3541e5a6d8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
