@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0daca0c7_5dff17e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-04-27T21:07:17Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "283d474737ded50ec4c3f973edf6aa112e4c0d78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b36182ee_64951e20",
@@ -38,6 +55,30 @@
       "side": 1,
       "message": "Not sure I followed. If `effectively_new_frame` is false, we will still check `!previous_frame` for truthness, if that holds then we will not go into else. I can add a DCHECK in else but just wanted to make sure I am understanding the concern here.",
       "parentUuid": "b36182ee_64951e20",
+      "range": {
+        "startLine": 919,
+        "startChar": 30,
+        "endLine": 919,
+        "endChar": 47
+      },
+      "revId": "283d474737ded50ec4c3f973edf6aa112e4c0d78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f7bfbb1_da201f6a",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-04-27T21:07:17Z",
+      "side": 1,
+      "message": "... I\u0027m going to go get more coffee. No need to add the DCHECK.",
+      "parentUuid": "fff45ef6_dce6b101",
       "range": {
         "startLine": 919,
         "startChar": 30,
