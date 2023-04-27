@@ -63,6 +63,30 @@
       },
       "revId": "0e792cb5fded767dd2e4716ac3c694778211baa6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a862f961_03d53b52",
+        "filename": "modules/rtp_rtcp/source/rtp_video_stream_receiver_frame_transformer_delegate.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2023-04-27T11:07:21Z",
+      "side": 1,
+      "message": "Got it, and that makes sense. A comment would be useful though.\n\nI think now is starting to be a good time to try to flesh out this API boundary, with RTP/transport on the one side and codecs on the other side...\n\nHappy to sit down and discuss it, perhaps tomorrow?",
+      "parentUuid": "5f5d26d6_e72de09a",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 12
+      },
+      "revId": "0e792cb5fded767dd2e4716ac3c694778211baa6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
