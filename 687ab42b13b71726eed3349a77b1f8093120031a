@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f74bf7b_e587aba8",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 925,
+      "author": {
+        "id": 19629
+      },
+      "writtenOn": "2023-04-27T19:27:35Z",
+      "side": 1,
+      "message": "Theoretically, yes but I am seeing weird screen artifacts doing so. May be someone (encoder?) is modifying the updated region on the previous frame causing those artifacts.",
+      "parentUuid": "9aaf84e3_9ee8701e",
+      "range": {
+        "startLine": 925,
+        "startChar": 36,
+        "endLine": 925,
+        "endChar": 55
+      },
+      "revId": "687ab42b13b71726eed3349a77b1f8093120031a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c0e83c4_212cd74e",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-27T18:59:24Z",
       "side": 1,
       "message": "This should be a const\u0026 to the function since you don\u0027t check it again before here. (I guess maybe it\u0027s implicitly checked with effectively_new_frame...?)",
+      "range": {
+        "startLine": 928,
+        "startChar": 27,
+        "endLine": 928,
+        "endChar": 42
+      },
+      "revId": "687ab42b13b71726eed3349a77b1f8093120031a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0b4aa58_75d7518d",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 928,
+      "author": {
+        "id": 19629
+      },
+      "writtenOn": "2023-04-27T19:27:35Z",
+      "side": 1,
+      "message": "Checking it again here now (though it is checked with `effectively_new_frame` as well). Avoiding ref since the pointer can be null at the call site.",
+      "parentUuid": "2c0e83c4_212cd74e",
       "range": {
         "startLine": 928,
         "startChar": 27,
