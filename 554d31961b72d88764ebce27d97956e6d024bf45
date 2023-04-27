@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9195f304_35ef11a2",
+        "filename": "api/call/transport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2023-04-27T12:45:45Z",
+      "side": 1,
+      "message": "Is this class and method introduced to avoid having to pipe a SendRtpBatch() method across the stack?\n\nIt looks a bit complicated, and would be easier to understand if we had SendRtpBatch(). WDYT?",
+      "range": {
+        "startLine": 48,
+        "startChar": 15,
+        "endLine": 48,
+        "endChar": 34
+      },
+      "revId": "554d31961b72d88764ebce27d97956e6d024bf45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a12477ca_687d475c",
         "filename": "modules/pacing/pacing_controller_unittest.cc",
         "patchSetId": 3
