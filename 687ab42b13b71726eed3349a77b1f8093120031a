@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aaf84e3_9ee8701e",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 925,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-04-27T18:59:24Z",
+      "side": 1,
+      "message": "Does this need to be a member or could we just grab it off of the previous_frame ?",
+      "range": {
+        "startLine": 925,
+        "startChar": 36,
+        "endLine": 925,
+        "endChar": 55
+      },
+      "revId": "687ab42b13b71726eed3349a77b1f8093120031a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c0e83c4_212cd74e",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 928,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-04-27T18:59:24Z",
+      "side": 1,
+      "message": "This should be a const\u0026 to the function since you don\u0027t check it again before here. (I guess maybe it\u0027s implicitly checked with effectively_new_frame...?)",
+      "range": {
+        "startLine": 928,
+        "startChar": 27,
+        "endLine": 928,
+        "endChar": 42
+      },
+      "revId": "687ab42b13b71726eed3349a77b1f8093120031a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
