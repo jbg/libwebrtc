@@ -54,6 +54,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "7f669276_2fcb66e0",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 20714
+      },
+      "writtenOn": "2023-04-27T19:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "220b1ec1_5439a901",
+      "revId": "c325ed1edc9ef1c2774ca1fabf9da77aba2a24d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7a5c00e2_ac4eb912",
         "filename": "modules/rtp_rtcp/source/forward_error_correction.cc",
         "patchSetId": 6
@@ -100,6 +118,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2571f90e_3d33aa0f",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 20714
+      },
+      "writtenOn": "2023-04-27T19:11:46Z",
+      "side": 1,
+      "message": "Ah OK I see. Changed it for now to 4, we can change this in the future for optimization.",
+      "parentUuid": "56c38096_790ab5a3",
+      "range": {
+        "startLine": 139,
+        "startChar": 34,
+        "endLine": 139,
+        "endChar": 46
+      },
+      "revId": "c325ed1edc9ef1c2774ca1fabf9da77aba2a24d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "b36b1604_3aa00d0d",
         "filename": "modules/rtp_rtcp/source/forward_error_correction.h",
         "patchSetId": 6
@@ -111,6 +153,30 @@
       "writtenOn": "2023-04-26T11:20:41Z",
       "side": 1,
       "message": "The size of the 4 new vector, will they always be the same?\n\nIf yes, then it might be safer/cleaner to add single vector,\nsomething like\n\n```\nstruct PickAGoodNameMaybeProtectedStream {\n  uint32_t ssrc;\n  uint16_t seq_num_base;\n  size_t packet_mask_offset;\n  size_t packet_mask_size;\n};\nabsl::InlinedVector\u003cProtectedStream, 2\u003e protected_streams;\n...\n\n.protected_streams \u003d {{.ssrc \u003d fec_packet-\u003essrc,  // Due to RED.\n  .seq_num_base \u003d seq_num_base,\n  .packet_mask_offset \u003d kPacketMaskOffset,\n  .packet_mask_size \u003d packet_mask_size}};\n```",
+      "range": {
+        "startLine": 143,
+        "startChar": 46,
+        "endLine": 143,
+        "endChar": 63
+      },
+      "revId": "c325ed1edc9ef1c2774ca1fabf9da77aba2a24d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcc8116a_361b3697",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 20714
+      },
+      "writtenOn": "2023-04-27T19:11:46Z",
+      "side": 1,
+      "message": "Since in the updated flexfec we are going to populate the \"protected_ssrcs\" elsewhere (in the RTP header parsing), didn\u0027t want to put all of these in the same struct for now. it\u0027s possible to put seq_num_base, packet_mask_offset and packet_mask_size in a separate struct as they will be populated in the same FEC header reader function, WDYT?",
+      "parentUuid": "b36b1604_3aa00d0d",
       "range": {
         "startLine": 143,
         "startChar": 46,
@@ -134,6 +200,24 @@
       "writtenOn": "2023-04-26T08:17:11Z",
       "side": 1,
       "message": "or\nusing ::testing::SizeIs;\n...\nASSERT_THAT(read_packet.protected_ssrcs, SizeIs(1));\n\nthen in case of error the message would include the full array, including its values instead or printing just it\u0027s size.\n\nbetter yet - you can combine Size matcher and element value matcher:\n\nEXPECT_THAT(read_packet.protected_ssrcs, ElementsAre(kMediaSsrc));\n\ninstead of having two matchers:\nASSERT_EQ(read_packet.protected_ssrcs.size(), 1U);\nEXPECT_EQ(kMediaSsrc, read_packet.protected_ssrcs[0]);",
+      "revId": "c325ed1edc9ef1c2774ca1fabf9da77aba2a24d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83b0504d_8abdf41d",
+        "filename": "modules/rtp_rtcp/source/ulpfec_header_reader_writer_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 20714
+      },
+      "writtenOn": "2023-04-27T19:11:46Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "581cbc80_63083c4c",
       "revId": "c325ed1edc9ef1c2774ca1fabf9da77aba2a24d8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
