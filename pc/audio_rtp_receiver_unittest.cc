@@ -21,7 +21,9 @@
 
 using ::testing::_;
 using ::testing::InvokeWithoutArgs;
+using ::testing::IsNull;
 using ::testing::Mock;
+using ::testing::NotNull;
 
 static const int kTimeOut = 100;
 static const double kDefaultVolume = 1;
@@ -41,7 +43,8 @@ class AudioRtpReceiverTest : public ::testing::Test {
                                                     false)),
         media_channel_(cricket::MediaChannel::Role::kReceive,
                        rtc::Thread::Current()) {
-    EXPECT_CALL(media_channel_, SetRawAudioSink(kSsrc, _));
+    EXPECT_CALL(media_channel_, SetRawAudioSink(kSsrc, NotNull()));
+    EXPECT_CALL(media_channel_, SetRawAudioSink(kSsrc, IsNull()));
     EXPECT_CALL(media_channel_, SetBaseMinimumPlayoutDelayMs(kSsrc, _));
   }
 
@@ -107,7 +110,8 @@ TEST(AudioRtpReceiver, OnChangedNotificationsAfterConstruction) {
   auto receiver = rtc::make_ref_counted<AudioRtpReceiver>(
       thread, std::string(), std::vector<std::string>(), true, &media_channel);
 
-  EXPECT_CALL(media_channel, SetDefaultRawAudioSink(_)).Times(1);
+  EXPECT_CALL(media_channel, SetDefaultRawAudioSink(IsNull())).Times(1);
+  EXPECT_CALL(media_channel, SetDefaultRawAudioSink(NotNull())).Times(1);
   EXPECT_CALL(media_channel, SetDefaultOutputVolume(kDefaultVolume)).Times(1);
   receiver->SetupUnsignaledMediaChannel();
   loop.Flush();
