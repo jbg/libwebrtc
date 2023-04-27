@@ -139,6 +139,17 @@ void FakeAudioReceiveStream::SetSink(webrtc::AudioSinkInterface* sink) {
   sink_ = sink;
 }
 
+void FakeAudioReceiveStream::SetAudioLevelCallback(
+    absl::AnyInvocable<void(webrtc::Timestamp, absl::optional<uint8_t>)>
+        callback) {
+  level_callback_ = std::move(callback);
+}
+
+absl::AnyInvocable<void(webrtc::Timestamp, absl::optional<uint8_t>)>
+FakeAudioReceiveStream::RemoveAudioLevelCallback() {
+  return std::move(level_callback_);
+}
+
 void FakeAudioReceiveStream::SetGain(float gain) {
   gain_ = gain;
 }

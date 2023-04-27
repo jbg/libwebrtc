@@ -276,6 +276,7 @@ webrtc::AudioReceiveStreamInterface::Stats AudioReceiveStreamImpl::GetStats(
   }
   stats.delay_estimate_ms = channel_receive_->GetDelayEstimate();
   stats.audio_level = channel_receive_->GetSpeechOutputLevelFullRange();
+  stats.rtp_audio_level = source_tracker_.GetAudioLevel(remote_ssrc());
   stats.total_output_energy = channel_receive_->GetTotalOutputEnergy();
   stats.total_output_duration = channel_receive_->GetTotalOutputDuration();
   stats.estimated_playout_ntp_timestamp_ms =
@@ -346,6 +347,18 @@ webrtc::AudioReceiveStreamInterface::Stats AudioReceiveStreamImpl::GetStats(
 void AudioReceiveStreamImpl::SetSink(AudioSinkInterface* sink) {
   RTC_DCHECK_RUN_ON(&worker_thread_checker_);
   channel_receive_->SetSink(sink);
+}
+
+void AudioReceiveStreamImpl::SetAudioLevelCallback(
+    absl::AnyInvocable<void(Timestamp, absl::optional<uint8_t>)> callback) {
+  RTC_DCHECK_RUN_ON(&worker_thread_checker_);
+  source_tracker_.SetAudioLevelCallback(remote_ssrc(), std::move(callback));
+}
+
+absl::AnyInvocable<void(Timestamp, absl::optional<uint8_t>)>
+AudioReceiveStreamImpl::RemoveAudioLevelCallback() {
+  RTC_DCHECK_RUN_ON(&worker_thread_checker_);
+  return source_tracker_.RemoveAudioLevelCallback(remote_ssrc());
 }
 
 void AudioReceiveStreamImpl::SetGain(float gain) {
