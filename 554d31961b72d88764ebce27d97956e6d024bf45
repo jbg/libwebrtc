@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a12477ca_687d475c",
+        "filename": "modules/pacing/pacing_controller_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2172,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-04-27T10:32:06Z",
+      "side": 1,
+      "message": "Remove for next iteration",
+      "range": {
+        "startLine": 2172,
+        "startChar": 0,
+        "endLine": 2172,
+        "endChar": 71
+      },
+      "revId": "554d31961b72d88764ebce27d97956e6d024bf45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
