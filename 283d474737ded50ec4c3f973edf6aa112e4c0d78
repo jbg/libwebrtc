@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b36182ee_64951e20",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-04-27T20:42:43Z",
+      "side": 1,
+      "message": "This new check could still force you into the else if you don\u0027t have a previous frame. e.g. if it\u0027s not effectively new (shouldn\u0027t happen?) or you are using damage region.\n\nMaybe just a DCHECK in the else block? (Or turn it to an else if/else LOG)",
+      "range": {
+        "startLine": 919,
+        "startChar": 30,
+        "endLine": 919,
+        "endChar": 47
+      },
+      "revId": "283d474737ded50ec4c3f973edf6aa112e4c0d78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

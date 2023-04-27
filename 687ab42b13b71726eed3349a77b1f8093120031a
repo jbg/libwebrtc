@@ -48,6 +48,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61700a07_1f77f5ea",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 925,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-04-27T20:42:43Z",
+      "side": 1,
+      "message": "Hmm, Could be the mouse cursor stuff too depending on where the artifacts are.",
+      "parentUuid": "5f74bf7b_e587aba8",
+      "range": {
+        "startLine": 925,
+        "startChar": 36,
+        "endLine": 925,
+        "endChar": 55
+      },
+      "revId": "687ab42b13b71726eed3349a77b1f8093120031a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c0e83c4_212cd74e",
