@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc5604ba_1e58b932",
+        "filename": "api/call/transport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-04-27T14:07:02Z",
+      "side": 1,
+      "message": "\u003e Is this class and method introduced to avoid having to pipe a SendRtpBatch() method across the stack?\n\nYes!\n\nFirst, I don\u0027t know yet how big the impact of this change will be, so I naturally do not want to spend high effort or create CL doozies before I see that this has impact.\n\nI started out wanting to implement eg \"SendRtpBatch\". First of all this will unfortunately lead to a doozy just due to all layers needing to be updated (see [1] that adds BatchComplete(), 43 files updated in webrtc alone).\n\nUnless I\u0027m missing something obvious, you also need to consider that right now, figuring out packet content, metadata \u0026 sending (or dropping) is interleaved in the same logic flow throughout layers. In order to create batches, the logic to figuring out content needs to be split from the actual sending i.e. instead of \"SendRtp\", you\u0027d have \"CreateRtp\" and then Send or SendBatch content. Depending on how you do this, the deeper level would then also need to re-shape the batches as they drop packets, or augment/change/crypt packet info. In all this feels to me like a quite dangerous highly scoped project.\n\n\u003e It looks a bit complicated, and would be easier to understand if we had SendRtpBatch(). WDYT?\n\nDepends on what your perspective is. The code impact of this and the Chrome CL is far smaller than what SendRtpBatch would be, and the number of intermediate batches are lower.\n\n[1] https://webrtc-review.googlesource.com/c/src/+/300262",
+      "parentUuid": "9195f304_35ef11a2",
+      "range": {
+        "startLine": 48,
+        "startChar": 15,
+        "endLine": 48,
+        "endChar": 34
+      },
+      "revId": "554d31961b72d88764ebce27d97956e6d024bf45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a12477ca_687d475c",
         "filename": "modules/pacing/pacing_controller_unittest.cc",
         "patchSetId": 3
