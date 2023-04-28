@@ -215,6 +215,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "327ba8f8_c806fe20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2023-04-28T23:30:17Z",
+      "side": 1,
+      "message": "In general I would prefer a design where either the consumer decides what to do , i.e. have it set a policy for the number of frames it\u0027s willing to accommodate in-flight (and has memory allocated to buffer).  This is more compatible with the \"push model\" approach that we want all capturers to use long term.  However that\u0027s not the way the current capture APIs work.\n\nIn the current \"pull model\" with CaptureFrame() we are more limited.  I am not sure we can even add a simple flow control API like AcceptFrames()/DropFrames() since it looks like there is nowhere for the frames to go, if there is already a frame captured and the flow control tells the capturer to accept more frames.\n\nSo I don\u0027t have a better idea right now, until we move more capturers to the \"push model.\"",
+      "revId": "ee85c84abc6e55d10d3af961c79ba86c2a468118",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "778c5299_688078cf",
