@@ -87,6 +87,30 @@
       },
       "revId": "0e792cb5fded767dd2e4716ac3c694778211baa6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80894900_d95623c0",
+        "filename": "modules/rtp_rtcp/source/rtp_video_stream_receiver_frame_transformer_delegate.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-04-28T10:22:41Z",
+      "side": 1,
+      "message": "Fleshed out the comment with more of this context and added an explicit TODO to fix this to not need sequence numbers, same as below for when getting a Sender frame.",
+      "parentUuid": "a862f961_03d53b52",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 12
+      },
+      "revId": "0e792cb5fded767dd2e4716ac3c694778211baa6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
