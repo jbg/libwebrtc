@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77eda000_cfbdf79a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19629
+      },
+      "writtenOn": "2023-04-28T14:39:15Z",
+      "side": 1,
+      "message": "Thanks for the reviews. I have addressed all comments in the latest PS.",
+      "revId": "283d474737ded50ec4c3f973edf6aa112e4c0d78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fff300cb_47ae248f",
@@ -31,6 +48,24 @@
       "writtenOn": "2023-04-28T09:09:21Z",
       "side": 1,
       "message": "There are same checks done above basically, you can just set effectively_new_frame to true in the if block above.",
+      "revId": "283d474737ded50ec4c3f973edf6aa112e4c0d78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cebbd7e3_ccbb27df",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 19629
+      },
+      "writtenOn": "2023-04-28T14:39:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fff300cb_47ae248f",
       "revId": "283d474737ded50ec4c3f973edf6aa112e4c0d78",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -66,6 +101,24 @@
       "side": 1,
       "message": "I mean, you have `queue_` accessible there.",
       "parentUuid": "d3dc5142_2135ddf7",
+      "revId": "283d474737ded50ec4c3f973edf6aa112e4c0d78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e8698a1_830b5cf1",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 846,
+      "author": {
+        "id": 19629
+      },
+      "writtenOn": "2023-04-28T14:39:15Z",
+      "side": 1,
+      "message": "Will have to acquire the mutex associated with `queue_` to access it but the mutex is already locked at the call site (and our lock is not reentrant) so it will cause deadlock here if I try to access it via `queue_`).",
+      "parentUuid": "42158354_42c9275e",
       "revId": "283d474737ded50ec4c3f973edf6aa112e4c0d78",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -131,6 +184,30 @@
       "side": 1,
       "message": "... I\u0027m going to go get more coffee. No need to add the DCHECK.",
       "parentUuid": "fff45ef6_dce6b101",
+      "range": {
+        "startLine": 919,
+        "startChar": 30,
+        "endLine": 919,
+        "endChar": 47
+      },
+      "revId": "283d474737ded50ec4c3f973edf6aa112e4c0d78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29dd4e4f_7b66d358",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 19629
+      },
+      "writtenOn": "2023-04-28T14:39:15Z",
+      "side": 1,
+      "message": "Heh ... no problem. Also, thanks for the reviews 😊",
+      "parentUuid": "8f7bfbb1_da201f6a",
       "range": {
         "startLine": 919,
         "startChar": 30,
