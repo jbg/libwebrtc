@@ -20,6 +20,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fff300cb_47ae248f",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-04-28T09:09:21Z",
+      "side": 1,
+      "message": "There are same checks done above basically, you can just set effectively_new_frame to true in the if block above.",
+      "revId": "283d474737ded50ec4c3f973edf6aa112e4c0d78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3dc5142_2135ddf7",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 846,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-04-28T09:09:21Z",
+      "side": 1,
+      "message": "Do we need to pass previous frame into ProcessMemFDBuffer? Because you have it accessible from there so it seems to be redundant.",
+      "revId": "283d474737ded50ec4c3f973edf6aa112e4c0d78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b36182ee_64951e20",
         "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
         "patchSetId": 10
