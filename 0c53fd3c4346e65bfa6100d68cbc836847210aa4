@@ -22,6 +22,30 @@
       },
       "revId": "0c53fd3c4346e65bfa6100d68cbc836847210aa4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b82f7d25_d6e46c32",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video_frame_transformer_delegate.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-04-28T12:15:58Z",
+      "side": 1,
+      "message": "As discussed on chat, either this or 0 SGTM.",
+      "parentUuid": "7edc78f2_6d0d6551",
+      "range": {
+        "startLine": 192,
+        "startChar": 33,
+        "endLine": 192,
+        "endChar": 40
+      },
+      "revId": "0c53fd3c4346e65bfa6100d68cbc836847210aa4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
