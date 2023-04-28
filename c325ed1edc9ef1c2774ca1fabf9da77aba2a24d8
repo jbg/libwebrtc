@@ -189,6 +189,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "7f7a3287_9ffef7c7",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-04-28T09:02:38Z",
+      "side": 1,
+      "message": "personally I prefer less duplication in data structures: if number of ssrcs has to be the same as number of other properties, I would prefer the single vector, single place that contains the size.\nFirst it would be created and filled with ssrcs, leaving other fields to some default values, then it would be udpdated to fill those other fields.\n\nTo be safer though this extra fields still better be initialized:\n```\nstruct PickAGoodNameMaybeProtectedStream {\n  uint32_t ssrc \u003d 0;\n  uint16_t seq_num_base \u003d 0;\n  size_t packet_mask_offset \u003d 0;\n  size_t packet_mask_size \u003d 0;\n};\n```\n\nbut if you think having two vectors would be cleaner overall, I won\u0027t mind.\nwith two vectors it is easier to check when data is in inconsistent state.",
+      "parentUuid": "dcc8116a_361b3697",
+      "range": {
+        "startLine": 143,
+        "startChar": 46,
+        "endLine": 143,
+        "endChar": 63
+      },
+      "revId": "c325ed1edc9ef1c2774ca1fabf9da77aba2a24d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "581cbc80_63083c4c",
         "filename": "modules/rtp_rtcp/source/ulpfec_header_reader_writer_unittest.cc",
         "patchSetId": 6
