@@ -54,6 +54,10 @@ struct RTC_EXPORT PacketOptions {
   PacketTimeUpdateParams packet_time_params;
   // PacketInfo is passed to SentPacket when signaling this packet is sent.
   PacketInfo info_signaled_after_sent;
+  // True if this is a batchable packet. Batchable packets are collected at low
+  // levels and sent first when their AsyncPacketSocket receives a
+  // OnSendBatchComplete call.
+  bool batchable = false;
 };
 
 // Provides the ability to receive packets asynchronously. Sends are not
@@ -87,6 +91,9 @@ class RTC_EXPORT AsyncPacketSocket : public sigslot::has_slots<> {
                      size_t cb,
                      const SocketAddress& addr,
                      const PacketOptions& options) = 0;
+  // Signals that all packets of a sent batch have been received by this socket.
+  // TODO(crbug.com/1439830): Make pure virtual once downstream projects adapt.
+  virtual void OnSendBatchComplete() {}
 
   // Close the socket.
   virtual int Close() = 0;
