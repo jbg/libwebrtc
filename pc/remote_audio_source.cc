@@ -12,6 +12,7 @@
 
 #include <stddef.h>
 
+#include <limits>
 #include <memory>
 #include <string>
 #include <utility>
@@ -78,11 +79,57 @@ void RemoteAudioSource::Start(
   // Register for callbacks immediately before AddSink so that we always get
   // notified when a channel goes out of scope (signaled when "AudioDataProxy"
   // is destroyed).
-  RTC_DCHECK(media_channel);
-  ssrc ? media_channel->SetRawAudioSink(*ssrc,
-                                        std::make_unique<AudioDataProxy>(this))
-       : media_channel->SetDefaultRawAudioSink(
-             std::make_unique<AudioDataProxy>(this));
+  auto proxy = std::make_unique<AudioDataProxy>(this);
+  ssrc ? media_channel->SetRawAudioSink(*ssrc, std::move(proxy))
+       : media_channel->SetDefaultRawAudioSink(std::move(proxy));
+
+  media_channel->SetAudioLevelCallback(
+      ssrc, [this](uint32_t timestamp, absl::optional<uint8_t> level) {
+        RTC_DCHECK_RUN_ON(worker_thread_);
+        if (muted_on_worker_thread_ != kAudioStateUnknown) {
+          constexpr uint32_t kMaxDelta =
+              std::numeric_limits<uint32_t>::max() / 2;
+          uint32_t delta;
+          if (timestamp > rtp_timestamp_) {
+            // Most often the delta will be in the order of tens of ms. A corner
+            // case to be aware of is if rtp_timestamp_ recently wrapped around,
+            // then a late-arriving audio packet could pass this test but a
+            // large delta here will mean that it's an out of order audio
+            // packet.
+            delta = timestamp - rtp_timestamp_;
+          } else {
+            // timestamp <= rtp_timestamp_.
+            // In the normal case when the new timestamp wrapped around, the
+            // delta will be smaller than `kMaxDelta`. If the delta is larger,
+            // then that's an older packet than what we already have level
+            // information for.
+            delta = timestamp +
+                    (std::numeric_limits<uint32_t>::max() - rtp_timestamp_);
+          }
+
+          if (delta > kMaxDelta) {
+            RTC_LOG(LS_WARNING) << "Ignoring level notification.";
+            return;
+          }
+        }
+
+        rtp_timestamp_ = timestamp;
+
+        AudioStateOnWorker mute_state =
+            (!level.has_value() || level.value() == 127) ? kAudioStateMuted
+                                                         : kAudioStateUnmuted;
+        if (mute_state == muted_on_worker_thread_)
+          return;
+        muted_on_worker_thread_ = mute_state;
+        const bool muted = (mute_state == kAudioStateMuted);
+        main_thread_->PostTask(
+            [this, thiz = rtc::scoped_refptr<RemoteAudioSource>(this), muted] {
+              RTC_DCHECK_RUN_ON(main_thread_);
+              const auto required_current_state = muted ? kLive : kMuted;
+              if (state_ == required_current_state)
+                SetState(muted ? kMuted : kLive);
+            });
+      });
 }
 
 void RemoteAudioSource::Stop(
@@ -92,6 +139,7 @@ void RemoteAudioSource::Stop(
   RTC_DCHECK(media_channel);
   ssrc ? media_channel->SetRawAudioSink(*ssrc, nullptr)
        : media_channel->SetDefaultRawAudioSink(nullptr);
+  media_channel->SetAudioLevelCallback(ssrc, nullptr);
 }
 
 void RemoteAudioSource::SetState(SourceState new_state) {
