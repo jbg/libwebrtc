@@ -213,6 +213,7 @@ rtc_source_set("media_channel") {
     "../api/transport:datagram_transport_interface",
     "../api/transport/rtp:rtp_source",
     "../api/units:time_delta",
+    "../api/units:timestamp",
     "../api/video:video_frame",
     "../api/video:video_rtp_headers",
     "../api/video_codecs:scalability_mode",
