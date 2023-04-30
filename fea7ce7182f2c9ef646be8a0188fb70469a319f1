@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49d67faf_22b9e6ec",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-04-30T18:23:45Z",
+      "side": 1,
+      "message": "if you want to keep optional,\nthen dereference them with `operator *` instead of `.value()` accessor\ni.e. `*fec_packet-\u003eprotected_streams[0].packet_mask_size`\n\nhttps://abseil.io/tips/181#solution\n“Testing the absl::StatusOr object for validity (as you would a smart pointer or optional) and accessing it using operator* or operator-\u003e is readable, efficient, and safe.”",
+      "revId": "fea7ce7182f2c9ef646be8a0188fb70469a319f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdebab28_1ab28f19",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-04-30T18:23:45Z",
+      "side": 1,
+      "message": "why optional?\nwould absl::nullopt and zero be treated differently?",
+      "revId": "fea7ce7182f2c9ef646be8a0188fb70469a319f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a91b1e8c_12a6437d",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-04-30T18:23:45Z",
+      "side": 1,
+      "message": "prefer to put the constant before the constructor\n\nhttps://google.github.io/styleguide/cppguide.html#Declaration_Order\n```\n3.Static constants\n5.Constructors and assignment operators\n```",
+      "revId": "fea7ce7182f2c9ef646be8a0188fb70469a319f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
