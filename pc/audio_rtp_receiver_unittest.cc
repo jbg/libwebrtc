@@ -11,6 +11,7 @@
 #include "pc/audio_rtp_receiver.h"
 
 #include <atomic>
+#include <utility>
 
 #include "pc/test/mock_voice_media_channel.h"
 #include "rtc_base/gunit.h"
@@ -18,10 +19,13 @@
 #include "test/gmock.h"
 #include "test/gtest.h"
 #include "test/run_loop.h"
+#include "test/time_controller/simulated_time_controller.h"
 
 using ::testing::_;
 using ::testing::InvokeWithoutArgs;
+using ::testing::IsNull;
 using ::testing::Mock;
+using ::testing::NotNull;
 
 static const int kTimeOut = 100;
 static const double kDefaultVolume = 1;
@@ -41,7 +45,8 @@ class AudioRtpReceiverTest : public ::testing::Test {
                                                     false)),
         media_channel_(cricket::MediaChannel::Role::kReceive,
                        rtc::Thread::Current()) {
-    EXPECT_CALL(media_channel_, SetRawAudioSink(kSsrc, _));
+    EXPECT_CALL(media_channel_, SetRawAudioSink(kSsrc, NotNull()));
+    EXPECT_CALL(media_channel_, SetRawAudioSink(kSsrc, IsNull()));
     EXPECT_CALL(media_channel_, SetBaseMinimumPlayoutDelayMs(kSsrc, _));
   }
 
@@ -107,7 +112,8 @@ TEST(AudioRtpReceiver, OnChangedNotificationsAfterConstruction) {
   auto receiver = rtc::make_ref_counted<AudioRtpReceiver>(
       thread, std::string(), std::vector<std::string>(), true, &media_channel);
 
-  EXPECT_CALL(media_channel, SetDefaultRawAudioSink(_)).Times(1);
+  EXPECT_CALL(media_channel, SetDefaultRawAudioSink(IsNull())).Times(1);
+  EXPECT_CALL(media_channel, SetDefaultRawAudioSink(NotNull())).Times(1);
   EXPECT_CALL(media_channel, SetDefaultOutputVolume(kDefaultVolume)).Times(1);
   receiver->SetupUnsignaledMediaChannel();
   loop.Flush();
@@ -124,6 +130,68 @@ TEST(AudioRtpReceiver, OnChangedNotificationsAfterConstruction) {
 
   EXPECT_CALL(media_channel, SetDefaultOutputVolume(kVolumeMuted)).Times(1);
   receiver->SetMediaChannel(nullptr);
+}
+
+TEST(AudioRtpReceiver, SourceStateMutedWhenNoPacketsArrive) {
+  webrtc::GlobalSimulatedTimeController time_controller(Timestamp::Seconds(10));
+  cricket::MockVoiceMediaChannel media_channel(
+      cricket::MediaChannel::Role::kReceive, time_controller.GetMainThread());
+  auto receiver = rtc::make_ref_counted<AudioRtpReceiver>(
+      time_controller.GetMainThread(), std::string(),
+      std::vector<std::string>(), true, &media_channel);
+
+  constexpr uint32_t kSsrc = 123;
+
+  EXPECT_CALL(media_channel, SetBaseMinimumPlayoutDelayMs(kSsrc, _));
+  EXPECT_CALL(media_channel, SetRawAudioSink(kSsrc, IsNull())).Times(1);
+  EXPECT_CALL(media_channel, SetRawAudioSink(kSsrc, NotNull())).Times(1);
+  EXPECT_CALL(media_channel, SetOutputVolume(kSsrc, _)).Times(1);
+
+  // Grab the callback object.
+  absl::AnyInvocable<void(uint32_t, absl::optional<uint8_t>)> level_callback;
+  EXPECT_CALL(media_channel,
+              SetAudioLevelCallback(absl::optional<uint32_t>(kSsrc), _))
+      .WillRepeatedly(testing::Invoke(
+          [&](absl::optional<uint32_t> ssrc,
+              absl::AnyInvocable<void(uint32_t, absl::optional<uint8_t>)> cb) {
+            level_callback = std::move(cb);
+          }));
+  receiver->SetupMediaChannel(kSsrc);
+  ASSERT_TRUE(level_callback);
+
+  auto track = receiver->audio_track();
+  EXPECT_TRUE(track->enabled());
+  EXPECT_EQ(track->state(), AudioTrackInterface::kLive);
+  auto* source = track->GetSource();
+
+  // TODO(tommi): Verify state change notifications from the track.
+
+  // Simulate the first audio packet arriving.
+  level_callback(time_controller.GetClock()->CurrentTime().ms(), 30);
+  EXPECT_EQ(source->state(), AudioSourceInterface::kLive);
+  time_controller.AdvanceTime(TimeDelta::Millis(20));
+
+  // Now simulate no packets arriving. Passing `absl::nullopt` is what
+  // SourceTracker will do when no packets have arrived from a remote source
+  // based on a timeout interval. See `SourceTracker::kTimeout`.
+  // The state of the source should transition to `kMuted`.
+  level_callback(time_controller.GetClock()->CurrentTime().ms(), absl::nullopt);
+  time_controller.AdvanceTime(TimeDelta::Millis(20));
+  EXPECT_EQ(source->state(), AudioSourceInterface::kMuted);
+
+  // Wake up the track again with a valid audio packet again.
+  level_callback(time_controller.GetClock()->CurrentTime().ms(), 50);
+  time_controller.AdvanceTime(TimeDelta::Millis(20));
+  EXPECT_EQ(source->state(), AudioSourceInterface::kLive);
+
+  // Deliver an out-of-order 'muted' packet. This should be ignored.
+
+  // TODO(tommi): Write test for out of order packets.
+  // TODO(tommi): Write test for guard against state flip-flop.
+
+  EXPECT_CALL(media_channel, SetOutputVolume(kSsrc, kVolumeMuted));
+  receiver->SetMediaChannel(nullptr);
+  ASSERT_FALSE(level_callback);
 }
 
 }  // namespace webrtc
