@@ -16,6 +16,23 @@
       "message": "Hey folks, any chance you can get a look? A small one which I think should solve the Metal crashes we\u0027ve been seeing.",
       "revId": "6addb7b6d046ca7749ff2131183152ce79c8604b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09cc48f1_7fad81e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2023-05-02T09:32:40Z",
+      "side": 1,
+      "message": "LGTM! Thanks for looking into this.",
+      "revId": "6addb7b6d046ca7749ff2131183152ce79c8604b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
