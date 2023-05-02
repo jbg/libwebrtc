@@ -70,6 +70,25 @@ RtpConfig::~RtpConfig() = default;
 RtpConfig::Flexfec::Flexfec() = default;
 RtpConfig::Flexfec::Flexfec(const Flexfec&) = default;
 RtpConfig::Flexfec::~Flexfec() = default;
+std::string RtpConfig::Flexfec::ToString() const {
+  char buf[1024];
+  rtc::SimpleStringBuilder ss(buf);
+
+  if (payload_type.has_value()) {
+    ss << "{payload_type: " << *payload_type;
+    ss << ", ssrc: " << ssrc;
+    ss << ", protected_media_ssrcs: [";
+    for (size_t i = 0; i < protected_media_ssrcs.size(); ++i) {
+      ss << protected_media_ssrcs[i];
+      if (i != protected_media_ssrcs.size() - 1)
+        ss << ", ";
+    }
+    ss << "]}";
+  } else {
+    ss << "(not configured)";
+  }
+  return ss.str();
+}
 
 std::string RtpConfig::ToString() const {
   char buf[2 * 1024];
@@ -106,17 +125,7 @@ std::string RtpConfig::ToString() const {
   ss << ", payload_name: " << payload_name;
   ss << ", payload_type: " << payload_type;
   ss << ", raw_payload: " << (raw_payload ? "true" : "false");
-
-  ss << ", flexfec: {payload_type: " << flexfec.payload_type;
-  ss << ", ssrc: " << flexfec.ssrc;
-  ss << ", protected_media_ssrcs: [";
-  for (size_t i = 0; i < flexfec.protected_media_ssrcs.size(); ++i) {
-    ss << flexfec.protected_media_ssrcs[i];
-    if (i != flexfec.protected_media_ssrcs.size() - 1)
-      ss << ", ";
-  }
-  ss << "]}";
-
+  ss << ", flexfec: " << flexfec.ToString();
   ss << ", rtx: " << rtx.ToString();
   ss << ", c_name: " << c_name;
   ss << '}';

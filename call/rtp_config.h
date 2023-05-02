@@ -127,8 +127,8 @@ struct RtpConfig {
     Flexfec();
     Flexfec(const Flexfec&);
     ~Flexfec();
-    // Payload type of FlexFEC. Set to -1 to disable sending FlexFEC.
-    int payload_type = -1;
+    // Optional payload type of FlexFEC.
+    absl::optional<uint8_t> payload_type;
 
     // SSRC of FlexFEC stream.
     uint32_t ssrc = 0;
@@ -140,6 +140,8 @@ struct RtpConfig {
     // TODO(brandtr): Update comment above when we support
     // multistream protection.
     std::vector<uint32_t> protected_media_ssrcs;
+
+    std::string ToString() const;
   } flexfec;
 
   // Settings for RTP retransmission payload format, see RFC 4588 for

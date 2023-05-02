@@ -130,9 +130,9 @@ std::unique_ptr<VideoFecGenerator> MaybeCreateFecGenerator(
     int simulcast_index,
     const FieldTrialsView& trials) {
   // If flexfec is configured that takes priority.
-  if (rtp.flexfec.payload_type >= 0) {
-    RTC_DCHECK_GE(rtp.flexfec.payload_type, 0);
-    RTC_DCHECK_LE(rtp.flexfec.payload_type, 127);
+  if (rtp.flexfec.payload_type.has_value()) {
+    RTC_DCHECK_GE(*rtp.flexfec.payload_type, 0);
+    RTC_DCHECK_LE(*rtp.flexfec.payload_type, 127);
     if (rtp.flexfec.ssrc == 0) {
       RTC_LOG(LS_WARNING) << "FlexFEC is enabled, but no FlexFEC SSRC given. "
                              "Therefore disabling FlexFEC.";
@@ -169,7 +169,7 @@ std::unique_ptr<VideoFecGenerator> MaybeCreateFecGenerator(
 
     RTC_DCHECK_EQ(1U, rtp.flexfec.protected_media_ssrcs.size());
     return std::make_unique<FlexfecSender>(
-        rtp.flexfec.payload_type, rtp.flexfec.ssrc,
+        *rtp.flexfec.payload_type, rtp.flexfec.ssrc,
         rtp.flexfec.protected_media_ssrcs[0], rtp.mid, rtp.extensions,
         RTPSender::FecExtensionSizes(), rtp_state, clock);
   } else if (rtp.ulpfec.red_payload_type >= 0 &&
