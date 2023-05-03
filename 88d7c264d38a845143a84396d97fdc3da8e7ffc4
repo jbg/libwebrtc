@@ -16,6 +16,23 @@
       "message": "Here is a small test patch ... Please review 😊",
       "revId": "88d7c264d38a845143a84396d97fdc3da8e7ffc4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1ab38ea_8cafc7ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-05-03T13:14:54Z",
+      "side": 1,
+      "message": "I defer to Johannes. But that reminds me this documentation needs an update anyway to match the code...",
+      "revId": "88d7c264d38a845143a84396d97fdc3da8e7ffc4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
