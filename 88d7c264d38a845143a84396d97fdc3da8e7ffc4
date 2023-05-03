@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ddc6d55_40c4263e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20759
+      },
+      "writtenOn": "2023-05-03T12:29:05Z",
+      "side": 1,
+      "message": "Here is a small test patch ... Please review 😊",
+      "revId": "88d7c264d38a845143a84396d97fdc3da8e7ffc4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
