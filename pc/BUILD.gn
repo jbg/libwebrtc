@@ -2168,6 +2168,7 @@ if (rtc_include_tests && !build_with_chromium) {
       "../test:scoped_key_value_config",
       "../test:test_main",
       "../test:test_support",
+      "../test/time_controller",
     ]
     absl_deps = [
       "//third_party/abseil-cpp/absl/algorithm:container",
