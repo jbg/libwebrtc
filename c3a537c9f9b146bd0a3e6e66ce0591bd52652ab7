@@ -22,6 +22,30 @@
       },
       "revId": "c3a537c9f9b146bd0a3e6e66ce0591bd52652ab7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28b2b62b_96711ea9",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2023-05-03T07:00:02Z",
+      "side": 1,
+      "message": "I prefer to keep them as they are at the moment to have the log at callgrok log for debugging ICE NEVER CONNECTED. After that, we can remove the log printing, or change the log level.",
+      "parentUuid": "51512ac8_3d4b3a4d",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 3
+      },
+      "revId": "c3a537c9f9b146bd0a3e6e66ce0591bd52652ab7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
