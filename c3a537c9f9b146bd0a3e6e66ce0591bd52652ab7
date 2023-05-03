@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51512ac8_3d4b3a4d",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-05-03T05:57:26Z",
+      "side": 1,
+      "message": "Should these also be LS_VERBOSE (for consisntency)?",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 3
+      },
+      "revId": "c3a537c9f9b146bd0a3e6e66ce0591bd52652ab7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
