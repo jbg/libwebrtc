@@ -111,6 +111,30 @@
       },
       "revId": "883d202d37aa68952b4a07f02cc102aaddb0b5c1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6001f116_c9d308fe",
+        "filename": "codereview.settings",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 14634
+      },
+      "writtenOn": "2023-05-03T09:08:43Z",
+      "side": 1,
+      "message": "Yes... eventually. But I think we can wait to implement this until we see it happen once or twice. If it\u0027s frequent, we can just revert this commit, no harm done",
+      "parentUuid": "5e23f6dc_304fd867",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 28
+      },
+      "revId": "883d202d37aa68952b4a07f02cc102aaddb0b5c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
