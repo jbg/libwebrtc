@@ -275,6 +275,11 @@ class PacingControllerProbing : public PacingController::PacketSender {
   PacedPacketInfo last_pacing_info_;
 };
 
+class MockTransportSendBatchController : public TransportSendBatchController {
+ public:
+  MOCK_METHOD(void, OnSendBatchComplete, ());
+};
+
 class PacingControllerTest : public ::testing::Test {
  protected:
   PacingControllerTest() : clock_(123456), trials_("") {}
@@ -2132,6 +2137,44 @@ TEST_F(PacingControllerTest, RespectsTargetRateWhenSendingPacketsInBursts) {
   }
   EXPECT_EQ(pacer.QueueSizePackets(), 88u);
   EXPECT_EQ(number_of_bursts, 4);
+}
+
+TEST_F(PacingControllerTest,
+       CallsSendBatchCompleteOnProcessPacketsWithZeroPackets) {
+  MockTransportSendBatchController mock_send_batch_controller;
+  PacingController pacer(&clock_, &callback_, trials_,
+                         &mock_send_batch_controller);
+  pacer.SetSendBurstInterval(TimeDelta::Millis(20));
+  pacer.SetPacingRates(DataRate::BytesPerSec(10000), DataRate::Zero());
+  EXPECT_CALL(mock_send_batch_controller, OnSendBatchComplete);
+  pacer.ProcessPackets();
+}
+
+TEST_F(PacingControllerTest,
+       CallsSendBatchCompleteOnProcessPacketsWithOnePacket) {
+  MockTransportSendBatchController mock_send_batch_controller;
+  PacingController pacer(&clock_, &callback_, trials_,
+                         &mock_send_batch_controller);
+  pacer.SetSendBurstInterval(TimeDelta::Millis(20));
+  pacer.SetPacingRates(DataRate::BytesPerSec(10000), DataRate::Zero());
+  pacer.EnqueuePacket(video_.BuildNextPacket(100));
+  EXPECT_CALL(mock_send_batch_controller, OnSendBatchComplete);
+  pacer.ProcessPackets();
+}
+
+TEST_F(PacingControllerTest,
+       CallsSendBatchCompleteOnProcessPacketsWithThreePackets) {
+  MockTransportSendBatchController mock_send_batch_controller;
+  PacingController pacer(&clock_, &callback_, trials_,
+                         &mock_send_batch_controller);
+  pacer.SetSendBurstInterval(TimeDelta::Millis(20));
+  pacer.SetPacingRates(DataRate::BytesPerSec(10000), DataRate::Zero());
+  pacer.SetPacingRates(DataRate::BytesPerSec(10000), DataRate::Zero());
+  pacer.EnqueuePacket(video_.BuildNextPacket(100));
+  pacer.EnqueuePacket(video_.BuildNextPacket(100));
+  pacer.EnqueuePacket(video_.BuildNextPacket(100));
+  EXPECT_CALL(mock_send_batch_controller, OnSendBatchComplete);
+  pacer.ProcessPackets();
 }
 
 TEST_F(PacingControllerTest, RespectsQueueTimeLimit) {

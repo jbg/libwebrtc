@@ -16,6 +16,7 @@
 #include <vector>
 
 #include "absl/strings/match.h"
+#include "api/transport/network_types.h"
 #include "modules/pacing/bitrate_prober.h"
 #include "modules/pacing/interval_budget.h"
 #include "rtc_base/checks.h"
@@ -30,6 +31,39 @@ constexpr TimeDelta kCongestedPacketInterval = TimeDelta::Millis(500);
 // The maximum debt level, in terms of time, capped when sending packets.
 constexpr TimeDelta kMaxDebtInTime = TimeDelta::Millis(500);
 constexpr TimeDelta kMaxElapsedTime = TimeDelta::Seconds(2);
+
+class SendPacketProcessor {
+ public:
+  explicit SendPacketProcessor(
+      PacingController::PacketSender* const packet_sender)
+      : packet_sender_(packet_sender) {}
+
+  ~SendPacketProcessor() {
+    for (auto& packet_to_send : packets_to_send_) {
+      PacedPacketInfo info = packet_to_send.paced_packet_info;
+      if (&packet_to_send == &packets_to_send_.back()) {
+        info.last_packet_in_batch = true;
+      }
+      packet_sender_->SendPacket(std::move(packet_to_send.rtp_packet_to_send),
+                                 info);
+    }
+  }
+
+  void SendPacket(std::unique_ptr<RtpPacketToSend> rtp_packet_to_send,
+                  const PacedPacketInfo& paced_packet_info) {
+    packets_to_send_.push_back(
+        {std::move(rtp_packet_to_send), paced_packet_info});
+  }
+
+ private:
+  struct PacketToSend {
+    std::unique_ptr<RtpPacketToSend> rtp_packet_to_send;
+    PacedPacketInfo paced_packet_info;
+  };
+
+  PacingController::PacketSender* const packet_sender_;
+  std::vector<PacketToSend> packets_to_send_;
+};
 
 bool IsDisabled(const FieldTrialsView& field_trials, absl::string_view key) {
   return absl::StartsWith(field_trials.Lookup(key), "Disabled");
@@ -52,9 +86,11 @@ const TimeDelta PacingController::kMaxPaddingReplayDuration =
 const TimeDelta PacingController::kMaxEarlyProbeProcessing =
     TimeDelta::Millis(1);
 
-PacingController::PacingController(Clock* clock,
-                                   PacketSender* packet_sender,
-                                   const FieldTrialsView& field_trials)
+PacingController::PacingController(
+    Clock* clock,
+    PacketSender* packet_sender,
+    const FieldTrialsView& field_trials,
+    TransportSendBatchController* send_batch_controller)
     : clock_(clock),
       packet_sender_(packet_sender),
       field_trials_(field_trials),
@@ -88,7 +124,8 @@ PacingController::PacingController(Clock* clock,
       queue_time_limit_(kMaxExpectedQueueLength),
       account_for_audio_(false),
       include_overhead_(false),
-      circuit_breaker_threshold_(1 << 16) {
+      circuit_breaker_threshold_(1 << 16)/*,
+      send_batch_controller_(send_batch_controller)*/ {
   if (!drain_large_queues_) {
     RTC_LOG(LS_WARNING) << "Pacer queues will not be drained,"
                            "pushback experiment must be enabled.";
@@ -376,6 +413,7 @@ Timestamp PacingController::NextSendTime() const {
 void PacingController::ProcessPackets() {
   const Timestamp now = CurrentTime();
   Timestamp target_send_time = now;
+  SendPacketProcessor send_packet_processor(packet_sender_);
 
   if (ShouldSendKeepalive(now)) {
     DataSize keepalive_data_sent = DataSize::Zero();
@@ -387,7 +425,7 @@ void PacingController::ProcessPackets() {
       for (auto& packet : keepalive_packets) {
         keepalive_data_sent +=
             DataSize::Bytes(packet->payload_size() + packet->padding_size());
-        packet_sender_->SendPacket(std::move(packet), PacedPacketInfo());
+        send_packet_processor.SendPacket(std::move(packet), PacedPacketInfo());
         for (auto& packet : packet_sender_->FetchFec()) {
           EnqueuePacket(std::move(packet));
         }
@@ -483,7 +521,7 @@ void PacingController::ProcessPackets() {
                        transport_overhead_per_packet_;
       }
 
-      packet_sender_->SendPacket(std::move(rtp_packet), pacing_info);
+      send_packet_processor.SendPacket(std::move(rtp_packet), pacing_info);
       for (auto& packet : packet_sender_->FetchFec()) {
         EnqueuePacket(std::move(packet));
       }
