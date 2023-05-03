@@ -3258,6 +3258,30 @@ TEST_P(WebRtcVoiceEngineTestFake, SetOutputVolume) {
   EXPECT_DOUBLE_EQ(3, GetRecvStream(kSsrcY).gain());
 }
 
+TEST_P(WebRtcVoiceEngineTestFake, SetAudioLevelCallback) {
+  EXPECT_TRUE(SetupRecvStream());
+  auto& stream = GetRecvStream(kSsrcX);
+  // No callback object should be set at this point.
+  EXPECT_FALSE(stream.level_callback());
+  absl::optional<uint8_t> callback_level;
+  absl::AnyInvocable<void(uint32_t, absl::optional<uint8_t>)> callback =
+      [&](uint32_t timestamp, absl::optional<uint8_t> level) {
+        callback_level = level;
+      };
+
+  // Assign our own callback.
+  receive_channel_->SetAudioLevelCallback(kSsrcX, std::move(callback));
+  ASSERT_TRUE(stream.level_callback());
+
+  // Verify that the correct callback object has been set on the receive stream.
+  stream.level_callback()(1000, 55);
+  EXPECT_EQ(callback_level, absl::optional<uint8_t>(55));
+
+  // Verify that the `RemoveAudioLevelCallback()` code path is called.
+  receive_channel_->SetAudioLevelCallback(kSsrcX, nullptr);
+  EXPECT_FALSE(stream.level_callback());
+}
+
 TEST_P(WebRtcVoiceEngineTestFake, SetOutputVolumeUnsignaledRecvStream) {
   EXPECT_TRUE(SetupChannel());
 

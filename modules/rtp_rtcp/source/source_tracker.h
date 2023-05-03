@@ -17,6 +17,7 @@
 #include <utility>
 #include <vector>
 
+#include "absl/functional/any_invocable.h"
 #include "absl/types/optional.h"
 #include "api/rtp_packet_infos.h"
 #include "api/task_queue/pending_task_safety_flag.h"
@@ -55,6 +56,14 @@ class SourceTracker {
   // the last `kTimeoutMs` milliseconds. Entries appear in reverse chronological
   // order (i.e. with the most recently updated entries appearing first).
   std::vector<RtpSource> GetSources() const;
+
+  void SetAudioLevelCallback(
+      uint32_t ssrc,
+      absl::AnyInvocable<void(uint32_t, absl::optional<uint8_t>)>
+          level_callback);
+
+  absl::AnyInvocable<void(uint32_t, absl::optional<uint8_t>)>
+  RemoveAudioLevelCallback(uint32_t ssrc);
 
  private:
   struct SourceKey {
@@ -128,6 +137,10 @@ class SourceTracker {
   // pruning in getters.
   void PruneEntries(Timestamp now) const RTC_RUN_ON(worker_thread_);
 
+  void FireAudioLevelCallback(const SourceKey& key,
+                              const SourceEntry& entry) const
+      RTC_RUN_ON(worker_thread_);
+
   TaskQueueBase* const worker_thread_;
   Clock* const clock_;
 
@@ -136,6 +149,12 @@ class SourceTracker {
   // pruning in const functions.
   mutable SourceList list_ RTC_GUARDED_BY(worker_thread_);
   mutable SourceMap map_ RTC_GUARDED_BY(worker_thread_);
+  mutable std::unordered_map<
+      SourceKey,
+      absl::AnyInvocable<void(uint32_t, absl::optional<uint8_t>)>,
+      SourceKeyHasher,
+      SourceKeyComparator>
+      level_callbacks_ RTC_GUARDED_BY(worker_thread_);
   ScopedTaskSafety worker_safety_;
 };
 
