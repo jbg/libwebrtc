@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49836ff7_166202e9",
+        "filename": "api/call/transport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2023-05-03T08:31:37Z",
+      "side": 1,
+      "message": "I understand both sides.. On the one hand doing all of this \"the proper\" way all the way down to the socket feels like an infeasibly large task right now, but I\u0027d also like us to avoid snookering ourselves by making a proper refactoring more difficult in the future.\n\nI think it would be worth at least plumbing a vector of packets from the pacer down to RtpSenderEgress. There a number of places where we could avoid per-packet locking and callbacks then, in addition to having a more explicit code path.\n\n\nHappy to discuss.",
+      "parentUuid": "33ae569f_d9fb906d",
+      "range": {
+        "startLine": 48,
+        "startChar": 15,
+        "endLine": 48,
+        "endChar": 34
+      },
+      "revId": "554d31961b72d88764ebce27d97956e6d024bf45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a12477ca_687d475c",
         "filename": "modules/pacing/pacing_controller_unittest.cc",
         "patchSetId": 3
