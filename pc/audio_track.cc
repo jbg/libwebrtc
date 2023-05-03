@@ -26,6 +26,7 @@ AudioTrack::AudioTrack(absl::string_view label,
     : MediaStreamTrack<AudioTrackInterface>(label), audio_source_(source) {
   if (audio_source_) {
     audio_source_->RegisterObserver(this);
+    muted_ = (audio_source_->state() == MediaSourceInterface::kMuted);
     OnChanged();
   }
 }
@@ -60,10 +61,17 @@ void AudioTrack::RemoveSink(AudioTrackSinkInterface* sink) {
 
 void AudioTrack::OnChanged() {
   RTC_DCHECK_RUN_ON(&signaling_thread_checker_);
-  if (audio_source_->state() == MediaSourceInterface::kEnded) {
+  auto source_state = audio_source_->state();
+  if (source_state == MediaSourceInterface::kEnded) {
     set_state(kEnded);
   } else {
-    set_state(kLive);
+    bool was_muted = muted_;
+    muted_ = (source_state == MediaSourceInterface::kMuted);
+    if (state() != kLive) {
+      set_state(kLive);  // Will call `FireOnChanged()`.
+    } else if (was_muted != muted_) {
+      FireOnChanged();
+    }
   }
 }
 
