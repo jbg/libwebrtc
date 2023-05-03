@@ -251,7 +251,7 @@ void RtpSenderEgress::SendPacket(RtpPacketToSend* packet,
     UpdateDelayStatistics(packet->capture_time(), now, packet_ssrc);
     UpdateOnSendPacket(options.packet_id, packet->capture_time(), packet_ssrc);
   }
-
+  options.last_packet_in_batch = pacing_info.last_packet_in_batch;
   const bool send_success = SendPacketToNetwork(*packet, options, pacing_info);
 
   // Put packet in retransmission history or update pending status even if

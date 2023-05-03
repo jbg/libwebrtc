@@ -2058,7 +2058,9 @@ std::vector<webrtc::RtpSource> WebRtcVideoChannel::GetSources(
 bool WebRtcVideoChannel::SendRtp(const uint8_t* data,
                                  size_t len,
                                  const webrtc::PacketOptions& options) {
-  MediaChannel::SendRtp(data, len, options);
+  webrtc::PacketOptions batchable_options = options;
+  batchable_options.batchable = true;
+  MediaChannel::SendRtp(data, len, batchable_options);
   return true;
 }
 

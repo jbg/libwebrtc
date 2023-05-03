@@ -98,6 +98,7 @@ struct PacedPacketInfo {
   int probe_cluster_min_probes = -1;
   int probe_cluster_min_bytes = -1;
   int probe_cluster_bytes_sent = 0;
+  bool last_packet_in_batch = false;
 };
 
 struct SentPacket {
