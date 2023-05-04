@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "3983f0af_8570b4c3",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 20714
+      },
+      "writtenOn": "2023-05-04T15:21:04Z",
+      "side": 1,
+      "message": "Removed the optional. will keep that in mind if we change to optional in the future.",
+      "parentUuid": "49d67faf_22b9e6ec",
+      "revId": "fea7ce7182f2c9ef646be8a0188fb70469a319f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "bdebab28_1ab28f19",
         "filename": "modules/rtp_rtcp/source/forward_error_correction.h",
         "patchSetId": 11
@@ -37,6 +55,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4520cdfb_f1a65978",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 20714
+      },
+      "writtenOn": "2023-05-04T15:21:04Z",
+      "side": 1,
+      "message": "Since zero might be a valid value (at least for seq_num_base), thought to make these optional, but actually I agree that there isn\u0027t much risk to initialize them with zero here, as if the parsing of the header will fail, anyway the packet will be ignored. This is actually the state now, when we create an FEC packet, these fields aren\u0027t populated with the final value.\n\nChanging back and initializing to 0.\n\nAfter we will refactor the RTP header parsing to populate the ssrcs, we might change this if we see it\u0027s needed.",
+      "parentUuid": "bdebab28_1ab28f19",
+      "revId": "fea7ce7182f2c9ef646be8a0188fb70469a319f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a91b1e8c_12a6437d",
         "filename": "modules/rtp_rtcp/source/forward_error_correction.h",
         "patchSetId": 11
@@ -48,6 +84,24 @@
       "writtenOn": "2023-04-30T18:23:45Z",
       "side": 1,
       "message": "prefer to put the constant before the constructor\n\nhttps://google.github.io/styleguide/cppguide.html#Declaration_Order\n```\n3.Static constants\n5.Constructors and assignment operators\n```",
+      "revId": "fea7ce7182f2c9ef646be8a0188fb70469a319f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24de22e3_e0fe9bac",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 20714
+      },
+      "writtenOn": "2023-05-04T15:21:04Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "a91b1e8c_12a6437d",
       "revId": "fea7ce7182f2c9ef646be8a0188fb70469a319f1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
