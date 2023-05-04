@@ -33,6 +33,23 @@
       "message": "I defer to Johannes. But that reminds me this documentation needs an update anyway to match the code...",
       "revId": "88d7c264d38a845143a84396d97fdc3da8e7ffc4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b30b156_86e79d75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2023-05-04T07:35:41Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "88d7c264d38a845143a84396d97fdc3da8e7ffc4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
