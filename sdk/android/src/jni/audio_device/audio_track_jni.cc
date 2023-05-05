@@ -16,6 +16,7 @@
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/platform_thread.h"
+#include "sdk/android/generated_java_audio_device_module_native_jni/BaseWebRtcAudioTrack_jni.h"
 #include "sdk/android/generated_java_audio_device_module_native_jni/WebRtcAudioTrack_jni.h"
 #include "sdk/android/src/jni/jni_helpers.h"
 #include "system_wrappers/include/field_trial.h"
@@ -45,8 +46,8 @@ AudioTrackJni::AudioTrackJni(JNIEnv* env,
       audio_device_buffer_(nullptr) {
   RTC_LOG(LS_INFO) << "ctor";
   RTC_DCHECK(audio_parameters_.is_valid());
-  Java_WebRtcAudioTrack_setNativeAudioTrack(env, j_audio_track_,
-                                            jni::jlongFromPointer(this));
+  Java_BaseWebRtcAudioTrack_setNativeAudioTrack(env, j_audio_track_,
+                                                jni::jlongFromPointer(this));
   // Detach from this thread since construction is allowed to happen on a
   // different thread.
   thread_checker_.Detach();
@@ -89,7 +90,7 @@ int32_t AudioTrackJni::InitPlayout() {
              nullptr);
   if (buffer_size_factor == 0)
     buffer_size_factor = 1.0;
-  int requested_buffer_size_bytes = Java_WebRtcAudioTrack_initPlayout(
+  int requested_buffer_size_bytes = Java_BaseWebRtcAudioTrack_initPlayout(
       env_, j_audio_track_, audio_parameters_.sample_rate(),
       static_cast<int>(audio_parameters_.channels()), buffer_size_factor);
   if (requested_buffer_size_bytes < 0) {
@@ -108,7 +109,7 @@ int32_t AudioTrackJni::InitPlayout() {
   RTC_HISTOGRAM_COUNTS("WebRTC.Audio.AndroidNativeRequestedAudioBufferSizeMs",
                        requested_buffer_size_ms, 0, 1000, 100);
   int actual_buffer_size_frames =
-      Java_WebRtcAudioTrack_getBufferSizeInFrames(env_, j_audio_track_);
+      Java_BaseWebRtcAudioTrack_getBufferSizeInFrames(env_, j_audio_track_);
   if (actual_buffer_size_frames >= 0) {
     const int actual_buffer_size_ms =
         actual_buffer_size_frames * 1000 / sample_rate;
@@ -136,7 +137,7 @@ int32_t AudioTrackJni::StartPlayout() {
         << "Playout can not start since InitPlayout must succeed first";
     return 0;
   }
-  if (!Java_WebRtcAudioTrack_startPlayout(env_, j_audio_track_)) {
+  if (!Java_BaseWebRtcAudioTrack_startPlayout(env_, j_audio_track_)) {
     RTC_LOG(LS_ERROR) << "StartPlayout failed";
     return -1;
   }
@@ -152,9 +153,10 @@ int32_t AudioTrackJni::StopPlayout() {
   }
   // Log the difference in initial and current buffer level.
   const int current_buffer_size_frames =
-      Java_WebRtcAudioTrack_getBufferSizeInFrames(env_, j_audio_track_);
+      Java_BaseWebRtcAudioTrack_getBufferSizeInFrames(env_, j_audio_track_);
   const int initial_buffer_size_frames =
-      Java_WebRtcAudioTrack_getInitialBufferSizeInFrames(env_, j_audio_track_);
+      Java_BaseWebRtcAudioTrack_getInitialBufferSizeInFrames(env_,
+                                                             j_audio_track_);
   const int sample_rate_hz = audio_parameters_.sample_rate();
   RTC_HISTOGRAM_COUNTS(
       "WebRTC.Audio.AndroidNativeAudioBufferSizeDifferenceFromInitialMs",
@@ -162,7 +164,7 @@ int32_t AudioTrackJni::StopPlayout() {
           sample_rate_hz,
       -500, 100, 100);
 
-  if (!Java_WebRtcAudioTrack_stopPlayout(env_, j_audio_track_)) {
+  if (!Java_BaseWebRtcAudioTrack_stopPlayout(env_, j_audio_track_)) {
     RTC_LOG(LS_ERROR) << "StopPlayout failed";
     return -1;
   }
@@ -186,15 +188,15 @@ bool AudioTrackJni::SpeakerVolumeIsAvailable() {
 int AudioTrackJni::SetSpeakerVolume(uint32_t volume) {
   RTC_LOG(LS_INFO) << "SetSpeakerVolume(" << volume << ")";
   RTC_DCHECK(thread_checker_.IsCurrent());
-  return Java_WebRtcAudioTrack_setStreamVolume(env_, j_audio_track_,
-                                               static_cast<int>(volume))
+  return Java_BaseWebRtcAudioTrack_setStreamVolume(env_, j_audio_track_,
+                                                   static_cast<int>(volume))
              ? 0
              : -1;
 }
 
 absl::optional<uint32_t> AudioTrackJni::MaxSpeakerVolume() const {
   RTC_DCHECK(thread_checker_.IsCurrent());
-  return Java_WebRtcAudioTrack_getStreamMaxVolume(env_, j_audio_track_);
+  return Java_BaseWebRtcAudioTrack_getStreamMaxVolume(env_, j_audio_track_);
 }
 
 absl::optional<uint32_t> AudioTrackJni::MinSpeakerVolume() const {
@@ -205,13 +207,14 @@ absl::optional<uint32_t> AudioTrackJni::MinSpeakerVolume() const {
 absl::optional<uint32_t> AudioTrackJni::SpeakerVolume() const {
   RTC_DCHECK(thread_checker_.IsCurrent());
   const uint32_t volume =
-      Java_WebRtcAudioTrack_getStreamVolume(env_, j_audio_track_);
+      Java_BaseWebRtcAudioTrack_getStreamVolume(env_, j_audio_track_);
   RTC_LOG(LS_INFO) << "SpeakerVolume: " << volume;
   return volume;
 }
 
 int AudioTrackJni::GetPlayoutUnderrunCount() {
-  return Java_WebRtcAudioTrack_GetPlayoutUnderrunCount(env_, j_audio_track_);
+  return Java_BaseWebRtcAudioTrack_GetPlayoutUnderrunCount(env_,
+                                                           j_audio_track_);
 }
 
 // TODO(henrika): possibly add stereo support.
