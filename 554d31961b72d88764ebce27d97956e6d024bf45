@@ -96,6 +96,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff072a4c_1d314a23",
+        "filename": "api/call/transport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-05-05T14:50:03Z",
+      "side": 1,
+      "message": "Updated to match our compromise solution, PTAL. Resolving this comment for now.",
+      "parentUuid": "49836ff7_166202e9",
+      "range": {
+        "startLine": 48,
+        "startChar": 15,
+        "endLine": 48,
+        "endChar": 34
+      },
+      "revId": "554d31961b72d88764ebce27d97956e6d024bf45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a12477ca_687d475c",
@@ -109,6 +133,30 @@
       "writtenOn": "2023-04-27T10:32:06Z",
       "side": 1,
       "message": "Remove for next iteration",
+      "range": {
+        "startLine": 2172,
+        "startChar": 0,
+        "endLine": 2172,
+        "endChar": 71
+      },
+      "revId": "554d31961b72d88764ebce27d97956e6d024bf45",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb9e1891_cda0a441",
+        "filename": "modules/pacing/pacing_controller_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2172,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-05-05T14:50:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a12477ca_687d475c",
       "range": {
         "startLine": 2172,
         "startChar": 0,
