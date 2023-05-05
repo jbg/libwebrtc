@@ -34,6 +34,64 @@
       "parentUuid": "a188a7ab_54cb5da1",
       "revId": "2c6a001c78f4bdf41b1e6e2a0dba677d0270e336",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f185fa5_0e4aac72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 29
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-05-05T16:06:44Z",
+      "side": 1,
+      "message": "Thanks, I think what you are saying around reflecting the remote \"source\" state makes sense. This is how RTCRtpSynchronizationSource is implemented for example.\n\nReading the spec here: https://www.w3.org/TR/webrtc/#mediastreamtrack-network-use\n\nAccording to this, any incoming packet should \"unmute\" the track and muting is triggered by receiving RTCP_BYE or timeout in absence of any packets.\n\nMaybe the spec is designed for video and not the audio use case where muting is typically done by setting `track.enabled \u003d false` instead of stop sending completely. Do we need to update the spec so that it makes more sense for audio? Or are there other parts of the spec that I have missed?\n\nAnother thing to consider is what to do when the sender doesn\u0027t use the audio level header extension?",
+      "parentUuid": "e955e854_893fb62b",
+      "revId": "2c6a001c78f4bdf41b1e6e2a0dba677d0270e336",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d3db8cb_09ab5bbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 29
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-05-05T16:06:44Z",
+      "side": 1,
+      "message": "Adding Harald to our discussion around the spec.",
+      "revId": "2c6a001c78f4bdf41b1e6e2a0dba677d0270e336",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11240615_d97b7e23",
+        "filename": "pc/remote_audio_source.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-05-05T16:06:44Z",
+      "side": 1,
+      "message": "This feels out of place here. This should be handled in the source tracker or before it. If the receive stream is active, then updates to the source tracker will be in-order (i.e. this is redundant). In the other case, https://www.w3.org/TR/webrtc/#dom-rtcrtpcontributingsource says that packets must be processed in order, so the check should probably be in the source tracker.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 76
+      },
+      "revId": "2c6a001c78f4bdf41b1e6e2a0dba677d0270e336",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
