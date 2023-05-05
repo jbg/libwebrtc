@@ -36,8 +36,8 @@ namespace {
 
 using ::testing::_;
 using ::testing::Field;
+using ::testing::InSequence;
 using ::testing::NiceMock;
-using ::testing::Optional;
 using ::testing::StrictMock;
 
 constexpr Timestamp kStartTime = Timestamp::Millis(123456789);
@@ -96,12 +96,14 @@ class TestTransport : public Transport {
  public:
   explicit TestTransport(RtpHeaderExtensionMap* extensions)
       : total_data_sent_(DataSize::Zero()), extensions_(extensions) {}
+  MOCK_METHOD(void, SentRtp, (const PacketOptions& options), ());
   bool SendRtp(const uint8_t* packet,
                size_t length,
                const PacketOptions& options) override {
     total_data_sent_ += DataSize::Bytes(length);
     last_packet_.emplace(rtc::MakeArrayView(packet, length), options,
                          extensions_);
+    SentRtp(options);
     return true;
   }
 
@@ -175,7 +177,7 @@ class RtpSenderEgressTest : public ::testing::Test {
   NiceMock<MockSendPacketObserver> send_packet_observer_;
   NiceMock<MockTransportFeedbackObserver> feedback_observer_;
   RtpHeaderExtensionMap header_extensions_;
-  TestTransport transport_;
+  NiceMock<TestTransport> transport_;
   RtpPacketHistory packet_history_;
   test::ExplicitKeyValueConfig trials_;
   uint16_t sequence_number_;
@@ -207,6 +209,27 @@ TEST_F(RtpSenderEgressTest, TransportFeedbackObserverGetsCorrectByteCount) {
 
   std::unique_ptr<RtpSenderEgress> sender = CreateRtpSenderEgress();
   sender->SendPacket(std::move(packet), PacedPacketInfo());
+}
+
+TEST_F(RtpSenderEgressTest, SendsPacketsOneByOneWhenNotBatching) {
+  std::unique_ptr<RtpSenderEgress> sender = CreateRtpSenderEgress();
+  EXPECT_CALL(transport_,
+              SentRtp(Field(&PacketOptions::last_packet_in_batch, true)));
+  sender->SendPacket(BuildRtpPacket(), PacedPacketInfo());
+}
+
+TEST_F(RtpSenderEgressTest, CollectsPacketsWhenBatching) {
+  auto config = DefaultConfig();
+  config.enable_send_packet_batching = true;
+  auto sender = std::make_unique<RtpSenderEgress>(config, &packet_history_);
+  sender->SendPacket(BuildRtpPacket(), PacedPacketInfo());
+  sender->SendPacket(BuildRtpPacket(), PacedPacketInfo());
+  InSequence s;
+  EXPECT_CALL(transport_,
+              SentRtp(Field(&PacketOptions::last_packet_in_batch, false)));
+  EXPECT_CALL(transport_,
+              SentRtp(Field(&PacketOptions::last_packet_in_batch, true)));
+  sender->OnBatchComplete();
 }
 
 TEST_F(RtpSenderEgressTest, PacketOptionsIsRetransmitSetByPacketType) {
