@@ -92,6 +92,8 @@ class VideoReceiveStreamInterface : public MediaReceiveStreamInterface {
     absl::optional<bool> power_efficient_decoder;
     FrameCounts frame_counts;
     int decode_ms = 0;
+    // TODO(https://bugs.chromium.org/p/webrtc/issues/detail?id=15085): Update
+    // variable names.
     int max_decode_ms = 0;
     int current_delay_ms = 0;
     int target_delay_ms = 0;
