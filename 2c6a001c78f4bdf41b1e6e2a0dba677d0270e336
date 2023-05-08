@@ -71,6 +71,91 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94788084_a857db03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 29
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-05-08T13:06:55Z",
+      "side": 1,
+      "message": "1) the moving of callbacks between tracks looks like a snake ready to bite you. I don\u0027t see the point, and it makes life more complicated.\n\n2) since this CL doesn\u0027t do rate limiting, it\u0027s risky for all the reasons we\u0027ve discussed. Please put it behind a feature flag.",
+      "revId": "2c6a001c78f4bdf41b1e6e2a0dba677d0270e336",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7b8c6ba_d07c17a3",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 2227,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-05-08T13:06:55Z",
+      "side": 1,
+      "message": "This behavior seems surprising to me. It means that if you add a stream, set a callback, and then get an unsignaled stream, the callback will now fire on a stream different from the one you added it to.\n\nConsider requiring a new callback to be set for each stream, and not doing the wandering-callback-dance.",
+      "revId": "2c6a001c78f4bdf41b1e6e2a0dba677d0270e336",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c96b409_201d85ff",
+        "filename": "modules/rtp_rtcp/source/source_tracker.h",
+        "patchSetId": 29
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-05-08T13:06:55Z",
+      "side": 1,
+      "message": "Didn\u0027t we invent an \"SSRC\" class for use instead of raw uint32_t?",
+      "revId": "2c6a001c78f4bdf41b1e6e2a0dba677d0270e336",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a978c90_d76d960e",
+        "filename": "modules/rtp_rtcp/source/source_tracker.h",
+        "patchSetId": 29
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-05-08T13:06:55Z",
+      "side": 1,
+      "message": "Do we ever want to do the audio level callback on anything except SSRC?\nFiring \"mute\" events on a track should not happen on anything but the SSRC; it\u0027s not muted unless it\u0027s silent, the state of the CSRCs doesn\u0027t matter.",
+      "revId": "2c6a001c78f4bdf41b1e6e2a0dba677d0270e336",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30f6aa56_866a501b",
+        "filename": "pc/audio_track.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-05-08T13:06:55Z",
+      "side": 1,
+      "message": "Please guard this behind a feature flag.",
+      "revId": "2c6a001c78f4bdf41b1e6e2a0dba677d0270e336",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11240615_d97b7e23",
@@ -90,6 +175,23 @@
         "endLine": 33,
         "endChar": 76
       },
+      "revId": "2c6a001c78f4bdf41b1e6e2a0dba677d0270e336",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdd278be_4c632eb9",
+        "filename": "pc/remote_audio_source.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-05-08T13:06:55Z",
+      "side": 1,
+      "message": "Or perhaps the feature flag should go here.",
       "revId": "2c6a001c78f4bdf41b1e6e2a0dba677d0270e336",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
