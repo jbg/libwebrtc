@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4243247d_ae8f16c6",
+        "filename": "call/call_config.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2023-05-08T08:33:14Z",
+      "side": 1,
+      "message": "Should we name this enable_ipc_packet_batching instead? It doesn\u0027t really enable sending in batches, that\u0027s already shipped and not controlled by this, right?",
+      "range": {
+        "startLine": 86,
+        "startChar": 7,
+        "endLine": 86,
+        "endChar": 34
+      },
+      "revId": "8a7c42d3d22858ccec784a0c42fc054a599f2680",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84634812_46d6a5b8",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2023-05-08T08:33:14Z",
+      "side": 1,
+      "message": "Is there a reason for doing this instead of just calling packet_sender_-\u003eOnBatchComplete() once the function returns?\n\nI still wonder if it wouldn\u0027t have been nicer to change to change this function so that all packets are first gathered in a vector and then sent to packet_sender_ at the end of this function, either as a vector or one-by-one. But perhaps you concluded that was infeasible?",
+      "range": {
+        "startLine": 389,
+        "startChar": 21,
+        "endLine": 389,
+        "endChar": 22
+      },
+      "revId": "8a7c42d3d22858ccec784a0c42fc054a599f2680",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7ce5c83_f397d08a",
+        "filename": "modules/pacing/packet_router.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2023-05-08T08:33:14Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be !empty()?",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 52
+      },
+      "revId": "8a7c42d3d22858ccec784a0c42fc054a599f2680",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7af3001_c6945b0f",
+        "filename": "modules/pacing/packet_router.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2023-05-08T08:33:14Z",
+      "side": 1,
+      "message": "Is this modules_used_in_current_batch_? Just to clarify that it\u0027s grouped by batches, and not representing active modules or similar",
+      "range": {
+        "startLine": 113,
+        "startChar": 30,
+        "endLine": 113,
+        "endChar": 59
+      },
+      "revId": "8a7c42d3d22858ccec784a0c42fc054a599f2680",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
