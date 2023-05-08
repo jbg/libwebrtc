@@ -1386,6 +1386,8 @@ bool WebRtcVideoChannel::AddSendStream(const StreamParams& sp) {
   config.crypto_options = crypto_options_;
   config.rtp.extmap_allow_mixed = ExtmapAllowMixed();
   config.rtcp_report_interval_ms = video_config_.rtcp_report_interval_ms;
+  config.rtp.enable_send_packet_batching =
+      video_config_.enable_send_packet_batching;
 
   WebRtcVideoSendStream* stream = new WebRtcVideoSendStream(
       call_, sp, std::move(config), default_send_options_,
@@ -2058,7 +2060,9 @@ std::vector<webrtc::RtpSource> WebRtcVideoChannel::GetSources(
 bool WebRtcVideoChannel::SendRtp(const uint8_t* data,
                                  size_t len,
                                  const webrtc::PacketOptions& options) {
-  MediaChannel::SendRtp(data, len, options);
+  webrtc::PacketOptions batchable_options = options;
+  batchable_options.batchable = true;
+  MediaChannel::SendRtp(data, len, batchable_options);
   return true;
 }
 
