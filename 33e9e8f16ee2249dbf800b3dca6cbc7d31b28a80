@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65e1c4cf_8deca07d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-05-08T08:52:39Z",
+      "side": 1,
+      "message": "If I understand this CL correctly, the tests with two and three certs are now effectively only testing that nothing crashes when you try to use a cert chain with two or three elements (a weak test).\n\nWe should eventually fix the underlying problem (if we don\u0027t remove openssl support first) - please add a TODO for that.",
+      "revId": "33e9e8f16ee2249dbf800b3dca6cbc7d31b28a80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0c5c6b9_9e13cfad",
+        "filename": "rtc_base/ssl_stream_adapter_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1129,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-05-08T08:52:39Z",
+      "side": 1,
+      "message": "Add a TODO(bugs.webrtc.org/xxxxx): Fix peer_cert_chain to handle multiple certificates under OpenSSL",
+      "revId": "33e9e8f16ee2249dbf800b3dca6cbc7d31b28a80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
