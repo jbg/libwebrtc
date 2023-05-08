@@ -33,6 +33,24 @@
       "message": "Good change. Tested on iOS: https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d15146#c8.",
       "revId": "9458ee486278da0970bef316cdeb56c1640cba94",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54049b8a_e2fabc13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-05-08T19:58:24Z",
+      "side": 1,
+      "message": "Thanks Peter for the additional testing and context in the bug.\nI\u0027ll just go ahead and submit this as is, which also brings the implementation inline with other platforms (and the functionality as it was before the merge).\n\nOne last thing occurred to me as well which is that even if the check was correct, I\u0027m not sure we could even assume that the system queues are sequential (right?), which is a prerequisite for the SequenceChecker.",
+      "parentUuid": "069fc5cb_98e26923",
+      "revId": "9458ee486278da0970bef316cdeb56c1640cba94",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
