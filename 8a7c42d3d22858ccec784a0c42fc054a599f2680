@@ -143,6 +143,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d5e5267_317e9be3",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-05-08T11:32:47Z",
+      "side": 1,
+      "message": "I just realized I\u0027m doing exactly what absl::Cleanup does much more nicely! Changed to that.",
+      "parentUuid": "50f63c29_77068041",
+      "range": {
+        "startLine": 389,
+        "startChar": 21,
+        "endLine": 389,
+        "endChar": 22
+      },
+      "revId": "8a7c42d3d22858ccec784a0c42fc054a599f2680",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7ce5c83_f397d08a",
@@ -204,6 +228,30 @@
       "side": 1,
       "message": "Aha, thanks, that makes sense.\n\nIt does seem a bit weird to call erase on something that we just DCHECKed to be empty though? Doesn\u0027t that call for a CHECK(empty()) instead so that we actually catch the bug? It seems to indicate that we don\u0027t fully understand the lifetime of the objects",
       "parentUuid": "f9168d04_62866eb0",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 52
+      },
+      "revId": "8a7c42d3d22858ccec784a0c42fc054a599f2680",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "745fb0fa_37a0a329",
+        "filename": "modules/pacing/packet_router.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-05-08T11:32:47Z",
+      "side": 1,
+      "message": "We would catch it in any case since a population of Canary runs with dchecks on... Sure I can change this to a check.",
+      "parentUuid": "63942d90_c192c361",
       "range": {
         "startLine": 93,
         "startChar": 0,
