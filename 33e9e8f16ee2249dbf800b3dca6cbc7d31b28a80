@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a0f2b08_9958b91a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7529
+      },
+      "writtenOn": "2023-05-08T11:26:19Z",
+      "side": 1,
+      "message": "Agreed, the test is not testing much on the OpenSSL path. Still it seemed better than disabling it completely. Added the TODO and pointed it to webrtc:15153. Let me know if I should open a new issue instead to track the follow-up.",
+      "parentUuid": "65e1c4cf_8deca07d",
+      "revId": "33e9e8f16ee2249dbf800b3dca6cbc7d31b28a80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0c5c6b9_9e13cfad",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-05-08T08:52:39Z",
       "side": 1,
       "message": "Add a TODO(bugs.webrtc.org/xxxxx): Fix peer_cert_chain to handle multiple certificates under OpenSSL",
+      "revId": "33e9e8f16ee2249dbf800b3dca6cbc7d31b28a80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57680a1c_03747f50",
+        "filename": "rtc_base/ssl_stream_adapter_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1129,
+      "author": {
+        "id": 7529
+      },
+      "writtenOn": "2023-05-08T11:26:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c0c5c6b9_9e13cfad",
       "revId": "33e9e8f16ee2249dbf800b3dca6cbc7d31b28a80",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
