@@ -22,6 +22,30 @@
       },
       "revId": "0bd3d7f2549fdff172dbdf61621e55791e128e97",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a41b0a3d_8ffc583c",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 2064,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-05-08T14:48:34Z",
+      "side": 1,
+      "message": "I wanted to limit this to video packets... but oh yes, I was unaware the RtpSenderEgress was aware of video/audio. Thanks, I think this became better, see new PS.",
+      "parentUuid": "5208b27d_602e3418",
+      "range": {
+        "startLine": 2063,
+        "startChar": 2,
+        "endLine": 2064,
+        "endChar": 37
+      },
+      "revId": "0bd3d7f2549fdff172dbdf61621e55791e128e97",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
