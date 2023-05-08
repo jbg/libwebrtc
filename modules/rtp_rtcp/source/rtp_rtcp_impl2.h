@@ -180,11 +180,13 @@ class ModuleRtpRtcpImpl2 final : public RtpRtcpInterface,
   int32_t SetCNAME(absl::string_view c_name) override;
 
   // Get RoundTripTime.
-  int32_t RTT(uint32_t remote_ssrc,
-              int64_t* rtt,
-              int64_t* avg_rtt,
-              int64_t* min_rtt,
-              int64_t* max_rtt) const override;
+  [[deprecated]] int32_t RTT(uint32_t remote_ssrc,
+                             int64_t* rtt,
+                             int64_t* avg_rtt,
+                             int64_t* min_rtt,
+                             int64_t* max_rtt) const override;
+
+  TimeDelta LastRtt() const override;
 
   int64_t ExpectedRetransmissionTimeMs() const override;
 
