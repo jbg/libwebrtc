@@ -199,6 +199,8 @@ void VCMDecodedFrameCallback::Decoded(VideoFrame& decodedImage,
 
   decodedImage.set_timestamp_us(
       frame_info->render_time ? frame_info->render_time->us() : -1);
+  // todo: plumb 'jitter_buffer_time' through here? This is basically the time
+  // between receive_start_ms and decode_start_ms.
   _receiveCallback->FrameToRender(decodedImage, qp, decode_time,
                                   frame_info->content_type);
 }
