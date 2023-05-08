@@ -635,7 +635,9 @@ VideoReceiveStreamInterface::Stats ReceiveStatisticsProxy::GetStats() const {
   stats_.jitter_buffer_delay_seconds =
       static_cast<double>(current_delay_counter_.Sum(1).value_or(0)) /
       rtc::kNumMillisecsPerSec;
+  // jitter_buffer_target_delay_seconds
   stats_.jitter_buffer_emitted_count = current_delay_counter_.NumSamples();
+  // jitter_buffer_minimum_delay_seconds
   stats_.estimated_playout_ntp_timestamp_ms =
       GetCurrentEstimatedPlayoutNtpTimestampMs(now_ms);
   return stats_;
