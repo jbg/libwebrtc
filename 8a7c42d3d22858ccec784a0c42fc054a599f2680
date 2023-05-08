@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eea5193_1afe3339",
+        "filename": "call/call_config.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-05-08T09:04:28Z",
+      "side": 1,
+      "message": "WebRTC will not provide enough information to enable batching unless this boolean is true.\n`enable_ipc_packet_batching` may be a worse name because it implies it has something to do also with packet receive which it doesn\u0027t. The word \"send\" is significant here.\nAnother problem with that name is that use of IPC isn\u0027t mandated by WebRTC\u0027s interfaces... any problem if I keep it? I think it\u0027s quite clear from the current name what it does.",
+      "parentUuid": "4243247d_ae8f16c6",
+      "range": {
+        "startLine": 86,
+        "startChar": 7,
+        "endLine": 86,
+        "endChar": 34
+      },
+      "revId": "8a7c42d3d22858ccec784a0c42fc054a599f2680",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84634812_46d6a5b8",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-05-08T08:33:14Z",
       "side": 1,
       "message": "Is there a reason for doing this instead of just calling packet_sender_-\u003eOnBatchComplete() once the function returns?\n\nI still wonder if it wouldn\u0027t have been nicer to change to change this function so that all packets are first gathered in a vector and then sent to packet_sender_ at the end of this function, either as a vector or one-by-one. But perhaps you concluded that was infeasible?",
+      "range": {
+        "startLine": 389,
+        "startChar": 21,
+        "endLine": 389,
+        "endChar": 22
+      },
+      "revId": "8a7c42d3d22858ccec784a0c42fc054a599f2680",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60d588d7_58160fee",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-05-08T09:04:28Z",
+      "side": 1,
+      "message": "\u003e Is there a reason for doing this instead\n\nNo special reason except to cover the multiple return points in the method. Is there a suggestion here? It\u0027s pretty arbitrary how to solve this.\n\n\u003e gathered in a vector\n\nI and Erik concluded in a pair programming session last week that it\u0027s infeasible at this point.",
+      "parentUuid": "84634812_46d6a5b8",
       "range": {
         "startLine": 389,
         "startChar": 21,
@@ -70,6 +118,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9168d04_62866eb0",
+        "filename": "modules/pacing/packet_router.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-05-08T09:04:28Z",
+      "side": 1,
+      "message": "No, this is intentionally !empty(). The check is here to signal against changes in code that would invoke Remove..Module from within packet sending. The `erase` below is present to ensure the map doesn\u0027t cause outages in production, should a bug sneak in.",
+      "parentUuid": "e7ce5c83_f397d08a",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 52
+      },
+      "revId": "8a7c42d3d22858ccec784a0c42fc054a599f2680",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7af3001_c6945b0f",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-05-08T08:33:14Z",
       "side": 1,
       "message": "Is this modules_used_in_current_batch_? Just to clarify that it\u0027s grouped by batches, and not representing active modules or similar",
+      "range": {
+        "startLine": 113,
+        "startChar": 30,
+        "endLine": 113,
+        "endChar": 59
+      },
+      "revId": "8a7c42d3d22858ccec784a0c42fc054a599f2680",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a338746_fb643450",
+        "filename": "modules/pacing/packet_router.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-05-08T09:04:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7af3001_c6945b0f",
       "range": {
         "startLine": 113,
         "startChar": 30,
