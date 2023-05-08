@@ -204,11 +204,7 @@ Timestamp VCMTiming::RenderTimeInternal(uint32_t frame_timestamp,
   Timestamp estimated_complete_time =
       ts_extrapolator_->ExtrapolateLocalTime(frame_timestamp).value_or(now);
 
-  // Make sure the actual delay stays in the range of `min_playout_delay_`
-  // and `max_playout_delay_`.
-  TimeDelta actual_delay =
-      current_delay_.Clamped(min_playout_delay_, max_playout_delay_);
-  return estimated_complete_time + actual_delay;
+  return estimated_complete_time + current_delay_;
 }
 
 TimeDelta VCMTiming::EstimatedMaxDecodeTime() const {
@@ -247,9 +243,12 @@ TimeDelta VCMTiming::TargetVideoDelay() const {
   return TargetDelayInternal();
 }
 
+TimeDelta VCMTiming::MinimumDelay() const {
+  return jitter_delay_ + EstimatedMaxDecodeTime() + render_delay_;
+}
+
 TimeDelta VCMTiming::TargetDelayInternal() const {
-  return std::max(min_playout_delay_,
-                  jitter_delay_ + EstimatedMaxDecodeTime() + render_delay_);
+  return MinimumDelay().Clamped(min_playout_delay_, max_playout_delay_);
 }
 
 VideoFrame::RenderParameters VCMTiming::RenderParameters() const {
@@ -274,6 +273,7 @@ VCMTiming::VideoDelayTimings VCMTiming::GetTimings() const {
       .jitter_delay = jitter_delay_,
       .estimated_max_decode_time = EstimatedMaxDecodeTime(),
       .render_delay = render_delay_,
+      .minimum_delay = MinimumDelay(),
       .min_playout_delay = min_playout_delay_,
       .max_playout_delay = max_playout_delay_,
       .target_delay = TargetDelayInternal(),
