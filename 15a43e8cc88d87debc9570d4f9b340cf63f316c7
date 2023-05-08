@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "065c54f8_f2b84d79",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-05-08T17:01:06Z",
+      "side": 1,
+      "message": "Is this the correct way to test for absence of RTT? Wouldn\u0027t returning an optional from LastRtt be more obvious?\n\nAlso I guess this changes the behavior slightly if the RTT is actually zero, but I think that should be fine.",
+      "range": {
+        "startLine": 744,
+        "startChar": 10,
+        "endLine": 744,
+        "endChar": 11
+      },
+      "revId": "15a43e8cc88d87debc9570d4f9b340cf63f316c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
