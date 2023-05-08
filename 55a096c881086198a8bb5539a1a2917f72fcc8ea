@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba14a502_32f0736a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-05-08T15:58:31Z",
+      "side": 1,
+      "message": "Nit: Somewhat confusing description, maybe change to \"... deprecate RtpRtcpInterface::RTT\".\n\nNot really that important",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 67
+      },
+      "revId": "55a096c881086198a8bb5539a1a2917f72fcc8ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
