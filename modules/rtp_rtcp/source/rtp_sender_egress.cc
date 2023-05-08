@@ -66,7 +66,8 @@ void RtpSenderEgress::NonPacedPacketSender::PrepareForSend(
 
 RtpSenderEgress::RtpSenderEgress(const RtpRtcpInterface::Configuration& config,
                                  RtpPacketHistory* packet_history)
-    : worker_queue_(TaskQueueBase::Current()),
+    : enable_send_packet_batching_(config.enable_send_packet_batching),
+      worker_queue_(TaskQueueBase::Current()),
       ssrc_(config.local_media_ssrc),
       rtx_ssrc_(config.rtx_send_ssrc),
       flexfec_ssrc_(config.fec_generator ? config.fec_generator->FecSsrc()
@@ -139,13 +140,13 @@ void RtpSenderEgress::SendPacket(std::unique_ptr<RtpPacketToSend> packet,
     RTC_DCHECK(packet->retransmitted_sequence_number().has_value());
   }
 
-  const uint32_t packet_ssrc = packet->Ssrc();
   const Timestamp now = clock_->CurrentTime();
 
 #if BWE_TEST_LOGGING_COMPILE_TIME_ENABLE
-  worker_queue_->PostTask(SafeTask(
-      task_safety_.flag(),
-      [this, now, packet_ssrc]() { BweTestLoggingPlot(now, packet_ssrc); }));
+  worker_queue_->PostTask(SafeTask(task_safety_.flag(),
+                                   [this, now, packet_ssrc = packet->Ssrc()]() {
+                                     BweTestLoggingPlot(now, packet_ssrc);
+                                   }));
 #endif
 
   if (need_rtp_packet_infos_ &&
@@ -225,6 +226,26 @@ void RtpSenderEgress::SendPacket(std::unique_ptr<RtpPacketToSend> packet,
     }
   }
 
+  auto compound_packet = Packet{std::move(packet), pacing_info, now};
+  if (enable_send_packet_batching_) {
+    packets_to_send_.push_back(std::move(compound_packet));
+  } else {
+    CompleteSendPacket(compound_packet, true);
+  }
+}
+
+void RtpSenderEgress::OnBatchComplete() {
+  RTC_DCHECK_RUN_ON(&pacer_checker_);
+  for (auto& packet : packets_to_send_) {
+    CompleteSendPacket(packet, &packet == &packets_to_send_.back());
+  }
+  packets_to_send_.clear();
+}
+
+void RtpSenderEgress::CompleteSendPacket(const Packet& compound_packet,
+                                         bool last_in_batch) {
+  auto& [packet, pacing_info, now] = compound_packet;
+
   const bool is_media = packet->packet_type() == RtpPacketMediaType::kAudio ||
                         packet->packet_type() == RtpPacketMediaType::kVideo;
 
@@ -246,12 +267,13 @@ void RtpSenderEgress::SendPacket(std::unique_ptr<RtpPacketToSend> packet,
 
   options.additional_data = packet->additional_data();
 
+  const uint32_t packet_ssrc = packet->Ssrc();
   if (packet->packet_type() != RtpPacketMediaType::kPadding &&
       packet->packet_type() != RtpPacketMediaType::kRetransmission) {
     UpdateDelayStatistics(packet->capture_time(), now, packet_ssrc);
     UpdateOnSendPacket(options.packet_id, packet->capture_time(), packet_ssrc);
   }
-
+  options.last_packet_in_batch = last_in_batch;
   const bool send_success = SendPacketToNetwork(*packet, options, pacing_info);
 
   // Put packet in retransmission history or update pending status even if
@@ -279,9 +301,9 @@ void RtpSenderEgress::SendPacket(std::unique_ptr<RtpPacketToSend> packet,
     // TODO(bugs.webrtc.org/137439): clean up task posting when the combined
     // network/worker project launches.
     if (TaskQueueBase::Current() != worker_queue_) {
-      worker_queue_->PostTask(
-          SafeTask(task_safety_.flag(), [this, now, packet_ssrc, packet_type,
-                                         counter = std::move(counter), size]() {
+      worker_queue_->PostTask(SafeTask(
+          task_safety_.flag(), [this, now = now, packet_ssrc, packet_type,
+                                counter = std::move(counter), size]() {
             RTC_DCHECK_RUN_ON(worker_queue_);
             UpdateRtpStats(now, packet_ssrc, packet_type, std::move(counter),
                            size);
