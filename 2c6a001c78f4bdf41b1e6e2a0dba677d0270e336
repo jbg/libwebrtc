@@ -88,6 +88,42 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f259ba8_b0ee1c78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 29
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-05-08T14:49:12Z",
+      "side": 1,
+      "message": "1) I\u0027m assuming you\u0027re referring to how unsignaled SSRCs are managed in voice engine. I\u0027ll shed some light on that in the other comments.\n\n2) Will follow up with a feature flag. I\u0027ll also follow up with a CL that handles rate limiting. Note that additional wiring-up is required in Chrome to hook this up to the eventual `muted` property, so just flagging that since this CL doesn\u0027t change the existing behavior.",
+      "parentUuid": "94788084_a857db03",
+      "revId": "2c6a001c78f4bdf41b1e6e2a0dba677d0270e336",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c31d4a31_f4148f6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 29
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-05-08T14:49:12Z",
+      "side": 1,
+      "message": "It seems to me that we could clarify/sharpen the language in the spec and that it would be helpful to do so.\n\nAs far as `track.enabled \u003d false` goes, from what I know, it should work the same way for audio and video in basic terms. The `muted` property might change regardless of the `enabled` property though. I.e. you could have an unmuted source connected to disabled track (or vice versa).\n\nAs far as other parts of the spec, for local streams, there are some useful examples given for the muted property. There\u0027s still vagueness there when it comes to practicalities when writing the code, but the use cases are still helpful to understand the intent (and how it provides value to the application):\n\n```\nThere can be several reasons for a MediaStreamTrack to be muted: the user pushing a physical mute button on the microphone, the user closing a laptop lid with an embedded camera, the user toggling a control in the operating system, the user clicking a mute button in the User Agent chrome, the User Agent (on behalf of the user) mutes, etc.\n```\n\nA laptop lid for a camera doesn\u0027t necessarily mean that the application would stop receiving frames. Pressing the mute button on a microphone similarly might only be detectable from the application by receiving 0\u0027d buffers (as opposed to knowing about the device\u0027s muted state).\n\nGood point about absence of the audio level header. I suppose getContributingSources doesn\u0027t do much in that case 😐",
+      "parentUuid": "2f185fa5_0e4aac72",
+      "revId": "2c6a001c78f4bdf41b1e6e2a0dba677d0270e336",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7b8c6ba_d07c17a3",
@@ -101,6 +137,24 @@
       "writtenOn": "2023-05-08T13:06:55Z",
       "side": 1,
       "message": "This behavior seems surprising to me. It means that if you add a stream, set a callback, and then get an unsignaled stream, the callback will now fire on a stream different from the one you added it to.\n\nConsider requiring a new callback to be set for each stream, and not doing the wandering-callback-dance.",
+      "revId": "2c6a001c78f4bdf41b1e6e2a0dba677d0270e336",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d86e20d0_5f8ae472",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 2227,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-05-08T14:49:12Z",
+      "side": 1,
+      "message": "Ah the wandering-callback-dance 😄\n\nThis is the design of the class actually and part of the complexity it manages - for unsignaled streams that is. There are two ways that the class operates:\n\n* \"I don\u0027t know about SSRCs, so just do the default thing\". This part of the implementation is the surprising part and specific for what is \u0027default\u0027.\n* The other works exactly as you\u0027d expect and does not involve the dance.\n\nThe comment I\u0027m adding in this CL just explains the existing behaviour. See calls to `SetRawAudioSink` for example as well as how the class manages the \u0027default\u0027 audio stream (e.g. what `GetUnsignaledSsrc()` does).\n\nIf we were to redesign the class, then I think that all the magic around the default dance would require a significant amount of changes (including API). But I don\u0027t think that there\u0027s much value in it as it stands since the audio code has different assumptions around playout than the video code does. I\u0027m also not sure what concrete problem we\u0027d be trying to solve (or even that the final outcome would be _less_ complicated). In general the \u0027default\u0027 concept abstracts away this complexity from the pov of the user of the class when the \"default\" methods are used.",
+      "parentUuid": "c7b8c6ba_d07c17a3",
       "revId": "2c6a001c78f4bdf41b1e6e2a0dba677d0270e336",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -124,6 +178,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1747fed5_ae4389a2",
+        "filename": "modules/rtp_rtcp/source/source_tracker.h",
+        "patchSetId": 29
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-05-08T14:49:12Z",
+      "side": 1,
+      "message": "I don\u0027t _think_ we have a class for it but we frequently use `absl::optional\u003cuint32_t\u003e` for it (to avoid assuming that 0 is not an SSRC).\n\nWe did invent a class (StreamId) for 16 bit sctp identifiers - maybe that\u0027s the one you\u0027re thinking of?",
+      "parentUuid": "5c96b409_201d85ff",
+      "revId": "2c6a001c78f4bdf41b1e6e2a0dba677d0270e336",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a978c90_d76d960e",
         "filename": "modules/rtp_rtcp/source/source_tracker.h",
         "patchSetId": 29
@@ -135,6 +207,24 @@
       "writtenOn": "2023-05-08T13:06:55Z",
       "side": 1,
       "message": "Do we ever want to do the audio level callback on anything except SSRC?\nFiring \"mute\" events on a track should not happen on anything but the SSRC; it\u0027s not muted unless it\u0027s silent, the state of the CSRCs doesn\u0027t matter.",
+      "revId": "2c6a001c78f4bdf41b1e6e2a0dba677d0270e336",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afea26e5_bb42ce0b",
+        "filename": "modules/rtp_rtcp/source/source_tracker.h",
+        "patchSetId": 29
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-05-08T14:49:12Z",
+      "side": 1,
+      "message": "Moving beyond just the `muted` property, I do think it would be useful to know the unmixed audio level of a CSRC down the line. But we don\u0027t have a way for an audio source to represent a CSRC but it sounds like something to think about in terms of what an API could look like.",
+      "parentUuid": "9a978c90_d76d960e",
       "revId": "2c6a001c78f4bdf41b1e6e2a0dba677d0270e336",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -158,6 +248,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "815a9d79_ba023b2c",
+        "filename": "pc/audio_track.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-05-08T14:49:12Z",
+      "side": 1,
+      "message": "Will follow up",
+      "parentUuid": "30f6aa56_866a501b",
+      "revId": "2c6a001c78f4bdf41b1e6e2a0dba677d0270e336",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11240615_d97b7e23",
         "filename": "pc/remote_audio_source.cc",
         "patchSetId": 29
@@ -169,6 +277,30 @@
       "writtenOn": "2023-05-05T16:06:44Z",
       "side": 1,
       "message": "This feels out of place here. This should be handled in the source tracker or before it. If the receive stream is active, then updates to the source tracker will be in-order (i.e. this is redundant). In the other case, https://www.w3.org/TR/webrtc/#dom-rtcrtpcontributingsource says that packets must be processed in order, so the check should probably be in the source tracker.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 76
+      },
+      "revId": "2c6a001c78f4bdf41b1e6e2a0dba677d0270e336",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac04dd26_87308d5b",
+        "filename": "pc/remote_audio_source.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-05-08T14:49:12Z",
+      "side": 1,
+      "message": "Yes agree that it makes more sense as part of SourceTracker. I\u0027m actually not if this happens in practice but since I did not find the code that would do the ordering in the case where playout isn\u0027t active (no neteq) so I added this and the test for it. I\u0027ll take a look at moving it over to SourceTracker.",
+      "parentUuid": "11240615_d97b7e23",
       "range": {
         "startLine": 33,
         "startChar": 0,
