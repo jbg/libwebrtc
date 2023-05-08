@@ -48,6 +48,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21e109fd_34417622",
+        "filename": "call/call_config.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2023-05-08T09:18:55Z",
+      "side": 1,
+      "message": "Good point, ipc in the name wouldn\u0027t make sense outside of Chrome.\n\nI\u0027m OK with this.",
+      "parentUuid": "4eea5193_1afe3339",
+      "range": {
+        "startLine": 86,
+        "startChar": 7,
+        "endLine": 86,
+        "endChar": 34
+      },
+      "revId": "8a7c42d3d22858ccec784a0c42fc054a599f2680",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84634812_46d6a5b8",
@@ -95,6 +119,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50f63c29_77068041",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2023-05-08T09:18:55Z",
+      "side": 1,
+      "message": "Ack, thanks. I wasn\u0027t sure if I missed something as it\u0027s a pattern that I haven\u0027t seen used in the rest of the file.\n\nThe proposal was the second paragraph.",
+      "parentUuid": "60d588d7_58160fee",
+      "range": {
+        "startLine": 389,
+        "startChar": 21,
+        "endLine": 389,
+        "endChar": 22
+      },
+      "revId": "8a7c42d3d22858ccec784a0c42fc054a599f2680",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7ce5c83_f397d08a",
@@ -132,6 +180,30 @@
       "side": 1,
       "message": "No, this is intentionally !empty(). The check is here to signal against changes in code that would invoke Remove..Module from within packet sending. The `erase` below is present to ensure the map doesn\u0027t cause outages in production, should a bug sneak in.",
       "parentUuid": "e7ce5c83_f397d08a",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 52
+      },
+      "revId": "8a7c42d3d22858ccec784a0c42fc054a599f2680",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63942d90_c192c361",
+        "filename": "modules/pacing/packet_router.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2023-05-08T09:18:55Z",
+      "side": 1,
+      "message": "Aha, thanks, that makes sense.\n\nIt does seem a bit weird to call erase on something that we just DCHECKed to be empty though? Doesn\u0027t that call for a CHECK(empty()) instead so that we actually catch the bug? It seems to indicate that we don\u0027t fully understand the lifetime of the objects",
+      "parentUuid": "f9168d04_62866eb0",
       "range": {
         "startLine": 93,
         "startChar": 0,
