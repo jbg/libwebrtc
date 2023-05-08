@@ -39,6 +39,17 @@ bool IsEnabled(const FieldTrialsView& field_trials, absl::string_view key) {
   return absl::StartsWith(field_trials.Lookup(key), "Enabled");
 }
 
+class SendBatchCompleteOnDestruction {
+ public:
+  explicit SendBatchCompleteOnDestruction(
+      PacingController::PacketSender* sender)
+      : sender_(sender) {}
+  ~SendBatchCompleteOnDestruction() { sender_->OnBatchComplete(); }
+
+ private:
+  PacingController::PacketSender* const sender_;
+};
+
 }  // namespace
 
 const TimeDelta PacingController::kMaxExpectedQueueLength =
@@ -374,6 +385,8 @@ Timestamp PacingController::NextSendTime() const {
 }
 
 void PacingController::ProcessPackets() {
+  SendBatchCompleteOnDestruction send_batch_complete_on_destruction(
+      packet_sender_);
   const Timestamp now = CurrentTime();
   Timestamp target_send_time = now;
 
