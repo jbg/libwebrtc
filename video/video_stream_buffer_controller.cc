@@ -21,6 +21,7 @@
 #include "api/task_queue/task_queue_base.h"
 #include "api/units/data_size.h"
 #include "api/units/time_delta.h"
+#include "api/units/timestamp.h"
 #include "api/video/encoded_frame.h"
 #include "api/video/frame_buffer.h"
 #include "api/video/video_content_type.h"
@@ -66,6 +67,18 @@ struct FrameMetadata {
   const uint32_t rtp_timestamp;
   const absl::optional<Timestamp> receive_time;
 };
+
+Timestamp MinReceiveTime(const EncodedFrame& frame) {
+  Timestamp first_recv_time = Timestamp::PlusInfinity();
+  for (const auto& packet_info : frame.PacketInfos()) {
+    first_recv_time = std::min(first_recv_time, packet_info.receive_time());
+  }
+  if (first_recv_time == Timestamp::PlusInfinity()) {
+    RTC_LOG(LS_VERBOSE) << "No packet receive time set, jitter buffer delay "
+                           "cannot be calculated";
+  }
+  return first_recv_time;
+}
 
 Timestamp ReceiveTime(const EncodedFrame& frame) {
   absl::optional<Timestamp> ts = frame.ReceivedTimestamp();
@@ -202,6 +215,7 @@ void VideoStreamBufferController::OnFrameReady(
   bool superframe_delayed_by_retransmission = false;
   DataSize superframe_size = DataSize::Zero();
   const EncodedFrame& first_frame = *frames.front();
+  Timestamp min_receive_time = MinReceiveTime(first_frame);
   Timestamp receive_time = ReceiveTime(first_frame);
 
   if (first_frame.is_keyframe())
@@ -222,6 +236,7 @@ void VideoStreamBufferController::OnFrameReady(
     frame->SetRenderTime(render_time.ms());
 
     superframe_delayed_by_retransmission |= frame->delayed_by_retransmission();
+    min_receive_time = std::min(min_receive_time, MinReceiveTime(*frame));
     receive_time = std::max(receive_time, ReceiveTime(*frame));
     superframe_size += DataSize::Bytes(frame->size());
   }
@@ -250,7 +265,8 @@ void VideoStreamBufferController::OnFrameReady(
 
   // Update stats.
   UpdateDroppedFrames();
-  UpdateJitterDelay();
+  UpdateFrameBufferTimings();
+  UpdateJitterBufferDelay(min_receive_time, now);
   UpdateTimingFrameInfo();
 
   std::unique_ptr<EncodedFrame> frame =
@@ -315,13 +331,31 @@ void VideoStreamBufferController::UpdateDroppedFrames()
       buffer_->GetTotalNumberOfDroppedFrames();
 }
 
-void VideoStreamBufferController::UpdateJitterDelay() {
+void VideoStreamBufferController::UpdateFrameBufferTimings() {
   auto timings = timing_->GetTimings();
   if (timings.num_decoded_frames) {
     stats_proxy_->OnFrameBufferTimingsUpdated(
         timings.estimated_max_decode_time.ms(), timings.current_delay.ms(),
         timings.target_delay.ms(), timings.jitter_delay.ms(),
         timings.min_playout_delay.ms(), timings.render_delay.ms());
+  }
+}
+
+void VideoStreamBufferController::UpdateJitterBufferDelay(
+    Timestamp min_receive_time,
+    Timestamp now) {
+  // The spec [1] mandates that `jitterBufferDelay` is the "time the first
+  // packet is received by the jitter buffer (ingest timestamp) to the time it
+  // exits the jitter buffer (emit timestamp)". Since the "video jitter buffer"
+  // is not a monolith in the webrtc.org implementation, we take the freedom to
+  // define "ingest timestamp" as "first packet received by
+  // RtpVideoStreamReceiver2" and "emit timestamp" as "decodable frame released
+  // by VideoStreamBufferController".
+  // [1]:
+  // https://w3c.github.io/webrtc-stats/#dom-rtcinboundrtpstreamstats-jitterbufferdelay
+  TimeDelta jitter_buffer_delay = now - min_receive_time;
+  if (jitter_buffer_delay >= TimeDelta::Zero()) {
+    stats_proxy_->OnJitterBufferDelay(jitter_buffer_delay.ms());
   }
 }
 
