@@ -68,11 +68,15 @@ std::string VideoReceiveStreamInterface::Stats::ToString(
   ss << "max_decode_ms: " << max_decode_ms << ", ";
   ss << "first_frame_received_to_decoded_ms: "
      << first_frame_received_to_decoded_ms << ", ";
-  ss << "cur_delay_ms: " << current_delay_ms << ", ";
-  ss << "targ_delay_ms: " << target_delay_ms << ", ";
-  ss << "jb_delay_ms: " << jitter_buffer_ms << ", ";
-  ss << "jb_cumulative_delay_seconds: " << jitter_buffer_delay_seconds << ", ";
-  ss << "jb_emitted_count: " << jitter_buffer_emitted_count << ", ";
+  ss << "current_delay_ms: " << current_delay_ms << ", ";
+  ss << "target_delay_ms: " << target_delay_ms << ", ";
+  ss << "jitter_buffer_ms: " << jitter_buffer_ms << ", ";
+  ss << "jitter_buffer_delay_seconds: " << jitter_buffer_delay_seconds << ", ";
+  ss << "jitter_buffer_target_delay_seconds: "
+     << jitter_buffer_target_delay_seconds << ", ";
+  ss << "jitter_buffer_emitted_count: " << jitter_buffer_emitted_count << ", ";
+  ss << "jitter_buffer_minimum_delay_seconds: "
+     << jitter_buffer_minimum_delay_seconds << ", ";
   ss << "min_playout_delay_ms: " << min_playout_delay_ms << ", ";
   ss << "sync_offset_ms: " << sync_offset_ms << ", ";
   ss << "cum_loss: " << rtp_stats.packets_lost << ", ";
