@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '2fe14dca3dd082162823ab9de61ff44e33a9d56f',
+  'chromium_revision': '8ec5c36fe93791081645b0690a2f95aed0c86347',
 
   # Fetch the prebuilt binaries for llvm-cov and llvm-profdata. Needed to
   # process the raw profiles produced by instrumented targets (built with
@@ -48,7 +48,7 @@ deps = {
   'src/base':
     'https://chromium.googlesource.com/chromium/src/base@7fdc8d30712863e313c1b4a85633a90b292608a2',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@314dcd742b199e43370133fb45368f95c220153e',
+    'https://chromium.googlesource.com/chromium/src/build@10c748801b217fd38b7fb80c9b54d512912dc413',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@a26ff314e935beb622b7a966a52c82f6e1b82524',
   # Gradle 6.6.1. Used for testing Android Studio project generation for WebRTC.
@@ -63,7 +63,7 @@ deps = {
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@7b4e5110da47995c6b2606b7b8802962e87a9a5d',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@0ec2eead61bb4affeb610d7aa14bd66ef681c953',
+    'https://chromium.googlesource.com/chromium/src/third_party@23a8769b8ce7e556a265f7ef4930cc554ff3d545',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -197,7 +197,7 @@ deps = {
       'condition': 'checkout_linux',
   },
   'src/third_party/freetype/src':
-    'https://chromium.googlesource.com/chromium/src/third_party/freetype2.git@8fe50c2adca74a4eca1501c831251283b4cc6d9b',
+    'https://chromium.googlesource.com/chromium/src/third_party/freetype2.git@e02a40a4f8754774c8dccc01aeb0f07ea58e81c7',
   'src/third_party/harfbuzz-ng/src':
     'https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz.git@8df5cdbcda495a582e72a7e2ce35d6106401edce',
   'src/third_party/google_benchmark/src': {
