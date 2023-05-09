@@ -92,12 +92,13 @@ ModuleRtpRtcpImpl::~ModuleRtpRtcpImpl() = default;
 
 // Process any pending tasks such as timeouts (non time critical events).
 void ModuleRtpRtcpImpl::Process() {
-  const int64_t now = clock_->TimeInMilliseconds();
+  const Timestamp now = clock_->CurrentTime();
+  const int64_t now_ms = now.ms();
 
   if (rtp_sender_) {
-    if (now >= last_bitrate_process_time_ + kRtpRtcpBitrateProcessTimeMs) {
+    if (now_ms >= last_bitrate_process_time_ + kRtpRtcpBitrateProcessTimeMs) {
       rtp_sender_->packet_sender.ProcessBitrateAndNotifyObservers();
-      last_bitrate_process_time_ = now;
+      last_bitrate_process_time_ = now_ms;
     }
   }
 
@@ -105,7 +106,8 @@ void ModuleRtpRtcpImpl::Process() {
   // things that run in this method are updated much more frequently. Move the
   // RTT checking over to the worker thread, which matches better with where the
   // stats are maintained.
-  bool process_rtt = now >= last_rtt_process_time_ + kRtpRtcpRttProcessTimeMs;
+  bool process_rtt =
+      now_ms >= last_rtt_process_time_ + kRtpRtcpRttProcessTimeMs;
   if (rtcp_sender_.Sending()) {
     // Process RTT if we have received a report block and we haven't
     // processed RTT for at least `kRtpRtcpRttProcessTimeMs` milliseconds.
@@ -151,7 +153,7 @@ void ModuleRtpRtcpImpl::Process() {
 
   // Get processed rtt.
   if (process_rtt) {
-    last_rtt_process_time_ = now;
+    last_rtt_process_time_ = now_ms;
     if (rtt_stats_) {
       // Make sure we have a valid RTT before setting.
       int64_t last_rtt = rtt_stats_->LastProcessedRtt();
@@ -164,7 +166,7 @@ void ModuleRtpRtcpImpl::Process() {
     rtcp_sender_.SendRTCP(GetFeedbackState(), kRtcpReport);
 
   if (rtcp_sender_.TMMBR() && rtcp_receiver_.UpdateTmmbrTimers()) {
-    rtcp_receiver_.NotifyTmmbrUpdated();
+    rtcp_receiver_.NotifyTmmbrUpdated(now);
   }
 }
 
