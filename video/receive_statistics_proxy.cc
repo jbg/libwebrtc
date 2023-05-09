@@ -632,10 +632,6 @@ VideoReceiveStreamInterface::Stats ReceiveStatisticsProxy::GetStats() const {
 
   stats_.content_type = last_content_type_;
   stats_.timing_frame_info = timing_frame_info_counter_.Max(now_ms);
-  stats_.jitter_buffer_delay_seconds =
-      static_cast<double>(current_delay_counter_.Sum(1).value_or(0)) /
-      rtc::kNumMillisecsPerSec;
-  stats_.jitter_buffer_emitted_count = current_delay_counter_.NumSamples();
   stats_.estimated_playout_ntp_timestamp_ms =
       GetCurrentEstimatedPlayoutNtpTimestampMs(now_ms);
   return stats_;
@@ -682,6 +678,12 @@ void ReceiveStatisticsProxy::OnFrameBufferTimingsUpdated(
   // Estimated one-way delay: network delay (rtt/2) + target_delay_ms (jitter
   // delay + decode time + render delay).
   oneway_delay_counter_.Add(target_delay_ms + avg_rtt_ms_ / 2);
+}
+
+void ReceiveStatisticsProxy::OnJitterBufferDelay(int jitter_buffer_delay_ms) {
+  RTC_DCHECK_RUN_ON(&main_thread_);
+  stats_.jitter_buffer_emitted_count++;
+  stats_.jitter_buffer_delay_seconds += jitter_buffer_delay_ms / 1000.0;
 }
 
 void ReceiveStatisticsProxy::OnUniqueFramesCounted(int num_unique_frames) {
