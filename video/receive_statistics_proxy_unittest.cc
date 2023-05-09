@@ -569,6 +569,7 @@ TEST_F(ReceiveStatisticsProxyTest, GetStatsReportsDecodeTimingStats) {
   statistics_proxy_->OnFrameBufferTimingsUpdated(
       kMaxDecodeMs, kCurrentDelayMs, kTargetDelayMs, kJitterDelayMs,
       kMinPlayoutDelayMs, kRenderDelayMs);
+      kMinimumDelayMs);
   VideoReceiveStreamInterface::Stats stats = FlushAndGetStats();
   EXPECT_EQ(kMaxDecodeMs, stats.max_decode_ms);
   EXPECT_EQ(kCurrentDelayMs, stats.current_delay_ms);
@@ -921,6 +922,7 @@ TEST_F(ReceiveStatisticsProxyTest, TimingHistogramsNotUpdatedForTooFewSamples) {
     statistics_proxy_->OnFrameBufferTimingsUpdated(
         kMaxDecodeMs, kCurrentDelayMs, kTargetDelayMs, kJitterDelayMs,
         kMinPlayoutDelayMs, kRenderDelayMs);
+        kMinimumDelayMs);
   }
 
   statistics_proxy_->UpdateHistograms(absl::nullopt, StreamDataCounters(),
@@ -942,9 +944,10 @@ TEST_F(ReceiveStatisticsProxyTest, TimingHistogramsAreUpdated) {
   const int kRenderDelayMs = 7;
 
   for (int i = 0; i < kMinRequiredSamples; ++i) {
-    statistics_proxy_->OnFrameBufferTimingsUpdated(
-        kMaxDecodeMs, kCurrentDelayMs, kTargetDelayMs, kJitterDelayMs,
-        kMinPlayoutDelayMs, kRenderDelayMs);
+        statistics_proxy_->OnFrameBufferTimingsUpdated(
+            kMaxDecodeMs, kCurrentDelayMs, kTargetDelayMs, kJitterDelayMs,
+            kMinPlayoutDelayMs, kRenderDelayMs);
+        kMinimumDelayMs);
   }
 
   FlushAndUpdateHistograms(absl::nullopt, StreamDataCounters(), nullptr);

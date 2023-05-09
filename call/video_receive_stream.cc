@@ -75,7 +75,11 @@ std::string VideoReceiveStreamInterface::Stats::ToString(
   ss << "target_delay_ms: " << target_delay_ms << ", ";
   ss << "jitter_delay_ms: " << jitter_buffer_ms << ", ";
   ss << "jitterBufferDelay: " << jitter_buffer_delay_seconds << ", ";
+  ss << "jitterBufferTargetDelay: " << jitter_buffer_target_delay_seconds
+     << ", ";
   ss << "jitterBufferEmittedCount: " << jitter_buffer_emitted_count << ", ";
+  ss << "jitterBufferMinimumDelay: " << jitter_buffer_minimum_delay_seconds
+     << ", ";
   ss << "min_playout_delay_ms: " << min_playout_delay_ms << ", ";
   ss << "sync_offset_ms: " << sync_offset_ms << ", ";
   ss << "cum_loss: " << rtp_stats.packets_lost << ", ";

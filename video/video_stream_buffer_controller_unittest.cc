@@ -105,7 +105,12 @@ class VideoStreamBufferControllerStatsObserverMock
                VideoContentType content_type),
               (override));
   MOCK_METHOD(void, OnDroppedFrames, (uint32_t num_dropped), (override));
-  MOCK_METHOD(void, OnDecodableFrame, (int jitter_buffer_delay_ms), (override));
+  MOCK_METHOD(void,
+              OnDecodableFrame,
+              (int jitter_buffer_delay_ms,
+               int target_delay_ms,
+               int minimum_delay_ms),
+              (override));
   MOCK_METHOD(void,
               OnFrameBufferTimingsUpdated,
               (int estimated_max_decode_time_ms,

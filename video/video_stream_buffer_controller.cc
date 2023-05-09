@@ -349,7 +349,9 @@ void VideoStreamBufferController::UpdateFrameBufferTimings(
   // https://w3c.github.io/webrtc-stats/#dom-rtcinboundrtpstreamstats-jitterbufferdelay
   TimeDelta jitter_buffer_delay =
       std::max(TimeDelta::Zero(), now - min_receive_time);
-  stats_proxy_->OnDecodableFrame(jitter_buffer_delay.ms());
+  stats_proxy_->OnDecodableFrame(jitter_buffer_delay.ms(),
+                                 timings.target_delay.ms(),
+                                 timings.minimum_delay.ms());
 }
 
 void VideoStreamBufferController::UpdateTimingFrameInfo() {
