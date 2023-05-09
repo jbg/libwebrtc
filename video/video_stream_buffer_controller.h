@@ -52,7 +52,8 @@ class VideoStreamBufferControllerStatsObserver {
                                            int jitter_delay_ms,
                                            int min_playout_delay_ms,
                                            int render_delay_ms,
-                                           int jitter_buffer_delay_ms) = 0;
+                                           int jitter_buffer_delay_ms,
+                                           int minimum_delay_ms) = 0;
 
   virtual void OnTimingFrameInfoUpdated(const TimingFrameInfo& info) = 0;
 };

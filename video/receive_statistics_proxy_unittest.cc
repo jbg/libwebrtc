@@ -565,11 +565,13 @@ TEST_F(ReceiveStatisticsProxyTest, GetStatsReportsDecodeTimingStats) {
   const int kMinPlayoutDelayMs = 6;
   const int kRenderDelayMs = 7;
   const int kJitterBufferDelayMs = 1000;
+  const int kMinimumDelayMs = 100;
   const int64_t kRttMs = 8;
   statistics_proxy_->OnRttUpdate(kRttMs);
   statistics_proxy_->OnFrameBufferTimingsUpdated(
       kMaxDecodeMs, kCurrentDelayMs, kTargetDelayMs, kJitterDelayMs,
-      kMinPlayoutDelayMs, kRenderDelayMs, kJitterBufferDelayMs);
+      kMinPlayoutDelayMs, kRenderDelayMs, kJitterBufferDelayMs,
+      kMinimumDelayMs);
   VideoReceiveStreamInterface::Stats stats = FlushAndGetStats();
   EXPECT_EQ(kMaxDecodeMs, stats.max_decode_ms);
   EXPECT_EQ(kCurrentDelayMs, stats.current_delay_ms);
@@ -919,11 +921,13 @@ TEST_F(ReceiveStatisticsProxyTest, TimingHistogramsNotUpdatedForTooFewSamples) {
   const int kMinPlayoutDelayMs = 6;
   const int kRenderDelayMs = 7;
   const int kJitterBufferDelayMs = 8;
+  const int kMinimumDelayMs = 100;
 
   for (int i = 0; i < kMinRequiredSamples - 1; ++i) {
     statistics_proxy_->OnFrameBufferTimingsUpdated(
         kMaxDecodeMs, kCurrentDelayMs, kTargetDelayMs, kJitterDelayMs,
-        kMinPlayoutDelayMs, kRenderDelayMs, kJitterBufferDelayMs);
+        kMinPlayoutDelayMs, kRenderDelayMs, kJitterBufferDelayMs,
+        kMinimumDelayMs);
   }
 
   statistics_proxy_->UpdateHistograms(absl::nullopt, StreamDataCounters(),
@@ -944,11 +948,13 @@ TEST_F(ReceiveStatisticsProxyTest, TimingHistogramsAreUpdated) {
   const int kMinPlayoutDelayMs = 6;
   const int kRenderDelayMs = 7;
   const int kJitterBufferDelayMs = 8;
+  const int kMinimumDelayMs = 100;
 
   for (int i = 0; i < kMinRequiredSamples; ++i) {
     statistics_proxy_->OnFrameBufferTimingsUpdated(
         kMaxDecodeMs, kCurrentDelayMs, kTargetDelayMs, kJitterDelayMs,
-        kMinPlayoutDelayMs, kRenderDelayMs, kJitterBufferDelayMs);
+        kMinPlayoutDelayMs, kRenderDelayMs, kJitterBufferDelayMs,
+        kMinimumDelayMs);
   }
 
   FlushAndUpdateHistograms(absl::nullopt, StreamDataCounters(), nullptr);

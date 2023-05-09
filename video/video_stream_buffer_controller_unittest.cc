@@ -113,7 +113,8 @@ class VideoStreamBufferControllerStatsObserverMock
                int jitter_delay_ms,
                int min_playout_delay_ms,
                int render_delay_ms,
-               int jitter_buffer_delay_ms),
+               int jitter_buffer_delay_ms,
+               int minimum_delay_ms),
               (override));
   MOCK_METHOD(void,
               OnTimingFrameInfoUpdated,
