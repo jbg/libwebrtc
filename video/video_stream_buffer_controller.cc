@@ -337,7 +337,8 @@ void VideoStreamBufferController::UpdateFrameBufferTimings() {
     stats_proxy_->OnFrameBufferTimingsUpdated(
         timings.estimated_max_decode_time.ms(), timings.current_delay.ms(),
         timings.target_delay.ms(), timings.jitter_delay.ms(),
-        timings.min_playout_delay.ms(), timings.render_delay.ms());
+        timings.min_playout_delay.ms(), timings.render_delay.ms(),
+        timings.minimum_delay.ms());
   }
 }
 
