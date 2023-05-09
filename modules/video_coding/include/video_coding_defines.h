@@ -79,9 +79,10 @@ class VCMReceiveStatisticsCallback {
   virtual void OnFrameBufferTimingsUpdated(int estimated_max_decode_time_ms,
                                            int current_delay_ms,
                                            int target_delay_ms,
-                                           int jitter_buffer_ms,
+                                           int jitter_delay_ms,
                                            int min_playout_delay_ms,
-                                           int render_delay_ms) = 0;
+                                           int render_delay_ms,
+                                           int minimum_delay_ms) = 0;
 
   virtual void OnTimingFrameInfoUpdated(const TimingFrameInfo& info) = 0;
 
