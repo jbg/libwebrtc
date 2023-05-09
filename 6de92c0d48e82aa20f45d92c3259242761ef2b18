@@ -37,6 +37,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c722bbf1_1539f03a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2023-05-09T13:46:13Z",
+      "side": 1,
+      "message": "\u003e Is this an update using the same source, or is it changing the source of authoritative root data?\n\nI suppose that the source is the same as before (https://pki.goog/roots.pem), but re-generated with [newer version](https://webrtc-review.googlesource.com/c/src/+/304642) of generator script (without using OpenSSL).\n\n\u003e We have stuck to keeping a very short list of compiled-in fallback roots in order to emphasize the point that people writing apps should absolutely do their own root management, not depend on compiled-in defaults.\n\nThe project I\u0027m working on achieve this by having in-house WebRTC build where `ssl_roots.h` is re-generated. The regeneration is done with `tools_webrtc/sslroots/generate_sslroots.py`, which recently stopped working due to `openssl` removed ability to generate C code.",
+      "parentUuid": "8e9d6b5c_9b767e3a",
+      "revId": "6de92c0d48e82aa20f45d92c3259242761ef2b18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af115379_71e284c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2023-05-09T13:46:13Z",
+      "side": 1,
+      "message": "Thanks for review and comments. To implement your request I\u0027ll need to change generator rewrite CL, so I\u0027ll add to to reviewers to that CL once it\u0027s ready.",
+      "revId": "6de92c0d48e82aa20f45d92c3259242761ef2b18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31652ce6_15b4685d",
         "filename": "rtc_base/ssl_roots.h",
         "patchSetId": 1
@@ -48,6 +83,24 @@
       "writtenOn": "2023-05-09T13:29:41Z",
       "side": 1,
       "message": "Please continue to give the authoritative source of the data as a link.\n\nAlso it would be good to include the date on which it was fetched in the comment.",
+      "revId": "6de92c0d48e82aa20f45d92c3259242761ef2b18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae53bbd1_bdb33dd6",
+        "filename": "rtc_base/ssl_roots.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2023-05-09T13:46:13Z",
+      "side": 1,
+      "message": "To implement insertion of link I\u0027ll need to change generator script to both accept local PEM files and URLs to pem files. I\u0027ll do it as part of https://webrtc-review.googlesource.com/c/src/+/304642. Sounds ok?",
+      "parentUuid": "31652ce6_15b4685d",
       "revId": "6de92c0d48e82aa20f45d92c3259242761ef2b18",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
