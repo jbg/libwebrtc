@@ -22,6 +22,30 @@
       },
       "revId": "15a43e8cc88d87debc9570d4f9b340cf63f316c7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbbc25ee_701670fa",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-05-09T08:00:31Z",
+      "side": 1,
+      "message": "Using special value to represent unset may be saving a bit, but I agree it is not a good representation. Changed to return optional\n\nYes, this may change how zero RTT is treated, but that is likely a fix: zero RTT should be supported same as very low RTT, not as no RTT.",
+      "parentUuid": "065c54f8_f2b84d79",
+      "range": {
+        "startLine": 744,
+        "startChar": 10,
+        "endLine": 744,
+        "endChar": 11
+      },
+      "revId": "15a43e8cc88d87debc9570d4f9b340cf63f316c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
