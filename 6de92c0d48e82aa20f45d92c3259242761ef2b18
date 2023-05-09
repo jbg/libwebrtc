@@ -16,6 +16,40 @@
       "message": "Hello Harald and Mirko,\n\nThis is follow up CL to https://webrtc-review.googlesource.com/c/src/+/304642 with rewrite of C header generator.\n\nCould you please review, thanks a lot in advance.",
       "revId": "6de92c0d48e82aa20f45d92c3259242761ef2b18",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e9d6b5c_9b767e3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-05-09T13:29:41Z",
+      "side": 1,
+      "message": "Is this an update using the same source, or is it changing the source of authoritative root data?\n\nWe have stuck to keeping a very short list of compiled-in fallback roots in order to emphasize the point that people writing apps should absolutely do their own root management, not depend on compiled-in defaults.",
+      "revId": "6de92c0d48e82aa20f45d92c3259242761ef2b18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31652ce6_15b4685d",
+        "filename": "rtc_base/ssl_roots.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-05-09T13:29:41Z",
+      "side": 1,
+      "message": "Please continue to give the authoritative source of the data as a link.\n\nAlso it would be good to include the date on which it was fetched in the comment.",
+      "revId": "6de92c0d48e82aa20f45d92c3259242761ef2b18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
