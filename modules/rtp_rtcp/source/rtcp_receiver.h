@@ -154,7 +154,7 @@ class RTCPReceiver final {
   bool UpdateTmmbrTimers();
   std::vector<rtcp::TmmbItem> BoundingSet(bool* tmmbr_owner);
   // Set new bandwidth and notify remote clients about it.
-  void NotifyTmmbrUpdated();
+  void NotifyTmmbrUpdated(Timestamp now);
 
  private:
 #if RTC_DCHECK_IS_ON
@@ -363,11 +363,12 @@ class RTCPReceiver final {
   // The set of registered local SSRCs.
   RegisteredSsrcs registered_ssrcs_;
 
-  RtcpBandwidthObserver* const rtcp_bandwidth_observer_;
+  RtcpBandwidthObserver* const deprecated_rtcp_bandwidth_observer_;
+  NetworkLinkRtcpObserver* const network_link_rtcp_observer_;
   RtcpIntraFrameObserver* const rtcp_intra_frame_observer_;
   RtcpLossNotificationObserver* const rtcp_loss_notification_observer_;
   NetworkStateEstimateObserver* const network_state_estimate_observer_;
-  TransportFeedbackObserver* const transport_feedback_observer_;
+  TransportFeedbackObserver* const deprecated_transport_feedback_observer_;
   VideoBitrateAllocationObserver* const bitrate_allocation_observer_;
   const TimeDelta report_interval_;
 

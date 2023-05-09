@@ -26,6 +26,7 @@
 #include "api/rtp_headers.h"
 #include "api/transport/network_types.h"
 #include "api/units/time_delta.h"
+#include "modules/rtp_rtcp/include/report_block_data.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/remote_estimate.h"
 #include "system_wrappers/include/clock.h"
 
@@ -164,6 +165,8 @@ class RtcpLossNotificationObserver {
                                           bool decodability_flag) = 0;
 };
 
+// TODO(bugs.webrtc.org/13757): Remove this interface in favor of the
+// NetworkLinkRtcpObserver that uses more descriptive types.
 class RtcpBandwidthObserver {
  public:
   // REMB or TMMBR
@@ -175,6 +178,27 @@ class RtcpBandwidthObserver {
       int64_t now_ms) = 0;
 
   virtual ~RtcpBandwidthObserver() {}
+};
+
+// Interface to watch incoming rtcp packets related to the link in general.
+// All message handlers have default empty implementation. This way users only
+// need to implement the ones they are interested in.
+// All message handles pass `receive_time` parameter, which is receive time
+// of the rtcp packet that triggered the update.
+class NetworkLinkRtcpObserver {
+ public:
+  virtual ~NetworkLinkRtcpObserver() = default;
+
+  virtual void OnTransportFeedback(Timestamp receive_time,
+                                   const rtcp::TransportFeedback& feedback) {}
+  virtual void OnReceiverEstimatedMaxBitrate(Timestamp receive_time,
+                                             DataRate bitrate) {}
+
+  // Called on an RTCP packet with sender or receiver reports with non zero
+  // report blocks. Report blocks are combined from all reports into one array.
+  virtual void OnReport(Timestamp receive_time,
+                        rtc::ArrayView<const ReportBlockData> report_blocks) {}
+  virtual void OnRttUpdate(Timestamp receive_time, TimeDelta rtt) {}
 };
 
 // NOTE! `kNumMediaTypes` must be kept in sync with RtpPacketMediaType!

@@ -30,27 +30,6 @@ namespace webrtc {
 class ReceiveStatisticsProvider;
 class Transport;
 
-// Interface to watch incoming rtcp packets related to the link in general.
-// All message handlers have default empty implementation. This way users only
-// need to implement the ones they are interested in.
-// All message handles pass `receive_time` parameter, which is receive time
-// of the rtcp packet that triggered the update.
-class NetworkLinkRtcpObserver {
- public:
-  virtual ~NetworkLinkRtcpObserver() = default;
-
-  virtual void OnTransportFeedback(Timestamp receive_time,
-                                   const rtcp::TransportFeedback& feedback) {}
-  virtual void OnReceiverEstimatedMaxBitrate(Timestamp receive_time,
-                                             DataRate bitrate) {}
-
-  // Called on an RTCP packet with sender or receiver reports with non zero
-  // report blocks. Report blocks are combined from all reports into one array.
-  virtual void OnReport(Timestamp receive_time,
-                        rtc::ArrayView<const ReportBlockData> report_blocks) {}
-  virtual void OnRttUpdate(Timestamp receive_time, TimeDelta rtt) {}
-};
-
 // Interface to watch incoming rtcp packets by media (rtp) receiver.
 // All message handlers have default empty implementation. This way users only
 // need to implement the ones they are interested in.
