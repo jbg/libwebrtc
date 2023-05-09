@@ -85,7 +85,7 @@ class ReceiveStatisticsProxy : public VCMReceiveStatisticsCallback,
   // Indicates video stream has been paused (no incoming packets).
   void OnStreamInactive();
 
-  // Overrides VCMReceiveStatisticsCallback.
+  // Implements VCMReceiveStatisticsCallback.
   void OnCompleteFrame(bool is_keyframe,
                        size_t size_bytes,
                        VideoContentType content_type) override;
@@ -96,6 +96,7 @@ class ReceiveStatisticsProxy : public VCMReceiveStatisticsCallback,
                                    int jitter_buffer_ms,
                                    int min_playout_delay_ms,
                                    int render_delay_ms) override;
+  void OnJitterBufferDelay(int jitter_buffer_delay_ms) override;
 
   void OnTimingFrameInfoUpdated(const TimingFrameInfo& info) override;
 

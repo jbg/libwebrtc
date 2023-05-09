@@ -76,12 +76,15 @@ class VCMReceiveStatisticsCallback {
 
   virtual void OnDroppedFrames(uint32_t frames_dropped) = 0;
 
+  // Timings calculated by VCMTiming.
   virtual void OnFrameBufferTimingsUpdated(int estimated_max_decode_time_ms,
                                            int current_delay_ms,
                                            int target_delay_ms,
                                            int jitter_buffer_ms,
                                            int min_playout_delay_ms,
                                            int render_delay_ms) = 0;
+  // Actual delay experienced by a single frame.
+  virtual void OnJitterBufferDelay(int jitter_buffer_delay_ms) = 0;
 
   virtual void OnTimingFrameInfoUpdated(const TimingFrameInfo& info) = 0;
 

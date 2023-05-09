@@ -67,7 +67,8 @@ class VideoStreamBufferController {
   void OnTimeout(TimeDelta delay);
   void FrameReadyForDecode(uint32_t rtp_timestamp, Timestamp render_time);
   void UpdateDroppedFrames() RTC_RUN_ON(&worker_sequence_checker_);
-  void UpdateJitterDelay();
+  void UpdateFrameBufferTimings();
+  void UpdateJitterBufferDelay(Timestamp receive_time, Timestamp now);
   void UpdateTimingFrameInfo();
   bool IsTooManyFramesQueued() const RTC_RUN_ON(&worker_sequence_checker_);
   void ForceKeyFrameReleaseImmediately() RTC_RUN_ON(&worker_sequence_checker_);

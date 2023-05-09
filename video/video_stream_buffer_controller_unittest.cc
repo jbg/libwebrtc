@@ -114,6 +114,10 @@ class VCMReceiveStatisticsCallbackMock : public VCMReceiveStatisticsCallback {
                int render_delay_ms),
               (override));
   MOCK_METHOD(void,
+              OnJitterBufferDelay,
+              (int jitter_buffer_delay_ms),
+              (override));
+  MOCK_METHOD(void,
               OnTimingFrameInfoUpdated,
               (const TimingFrameInfo& info),
               (override));
