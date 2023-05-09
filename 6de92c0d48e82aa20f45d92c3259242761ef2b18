@@ -103,6 +103,24 @@
       "parentUuid": "31652ce6_15b4685d",
       "revId": "6de92c0d48e82aa20f45d92c3259242761ef2b18",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "773a287d_f30ce6a2",
+        "filename": "rtc_base/ssl_roots.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-05-09T14:39:13Z",
+      "side": 1,
+      "message": "Sounds like the right place to do it!",
+      "parentUuid": "ae53bbd1_bdb33dd6",
+      "revId": "6de92c0d48e82aa20f45d92c3259242761ef2b18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
