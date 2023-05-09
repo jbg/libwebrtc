@@ -39,6 +39,30 @@
       },
       "revId": "cc969f8d3c192e258af33224b46fe8dd35f31a28",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0218abbc_8ed59553",
+        "filename": "rtc_base/ssl_stream_adapter_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1144,
+      "author": {
+        "id": 7529
+      },
+      "writtenOn": "2023-05-09T10:06:37Z",
+      "side": 1,
+      "message": "Done in patch set 3.",
+      "parentUuid": "47106bf4_930c9f63",
+      "range": {
+        "startLine": 1144,
+        "startChar": 0,
+        "endLine": 1144,
+        "endChar": 27
+      },
+      "revId": "cc969f8d3c192e258af33224b46fe8dd35f31a28",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
