@@ -223,6 +223,10 @@ size_t RTPSenderVideo::FecPacketOverhead() const {
   return overhead;
 }
 
+void RTPSenderVideo::SetRetransmissionSetting(int32_t retransmission_settings) {
+  retransmission_settings_ = retransmission_settings;
+}
+
 void RTPSenderVideo::SetVideoStructure(
     const FrameDependencyStructure* video_structure) {
   if (frame_transformer_delegate_) {
