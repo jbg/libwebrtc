@@ -121,6 +121,24 @@
       "parentUuid": "ae53bbd1_bdb33dd6",
       "revId": "6de92c0d48e82aa20f45d92c3259242761ef2b18",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a298d9d_16b7bc0b",
+        "filename": "rtc_base/ssl_roots.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2023-05-10T10:25:31Z",
+      "side": 1,
+      "message": "Added timestamp. Added file name/url of file used as source of generation. Also added sha256 hash of file, making possible to also find CA pem file by just googling hash.",
+      "parentUuid": "773a287d_f30ce6a2",
+      "revId": "6de92c0d48e82aa20f45d92c3259242761ef2b18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
