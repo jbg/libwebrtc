@@ -149,6 +149,8 @@ class RTPSenderVideo : public RTPVideoFrameSenderInterface {
   // place as the other rate stats.
   DataRate PostEncodeOverhead() const;
 
+  void SetRetransmissionSetting(int32_t retransmission_settings);
+
  protected:
   static uint8_t GetTemporalId(const RTPVideoHeader& header);
   bool AllowRetransmission(uint8_t temporal_id,
@@ -201,7 +203,7 @@ class RTPSenderVideo : public RTPVideoFrameSenderInterface {
   RTPSender* const rtp_sender_;
   Clock* const clock_;
 
-  const int32_t retransmission_settings_;
+  int32_t retransmission_settings_;
 
   // These members should only be accessed from within SendVideo() to avoid
   // potential race conditions.
