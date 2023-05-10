@@ -106,7 +106,7 @@ Updated when the available bitrate changes, `VideoSendStreamImpl::OnBitrateUpdat
 
 ### ReceiveStatisticsProxy
 `VideoReceiveStream` owns a [ReceiveStatisticsProxy] which implements
-`VCMReceiveStatisticsCallback`,
+`VideoStreamBufferControllerStatsObserver`,
 `RtcpCnameCallback`,
 `RtcpPacketTypeCounterObserver`,
 `CallStatsObserver`
@@ -123,7 +123,7 @@ Updated when a complete frame is received, `FrameBuffer::InsertFrame`.
 *   `network_frame_rate` - number of frames received during the last second.
 
 Updated when a frame is ready for decoding, `FrameBuffer::GetNextFrame`. From `VCMTiming`:
-*   `jitter_buffer_ms` - jitter buffer delay in ms.
+*   `jitter_buffer_ms` - jitter delay in ms.
 *   `max_decode_ms` - the 95th percentile observed decode time within a time window (10 sec).
 *   `render_delay_ms` - render delay in ms.
 *   `min_playout_delay_ms` - minimum playout delay in ms.

@@ -2059,6 +2059,8 @@ TEST_F(WebRtcVideoChannelBaseTest, GetStats) {
   EXPECT_GT(receive_info.receivers[0].framerate_received, 0);
   EXPECT_GT(receive_info.receivers[0].framerate_decoded, 0);
   EXPECT_GT(receive_info.receivers[0].framerate_output, 0);
+  EXPECT_GT(receive_info.receivers[0].jitter_buffer_delay_seconds, 0.0);
+  EXPECT_GT(receive_info.receivers[0].jitter_buffer_emitted_count, 0);
 
   EXPECT_EQ(1U, receive_info.receive_codecs.count(DefaultCodec().id));
   EXPECT_EQ(DefaultCodec().ToCodecParameters(),
