@@ -16,7 +16,7 @@
 namespace webrtc {
 
 RtpPacketInfo::RtpPacketInfo()
-    : ssrc_(0), rtp_timestamp_(0), receive_time_(Timestamp::MinusInfinity()) {}
+    : ssrc_(0), rtp_timestamp_(0), receive_time_(Timestamp::PlusInfinity()) {}
 
 RtpPacketInfo::RtpPacketInfo(uint32_t ssrc,
                              std::vector<uint32_t> csrcs,
