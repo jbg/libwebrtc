@@ -658,12 +658,16 @@ void ReceiveStatisticsProxy::OnDecoderInfo(
       }));
 }
 
-void ReceiveStatisticsProxy::OnDecodableFrame(int jitter_buffer_delay_ms) {
+void ReceiveStatisticsProxy::OnDecodableFrame(int jitter_buffer_delay_ms,
+                                              int target_delay_ms,
+                                              int minimum_delay_ms) {
   RTC_DCHECK_RUN_ON(&main_thread_);
   // Cumulative stats exposed through standardized GetStats.
   // TODO(crbug.com/webrtc/14244): Implement targetDelay and minimumDelay here.
   stats_.jitter_buffer_delay += TimeDelta::Millis(jitter_buffer_delay_ms);
+  stats_.jitter_buffer_target_delay += TimeDelta::Millis(target_delay_ms);
   ++stats_.jitter_buffer_emitted_count;
+  stats_.jitter_buffer_minimum_delay += TimeDelta::Millis(minimum_delay_ms);
 }
 
 void ReceiveStatisticsProxy::OnFrameBufferTimingsUpdated(
