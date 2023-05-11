@@ -408,7 +408,6 @@ void VideoReceiveStream2::Stop() {
   stats_proxy_.OnUniqueFramesCounted(
       rtp_video_stream_receiver_.GetUniqueFramesSeen());
 
-  buffer_->Stop();
   call_stats_->DeregisterStatsObserver(this);
 
   if (decoder_running_) {
@@ -431,6 +430,7 @@ void VideoReceiveStream2::Stop() {
 
     UpdateHistograms();
   }
+  buffer_->Stop();
 
   // TODO(bugs.webrtc.org/11993): Make these calls on the network thread.
   RTC_DCHECK_RUN_ON(&packet_sequence_checker_);

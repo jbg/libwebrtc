@@ -118,6 +118,7 @@ VideoStreamBufferController::VideoStreamBufferController(
 
 void VideoStreamBufferController::Stop() {
   RTC_DCHECK_RUN_ON(&worker_sequence_checker_);
+  frame_decode_scheduler_->CancelOutstanding();
   frame_decode_scheduler_->Stop();
   timeout_tracker_.Stop();
   decoder_ready_for_new_frame_ = false;
