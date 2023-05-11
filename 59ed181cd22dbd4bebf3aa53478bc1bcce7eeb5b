@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9396aebe_748e8785",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-05-11T12:00:58Z",
+      "side": 1,
+      "message": "Can you clarify in the CL description that this specifically refers to the case of video? I.e. we\u0027re not bug-fixing the audio case since that is already working as expected",
+      "revId": "59ed181cd22dbd4bebf3aa53478bc1bcce7eeb5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8de9bbe7_6af2420c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-05-11T12:00:58Z",
+      "side": 1,
+      "message": "Have you tested https://jsfiddle.net/jib1/0L6duga2/show with this patch?\n\nToday when you tick audio but not video, the jitter buffer reported in getStats is changing to reach what you specified, but if you tick video and not audio and move the video slider, the jitter buffer tends not to increase until you decrease the target.\n\n(Note ticking both boxes may trigger some A/V sync)\n\nWith this fix I think audio should behave approximately the same as video.",
+      "revId": "59ed181cd22dbd4bebf3aa53478bc1bcce7eeb5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b5dbd0e5_a2b8d5ed",
@@ -14,6 +48,57 @@
       "writtenOn": "2023-05-11T08:34:32Z",
       "side": 1,
       "message": "ptal.\n\nhbos: spec compliance\nasapersson: video/ integration",
+      "revId": "59ed181cd22dbd4bebf3aa53478bc1bcce7eeb5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75dd2e18_735dd1d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-05-11T12:00:58Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "59ed181cd22dbd4bebf3aa53478bc1bcce7eeb5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a5d2bab_36df5b6e",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-05-11T12:00:58Z",
+      "side": 1,
+      "message": "While an existing problem that exists for many of our metrics, millisecond precision seems like a poor choice when measuring things that takes in the order of magnitude some number of milliseconds. The rounding error of int should be a significant percentage of the overall sample time so we\u0027re systematically under-reporting.\n\nExisting problem etc, but should we file a crbug about this or is this not a problem worth fixing?",
+      "revId": "59ed181cd22dbd4bebf3aa53478bc1bcce7eeb5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5974841_946859ee",
+        "filename": "video/video_stream_buffer_controller.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-05-11T12:00:58Z",
+      "side": 1,
+      "message": "SGTM",
       "revId": "59ed181cd22dbd4bebf3aa53478bc1bcce7eeb5b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
