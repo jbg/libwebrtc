@@ -698,7 +698,7 @@ TEST_P(PeerConnectionCryptoDtlsCertGenTest, TestCertificateGeneration) {
 INSTANTIATE_TEST_SUITE_P(
     PeerConnectionCryptoTest,
     PeerConnectionCryptoDtlsCertGenTest,
-    Combine(Values(SdpSemantics::kPlanB_DEPRECATED, SdpSemantics::kUnifiedPlan),
+    Combine(Values(SdpSemantics::kUnifiedPlan),
             Values(SdpType::kOffer, SdpType::kAnswer),
             Values(CertGenTime::kBefore, CertGenTime::kDuring),
             Values(CertGenResult::kSucceed, CertGenResult::kFail),
@@ -803,7 +803,6 @@ TEST_P(PeerConnectionCryptoTest, SessionErrorIfFingerprintInvalid) {
 
 INSTANTIATE_TEST_SUITE_P(PeerConnectionCryptoTest,
                          PeerConnectionCryptoTest,
-                         Values(SdpSemantics::kPlanB_DEPRECATED,
-                                SdpSemantics::kUnifiedPlan));
+                         Values(SdpSemantics::kUnifiedPlan));
 
 }  // namespace webrtc

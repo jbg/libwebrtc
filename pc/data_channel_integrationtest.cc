@@ -97,13 +97,6 @@ class FakeClockForTest : public rtc::ScopedFakeClock {
   ScopedFakeClock& FakeClock() { return *this; }
 };
 
-class DataChannelIntegrationTestPlanB
-    : public PeerConnectionIntegrationBaseTest {
- protected:
-  DataChannelIntegrationTestPlanB()
-      : PeerConnectionIntegrationBaseTest(SdpSemantics::kPlanB_DEPRECATED) {}
-};
-
 class DataChannelIntegrationTestUnifiedPlan
     : public PeerConnectionIntegrationBaseTest {
  protected:
@@ -1089,8 +1082,7 @@ TEST_P(DataChannelIntegrationTest,
 
 INSTANTIATE_TEST_SUITE_P(DataChannelIntegrationTest,
                          DataChannelIntegrationTest,
-                         Combine(Values(SdpSemantics::kPlanB_DEPRECATED,
-                                        SdpSemantics::kUnifiedPlan),
+                         Combine(Values(SdpSemantics::kUnifiedPlan),
                                  testing::Bool()));
 
 TEST_F(DataChannelIntegrationTestUnifiedPlan,

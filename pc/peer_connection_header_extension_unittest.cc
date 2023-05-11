@@ -568,7 +568,7 @@ TEST_P(PeerConnectionHeaderExtensionTest, EnablingExtensionsAfterRemoteOffer) {
 INSTANTIATE_TEST_SUITE_P(
     ,
     PeerConnectionHeaderExtensionTest,
-    Combine(Values(SdpSemantics::kPlanB_DEPRECATED, SdpSemantics::kUnifiedPlan),
+    Combine(Values(SdpSemantics::kUnifiedPlan),
             Values(cricket::MediaType::MEDIA_TYPE_AUDIO,
                    cricket::MediaType::MEDIA_TYPE_VIDEO)),
     [](const testing::TestParamInfo<
