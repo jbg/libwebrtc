@@ -58,8 +58,13 @@ std::string VideoReceiveStreamInterface::Stats::ToString(
   ss << "total_bps: " << total_bitrate_bps << ", ";
   ss << "width: " << width << ", ";
   ss << "height: " << height << ", ";
+  // TODO(crbug.com/webrtc/15166): `key` and `delta` will not
+  // perfectly match the other frame counters.
   ss << "key: " << frame_counts.key_frames << ", ";
   ss << "delta: " << frame_counts.delta_frames << ", ";
+  ss << "frames_assembled_from_multiple_packets: "
+     << frames_assembled_from_multiple_packets << ", ";
+  ss << "frames_decoded: " << frames_decoded << ", ";
   ss << "frames_dropped: " << frames_dropped << ", ";
   ss << "network_fps: " << network_frame_rate << ", ";
   ss << "decode_fps: " << decode_frame_rate << ", ";
@@ -68,11 +73,17 @@ std::string VideoReceiveStreamInterface::Stats::ToString(
   ss << "max_decode_ms: " << max_decode_ms << ", ";
   ss << "first_frame_received_to_decoded_ms: "
      << first_frame_received_to_decoded_ms << ", ";
-  ss << "cur_delay_ms: " << current_delay_ms << ", ";
-  ss << "targ_delay_ms: " << target_delay_ms << ", ";
-  ss << "jb_delay_ms: " << jitter_buffer_ms << ", ";
-  ss << "jb_cumulative_delay_seconds: " << jitter_buffer_delay_seconds << ", ";
-  ss << "jb_emitted_count: " << jitter_buffer_emitted_count << ", ";
+  ss << "current_delay_ms: " << current_delay_ms << ", ";
+  ss << "target_delay_ms: " << target_delay_ms << ", ";
+  ss << "jitter_delay_ms: " << jitter_buffer_ms << ", ";
+  // Spec-compliant stats are camelCased to distinguish them from
+  // the legacy and internal stats.
+  ss << "totalAssemblyTime: " << total_assembly_time.seconds<double>() << ", ";
+  ss << "jitterBufferDelay: " << jitter_buffer_delay_seconds << ", ";
+  ss << "jitterBufferEmittedCount: " << jitter_buffer_emitted_count << ", ";
+  ss << "totalDecodeTime: " << total_decode_time.seconds<double>() << ", ";
+  ss << "totalProcessingDelay: " << total_processing_delay.seconds<double>()
+     << ", ";
   ss << "min_playout_delay_ms: " << min_playout_delay_ms << ", ";
   ss << "sync_offset_ms: " << sync_offset_ms << ", ";
   ss << "cum_loss: " << rtp_stats.packets_lost << ", ";
