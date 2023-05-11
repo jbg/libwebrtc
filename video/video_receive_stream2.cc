@@ -763,15 +763,6 @@ void VideoReceiveStream2::OnEncodedFrame(std::unique_ptr<EncodedFrame> frame) {
   const bool received_frame_is_keyframe =
       frame->FrameType() == VideoFrameType::kVideoFrameKey;
 
-  // Current OnPreDecode only cares about QP for VP8.
-  int qp = -1;
-  if (frame->CodecSpecific()->codecType == kVideoCodecVP8) {
-    if (!vp8::GetQp(frame->data(), frame->size(), &qp)) {
-      RTC_LOG(LS_WARNING) << "Failed to extract QP from VP8 video frame";
-    }
-  }
-  stats_proxy_.OnPreDecode(frame->CodecSpecific()->codecType, qp);
-
   decode_queue_.PostTask([this, now, keyframe_request_is_due,
                           received_frame_is_keyframe, frame = std::move(frame),
                           keyframe_required = keyframe_required_]() mutable {

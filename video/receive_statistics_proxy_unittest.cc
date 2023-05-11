@@ -699,37 +699,6 @@ TEST_F(ReceiveStatisticsProxyTest,
       0, metrics::NumSamples("WebRTC.Video.ReceiveStreamLifetimeInSeconds"));
 }
 
-TEST_F(ReceiveStatisticsProxyTest, BadCallHistogramsAreUpdated) {
-  // Based on the tuning parameters this will produce 7 uncertain states,
-  // then 10 certainly bad states. There has to be 10 certain states before
-  // any histograms are recorded.
-  const int kNumBadSamples = 17;
-  // We only count one sample per second.
-  const TimeDelta kBadFameInterval = TimeDelta::Millis(1100);
-
-  StreamDataCounters counters;
-  counters.first_packet_time_ms = Now().ms();
-
-  webrtc::VideoFrame frame = CreateFrame(kWidth, kHeight);
-
-  for (int i = 0; i < kNumBadSamples; ++i) {
-    time_controller_.AdvanceTime(kBadFameInterval);
-    statistics_proxy_->OnRenderedFrame(MetaData(frame));
-  }
-  statistics_proxy_->UpdateHistograms(absl::nullopt, counters, nullptr);
-  EXPECT_METRIC_EQ(1, metrics::NumSamples("WebRTC.Video.BadCall.Any"));
-  EXPECT_METRIC_EQ(1, metrics::NumEvents("WebRTC.Video.BadCall.Any", 100));
-
-  EXPECT_METRIC_EQ(1, metrics::NumSamples("WebRTC.Video.BadCall.FrameRate"));
-  EXPECT_METRIC_EQ(1,
-                   metrics::NumEvents("WebRTC.Video.BadCall.FrameRate", 100));
-
-  EXPECT_METRIC_EQ(
-      0, metrics::NumSamples("WebRTC.Video.BadCall.FrameRateVariance"));
-
-  EXPECT_METRIC_EQ(0, metrics::NumSamples("WebRTC.Video.BadCall.Qp"));
-}
-
 TEST_F(ReceiveStatisticsProxyTest, PacketLossHistogramIsUpdated) {
   statistics_proxy_->UpdateHistograms(10, StreamDataCounters(), nullptr);
   EXPECT_METRIC_EQ(
@@ -812,37 +781,6 @@ TEST_F(ReceiveStatisticsProxyTest, RtpToNtpFrequencyOffsetHistogramIsUpdated) {
                    metrics::NumSamples("WebRTC.Video.RtpToNtpFreqOffsetInKhz"));
   EXPECT_METRIC_EQ(
       1, metrics::NumEvents("WebRTC.Video.RtpToNtpFreqOffsetInKhz", 3));
-}
-
-TEST_F(ReceiveStatisticsProxyTest, Vp8QpHistogramIsUpdated) {
-  const int kQp = 22;
-
-  for (int i = 0; i < kMinRequiredSamples; ++i)
-    statistics_proxy_->OnPreDecode(kVideoCodecVP8, kQp);
-
-  FlushAndUpdateHistograms(absl::nullopt, StreamDataCounters(), nullptr);
-  EXPECT_METRIC_EQ(1, metrics::NumSamples("WebRTC.Video.Decoded.Vp8.Qp"));
-  EXPECT_METRIC_EQ(1, metrics::NumEvents("WebRTC.Video.Decoded.Vp8.Qp", kQp));
-}
-
-TEST_F(ReceiveStatisticsProxyTest, Vp8QpHistogramIsNotUpdatedForTooFewSamples) {
-  const int kQp = 22;
-
-  for (int i = 0; i < kMinRequiredSamples - 1; ++i)
-    statistics_proxy_->OnPreDecode(kVideoCodecVP8, kQp);
-
-  statistics_proxy_->UpdateHistograms(absl::nullopt, StreamDataCounters(),
-                                      nullptr);
-  EXPECT_METRIC_EQ(0, metrics::NumSamples("WebRTC.Video.Decoded.Vp8.Qp"));
-}
-
-TEST_F(ReceiveStatisticsProxyTest, Vp8QpHistogramIsNotUpdatedIfNoQpValue) {
-  for (int i = 0; i < kMinRequiredSamples; ++i)
-    statistics_proxy_->OnPreDecode(kVideoCodecVP8, -1);
-
-  statistics_proxy_->UpdateHistograms(absl::nullopt, StreamDataCounters(),
-                                      nullptr);
-  EXPECT_METRIC_EQ(0, metrics::NumSamples("WebRTC.Video.Decoded.Vp8.Qp"));
 }
 
 TEST_F(ReceiveStatisticsProxyTest,
