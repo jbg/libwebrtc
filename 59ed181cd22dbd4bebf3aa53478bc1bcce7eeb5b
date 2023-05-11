@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5dbd0e5_a2b8d5ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2023-05-11T08:34:32Z",
+      "side": 1,
+      "message": "ptal.\n\nhbos: spec compliance\nasapersson: video/ integration",
+      "revId": "59ed181cd22dbd4bebf3aa53478bc1bcce7eeb5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
