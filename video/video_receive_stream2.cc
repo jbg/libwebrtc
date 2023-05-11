@@ -408,8 +408,9 @@ void VideoReceiveStream2::Stop() {
   stats_proxy_.OnUniqueFramesCounted(
       rtp_video_stream_receiver_.GetUniqueFramesSeen());
 
-  buffer_->Stop();
   call_stats_->DeregisterStatsObserver(this);
+  buffer_->Clear();
+  buffer_->Stop();
 
   if (decoder_running_) {
     rtc::Event done;
