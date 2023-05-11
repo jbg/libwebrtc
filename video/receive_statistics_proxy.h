@@ -90,7 +90,9 @@ class ReceiveStatisticsProxy : public VideoStreamBufferControllerStatsObserver,
                        size_t size_bytes,
                        VideoContentType content_type) override;
   void OnDroppedFrames(uint32_t frames_dropped) override;
-  void OnDecodableFrame(int jitter_buffer_delay_ms) override;
+  void OnDecodableFrame(int jitter_buffer_delay_ms,
+                        int target_delay_ms,
+                        int minimum_delay_ms) override;
   void OnFrameBufferTimingsUpdated(int estimated_max_decode_time_ms,
                                    int current_delay_ms,
                                    int target_delay_ms,

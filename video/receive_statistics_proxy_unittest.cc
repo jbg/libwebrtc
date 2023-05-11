@@ -566,11 +566,13 @@ TEST_F(ReceiveStatisticsProxyTest, GetStatsReportsDecodeTimingStats) {
   const int kRenderDelayMs = 7;
   const int64_t kRttMs = 8;
   const int kJitterBufferDelayMs = 9;
+  const int kMinimumDelayMs = 1;
   statistics_proxy_->OnRttUpdate(kRttMs);
   statistics_proxy_->OnFrameBufferTimingsUpdated(
       kMaxDecodeMs, kCurrentDelayMs, kTargetDelayMs, kJitterDelayMs,
       kMinPlayoutDelayMs, kRenderDelayMs);
-  statistics_proxy_->OnDecodableFrame(kJitterBufferDelayMs);
+  statistics_proxy_->OnDecodableFrame(kJitterBufferDelayMs, kTargetDelayMs,
+                                      kMinimumDelayMs);
   VideoReceiveStreamInterface::Stats stats = FlushAndGetStats();
   EXPECT_EQ(kMaxDecodeMs, stats.max_decode_ms);
   EXPECT_EQ(kCurrentDelayMs, stats.current_delay_ms);
@@ -579,16 +581,24 @@ TEST_F(ReceiveStatisticsProxyTest, GetStatsReportsDecodeTimingStats) {
   EXPECT_EQ(kMinPlayoutDelayMs, stats.min_playout_delay_ms);
   EXPECT_EQ(kRenderDelayMs, stats.render_delay_ms);
   EXPECT_EQ(kJitterBufferDelayMs, stats.jitter_buffer_delay.ms());
+  EXPECT_EQ(kTargetDelayMs, stats.jitter_buffer_target_delay.ms());
   EXPECT_EQ(1u, stats.jitter_buffer_emitted_count);
+  EXPECT_EQ(kMinimumDelayMs, stats.jitter_buffer_minimum_delay.ms());
 }
 
 TEST_F(ReceiveStatisticsProxyTest, CumulativeDecodeGetStatsAccumulate) {
   const int kJitterBufferDelayMs = 3;
-  statistics_proxy_->OnDecodableFrame(kJitterBufferDelayMs);
-  statistics_proxy_->OnDecodableFrame(kJitterBufferDelayMs);
+  const int kTargetDelayMs = 2;
+  const int kMinimumDelayMs = 1;
+  statistics_proxy_->OnDecodableFrame(kJitterBufferDelayMs, kTargetDelayMs,
+                                      kMinimumDelayMs);
+  statistics_proxy_->OnDecodableFrame(kJitterBufferDelayMs, kTargetDelayMs,
+                                      kMinimumDelayMs);
   VideoReceiveStreamInterface::Stats stats = FlushAndGetStats();
   EXPECT_EQ(2 * kJitterBufferDelayMs, stats.jitter_buffer_delay.ms());
+  EXPECT_EQ(2 * kTargetDelayMs, stats.jitter_buffer_target_delay.ms());
   EXPECT_EQ(2u, stats.jitter_buffer_emitted_count);
+  EXPECT_EQ(2 * kMinimumDelayMs, stats.jitter_buffer_minimum_delay.ms());
 }
 
 TEST_F(ReceiveStatisticsProxyTest, GetStatsReportsRtcpPacketTypeCounts) {
