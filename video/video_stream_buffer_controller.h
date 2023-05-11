@@ -45,8 +45,12 @@ class VideoStreamBufferControllerStatsObserver {
 
   virtual void OnDroppedFrames(uint32_t frames_dropped) = 0;
 
-  // Actual delay experienced by a single frame.
-  virtual void OnDecodableFrame(int jitter_buffer_delay_ms) = 0;
+  // `jitter_buffer_delay_ms` is the delay experienced by a single frame,
+  // whereas `target_delay_ms` and `minimum_delay_ms` are the current delays
+  // applied by the jitter buffer.
+  virtual void OnDecodableFrame(int jitter_buffer_delay_ms,
+                                int target_delay_ms,
+                                int minimum_delay_ms) = 0;
 
   // Various jitter buffer delays determined by VCMTiming.
   virtual void OnFrameBufferTimingsUpdated(int estimated_max_decode_time_ms,

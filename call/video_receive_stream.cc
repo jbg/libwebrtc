@@ -80,8 +80,11 @@ std::string VideoReceiveStreamInterface::Stats::ToString(
   // the legacy and internal stats.
   ss << "totalAssemblyTime: " << total_assembly_time.seconds<double>() << ", ";
   ss << "jitterBufferDelay: " << jitter_buffer_delay_seconds << ", ";
+  ss << "jitterBufferTargetDelay: " << jitter_buffer_target_delay_seconds
+     << ", ";
   ss << "jitterBufferEmittedCount: " << jitter_buffer_emitted_count << ", ";
-  ss << "totalDecodeTime: " << total_decode_time.seconds<double>() << ", ";
+  ss << "jitterBufferMinimumDelay: " << jitter_buffer_minimum_delay_seconds ss
+     << "totalDecodeTime: " << total_decode_time.seconds<double>() << ", ";
   ss << "totalProcessingDelay: " << total_processing_delay.seconds<double>()
      << ", ";
   ss << "min_playout_delay_ms: " << min_playout_delay_ms << ", ";
