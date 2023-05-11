@@ -331,7 +331,6 @@ TEST_P(PeerConnectionDataChannelTest, ObsoleteSdpSyntaxIfSet) {
 
 INSTANTIATE_TEST_SUITE_P(PeerConnectionDataChannelTest,
                          PeerConnectionDataChannelTest,
-                         Values(SdpSemantics::kPlanB_DEPRECATED,
-                                SdpSemantics::kUnifiedPlan));
+                         Values(SdpSemantics::kUnifiedPlan));
 
 }  // namespace webrtc
