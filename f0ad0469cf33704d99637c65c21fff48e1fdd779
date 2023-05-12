@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25330cc5_7e57cc1e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-05-12T10:25:35Z",
+      "side": 1,
+      "message": "This needs to be webrtc:13528\n(by default it takes you to chromium:13528 if you don\u0027t specify repo)",
+      "revId": "f0ad0469cf33704d99637c65c21fff48e1fdd779",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4658f0ec_ee037e7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-05-12T10:25:35Z",
+      "side": 1,
+      "message": "While we do want to delete Plan B, we can\u0027t yet because of upstream dependencies. And as long as it is still in use there is value to testing it to avoid regressions.",
+      "revId": "f0ad0469cf33704d99637c65c21fff48e1fdd779",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
