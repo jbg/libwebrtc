@@ -44,12 +44,15 @@ TimeDelta GetSendNackDelay(const FieldTrialsView& field_trials) {
 constexpr TimeDelta NackPeriodicProcessor::kUpdateInterval;
 
 NackPeriodicProcessor::NackPeriodicProcessor(TimeDelta update_interval)
-    : update_interval_(update_interval) {}
+    : update_interval_(update_interval) {
+  RTC_LOG(LS_ERROR) << "DEBUG: NackPeriodicProcessor::NackPeriodicProcessor";
+}
 
 NackPeriodicProcessor::~NackPeriodicProcessor() {}
 
 void NackPeriodicProcessor::RegisterNackModule(NackRequesterBase* module) {
   RTC_DCHECK_RUN_ON(&sequence_);
+  RTC_LOG(LS_ERROR) << "DEBUG: NackPeriodicProcessor::RegisterNackModule";
   modules_.push_back(module);
   if (modules_.size() != 1)
     return;
@@ -59,6 +62,7 @@ void NackPeriodicProcessor::RegisterNackModule(NackRequesterBase* module) {
         ProcessNackModules();
         return update_interval_;
       });
+  RTC_LOG(LS_ERROR) << "DEBUG: Repeating task scheduled";
 }
 
 void NackPeriodicProcessor::UnregisterNackModule(NackRequesterBase* module) {
@@ -72,6 +76,7 @@ void NackPeriodicProcessor::UnregisterNackModule(NackRequesterBase* module) {
 
 void NackPeriodicProcessor::ProcessNackModules() {
   RTC_DCHECK_RUN_ON(&sequence_);
+  RTC_LOG(LS_ERROR) << "DEBUG: ProcessNackModules called";
   for (NackRequesterBase* module : modules_)
     module->ProcessNacks();
 }
@@ -137,6 +142,7 @@ void NackRequester::ProcessNacks() {
   if (!nack_batch.empty()) {
     // This batch of NACKs is triggered externally; there is no external
     // initiator who can batch them with other feedback messages.
+    RTC_LOG(LS_ERROR) << "DEBUG: ProcessNacks sending nack";
     nack_sender_->SendNack(nack_batch, /*buffering_allowed=*/false);
   }
 }
@@ -211,6 +217,7 @@ int NackRequester::OnReceivedPacket(uint16_t seq_num,
   if (!nack_batch.empty()) {
     // This batch of NACKs is triggered externally; the initiator can
     // batch them with other feedback messages.
+    RTC_LOG(LS_ERROR) << "DEBUG: OnReceivedPacket sending nack";
     nack_sender_->SendNack(nack_batch, /*buffering_allowed=*/true);
   }
 
@@ -305,8 +312,13 @@ std::vector<uint16_t> NackRequester::GetNackBatch(NackFilterOptions options) {
     bool nack_on_seq_num_passed =
         it->second.sent_at_time.IsInfinite() &&
         AheadOrAt(newest_seq_num_, it->second.send_at_seq_num);
+    RTC_LOG(LS_ERROR) << "DEBUG: GetNackBatch " << it->second.seq_num << ":"
+                      << " flags delay " << delay_timed_out << " rtt "
+                      << nack_on_rtt_passed << " seq " << nack_on_seq_num_passed
+                      << " rtt_ value " << rtt_;
     if (delay_timed_out && ((consider_seq_num && nack_on_seq_num_passed) ||
                             (consider_timestamp && nack_on_rtt_passed))) {
+      RTC_LOG(LS_ERROR) << "DEBUG: Emplacing nack";
       nack_batch.emplace_back(it->second.seq_num);
       ++it->second.retries;
       it->second.sent_at_time = now;

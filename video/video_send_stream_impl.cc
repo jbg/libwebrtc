@@ -580,20 +580,26 @@ uint32_t VideoSendStreamImpl::OnBitrateUpdated(BitrateAllocationUpdate update) {
   RTC_DCHECK(rtp_video_sender_->IsActive())
       << "VideoSendStream::Start has not been called.";
 
+  RTC_LOG(LS_ERROR) << "DEBUG: VideoSendStreamImpl::OnBitrateUpdated";
   // When the BWE algorithm doesn't pass a stable estimate, we'll use the
   // unstable one instead.
   if (update.stable_target_bitrate.IsZero()) {
-    update.stable_target_bitrate = update.target_bitrate;
+    RTC_LOG(LS_ERROR) << "DEBUG: Using unstable target bitrate",
+        update.stable_target_bitrate = update.target_bitrate;
   }
 
   rtp_video_sender_->OnBitrateUpdated(update, stats_proxy_->GetSendFrameRate());
   encoder_target_rate_bps_ = rtp_video_sender_->GetPayloadBitrateBps();
   const uint32_t protection_bitrate_bps =
       rtp_video_sender_->GetProtectionBitrateBps();
+  RTC_LOG(LS_ERROR) << "DEBUG: Impl::OnBitrateUpdated target bitrate "
+                    << encoder_target_rate_bps_ << ", protection bitrate "
+                    << protection_bitrate_bps;
   DataRate link_allocation = DataRate::Zero();
   if (encoder_target_rate_bps_ > protection_bitrate_bps) {
     link_allocation =
         DataRate::BitsPerSec(encoder_target_rate_bps_ - protection_bitrate_bps);
+    RTC_LOG(LS_ERROR) << "DEBUG: Link allocation is " << link_allocation;
   }
   DataRate overhead =
       update.target_bitrate - DataRate::BitsPerSec(encoder_target_rate_bps_);
@@ -604,15 +610,25 @@ uint32_t VideoSendStreamImpl::OnBitrateUpdated(BitrateAllocationUpdate update) {
     encoder_stable_target_rate = DataRate::BitsPerSec(encoder_target_rate_bps_);
   }
 
+  RTC_LOG(LS_ERROR) << "DEBUG: Target rate min of encoder max "
+                    << encoder_max_bitrate_bps_ << " and target rate "
+                    << encoder_target_rate_bps_;
   encoder_target_rate_bps_ =
       std::min(encoder_max_bitrate_bps_, encoder_target_rate_bps_);
 
+  RTC_LOG(LS_ERROR) << "DEBUG: Stable target rate min of encoder max "
+                    << encoder_max_bitrate_bps_ << " and stable target rate "
+                    << encoder_stable_target_rate;
   encoder_stable_target_rate =
       std::min(DataRate::BitsPerSec(encoder_max_bitrate_bps_),
                encoder_stable_target_rate);
 
   DataRate encoder_target_rate = DataRate::BitsPerSec(encoder_target_rate_bps_);
   link_allocation = std::max(encoder_target_rate, link_allocation);
+  RTC_LOG(LS_ERROR) << "DEBUG: Impl::OnBitrateUpdated calling "
+                       "encoder::OnBitrateUpdated, target rate = "
+                    << encoder_target_rate
+                    << ", link allocation = " << link_allocation;
   video_stream_encoder_->OnBitrateUpdated(
       encoder_target_rate, encoder_stable_target_rate, link_allocation,
       rtc::dchecked_cast<uint8_t>(update.packet_loss_ratio * 256),

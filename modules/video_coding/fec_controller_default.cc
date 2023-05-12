@@ -85,6 +85,7 @@ uint32_t FecControllerDefault::UpdateFecRates(
     uint8_t fraction_lost,
     std::vector<bool> loss_mask_vector,
     int64_t round_trip_time_ms) {
+  RTC_LOG(LS_ERROR) << "DEBUG: FecControllerDefault::UpdateFecRates";
   float target_bitrate_kbps =
       static_cast<float>(estimated_bitrate_bps) / 1000.0f;
   // Sanity check.
@@ -108,6 +109,9 @@ uint32_t FecControllerDefault::UpdateFecRates(
         media_optimization::kMaxFilter;
     uint8_t packet_loss_enc = loss_prot_logic_->FilteredLoss(
         clock_->TimeInMilliseconds(), filter_mode, fraction_lost);
+    RTC_LOG(LS_ERROR) << "DEBUG: UpdateFecRates fraction_lost = "
+                      << fraction_lost
+                      << " packet_loss_enc = " << packet_loss_enc;
     // For now use the filtered loss for computing the robustness settings.
     loss_prot_logic_->UpdateFilteredLossPr(packet_loss_enc);
     if (loss_prot_logic_->SelectedType() == media_optimization::kNone) {
@@ -149,6 +153,10 @@ uint32_t FecControllerDefault::UpdateFecRates(
   protection_callback_->ProtectionRequest(
       &delta_fec_params, &key_fec_params, &sent_video_rate_bps,
       &sent_nack_rate_bps, &sent_fec_rate_bps);
+  RTC_LOG(LS_ERROR) << "FecController ProtectionRequest result "
+                    << " sent_video_rate_bps=" << sent_video_rate_bps
+                    << " sent_nack_rate_bps=" << sent_nack_rate_bps
+                    << " sent_fec_rate_bps=" << sent_fec_rate_bps;
   uint32_t sent_total_rate_bps =
       sent_video_rate_bps + sent_nack_rate_bps + sent_fec_rate_bps;
   // Estimate the overhead costs of the next second as staying the same
@@ -158,9 +166,15 @@ uint32_t FecControllerDefault::UpdateFecRates(
         static_cast<float>(sent_nack_rate_bps + sent_fec_rate_bps) /
         sent_total_rate_bps;
   }
+  RTC_LOG(LS_ERROR)
+      << "DEBUG: FecController protection overhead rate before cap: "
+      << protection_overhead_rate;
   // Cap the overhead estimate to a threshold, default is 50%.
   protection_overhead_rate =
       std::min(protection_overhead_rate, overhead_threshold_);
+  RTC_LOG(LS_ERROR)
+      << "DEBUG: FecController protection overhead rate after cap: "
+      << protection_overhead_rate;
   // Source coding rate: total rate - protection overhead.
   return estimated_bitrate_bps * (1.0 - protection_overhead_rate);
 }

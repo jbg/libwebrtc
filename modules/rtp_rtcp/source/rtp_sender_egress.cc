@@ -41,6 +41,7 @@ void RtpSenderEgress::NonPacedPacketSender::EnqueuePackets(
     std::vector<std::unique_ptr<RtpPacketToSend>> packets) {
   for (auto& packet : packets) {
     PrepareForSend(packet.get());
+    RTC_LOG(LS_ERROR) << "DEBUG: EnqueuePackets";
     sender_->SendPacket(packet.get(), PacedPacketInfo());
   }
   auto fec_packets = sender_->FetchFecPackets();
@@ -474,6 +475,7 @@ void RtpSenderEgress::UpdateDelayStatistics(Timestamp capture_time,
 
     // Add the new element.
     TimeDelta new_send_delay = now - capture_time;
+    RTC_LOG(LS_ERROR) << "DEBUG: Recording send delay " << new_send_delay;
     auto [it, inserted] = send_delays_.emplace(now, new_send_delay);
     if (!inserted) {
       // TODO(terelius): If we have multiple delay measurements during the same

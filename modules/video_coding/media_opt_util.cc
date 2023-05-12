@@ -19,6 +19,7 @@
 #include "modules/video_coding/utility/simulcast_rate_allocator.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/experiments/rate_control_settings.h"
+#include "rtc_base/logging.h"
 #include "rtc_base/numerics/safe_conversions.h"
 
 namespace webrtc {
@@ -65,6 +66,8 @@ uint8_t VCMProtectionMethod::RequiredProtectionFactorK() {
 }
 
 uint8_t VCMProtectionMethod::RequiredProtectionFactorD() {
+  RTC_LOG(LS_ERROR) << "DEBUG: RequiredProtectionFactorD = "
+                    << _protectionFactorD;
   return _protectionFactorD;
 }
 
@@ -109,6 +112,7 @@ bool VCMNackFecMethod::ProtectionFactor(
 
   // Otherwise: we count on FEC; if the RTT is below a threshold, then we
   // nack the residual, based on a decision made in the JB.
+  RTC_LOG(LS_ERROR) << "DEBUG: VCMNackFecMethod::ProtectionFactor()";
 
   // Compute the protection factors
   VCMFecMethod::ProtectionFactor(parameters);
@@ -130,7 +134,8 @@ bool VCMNackFecMethod::ProtectionFactor(
     // update FEC rates after applying adjustment
     VCMFecMethod::UpdateProtectionFactorD(_protectionFactorD);
   }
-
+  RTC_LOG(LS_ERROR) << "DEBUG: NackFec ProtectionFactorD is "
+                    << _protectionFactorD;
   return true;
 }
 
@@ -216,6 +221,8 @@ bool VCMNackFecMethod::UpdateParameters(
   // the actual one
   _protectionFactorK = VCMFecMethod::ConvertFECRate(_protectionFactorK);
   _protectionFactorD = VCMFecMethod::ConvertFECRate(_protectionFactorD);
+  RTC_LOG(LS_ERROR) << "DEBUG: UpdateParameters protectionFactorD = "
+                    << _protectionFactorD;
 
   return true;
 }
@@ -284,6 +291,8 @@ void VCMFecMethod::UpdateProtectionFactorK(uint8_t protectionFactorK) {
 
 bool VCMFecMethod::ProtectionFactor(const VCMProtectionParameters* parameters) {
   // FEC PROTECTION SETTINGS: varies with packet loss and bitrate
+  RTC_LOG(LS_ERROR) << "DEBUG: VCMFecMethod::ProtectionFactor, packetLoss is "
+                    << parameters->lossPr;
 
   // No protection if (filtered) packetLoss is 0
   uint8_t packetLoss = rtc::saturated_cast<uint8_t>(255 * parameters->lossPr);
@@ -342,6 +351,7 @@ bool VCMFecMethod::ProtectionFactor(const VCMProtectionParameters* parameters) {
 
   // Restrict packet loss range to 50:
   // current tables defined only up to 50%
+  RTC_LOG(LS_ERROR) << "DEBUG: Packet loss is " << packetLoss;
   if (packetLoss >= kPacketLossMax) {
     packetLoss = kPacketLossMax - 1;
   }
@@ -352,6 +362,8 @@ bool VCMFecMethod::ProtectionFactor(const VCMProtectionParameters* parameters) {
 
   // Protection factor for P frame
   codeRateDelta = kFecRateTable[indexTable];
+  RTC_LOG(LS_ERROR) << "DEBUG: ProtectionFactorD index=" << indexTable
+                    << " value=" << codeRateDelta;
 
   if (packetLoss > lossThr && avgTotPackets > packetNumThr) {
     // Set a minimum based on first partition size.
@@ -435,6 +447,8 @@ bool VCMFecMethod::ProtectionFactor(const VCMProtectionParameters* parameters) {
     _corrFecCost = 0.0f;
   }
 
+  RTC_LOG(LS_ERROR) << "DEBUG: FecMethod::ProtectionFactorD is "
+                    << _protectionFactorD;
   // DONE WITH FEC PROTECTION SETTINGS
   return true;
 }
@@ -542,10 +556,17 @@ void VCMLossProtectionLogic::UpdateRtt(int64_t rtt) {
 
 void VCMLossProtectionLogic::UpdateMaxLossHistory(uint8_t lossPr255,
                                                   int64_t now) {
+  RTC_LOG(LS_ERROR) << "DEBUG: UpdateMaxLossHistory, loss " << lossPr255
+                    << " timestamp " << now;
+  RTC_LOG(LS_ERROR) << "DEBUG: time delta = " << now - _lossPrHistory[0].timeMs;
   if (_lossPrHistory[0].timeMs >= 0 &&
       now - _lossPrHistory[0].timeMs < kLossPrShortFilterWinMs) {
     if (lossPr255 > _shortMaxLossPr255) {
+      RTC_LOG(LS_ERROR) << "DEBUG: Increasing short sample from "
+                        << _shortMaxLossPr255 << " to " << lossPr255;
       _shortMaxLossPr255 = lossPr255;
+    } else {
+      RTC_LOG(LS_ERROR) << "DEBUG: Too fast, no sample";
     }
   } else {
     // Only add a new value to the history once a second
@@ -562,7 +583,7 @@ void VCMLossProtectionLogic::UpdateMaxLossHistory(uint8_t lossPr255,
     if (_shortMaxLossPr255 == 0) {
       _shortMaxLossPr255 = lossPr255;
     }
-
+    RTC_LOG(LS_ERROR) << "DEBUG: Recording new sample";
     _lossPrHistory[0].lossPr255 = _shortMaxLossPr255;
     _lossPrHistory[0].timeMs = now;
     _shortMaxLossPr255 = 0;

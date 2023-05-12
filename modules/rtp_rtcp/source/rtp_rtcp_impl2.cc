@@ -339,7 +339,6 @@ bool ModuleRtpRtcpImpl2::TrySendPacket(RtpPacketToSend* packet,
   if (!is_flexfec) {
     rtp_sender_->sequencer.Sequence(*packet);
   }
-
   rtp_sender_->packet_sender.SendPacket(packet, pacing_info);
   return true;
 }
