@@ -22,6 +22,30 @@
       },
       "revId": "ed0c1f4ebb7c28a94681bfb532802c2636be2c70",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64878658_ae6e1839",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-05-12T11:00:40Z",
+      "side": 1,
+      "message": "or just EXPECT_EQ(offset, 0);\n\noperator\u003d\u003d(optional\u003cint\u003e, int) is well defined and expectation would nicely fail if offset is nullopt\nhttps://en.cppreference.com/w/cpp/utility/optional/operator_cmp",
+      "parentUuid": "2c4843a2_4f098452",
+      "range": {
+        "startLine": 329,
+        "startChar": 2,
+        "endLine": 329,
+        "endChar": 13
+      },
+      "revId": "ed0c1f4ebb7c28a94681bfb532802c2636be2c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
