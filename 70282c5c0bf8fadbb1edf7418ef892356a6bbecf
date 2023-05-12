@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6d02c9c_31dc559e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-05-12T08:28:26Z",
+      "side": 1,
+      "message": "This fixes the bandwidth reduction we saw in the performance bot.",
+      "revId": "70282c5c0bf8fadbb1edf7418ef892356a6bbecf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
