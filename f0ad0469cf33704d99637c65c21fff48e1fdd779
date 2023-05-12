@@ -33,6 +33,24 @@
       "message": "While we do want to delete Plan B, we can\u0027t yet because of upstream dependencies. And as long as it is still in use there is value to testing it to avoid regressions.",
       "revId": "f0ad0469cf33704d99637c65c21fff48e1fdd779",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae59183d_275f1a2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20759
+      },
+      "writtenOn": "2023-05-12T12:34:57Z",
+      "side": 1,
+      "message": "hi, many thanks for your comment.\n\nNo worries about this, I will close the CL for now...",
+      "parentUuid": "4658f0ec_ee037e7e",
+      "revId": "f0ad0469cf33704d99637c65c21fff48e1fdd779",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
