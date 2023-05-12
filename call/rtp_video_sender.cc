@@ -823,7 +823,9 @@ void RtpVideoSender::OnTransportOverheadChanged(
 
 void RtpVideoSender::OnBitrateUpdated(BitrateAllocationUpdate update,
                                       int framerate) {
-  // Substract overhead from bitrate.
+  RTC_LOG(LS_ERROR) << "OnBitrateUpdated: update.target_bitrate is "
+                    << update.target_bitrate;
+  // Subtract overhead from bitrate.
   MutexLock lock(&mutex_);
   size_t num_active_streams = 0;
   size_t overhead_bytes_per_packet = 0;
@@ -854,11 +856,23 @@ void RtpVideoSender::OnBitrateUpdated(BitrateAllocationUpdate update,
   // Get the encoder target rate. It is the estimated network rate -
   // protection overhead.
   // TODO(srte): We should multiply with 255 here.
+  RTC_LOG(LS_ERROR) << "FEC input "
+                    << " payload_bitrate_bps=" << payload_bitrate_bps
+                    << " framerate=" << framerate << " packet_loss="
+                    << rtc::saturated_cast<uint8_t>(update.packet_loss_ratio *
+                                                    256)
+                    // << " loss_mask_vector=" << loss_mask_vector_
+                    << " round_trip_time=" << update.round_trip_time.ms();
+
   encoder_target_rate_bps_ = fec_controller_->UpdateFecRates(
       payload_bitrate_bps, framerate,
       rtc::saturated_cast<uint8_t>(update.packet_loss_ratio * 256),
       loss_mask_vector_, update.round_trip_time.ms());
+  RTC_LOG(LS_ERROR) << "DEBUG: target rate after FEC = "
+                    << encoder_target_rate_bps_;
   if (!fec_allowed_) {
+    RTC_LOG(LS_ERROR) << "DEBUG: FEC not allowed, reset to "
+                      << payload_bitrate_bps;
     encoder_target_rate_bps_ = payload_bitrate_bps;
     // fec_controller_->UpdateFecRates() was still called so as to allow
     // `fec_controller_` to update whatever internal state it might have,
@@ -871,6 +885,8 @@ void RtpVideoSender::OnBitrateUpdated(BitrateAllocationUpdate update,
   // packetization rate is positive since packets are still flowing.
   uint32_t post_encode_overhead_bps = std::min(
       GetPostEncodeOverhead().bps<uint32_t>(), encoder_target_rate_bps_ / 2);
+  RTC_LOG(LS_ERROR) << "DEBUG: post_encode_overhead_bps="
+                    << post_encode_overhead_bps;
   encoder_target_rate_bps_ -= post_encode_overhead_bps;
 
   loss_mask_vector_.clear();
@@ -885,16 +901,32 @@ void RtpVideoSender::OnBitrateUpdated(BitrateAllocationUpdate update,
         DataRate::BitsPerSec(encoder_target_rate_bps_),
         max_total_packet_size - DataSize::Bytes(overhead_bytes_per_packet),
         packet_overhead, Frequency::Hertz(framerate));
+    RTC_LOG(LS_ERROR) << "DEBUG: encoder_overhead_rate before truncation"
+                      << encoder_overhead_rate.bps<uint32_t>();
     encoder_overhead_rate_bps = std::min(
         encoder_overhead_rate.bps<uint32_t>(),
         update.target_bitrate.bps<uint32_t>() - encoder_target_rate_bps_);
+    RTC_LOG(LS_ERROR) << "DEBUG: encoder_overhead_rate after truncation "
+                      << encoder_overhead_rate_bps;
   }
+  RTC_LOG(LS_ERROR) << "DEBUG: Input to media_rate: "
+                    << " encoder_target_rate_bps_ = "
+                    << encoder_target_rate_bps_
+                    << " encoder_overhead_rate_bps = "
+                    << encoder_overhead_rate_bps
+                    << " post_encode_overhead_bps = "
+                    << post_encode_overhead_bps;
+
   const uint32_t media_rate = encoder_target_rate_bps_ +
                               encoder_overhead_rate_bps +
                               post_encode_overhead_bps;
   RTC_DCHECK_GE(update.target_bitrate, DataRate::BitsPerSec(media_rate));
   // `protection_bitrate_bps_` includes overhead.
   protection_bitrate_bps_ = update.target_bitrate.bps() - media_rate;
+  RTC_LOG(LS_ERROR) << "DEBUG: Setting protection_bitrate_bps to "
+                    << protection_bitrate_bps_
+                    << ", target_bitrate = " << update.target_bitrate.bps()
+                    << ", media rate = " << media_rate;
 }
 
 uint32_t RtpVideoSender::GetPayloadBitrateBps() const {
@@ -902,6 +934,8 @@ uint32_t RtpVideoSender::GetPayloadBitrateBps() const {
 }
 
 uint32_t RtpVideoSender::GetProtectionBitrateBps() const {
+  RTC_LOG(LS_ERROR) << "DEBUG: RtpVideoSender::GetProtectionBitrateBps="
+                    << protection_bitrate_bps_;
   return protection_bitrate_bps_;
 }
 
@@ -921,9 +955,14 @@ int RtpVideoSender::ProtectionRequest(const FecProtectionParams* delta_params,
                                       uint32_t* sent_video_rate_bps,
                                       uint32_t* sent_nack_rate_bps,
                                       uint32_t* sent_fec_rate_bps) {
+  RTC_LOG(LS_ERROR) << "DEBUG: RtpVideoSender::ProtectionRequest, "
+                    << " delta fec rate " << delta_params->fec_rate
+                    << " key fec rate " << key_params->fec_rate;
   *sent_video_rate_bps = 0;
   *sent_nack_rate_bps = 0;
   *sent_fec_rate_bps = 0;
+  RTC_LOG(LS_ERROR) << "DEBUG: ProtectionRequest sees " << rtp_streams_.size()
+                    << " streams";
   for (const RtpStreamSender& stream : rtp_streams_) {
     stream.rtp_rtcp->SetFecProtectionParams(*delta_params, *key_params);
 
@@ -1011,6 +1050,12 @@ DataRate RtpVideoSender::CalculateOverheadRate(DataRate data_rate,
                                                DataSize packet_size,
                                                DataSize overhead_per_packet,
                                                Frequency framerate) const {
+  RTC_LOG(LS_ERROR) << "CalculateOverheadRate inputs:"
+                    << " data_rate=" << data_rate
+                    << " packet_size=" << packet_size
+                    << " overhead_per_packet=" << overhead_per_packet
+                    << " use_frame_rate_for_overhead_="
+                    << use_frame_rate_for_overhead_;
   Frequency packet_rate = data_rate / packet_size;
   if (use_frame_rate_for_overhead_) {
     framerate = std::max(framerate, Frequency::Hertz(1));

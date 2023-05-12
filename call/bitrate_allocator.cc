@@ -398,6 +398,9 @@ void BitrateAllocator::OnNetworkEstimateChanged(TargetTransferRate msg) {
   auto stable_bitrate_allocation =
       AllocateBitrates(allocatable_tracks_, last_stable_target_bps_);
 
+  RTC_LOG(LS_ERROR)
+      << "DEBUG: BitrateAllocator::OnNetworkEstimateChanged, tracks = "
+      << allocatable_tracks_.size();
   for (auto& config : allocatable_tracks_) {
     uint32_t allocated_bitrate = allocation[config.observer];
     uint32_t allocated_stable_target_rate =

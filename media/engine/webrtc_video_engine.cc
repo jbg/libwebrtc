@@ -996,6 +996,11 @@ bool WebRtcVideoChannel::ApplyChangedParams(
       }
     }
   } else {
+    RTC_LOG(LS_ERROR) << "DEBUG: Calling send-codec-changed-callback, "
+                         "changed_params.send_codec = "
+                      << changed_params.send_codec.has_value()
+                      << ", changed_params.rtcp_mode = "
+                      << changed_params.rtcp_mode.has_value();
     if (changed_params.send_codec || changed_params.rtcp_mode) {
       send_codec_changed_callback_();
     }
@@ -1010,6 +1015,10 @@ void WebRtcVideoChannel::SetReceiverFeedbackParameters(
     absl::optional<int> rtx_time) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
 
+  RTC_LOG(LS_ERROR) << "SetReceiverFeedbackParameters, rtcp_mode = "
+                    << rtcp_mode << ", # of streams is "
+                    << receive_streams_.size();
+
   RTC_DCHECK(role() == MediaChannel::Role::kReceive ||
              role() == MediaChannel::Role::kBoth);
   // Update receive feedback parameters from new codec or RTCP mode.
@@ -1018,6 +1027,15 @@ void WebRtcVideoChannel::SetReceiverFeedbackParameters(
     kv.second->SetFeedbackParameters(lntf_enabled, nack_enabled, rtcp_mode,
                                      rtx_time);
   }
+  // Store for future creation of receive streams
+  rtp_config_.lntf.enabled = lntf_enabled;
+  if (nack_enabled) {
+    rtp_config_.nack.rtp_history_ms = kNackHistoryMs;
+  } else {
+    rtp_config_.nack.rtp_history_ms = 0;
+  }
+  rtp_config_.rtcp_mode = rtcp_mode;
+  // Note: There is no place in config to store rtx_time.
 }
 
 webrtc::RtpParameters WebRtcVideoChannel::GetRtpSendParameters(
@@ -1525,14 +1543,19 @@ void WebRtcVideoChannel::ConfigureReceiverRtp(
     }
   }
 
-  // Whether or not the receive stream sends reduced size RTCP is determined
-  // by the send params.
-  // TODO(deadbeef): Once we change "send_params" to "sender_params" and
-  // "recv_params" to "receiver_params", we should get this out of
-  // receiver_params_.
-  config->rtp.rtcp_mode = send_params_.rtcp.reduced_size
-                              ? webrtc::RtcpMode::kReducedSize
-                              : webrtc::RtcpMode::kCompound;
+  if (role() == MediaChannel::Role::kBoth) {
+    // Whether or not the receive stream sends reduced size RTCP is determined
+    // by the send params.
+    // TODO(deadbeef): Once we change "send_params" to "sender_params" and
+    // "recv_params" to "receiver_params", we should get this out of
+    // receiver_params_.
+    config->rtp.rtcp_mode = send_params_.rtcp.reduced_size
+                                ? webrtc::RtcpMode::kReducedSize
+                                : webrtc::RtcpMode::kCompound;
+  } else {
+    // The mode is determined by a call to the configuration function.
+    config->rtp.rtcp_mode = rtp_config_.rtcp_mode;
+  }
 
   // rtx-time (RFC 4588) is a declarative attribute similar to rtcp-rsize and
   // determined by the sender / send codec.
@@ -3108,6 +3131,7 @@ void WebRtcVideoChannel::WebRtcVideoReceiveStream::SetFeedbackParameters(
     absl::optional<int> rtx_time) {
   RTC_DCHECK(stream_);
 
+  RTC_LOG(LS_ERROR) << "DEBUG: SetFeedbackParameters rtcp_mode = " << rtcp_mode;
   if (config_.rtp.rtcp_mode != rtcp_mode) {
     config_.rtp.rtcp_mode = rtcp_mode;
     stream_->SetRtcpMode(rtcp_mode);
@@ -3220,6 +3244,8 @@ void WebRtcVideoChannel::WebRtcVideoReceiveStream::CreateReceiveStream() {
   webrtc::VideoReceiveStreamInterface::Config config = config_.Copy();
   config.rtp.protected_by_flexfec = (flexfec_stream_ != nullptr);
   config.rtp.packet_sink_ = flexfec_stream_;
+  RTC_LOG(LS_ERROR) << "DEBUG: CreateReceiveStream, rtcp_mode is "
+                    << config.rtp.rtcp_mode;
   stream_ = call_->CreateVideoReceiveStream(std::move(config));
 }
 

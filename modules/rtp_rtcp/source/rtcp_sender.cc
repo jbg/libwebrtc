@@ -193,6 +193,7 @@ RtcpMode RTCPSender::Status() const {
 }
 
 void RTCPSender::SetRTCPStatus(RtcpMode new_method) {
+  RTC_LOG(LS_ERROR) << "DEBUG: SetRTCPStatus to " << new_method;
   MutexLock lock(&mutex_rtcp_sender_);
 
   if (new_method == RtcpMode::kOff) {
@@ -477,6 +478,7 @@ void RTCPSender::BuildSDES(const RtcpContext& ctx, PacketSender& sender) {
 }
 
 void RTCPSender::BuildRR(const RtcpContext& ctx, PacketSender& sender) {
+  RTC_LOG(LS_ERROR) << "BuildRR from " << ssrc_;
   rtcp::ReceiverReport report;
   report.SetSenderSsrc(ssrc_);
   report.SetReportBlocks(CreateReportBlocks(ctx.feedback_state_));
@@ -605,6 +607,8 @@ void RTCPSender::BuildNACK(const RtcpContext& ctx, PacketSender& sender) {
   // Report stats.
   for (int idx = 0; idx < ctx.nack_size_; ++idx) {
     nack_stats_.ReportRequest(ctx.nack_list_[idx]);
+    RTC_LOG(LS_ERROR) << "DEBUG: Sent nack # " << nack_stats_.unique_requests()
+                      << " for " << ctx.nack_list_[idx];
   }
   packet_type_counter_.nack_requests = nack_stats_.requests();
   packet_type_counter_.unique_nack_requests = nack_stats_.unique_requests();
@@ -657,6 +661,7 @@ int32_t RTCPSender::SendRTCP(const FeedbackState& feedback_state,
                              RTCPPacketType packet_type,
                              int32_t nack_size,
                              const uint16_t* nack_list) {
+  RTC_LOG(LS_ERROR) << "DEBUG: SendRTCP, packet type " << packet_type;
   int32_t error_code = -1;
   auto callback = [&](rtc::ArrayView<const uint8_t> packet) {
     if (transport_->SendRtcp(packet.data(), packet.size())) {
@@ -773,6 +778,9 @@ void RTCPSender::PrepareReport(const FeedbackState& feedback_state) {
       SetFlag(sending_ ? kRtcpSr : kRtcpRr, true);
   }
 
+  RTC_LOG(LS_ERROR) << "DEBUG: PrepareReport generate_report is "
+                    << generate_report << ", method is " << method_;
+
   if (IsFlagPresent(kRtcpSr) || (IsFlagPresent(kRtcpRr) && !cname_.empty()))
     SetFlag(kRtcpSdes, true);
 
@@ -800,6 +808,9 @@ void RTCPSender::PrepareReport(const FeedbackState& feedback_state) {
     int min_interval_int = rtc::dchecked_cast<int>(min_interval.ms());
     TimeDelta time_to_next = TimeDelta::Millis(
         random_.Rand(min_interval_int * 1 / 2, min_interval_int * 3 / 2));
+
+    RTC_LOG(LS_ERROR) << "DEBUG: PrepareReport time_to_next is "
+                      << time_to_next;
 
     RTC_DCHECK(!time_to_next.IsZero());
     SetNextRtcpSendEvaluationDuration(time_to_next);

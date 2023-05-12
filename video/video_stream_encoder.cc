@@ -2296,6 +2296,8 @@ void VideoStreamEncoder::OnBitrateUpdated(DataRate target_bitrate,
                                           uint8_t fraction_lost,
                                           int64_t round_trip_time_ms,
                                           double cwnd_reduce_ratio) {
+  RTC_LOG(LS_ERROR) << "DEBUG: OnBitrateUpdated target = " << target_bitrate
+                    << " stable target = " << stable_target_bitrate;
   RTC_DCHECK_GE(link_allocation, target_bitrate);
   if (!encoder_queue_.IsCurrent()) {
     encoder_queue_.PostTask([this, target_bitrate, stable_target_bitrate,
@@ -2324,11 +2326,12 @@ void VideoStreamEncoder::OnBitrateUpdated(DataRate target_bitrate,
 
   RTC_DCHECK(sink_) << "sink_ must be set before the encoder is active.";
 
-  RTC_LOG(LS_VERBOSE) << "OnBitrateUpdated, bitrate " << target_bitrate.bps()
-                      << " stable bitrate = " << stable_target_bitrate.bps()
-                      << " link allocation bitrate = " << link_allocation.bps()
-                      << " packet loss " << static_cast<int>(fraction_lost)
-                      << " rtt " << round_trip_time_ms;
+  RTC_LOG(LS_ERROR) << "DEBUG: OnBitrateUpdated, bitrate "
+                    << target_bitrate.bps()
+                    << " stable bitrate = " << stable_target_bitrate.bps()
+                    << " link allocation bitrate = " << link_allocation.bps()
+                    << " packet loss " << static_cast<int>(fraction_lost)
+                    << " rtt " << round_trip_time_ms;
 
   if (encoder_) {
     encoder_->OnPacketLossRateUpdate(static_cast<float>(fraction_lost) / 256.f);

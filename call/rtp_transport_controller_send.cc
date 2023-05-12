@@ -627,6 +627,8 @@ void RtpTransportControllerSend::StartProcessPeriodicTasks() {
 
 void RtpTransportControllerSend::UpdateControllerWithTimeInterval() {
   RTC_DCHECK(controller_);
+  RTC_LOG(LS_ERROR)
+      << "DEBUG: RtpTransportControllerSend::UpdateControllerWithTimeInterval";
   ProcessInterval msg;
   msg.at_time = Timestamp::Millis(clock_->TimeInMilliseconds());
   if (add_pacing_to_cwin_)
@@ -641,6 +643,7 @@ void RtpTransportControllerSend::UpdateStreamsConfig() {
 }
 
 void RtpTransportControllerSend::PostUpdates(NetworkControlUpdate update) {
+  RTC_LOG(LS_ERROR) << "DEBUG: RtpTransportControllerSend::PostUpdates";
   if (update.congestion_window) {
     congestion_window_size_ = *update.congestion_window;
     UpdateCongestedState();

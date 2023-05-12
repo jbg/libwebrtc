@@ -81,6 +81,8 @@ absl::optional<TargetTransferRate> CongestionControlHandler::GetUpdate() {
                        << ToString(log_target_rate) << ".";
     encoder_paused_in_last_report_ = pause_encoding;
     last_reported_ = new_outgoing;
+    RTC_LOG(LS_ERROR) << "DEBUG: GetUpdate returns new target rate "
+                      << new_outgoing.target_rate.bps() << " bps";
     return new_outgoing;
   }
   return absl::nullopt;

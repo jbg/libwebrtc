@@ -591,7 +591,7 @@ bool RTCPReceiver::HandleReceiverReport(const CommonHeader& rtcp_block,
   const uint32_t remote_ssrc = receiver_report.sender_ssrc();
 
   packet_information->remote_ssrc = remote_ssrc;
-
+  RTC_LOG(LS_ERROR) << "DEBUG: HandleReceiverReport from " << remote_ssrc;
   UpdateTmmbrRemoteIsAlive(remote_ssrc);
 
   packet_information->packet_type_flags |= kRtcpRr;
@@ -1130,6 +1130,7 @@ void RTCPReceiver::NotifyTmmbrUpdated() {
 // Holding no Critical section.
 void RTCPReceiver::TriggerCallbacksFromRtcpPacket(
     const PacketInformation& packet_information) {
+  RTC_LOG(LS_ERROR) << "DEBUG: RTCPReceiver::TriggerCallbacksFromRtcpPacket";
   // Process TMMBR and REMB first to avoid multiple callbacks
   // to OnNetworkChanged.
   if (packet_information.packet_type_flags & kRtcpTmmbr) {
@@ -1219,6 +1220,14 @@ void RTCPReceiver::TriggerCallbacksFromRtcpPacket(
 
   if ((packet_information.packet_type_flags & kRtcpSr) ||
       (packet_information.packet_type_flags & kRtcpRr)) {
+    if (packet_information.packet_type_flags & kRtcpSr &&
+        packet_information.packet_type_flags & kRtcpRr) {
+      RTC_LOG(LS_ERROR) << "DEBUG: TriggerCallbacks - SR and RR received";
+    } else if (packet_information.packet_type_flags & kRtcpSr) {
+      RTC_LOG(LS_ERROR) << "DEBUG: TriggerCallbacks - SR received";
+    } else {
+      RTC_LOG(LS_ERROR) << "DEBUG: TriggerCallbacks - RR received";
+    }
     rtp_rtcp_->OnReceivedRtcpReportBlocks(packet_information.report_blocks);
   }
 
