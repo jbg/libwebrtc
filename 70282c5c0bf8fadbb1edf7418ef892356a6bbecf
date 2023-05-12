@@ -16,6 +16,23 @@
       "message": "This fixes the bandwidth reduction we saw in the performance bot.",
       "revId": "70282c5c0bf8fadbb1edf7418ef892356a6bbecf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24e08877_e479108c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-05-12T11:09:05Z",
+      "side": 1,
+      "message": "LGTM (the Chromium bot seems an issue at HEAD with Chromium).",
+      "revId": "70282c5c0bf8fadbb1edf7418ef892356a6bbecf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
