@@ -116,7 +116,7 @@ class ChannelSend : public ChannelSendInterface,
 
   void RegisterSenderCongestionControlObjects(
       RtpTransportControllerSendInterface* transport,
-      RtcpBandwidthObserver* bandwidth_observer) override;
+      NetworkLinkRtcpObserver* rtcp_observer) override;
   void ResetSenderCongestionControlObjects() override;
   void SetRTCP_CNAME(absl::string_view c_name) override;
   std::vector<ReportBlockData> GetRemoteRTCPReportBlocks() const override;
@@ -272,32 +272,31 @@ class RtpPacketSenderProxy : public RtpPacketSender {
   RtpPacketSender* rtp_packet_pacer_ RTC_GUARDED_BY(&mutex_);
 };
 
-class VoERtcpObserver : public RtcpBandwidthObserver {
+class VoERtcpObserver : public NetworkLinkRtcpObserver {
  public:
   explicit VoERtcpObserver(ChannelSend* owner)
       : owner_(owner), bandwidth_observer_(nullptr) {}
   ~VoERtcpObserver() override {}
 
-  void SetBandwidthObserver(RtcpBandwidthObserver* bandwidth_observer) {
+  void SetBandwidthObserver(NetworkLinkRtcpObserver* bandwidth_observer) {
     MutexLock lock(&mutex_);
     bandwidth_observer_ = bandwidth_observer;
   }
 
-  void OnReceivedEstimatedBitrate(uint32_t bitrate) override {
+  void OnReceiverEstimatedMaxBitrate(Timestamp receive_time,
+                                     DataRate bitrate) override {
     MutexLock lock(&mutex_);
     if (bandwidth_observer_) {
-      bandwidth_observer_->OnReceivedEstimatedBitrate(bitrate);
+      bandwidth_observer_->OnReceiverEstimatedMaxBitrate(receive_time, bitrate);
     }
   }
 
-  void OnReceivedRtcpReceiverReport(const ReportBlockList& report_blocks,
-                                    int64_t rtt,
-                                    int64_t now_ms) override {
+  void OnReport(Timestamp receive_time,
+                rtc::ArrayView<const ReportBlockData> report_blocks) override {
     {
       MutexLock lock(&mutex_);
       if (bandwidth_observer_) {
-        bandwidth_observer_->OnReceivedRtcpReceiverReport(report_blocks, rtt,
-                                                          now_ms);
+        bandwidth_observer_->OnReport(receive_time, report_blocks);
       }
     }
     // TODO(mflodman): Do we need to aggregate reports here or can we jut send
@@ -311,23 +310,21 @@ class VoERtcpObserver : public RtcpBandwidthObserver {
 
     // If receiving multiple report blocks, calculate the weighted average based
     // on the number of packets a report refers to.
-    for (ReportBlockList::const_iterator block_it = report_blocks.begin();
-         block_it != report_blocks.end(); ++block_it) {
+    for (const ReportBlockData& block : report_blocks) {
       // Find the previous extended high sequence number for this remote SSRC,
       // to calculate the number of RTP packets this report refers to. Ignore if
       // we haven't seen this SSRC before.
-      std::map<uint32_t, uint32_t>::iterator seq_num_it =
-          extended_max_sequence_number_.find(block_it->source_ssrc);
+      auto seq_num_it = extended_max_sequence_number_.find(block.source_ssrc());
       int number_of_packets = 0;
       if (seq_num_it != extended_max_sequence_number_.end()) {
         number_of_packets =
-            block_it->extended_highest_sequence_number - seq_num_it->second;
+            block.extended_highest_sequence_number() - seq_num_it->second;
       }
-      fraction_lost_aggregate += number_of_packets * block_it->fraction_lost;
+      fraction_lost_aggregate += number_of_packets * block.fraction_lost_raw();
       total_number_of_packets += number_of_packets;
 
-      extended_max_sequence_number_[block_it->source_ssrc] =
-          block_it->extended_highest_sequence_number;
+      extended_max_sequence_number_[block.source_ssrc()] =
+          block.extended_highest_sequence_number();
     }
     int weighted_fraction_lost = 0;
     if (total_number_of_packets > 0) {
@@ -338,12 +335,27 @@ class VoERtcpObserver : public RtcpBandwidthObserver {
     owner_->OnUplinkPacketLossRate(weighted_fraction_lost / 255.0f);
   }
 
+  void OnTransportFeedback(Timestamp receive_time,
+                           const rtcp::TransportFeedback& feedback) override {
+    MutexLock lock(&mutex_);
+    if (bandwidth_observer_) {
+      bandwidth_observer_->OnTransportFeedback(receive_time, feedback);
+    }
+  }
+
+  void OnRttUpdate(Timestamp receive_time, TimeDelta rtt) override {
+    MutexLock lock(&mutex_);
+    if (bandwidth_observer_) {
+      bandwidth_observer_->OnRttUpdate(receive_time, rtt);
+    }
+  }
+
  private:
   ChannelSend* owner_;
   // Maps remote side ssrc to extended highest sequence number received.
   std::map<uint32_t, uint32_t> extended_max_sequence_number_;
   Mutex mutex_;
-  RtcpBandwidthObserver* bandwidth_observer_ RTC_GUARDED_BY(mutex_);
+  NetworkLinkRtcpObserver* bandwidth_observer_ RTC_GUARDED_BY(mutex_);
 };
 
 int32_t ChannelSend::SendData(AudioFrameType frameType,
@@ -475,7 +487,7 @@ ChannelSend::ChannelSend(
   audio_coding_ = AudioCodingModule::Create();
 
   RtpRtcpInterface::Configuration configuration;
-  configuration.bandwidth_callback = rtcp_observer_.get();
+  configuration.network_link_rtcp_observer = rtcp_observer_.get();
   configuration.transport_feedback_callback = feedback_observer_;
   configuration.clock = (clock ? clock : Clock::GetRealTimeClock());
   configuration.audio = true;
@@ -704,7 +716,7 @@ void ChannelSend::SetSendAudioLevelIndicationStatus(bool enable, int id) {
 
 void ChannelSend::RegisterSenderCongestionControlObjects(
     RtpTransportControllerSendInterface* transport,
-    RtcpBandwidthObserver* bandwidth_observer) {
+    NetworkLinkRtcpObserver* rtcp_observer) {
   RTC_DCHECK_RUN_ON(&worker_thread_checker_);
   RtpPacketSender* rtp_packet_pacer = transport->packet_sender();
   PacketRouter* packet_router = transport->packet_router();
@@ -712,7 +724,7 @@ void ChannelSend::RegisterSenderCongestionControlObjects(
   RTC_DCHECK(rtp_packet_pacer);
   RTC_DCHECK(packet_router);
   RTC_DCHECK(!packet_router_);
-  rtcp_observer_->SetBandwidthObserver(bandwidth_observer);
+  rtcp_observer_->SetBandwidthObserver(rtcp_observer);
   rtp_packet_pacer_proxy_->SetPacketPacer(rtp_packet_pacer);
   rtp_rtcp_->SetStorePacketsStatus(true, 600);
   packet_router_ = packet_router;
