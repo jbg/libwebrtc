@@ -284,7 +284,7 @@ void AudioSendStream::ConfigureStream(
       channel_send_->ResetSenderCongestionControlObjects();
     }
 
-    RtcpBandwidthObserver* bandwidth_observer = nullptr;
+    NetworkLinkRtcpObserver* bandwidth_observer = nullptr;
 
     if (!allocate_audio_without_feedback_ &&
         new_ids.transport_sequence_number != 0) {

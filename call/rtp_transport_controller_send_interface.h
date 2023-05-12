@@ -130,7 +130,7 @@ class RtpTransportControllerSendInterface {
       absl::string_view transport_name,
       const rtc::NetworkRoute& network_route) = 0;
   virtual void OnNetworkAvailability(bool network_available) = 0;
-  virtual RtcpBandwidthObserver* GetBandwidthObserver() = 0;
+  virtual NetworkLinkRtcpObserver* GetBandwidthObserver() = 0;
   virtual int64_t GetPacerQueuingDelayMs() const = 0;
   virtual absl::optional<Timestamp> GetFirstPacketTime() const = 0;
   virtual void EnablePeriodicAlrProbing(bool enable) = 0;
