@@ -72,7 +72,7 @@ class ChannelSendInterface {
   virtual void SetSendAudioLevelIndicationStatus(bool enable, int id) = 0;
   virtual void RegisterSenderCongestionControlObjects(
       RtpTransportControllerSendInterface* transport,
-      RtcpBandwidthObserver* bandwidth_observer) = 0;
+      NetworkLinkRtcpObserver* rtcp_observer) = 0;
   virtual void ResetSenderCongestionControlObjects() = 0;
   virtual std::vector<ReportBlockData> GetRemoteRTCPReportBlocks() const = 0;
   virtual ANAStats GetANAStatistics() const = 0;

@@ -131,7 +131,7 @@ class MockChannelSend : public voe::ChannelSendInterface {
               (override));
   MOCK_METHOD(void,
               RegisterSenderCongestionControlObjects,
-              (RtpTransportControllerSendInterface*, RtcpBandwidthObserver*),
+              (RtpTransportControllerSendInterface*, NetworkLinkRtcpObserver*),
               (override));
   MOCK_METHOD(void, ResetSenderCongestionControlObjects, (), (override));
   MOCK_METHOD(CallSendStatistics, GetRTCPStatistics, (), (const, override));
