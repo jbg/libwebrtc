@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc15c41f_f1c309aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 20800
+      },
+      "writtenOn": "2023-05-13T10:11:26Z",
+      "side": 1,
+      "message": "But this is not the correct justification. `F_DUPFD_CLOEXEC` has a single mandatory argument, and the call will `Duplicate  the file descriptor fd using the lowest-numbered available file descriptor greater than or equal to arg`, so if we do not care about the specific number 0 will provide the best opportunity.\nNot that the commit message matters much especially after merging, but it\u0027s better to be precise to avoid confusion like the one that caused the bug in the first place...",
+      "range": {
+        "startLine": 9,
+        "startChar": 62,
+        "endLine": 10,
+        "endChar": 50
+      },
+      "revId": "7b0d7f48fbffb412f0c485f86ef33b0dea605d1d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "408997be_7af16a65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20800
+      },
+      "writtenOn": "2023-05-13T10:11:26Z",
+      "side": 1,
+      "message": "Hi,\nThank you for the prompt fix and excuse me for nitpicking, but...",
+      "revId": "7b0d7f48fbffb412f0c485f86ef33b0dea605d1d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
