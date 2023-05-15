@@ -33,6 +33,24 @@
       "message": "Is there a receive codec equivalent of this do be done as well, for symmetry?\nPerhaps in a separate CL to avoid risk of revert",
       "revId": "bbbc2678283ada483fbba788d77e75da998b2df6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b37edc07_576ffa8d",
+        "filename": "media/engine/webrtc_video_engine.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-05-15T10:30:45Z",
+      "side": 1,
+      "message": "There are a number of variables that need to go to one or the other side once the channels are split, but no precise equivalent of the \"send_codec\" variable.\nThis one is the one that bit me hard; splitting the rest seems like it can wait until I can split the implementations.",
+      "parentUuid": "2888526b_05cdc01e",
+      "revId": "bbbc2678283ada483fbba788d77e75da998b2df6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
