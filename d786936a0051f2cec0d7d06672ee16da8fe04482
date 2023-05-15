@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e501981d_c0b756fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-05-15T13:02:49Z",
+      "side": 1,
+      "message": "I also wonder if proxy is really needed, probably not: https://webrtc-review.googlesource.com/c/src/+/305224 , but too unsure how audio classes work to suggest that cleanup.",
+      "revId": "d786936a0051f2cec0d7d06672ee16da8fe04482",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
