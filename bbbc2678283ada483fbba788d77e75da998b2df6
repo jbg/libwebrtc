@@ -16,6 +16,23 @@
       "message": "Closing the barn door after the escaped horse has been shot...",
       "revId": "bbbc2678283ada483fbba788d77e75da998b2df6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2888526b_05cdc01e",
+        "filename": "media/engine/webrtc_video_engine.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-05-15T10:11:44Z",
+      "side": 1,
+      "message": "Is there a receive codec equivalent of this do be done as well, for symmetry?\nPerhaps in a separate CL to avoid risk of revert",
+      "revId": "bbbc2678283ada483fbba788d77e75da998b2df6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
