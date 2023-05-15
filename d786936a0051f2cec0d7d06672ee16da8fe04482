@@ -16,6 +16,24 @@
       "message": "I also wonder if proxy is really needed, probably not: https://webrtc-review.googlesource.com/c/src/+/305224 , but too unsure how audio classes work to suggest that cleanup.",
       "revId": "d786936a0051f2cec0d7d06672ee16da8fe04482",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1f6e136_abb43d6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-05-15T18:53:30Z",
+      "side": 1,
+      "message": "I\u0027m also unsure how this works but this is my understanding:\n- All RTCP packets are delivered to all send/receive streams, which have independent RTCP modules.\n- The audio send stream intercepts these RTCP packets and calculates the average fraction lost per stream weighted by number of packets sent. This doesn\u0027t make sense to me, we should only use the fraction lost for audio send stream SSRC?\n- The RTCP module filters out blocks for other streams and the report_block_data_observer is called for the block about the configured SSRC (presumably only one block per report?).\n\nIf that is the case then I think https://webrtc-review.googlesource.com/c/src/+/305224 would be a great simplification.",
+      "parentUuid": "e501981d_c0b756fc",
+      "revId": "d786936a0051f2cec0d7d06672ee16da8fe04482",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
