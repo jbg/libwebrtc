@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '30ae698dcc403d98e6ad8ac55bf523d5d8f07c6d',
+  'chromium_revision': '39f9fdfa4482736b9ef96a8c5aaf74ee0ce3b6b2',
 
   # Fetch the prebuilt binaries for llvm-cov and llvm-profdata. Needed to
   # process the raw profiles produced by instrumented targets (built with
@@ -57,13 +57,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@f8bdf16645bf7643b548760251efda49f344a46e',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@fb72e22fdd4d8e6b4a3deee52433c452234a4122',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@ffca87511eddb4870010d617e82268ceb189fe35',
+    'https://chromium.googlesource.com/chromium/src/testing@7ff60d00d1d7c3817105b0f1120ec3243780ecd0',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@6c3bcea564c2c6324ec7bcf4c0bbbd7c982363e9',
+    'https://chromium.googlesource.com/chromium/src/third_party@c7c14b15202199898166d2ac4b4b72f8c108221a',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -183,7 +183,7 @@ deps = {
   'src/third_party/crc32c/src':
     'https://chromium.googlesource.com/external/github.com/google/crc32c.git@fa5ade41ee480003d9c5af6f43567ba22e4e17e6',
   'src/third_party/depot_tools':
-    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@541638fd2318e0c03df51cd70b8ac6e9f7273fbb',
+    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@6316ac234e70d983ae758e283ed6ac8d4d0cb36b',
   'src/third_party/ffmpeg':
     'https://chromium.googlesource.com/chromium/third_party/ffmpeg.git@8d21d41d8bec5c0b266ee305d1a708dc5c23b594',
   'src/third_party/flatbuffers/src':
@@ -279,9 +279,9 @@ deps = {
   'src/third_party/libsrtp':
     'https://chromium.googlesource.com/chromium/deps/libsrtp.git@5b7c744eb8310250ccc534f3f86a2015b3887a0a',
   'src/third_party/dav1d/libdav1d':
-    'https://chromium.googlesource.com/external/github.com/videolan/dav1d.git@676a864a11af2c0522e1f992e770589543894686',
+    'https://chromium.googlesource.com/external/github.com/videolan/dav1d.git@f8ae94eca0f53502a2cddd29a263c1edea4822a0',
   'src/third_party/libaom/source/libaom':
-    'https://aomedia.googlesource.com/aom.git@f15d8bacc72479979182f7484e0b80cf988ffd67',
+    'https://aomedia.googlesource.com/aom.git@5f516275fb8761562bd877f2a8f185cd76c2a274',
   'src/third_party/libunwindstack': {
       'url': 'https://chromium.googlesource.com/chromium/src/third_party/libunwindstack.git@4dbfa0e8c844c8e243b297bc185e54a99ff94f9e',
       'condition': 'checkout_android',
@@ -336,7 +336,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@dc496326681b07b3bd1ded10933329e9fd73beaf',
+    'https://chromium.googlesource.com/chromium/src/tools@e7b56562222445692b55725cefd8f946a2e1f28a',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
