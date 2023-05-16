@@ -52,6 +52,24 @@
       "parentUuid": "f1f6e136_abb43d6d",
       "revId": "d786936a0051f2cec0d7d06672ee16da8fe04482",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e05a2a5_6b0c3e36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-05-16T18:52:29Z",
+      "side": 1,
+      "message": "Ah I misunderstood the order of things, I thought it was Call-\u003eAudioSendStream-\u003eChannelSend-\u003eVoERtcpObserver-\u003eRtpRtcp (meaning it would process all reports regardless of SSRC), but I see now RtpRtcp process the reports before VoERtcpObserver is called.",
+      "parentUuid": "a0abd423_169b5042",
+      "revId": "d786936a0051f2cec0d7d06672ee16da8fe04482",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
