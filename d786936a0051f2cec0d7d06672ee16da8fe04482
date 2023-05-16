@@ -34,6 +34,24 @@
       "parentUuid": "e501981d_c0b756fc",
       "revId": "d786936a0051f2cec0d7d06672ee16da8fe04482",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0abd423_169b5042",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-05-16T09:09:16Z",
+      "side": 1,
+      "message": "not sure what you mean by 2nd bullet.\nmy understanding that we take weighted average when in practice there at most one given report because each audio send stream handles single SSRC\n\nOverall I guess we agree that going it is good idea to do that simplification before proceeding with this refactoring.",
+      "parentUuid": "f1f6e136_abb43d6d",
+      "revId": "d786936a0051f2cec0d7d06672ee16da8fe04482",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
