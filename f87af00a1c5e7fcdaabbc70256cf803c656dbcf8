@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90c4ac59_0bfe6015",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-05-17T09:47:23Z",
+      "side": 1,
+      "message": "Jeremy, is there a way to test this?\n\nI was wondering at running the binary with `--isolated_script_test_perf_output` and check the file with the metric is generated correctly.\n\nAfter that we assume things will be uploaded (and check later).",
+      "revId": "f87af00a1c5e7fcdaabbc70256cf803c656dbcf8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd758da7_384a8e67",
+        "filename": "infra/specs/test_suites.pyl",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-05-17T09:47:23Z",
+      "side": 1,
+      "message": "I think we need `\u0027mixins\u0027: [\u0027perf-webrtc-perf-tests\u0027]` here and below as well.\n\nAdding Jeremy to check.",
+      "range": {
+        "startLine": 26,
+        "startChar": 32,
+        "endLine": 26,
+        "endChar": 34
+      },
+      "revId": "f87af00a1c5e7fcdaabbc70256cf803c656dbcf8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
