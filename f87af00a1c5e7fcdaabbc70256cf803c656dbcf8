@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "57a34312_a4f1181c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2023-05-17T10:16:19Z",
+      "side": 1,
+      "message": "Tests should run on this CL CQ when the other comment is fixed.\nFor the upload, maybe it can be tested with a led command line but probably it\u0027s fine to submit and see how it goes.\n\nled get-builder luci.webrtc.ci:\"Linux64 Builder\" | led edit-cr-cl https://webrtc-review.googlesource.com/c/src/+/305600 | led launch",
+      "parentUuid": "90c4ac59_0bfe6015",
+      "revId": "f87af00a1c5e7fcdaabbc70256cf803c656dbcf8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd758da7_384a8e67",
         "filename": "infra/specs/test_suites.pyl",
         "patchSetId": 2
@@ -37,6 +55,47 @@
         "endLine": 26,
         "endChar": 34
       },
+      "revId": "f87af00a1c5e7fcdaabbc70256cf803c656dbcf8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d332b61b_dcb76a94",
+        "filename": "infra/specs/test_suites.pyl",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2023-05-17T10:16:19Z",
+      "side": 1,
+      "message": "In order to upload the metrics you actually need to add a new \u0027perf-video-codec-perf-tests\u0027 mixin in mixins_webrtc.pyl.\nIt would like this:\n  \u0027perf-video-codec-perf-tests\u0027: {\n    \u0027merge\u0027: {\n      \u0027script\u0027: \u0027//tools_webrtc/perf/process_perf_results.py\u0027,\n      \u0027args\u0027: [\u0027--test-suite\u0027, \u0027video_codec_perf_tests\u0027],\n    },\n  },",
+      "parentUuid": "bd758da7_384a8e67",
+      "range": {
+        "startLine": 26,
+        "startChar": 32,
+        "endLine": 26,
+        "endChar": 34
+      },
+      "revId": "f87af00a1c5e7fcdaabbc70256cf803c656dbcf8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c338b9fa_dab48101",
+        "filename": "infra/specs/test_suites.pyl",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2023-05-17T10:16:19Z",
+      "side": 1,
+      "message": "The new test needs to be added here to run on CQ (e.g. linux_rel).\nYou should specify the same mixins as webrtc_perf_tests.\n\n\u0027quick-perf-tests\u0027 will run the test with the \"WebRTC-QuickPerfTest\" field trial. Probably expectations should be moved under the field trial as explained in https://webrtc-review.googlesource.com/c/src/+/290571.",
       "revId": "f87af00a1c5e7fcdaabbc70256cf803c656dbcf8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
