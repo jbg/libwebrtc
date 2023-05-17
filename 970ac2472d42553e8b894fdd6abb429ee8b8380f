@@ -33,6 +33,29 @@
       "message": "for more context:\nhttps://webrtc-review.googlesource.com/c/src/+/304700\n\nimplements handling NetworkLinkRtcpObserver similarly to RtcpBandwidthObserver",
       "revId": "970ac2472d42553e8b894fdd6abb429ee8b8380f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "561d5918_6487ecdf",
+        "filename": "call/rtp_transport_controller_send_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2023-05-17T11:10:23Z",
+      "side": 1,
+      "message": "Optional nit: GetNetworkLinkObserver?",
+      "range": {
+        "startLine": 132,
+        "startChar": 38,
+        "endLine": 132,
+        "endChar": 47
+      },
+      "revId": "970ac2472d42553e8b894fdd6abb429ee8b8380f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
