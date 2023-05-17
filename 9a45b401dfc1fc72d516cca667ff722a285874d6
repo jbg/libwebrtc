@@ -33,6 +33,24 @@
       "message": "I find it a bit confusing to have `pw_fd_` as a member but not own the fd. Maybe clear it here to make it more obvious that the ownership was transferred?",
       "revId": "9a45b401dfc1fc72d516cca667ff722a285874d6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0f1c223_f16d9af1",
+        "filename": "modules/video_capture/linux/camera_portal.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-05-17T09:08:30Z",
+      "side": 1,
+      "message": "Right, there is no need to keep it as a member.",
+      "parentUuid": "24bef717_718b2bf0",
+      "revId": "9a45b401dfc1fc72d516cca667ff722a285874d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
