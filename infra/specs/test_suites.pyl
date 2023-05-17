@@ -23,6 +23,7 @@
           '../../third_party/android_sdk/public/platform-tools/adb',
         ]
       },
+      'video_codec_perf_tests': {},
       'webrtc_perf_tests': {
         'mixins': ['perf-webrtc-perf-tests'],
       },
@@ -73,6 +74,7 @@
         'mixins': ['perf-low-bandwidth-audio-perf-test'],
         'args': ['.', '--remove'],
       },
+      'video_codec_perf_tests': {},
       'webrtc_perf_tests': {
         'mixins': ['perf-webrtc-perf-tests'],
         'args': [
