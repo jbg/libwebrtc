@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adee705b_a7d3aa9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2023-05-17T07:41:14Z",
+      "side": 1,
+      "message": "One small issue. The rest looks good to me.",
+      "revId": "9a45b401dfc1fc72d516cca667ff722a285874d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24bef717_718b2bf0",
+        "filename": "modules/video_capture/linux/camera_portal.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2023-05-17T07:41:14Z",
+      "side": 1,
+      "message": "I find it a bit confusing to have `pw_fd_` as a member but not own the fd. Maybe clear it here to make it more obvious that the ownership was transferred?",
+      "revId": "9a45b401dfc1fc72d516cca667ff722a285874d6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
