@@ -396,7 +396,7 @@ ChannelSend::ChannelSend(
 
   RtpRtcpInterface::Configuration configuration;
   configuration.report_block_data_observer = this;
-  configuration.bandwidth_callback =
+  configuration.network_link_rtcp_observer =
       transport_controller->GetBandwidthObserver();
   configuration.transport_feedback_callback =
       transport_controller->transport_feedback_observer();

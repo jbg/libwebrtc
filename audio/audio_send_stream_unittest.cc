@@ -28,7 +28,7 @@
 #include "modules/audio_mixer/sine_wave_generator.h"
 #include "modules/audio_processing/include/audio_processing_statistics.h"
 #include "modules/audio_processing/include/mock_audio_processing.h"
-#include "modules/rtp_rtcp/mocks/mock_rtcp_bandwidth_observer.h"
+#include "modules/rtp_rtcp/mocks/mock_network_link_rtcp_observer.h"
 #include "modules/rtp_rtcp/mocks/mock_rtp_rtcp.h"
 #include "system_wrappers/include/clock.h"
 #include "test/gtest.h"
@@ -323,7 +323,7 @@ struct ConfigHelper {
   ::testing::StrictMock<MockChannelSend>* channel_send_ = nullptr;
   rtc::scoped_refptr<MockAudioProcessing> audio_processing_;
   AudioProcessingStats audio_processing_stats_;
-  ::testing::StrictMock<MockRtcpBandwidthObserver> bandwidth_observer_;
+  ::testing::StrictMock<MockNetworkLinkRtcpObserver> bandwidth_observer_;
   ::testing::NiceMock<MockRtcEventLog> event_log_;
   ::testing::NiceMock<MockRtpTransportControllerSend> rtp_transport_;
   ::testing::NiceMock<MockRtpRtcpInterface> rtp_rtcp_;
