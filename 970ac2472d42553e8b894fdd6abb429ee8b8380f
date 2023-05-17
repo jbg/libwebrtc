@@ -56,6 +56,30 @@
       },
       "revId": "970ac2472d42553e8b894fdd6abb429ee8b8380f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "058b3520_62293e71",
+        "filename": "call/rtp_transport_controller_send_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-05-17T11:21:23Z",
+      "side": 1,
+      "message": "I\u0027ve reconsidered the name, and in this context (TransportController) the whole class is about network link, but this particular accessor is all about handling incoming rtcp messages, so changed to GetRtcpObserver",
+      "parentUuid": "561d5918_6487ecdf",
+      "range": {
+        "startLine": 132,
+        "startChar": 38,
+        "endLine": 132,
+        "endChar": 47
+      },
+      "revId": "970ac2472d42553e8b894fdd6abb429ee8b8380f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
