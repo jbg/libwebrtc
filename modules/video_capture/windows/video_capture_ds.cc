@@ -122,7 +122,11 @@ int32_t VideoCaptureDS::Init(const char* deviceUniqueIdUTF8) {
 }
 
 int32_t VideoCaptureDS::StartCapture(const VideoCaptureCapability& capability) {
+<<<<<<< HEAD   (f80cf8 Changing the pre echo configuration default.)
   MutexLock lock(&api_lock_);
+=======
+  RTC_DCHECK_RUN_ON(&api_checker_);
+>>>>>>> CHANGE (dcf600 In VideoCaptureDS::{Start|Stop}Capture do not lock)
 
   if (capability != _requestedCapability) {
     DisconnectGraph();
@@ -146,7 +150,11 @@ int32_t VideoCaptureDS::StartCapture(const VideoCaptureCapability& capability) {
 }
 
 int32_t VideoCaptureDS::StopCapture() {
+<<<<<<< HEAD   (f80cf8 Changing the pre echo configuration default.)
   MutexLock lock(&api_lock_);
+=======
+  RTC_DCHECK_RUN_ON(&api_checker_);
+>>>>>>> CHANGE (dcf600 In VideoCaptureDS::{Start|Stop}Capture do not lock)
 
   HRESULT hr = _mediaControl->StopWhenReady();
   if (FAILED(hr)) {
