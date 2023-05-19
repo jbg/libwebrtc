@@ -36,6 +36,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f871041_fa056c5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-05-19T10:07:21Z",
+      "side": 1,
+      "message": "Tried:\n\nout/release/video_codec_perf_tests --gtest_filter\u003d*H264*180p*32kbps* --isolated_script_test_perf_output\u003d./test.pb\n\nIt produces test.pb. Not sure how to verify that content of the dump is correct. Values logged to stdout look correct.",
+      "parentUuid": "57a34312_a4f1181c",
+      "revId": "f87af00a1c5e7fcdaabbc70256cf803c656dbcf8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd758da7_384a8e67",
@@ -83,6 +101,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "288477f2_6a0510a8",
+        "filename": "infra/specs/test_suites.pyl",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-05-19T10:07:21Z",
+      "side": 1,
+      "message": "Add perf-video-codec-perf-tests to mixins_webrtc.py",
+      "parentUuid": "d332b61b_dcb76a94",
+      "range": {
+        "startLine": 26,
+        "startChar": 32,
+        "endLine": 26,
+        "endChar": 34
+      },
+      "revId": "f87af00a1c5e7fcdaabbc70256cf803c656dbcf8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c338b9fa_dab48101",
@@ -96,6 +138,24 @@
       "writtenOn": "2023-05-17T10:16:19Z",
       "side": 1,
       "message": "The new test needs to be added here to run on CQ (e.g. linux_rel).\nYou should specify the same mixins as webrtc_perf_tests.\n\n\u0027quick-perf-tests\u0027 will run the test with the \"WebRTC-QuickPerfTest\" field trial. Probably expectations should be moved under the field trial as explained in https://webrtc-review.googlesource.com/c/src/+/290571.",
+      "revId": "f87af00a1c5e7fcdaabbc70256cf803c656dbcf8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e6496f5_c3bbd7a6",
+        "filename": "infra/specs/test_suites.pyl",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-05-19T10:07:21Z",
+      "side": 1,
+      "message": "I didn\u0027t plan to enable codec perf tests on CQ. But why not. It takes ~55 seconds to run on linux_rel.\n\nCopied \u0027mixins\u0027: [\u0027quick-perf-tests\u0027, \u0027resultdb-gtest-json-format\u0027] from webrtc_perf_tests_tryserver.",
+      "parentUuid": "c338b9fa_dab48101",
       "revId": "f87af00a1c5e7fcdaabbc70256cf803c656dbcf8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
