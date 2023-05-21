@@ -406,6 +406,10 @@ class FakeVoiceMediaChannel : public RtpHelper<VoiceMediaChannel> {
       std::unique_ptr<webrtc::AudioSinkInterface> sink) override;
   void SetDefaultRawAudioSink(
       std::unique_ptr<webrtc::AudioSinkInterface> sink) override;
+  void SetAudioLevelCallback(
+      absl::optional<uint32_t> ssrc,
+      absl::AnyInvocable<void(uint32_t, absl::optional<uint8_t>)> callback)
+      override;
 
   std::vector<webrtc::RtpSource> GetSources(uint32_t ssrc) const override;
   bool SenderNackEnabled() const override { return false; }
