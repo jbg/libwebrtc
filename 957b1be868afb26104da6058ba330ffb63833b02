@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ade2a8de_c01d429d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-05-22T12:50:24Z",
+      "side": 1,
+      "message": "This is refactoring of things that should really go away - wrong abstraction layer.\nBut it is better than it was.",
+      "revId": "957b1be868afb26104da6058ba330ffb63833b02",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
