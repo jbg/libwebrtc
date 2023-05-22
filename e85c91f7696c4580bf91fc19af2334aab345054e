@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72d02607_5f305ec9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-05-22T12:13:50Z",
+      "side": 1,
+      "message": "Lets wait for the dust on https://webrtc-review.googlesource.com/c/src/+/305461 to settle but keeping the CL up so we don\u0027t forget.\n\nIf this isn\u0027t for production, it shouldn\u0027t be possible to enable from Chrome with the new API (it currently is with SDP munging but we don\u0027t talk about that :-))",
+      "revId": "e85c91f7696c4580bf91fc19af2334aab345054e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
