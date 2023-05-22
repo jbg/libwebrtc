@@ -1992,14 +1992,26 @@ absl::optional<uint32_t> WebRtcVoiceMediaChannel::GetUnsignaledSsrc() const {
   return unsignaled_recv_ssrcs_.back();
 }
 
-bool WebRtcVoiceMediaChannel::SetLocalSsrc(const StreamParams& sp) {
-  RTC_DCHECK(role() == MediaChannel::Role::kReceive);
-  uint32_t ssrc = sp.first_ssrc();
+void WebRtcVoiceMediaChannel::SetSsrcListChangedCallback(
+    absl::AnyInvocable<void(const std::set<uint32_t>&)> callback) {
+  ssrc_list_changed_callback_ = std::move(callback);
+}
+
+void WebRtcVoiceMediaChannel::ChooseReceiverReportSsrc(
+    const std::set<uint32_t>& choices) {
+  // Don't change SSRC if set is empty. Note that this differs from
+  // the behavior of video.
+  if (choices.empty()) {
+    return;
+  }
+  if (choices.find(receiver_reports_ssrc_) != choices.end()) {
+    return;
+  }
+  uint32_t ssrc = *(choices.begin());
   receiver_reports_ssrc_ = ssrc;
   for (auto& kv : recv_streams_) {
     call_->OnLocalSsrcUpdated(kv.second->stream(), ssrc);
   }
-  return true;
 }
 
 // Not implemented.

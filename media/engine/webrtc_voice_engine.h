@@ -183,7 +183,9 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
   void ResetUnsignaledRecvStream() override;
   absl::optional<uint32_t> GetUnsignaledSsrc() const override;
 
-  bool SetLocalSsrc(const StreamParams& sp) override;
+  void ChooseReceiverReportSsrc(const std::set<uint32_t>& choices) override;
+  virtual void SetSsrcListChangedCallback(
+      absl::AnyInvocable<void(const std::set<uint32_t>&)> callback) override;
 
   void OnDemuxerCriteriaUpdatePending() override;
   void OnDemuxerCriteriaUpdateComplete() override;
@@ -360,6 +362,10 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
 
   void FillSendCodecStats(VoiceMediaSendInfo* voice_media_info);
   void FillReceiveCodecStats(VoiceMediaReceiveInfo* voice_media_info);
+
+  // Callback invoked whenever the list of SSRCs changes.
+  absl::AnyInvocable<void(const std::set<uint32_t>&)>
+      ssrc_list_changed_callback_;
 };
 
 }  // namespace cricket

@@ -1283,6 +1283,22 @@ void WebRtcVideoChannel::SetReceiverReportSsrc(uint32_t ssrc) {
     receive_stream->SetLocalSsrc(ssrc);
 }
 
+void WebRtcVideoChannel::ChooseReceiverReportSsrc(
+    const std::set<uint32_t>& choices) {
+  RTC_DCHECK_RUN_ON(&thread_checker_);
+  // If we can continue using the current receiver report, do so.
+  if (choices.find(rtcp_receiver_report_ssrc_) != choices.end()) {
+    return;
+  }
+  // Go back to the default if list has been emptied.
+  if (choices.empty()) {
+    SetReceiverReportSsrc(kDefaultRtcpReceiverReportSsrc);
+    return;
+  }
+  // Any number is as good as any other.
+  SetReceiverReportSsrc(*choices.begin());
+}
+
 bool WebRtcVideoChannel::GetSendCodec(VideoCodec* codec) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
   if (!send_codec_) {
@@ -1402,8 +1418,10 @@ bool WebRtcVideoChannel::AddSendStream(const StreamParams& sp) {
   // If legacy kBoth mode, tell my receiver part about its SSRC.
   // In kSend mode, this is the responsibility of the caller.
   if (role() == MediaChannel::Role::kBoth) {
-    if (rtcp_receiver_report_ssrc_ == kDefaultRtcpReceiverReportSsrc) {
-      SetReceiverReportSsrc(ssrc);
+    ChooseReceiverReportSsrc(send_ssrcs_);
+  } else {
+    if (ssrc_list_changed_callback_) {
+      ssrc_list_changed_callback_(send_ssrcs_);
     }
   }
 
@@ -1431,9 +1449,12 @@ bool WebRtcVideoChannel::RemoveSendStream(uint32_t ssrc) {
   send_streams_.erase(it);
 
   // Switch receiver report SSRCs, the one in use is no longer valid.
-  if (rtcp_receiver_report_ssrc_ == ssrc) {
-    SetReceiverReportSsrc(send_streams_.empty() ? kDefaultRtcpReceiverReportSsrc
-                                                : send_streams_.begin()->first);
+  if (role() == MediaChannel::Role::kBoth) {
+    ChooseReceiverReportSsrc(send_ssrcs_);
+  } else {
+    if (ssrc_list_changed_callback_) {
+      ssrc_list_changed_callback_(send_ssrcs_);
+    }
   }
 
   delete removed_stream;
@@ -1596,15 +1617,6 @@ void WebRtcVideoChannel::ResetUnsignaledRecvStream() {
       ++it;
     }
   }
-}
-
-bool WebRtcVideoChannel::SetLocalSsrc(const StreamParams& sp) {
-  RTC_DCHECK_RUN_ON(&thread_checker_);
-  RTC_DCHECK(role() == MediaChannel::Role::kReceive);
-  if (rtcp_receiver_report_ssrc_ == kDefaultRtcpReceiverReportSsrc) {
-    SetReceiverReportSsrc(sp.first_ssrc());
-  }
-  return true;
 }
 
 absl::optional<uint32_t> WebRtcVideoChannel::GetUnsignaledSsrc() const {

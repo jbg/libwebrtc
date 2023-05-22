@@ -140,7 +140,6 @@ class WebRtcVideoChannel : public VideoMediaChannel,
   bool RemoveRecvStream(uint32_t ssrc) override;
   void ResetUnsignaledRecvStream() override;
   absl::optional<uint32_t> GetUnsignaledSsrc() const override;
-  bool SetLocalSsrc(const StreamParams& sp) override;
   void OnDemuxerCriteriaUpdatePending() override;
   void OnDemuxerCriteriaUpdateComplete() override;
   bool SetSink(uint32_t ssrc,
@@ -189,6 +188,16 @@ class WebRtcVideoChannel : public VideoMediaChannel,
       absl::AnyInvocable<void()> callback) override {
     send_codec_changed_callback_ = std::move(callback);
   }
+
+  void SetSsrcListChangedCallback(
+      absl::AnyInvocable<void(const std::set<uint32_t>&)> callback) override {
+    ssrc_list_changed_callback_ = std::move(callback);
+  }
+
+  // Choose one of the available SSRCs (or default if none) as the current
+  // receiver report SSRC.
+  // TODO: Inherit from MediaStream interface
+  void ChooseReceiverReportSsrc(const std::set<uint32_t>& choices) override;
 
   // Implemented for VideoMediaChannelTest.
   bool sending() const {
@@ -712,6 +721,9 @@ class WebRtcVideoChannel : public VideoMediaChannel,
   // Callback invoked whenever the send codec changes.
   // TODO(bugs.webrtc.org/13931): Remove again when coupling isn't needed.
   absl::AnyInvocable<void()> send_codec_changed_callback_;
+  // Callback invoked whenever the list of SSRCs changes.
+  absl::AnyInvocable<void(const std::set<uint32_t>&)>
+      ssrc_list_changed_callback_;
 };
 
 }  // namespace cricket

@@ -230,6 +230,12 @@ RTCError RtpTransceiver::CreateChannel(
         if (!media_receive_channel) {
           return;
         }
+        media_send_channel->SetSsrcListChangedCallback(
+            [receive_channel = media_receive_channel.get()](
+                const std::set<uint32_t>& choices) {
+              // TODO: Ref guard
+              receive_channel->ChooseReceiverReportSsrc(choices);
+            });
 
         new_channel = std::make_unique<cricket::VoiceChannel>(
             context()->worker_thread(), context()->network_thread(),
@@ -278,6 +284,12 @@ RTCError RtpTransceiver::CreateChannel(
         if (!media_receive_channel) {
           return;
         }
+        media_send_channel->SetSsrcListChangedCallback(
+            [receive_channel = media_receive_channel.get()](
+                const std::set<uint32_t>& choices) {
+              // TODO: ref-guard
+              receive_channel->ChooseReceiverReportSsrc(choices);
+            });
 
         new_channel = std::make_unique<cricket::VideoChannel>(
             context()->worker_thread(), context()->network_thread(),
