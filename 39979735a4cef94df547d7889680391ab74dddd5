@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2339476a_c49d5bf4",
+        "filename": "modules/video_capture/linux/camera_portal.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2023-05-22T07:19:23Z",
+      "side": 1,
+      "message": "Unnecessary, I think.",
+      "revId": "39979735a4cef94df547d7889680391ab74dddd5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
