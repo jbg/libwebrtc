@@ -177,6 +177,8 @@ int32_t VideoCaptureModulePipeWire::StopCapture() {
 }
 
 bool VideoCaptureModulePipeWire::CaptureStarted() {
+  MutexLock lock(&api_lock_);
+
   return started_;
 }
 
@@ -295,17 +297,21 @@ void VideoCaptureModulePipeWire::OnStreamStateChanged(
   RTC_DCHECK(that);
 
   switch (state) {
-    case PW_STREAM_STATE_STREAMING:
+    case PW_STREAM_STATE_STREAMING: {
+      MutexLock lock(&that->api_lock_);
       that->started_ = true;
       break;
+    }
     case PW_STREAM_STATE_ERROR:
       RTC_LOG(LS_ERROR) << "PipeWire stream state error: " << error_message;
       [[fallthrough]];
     case PW_STREAM_STATE_PAUSED:
     case PW_STREAM_STATE_UNCONNECTED:
-    case PW_STREAM_STATE_CONNECTING:
+    case PW_STREAM_STATE_CONNECTING: {
+      MutexLock lock(&that->api_lock_);
       that->started_ = false;
       break;
+    }
   }
   RTC_LOG(LS_VERBOSE) << "PipeWire stream state change: "
                       << pw_stream_state_as_string(old_state) << " -> "
