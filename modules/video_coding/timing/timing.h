@@ -39,6 +39,8 @@ class VCMTiming {
     TimeDelta estimated_max_decode_time;
     // Estimated time needed to render a frame. Set to a constant.
     TimeDelta render_delay;
+    // Minimum delay. Obtained by summing the three delays above.
+    TimeDelta minimum_delay;
     // Minimum total delay used when determining render time for a frame.
     // Obtained from API, `playout-delay` RTP header extension, or A/V sync.
     TimeDelta min_playout_delay;
@@ -47,7 +49,7 @@ class VCMTiming {
     TimeDelta max_playout_delay;
     // Target delay. Obtained from all the elements above.
     TimeDelta target_delay;
-    // Current delay. Obtained by smoothing out the target delay.
+    // Current delay. Obtained by smoothening the `target_delay`.
     TimeDelta current_delay;
   };
 
@@ -132,6 +134,7 @@ class VCMTiming {
   TimeDelta EstimatedMaxDecodeTime() const RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_);
   Timestamp RenderTimeInternal(uint32_t frame_timestamp, Timestamp now) const
       RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_);
+  TimeDelta MinimumDelay() const RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_);
   TimeDelta TargetDelayInternal() const RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_);
   bool UseLowLatencyRendering() const RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_);
 
