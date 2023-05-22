@@ -16,6 +16,24 @@
       "message": "Why is this part no longer needed?",
       "revId": "eb97ac5f29467c79f83362ebc053671133047087",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5482cdee_ddfd6046",
+        "filename": "pc/channel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-05-22T14:11:48Z",
+      "side": 0,
+      "message": "This was the first implementation - now the same thing is done via the ChooseReceiverReportSsrc function.",
+      "parentUuid": "2d802c35_e4f2eb77",
+      "revId": "eb97ac5f29467c79f83362ebc053671133047087",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
