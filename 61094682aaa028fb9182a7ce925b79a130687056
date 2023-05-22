@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6e376798_6e4f1037",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2023-05-22T12:04:08Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "61094682aaa028fb9182a7ce925b79a130687056",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "401c1f41_1a12da3f",
         "filename": "pc/rtc_stats_collector.cc",
         "patchSetId": 19
@@ -31,6 +48,24 @@
       "writtenOn": "2023-05-22T11:54:07Z",
       "side": 1,
       "message": "FYI normally adding a new metric requires a chromium CL here and here:\n1. https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/peerconnection/rtc_stats_report.idl;l\u003d104;drc\u003d9c88ebf1f457d5f780fe3da6b8c9b40223c809bf\n2. https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/peerconnection/rtc_stats_report.cc;l\u003d311;drc\u003d9c88ebf1f457d5f780fe3da6b8c9b40223c809bf\n\nBut because this is already covered by the audio versions of these metrics, they will get automatically shipped to the web in the next webrtc roll, no action needed.",
+      "revId": "61094682aaa028fb9182a7ce925b79a130687056",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9bace20_87dde99f",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2023-05-22T12:04:08Z",
+      "side": 1,
+      "message": "Yeah, I guessed as much since it worked in Chromium without making any changes there.",
+      "parentUuid": "401c1f41_1a12da3f",
       "revId": "61094682aaa028fb9182a7ce925b79a130687056",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
