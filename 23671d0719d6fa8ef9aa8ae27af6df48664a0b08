@@ -34,6 +34,24 @@
       "parentUuid": "2a1277a5_699a4951",
       "revId": "23671d0719d6fa8ef9aa8ae27af6df48664a0b08",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7adb1297_c04e9471",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2023-05-22T12:01:46Z",
+      "side": 1,
+      "message": "Ok, good info. I\u0027m in no rush, so I\u0027ll wait after the branch then.",
+      "parentUuid": "4041af50_7301af2b",
+      "revId": "23671d0719d6fa8ef9aa8ae27af6df48664a0b08",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
