@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa36f2fd_7dc1808e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2023-05-22T09:07:55Z",
+      "side": 1,
+      "message": "Thanks! Followup with `target` and `minimum` cousins coming soon :)",
+      "revId": "95cb1d34b9d0c57a8fc27afedd1d1ca0b13cca14",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
