@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01f95b96_d1d09d0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-05-22T07:21:34Z",
+      "side": 1,
+      "message": "+ asapersson@ for changes in modules/video_coding/codecs/test/video_codec_test.cc (had to lower PSNR thresholds to let the test pass with OpenH264).",
+      "revId": "1013160b1cf2a0385e15d003139917af97085918",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
