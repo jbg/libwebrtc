@@ -73,6 +73,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "3a3679ee_0e12875b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2023-05-22T11:22:05Z",
+      "side": 1,
+      "message": "I tested it using a custom Chromium build running the fiddle, and everything seems WAI.",
+      "parentUuid": "34091cff_cb64fd10",
+      "revId": "59ed181cd22dbd4bebf3aa53478bc1bcce7eeb5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "b5dbd0e5_a2b8d5ed",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 17
