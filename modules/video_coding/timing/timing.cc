@@ -247,9 +247,12 @@ TimeDelta VCMTiming::TargetVideoDelay() const {
   return TargetDelayInternal();
 }
 
+TimeDelta VCMTiming::MinimumDelay() const {
+  return jitter_delay_ + EstimatedMaxDecodeTime() + render_delay_;
+}
+
 TimeDelta VCMTiming::TargetDelayInternal() const {
-  return std::max(min_playout_delay_,
-                  jitter_delay_ + EstimatedMaxDecodeTime() + render_delay_);
+  return std::max(min_playout_delay_, MinimumDelay());
 }
 
 VideoFrame::RenderParameters VCMTiming::RenderParameters() const {
@@ -274,6 +277,7 @@ VCMTiming::VideoDelayTimings VCMTiming::GetTimings() const {
       .jitter_delay = jitter_delay_,
       .estimated_max_decode_time = EstimatedMaxDecodeTime(),
       .render_delay = render_delay_,
+      .minimum_delay = MinimumDelay(),
       .min_playout_delay = min_playout_delay_,
       .max_playout_delay = max_playout_delay_,
       .target_delay = TargetDelayInternal(),
