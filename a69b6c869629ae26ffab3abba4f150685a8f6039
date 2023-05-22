@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb948ac4_5c56ce4a",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-05-22T12:25:47Z",
+      "side": 1,
+      "message": "All of the paths below grab the lock.\nIt would be clearer if you grab it in one place before the switch statement.",
+      "revId": "a69b6c869629ae26ffab3abba4f150685a8f6039",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
