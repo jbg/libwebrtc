@@ -16,6 +16,24 @@
       "message": "Thanks for the review!\n\nI just sent out https://webrtc-review.googlesource.com/c/src/+/304404, that implements jitterBufferTargetDelay which is \"lost\" when fixing jitterBufferDelay in this CL. With these two CLs, we have gained the \"time waiting\" stat without losing the \"target\" stat \u003d\u003e net win.\n\nWhen both have landed, I\u0027ll send out a PSA about this breaking change.",
       "revId": "23671d0719d6fa8ef9aa8ae27af6df48664a0b08",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4041af50_7301af2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-05-22T11:48:56Z",
+      "side": 1,
+      "message": "SGTM - remember that the next branch point is tomorrow, so you may want to delay landing until after the cut (or land everything today)",
+      "parentUuid": "2a1277a5_699a4951",
+      "revId": "23671d0719d6fa8ef9aa8ae27af6df48664a0b08",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
