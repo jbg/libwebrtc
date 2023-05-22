@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "546f4171_9b5e7184",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2023-05-22T11:07:12Z",
+      "side": 1,
+      "message": "Please take a look. Seems to WAI in Chrome with https://jsfiddle.net/j6tdfyb5/3/show.",
+      "revId": "e74254ae78b328e78b414b32906e4d066bb6ccd0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
