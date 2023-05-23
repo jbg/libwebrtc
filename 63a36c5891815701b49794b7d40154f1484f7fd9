@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dd151ba_7f728b49",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2023-05-23T09:15:03Z",
+      "side": 1,
+      "message": "I\u0027m not sure if it matters, but this means we return the *requested* setting and not the *actual* settings.\nAnd like the v4l2 backend (here and in Chromium) the `videoType` of the requested settings is ignored. So that will probably be different.",
+      "revId": "63a36c5891815701b49794b7d40154f1484f7fd9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
