@@ -16,6 +16,24 @@
       "message": "I found an inconsistency in the implementation that I have fixed.\n\nNow, both the `target` and `minimum` delays correspond ONLY to the \"jitter delays\", or \"pre-decode delays\" that are introduced to mitigate network jitter. The \"decode time variation\" and \"render delay\" are no longer included.\n\nThis makes these new stats (`target` and `minimum`) consistent with the existing (``) stat, makes the new ones more useful since they can now be clearly compared with each other. Further, this is actually what is required by the current wording of the spec.\n\nThis change makes these stats measure \"less\", but that is actually good, since we already have the `totalDecodeTime` and `totalProcessingDelay` counters, that measure things happening after the pre-decode de-jittering. So in conclusion, I think the new implementation is the right one. I did a bunch of manual testing of this using this latest fiddle: https://jsfiddle.net/pfgzj0yo/17/\n\nÅsa, can you take a new look between PS19 and PS20? The implementation of `target` is a little bit awkward right now, but I think it could be cleaned up later. I filed https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d15197 for that.",
       "revId": "2c81c38061573447e9cc7ef156149ca66eb8b995",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be6182c2_56ead38a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2023-05-24T11:47:21Z",
+      "side": 1,
+      "message": "Huh, somehow I lost OWNERS approval for pc/ as well? So hbos, can you +1 as well? :)",
+      "parentUuid": "e0eef8b1_c45c05b9",
+      "revId": "2c81c38061573447e9cc7ef156149ca66eb8b995",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
