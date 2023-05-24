@@ -493,8 +493,7 @@ RTCInboundRtpStreamStats::RTCInboundRtpStreamStats(std::string id,
           {NonStandardGroupId::kRtcStatsRelativePacketArrivalDelay}),
       interruption_count("interruptionCount"),
       total_interruption_duration("totalInterruptionDuration"),
-      min_playout_delay("minPlayoutDelay"),
-      track_id("trackId") {}
+      min_playout_delay("minPlayoutDelay") {}
 
 RTCInboundRtpStreamStats::RTCInboundRtpStreamStats(
     const RTCInboundRtpStreamStats& other) = default;
@@ -568,8 +567,7 @@ RTCOutboundRtpStreamStats::RTCOutboundRtpStreamStats(std::string id,
       qp_sum("qpSum"),
       active("active"),
       power_efficient_encoder("powerEfficientEncoder"),
-      scalability_mode("scalabilityMode"),
-      track_id("trackId") {}
+      scalability_mode("scalabilityMode") {}
 
 RTCOutboundRtpStreamStats::RTCOutboundRtpStreamStats(
     const RTCOutboundRtpStreamStats& other) = default;
