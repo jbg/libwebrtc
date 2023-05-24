@@ -33,6 +33,159 @@
       "message": "@philipel@webrtc.org @ssilkin@webrtc.org Hi, Philip and Sergey, could you help review this CL?",
       "revId": "2267e5eb1ba3fad81e65c7dcf66200e3772bb325",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa734d05_a0e46e3a",
+        "filename": "common_video/h265/h265_bitstream_parser.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-05-24T05:44:14Z",
+      "side": 1,
+      "message": "\u003d default;",
+      "revId": "2267e5eb1ba3fad81e65c7dcf66200e3772bb325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2fb61b8_9d4340ff",
+        "filename": "common_video/h265/h265_bitstream_parser.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-05-24T05:44:14Z",
+      "side": 1,
+      "message": "\u003d default;",
+      "revId": "2267e5eb1ba3fad81e65c7dcf66200e3772bb325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "564d0eb4_94b877d4",
+        "filename": "common_video/h265/h265_bitstream_parser.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-05-24T05:44:14Z",
+      "side": 1,
+      "message": "At the same time you should be checking pps_id, and all the way back to sps_id \u0026 vps_id?",
+      "revId": "2267e5eb1ba3fad81e65c7dcf66200e3772bb325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b116fa10_9cc7500c",
+        "filename": "common_video/h265/h265_common.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-05-24T05:44:14Z",
+      "side": 1,
+      "message": "Please put this to rtc_base/bitstream_reader.cc|h to be shared by all parsers. Looks like you\u0027re providing something like what Chromium\u0027s Log2Ceiling() in its bitstream reader.",
+      "revId": "2267e5eb1ba3fad81e65c7dcf66200e3772bb325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fd7b1f0_885f9cdb",
+        "filename": "common_video/h265/h265_common.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-05-24T05:44:14Z",
+      "side": 1,
+      "message": "Nalu type size is not 2-byte. It\u0027s NALU header size to be 2. Renaming?",
+      "revId": "2267e5eb1ba3fad81e65c7dcf66200e3772bb325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a8ca44c_db72e48f",
+        "filename": "common_video/h265/h265_common.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-05-24T05:44:14Z",
+      "side": 1,
+      "message": "Why you need it here?",
+      "revId": "2267e5eb1ba3fad81e65c7dcf66200e3772bb325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd508b91_9f7ab93e",
+        "filename": "common_video/h265/h265_pps_parser.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-05-24T05:44:14Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be included in slice parser instead of pps parser?",
+      "revId": "2267e5eb1ba3fad81e65c7dcf66200e3772bb325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2db58ca1_22fe9741",
+        "filename": "common_video/h265/h265_sps_parser.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-05-24T05:44:14Z",
+      "side": 1,
+      "message": "sps_id to avoid confusion.",
+      "revId": "2267e5eb1ba3fad81e65c7dcf66200e3772bb325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05cddb57_d53f680c",
+        "filename": "common_video/h265/h265_vps_parser.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-05-24T05:44:14Z",
+      "side": 1,
+      "message": "Could you explain why some of the files are basing on 2019-06 version of the spec while others basing on 2021-08 version of it?",
+      "revId": "2267e5eb1ba3fad81e65c7dcf66200e3772bb325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
