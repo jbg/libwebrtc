@@ -69,6 +69,24 @@
       "message": "(Still waiting for the M115 branch to be announced.)",
       "revId": "23671d0719d6fa8ef9aa8ae27af6df48664a0b08",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c569dd9_41ae533d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-05-24T09:21:56Z",
+      "side": 1,
+      "message": "I just built tip-of-tree (macOS) and chrome://version showed M116 so I *think* that means the branch has already been made",
+      "parentUuid": "d729e5e6_f7be2374",
+      "revId": "23671d0719d6fa8ef9aa8ae27af6df48664a0b08",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
