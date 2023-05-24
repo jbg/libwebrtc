@@ -91,6 +91,30 @@
       },
       "revId": "61094682aaa028fb9182a7ce925b79a130687056",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6fb2272_0fb82d8c",
+        "filename": "video/receive_statistics_proxy_unittest.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2023-05-24T11:45:36Z",
+      "side": 1,
+      "message": "Yes, of course! Thanks for catching.",
+      "parentUuid": "9307c2d9_0ef0e3c4",
+      "range": {
+        "startLine": 591,
+        "startChar": 8,
+        "endLine": 591,
+        "endChar": 11
+      },
+      "revId": "61094682aaa028fb9182a7ce925b79a130687056",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
