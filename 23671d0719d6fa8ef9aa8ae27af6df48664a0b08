@@ -105,6 +105,24 @@
       "parentUuid": "0c569dd9_41ae533d",
       "revId": "23671d0719d6fa8ef9aa8ae27af6df48664a0b08",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc1dc846_0970eadf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-05-24T11:39:55Z",
+      "side": 1,
+      "message": "Not sure, I guess the safe thing would be to wait in case different OSes cut at different times",
+      "parentUuid": "9ec53c5e_0e30dee2",
+      "revId": "23671d0719d6fa8ef9aa8ae27af6df48664a0b08",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
