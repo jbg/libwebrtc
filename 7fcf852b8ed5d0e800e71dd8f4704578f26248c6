@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc3e8e63_48f02207",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-05-24T18:52:15Z",
+      "side": 1,
+      "message": "Not an OWNER of the directories; but seems reasonable to me; though I didn\u0027t review camera_portal in extensive detail to see how much different from the existing code. Seems to mainly be some changes for plumbing the fd?",
+      "revId": "7fcf852b8ed5d0e800e71dd8f4704578f26248c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3bf54aa_0ab92390",
+        "filename": "modules/video_capture/linux/camera_portal.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-05-24T18:52:15Z",
+      "side": 1,
+      "message": "2023",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "7fcf852b8ed5d0e800e71dd8f4704578f26248c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a60213e_1c023824",
+        "filename": "modules/video_capture/linux/camera_portal.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-05-24T18:52:15Z",
+      "side": 1,
+      "message": "I vaguely recall needing to have a macro for using gio?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 28
+      },
+      "revId": "7fcf852b8ed5d0e800e71dd8f4704578f26248c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d01c943c_6e0d08b0",
+        "filename": "modules/video_capture/linux/camera_portal.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-05-24T18:52:15Z",
+      "side": 1,
+      "message": "Is there some/any of this that can be shared with the screen capture portal and should we consolidate those? Or was that mainly done via Michael\u0027s otustanding CL?",
+      "range": {
+        "startLine": 26,
+        "startChar": 6,
+        "endLine": 26,
+        "endChar": 25
+      },
+      "revId": "7fcf852b8ed5d0e800e71dd8f4704578f26248c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efd294e6_7aaff4f1",
+        "filename": "modules/video_capture/linux/camera_portal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-05-24T18:52:15Z",
+      "side": 1,
+      "message": "2023",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "7fcf852b8ed5d0e800e71dd8f4704578f26248c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a095fa26_38eca973",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-05-24T18:52:15Z",
+      "side": 1,
+      "message": "Prefer this to be stored as a constant somewhere e.g. `kInvalidPipeWireFd`",
+      "range": {
+        "startLine": 238,
+        "startChar": 12,
+        "endLine": 238,
+        "endChar": 14
+      },
+      "revId": "7fcf852b8ed5d0e800e71dd8f4704578f26248c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
