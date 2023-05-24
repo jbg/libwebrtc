@@ -16,6 +16,24 @@
       "message": "Will land when this statement is true",
       "revId": "0e6c213d712deb134396991f0a055c78153ccea9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cda5b9b_5c5ffddb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-05-24T15:50:08Z",
+      "side": 1,
+      "message": "Ready!",
+      "parentUuid": "a607cec5_16a886fd",
+      "revId": "0e6c213d712deb134396991f0a055c78153ccea9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
