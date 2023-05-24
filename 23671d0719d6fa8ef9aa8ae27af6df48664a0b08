@@ -52,6 +52,23 @@
       "parentUuid": "4041af50_7301af2b",
       "revId": "23671d0719d6fa8ef9aa8ae27af6df48664a0b08",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d729e5e6_f7be2374",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2023-05-24T09:20:02Z",
+      "side": 1,
+      "message": "(Still waiting for the M115 branch to be announced.)",
+      "revId": "23671d0719d6fa8ef9aa8ae27af6df48664a0b08",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
