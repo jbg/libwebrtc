@@ -16,6 +16,23 @@
       "message": "Hello Harald,\n\ncould you please review this CL? It should make code easier to understand for a reader.\n\nThanks a lot in advance, Yury.",
       "revId": "28d46e9c1551b616d71e66bb9b65c048a5cbdf77",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1033850b_6a7ea0e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-05-25T14:39:32Z",
+      "side": 1,
+      "message": "Given that it doesn\u0027t connect to anything, it seems safe to remove.\nOnce we get back to combining the BWE, we may want a different approach to controlling it.\n\nStill, adding a couple of reviewers that have been working on BWE before.",
+      "revId": "28d46e9c1551b616d71e66bb9b65c048a5cbdf77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
