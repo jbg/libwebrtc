@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fda72d5_dea339dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-05-25T08:43:19Z",
+      "side": 1,
+      "message": "Should be a no-op refactoring. Testing to interfaces is better than testing to implementations.",
+      "revId": "27081e9367da6e7577b1bee4afe04341782767c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
