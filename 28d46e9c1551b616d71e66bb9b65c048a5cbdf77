@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e6c2220_5e60f9f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2023-05-25T13:21:38Z",
+      "side": 1,
+      "message": "Hello Harald,\n\ncould you please review this CL? It should make code easier to understand for a reader.\n\nThanks a lot in advance, Yury.",
+      "revId": "28d46e9c1551b616d71e66bb9b65c048a5cbdf77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
