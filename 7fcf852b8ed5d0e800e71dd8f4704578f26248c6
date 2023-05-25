@@ -89,6 +89,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e0ef64d2_c08d711d",
+        "filename": "modules/video_capture/linux/camera_portal.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2023-05-25T07:32:39Z",
+      "side": 1,
+      "message": "I don\u0027t have any outstanding CLs related to that. Any code, that I think can be shared was already split out: https://webrtc-review.googlesource.com/c/src/+/281661.\n\nThe code here is for the camera portal, which is different than the screen-share portal.",
+      "parentUuid": "d01c943c_6e0d08b0",
+      "range": {
+        "startLine": 26,
+        "startChar": 6,
+        "endLine": 26,
+        "endChar": 25
+      },
+      "revId": "7fcf852b8ed5d0e800e71dd8f4704578f26248c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "efd294e6_7aaff4f1",
         "filename": "modules/video_capture/linux/camera_portal.h",
         "patchSetId": 4
