@@ -11,6 +11,7 @@
 #include "modules/video_capture/video_capture_options.h"
 
 #if defined(WEBRTC_USE_PIPEWIRE)
+#include "modules/portal/pipewire_utils.h"
 #include "modules/video_capture/linux/pipewire_session.h"
 #endif
 

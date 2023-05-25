@@ -235,7 +235,7 @@ PipeWireSession::~PipeWireSession() {
 void PipeWireSession::Init(VideoCaptureOptions::Callback* callback, int fd) {
   callback_ = callback;
 
-  if (fd != -1) {
+  if (fd != kInvalidPipeWireFd) {
     InitPipeWire(fd);
   } else {
     portal_notifier_ = std::make_unique<CameraPortalNotifier>(this);
