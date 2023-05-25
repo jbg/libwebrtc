@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0cb9117_d0b871c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-05-25T12:37:20Z",
+      "side": 1,
+      "message": "Mirko likes python (but then it is just a typo and we all dislike typos!)",
+      "revId": "e1619e8177234609116474c567779f28f31a56ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
