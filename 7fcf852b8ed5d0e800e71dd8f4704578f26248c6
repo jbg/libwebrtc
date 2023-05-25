@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc9126a1_812a4ad7",
+        "filename": "modules/video_capture/linux/camera_portal.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-05-25T08:44:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3bf54aa_0ab92390",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "7fcf852b8ed5d0e800e71dd8f4704578f26248c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a60213e_1c023824",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-05-24T18:52:15Z",
       "side": 1,
       "message": "I vaguely recall needing to have a macro for using gio?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 28
+      },
+      "revId": "7fcf852b8ed5d0e800e71dd8f4704578f26248c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d017c12_49233fbc",
+        "filename": "modules/video_capture/linux/camera_portal.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-05-25T08:44:30Z",
+      "side": 1,
+      "message": "What macro you have in mind? It was already using gio before, it\u0027s just moved now to a separate implementation.",
+      "parentUuid": "1a60213e_1c023824",
       "range": {
         "startLine": 13,
         "startChar": 0,
@@ -111,6 +159,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d857c63_b6eff32a",
+        "filename": "modules/video_capture/linux/camera_portal.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-05-25T08:44:30Z",
+      "side": 1,
+      "message": "Michael already re-used some of the portal code and split some parts so they can be shared. This change is mainly about splitting portal/pipewire implementations. It doesn\u0027t introduce anything new, I just moved things into `CameraPortalPrivate` so consumers including `camera_portal.h` header don\u0027t have to deal with missing gio headers.",
+      "parentUuid": "e0ef64d2_c08d711d",
+      "range": {
+        "startLine": 26,
+        "startChar": 6,
+        "endLine": 26,
+        "endChar": 25
+      },
+      "revId": "7fcf852b8ed5d0e800e71dd8f4704578f26248c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efd294e6_7aaff4f1",
@@ -134,6 +206,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d4d70fe_85fd96d9",
+        "filename": "modules/video_capture/linux/camera_portal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-05-25T08:44:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efd294e6_7aaff4f1",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "7fcf852b8ed5d0e800e71dd8f4704578f26248c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a095fa26_38eca973",
@@ -147,6 +243,30 @@
       "writtenOn": "2023-05-24T18:52:15Z",
       "side": 1,
       "message": "Prefer this to be stored as a constant somewhere e.g. `kInvalidPipeWireFd`",
+      "range": {
+        "startLine": 238,
+        "startChar": 12,
+        "endLine": 238,
+        "endChar": 14
+      },
+      "revId": "7fcf852b8ed5d0e800e71dd8f4704578f26248c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47b3bd62_1c0d0ad7",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-05-25T08:44:30Z",
+      "side": 1,
+      "message": "I will submit it as a separate change as we use `-1` in some other places.",
+      "parentUuid": "a095fa26_38eca973",
       "range": {
         "startLine": 238,
         "startChar": 12,
