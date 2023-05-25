@@ -123,6 +123,24 @@
       "parentUuid": "9ec53c5e_0e30dee2",
       "revId": "23671d0719d6fa8ef9aa8ae27af6df48664a0b08",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b98ca598_1e082475",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2023-05-25T07:32:20Z",
+      "side": 1,
+      "message": "Announced: https://groups.google.com/a/chromium.org/g/chromium-dev/c/OiOS-Kf9J78",
+      "parentUuid": "fc1dc846_0970eadf",
+      "revId": "23671d0719d6fa8ef9aa8ae27af6df48664a0b08",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
