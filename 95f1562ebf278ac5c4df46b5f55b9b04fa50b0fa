@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5093852_45180f06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-05-25T14:53:54Z",
+      "side": 1,
+      "message": "Please submit if you are OK with this change Alex. I was not able to narrow down the exact cause since the only laptop where it reproduces is a low performance non corp device and I can\u0027t develop on the device itself. Will dig deeper into if there is a real gain in using `copyPixelsFrom` and then revisit this issue. Or possibly try to avoid the memory copy totally using `WgcDesktopFrame`.",
+      "revId": "95f1562ebf278ac5c4df46b5f55b9b04fa50b0fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
