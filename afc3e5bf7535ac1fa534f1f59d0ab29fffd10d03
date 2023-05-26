@@ -80,6 +80,30 @@
       },
       "revId": "afc3e5bf7535ac1fa534f1f59d0ab29fffd10d03",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d11f37eb_475ed6ca",
+        "filename": "call/rtp_video_sender.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2023-05-26T11:02:54Z",
+      "side": 1,
+      "message": "guess doesn\u0027t hurt to add protection here as well, in case we may use this method somewhere else",
+      "parentUuid": "b85a3f02_c1eab09a",
+      "range": {
+        "startLine": 125,
+        "startChar": 6,
+        "endLine": 125,
+        "endChar": 32
+      },
+      "revId": "afc3e5bf7535ac1fa534f1f59d0ab29fffd10d03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
