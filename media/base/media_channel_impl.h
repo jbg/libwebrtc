@@ -257,21 +257,19 @@ class VideoMediaChannel : public MediaChannel,
   // Gets quality stats for the channel.
   virtual bool GetSendStats(VideoMediaSendInfo* info) = 0;
   virtual bool GetReceiveStats(VideoMediaReceiveInfo* info) = 0;
+  bool GetStats(VideoMediaSendInfo* info) override {
+    return GetSendStats(info);
+  }
+  bool GetStats(VideoMediaReceiveInfo* info) override {
+    return GetReceiveStats(info);
+  }
 
   // TODO(bugs.webrtc.org/13931): Remove when configuration is more sensible
-  virtual void SetSendCodecChangedCallback(
-      absl::AnyInvocable<void()> callback) = 0;
+  void SetSendCodecChangedCallback(
+      absl::AnyInvocable<void()> callback) override = 0;
 
  private:
   // Functions not implemented on this interface
-  bool GetStats(VideoMediaSendInfo* info) override {
-    RTC_CHECK_NOTREACHED();
-    return false;
-  }
-  bool GetStats(VideoMediaReceiveInfo* info) override {
-    RTC_CHECK_NOTREACHED();
-    return false;
-  }
   bool HasNetworkInterface() const override {
     return MediaChannel::HasNetworkInterface();
   }
@@ -686,6 +684,10 @@ class VideoMediaSendChannel : public VideoMediaSendChannelInterface {
   void SetSsrcListChangedCallback(
       absl::AnyInvocable<void(const std::set<uint32_t>&)> callback) override {
     impl()->SetSsrcListChangedCallback(std::move(callback));
+  }
+  void SetSendCodecChangedCallback(
+      absl::AnyInvocable<void()> callback) override {
+    impl()->SetSendCodecChangedCallback(std::move(callback));
   }
 
   MediaChannel* ImplForTesting() override { return impl_; }
