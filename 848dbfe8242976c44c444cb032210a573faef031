@@ -87,6 +87,41 @@
       "parentUuid": "5027bcff_a6931dd2",
       "revId": "848dbfe8242976c44c444cb032210a573faef031",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "975f01f0_0dbdbf90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-05-26T12:33:55Z",
+      "side": 1,
+      "message": "OK got it, I didn\u0027t +1 because I wanted to make sure it accumulates, but +1 based on your reply.\n\nWe sadly don\u0027t have \"counters increase over time\" tests. We\u0027ve talked about adding such tests many times and also tests like \"does send side and receive side add up\", but the we\u0027ve never had enough (human) resources to dedicate to improving this situation so tests are simple and sometimes they miss things",
+      "parentUuid": "9540de4d_af409223",
+      "revId": "848dbfe8242976c44c444cb032210a573faef031",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5ba495a_a6d02a0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-05-26T12:33:55Z",
+      "side": 1,
+      "message": "+1 +2",
+      "revId": "848dbfe8242976c44c444cb032210a573faef031",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
