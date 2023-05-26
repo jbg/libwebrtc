@@ -16,6 +16,23 @@
       "message": "Mirko likes python (but then it is just a typo and we all dislike typos!)",
       "revId": "e1619e8177234609116474c567779f28f31a56ec",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "326bca85_f444b68b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20759
+      },
+      "writtenOn": "2023-05-26T09:14:44Z",
+      "side": 1,
+      "message": "I tried to press the \"Submit to CQ\" button but it did not work for me ...",
+      "revId": "e1619e8177234609116474c567779f28f31a56ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
