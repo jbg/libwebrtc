@@ -33,6 +33,42 @@
       "message": "Looks good but are we exposing current values or values that are incremented for each when each frame is emitted from the jitter buffer?",
       "revId": "848dbfe8242976c44c444cb032210a573faef031",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5027bcff_a6931dd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2023-05-26T11:38:14Z",
+      "side": 1,
+      "message": "VCMTiming exposes current values, that are then accumulated in ReceiveStatisticsProxy for each emitted frame. So from the PC::GetStats PoV, it\u0027s only accumulators.\n\nRelated to that though: do we have any test coverage that the stats indeed are non-decreasing? The change I made to `rtc_stats_integrationtest.cc` only checks the stats once (since the surrounding lines do that).",
+      "parentUuid": "d7744956_d9cc0845",
+      "revId": "848dbfe8242976c44c444cb032210a573faef031",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f33af21_4606fcaa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2023-05-26T11:38:14Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "1e9790a5_e36bcbda",
+      "revId": "848dbfe8242976c44c444cb032210a573faef031",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
