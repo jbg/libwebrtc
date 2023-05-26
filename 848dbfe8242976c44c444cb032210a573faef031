@@ -69,6 +69,24 @@
       "parentUuid": "1e9790a5_e36bcbda",
       "revId": "848dbfe8242976c44c444cb032210a573faef031",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9540de4d_af409223",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2023-05-26T11:44:55Z",
+      "side": 1,
+      "message": "You missed the +1 :) \"CV cannot start a Run because this CL is missing Code-Owners\"\n\nIt\u0027s kind of annoying that Gerrit removes the +1 from files that were not touched actually.",
+      "parentUuid": "5027bcff_a6931dd2",
+      "revId": "848dbfe8242976c44c444cb032210a573faef031",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
