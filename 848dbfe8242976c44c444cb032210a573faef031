@@ -16,6 +16,23 @@
       "message": "ping hbos, I need another +1 for pc/ 😊",
       "revId": "848dbfe8242976c44c444cb032210a573faef031",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7744956_d9cc0845",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-05-26T10:06:17Z",
+      "side": 1,
+      "message": "Looks good but are we exposing current values or values that are incremented for each when each frame is emitted from the jitter buffer?",
+      "revId": "848dbfe8242976c44c444cb032210a573faef031",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
