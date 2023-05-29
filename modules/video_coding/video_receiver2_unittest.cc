@@ -84,7 +84,7 @@ class VideoReceiver2Test : public ::testing::Test {
 
   test::ScopedKeyValueConfig field_trials_;
   SimulatedClock clock_{Timestamp::Millis(1337)};
-  VCMTiming timing_{&clock_, field_trials_};
+  VCMTiming timing_{&clock_};
   NiceMock<MockVCMReceiveCallback> receive_callback_;
   VideoReceiver2 receiver_{&clock_, &timing_, field_trials_};
 };

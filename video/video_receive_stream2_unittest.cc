@@ -255,7 +255,7 @@ class VideoReceiveStream2Test : public ::testing::TestWithParam<bool> {
       video_receive_stream_->UnregisterFromTransport();
       video_receive_stream_ = nullptr;
     }
-    timing_ = new VCMTiming(clock_, fake_call_.trials());
+    timing_ = new VCMTiming(clock_);
     video_receive_stream_ =
         std::make_unique<webrtc::internal::VideoReceiveStream2>(
             time_controller_.GetTaskQueueFactory(), &fake_call_,

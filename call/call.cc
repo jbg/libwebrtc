@@ -1016,7 +1016,7 @@ webrtc::VideoReceiveStreamInterface* Call::CreateVideoReceiveStream(
   VideoReceiveStream2* receive_stream = new VideoReceiveStream2(
       task_queue_factory_, this, num_cpu_cores_,
       transport_send_->packet_router(), std::move(configuration),
-      call_stats_.get(), clock_, std::make_unique<VCMTiming>(clock_, trials()),
+      call_stats_.get(), clock_, std::make_unique<VCMTiming>(clock_),
       &nack_periodic_processor_, decode_sync_.get(), event_log_);
   // TODO(bugs.webrtc.org/11993): Set this up asynchronously on the network
   // thread.

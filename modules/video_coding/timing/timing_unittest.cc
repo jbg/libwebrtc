@@ -15,13 +15,16 @@
 #include "system_wrappers/include/clock.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
-#include "test/scoped_key_value_config.h"
 
 namespace webrtc {
 namespace {
 
 constexpr Frequency k25Fps = Frequency::Hertz(25);
 constexpr Frequency k90kHz = Frequency::KiloHertz(90);
+
+// The minimum pacing is enabled by a field trial and active if the RTP
+// playout delay header extension is set to min==0.
+constexpr TimeDelta kMinPacing = TimeDelta::Millis(8);
 
 MATCHER(HasConsistentVideoDelayTimings, "") {
   // Delays should be non-negative.
@@ -71,9 +74,8 @@ MATCHER(HasConsistentVideoDelayTimings, "") {
 }  // namespace
 
 TEST(VCMTimingTest, JitterDelay) {
-  test::ScopedKeyValueConfig field_trials;
   SimulatedClock clock(0);
-  VCMTiming timing(&clock, field_trials);
+  VCMTiming timing(&clock);
   timing.Reset();
 
   uint32_t timestamp = 0;
@@ -167,9 +169,8 @@ TEST(VCMTimingTest, JitterDelay) {
 
 TEST(VCMTimingTest, TimestampWrapAround) {
   constexpr auto kStartTime = Timestamp::Millis(1337);
-  test::ScopedKeyValueConfig field_trials;
   SimulatedClock clock(kStartTime);
-  VCMTiming timing(&clock, field_trials);
+  VCMTiming timing(&clock);
 
   // Provoke a wrap-around. The fifth frame will have wrapped at 25 fps.
   constexpr uint32_t kRtpTicksPerFrame = k90kHz / k25Fps;
@@ -189,9 +190,8 @@ TEST(VCMTimingTest, TimestampWrapAround) {
 }
 
 TEST(VCMTimingTest, UseLowLatencyRenderer) {
-  test::ScopedKeyValueConfig field_trials;
   SimulatedClock clock(0);
-  VCMTiming timing(&clock, field_trials);
+  VCMTiming timing(&clock);
   timing.Reset();
   // Default is false.
   EXPECT_FALSE(timing.RenderParameters().use_low_latency_rendering);
@@ -222,8 +222,7 @@ TEST(VCMTimingTest, MaxWaitingTimeIsZeroForZeroRenderTime) {
   constexpr TimeDelta kTimeDelta = 1 / Frequency::Hertz(60);
   constexpr Timestamp kZeroRenderTime = Timestamp::Zero();
   SimulatedClock clock(kStartTimeUs);
-  test::ScopedKeyValueConfig field_trials;
-  VCMTiming timing(&clock, field_trials);
+  VCMTiming timing(&clock);
   timing.Reset();
   timing.set_max_playout_delay(TimeDelta::Zero());
   for (int i = 0; i < 10; ++i) {
@@ -253,17 +252,12 @@ TEST(VCMTimingTest, MaxWaitingTimeIsZeroForZeroRenderTime) {
   EXPECT_THAT(timing.GetTimings(), HasConsistentVideoDelayTimings());
 }
 
-TEST(VCMTimingTest, MaxWaitingTimeZeroDelayPacingExperiment) {
-  // The minimum pacing is enabled by a field trial and active if the RTP
-  // playout delay header extension is set to min==0.
-  constexpr TimeDelta kMinPacing = TimeDelta::Millis(3);
-  test::ScopedKeyValueConfig field_trials(
-      "WebRTC-ZeroPlayoutDelay/min_pacing:3ms/");
+TEST(VCMTimingTest, MaxWaitingTimeZeroDelayMinimumPacing) {
   constexpr int64_t kStartTimeUs = 3.15e13;  // About one year in us.
   constexpr TimeDelta kTimeDelta = 1 / Frequency::Hertz(60);
   constexpr auto kZeroRenderTime = Timestamp::Zero();
   SimulatedClock clock(kStartTimeUs);
-  VCMTiming timing(&clock, field_trials);
+  VCMTiming timing(&clock);
   timing.Reset();
   // MaxWaitingTime() returns zero for evenly spaced video frames.
   for (int i = 0; i < 10; ++i) {
@@ -305,49 +299,12 @@ TEST(VCMTimingTest, MaxWaitingTimeZeroDelayPacingExperiment) {
   EXPECT_THAT(timing.GetTimings(), HasConsistentVideoDelayTimings());
 }
 
-TEST(VCMTimingTest, DefaultMaxWaitingTimeUnaffectedByPacingExperiment) {
-  // The minimum pacing is enabled by a field trial but should not have any
-  // effect if render_time_ms is greater than 0;
-  test::ScopedKeyValueConfig field_trials(
-      "WebRTC-ZeroPlayoutDelay/min_pacing:3ms/");
-  constexpr int64_t kStartTimeUs = 3.15e13;  // About one year in us.
-  const TimeDelta kTimeDelta = TimeDelta::Millis(1000.0 / 60.0);
-  SimulatedClock clock(kStartTimeUs);
-  VCMTiming timing(&clock, field_trials);
-  timing.Reset();
-  clock.AdvanceTime(kTimeDelta);
-  auto now = clock.CurrentTime();
-  Timestamp render_time = now + TimeDelta::Millis(30);
-  // Estimate the internal processing delay from the first frame.
-  TimeDelta estimated_processing_delay =
-      (render_time - now) -
-      timing.MaxWaitingTime(render_time, now,
-                            /*too_many_frames_queued=*/false);
-  EXPECT_GT(estimated_processing_delay, TimeDelta::Zero());
-
-  // Any other frame submitted at the same time should be scheduled according to
-  // its render time.
-  for (int i = 0; i < 5; ++i) {
-    render_time += kTimeDelta;
-    EXPECT_EQ(timing.MaxWaitingTime(render_time, now,
-                                    /*too_many_frames_queued=*/false),
-              render_time - now - estimated_processing_delay);
-  }
-
-  EXPECT_THAT(timing.GetTimings(), HasConsistentVideoDelayTimings());
-}
-
 TEST(VCMTimingTest, MaxWaitingTimeReturnsZeroIfTooManyFramesQueuedIsTrue) {
-  // The minimum pacing is enabled by a field trial and active if the RTP
-  // playout delay header extension is set to min==0.
-  constexpr TimeDelta kMinPacing = TimeDelta::Millis(3);
-  test::ScopedKeyValueConfig field_trials(
-      "WebRTC-ZeroPlayoutDelay/min_pacing:3ms/");
   constexpr int64_t kStartTimeUs = 3.15e13;  // About one year in us.
   const TimeDelta kTimeDelta = TimeDelta::Millis(1000.0 / 60.0);
   constexpr auto kZeroRenderTime = Timestamp::Zero();
   SimulatedClock clock(kStartTimeUs);
-  VCMTiming timing(&clock, field_trials);
+  VCMTiming timing(&clock);
   timing.Reset();
   // MaxWaitingTime() returns zero for evenly spaced video frames.
   for (int i = 0; i < 10; ++i) {
@@ -377,9 +334,8 @@ TEST(VCMTimingTest, MaxWaitingTimeReturnsZeroIfTooManyFramesQueuedIsTrue) {
 }
 
 TEST(VCMTimingTest, UpdateCurrentDelayCapsWhenOffByMicroseconds) {
-  test::ScopedKeyValueConfig field_trials;
   SimulatedClock clock(0);
-  VCMTiming timing(&clock, field_trials);
+  VCMTiming timing(&clock);
   timing.Reset();
 
   // Set larger initial current delay.
@@ -400,9 +356,8 @@ TEST(VCMTimingTest, UpdateCurrentDelayCapsWhenOffByMicroseconds) {
 }
 
 TEST(VCMTimingTest, GetTimings) {
-  test::ScopedKeyValueConfig field_trials;
   SimulatedClock clock(33);
-  VCMTiming timing(&clock, field_trials);
+  VCMTiming timing(&clock);
   timing.Reset();
 
   // Setup.

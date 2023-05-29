@@ -143,7 +143,7 @@ class VideoStreamBufferControllerFixture
         decode_sync_(clock_,
                      &fake_metronome_,
                      time_controller_.GetMainThread()),
-        timing_(clock_, field_trials_),
+        timing_(clock_),
         buffer_(std::make_unique<VideoStreamBufferController>(
             clock_,
             time_controller_.GetMainThread(),
@@ -805,20 +805,7 @@ TEST_P(VideoStreamBufferControllerTest,
   EXPECT_THAT(WaitForFrameOrTimeout(kFps30Delay), Frame(test::WithId(10)));
 }
 
-INSTANTIATE_TEST_SUITE_P(VideoStreamBufferController,
-                         VideoStreamBufferControllerTest,
-                         ::testing::Combine(::testing::Bool(),
-                                            ::testing::Values("")),
-                         [](const auto& info) {
-                           return std::get<0>(info.param) ? "SyncDecoding"
-                                                          : "UnsyncedDecoding";
-                         });
-
-class LowLatencyVideoStreamBufferControllerTest
-    : public ::testing::Test,
-      public VideoStreamBufferControllerFixture {};
-
-TEST_P(LowLatencyVideoStreamBufferControllerTest,
+TEST_P(VideoStreamBufferControllerTest,
        FramesDecodedInstantlyWithLowLatencyRendering) {
   // Initial keyframe.
   StartNextDecodeForceKeyframe();
@@ -842,7 +829,7 @@ TEST_P(LowLatencyVideoStreamBufferControllerTest,
   EXPECT_THAT(WaitForFrameOrTimeout(TimeDelta::Zero()), Frame(test::WithId(1)));
 }
 
-TEST_P(LowLatencyVideoStreamBufferControllerTest, ZeroPlayoutDelayFullQueue) {
+TEST_P(VideoStreamBufferControllerTest, ZeroPlayoutDelayFullQueue) {
   // Initial keyframe.
   StartNextDecodeForceKeyframe();
   timing_.set_min_playout_delay(TimeDelta::Zero());
@@ -867,8 +854,7 @@ TEST_P(LowLatencyVideoStreamBufferControllerTest, ZeroPlayoutDelayFullQueue) {
   EXPECT_THAT(WaitForFrameOrTimeout(TimeDelta::Zero()), Frame(test::WithId(1)));
 }
 
-TEST_P(LowLatencyVideoStreamBufferControllerTest,
-       MinMaxDelayZeroLowLatencyMode) {
+TEST_P(VideoStreamBufferControllerTest, MinMaxDelayZeroLowLatencyMode) {
   // Initial keyframe.
   StartNextDecodeForceKeyframe();
   timing_.set_min_playout_delay(TimeDelta::Zero());
@@ -890,15 +876,14 @@ TEST_P(LowLatencyVideoStreamBufferControllerTest,
   EXPECT_THAT(WaitForFrameOrTimeout(TimeDelta::Zero()), Frame(test::WithId(1)));
 }
 
-INSTANTIATE_TEST_SUITE_P(
-    VideoStreamBufferController,
-    LowLatencyVideoStreamBufferControllerTest,
-    ::testing::Combine(
-        ::testing::Bool(),
-        ::testing::Values(
-            "WebRTC-ZeroPlayoutDelay/min_pacing:16ms,max_decode_queue_size:5/",
-            "WebRTC-ZeroPlayoutDelay/"
-            "min_pacing:16ms,max_decode_queue_size:5/")));
+INSTANTIATE_TEST_SUITE_P(VideoStreamBufferController,
+                         VideoStreamBufferControllerTest,
+                         ::testing::Combine(::testing::Bool(),
+                                            ::testing::Values("")),
+                         [](const auto& info) {
+                           return std::get<0>(info.param) ? "SyncDecoding"
+                                                          : "UnsyncedDecoding";
+                         });
 
 class IncomingTimestampVideoStreamBufferControllerTest
     : public ::testing::Test,

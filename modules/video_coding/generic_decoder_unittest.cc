@@ -66,7 +66,7 @@ class GenericDecoderTest : public ::testing::Test {
   GenericDecoderTest()
       : time_controller_(Timestamp::Zero()),
         clock_(time_controller_.GetClock()),
-        timing_(time_controller_.GetClock(), field_trials_),
+        timing_(time_controller_.GetClock()),
         decoder_(time_controller_.GetTaskQueueFactory()),
         vcm_callback_(&timing_, time_controller_.GetClock(), field_trials_),
         generic_decoder_(&decoder_) {}
