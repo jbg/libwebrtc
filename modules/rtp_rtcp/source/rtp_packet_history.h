@@ -19,11 +19,11 @@
 #include <vector>
 
 #include "api/function_view.h"
+#include "api/sequence_checker.h"
 #include "api/units/time_delta.h"
 #include "api/units/timestamp.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/rtp_rtcp/source/rtp_packet_to_send.h"
-#include "rtc_base/synchronization/mutex.h"
 #include "rtc_base/thread_annotations.h"
 
 namespace webrtc {
@@ -174,25 +174,22 @@ class RtpPacketHistory {
   bool padding_priority_enabled() const;
 
   // Helper method to check if packet has too recently been sent.
-  bool VerifyRtt(const StoredPacket& packet) const
-      RTC_EXCLUSIVE_LOCKS_REQUIRED(lock_);
-  void Reset() RTC_EXCLUSIVE_LOCKS_REQUIRED(lock_);
-  void CullOldPackets() RTC_EXCLUSIVE_LOCKS_REQUIRED(lock_);
+  bool VerifyRtt(const StoredPacket& packet) const;
+  void Reset();
+  void CullOldPackets();
   // Removes the packet from the history, and context/mapping that has been
   // stored. Returns the RTP packet instance contained within the StoredPacket.
-  std::unique_ptr<RtpPacketToSend> RemovePacket(int packet_index)
-      RTC_EXCLUSIVE_LOCKS_REQUIRED(lock_);
-  int GetPacketIndex(uint16_t sequence_number) const
-      RTC_EXCLUSIVE_LOCKS_REQUIRED(lock_);
-  StoredPacket* GetStoredPacket(uint16_t sequence_number)
-      RTC_EXCLUSIVE_LOCKS_REQUIRED(lock_);
+  std::unique_ptr<RtpPacketToSend> RemovePacket(int packet_index);
+  int GetPacketIndex(uint16_t sequence_number) const;
+  StoredPacket* GetStoredPacket(uint16_t sequence_number);
 
   Clock* const clock_;
   const PaddingMode padding_mode_;
-  mutable Mutex lock_;
-  size_t number_to_store_ RTC_GUARDED_BY(lock_);
-  StorageMode mode_ RTC_GUARDED_BY(lock_);
-  TimeDelta rtt_ RTC_GUARDED_BY(lock_);
+
+  SequenceChecker sequence_;
+  size_t number_to_store_ RTC_GUARDED_BY(sequence_);
+  StorageMode mode_ RTC_GUARDED_BY(sequence_);
+  TimeDelta rtt_ RTC_GUARDED_BY(sequence_);
 
   // Queue of stored packets, ordered by sequence number, with older packets in
   // the front and new packets being added to the back. Note that there may be
@@ -200,15 +197,16 @@ class RtpPacketHistory {
   // Packets may also be removed out-of-order, in which case there will be
   // instances of StoredPacket with `packet_` set to nullptr. The first and last
   // entry in the queue will however always be populated.
-  std::deque<StoredPacket> packet_history_ RTC_GUARDED_BY(lock_);
+  std::deque<StoredPacket> packet_history_ RTC_GUARDED_BY(sequence_);
 
   // Total number of packets with inserted.
-  uint64_t packets_inserted_ RTC_GUARDED_BY(lock_);
+  uint64_t packets_inserted_ RTC_GUARDED_BY(sequence_);
   // Objects from `packet_history_` ordered by "most likely to be useful", used
   // in GetPayloadPaddingPacket().
-  PacketPrioritySet padding_priority_ RTC_GUARDED_BY(lock_);
+  PacketPrioritySet padding_priority_ RTC_GUARDED_BY(sequence_);
 
-  std::optional<RtpPacketToSend> large_payload_packet_ RTC_GUARDED_BY(lock_);
+  std::optional<RtpPacketToSend> large_payload_packet_
+      RTC_GUARDED_BY(sequence_);
 };
 }  // namespace webrtc
 #endif  // MODULES_RTP_RTCP_SOURCE_RTP_PACKET_HISTORY_H_

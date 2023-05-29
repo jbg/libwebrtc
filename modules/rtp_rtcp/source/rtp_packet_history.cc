@@ -84,12 +84,14 @@ RtpPacketHistory::RtpPacketHistory(Clock* clock, PaddingMode padding_mode)
       rtt_(TimeDelta::MinusInfinity()),
       packets_inserted_(0) {}
 
-RtpPacketHistory::~RtpPacketHistory() {}
+RtpPacketHistory::~RtpPacketHistory() {
+  RTC_DCHECK_RUN_ON(&sequence_);
+}
 
 void RtpPacketHistory::SetStorePacketsStatus(StorageMode mode,
                                              size_t number_to_store) {
+  RTC_DCHECK_RUN_ON(&sequence_);
   RTC_DCHECK_LE(number_to_store, kMaxCapacity);
-  MutexLock lock(&lock_);
   if (mode != StorageMode::kDisabled && mode_ != StorageMode::kDisabled) {
     RTC_LOG(LS_WARNING) << "Purging packet history in order to re-set status.";
   }
@@ -99,12 +101,12 @@ void RtpPacketHistory::SetStorePacketsStatus(StorageMode mode,
 }
 
 RtpPacketHistory::StorageMode RtpPacketHistory::GetStorageMode() const {
-  MutexLock lock(&lock_);
+  RTC_DCHECK_RUN_ON(&sequence_);
   return mode_;
 }
 
 void RtpPacketHistory::SetRtt(TimeDelta rtt) {
-  MutexLock lock(&lock_);
+  RTC_DCHECK_RUN_ON(&sequence_);
   RTC_DCHECK_GE(rtt, TimeDelta::Zero());
   rtt_ = rtt;
   // If storage is not disabled,  packets will be removed after a timeout
@@ -117,8 +119,8 @@ void RtpPacketHistory::SetRtt(TimeDelta rtt) {
 
 void RtpPacketHistory::PutRtpPacket(std::unique_ptr<RtpPacketToSend> packet,
                                     Timestamp send_time) {
+  RTC_DCHECK_RUN_ON(&sequence_);
   RTC_DCHECK(packet);
-  MutexLock lock(&lock_);
   if (mode_ == StorageMode::kDisabled) {
     return;
   }
@@ -176,6 +178,7 @@ void RtpPacketHistory::PutRtpPacket(std::unique_ptr<RtpPacketToSend> packet,
 
 std::unique_ptr<RtpPacketToSend> RtpPacketHistory::GetPacketAndMarkAsPending(
     uint16_t sequence_number) {
+  RTC_DCHECK_RUN_ON(&sequence_);
   return GetPacketAndMarkAsPending(
       sequence_number, [](const RtpPacketToSend& packet) {
         return std::make_unique<RtpPacketToSend>(packet);
@@ -186,7 +189,7 @@ std::unique_ptr<RtpPacketToSend> RtpPacketHistory::GetPacketAndMarkAsPending(
     uint16_t sequence_number,
     rtc::FunctionView<std::unique_ptr<RtpPacketToSend>(const RtpPacketToSend&)>
         encapsulate) {
-  MutexLock lock(&lock_);
+  RTC_DCHECK_RUN_ON(&sequence_);
   if (mode_ == StorageMode::kDisabled) {
     return nullptr;
   }
@@ -217,7 +220,7 @@ std::unique_ptr<RtpPacketToSend> RtpPacketHistory::GetPacketAndMarkAsPending(
 }
 
 void RtpPacketHistory::MarkPacketAsSent(uint16_t sequence_number) {
-  MutexLock lock(&lock_);
+  RTC_DCHECK_RUN_ON(&sequence_);
   if (mode_ == StorageMode::kDisabled) {
     return;
   }
@@ -236,7 +239,7 @@ void RtpPacketHistory::MarkPacketAsSent(uint16_t sequence_number) {
 }
 
 bool RtpPacketHistory::GetPacketState(uint16_t sequence_number) const {
-  MutexLock lock(&lock_);
+  RTC_DCHECK_RUN_ON(&sequence_);
   if (mode_ == StorageMode::kDisabled) {
     return false;
   }
@@ -260,6 +263,7 @@ bool RtpPacketHistory::GetPacketState(uint16_t sequence_number) const {
 
 bool RtpPacketHistory::VerifyRtt(
     const RtpPacketHistory::StoredPacket& packet) const {
+  RTC_DCHECK_RUN_ON(&sequence_);
   if (packet.times_retransmitted() > 0 &&
       clock_->CurrentTime() - packet.send_time() < rtt_) {
     // This packet has already been retransmitted once, and the time since
@@ -281,7 +285,7 @@ std::unique_ptr<RtpPacketToSend> RtpPacketHistory::GetPayloadPaddingPacket() {
 std::unique_ptr<RtpPacketToSend> RtpPacketHistory::GetPayloadPaddingPacket(
     rtc::FunctionView<std::unique_ptr<RtpPacketToSend>(const RtpPacketToSend&)>
         encapsulate) {
-  MutexLock lock(&lock_);
+  RTC_DCHECK_RUN_ON(&sequence_);
   if (mode_ == StorageMode::kDisabled) {
     return nullptr;
   }
@@ -331,7 +335,7 @@ std::unique_ptr<RtpPacketToSend> RtpPacketHistory::GetPayloadPaddingPacket(
 
 void RtpPacketHistory::CullAcknowledgedPackets(
     rtc::ArrayView<const uint16_t> sequence_numbers) {
-  MutexLock lock(&lock_);
+  RTC_DCHECK_RUN_ON(&sequence_);
   for (uint16_t sequence_number : sequence_numbers) {
     int packet_index = GetPacketIndex(sequence_number);
     if (packet_index < 0 ||
@@ -343,17 +347,19 @@ void RtpPacketHistory::CullAcknowledgedPackets(
 }
 
 void RtpPacketHistory::Clear() {
-  MutexLock lock(&lock_);
+  RTC_DCHECK_RUN_ON(&sequence_);
   Reset();
 }
 
 void RtpPacketHistory::Reset() {
+  RTC_DCHECK_RUN_ON(&sequence_);
   packet_history_.clear();
   padding_priority_.clear();
   large_payload_packet_ = std::nullopt;
 }
 
 void RtpPacketHistory::CullOldPackets() {
+  RTC_DCHECK_RUN_ON(&sequence_);
   Timestamp now = clock_->CurrentTime();
   TimeDelta packet_duration =
       rtt_.IsFinite()
@@ -394,6 +400,7 @@ void RtpPacketHistory::CullOldPackets() {
 
 std::unique_ptr<RtpPacketToSend> RtpPacketHistory::RemovePacket(
     int packet_index) {
+  RTC_DCHECK_RUN_ON(&sequence_);
   // Move the packet out from the StoredPacket container.
   std::unique_ptr<RtpPacketToSend> rtp_packet =
       std::move(packet_history_[packet_index].packet_);
@@ -414,6 +421,7 @@ std::unique_ptr<RtpPacketToSend> RtpPacketHistory::RemovePacket(
 }
 
 int RtpPacketHistory::GetPacketIndex(uint16_t sequence_number) const {
+  RTC_DCHECK_RUN_ON(&sequence_);
   if (packet_history_.empty()) {
     return 0;
   }
@@ -442,6 +450,7 @@ int RtpPacketHistory::GetPacketIndex(uint16_t sequence_number) const {
 
 RtpPacketHistory::StoredPacket* RtpPacketHistory::GetStoredPacket(
     uint16_t sequence_number) {
+  RTC_DCHECK_RUN_ON(&sequence_);
   int index = GetPacketIndex(sequence_number);
   if (index < 0 || static_cast<size_t>(index) >= packet_history_.size() ||
       packet_history_[index].packet_ == nullptr) {
