@@ -27,6 +27,7 @@
 #include "api/video/video_timing.h"
 #include "modules/rtp_rtcp/include/rtp_cvo.h"
 #include "modules/rtp_rtcp/include/rtp_header_extension_map.h"
+#include "modules/rtp_rtcp/mocks/mock_rtp_packet_sender.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/nack.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/receiver_report.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/report_block.h"
@@ -169,6 +170,7 @@ class RtpSenderVideoTest : public ::testing::Test {
           config.local_media_ssrc = kSsrc;
           config.rtx_send_ssrc = kRtxSsrc;
           config.rid = "rid";
+          config.paced_sender = &mock_paced_sender_;
           return config;
         }())),
         rtp_sender_video_(
@@ -177,6 +179,17 @@ class RtpSenderVideoTest : public ::testing::Test {
                                                  field_trials_)) {
     rtp_module_->SetSequenceNumber(kSeqNum);
     rtp_module_->SetStartTimestamp(0);
+
+    // We use a fake pacing implementation where packets are immediately sent
+    // after enquing.
+    ON_CALL(mock_paced_sender_, EnqueuePackets)
+        .WillByDefault(
+            [&](std::vector<std::unique_ptr<RtpPacketToSend>> packets) {
+              for (std::unique_ptr<RtpPacketToSend>& packet : packets) {
+                rtp_module_->TrySendPacket(std::move(packet),
+                                           PacedPacketInfo());
+              }
+            });
   }
 
   void UsesMinimalVp8DescriptorWhenGenericFrameDescriptorExtensionIsUsed(
@@ -188,6 +201,7 @@ class RtpSenderVideoTest : public ::testing::Test {
   test::ExplicitKeyValueConfig field_trials_{""};
   SimulatedClock fake_clock_;
   LoopbackTransportTest transport_;
+  NiceMock<MockRtpPacketSender> mock_paced_sender_;
   RateLimiter retransmission_rate_limiter_;
   std::unique_ptr<ModuleRtpRtcpImpl2> rtp_module_;
   std::unique_ptr<TestRtpSenderVideo> rtp_sender_video_;
@@ -1455,6 +1469,7 @@ class RtpSenderVideoWithFrameTransformerTest : public ::testing::Test {
           config.retransmission_rate_limiter = &retransmission_rate_limiter_;
           config.field_trials = &field_trials_;
           config.local_media_ssrc = kSsrc;
+          config.paced_sender = &mock_paced_sender_;
           return config;
         }())) {
     rtp_module_->SetSequenceNumber(kSeqNum);
@@ -1474,6 +1489,7 @@ class RtpSenderVideoWithFrameTransformerTest : public ::testing::Test {
 
  protected:
   GlobalSimulatedTimeController time_controller_;
+  MockRtpPacketSender mock_paced_sender_;
   test::ExplicitKeyValueConfig field_trials_{""};
   LoopbackTransportTest transport_;
   RateLimiter retransmission_rate_limiter_;
@@ -1550,7 +1566,7 @@ TEST_F(RtpSenderVideoWithFrameTransformerTest, ValidPayloadTypes) {
 }
 #endif
 
-TEST_F(RtpSenderVideoWithFrameTransformerTest, OnTransformedFrameSendsVideo) {
+TEST_F(RtpSenderVideoWithFrameTransformerTest, OnTransformedFrameEnqueuPacket) {
   auto mock_frame_transformer =
       rtc::make_ref_counted<NiceMock<MockFrameTransformer>>();
   rtc::scoped_refptr<TransformedFrameCallback> callback;
@@ -1570,20 +1586,21 @@ TEST_F(RtpSenderVideoWithFrameTransformerTest, OnTransformedFrameSendsVideo) {
           });
   auto encoder_queue = time_controller_.GetTaskQueueFactory()->CreateTaskQueue(
       "encoder_queue", TaskQueueFactory::Priority::NORMAL);
+  EXPECT_CALL(mock_paced_sender_, EnqueuePackets);
   encoder_queue->PostTask([&] {
     rtp_sender_video->SendEncodedImage(kPayload, kType, kTimestamp,
                                        *encoded_image, video_header,
                                        kDefaultExpectedRetransmissionTimeMs);
   });
   time_controller_.AdvanceTime(TimeDelta::Zero());
-  EXPECT_EQ(transport_.packets_sent(), 1);
+
+  EXPECT_CALL(mock_paced_sender_, EnqueuePackets);
   encoder_queue->PostTask([&] {
     rtp_sender_video->SendEncodedImage(kPayload, kType, kTimestamp,
                                        *encoded_image, video_header,
                                        kDefaultExpectedRetransmissionTimeMs);
   });
   time_controller_.AdvanceTime(TimeDelta::Zero());
-  EXPECT_EQ(transport_.packets_sent(), 2);
 }
 
 TEST_F(RtpSenderVideoWithFrameTransformerTest,
@@ -1611,6 +1628,8 @@ TEST_F(RtpSenderVideoWithFrameTransformerTest,
   auto encoder_queue = time_controller_.GetTaskQueueFactory()->CreateTaskQueue(
       "encoder_queue", TaskQueueFactory::Priority::NORMAL);
   const int kFramesPerSecond = 25;
+
+  EXPECT_CALL(mock_paced_sender_, EnqueuePackets).Times(kFramesPerSecond);
   for (int i = 0; i < kFramesPerSecond; ++i) {
     encoder_queue->PostTask([&] {
       rtp_sender_video->SendEncodedImage(kPayload, kType, kTimestamp,
@@ -1619,7 +1638,6 @@ TEST_F(RtpSenderVideoWithFrameTransformerTest,
     });
     time_controller_.AdvanceTime(TimeDelta::Millis(1000 / kFramesPerSecond));
   }
-  EXPECT_EQ(transport_.packets_sent(), kFramesPerSecond);
   EXPECT_GT(rtp_sender_video->PostEncodeOverhead().bps(), 2200);
 }
 
@@ -1713,20 +1731,21 @@ TEST_F(RtpSenderVideoWithFrameTransformerTest,
           });
   auto encoder_queue = time_controller_.GetTaskQueueFactory()->CreateTaskQueue(
       "encoder_queue", TaskQueueFactory::Priority::NORMAL);
+  EXPECT_CALL(mock_paced_sender_, EnqueuePackets);
   encoder_queue->PostTask([&] {
     rtp_sender_video->SendEncodedImage(kPayload, kType, kTimestamp,
                                        *encoded_image, video_header,
                                        kDefaultExpectedRetransmissionTimeMs);
   });
   time_controller_.AdvanceTime(TimeDelta::Zero());
-  EXPECT_EQ(transport_.packets_sent(), 1);
+
+  EXPECT_CALL(mock_paced_sender_, EnqueuePackets);
   encoder_queue->PostTask([&] {
     rtp_sender_video->SendEncodedImage(kPayload, kType, kTimestamp,
                                        *encoded_image, video_header,
                                        kDefaultExpectedRetransmissionTimeMs);
   });
   time_controller_.AdvanceTime(TimeDelta::Zero());
-  EXPECT_EQ(transport_.packets_sent(), 2);
 }
 
 }  // namespace

@@ -71,11 +71,7 @@ ModuleRtpRtcpImpl2::RtpSenderContext::RtpSenderContext(
                 /*require_marker_before_media_padding=*/!config.audio,
                 config.clock),
       packet_sender(config, &packet_history),
-      non_paced_sender(&packet_sender, &sequencer),
-      packet_generator(
-          config,
-          &packet_history,
-          config.paced_sender ? config.paced_sender : &non_paced_sender) {}
+      packet_generator(config, &packet_history, config.paced_sender) {}
 
 ModuleRtpRtcpImpl2::ModuleRtpRtcpImpl2(const Configuration& configuration)
     : worker_queue_(TaskQueueBase::Current()),

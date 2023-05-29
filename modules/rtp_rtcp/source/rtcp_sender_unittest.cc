@@ -16,6 +16,7 @@
 #include "absl/base/macros.h"
 #include "api/units/time_delta.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
+#include "modules/rtp_rtcp/mocks/mock_rtp_packet_sender.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/bye.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/common_header.h"
 #include "modules/rtp_rtcp/source/rtp_packet_received.h"
@@ -31,6 +32,7 @@ using ::testing::_;
 using ::testing::ElementsAre;
 using ::testing::Eq;
 using ::testing::Invoke;
+using ::testing::NiceMock;
 using ::testing::Property;
 using ::testing::SizeIs;
 
@@ -114,6 +116,7 @@ class RtcpSenderTest : public ::testing::Test {
     result.rtcp_report_interval_ms = config.rtcp_report_interval->ms();
     result.receive_statistics = config.receive_statistics;
     result.local_media_ssrc = config.local_media_ssrc;
+    result.paced_sender = &mock_paced_sender_;
     return result;
   }
 
@@ -137,6 +140,7 @@ class RtcpSenderTest : public ::testing::Test {
   TestTransport test_transport_;
   std::unique_ptr<ReceiveStatistics> receive_statistics_;
   std::unique_ptr<ModuleRtpRtcpImpl2> rtp_rtcp_impl_;
+  NiceMock<MockRtpPacketSender> mock_paced_sender_;
 };
 
 TEST_F(RtcpSenderTest, SetRtcpStatus) {

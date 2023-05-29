@@ -19,6 +19,7 @@
 #include "call/rtx_receive_stream.h"
 #include "modules/rtp_rtcp/include/receive_statistics.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
+#include "modules/rtp_rtcp/mocks/mock_rtp_packet_sender.h"
 #include "modules/rtp_rtcp/source/rtp_packet_received.h"
 #include "modules/rtp_rtcp/source/rtp_rtcp_impl2.h"
 #include "modules/rtp_rtcp/source/rtp_sender_video.h"
@@ -28,6 +29,8 @@
 #include "test/gtest.h"
 
 namespace webrtc {
+
+using ::testing::NiceMock;
 
 const int kVideoNackListSize = 30;
 const uint32_t kTestSsrc = 3456;
@@ -133,10 +136,13 @@ class RtpRtcpRtxNackTest : public ::testing::Test {
     configuration.clock = &fake_clock;
     receive_statistics_ = ReceiveStatistics::Create(&fake_clock);
     configuration.receive_statistics = receive_statistics_.get();
+
     configuration.outgoing_transport = &transport_;
+    configuration.paced_sender = &mock_paced_sender_;
     configuration.retransmission_rate_limiter = &retransmission_rate_limiter_;
     configuration.local_media_ssrc = kTestSsrc;
     configuration.rtx_send_ssrc = kTestRtxSsrc;
+
     rtp_rtcp_module_ = ModuleRtpRtcpImpl2::Create(configuration);
     test::ExplicitKeyValueConfig field_trials("");
     RTPSenderVideo::Config video_config;
@@ -161,6 +167,17 @@ class RtpRtcpRtxNackTest : public ::testing::Test {
     for (size_t n = 0; n < sizeof(payload_data); n++) {
       payload_data[n] = n % 10;
     }
+
+    // We use a fake pacing implementation where packets are immediately sent
+    // after enquing.
+    ON_CALL(mock_paced_sender_, EnqueuePackets)
+        .WillByDefault(
+            [&](std::vector<std::unique_ptr<RtpPacketToSend>> packets) {
+              for (std::unique_ptr<RtpPacketToSend>& packet : packets) {
+                rtp_rtcp_module_->TrySendPacket(std::move(packet),
+                                                PacedPacketInfo());
+              }
+            });
   }
 
   int BuildNackList(uint16_t* nack_list) {
@@ -227,6 +244,7 @@ class RtpRtcpRtxNackTest : public ::testing::Test {
   rtc::AutoThread main_thread_;
   std::unique_ptr<ReceiveStatistics> receive_statistics_;
   std::unique_ptr<ModuleRtpRtcpImpl2> rtp_rtcp_module_;
+  NiceMock<MockRtpPacketSender> mock_paced_sender_;
   std::unique_ptr<RTPSenderVideo> rtp_sender_video_;
   RtxLoopBackTransport transport_;
   const std::map<int, int> rtx_associated_payload_types_ = {

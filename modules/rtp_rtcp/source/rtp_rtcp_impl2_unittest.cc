@@ -20,6 +20,7 @@
 #include "api/field_trials_registry.h"
 #include "api/units/time_delta.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
+#include "modules/rtp_rtcp/mocks/mock_rtp_packet_sender.h"
 #include "modules/rtp_rtcp/source/rtcp_packet.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/nack.h"
 #include "modules/rtp_rtcp/source/rtp_packet_received.h"
@@ -40,6 +41,7 @@ using ::testing::ElementsAre;
 using ::testing::Eq;
 using ::testing::Field;
 using ::testing::Gt;
+using ::testing::NiceMock;
 using ::testing::Not;
 using ::testing::Optional;
 using ::testing::SizeIs;
@@ -83,10 +85,7 @@ class RtcpRttStatsTestImpl : public RtcpRttStats {
   int64_t rtt_ms_;
 };
 
-// TODO(bugs.webrtc.org/11581): remove inheritance once the ModuleRtpRtcpImpl2
-// Module/ProcessThread dependency is gone.
-class SendTransport : public Transport,
-                      public sim_time_impl::SimulatedSequenceRunner {
+class SendTransport : public Transport {
  public:
   SendTransport(TimeDelta delay, GlobalSimulatedTimeController* time_controller)
       : receiver_(nullptr),
@@ -94,11 +93,9 @@ class SendTransport : public Transport,
         delay_(delay),
         rtp_packets_sent_(0),
         rtcp_packets_sent_(0),
-        last_packet_(&header_extensions_) {
-    time_controller_->Register(this);
-  }
+        last_packet_(&header_extensions_) {}
 
-  ~SendTransport() { time_controller_->Unregister(this); }
+  ~SendTransport() = default;
 
   void SetRtpRtcpModule(ModuleRtpRtcpImpl2* receiver) { receiver_ = receiver; }
   void SimulateNetworkDelay(TimeDelta delay) { delay_ = delay; }
@@ -115,30 +112,17 @@ class SendTransport : public Transport,
     last_nack_list_ = parser.nack()->packet_ids();
     Timestamp current_time = time_controller_->GetClock()->CurrentTime();
     Timestamp delivery_time = current_time + delay_;
-    rtcp_packets_.push_back(
-        Packet{delivery_time, std::vector<uint8_t>(data, data + len)});
+    Packet packet = {delivery_time, std::vector<uint8_t>(data, data + len)};
+    time_controller_->GetMainThread()->PostDelayedTask(
+        [&, packet] {
+          EXPECT_TRUE(receiver_);
+          receiver_->IncomingRtcpPacket(packet.data);
+        },
+        delay_);
     ++rtcp_packets_sent_;
-    RunReady(current_time);
+    // Tests with zero delay expect the posted RTCP to immediately be received.
+    time_controller_->AdvanceTime(TimeDelta::Zero());
     return true;
-  }
-
-  // sim_time_impl::SimulatedSequenceRunner
-  Timestamp GetNextRunTime() const override {
-    if (!rtcp_packets_.empty())
-      return rtcp_packets_.front().send_time;
-    return Timestamp::PlusInfinity();
-  }
-  void RunReady(Timestamp at_time) override {
-    while (!rtcp_packets_.empty() &&
-           rtcp_packets_.front().send_time <= at_time) {
-      Packet packet = std::move(rtcp_packets_.front());
-      rtcp_packets_.pop_front();
-      EXPECT_TRUE(receiver_);
-      receiver_->IncomingRtcpPacket(packet.data);
-    }
-  }
-  TaskQueueBase* GetAsTaskQueue() override {
-    return reinterpret_cast<TaskQueueBase*>(this);
   }
 
   size_t NumRtcpSent() { return rtcp_packets_sent_; }
@@ -190,6 +174,7 @@ class RtpRtcpModule : public RtcpPacketTypeCounterObserver,
   SendTransport transport_;
   RtcpRttStatsTestImpl rtt_stats_;
   std::unique_ptr<ModuleRtpRtcpImpl2> impl_;
+  NiceMock<MockRtpPacketSender> mock_paced_sender_;
 
   void RtcpPacketTypesCounterUpdated(
       uint32_t ssrc,
@@ -241,6 +226,7 @@ class RtpRtcpModule : public RtcpPacketTypeCounterObserver,
     config.audio = false;
     config.clock = time_controller_->GetClock();
     config.outgoing_transport = &transport_;
+    config.paced_sender = &mock_paced_sender_;
     config.receive_statistics = receive_statistics_.get();
     config.rtcp_packet_type_counter_observer = this;
     config.rtt_stats = &rtt_stats_;
@@ -256,6 +242,16 @@ class RtpRtcpModule : public RtcpPacketTypeCounterObserver,
     impl_.reset(new ModuleRtpRtcpImpl2(config));
     impl_->SetRemoteSSRC(is_sender_ ? kReceiverSsrc : kSenderSsrc);
     impl_->SetRTCPStatus(RtcpMode::kCompound);
+
+    // We use a fake pacing implementation where packets are immediately sent
+    // after enquing.
+    ON_CALL(mock_paced_sender_, EnqueuePackets)
+        .WillByDefault(
+            [&](std::vector<std::unique_ptr<RtpPacketToSend>> packets) {
+              for (std::unique_ptr<RtpPacketToSend>& packet : packets) {
+                impl_->TrySendPacket(std::move(packet), PacedPacketInfo());
+              }
+            });
   }
 
  private:
@@ -944,16 +940,7 @@ TEST_F(RtpRtcpImpl2Test, AssignsTransportSequenceNumber) {
                                   kTransportSequenceNumberExtensionId);
 
   EXPECT_TRUE(SendFrame(&sender_, sender_video_.get(), kBaseLayerTid));
-  uint16_t first_transport_seq = 0;
-  EXPECT_TRUE(sender_.last_packet().GetExtension<TransportSequenceNumber>(
-      &first_transport_seq));
-
-  EXPECT_TRUE(SendFrame(&sender_, sender_video_.get(), kBaseLayerTid));
-  uint16_t second_transport_seq = 0;
-  EXPECT_TRUE(sender_.last_packet().GetExtension<TransportSequenceNumber>(
-      &second_transport_seq));
-
-  EXPECT_EQ(first_transport_seq + 1, second_transport_seq);
+  EXPECT_TRUE(sender_.last_packet().HasExtension<TransportSequenceNumber>());
 }
 
 TEST_F(RtpRtcpImpl2Test, AssignsAbsoluteSendTime) {
@@ -1018,14 +1005,16 @@ TEST_F(RtpRtcpImpl2Test, GeneratesFlexfec) {
   params.fec_mask_type = kFecMaskRandom;
   sender_.impl_->SetFecProtectionParams(params, params);
 
-  // Send a one packet frame, expect one media packet and one FEC packet.
+  // Send a one packet frame, expect one media packet.
   EXPECT_TRUE(SendFrame(&sender_, sender_video_.get(), kBaseLayerTid));
-  ASSERT_THAT(sender_.transport_.rtp_packets_sent_, Eq(2));
+  ASSERT_THAT(sender_.transport_.rtp_packets_sent_, Eq(1));
 
-  const RtpPacketReceived& fec_packet = sender_.last_packet();
-  EXPECT_EQ(fec_packet.SequenceNumber(), fec_start_seq);
-  EXPECT_EQ(fec_packet.Ssrc(), kFlexfecSsrc);
-  EXPECT_EQ(fec_packet.PayloadType(), kFlexfecPayloadType);
+  std::vector<std::unique_ptr<RtpPacketToSend>> fec_packets =
+      sender_.impl_->FetchFecPackets();
+  ASSERT_THAT(fec_packets, SizeIs(1));
+  EXPECT_EQ(fec_packets[0]->SequenceNumber(), fec_start_seq);
+  EXPECT_EQ(fec_packets[0]->Ssrc(), kFlexfecSsrc);
+  EXPECT_EQ(fec_packets[0]->PayloadType(), kFlexfecPayloadType);
 }
 
 TEST_F(RtpRtcpImpl2Test, GeneratesUlpfec) {
@@ -1042,18 +1031,20 @@ TEST_F(RtpRtcpImpl2Test, GeneratesUlpfec) {
   params.fec_mask_type = kFecMaskRandom;
   sender_.impl_->SetFecProtectionParams(params, params);
 
-  // Send a one packet frame, expect one media packet and one FEC packet.
+  // Send a one packet frame, expect one media packet.
   EXPECT_TRUE(SendFrame(&sender_, sender_video_.get(), kBaseLayerTid));
-  ASSERT_THAT(sender_.transport_.rtp_packets_sent_, Eq(2));
+  ASSERT_THAT(sender_.transport_.rtp_packets_sent_, Eq(1));
 
   // Ulpfec is sent on the media ssrc, sharing the sequene number series.
-  const RtpPacketReceived& fec_packet = sender_.last_packet();
-  EXPECT_EQ(fec_packet.SequenceNumber(), kSequenceNumber + 1);
-  EXPECT_EQ(fec_packet.Ssrc(), kSenderSsrc);
+  std::vector<std::unique_ptr<RtpPacketToSend>> fec_packets =
+      sender_.impl_->FetchFecPackets();
+  ASSERT_THAT(fec_packets, SizeIs(1));
+  EXPECT_EQ(fec_packets[0]->SequenceNumber(), kSequenceNumber);
+  EXPECT_EQ(fec_packets[0]->Ssrc(), kSenderSsrc);
   // The packets are encapsulated in RED packets, check that and that the RED
   // header (first byte of payload) indicates the desired FEC payload type.
-  EXPECT_EQ(fec_packet.PayloadType(), kRedPayloadType);
-  EXPECT_EQ(fec_packet.payload()[0], kUlpfecPayloadType);
+  EXPECT_EQ(fec_packets[0]->PayloadType(), kRedPayloadType);
+  EXPECT_EQ(fec_packets[0]->payload()[0], kUlpfecPayloadType);
 }
 
 TEST_F(RtpRtcpImpl2Test, RtpStateReflectsCurrentState) {

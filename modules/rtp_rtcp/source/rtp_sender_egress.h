@@ -42,25 +42,6 @@ namespace webrtc {
 
 class RtpSenderEgress {
  public:
-  // Helper class that redirects packets directly to the send part of this class
-  // without passing through an actual paced sender.
-  class NonPacedPacketSender : public RtpPacketSender {
-   public:
-    NonPacedPacketSender(RtpSenderEgress* sender, PacketSequencer* sequencer);
-    virtual ~NonPacedPacketSender();
-
-    void EnqueuePackets(
-        std::vector<std::unique_ptr<RtpPacketToSend>> packets) override;
-    // Since we don't pace packets, there's no pending packets to remove.
-    void RemovePacketsForSsrc(uint32_t ssrc) override {}
-
-   private:
-    void PrepareForSend(RtpPacketToSend* packet);
-    uint16_t transport_sequence_number_;
-    RtpSenderEgress* const sender_;
-    PacketSequencer* sequencer_;
-  };
-
   RtpSenderEgress(const RtpRtcpInterface::Configuration& config,
                   RtpPacketHistory* packet_history);
   ~RtpSenderEgress();

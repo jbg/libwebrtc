@@ -22,6 +22,7 @@
 #include "modules/rtp_rtcp/include/rtp_header_extension_map.h"
 #include "modules/rtp_rtcp/include/rtp_packet_sender.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
+#include "modules/rtp_rtcp/mocks/mock_rtp_packet_sender.h"
 #include "modules/rtp_rtcp/source/packet_sequencer.h"
 #include "modules/rtp_rtcp/source/rtp_format_video_generic.h"
 #include "modules/rtp_rtcp/source/rtp_generic_frame_descriptor.h"
@@ -89,18 +90,6 @@ using ::testing::Property;
 using ::testing::Return;
 using ::testing::SizeIs;
 
-class MockRtpPacketPacer : public RtpPacketSender {
- public:
-  MockRtpPacketPacer() {}
-  virtual ~MockRtpPacketPacer() {}
-
-  MOCK_METHOD(void,
-              EnqueuePackets,
-              (std::vector<std::unique_ptr<RtpPacketToSend>>),
-              (override));
-  MOCK_METHOD(void, RemovePacketsForSsrc, (uint32_t), (override));
-};
-
 }  // namespace
 
 class RtpSenderTest : public ::testing::Test {
@@ -160,7 +149,7 @@ class RtpSenderTest : public ::testing::Test {
   GlobalSimulatedTimeController time_controller_;
   Clock* const clock_;
   NiceMock<MockRtcEventLog> mock_rtc_event_log_;
-  MockRtpPacketPacer mock_paced_sender_;
+  MockRtpPacketSender mock_paced_sender_;
   RateLimiter retransmission_rate_limiter_;
   FlexfecSender flexfec_sender_;
 

@@ -29,41 +29,6 @@ constexpr TimeDelta kUpdateInterval =
     TimeDelta::Millis(kBitrateStatisticsWindowMs);
 }  // namespace
 
-RtpSenderEgress::NonPacedPacketSender::NonPacedPacketSender(
-    RtpSenderEgress* sender,
-    PacketSequencer* sequencer)
-    : transport_sequence_number_(0), sender_(sender), sequencer_(sequencer) {
-  RTC_DCHECK(sequencer);
-}
-RtpSenderEgress::NonPacedPacketSender::~NonPacedPacketSender() = default;
-
-void RtpSenderEgress::NonPacedPacketSender::EnqueuePackets(
-    std::vector<std::unique_ptr<RtpPacketToSend>> packets) {
-  for (auto& packet : packets) {
-    PrepareForSend(packet.get());
-    sender_->SendPacket(std::move(packet), PacedPacketInfo());
-  }
-  auto fec_packets = sender_->FetchFecPackets();
-  if (!fec_packets.empty()) {
-    EnqueuePackets(std::move(fec_packets));
-  }
-}
-
-void RtpSenderEgress::NonPacedPacketSender::PrepareForSend(
-    RtpPacketToSend* packet) {
-  // Assign sequence numbers, but not for flexfec which is already running on
-  // an internally maintained sequence number series.
-  if (packet->Ssrc() != sender_->FlexFecSsrc()) {
-    sequencer_->Sequence(*packet);
-  }
-  if (!packet->SetExtension<TransportSequenceNumber>(
-          ++transport_sequence_number_)) {
-    --transport_sequence_number_;
-  }
-  packet->ReserveExtension<TransmissionOffset>();
-  packet->ReserveExtension<AbsoluteSendTime>();
-}
-
 RtpSenderEgress::RtpSenderEgress(const RtpRtcpInterface::Configuration& config,
                                  RtpPacketHistory* packet_history)
     : enable_send_packet_batching_(config.enable_send_packet_batching),

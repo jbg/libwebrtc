@@ -482,6 +482,7 @@ rtc_library("mock_rtp_rtcp") {
     "mocks/mock_network_link_rtcp_observer.h",
     "mocks/mock_recovered_packet_receiver.h",
     "mocks/mock_rtcp_rtt_stats.h",
+    "mocks/mock_rtp_packet_sender.h",
     "mocks/mock_rtp_rtcp.h",
   ]
   deps = [

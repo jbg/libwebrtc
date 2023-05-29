@@ -260,9 +260,6 @@ class ModuleRtpRtcpImpl2 final : public RtpRtcpInterface,
     PacketSequencer sequencer RTC_GUARDED_BY(sequencing_checker);
     // Handles final time timestamping/stats/etc and handover to Transport.
     RtpSenderEgress packet_sender;
-    // If no paced sender configured, this class will be used to pass packets
-    // from `packet_generator_` to `packet_sender_`.
-    RtpSenderEgress::NonPacedPacketSender non_paced_sender;
     // Handles creation of RTP packets to be sent.
     RTPSender packet_generator;
   };
