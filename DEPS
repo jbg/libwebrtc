@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'fa2e0631628502e1eb56b48f3c4089fd338a98c7',
+  'chromium_revision': 'fa6a1e52eff93e4964d0016c5cbba038aeea7dd9',
 
   # Fetch the prebuilt binaries for llvm-cov and llvm-profdata. Needed to
   # process the raw profiles produced by instrumented targets (built with
@@ -61,9 +61,9 @@ deps = {
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@0e2fe5da894321ceb0512e07f8cc649fef88216d',
+    'https://chromium.googlesource.com/chromium/src/testing@e72b926fbadbf69e91025a232ba706a541d69cd5',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@59233aaba4500922ad26ca5a9c5b4802fc336c10',
+    'https://chromium.googlesource.com/chromium/src/third_party@4cc36305e18399e4ac0091d54a0e56ce98d8120f',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -336,7 +336,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@fbf36ba87c0bc710bc7691df9b26c20c2283774e',
+    'https://chromium.googlesource.com/chromium/src/tools@7b8c2ae835fd5d68c5c1ee3c5596c519d0cc4959',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
