@@ -16,6 +16,24 @@
       "message": "This patch breaks GCC build, as it is missing a required include: std::optional requires \u003coptional\u003e include.",
       "revId": "40a0fa95c84db183ca80a6c68e16add30272bf6a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aef22299_cb5da1c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-05-30T11:10:53Z",
+      "side": 1,
+      "message": "Sorry about that. I will add that - but I dont have a GCC compiler.\nmbonadei@ should there be a gcc build bot or a stricter check for correct includes?",
+      "parentUuid": "80803523_f7b21e79",
+      "revId": "40a0fa95c84db183ca80a6c68e16add30272bf6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
