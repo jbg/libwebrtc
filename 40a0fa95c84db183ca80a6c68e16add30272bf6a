@@ -69,6 +69,23 @@
       "parentUuid": "aef22299_cb5da1c3",
       "revId": "40a0fa95c84db183ca80a6c68e16add30272bf6a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e9c1895_d44fb975",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17639
+      },
+      "writtenOn": "2023-05-30T11:26:28Z",
+      "side": 1,
+      "message": "I just submitted https://webrtc-review.googlesource.com/c/src/+/307022 with the include fix. I don\u0027t have bandwidth available today to contribute a fix to use absl::optional (maybe tomorrow).\n\nSo feel free to move to absl::optional and not land the std::optional include fix if you prefer.",
+      "revId": "40a0fa95c84db183ca80a6c68e16add30272bf6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
