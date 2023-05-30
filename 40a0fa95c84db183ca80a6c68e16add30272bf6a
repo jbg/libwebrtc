@@ -34,6 +34,23 @@
       "parentUuid": "80803523_f7b21e79",
       "revId": "40a0fa95c84db183ca80a6c68e16add30272bf6a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b17b5344_79038e45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17639
+      },
+      "writtenOn": "2023-05-30T11:13:51Z",
+      "side": 1,
+      "message": "AFAIK right now GCC is not supported officially, though policy is keeping it working if issues are detected and somebody contributes a fix. I have a patch ready to contribute that I will send today... (But in webrtc sometimes it is just faster to write the issue in the original commit :) for trivial fixes like this).",
+      "revId": "40a0fa95c84db183ca80a6c68e16add30272bf6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
