@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80803523_f7b21e79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17639
+      },
+      "writtenOn": "2023-05-30T08:39:23Z",
+      "side": 1,
+      "message": "This patch breaks GCC build, as it is missing a required include: std::optional requires \u003coptional\u003e include.",
+      "revId": "40a0fa95c84db183ca80a6c68e16add30272bf6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
