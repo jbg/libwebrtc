@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2e0f50e_276d98d8",
+        "filename": "infra/specs/test_suites.pyl",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-05-30T11:26:34Z",
+      "side": 1,
+      "message": "Android was not doing this, is that OK to enable?",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 213,
+        "endChar": 31
+      },
+      "revId": "10258b2674dc9388469f087e348f3c61ed3c9d30",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
