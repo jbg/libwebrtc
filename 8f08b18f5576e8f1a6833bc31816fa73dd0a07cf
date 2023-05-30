@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5197cc7_92274ac8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-05-30T11:30:05Z",
+      "side": 1,
+      "message": "Removing use of std::optional here\nhttps://webrtc-review.googlesource.com/c/src/+/307023",
+      "revId": "8f08b18f5576e8f1a6833bc31816fa73dd0a07cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
