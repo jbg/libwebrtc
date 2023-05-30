@@ -86,6 +86,24 @@
       "message": "I just submitted https://webrtc-review.googlesource.com/c/src/+/307022 with the include fix. I don\u0027t have bandwidth available today to contribute a fix to use absl::optional (maybe tomorrow).\n\nSo feel free to move to absl::optional and not land the std::optional include fix if you prefer.",
       "revId": "40a0fa95c84db183ca80a6c68e16add30272bf6a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c206d18f_0006f307",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-05-30T11:33:35Z",
+      "side": 1,
+      "message": "Feel free to ignore converting to absl::optional.\nLong term plan is to convert everything to std::optional anyway (once http://crbug.com/1373619 is resolved)",
+      "parentUuid": "8e9c1895_d44fb975",
+      "revId": "40a0fa95c84db183ca80a6c68e16add30272bf6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
