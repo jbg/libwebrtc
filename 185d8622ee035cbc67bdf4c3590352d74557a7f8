@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ae8ae44_69d4ef72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-05-30T04:05:12Z",
+      "side": 1,
+      "message": "If I can land this in both internal and Chrome, I can finally start splitting the implementation classes.",
+      "revId": "185d8622ee035cbc67bdf4c3590352d74557a7f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
