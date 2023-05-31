@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f7adc533_8e783b85",
+        "filename": "api/fec_controller.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-05-31T14:02:08Z",
+      "side": 1,
+      "message": "Looks like you need to move RetransmissionMode to api/public then as well?- Or add a new enum here and translate just values you intend to use in the implementation.",
+      "range": {
+        "startLine": 35,
+        "startChar": 41,
+        "endLine": 35,
+        "endChar": 60
+      },
+      "revId": "721bfbc29fd1421f302152fbc915f408988d2e77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b683b64_e9a2d0cd",
         "filename": "call/rtp_video_sender.h",
         "patchSetId": 6
