@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26fe74d3_3317f5d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-05-31T14:26:04Z",
+      "side": 1,
+      "message": "LGTM with nits but remember that my eyes don\u0027t count ;-)",
+      "revId": "4341c0ac4c7980ec46ebd688f88eb19d1a610d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a51ab28c_fabbe42b",
+        "filename": "media/base/codec.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-05-31T14:26:04Z",
+      "side": 1,
+      "message": "follow-up: rename id to payload_type which avoids the obj problem?",
+      "revId": "4341c0ac4c7980ec46ebd688f88eb19d1a610d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0454eca_05b88a94",
+        "filename": "media/base/codec.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-05-31T14:26:04Z",
+      "side": 1,
+      "message": "can this reuse cricket::MediaType?",
+      "revId": "4341c0ac4c7980ec46ebd688f88eb19d1a610d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0c582a5_d6450790",
+        "filename": "media/base/codec.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-05-31T14:26:04Z",
+      "side": 1,
+      "message": "might make sense to say that this variant is typically used for audio codecs while the one above is used for video codecs?",
+      "revId": "4341c0ac4c7980ec46ebd688f88eb19d1a610d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
