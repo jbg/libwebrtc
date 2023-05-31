@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19f59737_207548d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-05-31T20:36:52Z",
+      "side": 1,
+      "message": "Looks good to me. Some questions.",
+      "revId": "4341c0ac4c7980ec46ebd688f88eb19d1a610d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a51ab28c_fabbe42b",
@@ -55,6 +72,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "26d2acdd_fde62114",
+        "filename": "media/base/codec.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-05-31T20:36:52Z",
+      "side": 1,
+      "message": "The name \"intersect\" (and the whole function) looks a bit odd.\nI would call it \"ChoosePacketization\" and return an ErrorOr\u003cstd::string\u003e.",
+      "revId": "4341c0ac4c7980ec46ebd688f88eb19d1a610d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0454eca_05b88a94",
         "filename": "media/base/codec.h",
         "patchSetId": 3
@@ -84,6 +118,23 @@
       "side": 1,
       "message": "I don\u0027t think we want data codecs, and it would thus require to have every switch / if / else to care about this value.\n\nAlso, it\u0027s an old enum and I don\u0027t like those much.",
       "parentUuid": "a0454eca_05b88a94",
+      "revId": "4341c0ac4c7980ec46ebd688f88eb19d1a610d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e68e79c3_0d07960d",
+        "filename": "media/base/codec.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-05-31T20:36:52Z",
+      "side": 1,
+      "message": "Formally, video always has channels\u003d1.\nWhat does the bitrate parameter mean? Are you sure it has the right name?\n\n(I see that this is badness from the previous implementation....)",
       "revId": "4341c0ac4c7980ec46ebd688f88eb19d1a610d23",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
