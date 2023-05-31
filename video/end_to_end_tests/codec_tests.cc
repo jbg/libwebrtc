@@ -15,6 +15,7 @@
 #include "api/video/color_space.h"
 #include "api/video/video_rotation.h"
 #include "common_video/test/utilities.h"
+#include "media/base/codec.h"
 #include "media/engine/internal_decoder_factory.h"
 #include "media/engine/internal_encoder_factory.h"
 #include "modules/video_coding/codecs/h264/include/h264.h"
@@ -245,7 +246,7 @@ INSTANTIATE_TEST_SUITE_P(
 
 TEST_P(EndToEndTestH264, SendsAndReceivesH264) {
   test::FunctionVideoEncoderFactory encoder_factory(
-      []() { return H264Encoder::Create(cricket::VideoCodec("H264")); });
+      []() { return H264Encoder::Create(); });
   test::FunctionVideoDecoderFactory decoder_factory(
       []() { return H264Decoder::Create(); });
   CodecObserver test(500, kVideoRotation_0, absl::nullopt, "H264",
@@ -255,7 +256,7 @@ TEST_P(EndToEndTestH264, SendsAndReceivesH264) {
 
 TEST_P(EndToEndTestH264, SendsAndReceivesH264VideoRotation90) {
   test::FunctionVideoEncoderFactory encoder_factory(
-      []() { return H264Encoder::Create(cricket::VideoCodec("H264")); });
+      []() { return H264Encoder::Create(); });
   test::FunctionVideoDecoderFactory decoder_factory(
       []() { return H264Decoder::Create(); });
   CodecObserver test(5, kVideoRotation_90, absl::nullopt, "H264",
