@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9479481b_6047de7c",
+        "filename": "media/base/codec.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2023-05-31T14:38:26Z",
+      "side": 1,
+      "message": "Renaming a public member is quite difficult and it\u0027s out of scope for this project, a later version could introduce getters and migrate code to use those instead, then rename the internal variables.\n\nBut then, the getters will clash with the current names and will have a terrible transitional name too, so we\u0027ll need a 3 phases transition 😞",
+      "parentUuid": "a51ab28c_fabbe42b",
+      "revId": "4341c0ac4c7980ec46ebd688f88eb19d1a610d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0454eca_05b88a94",
         "filename": "media/base/codec.h",
         "patchSetId": 3
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "80e4fab1_649c0fcd",
+        "filename": "media/base/codec.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2023-05-31T14:38:26Z",
+      "side": 1,
+      "message": "I don\u0027t think we want data codecs, and it would thus require to have every switch / if / else to care about this value.\n\nAlso, it\u0027s an old enum and I don\u0027t like those much.",
+      "parentUuid": "a0454eca_05b88a94",
+      "revId": "4341c0ac4c7980ec46ebd688f88eb19d1a610d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0c582a5_d6450790",
         "filename": "media/base/codec.h",
         "patchSetId": 3
@@ -65,6 +101,24 @@
       "writtenOn": "2023-05-31T14:26:04Z",
       "side": 1,
       "message": "might make sense to say that this variant is typically used for audio codecs while the one above is used for video codecs?",
+      "revId": "4341c0ac4c7980ec46ebd688f88eb19d1a610d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2207b34_9cd6a65e",
+        "filename": "media/base/codec.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2023-05-31T14:38:26Z",
+      "side": 1,
+      "message": "Yes, but the nicer way to build codec objects would be to use the Create* functions rather than the constructors.\n\nI should probably make the constructors protected and move the Create* functions to this class to make sure I don\u0027t need to make them friends.\nNote: A future goal will probably be to remove the empty constructors too as those objects don\u0027t make sense.",
+      "parentUuid": "d0c582a5_d6450790",
       "revId": "4341c0ac4c7980ec46ebd688f88eb19d1a610d23",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
