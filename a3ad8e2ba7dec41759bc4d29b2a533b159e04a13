@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e366bb9e_93ab73fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5623
+      },
+      "writtenOn": "2023-05-31T04:52:47Z",
+      "side": 1,
+      "message": "This change is required to unblock the auto-roller.",
+      "revId": "a3ad8e2ba7dec41759bc4d29b2a533b159e04a13",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
