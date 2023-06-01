@@ -16,6 +16,24 @@
       "message": "I\u0027m not sure if it matters, but this means we return the *requested* setting and not the *actual* settings.\nAnd like the v4l2 backend (here and in Chromium) the `videoType` of the requested settings is ignored. So that will probably be different.",
       "revId": "63a36c5891815701b49794b7d40154f1484f7fd9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c26d897f_3ec99f06",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 8178
+      },
+      "writtenOn": "2023-06-01T12:45:29Z",
+      "side": 1,
+      "message": "True, but the *actual* setting is set async so how would the caller know whether it has been configured yet? The only way to know for sure is to look at the `VideoCaptureCapability` [passed along with the callback](https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/video_capture/video_capture_impl.h;l\u003d76;drc\u003dcd5c62362fd7ea2e2a6d8c3829f4ade5dea5823b).\n\nAlso prior to this change this call is racy which is arguably worse. It could be made safe by locking the pipewire thread loop lock but then you\u0027d still have to deal with the problem mentioned above somehow.",
+      "parentUuid": "3dd151ba_7f728b49",
+      "revId": "63a36c5891815701b49794b7d40154f1484f7fd9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
