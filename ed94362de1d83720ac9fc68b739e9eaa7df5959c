@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad22ffe3_1f43d16f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-06-01T10:05:58Z",
+      "side": 1,
+      "message": "Using SafeTask() didn\u0027t work for guarding against deallocation of container in this case, since the container is living on the signaling thread and the invokes go to the network thread.",
+      "revId": "ed94362de1d83720ac9fc68b739e9eaa7df5959c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
