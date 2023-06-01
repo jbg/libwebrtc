@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "48061e887ec9dcd30ace5f3432f04adab0d0f83b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08e51855_13d6c12d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5187
+      },
+      "writtenOn": "2023-06-01T19:25:40Z",
+      "side": 1,
+      "message": "Added `brotli` as a dependency as well in the same way that Chromium does in order \nto hopefully resolve the failures on the trybots https://source.chromium.org/chromium/chromium/src/+/main:.vpython3;l\u003d369\n\nI\u0027m confused how it was getting into the bad state to begin with, though.",
+      "revId": "48061e887ec9dcd30ace5f3432f04adab0d0f83b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
