@@ -58,6 +58,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c478fa1f_9e4bab82",
+        "filename": "api/fec_controller.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2023-06-01T05:56:27Z",
+      "side": 1,
+      "message": "see above",
+      "parentUuid": "f7adc533_8e783b85",
+      "range": {
+        "startLine": 35,
+        "startChar": 41,
+        "endLine": 35,
+        "endChar": 60
+      },
+      "revId": "721bfbc29fd1421f302152fbc915f408988d2e77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b683b64_e9a2d0cd",
@@ -81,6 +105,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f061d9c_67d0e054",
+        "filename": "call/rtp_video_sender.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2023-06-01T05:56:27Z",
+      "side": 1,
+      "message": "thanks, I realised we may use this value as a bitwise OR on values of enum RetransmissionMode. e.g.https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/rtp_rtcp/source/rtp_sender_video.cc;l\u003d148?q\u003drtp_sender_video\u0026ss\u003dchromium%2Fchromium%2Fsrc. The comment here is inaccurate, updated the comment.",
+      "parentUuid": "5b683b64_e9a2d0cd",
+      "range": {
+        "startLine": 124,
+        "startChar": 7,
+        "endLine": 124,
+        "endChar": 28
+      },
+      "revId": "721bfbc29fd1421f302152fbc915f408988d2e77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "275b64db_84cde9b8",
@@ -94,6 +142,30 @@
       "writtenOn": "2023-05-31T13:58:50Z",
       "side": 1,
       "message": "how is this protected? Please add GUARDED BY.  Looks like it can be the send_checker_.",
+      "range": {
+        "startLine": 207,
+        "startChar": 10,
+        "endLine": 207,
+        "endChar": 34
+      },
+      "revId": "721bfbc29fd1421f302152fbc915f408988d2e77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a02b31b_73566df7",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2023-06-01T05:56:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "275b64db_84cde9b8",
       "range": {
         "startLine": 207,
         "startChar": 10,
