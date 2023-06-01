@@ -40,7 +40,8 @@ RtpTransmissionManager::RtpTransmissionManager(
     PeerConnectionObserver* observer,
     LegacyStatsCollectorInterface* legacy_stats,
     std::function<void()> on_negotiation_needed)
-    : is_unified_plan_(is_unified_plan),
+    : transceivers_(context->network_thread()),
+      is_unified_plan_(is_unified_plan),
       context_(context),
       usage_pattern_(usage_pattern),
       observer_(observer),

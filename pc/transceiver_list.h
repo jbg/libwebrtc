@@ -90,9 +90,13 @@ class TransceiverStableState {
 // This class encapsulates the active list of transceivers on a
 // PeerConnection, and offers convenient functions on that list.
 // It is a single-thread class; all operations must be performed
-// on the same thread.
+// on the same thread, except that the list of transcevers can
+// be accessed via the ListFromNetworkThread() function.
 class TransceiverList {
  public:
+  explicit TransceiverList(rtc::Thread* network_thread)
+      : network_thread_(network_thread) {}
+
   // Returns a copy of the currently active list of transceivers. The
   // list consists of rtc::scoped_refptrs, which will keep the transceivers
   // from being deallocated, even if they are removed from the TransceiverList.
@@ -100,10 +104,11 @@ class TransceiverList {
     RTC_DCHECK_RUN_ON(&sequence_checker_);
     return transceivers_;
   }
-  // As above, but does not check thread ownership. Unsafe.
+  // As above, but can be called from the network thread.
   // TODO(bugs.webrtc.org/12692): Refactor and remove
-  std::vector<RtpTransceiverProxyRefPtr> UnsafeList() const {
-    return transceivers_;
+  std::vector<RtpTransceiverProxyRefPtr> ListFromNetworkThread() const {
+    RTC_DCHECK_RUN_ON(network_thread_);
+    return transceivers_n_;
   }
 
   // Returns a list of the internal() pointers of the currently active list
@@ -111,16 +116,9 @@ class TransceiverList {
   // be consumed on the same thread.
   std::vector<RtpTransceiver*> ListInternal() const;
 
-  void Add(RtpTransceiverProxyRefPtr transceiver) {
-    RTC_DCHECK_RUN_ON(&sequence_checker_);
-    transceivers_.push_back(transceiver);
-  }
-  void Remove(RtpTransceiverProxyRefPtr transceiver) {
-    RTC_DCHECK_RUN_ON(&sequence_checker_);
-    transceivers_.erase(
-        std::remove(transceivers_.begin(), transceivers_.end(), transceiver),
-        transceivers_.end());
-  }
+  void Add(RtpTransceiverProxyRefPtr transceiver);
+  void Remove(RtpTransceiverProxyRefPtr transceiver);
+
   RtpTransceiverProxyRefPtr FindBySender(
       rtc::scoped_refptr<RtpSenderInterface> sender) const;
   RtpTransceiverProxyRefPtr FindByMid(const std::string& mid) const;
@@ -144,8 +142,11 @@ class TransceiverList {
 
  private:
   RTC_NO_UNIQUE_ADDRESS SequenceChecker sequence_checker_;
-  std::vector<RtpTransceiverProxyRefPtr> transceivers_;
-  // TODO(bugs.webrtc.org/12692): Add RTC_GUARDED_BY(sequence_checker_);
+  rtc::Thread* network_thread_;
+  std::vector<RtpTransceiverProxyRefPtr> transceivers_
+      RTC_GUARDED_BY(sequence_checker_);
+  std::vector<RtpTransceiverProxyRefPtr> transceivers_n_
+      RTC_GUARDED_BY(network_thread_);
 
   // Holds changes made to transceivers during applying descriptors for
   // potential rollback. Gets cleared once signaling state goes to stable.

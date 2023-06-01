@@ -2747,7 +2747,7 @@ void PeerConnection::ReportTransportStats() {
       media_types_by_transport_name;
   if (ConfiguredForMedia()) {
     for (const auto& transceiver :
-         rtp_manager()->transceivers()->UnsafeList()) {
+         rtp_manager()->transceivers()->ListFromNetworkThread()) {
       if (transceiver->internal()->channel()) {
         std::string transport_name(
             transceiver->internal()->channel()->transport_name());
@@ -2903,7 +2903,7 @@ bool PeerConnection::OnTransportChanged(
   bool ret = true;
   if (ConfiguredForMedia()) {
     for (const auto& transceiver :
-         rtp_manager()->transceivers()->UnsafeList()) {
+         rtp_manager()->transceivers()->ListFromNetworkThread()) {
       cricket::ChannelInterface* channel = transceiver->internal()->channel();
       if (channel && channel->mid() == mid) {
         ret = channel->SetRtpTransport(rtp_transport);

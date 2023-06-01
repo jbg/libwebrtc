@@ -52,6 +52,22 @@ std::vector<RtpTransceiver*> TransceiverList::ListInternal() const {
   return internals;
 }
 
+void TransceiverList::Add(RtpTransceiverProxyRefPtr transceiver) {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
+  transceivers_.push_back(transceiver);
+  network_thread_->PostTask([this, transceivers_copy = transceivers_] {
+    RTC_DCHECK_RUN_ON(network_thread_);
+    transceivers_n_ = transceivers_copy;
+  });
+}
+
+void TransceiverList::Remove(RtpTransceiverProxyRefPtr transceiver) {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
+  transceivers_.erase(
+      std::remove(transceivers_.begin(), transceivers_.end(), transceiver),
+      transceivers_.end());
+}
+
 RtpTransceiverProxyRefPtr TransceiverList::FindBySender(
     rtc::scoped_refptr<RtpSenderInterface> sender) const {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
