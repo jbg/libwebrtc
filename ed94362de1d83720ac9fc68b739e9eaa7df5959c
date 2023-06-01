@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e56425f_2bc91986",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-06-01T10:45:38Z",
+      "side": 1,
+      "message": "Don\u0027t understand how the suggestion solves things..",
+      "revId": "ed94362de1d83720ac9fc68b739e9eaa7df5959c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1039771_613fe401",
@@ -31,6 +48,24 @@
       "writtenOn": "2023-06-01T10:30:32Z",
       "side": 1,
       "message": "as an alternative approach to PostTask, would it make sense to update the code in `RtpTransceiver` to update `transceivers_n_` whenever `channel_-\u003eSetRtpTransport(...)` is called?\n\nBesides avoiding PostTask here, that would make the state on the network thread be guaranteed to be up to date (since we won\u0027t know when the posted task will actually run in relation to the SetRtpTransport() call).",
+      "revId": "ed94362de1d83720ac9fc68b739e9eaa7df5959c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "897508b2_291726f4",
+        "filename": "pc/transceiver_list.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-06-01T10:45:38Z",
+      "side": 1,
+      "message": "I\u0027m not sure how that would help.\nThe list of transceivers changes in response to SDP negotiation, not in response to setting of transports. And I don\u0027t think the ReportTransportStats call is linked in any particular way to the setting of the transport.\n\nWe could trigger a \"copy transceiver list\" operation after finishing SDP negotiation, but that just feels like it\u0027s violating encapsulation principles.\n\nI don\u0027t think the state asynchronocity matters much - the network thread is required to be responsive. We could make it a BlockingCall (ouch).....",
+      "parentUuid": "a1039771_613fe401",
       "revId": "ed94362de1d83720ac9fc68b739e9eaa7df5959c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
