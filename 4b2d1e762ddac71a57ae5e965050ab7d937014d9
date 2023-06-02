@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eb11600_6b573914",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-06-02T13:53:08Z",
+      "side": 1,
+      "message": "I\u0027m surprised that this codec type is handled so cavalierly at this level, given H.264\u0027s notoriously labyrinthine sets of parameters, profiles and variants.\n\nBut if it works, it works...",
+      "revId": "4b2d1e762ddac71a57ae5e965050ab7d937014d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
