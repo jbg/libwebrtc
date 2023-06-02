@@ -225,6 +225,7 @@ int LibaomAv1Encoder::InitEncode(const VideoCodec* codec_settings,
   cfg_.g_timebase.num = 1;
   cfg_.g_timebase.den = kRtpTicksPerSecond;
   cfg_.rc_target_bitrate = encoder_settings_.startBitrate;  // kilobits/sec.
+  cfg_.rc_dropframe_thresh = encoder_settings_.GetFrameDropEnabled() ? 30 : 0;
   cfg_.g_input_bit_depth = kBitDepth;
   cfg_.kf_mode = AOM_KF_DISABLED;
   cfg_.rc_min_quantizer = kQpMin;
