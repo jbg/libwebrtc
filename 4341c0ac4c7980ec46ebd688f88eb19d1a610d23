@@ -70,6 +70,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "432bbdef_244800a4",
+        "filename": "media/base/codec.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2023-06-02T13:25:59Z",
+      "side": 1,
+      "message": "Keeping the same now for now, we can revisit in the future.",
+      "parentUuid": "9479481b_6047de7c",
+      "revId": "4341c0ac4c7980ec46ebd688f88eb19d1a610d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26d2acdd_fde62114",
