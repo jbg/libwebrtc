@@ -87,6 +87,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43a29dbd_3fa4ecd0",
+        "filename": "media/base/codec.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2023-06-02T13:25:33Z",
+      "side": 1,
+      "message": "It had a single caller, so I moved the implementation there and added tests.",
+      "parentUuid": "26d2acdd_fde62114",
+      "revId": "4341c0ac4c7980ec46ebd688f88eb19d1a610d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0454eca_05b88a94",
@@ -157,6 +175,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1495dddc_1fcdbed5",
+        "filename": "media/base/codec.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2023-06-02T13:25:33Z",
+      "side": 1,
+      "message": "bitrate is not a great name and it\u0027s used to chose a target_bitrate, implemented probably from back when we did not have SetParameters() around. I found one internal usage that I\u0027ll follow up on to see if we can remove it as it has a single user.",
+      "parentUuid": "e68e79c3_0d07960d",
+      "revId": "4341c0ac4c7980ec46ebd688f88eb19d1a610d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0c582a5_d6450790",
@@ -188,6 +224,24 @@
       "side": 1,
       "message": "Yes, but the nicer way to build codec objects would be to use the Create* functions rather than the constructors.\n\nI should probably make the constructors protected and move the Create* functions to this class to make sure I don\u0027t need to make them friends.\nNote: A future goal will probably be to remove the empty constructors too as those objects don\u0027t make sense.",
       "parentUuid": "d0c582a5_d6450790",
+      "revId": "4341c0ac4c7980ec46ebd688f88eb19d1a610d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5db5ee66_29976550",
+        "filename": "media/base/codec.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2023-06-02T13:25:33Z",
+      "side": 1,
+      "message": "There are now protected. When the Create* functions will start to return a Codec instance, they\u0027ll be added as friends.",
+      "parentUuid": "d2207b34_9cd6a65e",
       "revId": "4341c0ac4c7980ec46ebd688f88eb19d1a610d23",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }

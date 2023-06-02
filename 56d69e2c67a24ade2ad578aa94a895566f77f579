@@ -16,6 +16,24 @@
       "message": "I\u0027m a bit surprised to see this function disappear. Do we fall back to a function on Codec?",
       "revId": "56d69e2c67a24ade2ad578aa94a895566f77f579",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e952610_7819b794",
+        "filename": "media/base/codec.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2023-06-02T13:25:33Z",
+      "side": 0,
+      "message": "Yes, cricket::Codec has the one and only implementation.",
+      "parentUuid": "dabed53c_57e98b6d",
+      "revId": "56d69e2c67a24ade2ad578aa94a895566f77f579",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
