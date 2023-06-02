@@ -500,7 +500,10 @@ AudioCodec CreateAudioCodec(int id,
                             const std::string& name,
                             int clockrate,
                             size_t channels) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
   return AudioCodec(id, name, clockrate, 0, channels);
+#pragma clang diagnostic pop
 }
 
 VideoCodec CreateVideoCodec(const std::string& name) {

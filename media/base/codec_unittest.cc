@@ -69,21 +69,24 @@ TEST(CodecTest, TestCodecOperators) {
 }
 
 TEST(CodecTest, TestAudioCodecOperators) {
-  AudioCodec c0(96, "A", 44100, 20000, 2);
-  AudioCodec c1(95, "A", 44100, 20000, 2);
-  AudioCodec c2(96, "x", 44100, 20000, 2);
-  AudioCodec c3(96, "A", 48000, 20000, 2);
-  AudioCodec c4(96, "A", 44100, 10000, 2);
+  AudioCodec c0 = cricket::CreateAudioCodec(96, "A", 44100, 2);
+  AudioCodec c1 = cricket::CreateAudioCodec(95, "A", 44100, 2);
+  AudioCodec c2 = cricket::CreateAudioCodec(96, "x", 44100, 2);
+  AudioCodec c3 = cricket::CreateAudioCodec(96, "A", 48000, 2);
+  AudioCodec c4 = cricket::CreateAudioCodec(96, "A", 44100, 2);
   c4.bitrate = 10000;
-  AudioCodec c5(96, "A", 44100, 20000, 1);
+  AudioCodec c5 = cricket::CreateAudioCodec(96, "A", 44100, 1);
   EXPECT_NE(c0, c1);
   EXPECT_NE(c0, c2);
   EXPECT_NE(c0, c3);
   EXPECT_NE(c0, c4);
   EXPECT_NE(c0, c5);
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
   AudioCodec c7;
-  AudioCodec c8(0, "", 0, 0, 0);
+#pragma clang diagnostic pop
+  AudioCodec c8 = cricket::CreateAudioCodec(0, "", 0, 0);
   AudioCodec c9 = c0;
   EXPECT_EQ(c8, c7);
   EXPECT_NE(c9, c7);
@@ -108,47 +111,47 @@ TEST(CodecTest, TestAudioCodecOperators) {
 
 TEST(CodecTest, TestAudioCodecMatches) {
   // Test a codec with a static payload type.
-  AudioCodec c0(34, "A", 44100, 20000, 1);
-  EXPECT_TRUE(c0.Matches(AudioCodec(34, "", 44100, 20000, 1)));
-  EXPECT_TRUE(c0.Matches(AudioCodec(34, "", 44100, 20000, 0)));
-  EXPECT_TRUE(c0.Matches(AudioCodec(34, "", 44100, 0, 0)));
-  EXPECT_TRUE(c0.Matches(AudioCodec(34, "", 0, 0, 0)));
-  EXPECT_FALSE(c0.Matches(AudioCodec(96, "A", 44100, 20000, 1)));
-  EXPECT_FALSE(c0.Matches(AudioCodec(96, "", 44100, 20000, 1)));
-  EXPECT_FALSE(c0.Matches(AudioCodec(95, "", 55100, 20000, 1)));
-  EXPECT_FALSE(c0.Matches(AudioCodec(95, "", 44100, 30000, 1)));
-  EXPECT_FALSE(c0.Matches(AudioCodec(95, "", 44100, 20000, 2)));
-  EXPECT_FALSE(c0.Matches(AudioCodec(95, "", 55100, 30000, 2)));
+  AudioCodec c0 = cricket::CreateAudioCodec(34, "A", 44100, 1);
+  EXPECT_TRUE(c0.Matches(cricket::CreateAudioCodec(34, "", 44100, 1)));
+  EXPECT_TRUE(c0.Matches(cricket::CreateAudioCodec(34, "", 44100, 0)));
+  EXPECT_TRUE(c0.Matches(cricket::CreateAudioCodec(34, "", 44100, 0)));
+  EXPECT_TRUE(c0.Matches(cricket::CreateAudioCodec(34, "", 0, 0)));
+  EXPECT_FALSE(c0.Matches(cricket::CreateAudioCodec(96, "A", 44100, 1)));
+  EXPECT_FALSE(c0.Matches(cricket::CreateAudioCodec(96, "", 44100, 1)));
+  EXPECT_FALSE(c0.Matches(cricket::CreateAudioCodec(95, "", 55100, 1)));
+  EXPECT_FALSE(c0.Matches(cricket::CreateAudioCodec(95, "", 44100, 1)));
+  EXPECT_FALSE(c0.Matches(cricket::CreateAudioCodec(95, "", 44100, 2)));
+  EXPECT_FALSE(c0.Matches(cricket::CreateAudioCodec(95, "", 55100, 2)));
 
   // Test a codec with a dynamic payload type.
-  AudioCodec c1(96, "A", 44100, 20000, 1);
-  EXPECT_TRUE(c1.Matches(AudioCodec(96, "A", 0, 0, 0)));
-  EXPECT_TRUE(c1.Matches(AudioCodec(97, "A", 0, 0, 0)));
-  EXPECT_TRUE(c1.Matches(AudioCodec(96, "a", 0, 0, 0)));
-  EXPECT_TRUE(c1.Matches(AudioCodec(97, "a", 0, 0, 0)));
-  EXPECT_TRUE(c1.Matches(AudioCodec(35, "a", 0, 0, 0)));
-  EXPECT_TRUE(c1.Matches(AudioCodec(42, "a", 0, 0, 0)));
-  EXPECT_TRUE(c1.Matches(AudioCodec(65, "a", 0, 0, 0)));
-  EXPECT_FALSE(c1.Matches(AudioCodec(95, "A", 0, 0, 0)));
-  EXPECT_FALSE(c1.Matches(AudioCodec(34, "A", 0, 0, 0)));
-  EXPECT_FALSE(c1.Matches(AudioCodec(96, "", 44100, 20000, 2)));
-  EXPECT_FALSE(c1.Matches(AudioCodec(96, "A", 55100, 30000, 1)));
+  AudioCodec c1 = cricket::CreateAudioCodec(96, "A", 44100, 1);
+  EXPECT_TRUE(c1.Matches(cricket::CreateAudioCodec(96, "A", 0, 0)));
+  EXPECT_TRUE(c1.Matches(cricket::CreateAudioCodec(97, "A", 0, 0)));
+  EXPECT_TRUE(c1.Matches(cricket::CreateAudioCodec(96, "a", 0, 0)));
+  EXPECT_TRUE(c1.Matches(cricket::CreateAudioCodec(97, "a", 0, 0)));
+  EXPECT_TRUE(c1.Matches(cricket::CreateAudioCodec(35, "a", 0, 0)));
+  EXPECT_TRUE(c1.Matches(cricket::CreateAudioCodec(42, "a", 0, 0)));
+  EXPECT_TRUE(c1.Matches(cricket::CreateAudioCodec(65, "a", 0, 0)));
+  EXPECT_FALSE(c1.Matches(cricket::CreateAudioCodec(95, "A", 0, 0)));
+  EXPECT_FALSE(c1.Matches(cricket::CreateAudioCodec(34, "A", 0, 0)));
+  EXPECT_FALSE(c1.Matches(cricket::CreateAudioCodec(96, "", 44100, 2)));
+  EXPECT_FALSE(c1.Matches(cricket::CreateAudioCodec(96, "A", 55100, 1)));
 
   // Test a codec with a dynamic payload type, and auto bitrate.
-  AudioCodec c2(97, "A", 16000, 0, 1);
+  AudioCodec c2 = cricket::CreateAudioCodec(97, "A", 16000, 1);
   // Use default bitrate.
-  EXPECT_TRUE(c2.Matches(AudioCodec(97, "A", 16000, 0, 1)));
-  EXPECT_TRUE(c2.Matches(AudioCodec(97, "A", 16000, 0, 0)));
+  EXPECT_TRUE(c2.Matches(cricket::CreateAudioCodec(97, "A", 16000, 1)));
+  EXPECT_TRUE(c2.Matches(cricket::CreateAudioCodec(97, "A", 16000, 0)));
   // Use explicit bitrate.
-  EXPECT_TRUE(c2.Matches(AudioCodec(97, "A", 16000, 32000, 1)));
+  EXPECT_TRUE(c2.Matches(cricket::CreateAudioCodec(97, "A", 16000, 1)));
   // Backward compatibility with clients that might send "-1" (for default).
-  EXPECT_TRUE(c2.Matches(AudioCodec(97, "A", 16000, -1, 1)));
+  EXPECT_TRUE(c2.Matches(cricket::CreateAudioCodec(97, "A", 16000, 1)));
 
   // Stereo doesn't match channels = 0.
-  AudioCodec c3(96, "A", 44100, 20000, 2);
-  EXPECT_TRUE(c3.Matches(AudioCodec(96, "A", 44100, 20000, 2)));
-  EXPECT_FALSE(c3.Matches(AudioCodec(96, "A", 44100, 20000, 1)));
-  EXPECT_FALSE(c3.Matches(AudioCodec(96, "A", 44100, 20000, 0)));
+  AudioCodec c3 = cricket::CreateAudioCodec(96, "A", 44100, 2);
+  EXPECT_TRUE(c3.Matches(cricket::CreateAudioCodec(96, "A", 44100, 2)));
+  EXPECT_FALSE(c3.Matches(cricket::CreateAudioCodec(96, "A", 44100, 1)));
+  EXPECT_FALSE(c3.Matches(cricket::CreateAudioCodec(96, "A", 44100, 0)));
 }
 
 TEST(CodecTest, TestVideoCodecOperators) {
@@ -459,7 +462,7 @@ TEST(CodecTest, TestToCodecParameters) {
   EXPECT_EQ("p1", codec_params_1.parameters.begin()->first);
   EXPECT_EQ("v1", codec_params_1.parameters.begin()->second);
 
-  AudioCodec a(97, "A", 44100, 20000, 2);
+  AudioCodec a = cricket::CreateAudioCodec(97, "A", 44100, 2);
   a.SetParam("p1", "a1");
   webrtc::RtpCodecParameters codec_params_2 = a.ToCodecParameters();
   EXPECT_EQ(97, codec_params_2.payload_type);

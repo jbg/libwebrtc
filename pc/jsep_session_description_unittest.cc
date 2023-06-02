@@ -62,7 +62,7 @@ CreateCricketSessionDescription() {
   // VideoContentDescription
   auto video = std::make_unique<cricket::VideoContentDescription>();
 
-  audio->AddCodec(cricket::AudioCodec(103, "ISAC", 16000, 0, 0));
+  audio->AddCodec(cricket::CreateAudioCodec(103, "ISAC", 16000, 0));
   desc->AddContent(cricket::CN_AUDIO, MediaProtocolType::kRtp,
                    std::move(audio));
 

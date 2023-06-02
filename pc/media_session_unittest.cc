@@ -112,22 +112,22 @@ using webrtc::RtpExtension;
 using webrtc::RtpTransceiverDirection;
 
 static const AudioCodec kAudioCodecs1[] = {
-    AudioCodec(103, "ISAC", 16000, -1, 1),
-    AudioCodec(102, "iLBC", 8000, 13300, 1),
-    AudioCodec(0, "PCMU", 8000, 64000, 1),
-    AudioCodec(8, "PCMA", 8000, 64000, 1),
-    AudioCodec(117, "red", 8000, 0, 1),
-    AudioCodec(107, "CN", 48000, 0, 1)};
+    cricket::CreateAudioCodec(103, "ISAC", 16000, 1),
+    cricket::CreateAudioCodec(102, "iLBC", 8000, 1),
+    cricket::CreateAudioCodec(0, "PCMU", 8000, 1),
+    cricket::CreateAudioCodec(8, "PCMA", 8000, 1),
+    cricket::CreateAudioCodec(117, "red", 8000, 1),
+    cricket::CreateAudioCodec(107, "CN", 48000, 1)};
 
 static const AudioCodec kAudioCodecs2[] = {
-    AudioCodec(126, "foo", 16000, 22000, 1),
-    AudioCodec(0, "PCMU", 8000, 64000, 1),
-    AudioCodec(127, "iLBC", 8000, 13300, 1),
+    cricket::CreateAudioCodec(126, "foo", 16000, 1),
+    cricket::CreateAudioCodec(0, "PCMU", 8000, 1),
+    cricket::CreateAudioCodec(127, "iLBC", 8000, 1),
 };
 
 static const AudioCodec kAudioCodecsAnswer[] = {
-    AudioCodec(102, "iLBC", 8000, 13300, 1),
-    AudioCodec(0, "PCMU", 8000, 64000, 1),
+    cricket::CreateAudioCodec(102, "iLBC", 8000, 1),
+    cricket::CreateAudioCodec(0, "PCMU", 8000, 1),
 };
 
 static const VideoCodec kVideoCodecs1[] = {VideoCodec(96, "H264-SVC"),
@@ -1313,10 +1313,10 @@ TEST_F(MediaSessionDescriptionFactoryTest,
   AddMediaDescriptionOptions(MEDIA_TYPE_AUDIO, "audio",
                              RtpTransceiverDirection::kSendRecv, kActive,
                              &opts);
-  std::vector f1_codecs = {AudioCodec(96, "opus", 48000, -1, 1)};
+  std::vector f1_codecs = {cricket::CreateAudioCodec(96, "opus", 48000, 1)};
   f1_.set_audio_codecs(f1_codecs, f1_codecs);
 
-  std::vector f2_codecs = {AudioCodec(0, "PCMU", 8000, -1, 1)};
+  std::vector f2_codecs = {cricket::CreateAudioCodec(0, "PCMU", 8000, 1)};
   f2_.set_audio_codecs(f2_codecs, f2_codecs);
 
   std::unique_ptr<SessionDescription> offer = f1_.CreateOffer(opts, nullptr);
@@ -4665,13 +4665,13 @@ void TestAudioCodecsOffer(RtpTransceiverDirection direction) {
 }
 
 static const AudioCodec kOfferAnswerCodecs[] = {
-    AudioCodec(0, "codec0", 16000, -1, 1),
-    AudioCodec(1, "codec1", 8000, 13300, 1),
-    AudioCodec(2, "codec2", 8000, 64000, 1),
-    AudioCodec(3, "codec3", 8000, 64000, 1),
-    AudioCodec(4, "codec4", 8000, 0, 2),
-    AudioCodec(5, "codec5", 32000, 0, 1),
-    AudioCodec(6, "codec6", 48000, 0, 1)};
+    cricket::CreateAudioCodec(0, "codec0", 16000, 1),
+    cricket::CreateAudioCodec(1, "codec1", 8000, 1),
+    cricket::CreateAudioCodec(2, "codec2", 8000, 1),
+    cricket::CreateAudioCodec(3, "codec3", 8000, 1),
+    cricket::CreateAudioCodec(4, "codec4", 8000, 2),
+    cricket::CreateAudioCodec(5, "codec5", 32000, 1),
+    cricket::CreateAudioCodec(6, "codec6", 48000, 1)};
 
 /* The codecs groups below are chosen as per the matrix below. The objective
  * is to have different sets of codecs in the inputs, to get unique sets of

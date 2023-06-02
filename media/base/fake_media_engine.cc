@@ -444,7 +444,7 @@ void FakeVideoMediaChannel::GenerateSendKeyFrame(
 FakeVoiceEngine::FakeVoiceEngine() : fail_create_channel_(false) {
   // Add a fake audio codec. Note that the name must not be "" as there are
   // sanity checks against that.
-  SetCodecs({AudioCodec(101, "fake_audio_codec", 8000, 0, 1)});
+  SetCodecs({cricket::CreateAudioCodec(101, "fake_audio_codec", 8000, 1)});
 }
 void FakeVoiceEngine::Init() {}
 rtc::scoped_refptr<webrtc::AudioState> FakeVoiceEngine::GetAudioState() const {

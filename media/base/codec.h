@@ -168,12 +168,14 @@ struct RTC_EXPORT Codec {
 
 struct AudioCodec : public Codec {
   // Creates a codec with the given parameters.
-  AudioCodec(int id,
-             const std::string& name,
-             int clockrate,
-             int unused_bitrate,
-             size_t channels);
+  [[deprecated("Use cricket::CreateAudioCodec")]] AudioCodec(
+      int id,
+      const std::string& name,
+      int clockrate,
+      int unused_bitrate,
+      size_t channels);
   // Creates an empty codec.
+  [[deprecated("Do not create empty AudioCodec")]]
   AudioCodec();
   AudioCodec(const AudioCodec& c);
   AudioCodec(AudioCodec&& c);

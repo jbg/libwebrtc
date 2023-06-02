@@ -57,9 +57,12 @@ using webrtc::RtpTransceiverDirection;
 using webrtc::SdpType;
 
 namespace {
-const cricket::AudioCodec kPcmuCodec(0, "PCMU", 64000, 8000, 1);
-const cricket::AudioCodec kPcmaCodec(8, "PCMA", 64000, 8000, 1);
-const cricket::AudioCodec kIsacCodec(103, "ISAC", 40000, 16000, 1);
+const cricket::AudioCodec kPcmuCodec =
+    cricket::CreateAudioCodec(0, "PCMU", 64000, 1);
+const cricket::AudioCodec kPcmaCodec =
+    cricket::CreateAudioCodec(8, "PCMA", 64000, 1);
+const cricket::AudioCodec kIsacCodec =
+    cricket::CreateAudioCodec(103, "ISAC", 40000, 1);
 const cricket::VideoCodec kH264Codec(97, "H264");
 const cricket::VideoCodec kH264SvcCodec(99, "H264-SVC");
 const uint32_t kSsrc1 = 0x1111;
