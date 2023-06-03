@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "230afdab_166c123f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-06-03T09:22:04Z",
+      "side": 1,
+      "message": "I would like to have a second pair of eyes on this. To me it looks reasonable, assuming that the performance impact of absl::optional is negligible.",
+      "revId": "3bb220924976ca40d4756ded9763a8137400aefa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
