@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "538a6c9c_954df1a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-06-03T14:11:50Z",
+      "side": 1,
+      "message": "Approval, just a few nits.",
+      "revId": "5685ff734a574a5e52b668b831279efd88cd4391",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "459b695d_2837a55d",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-06-03T14:11:50Z",
+      "side": 1,
+      "message": "From inspecting the CL, it looks as if you have deleted all references to \"the old way\". Is it OK to delete this, or is there a reason to retain it?",
+      "revId": "5685ff734a574a5e52b668b831279efd88cd4391",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e4e1d17_858ebecf",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2258,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-06-03T14:11:50Z",
+      "side": 1,
+      "message": "This code looks better with absl::optional!",
+      "revId": "5685ff734a574a5e52b668b831279efd88cd4391",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2b8d25f_023fa2cc",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2448,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-06-03T14:11:50Z",
+      "side": 1,
+      "message": "Do you need to reference the intermediate variable? I\u0027d have thought the assignment would (conceptually) return a reference to the variable without the need to mention it again.\n\nOr is it just a little clearer? (If so, it would be even clearer if the first Find was outside of the \"if\" statement)",
+      "revId": "5685ff734a574a5e52b668b831279efd88cd4391",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
