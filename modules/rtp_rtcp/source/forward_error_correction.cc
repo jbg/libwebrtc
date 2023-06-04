@@ -329,8 +329,11 @@ void ForwardErrorCorrection::FinalizeFecHeaders(size_t num_fec_packets,
                                                 uint16_t seq_num_base) {
   for (size_t i = 0; i < num_fec_packets; ++i) {
     fec_header_writer_->FinalizeFecHeader(
-        media_ssrc, seq_num_base, &packet_masks_[i * packet_mask_size_],
-        packet_mask_size_, &generated_fec_packets_[i]);
+        {{.ssrc = media_ssrc,
+          .seq_num_base = seq_num_base,
+          .packet_mask = &packet_masks_[i * packet_mask_size_],
+          .packet_mask_size = packet_mask_size_}},
+        generated_fec_packets_[i]);
   }
 }
 
