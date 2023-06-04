@@ -12,6 +12,8 @@
 
 #include <string.h>
 
+#include <vector>
+
 #include "api/scoped_refptr.h"
 #include "modules/rtp_rtcp/source/byte_io.h"
 #include "modules/rtp_rtcp/source/forward_error_correction_internal.h"
@@ -108,12 +110,14 @@ size_t UlpfecHeaderWriter::FecHeaderSize(size_t packet_mask_size) const {
 }
 
 void UlpfecHeaderWriter::FinalizeFecHeader(
-    uint32_t /* media_ssrc */,
-    uint16_t seq_num_base,
-    const uint8_t* packet_mask,
-    size_t packet_mask_size,
-    ForwardErrorCorrection::Packet* fec_packet) const {
-  uint8_t* data = fec_packet->data.MutableData();
+    std::vector<FecHeaderWriter::ProtectedStream> protected_streams,
+    ForwardErrorCorrection::Packet& fec_packet) const {
+  RTC_CHECK_EQ(protected_streams.size(), 1);
+  uint16_t seq_num_base = protected_streams[0].seq_num_base;
+  const uint8_t* packet_mask = protected_streams[0].packet_mask;
+  size_t packet_mask_size = protected_streams[0].packet_mask_size;
+
+  uint8_t* data = fec_packet.data.MutableData();
   // Set E bit to zero.
   data[0] &= 0x7f;
   // Set L bit based on packet mask size. (Note that the packet mask
@@ -133,7 +137,7 @@ void UlpfecHeaderWriter::FinalizeFecHeader(
   // required in general.)
   const size_t fec_header_size = FecHeaderSize(packet_mask_size);
   ByteWriter<uint16_t>::WriteBigEndian(
-      &data[10], fec_packet->data.size() - fec_header_size);
+      &data[10], fec_packet.data.size() - fec_header_size);
   // Copy the packet mask.
   memcpy(&data[12], packet_mask, packet_mask_size);
 }

@@ -85,8 +85,11 @@ rtc::scoped_refptr<Packet> WriteHeader(const uint8_t* packet_mask,
   for (size_t i = 0; i < written_packet->data.size(); ++i) {
     data[i] = i;  // Actual content doesn't matter.
   }
-  writer.FinalizeFecHeader(kMediaSsrc, kMediaStartSeqNum, packet_mask,
-                           packet_mask_size, written_packet.get());
+  writer.FinalizeFecHeader({{.ssrc = kMediaSsrc,
+                             .seq_num_base = kMediaStartSeqNum,
+                             .packet_mask = packet_mask,
+                             .packet_mask_size = packet_mask_size}},
+                           *written_packet);
   return written_packet;
 }
 
@@ -339,8 +342,11 @@ TEST(Flexfec03HeaderWriterTest, FinalizesHeaderWithKBit0Set) {
   }
 
   Flexfec03HeaderWriter writer;
-  writer.FinalizeFecHeader(kMediaSsrc, kMediaStartSeqNum, kUlpfecPacketMask,
-                           sizeof(kUlpfecPacketMask), &written_packet);
+  writer.FinalizeFecHeader({{.ssrc = kMediaSsrc,
+                             .seq_num_base = kMediaStartSeqNum,
+                             .packet_mask = kUlpfecPacketMask,
+                             .packet_mask_size = sizeof(kUlpfecPacketMask)}},
+                           written_packet);
 
   VerifyFinalizedHeaders(kFlexfecPacketMask, kExpectedPacketMaskSize,
                          written_packet);
@@ -358,8 +364,11 @@ TEST(Flexfec03HeaderWriterTest, FinalizesHeaderWithKBit1Set) {
   }
 
   Flexfec03HeaderWriter writer;
-  writer.FinalizeFecHeader(kMediaSsrc, kMediaStartSeqNum, kUlpfecPacketMask,
-                           sizeof(kUlpfecPacketMask), &written_packet);
+  writer.FinalizeFecHeader({{.ssrc = kMediaSsrc,
+                             .seq_num_base = kMediaStartSeqNum,
+                             .packet_mask = kUlpfecPacketMask,
+                             .packet_mask_size = sizeof(kUlpfecPacketMask)}},
+                           written_packet);
 
   VerifyFinalizedHeaders(kFlexfecPacketMask, kExpectedPacketMaskSize,
                          written_packet);
@@ -381,8 +390,11 @@ TEST(Flexfec03HeaderWriterTest, FinalizesHeaderWithKBit2Set) {
   }
 
   Flexfec03HeaderWriter writer;
-  writer.FinalizeFecHeader(kMediaSsrc, kMediaStartSeqNum, kUlpfecPacketMask,
-                           sizeof(kUlpfecPacketMask), &written_packet);
+  writer.FinalizeFecHeader({{.ssrc = kMediaSsrc,
+                             .seq_num_base = kMediaStartSeqNum,
+                             .packet_mask = kUlpfecPacketMask,
+                             .packet_mask_size = sizeof(kUlpfecPacketMask)}},
+                           written_packet);
 
   VerifyFinalizedHeaders(kFlexfecPacketMask, kExpectedPacketMaskSize,
                          written_packet);
