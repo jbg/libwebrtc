@@ -322,7 +322,7 @@ bool Codec::ValidateCodecFormat() const {
   }
   return true;
 }
-
+/*
 AudioCodec::AudioCodec(int id,
                        const std::string& name,
                        int clockrate,
@@ -336,7 +336,7 @@ AudioCodec::AudioCodec(const AudioCodec& c) = default;
 AudioCodec::AudioCodec(AudioCodec&& c) = default;
 AudioCodec& AudioCodec::operator=(const AudioCodec& c) = default;
 AudioCodec& AudioCodec::operator=(AudioCodec&& c) = default;
-
+*/
 std::string Codec::ToString() const {
   char buf[256];
 
@@ -358,13 +358,13 @@ std::string Codec::ToString() const {
   }
   return sb.str();
 }
-
+/*
 VideoCodec::VideoCodec(int id, const std::string& name)
     : Codec(Type::kVideo, id, name, kVideoCodecClockrate) {
   SetDefaultParameters();
 }
 
-VideoCodec::VideoCodec(const std::string& name) : VideoCodec(0 /* id */, name) {
+VideoCodec::VideoCodec(const std::string& name) : VideoCodec(0 , name) {
   SetDefaultParameters();
 }
 
@@ -393,17 +393,21 @@ VideoCodec VideoCodec::CreateRtxCodec(int rtx_payload_type,
                                       int associated_payload_type) {
   return CreateVideoRtxCodec(rtx_payload_type, associated_payload_type);
 }
+*/
 
-VideoCodec CreateVideoRtxCodec(int rtx_payload_type,
-                               int associated_payload_type) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-  VideoCodec rtx_codec(rtx_payload_type, kRtxCodecName);
-#pragma clang diagnostic pop
+Codec CreateAudioRtxCodec(int rtx_payload_type, int associated_payload_type) {
+  Codec rtx_codec = CreateAudioCodec(rtx_payload_type, kRtxCodecName, 0, 1);
   rtx_codec.SetParam(kCodecParamAssociatedPayloadType, associated_payload_type);
   return rtx_codec;
 }
 
+Codec CreateVideoRtxCodec(int rtx_payload_type, int associated_payload_type) {
+  Codec rtx_codec = CreateVideoCodec(rtx_payload_type, kRtxCodecName);
+  rtx_codec.SetParam(kCodecParamAssociatedPayloadType, associated_payload_type);
+  return rtx_codec;
+}
+
+/*
 VideoCodec::CodecType VideoCodec::GetCodecType() const {
   if (absl::EqualsIgnoreCase(name, kRedCodecName)) {
     return CODEC_RED;
@@ -420,7 +424,7 @@ VideoCodec::CodecType VideoCodec::GetCodecType() const {
 
   return CODEC_VIDEO;
 }
-
+*/
 bool HasLntf(const Codec& codec) {
   return codec.HasFeedbackParam(
       FeedbackParam(kRtcpFbParamLntf, kParamValueEmpty));
@@ -499,35 +503,31 @@ void AddH264ConstrainedBaselineProfileToSupportedFormats(
   }
 }
 
-AudioCodec CreateAudioCodec(int id,
-                            const std::string& name,
-                            int clockrate,
-                            size_t channels) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-  return AudioCodec(id, name, clockrate, 0, channels);
-#pragma clang diagnostic pop
+Codec CreateAudioCodec(int id,
+                       const std::string& name,
+                       int clockrate,
+                       size_t channels) {
+  return Codec(Codec::Type::kAudio, id, name, clockrate, channels);
 }
 
-VideoCodec CreateVideoCodec(const std::string& name) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-  return VideoCodec(name);
-#pragma clang diagnostic pop
+Codec CreateVideoCodec(const std::string& name) {
+  return CreateVideoCodec(0, name);
 }
 
-VideoCodec CreateVideoCodec(int id, const std::string& name) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-  return VideoCodec(id, name);
-#pragma clang diagnostic pop
+Codec CreateVideoCodec(int id, const std::string& name) {
+  Codec c(Codec::Type::kVideo, id, name, kVideoCodecClockrate);
+  if (absl::EqualsIgnoreCase(kH264CodecName, name)) {
+    // This default is set for all H.264 codecs created because
+    // that was the default before packetization mode support was added.
+    // TODO(hta): Move this to the places that create VideoCodecs from
+    // SDP or from knowledge of implementation capabilities.
+    c.SetParam(kH264FmtpPacketizationMode, "1");
+  }
+  return c;
 }
 
-VideoCodec CreateVideoCodec(const webrtc::SdpVideoFormat& c) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-  return VideoCodec(c);
-#pragma clang diagnostic pop
+Codec CreateVideoCodec(const webrtc::SdpVideoFormat& c) {
+  return Codec(c);
 }
 
 }  // namespace cricket
