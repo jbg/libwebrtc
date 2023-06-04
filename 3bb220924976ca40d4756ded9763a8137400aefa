@@ -16,6 +16,24 @@
       "message": "I would like to have a second pair of eyes on this. To me it looks reasonable, assuming that the performance impact of absl::optional is negligible.",
       "revId": "3bb220924976ca40d4756ded9763a8137400aefa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bfc511e_cde756ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2023-06-04T23:32:12Z",
+      "side": 1,
+      "message": "An alternative way would be to have a separate \"is set\" boolean and a union to prevent the default constructor to construct objects of type T.\nThe union itself is not sufficient as it doesn\u0027t keep track of \"moved out\" values and it could end up double destructing values.\nBut an optional element does it all for us by design and it\u0027s a lot simpler for us. Later C++ versions will allow us to use std::expected directly which takes care of those details for us.",
+      "parentUuid": "230afdab_166c123f",
+      "revId": "3bb220924976ca40d4756ded9763a8137400aefa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
