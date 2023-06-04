@@ -37,6 +37,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "011e7170_3545b223",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2023-06-04T23:29:22Z",
+      "side": 1,
+      "message": "Oh obviously! With so many changes, it\u0027s hard to keep track sometimes...",
+      "parentUuid": "459b695d_2837a55d",
+      "revId": "5685ff734a574a5e52b668b831279efd88cd4391",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2e4e1d17_858ebecf",
         "filename": "pc/media_session.cc",
         "patchSetId": 2
@@ -65,6 +83,24 @@
       "writtenOn": "2023-06-03T14:11:50Z",
       "side": 1,
       "message": "Do you need to reference the intermediate variable? I\u0027d have thought the assignment would (conceptually) return a reference to the variable without the need to mention it again.\n\nOr is it just a little clearer? (If so, it would be even clearer if the first Find was outside of the \"if\" statement)",
+      "revId": "5685ff734a574a5e52b668b831279efd88cd4391",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2413a3bf_cf0d246e",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2448,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2023-06-04T23:29:22Z",
+      "side": 1,
+      "message": "Moved found_codec out of the \"if\".\nSince it\u0027s not referenced outside the if, I wanted to experiment with the new \"if\" syntax, but I forgot to remove this before submitting (it\u0027s not a significant improvement since the scope is so reduced anyway).",
+      "parentUuid": "b2b8d25f_023fa2cc",
       "revId": "5685ff734a574a5e52b668b831279efd88cd4391",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
