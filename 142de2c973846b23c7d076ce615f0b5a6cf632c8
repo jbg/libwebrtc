@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d25b0ba6_f2c8be27",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-06-05T11:18:18Z",
+      "side": 1,
+      "message": "Prefer to join these two members into \nrtc::ArrayView\u003cconst uint8_t\u003e packet_mask\nhttp://bugs.webrtc.org/14870\n\n(though if packet_mask can be up to 120 bits, then may be even better representation would be absl::uint128. However such refactoring looks complicated and too out of scope of this change)",
+      "range": {
+        "startLine": 397,
+        "startChar": 4,
+        "endLine": 398,
+        "endChar": 32
+      },
+      "revId": "142de2c973846b23c7d076ce615f0b5a6cf632c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2f44739_f515228c",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-06-05T11:18:18Z",
+      "side": 1,
+      "message": "why pass by value? looking at the intended usage, it would only be read from, there is no plans for thread hops, i.e. it seems it is enough to pass read-only reference:\nrtc::ArrayView\u003cconst ProtectedStream\u003e protected_streams",
+      "range": {
+        "startLine": 424,
+        "startChar": 6,
+        "endLine": 424,
+        "endChar": 34
+      },
+      "revId": "142de2c973846b23c7d076ce615f0b5a6cf632c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44bedea7_265f8d08",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-06-05T11:18:18Z",
+      "side": 1,
+      "message": "thank you for this update!",
+      "range": {
+        "startLine": 425,
+        "startChar": 36,
+        "endLine": 425,
+        "endChar": 37
+      },
+      "revId": "142de2c973846b23c7d076ce615f0b5a6cf632c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
