@@ -52,6 +52,23 @@
       "parentUuid": "3bfc511e_cde756ff",
       "revId": "3bb220924976ca40d4756ded9763a8137400aefa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b29898f_b6c41928",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-06-05T06:15:37Z",
+      "side": 1,
+      "message": "https://stackoverflow.com/questions/23523184/overhead-of-stdoptionalt claims that the overhead is \"usually negligible\" - we don\u0027t do arrays of ErrorOr, so the case of looping over arrays of them isn\u0027t applicable.",
+      "revId": "3bb220924976ca40d4756ded9763a8137400aefa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
