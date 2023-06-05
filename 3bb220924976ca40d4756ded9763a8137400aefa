@@ -34,6 +34,24 @@
       "parentUuid": "230afdab_166c123f",
       "revId": "3bb220924976ca40d4756ded9763a8137400aefa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6fb2d4b_a7b4ed64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-06-05T06:01:34Z",
+      "side": 1,
+      "message": "To make it clear - I think this is probably the right choice.\nMy fear is that the overhead of absl::optional is big enough that it\u0027s worth avoiding this optimization for inner loops, and whether this happens enough that we need to consider it for WebRTC.\n\nOne alternative (if it\u0027s possible, and if it\u0027s necessary) would be to template ErrorOr\u003c\u003e on whether or not the T is default constructible, and go for the absl::optional if it isn\u0027t. This may be problematic - first hit on Google / Stackoverflow was https://stackoverflow.com/questions/4669131/how-to-check-if-a-template-argument-is-default-constructible \n\nBut I hope Tommi says \"I think it is OK\" and lets us land this.",
+      "parentUuid": "3bfc511e_cde756ff",
+      "revId": "3bb220924976ca40d4756ded9763a8137400aefa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
