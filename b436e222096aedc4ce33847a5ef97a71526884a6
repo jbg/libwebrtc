@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c993adc3_5933ece0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-06-05T12:58:11Z",
+      "side": 1,
+      "message": "few random notes, I haven\u0027t done full review yet",
+      "revId": "b436e222096aedc4ce33847a5ef97a71526884a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15329845_1bb56396",
+        "filename": "modules/rtp_rtcp/source/flexfec_header_reader_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-06-05T12:58:11Z",
+      "side": 1,
+      "message": "FlexfecHeaderWriter is derived from FecHeaderWriter, so you may omit base class name here.\nalso, ProtectedStream is relatively large type (sizeof(protected_stream) \u003e sizeof(void*)), so prefer not to copy it:\nfor (const ProtectedStream\u0026 protected_stream: protected_streams) {\n   ...",
+      "range": {
+        "startLine": 261,
+        "startChar": 7,
+        "endLine": 261,
+        "endChar": 39
+      },
+      "revId": "b436e222096aedc4ce33847a5ef97a71526884a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bba8abe_4df1b480",
+        "filename": "modules/rtp_rtcp/source/flexfec_header_reader_writer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-06-05T12:58:11Z",
+      "side": 1,
+      "message": "why represent seq_num_base as two bytes instead of more natural uint16_t ?",
+      "range": {
+        "startLine": 66,
+        "startChar": 2,
+        "endLine": 66,
+        "endChar": 26
+      },
+      "revId": "b436e222096aedc4ce33847a5ef97a71526884a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51296e06_79d6d340",
+        "filename": "modules/rtp_rtcp/source/flexfec_header_reader_writer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-06-05T12:58:11Z",
+      "side": 1,
+      "message": "feel free to use CopyOnWriteBuffer::data() accessor instead of CopyOnWriteBuffer::cdata\n\nthey always mean the same ( CopyOnWriteBuffer lost its mutable data() accessor in favor of MutableData because it was too easy to misuse)",
+      "range": {
+        "startLine": 112,
+        "startChar": 46,
+        "endLine": 112,
+        "endChar": 51
+      },
+      "revId": "b436e222096aedc4ce33847a5ef97a71526884a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "209a3d54_d5639482",
+        "filename": "modules/rtp_rtcp/source/flexfec_header_reader_writer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-06-05T12:58:11Z",
+      "side": 1,
+      "message": "prefer to put values under test as 1st parameter, constant to check against - as 2nd:\n`EXPECT_EQ(packet[0] \u0026 0x80, 0x00);`",
+      "range": {
+        "startLine": 113,
+        "startChar": 2,
+        "endLine": 113,
+        "endChar": 37
+      },
+      "revId": "b436e222096aedc4ce33847a5ef97a71526884a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7e272be_aff8ea36",
+        "filename": "modules/rtp_rtcp/source/flexfec_header_reader_writer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-06-05T12:58:11Z",
+      "side": 1,
+      "message": "index itself is not used withing loop, so prefer range-for loop:\n```\nfor (const FecHeaderWriter::ProtectedStream\u0026 stream : write_protected_streams) {\n  read_packet.protected_streams.push_back({.ssrc \u003d stream.ssrc}));\n}\n```",
+      "range": {
+        "startLine": 137,
+        "startChar": 2,
+        "endLine": 137,
+        "endChar": 63
+      },
+      "revId": "b436e222096aedc4ce33847a5ef97a71526884a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
