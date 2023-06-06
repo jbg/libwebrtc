@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14bfa070_caacc44c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6680
+      },
+      "writtenOn": "2023-06-06T19:48:58Z",
+      "side": 1,
+      "message": "The frame-drop settings in this CL appear to be the same as those for VP9, which are known to work well.",
+      "revId": "02926fb4070e3342d8d653fa3c88fba50ab58545",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
