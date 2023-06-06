@@ -184,7 +184,20 @@ void FlexfecReceiver::ProcessReceivedPacket(
                        << parsed_packet.Ssrc() << " seq "
                        << parsed_packet.SequenceNumber() << " recovered length "
                        << recovered_packet->pkt->data.size()
+                       << " received length "
+                       << received_packet.pkt->data.size()
                        << " from FlexFEC stream with SSRC: " << ssrc_;
+
+      RTC_LOG_V(level) << "Recovered media packet data: "
+                       << rtc::hex_encode(absl::string_view(
+                              (const char*)recovered_packet->pkt->data.data(),
+                              recovered_packet->pkt->data.size()));
+
+      RTC_LOG_V(level) << "Received packet data: "
+                       << rtc::hex_encode(absl::string_view(
+                              (const char*)received_packet.pkt->data.data(),
+                              received_packet.pkt->data.size()));
+
       if (should_log_periodically) {
         last_recovered_packet_ = now;
       }
