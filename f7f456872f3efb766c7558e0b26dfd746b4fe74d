@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baa1efee_d5443557",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2023-06-07T15:17:23Z",
+      "side": 1,
+      "message": "LGTM with nits.",
+      "revId": "f7f456872f3efb766c7558e0b26dfd746b4fe74d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0505b59f_25b14abc",
+        "filename": "modules/audio_coding/neteq/neteq_impl_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2023-06-07T15:17:23Z",
+      "side": 1,
+      "message": "const",
+      "range": {
+        "startLine": 733,
+        "startChar": 2,
+        "endLine": 733,
+        "endChar": 8
+      },
+      "revId": "f7f456872f3efb766c7558e0b26dfd746b4fe74d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "603e4b2f_0b350751",
+        "filename": "modules/audio_coding/neteq/neteq_impl_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2023-06-07T15:17:23Z",
+      "side": 1,
+      "message": "const",
+      "range": {
+        "startLine": 749,
+        "startChar": 4,
+        "endLine": 749,
+        "endChar": 7
+      },
+      "revId": "f7f456872f3efb766c7558e0b26dfd746b4fe74d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
