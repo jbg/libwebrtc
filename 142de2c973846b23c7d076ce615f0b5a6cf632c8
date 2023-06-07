@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36047323_67e6d297",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 20714
+      },
+      "writtenOn": "2023-06-07T17:07:32Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "d25b0ba6_f2c8be27",
+      "range": {
+        "startLine": 397,
+        "startChar": 4,
+        "endLine": 398,
+        "endChar": 32
+      },
+      "revId": "142de2c973846b23c7d076ce615f0b5a6cf632c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2f44739_f515228c",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-06-05T11:18:18Z",
       "side": 1,
       "message": "why pass by value? looking at the intended usage, it would only be read from, there is no plans for thread hops, i.e. it seems it is enough to pass read-only reference:\nrtc::ArrayView\u003cconst ProtectedStream\u003e protected_streams",
+      "range": {
+        "startLine": 424,
+        "startChar": 6,
+        "endLine": 424,
+        "endChar": 34
+      },
+      "revId": "142de2c973846b23c7d076ce615f0b5a6cf632c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82f361d9_e0f0b082",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 20714
+      },
+      "writtenOn": "2023-06-07T17:07:32Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "f2f44739_f515228c",
       "range": {
         "startLine": 424,
         "startChar": 6,
