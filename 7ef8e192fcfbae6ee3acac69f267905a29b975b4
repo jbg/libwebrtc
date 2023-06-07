@@ -16,6 +16,29 @@
       "message": "Put the change behind a kill-switch.",
       "revId": "7ef8e192fcfbae6ee3acac69f267905a29b975b4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8599fbf5_1a5375b1",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2023-06-07T11:40:53Z",
+      "side": 1,
+      "message": "nit: remove",
+      "range": {
+        "startLine": 74,
+        "startChar": 2,
+        "endLine": 74,
+        "endChar": 10
+      },
+      "revId": "7ef8e192fcfbae6ee3acac69f267905a29b975b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
