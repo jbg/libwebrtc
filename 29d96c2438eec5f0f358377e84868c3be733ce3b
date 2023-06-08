@@ -34,6 +34,24 @@
       "parentUuid": "3415ff27_276c1bd6",
       "revId": "29d96c2438eec5f0f358377e84868c3be733ce3b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba9bd33d_2abcda40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5623
+      },
+      "writtenOn": "2023-06-08T13:39:18Z",
+      "side": 1,
+      "message": "Ignore above - roller seems genuinely unhappy with Fuchsia GN SDK, unsure why. I\u0027ll start looking into it shortly.",
+      "parentUuid": "2dbfdca9_1f158120",
+      "revId": "29d96c2438eec5f0f358377e84868c3be733ce3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
