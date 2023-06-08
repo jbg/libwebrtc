@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce6e770f_a7f44eef",
+        "filename": "modules/rtp_rtcp/source/flexfec_header_reader_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-06-08T12:30:40Z",
+      "side": 1,
+      "message": "personally I like to iterate directly over buffer rather than index into the buffer:\ne.g. something like\n\n```\n// First seq_num will be ...\nuint8_t* write_at \u003d data + 8;\n...\n...::WriteBigEndian(write_at, protected_stream.seq_num_base);\nwrite_at +\u003d kStreamSpecificHeaderSize;\n...\n*write_at |\u003d 0x80 // Set k-bit 1.\n```\n\nbut current style is ok too.",
+      "revId": "8dec3ff61cd02eb5e029f22e7955a5632d5f8235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5049a334_094188aa",
+        "filename": "modules/rtp_rtcp/source/flexfec_header_reader_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-06-08T12:30:40Z",
+      "side": 1,
+      "message": "because this comment doesn\u0027t fit on the same line it would likely look nicer as a comment before the code:\n\n```\n// Clear all trailing bits.\nmemset(\u0026data[byte_index], 0, kFlexfecPacketMaskSizes[2] - kFlexfecPacketMaskSizes[1]);\n```",
+      "range": {
+        "startLine": 293,
+        "startChar": 48,
+        "endLine": 293,
+        "endChar": 76
+      },
+      "revId": "8dec3ff61cd02eb5e029f22e7955a5632d5f8235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
