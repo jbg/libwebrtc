@@ -69,6 +69,24 @@
       "parentUuid": "b7bf2d33_f6de0127",
       "revId": "d0e0ccf0f51c5a629784d66e68a902b0192557ef",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bef5744_6e0428f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-06-08T10:17:58Z",
+      "side": 1,
+      "message": "Looks like you are right about the problem being infra related; the failures all happened on one specific machine.",
+      "parentUuid": "835e2510_3667592e",
+      "revId": "d0e0ccf0f51c5a629784d66e68a902b0192557ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
