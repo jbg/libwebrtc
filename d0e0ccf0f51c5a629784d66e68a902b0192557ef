@@ -16,6 +16,23 @@
       "message": "LGTM, is anyone going to own the bug to re-enable them?",
       "revId": "d0e0ccf0f51c5a629784d66e68a902b0192557ef",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e64211b6_d1e5c6cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8178
+      },
+      "writtenOn": "2023-06-08T09:53:15Z",
+      "side": 1,
+      "message": "Not sure why I was added, I don\u0027t have editbugs permissions and I cannot set review flags.\n\nAnyway, looking at the log it\u0027s probably an infra issue?\n\u003e Expected: (number_of_devices_) \u003e (0u), actual: 0 vs 0",
+      "revId": "d0e0ccf0f51c5a629784d66e68a902b0192557ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
