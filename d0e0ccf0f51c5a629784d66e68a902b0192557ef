@@ -33,6 +33,24 @@
       "message": "Not sure why I was added, I don\u0027t have editbugs permissions and I cannot set review flags.\n\nAnyway, looking at the log it\u0027s probably an infra issue?\n\u003e Expected: (number_of_devices_) \u003e (0u), actual: 0 vs 0",
       "revId": "d0e0ccf0f51c5a629784d66e68a902b0192557ef",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7bf2d33_f6de0127",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-06-08T09:57:42Z",
+      "side": 1,
+      "message": "Based on git blame, you seemed like the person with the most expertise around these tests. :)",
+      "parentUuid": "e64211b6_d1e5c6cd",
+      "revId": "d0e0ccf0f51c5a629784d66e68a902b0192557ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
