@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d498aaef_cdff59a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-06-08T09:28:29Z",
+      "side": 1,
+      "message": "LGTM, is anyone going to own the bug to re-enable them?",
+      "revId": "d0e0ccf0f51c5a629784d66e68a902b0192557ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
