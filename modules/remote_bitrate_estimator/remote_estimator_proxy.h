@@ -17,8 +17,8 @@
 #include <vector>
 
 #include "absl/types/optional.h"
-#include "api/field_trials_view.h"
 #include "api/rtp_headers.h"
+#include "api/sequence_checker.h"
 #include "api/transport/network_control.h"
 #include "api/units/data_size.h"
 #include "api/units/time_delta.h"
@@ -28,7 +28,6 @@
 #include "modules/rtp_rtcp/source/rtcp_packet/transport_feedback.h"
 #include "modules/rtp_rtcp/source/rtp_packet_received.h"
 #include "rtc_base/numerics/sequence_number_unwrapper.h"
-#include "rtc_base/synchronization/mutex.h"
 
 namespace webrtc {
 
@@ -56,11 +55,11 @@ class RemoteEstimatorProxy {
 
  private:
   void MaybeCullOldPackets(int64_t sequence_number, Timestamp arrival_time)
-      RTC_EXCLUSIVE_LOCKS_REQUIRED(&lock_);
-  void SendPeriodicFeedbacks() RTC_EXCLUSIVE_LOCKS_REQUIRED(&lock_);
+      RTC_EXCLUSIVE_LOCKS_REQUIRED(&sequence_checker_);
+  void SendPeriodicFeedbacks() RTC_EXCLUSIVE_LOCKS_REQUIRED(&sequence_checker_);
   void SendFeedbackOnRequest(int64_t sequence_number,
                              const FeedbackRequest& feedback_request)
-      RTC_EXCLUSIVE_LOCKS_REQUIRED(&lock_);
+      RTC_EXCLUSIVE_LOCKS_REQUIRED(&sequence_checker_);
 
   // Returns a Transport Feedback packet with information about as many packets
   // that has been received between [`begin_sequence_number_incl`,
@@ -78,34 +77,36 @@ class RemoteEstimatorProxy {
       bool include_timestamps,
       int64_t begin_sequence_number_inclusive,
       int64_t end_sequence_number_exclusive,
-      bool is_periodic_update) RTC_EXCLUSIVE_LOCKS_REQUIRED(&lock_);
+      bool is_periodic_update) RTC_EXCLUSIVE_LOCKS_REQUIRED(&sequence_checker_);
 
   const TransportFeedbackSender feedback_sender_;
   Timestamp last_process_time_;
 
-  Mutex lock_;
+  SequenceChecker sequence_checker_;
   //  `network_state_estimator_` may be null.
   NetworkStateEstimator* const network_state_estimator_
-      RTC_PT_GUARDED_BY(&lock_);
-  uint32_t media_ssrc_ RTC_GUARDED_BY(&lock_);
-  uint8_t feedback_packet_count_ RTC_GUARDED_BY(&lock_);
-  SeqNumUnwrapper<uint16_t> unwrapper_ RTC_GUARDED_BY(&lock_);
-  DataSize packet_overhead_ RTC_GUARDED_BY(&lock_);
+      RTC_PT_GUARDED_BY(&sequence_checker_);
+  uint32_t media_ssrc_ RTC_GUARDED_BY(&sequence_checker_);
+  uint8_t feedback_packet_count_ RTC_GUARDED_BY(&sequence_checker_);
+  SeqNumUnwrapper<uint16_t> unwrapper_ RTC_GUARDED_BY(&sequence_checker_);
+  DataSize packet_overhead_ RTC_GUARDED_BY(&sequence_checker_);
 
   // The next sequence number that should be the start sequence number during
   // periodic reporting. Will be absl::nullopt before the first seen packet.
-  absl::optional<int64_t> periodic_window_start_seq_ RTC_GUARDED_BY(&lock_);
+  absl::optional<int64_t> periodic_window_start_seq_
+      RTC_GUARDED_BY(&sequence_checker_);
 
   // Packet arrival times, by sequence number.
-  PacketArrivalTimeMap packet_arrival_times_ RTC_GUARDED_BY(&lock_);
+  PacketArrivalTimeMap packet_arrival_times_ RTC_GUARDED_BY(&sequence_checker_);
 
-  TimeDelta send_interval_ RTC_GUARDED_BY(&lock_);
-  bool send_periodic_feedback_ RTC_GUARDED_BY(&lock_);
+  TimeDelta send_interval_ RTC_GUARDED_BY(&sequence_checker_);
+  bool send_periodic_feedback_ RTC_GUARDED_BY(&sequence_checker_);
 
   // Unwraps absolute send times.
-  uint32_t previous_abs_send_time_ RTC_GUARDED_BY(&lock_);
-  Timestamp abs_send_timestamp_ RTC_GUARDED_BY(&lock_);
-  Timestamp last_arrival_time_with_abs_send_time_ RTC_GUARDED_BY(&lock_);
+  uint32_t previous_abs_send_time_ RTC_GUARDED_BY(&sequence_checker_);
+  Timestamp abs_send_timestamp_ RTC_GUARDED_BY(&sequence_checker_);
+  Timestamp last_arrival_time_with_abs_send_time_
+      RTC_GUARDED_BY(&sequence_checker_);
 };
 
 }  // namespace webrtc
