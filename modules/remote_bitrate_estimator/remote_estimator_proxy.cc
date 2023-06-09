@@ -17,6 +17,7 @@
 #include <utility>
 
 #include "absl/types/optional.h"
+#include "api/sequence_checker.h"
 #include "api/units/data_size.h"
 #include "api/units/time_delta.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/remote_estimate.h"
@@ -24,8 +25,6 @@
 #include "modules/rtp_rtcp/source/rtp_header_extensions.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
-#include "rtc_base/numerics/safe_minmax.h"
-#include "system_wrappers/include/clock.h"
 
 namespace webrtc {
 namespace {
@@ -74,6 +73,7 @@ RemoteEstimatorProxy::~RemoteEstimatorProxy() {}
 
 void RemoteEstimatorProxy::MaybeCullOldPackets(int64_t sequence_number,
                                                Timestamp arrival_time) {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
   if (periodic_window_start_seq_ >=
           packet_arrival_times_.end_sequence_number() &&
       arrival_time - Timestamp::Zero() >= kBackWindow) {
@@ -84,6 +84,7 @@ void RemoteEstimatorProxy::MaybeCullOldPackets(int64_t sequence_number,
 }
 
 void RemoteEstimatorProxy::IncomingPacket(const RtpPacketReceived& packet) {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
   if (packet.arrival_time().IsInfinite()) {
     RTC_LOG(LS_WARNING) << "Arrival time not set.";
     return;
@@ -103,7 +104,6 @@ void RemoteEstimatorProxy::IncomingPacket(const RtpPacketReceived& packet) {
     return;
   }
 
-  MutexLock lock(&lock_);
   send_periodic_feedback_ = packet.HasExtension<TransportSequenceNumber>();
 
   media_ssrc_ = packet.Ssrc();
@@ -158,7 +158,7 @@ void RemoteEstimatorProxy::IncomingPacket(const RtpPacketReceived& packet) {
 }
 
 TimeDelta RemoteEstimatorProxy::Process(Timestamp now) {
-  MutexLock lock(&lock_);
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
   if (!send_periodic_feedback_) {
     // If TransportSequenceNumberV2 has been received in one packet,
     // PeriodicFeedback is disabled for the rest of the call.
@@ -175,6 +175,7 @@ TimeDelta RemoteEstimatorProxy::Process(Timestamp now) {
 }
 
 void RemoteEstimatorProxy::OnBitrateChanged(int bitrate_bps) {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
   // TwccReportSize = Ipv4(20B) + UDP(8B) + SRTP(10B) +
   // AverageTwccReport(30B)
   // TwccReport size at 50ms interval is 24 byte.
@@ -193,16 +194,16 @@ void RemoteEstimatorProxy::OnBitrateChanged(int bitrate_bps) {
           ? kMaxInterval
           : std::max(kTwccReportSize / twcc_bitrate, kMinInterval);
 
-  MutexLock lock(&lock_);
   send_interval_ = send_interval;
 }
 
 void RemoteEstimatorProxy::SetTransportOverhead(DataSize overhead_per_packet) {
-  MutexLock lock(&lock_);
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
   packet_overhead_ = overhead_per_packet;
 }
 
 void RemoteEstimatorProxy::SendPeriodicFeedbacks() {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
   // `periodic_window_start_seq_` is the first sequence number to include in
   // the current feedback packet. Some older may still be in the map, in case
   // a reordering happens and we need to retransmit them.
@@ -249,6 +250,7 @@ void RemoteEstimatorProxy::SendPeriodicFeedbacks() {
 void RemoteEstimatorProxy::SendFeedbackOnRequest(
     int64_t sequence_number,
     const FeedbackRequest& feedback_request) {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
   if (feedback_request.sequence_count == 0) {
     return;
   }
@@ -278,6 +280,7 @@ RemoteEstimatorProxy::MaybeBuildFeedbackPacket(
     int64_t begin_sequence_number_inclusive,
     int64_t end_sequence_number_exclusive,
     bool is_periodic_update) {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
   RTC_DCHECK_LT(begin_sequence_number_inclusive, end_sequence_number_exclusive);
 
   int64_t start_seq =
