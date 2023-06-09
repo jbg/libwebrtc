@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ca92708_e3494e9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5623
+      },
+      "writtenOn": "2023-06-09T06:31:29Z",
+      "side": 1,
+      "message": "Required to unblock the roller due to this upstream CL: https://chromium-review.googlesource.com/c/chromium/src/+/4602848.",
+      "revId": "a7270bde55ff6e66c3c98955e776e6bdb324d183",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
