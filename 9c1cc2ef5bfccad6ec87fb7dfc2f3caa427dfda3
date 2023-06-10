@@ -33,6 +33,52 @@
       "message": "Experts in .mm have to say whether this makes sense or not.\nLook out for cases where the user is trying to change only one parameter, and gets unintended changes in the other parameters.",
       "revId": "9c1cc2ef5bfccad6ec87fb7dfc2f3caa427dfda3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14acd896_39bf5499",
+        "filename": "sdk/objc/components/audio/RTCAudioSession.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2023-06-10T13:42:10Z",
+      "side": 1,
+      "message": "technically this should be AVAudioSessionCategory but I recognise the API already was like this.",
+      "range": {
+        "startLine": 410,
+        "startChar": 21,
+        "endLine": 410,
+        "endChar": 32
+      },
+      "revId": "9c1cc2ef5bfccad6ec87fb7dfc2f3caa427dfda3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20b67c96_510fe8e1",
+        "filename": "sdk/objc/components/audio/RTCAudioSession.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2023-06-10T13:42:10Z",
+      "side": 1,
+      "message": "This should be AVAudioSessionMode",
+      "range": {
+        "startLine": 411,
+        "startChar": 21,
+        "endLine": 411,
+        "endChar": 31
+      },
+      "revId": "9c1cc2ef5bfccad6ec87fb7dfc2f3caa427dfda3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
