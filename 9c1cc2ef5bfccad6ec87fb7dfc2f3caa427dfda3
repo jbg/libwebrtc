@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41492f90_09c18513",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-06-10T13:14:11Z",
+      "side": 1,
+      "message": "Please remember the webrtc: prefix on the bug number.\nThis naked number creates a pointer to a totally irrelevant bug in Chrome.",
+      "revId": "9c1cc2ef5bfccad6ec87fb7dfc2f3caa427dfda3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1160846_3dfdf8b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-06-10T13:14:11Z",
+      "side": 1,
+      "message": "Experts in .mm have to say whether this makes sense or not.\nLook out for cases where the user is trying to change only one parameter, and gets unintended changes in the other parameters.",
+      "revId": "9c1cc2ef5bfccad6ec87fb7dfc2f3caa427dfda3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
