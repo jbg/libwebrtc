@@ -225,6 +225,10 @@ RTC_OBJC_EXPORT
 // AVAudioSession. `lockForConfiguration` must be called before using them
 // otherwise they will fail with kRTCAudioSessionErrorLockRequired.
 
+- (BOOL)setCategory:(AVAudioSessionCategory)category
+               mode:(AVAudioSessionMode)mode
+            options:(AVAudioSessionCategoryOptions)options
+              error:(NSError **)outError;
 - (BOOL)setCategory:(NSString *)category
         withOptions:(AVAudioSessionCategoryOptions)options
               error:(NSError **)outError;
