@@ -55,6 +55,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4a507154_84763f25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16914
+      },
+      "writtenOn": "2023-06-11T07:44:23Z",
+      "side": 1,
+      "message": "Setting them separately will cost it take more time when we set want to set both category options and mode.\nIn apple\u0027s document, they also suggest setting them at the same time. \nhttps://developer.apple.com/documentation/avfaudio/avaudiosession/1616614-setmode?language\u003dobjc",
+      "parentUuid": "a1160846_3dfdf8b2",
+      "revId": "9c1cc2ef5bfccad6ec87fb7dfc2f3caa427dfda3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "14acd896_39bf5499",
         "filename": "sdk/objc/components/audio/RTCAudioSession.mm",
         "patchSetId": 2
