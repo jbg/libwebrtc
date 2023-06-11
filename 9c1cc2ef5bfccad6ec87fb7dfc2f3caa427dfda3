@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2190c13a_399f5a9d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 16914
+      },
+      "writtenOn": "2023-06-11T07:36:23Z",
+      "side": 1,
+      "message": "I have updated the commit message. thx.",
+      "parentUuid": "41492f90_09c18513",
+      "revId": "9c1cc2ef5bfccad6ec87fb7dfc2f3caa427dfda3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a1160846_3dfdf8b2",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
