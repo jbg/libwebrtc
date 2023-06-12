@@ -46,15 +46,28 @@
   std::string sdp("candidate:4025901590 1 udp 2122265343 "
                   "fdff:2642:12a6:fe38:c001:beda:fcf9:51aa "
                   "59052 typ host generation 0");
-  webrtc::IceCandidateInterface *nativeCandidate =
-      webrtc::CreateIceCandidate("audio", 0, sdp, nullptr);
+  std::unique_ptr<webrtc::IceCandidateInterface> nativeCandidate(
+      webrtc::CreateIceCandidate("audio", 0, sdp, nullptr));
 
   RTC_OBJC_TYPE(RTCIceCandidate) *iceCandidate =
-      [[RTC_OBJC_TYPE(RTCIceCandidate) alloc] initWithNativeCandidate:nativeCandidate];
+      [[RTC_OBJC_TYPE(RTCIceCandidate) alloc] initWithNativeCandidate:nativeCandidate.get()];
   EXPECT_TRUE([@"audio" isEqualToString:iceCandidate.sdpMid]);
   EXPECT_EQ(0, iceCandidate.sdpMLineIndex);
 
   EXPECT_EQ(sdp, iceCandidate.sdp.stdString);
+}
+
+- (void)testNativeCandidateCopied {
+  std::string sdp("candidate:4025901590 1 udp 2122265343 "
+                  "fdff:2642:12a6:fe38:c001:beda:fcf9:51aa "
+                  "59052 typ host generation 0");
+  std::unique_ptr<webrtc::IceCandidateInterface> nativeCandidate(
+      webrtc::CreateIceCandidate("audio", 0, sdp, nullptr));
+
+  RTC_OBJC_TYPE(RTCIceCandidate) *iceCandidate =
+      [[RTC_OBJC_TYPE(RTCIceCandidate) alloc] initWithNativeCandidate:nativeCandidate.get()];
+
+  EXPECT_NE(nativeCandidate.get(), iceCandidate.nativeCandidate.get());
 }
 
 @end
