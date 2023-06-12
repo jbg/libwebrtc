@@ -268,11 +268,11 @@ void PeerConnectionDelegateAdapter::OnIceSelectedCandidatePairChanged(
   auto local_candidate_wrapper = std::make_unique<JsepIceCandidate>(
       selected_pair.local_candidate().transport_name(), -1, selected_pair.local_candidate());
   RTC_OBJC_TYPE(RTCIceCandidate) *local_candidate = [[RTC_OBJC_TYPE(RTCIceCandidate) alloc]
-      initWithNativeCandidate:local_candidate_wrapper.release()];
+      initWithNativeCandidate:local_candidate_wrapper.get()];
   auto remote_candidate_wrapper = std::make_unique<JsepIceCandidate>(
       selected_pair.remote_candidate().transport_name(), -1, selected_pair.remote_candidate());
   RTC_OBJC_TYPE(RTCIceCandidate) *remote_candidate = [[RTC_OBJC_TYPE(RTCIceCandidate) alloc]
-      initWithNativeCandidate:remote_candidate_wrapper.release()];
+      initWithNativeCandidate:remote_candidate_wrapper.get()];
   RTC_OBJC_TYPE(RTCPeerConnection) *peer_connection = peer_connection_;
   NSString *nsstr_reason = [NSString stringForStdString:event.reason];
   if ([peer_connection.delegate
