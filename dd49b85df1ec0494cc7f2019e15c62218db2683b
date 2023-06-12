@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae50b5c5_e8768040",
+        "filename": "DEPS",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-06-12T13:57:52Z",
+      "side": 1,
+      "message": "This was one of the issues.",
+      "range": {
+        "startLine": 111,
+        "startChar": 7,
+        "endLine": 111,
+        "endChar": 18
+      },
+      "revId": "dd49b85df1ec0494cc7f2019e15c62218db2683b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2641d9c_8d105737",
+        "filename": "DEPS",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-06-12T13:57:52Z",
+      "side": 1,
+      "message": "And this was the other one.",
+      "range": {
+        "startLine": 280,
+        "startChar": 39,
+        "endLine": 280,
+        "endChar": 58
+      },
+      "revId": "dd49b85df1ec0494cc7f2019e15c62218db2683b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
