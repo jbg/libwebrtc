@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fa47b22_f1ab9d70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20714
+      },
+      "writtenOn": "2023-06-13T10:34:18Z",
+      "side": 1,
+      "message": "Can this be submitted to the Commit Queue? Thanks!",
+      "revId": "c1b2d09292582cc4868e20f4a5f6d6d52d722fd8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
