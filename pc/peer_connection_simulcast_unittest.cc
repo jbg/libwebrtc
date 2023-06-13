@@ -613,6 +613,31 @@ TEST_F(PeerConnectionSimulcastTests, SimulcastSldModificationRejected) {
   EXPECT_TRUE(local->SetLocalDescription(std::move(modified_offer)));
 }
 
+// Death tests.
+// Disabled on Android because death tests misbehave on Android, see
+// base/test/gtest_util.h.
+#if GTEST_HAS_DEATH_TEST && !defined(WEBRTC_ANDROID)
+using PeerConnectionSimulcastDeathTests = PeerConnectionSimulcastTests;
+// Munging a ssrc with a cname into a ssrc-less simulcast offer hits a CHECK.
+TEST_F(PeerConnectionSimulcastDeathTests, MungingSsrcNameToSimulcastOfferDies) {
+  auto local = CreatePeerConnectionWrapper();
+  auto layers = CreateLayers({"1", "2", "3"}, true);
+  AddTransceiver(local.get(), layers);
+  auto offer = local->CreateOffer();
+  std::string as_string;
+  EXPECT_TRUE(offer->ToString(&as_string));
+  as_string += "a=ssrc:12345 cname:boom\r\n";
+  SdpParseError parse_error;
+  auto modified_offer =
+      CreateSessionDescription(SdpType::kOffer, as_string, &parse_error);
+  EXPECT_TRUE(modified_offer);
+  RTC_EXPECT_DEATH(local->SetLocalDescription(std::move(modified_offer)),
+                   "current_parameters.encodings.size.* >= "
+                   "init_parameters_.encodings.size.*");
+}
+
+#endif  // GTEST_HAS_DEATH_TEST && !defined(WEBRTC_ANDROID)
+
 #if RTC_METRICS_ENABLED
 //
 // Checks the logged metrics when simulcast is not used.
