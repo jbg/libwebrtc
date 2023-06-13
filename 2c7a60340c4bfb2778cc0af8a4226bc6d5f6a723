@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8d2c7e8_dbb3b679",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2023-06-13T09:42:08Z",
+      "side": 1,
+      "message": "Hello Kári,\n\nCould you please take a look at this CL which fixes leak of ice candidates in iOS SDK?\n\nThanks a lot in advance,\nYury.",
+      "revId": "2c7a60340c4bfb2778cc0af8a4226bc6d5f6a723",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
