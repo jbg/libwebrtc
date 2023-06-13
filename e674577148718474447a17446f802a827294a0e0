@@ -16,6 +16,23 @@
       "message": "hi, is there someone who could take a look at this patch ?",
       "revId": "e674577148718474447a17446f802a827294a0e0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18873f2c_6f142387",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2023-06-13T11:37:49Z",
+      "side": 1,
+      "message": "Sorry for the negativity, but I don\u0027t think we should log user data into the text log, even if it is only at a verbose level.\n\nIs there a compelling reason why this needs to be checked in? I do see the value of these logs, but maybe you can keep them as a local patch?",
+      "revId": "e674577148718474447a17446f802a827294a0e0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
