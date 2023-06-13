@@ -2654,10 +2654,10 @@ static std::unique_ptr<C> ParseContentDescription(
   for (int pt : payload_types) {
     payload_type_preferences[pt] = preference--;
   }
-  std::vector<typename C::CodecType> codecs = media_desc->codecs();
+  std::vector<cricket::Codec> codecs = media_desc->codecs();
   absl::c_sort(
-      codecs, [&payload_type_preferences](const typename C::CodecType& a,
-                                          const typename C::CodecType& b) {
+      codecs, [&payload_type_preferences](const typename cricket::Codec& a,
+                                          const typename cricket::Codec& b) {
         return payload_type_preferences[a.id] > payload_type_preferences[b.id];
       });
   media_desc->set_codecs(codecs);
@@ -2990,10 +2990,9 @@ absl::optional<T> PopWildcardCodec(std::vector<T>* codecs) {
   return absl::nullopt;
 }
 
-template <class T>
-void UpdateFromWildcardCodecs(cricket::MediaContentDescriptionImpl<T>* desc) {
+void UpdateFromWildcardCodecs(cricket::MediaContentDescriptionImpl* desc) {
   auto codecs = desc->codecs();
-  absl::optional<T> wildcard_codec = PopWildcardCodec(&codecs);
+  absl::optional<cricket::Codec> wildcard_codec = PopWildcardCodec(&codecs);
   if (!wildcard_codec) {
     return;
   }

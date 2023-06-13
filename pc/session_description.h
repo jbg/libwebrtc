@@ -261,7 +261,6 @@ class MediaContentDescription {
   virtual MediaContentDescription* CloneInternal() const = 0;
 };
 
-template <class C>
 class MediaContentDescriptionImpl : public MediaContentDescription {
  public:
   void set_protocol(absl::string_view protocol) override {
@@ -269,15 +268,15 @@ class MediaContentDescriptionImpl : public MediaContentDescription {
     protocol_ = std::string(protocol);
   }
 
-  typedef C CodecType;
-
   // Codecs should be in preference order (most preferred codec first).
-  const std::vector<C>& codecs() const { return codecs_; }
-  void set_codecs(const std::vector<C>& codecs) { codecs_ = codecs; }
+  const std::vector<cricket::Codec>& codecs() const { return codecs_; }
+  void set_codecs(const std::vector<cricket::Codec>& codecs) {
+    codecs_ = codecs;
+  }
   bool has_codecs() const override { return !codecs_.empty(); }
   bool HasCodec(int id) {
     bool found = false;
-    for (typename std::vector<C>::iterator iter = codecs_.begin();
+    for (typename std::vector<cricket::Codec>::iterator iter = codecs_.begin();
          iter != codecs_.end(); ++iter) {
       if (iter->id == id) {
         found = true;
@@ -286,9 +285,9 @@ class MediaContentDescriptionImpl : public MediaContentDescription {
     }
     return found;
   }
-  void AddCodec(const C& codec) { codecs_.push_back(codec); }
-  void AddOrReplaceCodec(const C& codec) {
-    for (typename std::vector<C>::iterator iter = codecs_.begin();
+  void AddCodec(const cricket::Codec& codec) { codecs_.push_back(codec); }
+  void AddOrReplaceCodec(const cricket::Codec& codec) {
+    for (typename std::vector<cricket::Codec>::iterator iter = codecs_.begin();
          iter != codecs_.end(); ++iter) {
       if (iter->id == codec.id) {
         *iter = codec;
@@ -297,18 +296,18 @@ class MediaContentDescriptionImpl : public MediaContentDescription {
     }
     AddCodec(codec);
   }
-  void AddCodecs(const std::vector<C>& codecs) {
-    typename std::vector<C>::const_iterator codec;
+  void AddCodecs(const std::vector<cricket::Codec>& codecs) {
+    typename std::vector<cricket::Codec>::const_iterator codec;
     for (codec = codecs.begin(); codec != codecs.end(); ++codec) {
       AddCodec(*codec);
     }
   }
 
  private:
-  std::vector<C> codecs_;
+  std::vector<cricket::Codec> codecs_;
 };
 
-class AudioContentDescription : public MediaContentDescriptionImpl<AudioCodec> {
+class AudioContentDescription : public MediaContentDescriptionImpl {
  public:
   AudioContentDescription() {}
 
@@ -322,7 +321,7 @@ class AudioContentDescription : public MediaContentDescriptionImpl<AudioCodec> {
   }
 };
 
-class VideoContentDescription : public MediaContentDescriptionImpl<VideoCodec> {
+class VideoContentDescription : public MediaContentDescriptionImpl {
  public:
   virtual MediaType type() const { return MEDIA_TYPE_VIDEO; }
   virtual VideoContentDescription* as_video() { return this; }
