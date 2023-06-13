@@ -14,12 +14,26 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include <memory>
 #include <string>
 
 #include "absl/strings/string_view.h"
 #include "rtc_base/system/rtc_export.h"
 
 namespace rtc {
+
+// Interface for RNG implementations.
+class RandomGenerator {
+ public:
+  virtual ~RandomGenerator() {}
+  virtual bool Init(const void* seed, size_t len) = 0;
+  virtual bool Generate(void* buf, size_t len) = 0;
+};
+
+// Set a custom random generator. Results produced by CreateRandomXyz
+// are cryptographically random iff the output of the supplied generator is
+// cryptographically random.
+void SetRandomGenerator(std::unique_ptr<RandomGenerator> generator);
 
 // For testing, we can return predictable data.
 void SetRandomTestMode(bool test);

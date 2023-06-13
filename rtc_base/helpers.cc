@@ -25,13 +25,7 @@
 
 namespace rtc {
 
-// Base class for RNG implementations.
-class RandomGenerator {
- public:
-  virtual ~RandomGenerator() {}
-  virtual bool Init(const void* seed, size_t len) = 0;
-  virtual bool Generate(void* buf, size_t len) = 0;
-};
+namespace {
 
 // The OpenSSL RNG.
 class SecureRandomGenerator : public RandomGenerator {
@@ -64,8 +58,6 @@ class TestRandomGenerator : public RandomGenerator {
   int seed_;
 };
 
-namespace {
-
 // TODO: Use Base64::Base64Table instead.
 static const char kBase64[64] = {
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
@@ -93,6 +85,10 @@ RandomGenerator& Rng() {
 }
 
 }  // namespace
+
+void SetRandomGenerator(std::unique_ptr<RandomGenerator> generator) {
+  GetGlobalRng() = std::move(generator);
+}
 
 void SetRandomTestMode(bool test) {
   if (!test) {
