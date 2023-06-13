@@ -82,7 +82,7 @@ void RtpParametersFromMediaDescription(
     const MediaContentDescriptionImpl<Codec>* desc,
     const RtpHeaderExtensions& extensions,
     bool is_stream_active,
-    RtpParameters<Codec>* params) {
+    InternalRtpParameters* params) {
   params->is_stream_active = is_stream_active;
   params->codecs = desc->codecs();
   // TODO(bugs.webrtc.org/11513): See if we really need
@@ -98,7 +98,7 @@ template <class Codec>
 void RtpSendParametersFromMediaDescription(
     const MediaContentDescriptionImpl<Codec>* desc,
     webrtc::RtpExtension::Filter extensions_filter,
-    RtpSendParameters<Codec>* send_params) {
+    RtpSenderParameters* send_params) {
   RtpHeaderExtensions extensions =
       webrtc::RtpExtension::DeduplicateHeaderExtensions(
           desc->rtp_header_extensions(), extensions_filter);
@@ -934,7 +934,7 @@ bool VoiceChannel::SetLocalContent_w(const MediaContentDescription* content,
   bool update_header_extensions = true;
   media_send_channel()->SetExtmapAllowMixed(content->extmap_allow_mixed());
 
-  AudioRecvParameters recv_params = last_recv_params_;
+  AudioReceiverParameters recv_params = last_recv_params_;
   RtpParametersFromMediaDescription(
       content->as_audio(), header_extensions,
       webrtc::RtpTransceiverDirectionHasRecv(content->direction()),
@@ -987,7 +987,7 @@ bool VoiceChannel::SetRemoteContent_w(const MediaContentDescription* content,
   TRACE_EVENT0("webrtc", "VoiceChannel::SetRemoteContent_w");
   RTC_LOG(LS_INFO) << "Setting remote voice description for " << ToString();
 
-  AudioSendParameters send_params = last_send_params_;
+  AudioSenderParameters send_params = last_send_params_;
   RtpSendParametersFromMediaDescription(content->as_audio(),
                                         extensions_filter(), &send_params);
   send_params.mid = mid();
@@ -1091,14 +1091,14 @@ bool VideoChannel::SetLocalContent_w(const MediaContentDescription* content,
   bool update_header_extensions = true;
   media_send_channel()->SetExtmapAllowMixed(content->extmap_allow_mixed());
 
-  VideoRecvParameters recv_params = last_recv_params_;
+  VideoReceiverParameters recv_params = last_recv_params_;
 
   RtpParametersFromMediaDescription(
       content->as_video(), header_extensions,
       webrtc::RtpTransceiverDirectionHasRecv(content->direction()),
       &recv_params);
 
-  VideoSendParameters send_params = last_send_params_;
+  VideoSenderParameters send_params = last_send_params_;
 
   bool needs_send_params_update = false;
   if (type == SdpType::kAnswer || type == SdpType::kPrAnswer) {
@@ -1177,13 +1177,13 @@ bool VideoChannel::SetRemoteContent_w(const MediaContentDescription* content,
 
   const VideoContentDescription* video = content->as_video();
 
-  VideoSendParameters send_params = last_send_params_;
+  VideoSenderParameters send_params = last_send_params_;
   RtpSendParametersFromMediaDescription(video, extensions_filter(),
                                         &send_params);
   send_params.mid = mid();
   send_params.conference_mode = video->conference_mode();
 
-  VideoRecvParameters recv_params = last_recv_params_;
+  VideoReceiverParameters recv_params = last_recv_params_;
 
   bool needs_recv_params_update = false;
   if (type == SdpType::kAnswer || type == SdpType::kPrAnswer) {

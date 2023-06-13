@@ -288,11 +288,11 @@ VideoMediaReceiveInfo::~VideoMediaReceiveInfo() = default;
 VoiceMediaReceiveInfo::VoiceMediaReceiveInfo() = default;
 VoiceMediaReceiveInfo::~VoiceMediaReceiveInfo() = default;
 
-AudioSendParameters::AudioSendParameters() = default;
-AudioSendParameters::~AudioSendParameters() = default;
+AudioSenderParameters::AudioSenderParameters() = default;
+AudioSenderParameters::~AudioSenderParameters() = default;
 
-std::map<std::string, std::string> AudioSendParameters::ToStringMap() const {
-  auto params = RtpSendParameters<AudioCodec>::ToStringMap();
+std::map<std::string, std::string> AudioSenderParameters::ToStringMap() const {
+  auto params = RtpSenderParameters::ToStringMap();
   params["options"] = options.ToString();
   return params;
 }
@@ -301,11 +301,11 @@ cricket::MediaType VoiceMediaChannel::media_type() const {
   return cricket::MediaType::MEDIA_TYPE_AUDIO;
 }
 
-VideoSendParameters::VideoSendParameters() = default;
-VideoSendParameters::~VideoSendParameters() = default;
+VideoSenderParameters::VideoSenderParameters() = default;
+VideoSenderParameters::~VideoSenderParameters() = default;
 
-std::map<std::string, std::string> VideoSendParameters::ToStringMap() const {
-  auto params = RtpSendParameters<VideoCodec>::ToStringMap();
+std::map<std::string, std::string> VideoSenderParameters::ToStringMap() const {
+  auto params = RtpSenderParameters::ToStringMap();
   params["conference_mode"] = (conference_mode ? "yes" : "no");
   return params;
 }

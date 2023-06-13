@@ -179,7 +179,7 @@ class VoiceMediaShimChannel : public VoiceMediaChannel {
     send_impl()->SetSendCodecChangedCallback(std::move(callback));
   }
   // Implementation of VoiceMediaSendChannel
-  bool SetSendParameters(const AudioSendParameters& params) override {
+  bool SetSendParameters(const AudioSenderParameters& params) override {
     return send_impl()->SetSendParameters(params);
   }
   void SetSend(bool send) override { return send_impl()->SetSend(send); }
@@ -203,7 +203,7 @@ class VoiceMediaShimChannel : public VoiceMediaChannel {
     return send_impl()->SenderNonSenderRttEnabled();
   }
   // Implementation of VoiceMediaReceiveChannelInterface
-  bool SetRecvParameters(const AudioRecvParameters& params) override {
+  bool SetRecvParameters(const AudioReceiverParameters& params) override {
     return receive_impl()->SetRecvParameters(params);
   }
   webrtc::RtpParameters GetRtpReceiveParameters(uint32_t ssrc) const override {
@@ -382,7 +382,7 @@ class VideoMediaShimChannel : public VideoMediaChannel {
     return send_impl()->GetRtpSendParameters(ssrc);
   }
   // Send_Implementation of VideoMediaSendChannelInterface
-  bool SetSendParameters(const VideoSendParameters& params) override {
+  bool SetSendParameters(const VideoSenderParameters& params) override {
     return send_impl()->SetSendParameters(params);
   }
   absl::optional<VideoCodec> GetSendCodec() override {
@@ -484,7 +484,7 @@ class VideoMediaShimChannel : public VideoMediaChannel {
                                                              frame_transformer);
   }
   // Implementation of VideoMediaReceiveChannelInterface
-  bool SetRecvParameters(const VideoRecvParameters& params) override {
+  bool SetRecvParameters(const VideoReceiverParameters& params) override {
     return receive_impl()->SetRecvParameters(params);
   }
   webrtc::RtpParameters GetRtpReceiveParameters(uint32_t ssrc) const override {

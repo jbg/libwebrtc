@@ -377,9 +377,9 @@ class FakeVoiceMediaChannel : public RtpHelper<VoiceMediaChannel> {
   const std::vector<DtmfInfo>& dtmf_info_queue() const;
   const AudioOptions& options() const;
   int max_bps() const;
-  bool SetSendParameters(const AudioSendParameters& params) override;
+  bool SetSendParameters(const AudioSenderParameters& params) override;
 
-  bool SetRecvParameters(const AudioRecvParameters& params) override;
+  bool SetRecvParameters(const AudioReceiverParameters& params) override;
 
   void SetPlayout(bool playout) override;
   void SetSend(bool send) override;
@@ -484,8 +484,8 @@ class FakeVideoMediaChannel : public RtpHelper<VideoMediaChannel> {
   const std::map<uint32_t, rtc::VideoSinkInterface<webrtc::VideoFrame>*>&
   sinks() const;
   int max_bps() const;
-  bool SetSendParameters(const VideoSendParameters& params) override;
-  bool SetRecvParameters(const VideoRecvParameters& params) override;
+  bool SetSendParameters(const VideoSenderParameters& params) override;
+  bool SetRecvParameters(const VideoReceiverParameters& params) override;
   bool AddSendStream(const StreamParams& sp) override;
   bool RemoveSendStream(uint32_t ssrc) override;
 

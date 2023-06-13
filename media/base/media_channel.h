@@ -796,11 +796,10 @@ struct RtcpParameters {
   bool remote_estimate = false;
 };
 
-template <class Codec>
-struct RtpParameters {
-  virtual ~RtpParameters() = default;
+struct InternalRtpParameters {
+  virtual ~InternalRtpParameters() = default;
 
-  std::vector<Codec> codecs;
+  std::vector<cricket::Codec> codecs;
   std::vector<webrtc::RtpExtension> extensions;
   // For a send stream this is true if we've neogtiated a send direction,
   // for a receive stream this is true if we've negotiated a receive direction.
@@ -828,10 +827,7 @@ struct RtpParameters {
   }
 };
 
-// TODO(deadbeef): Rename to RtpSenderParameters, since they're intended to
-// encapsulate all the parameters needed for an RtpSender.
-template <class Codec>
-struct RtpSendParameters : RtpParameters<Codec> {
+struct RtpSenderParameters : InternalRtpParameters {
   int max_bandwidth_bps = -1;
   // This is the value to be sent in the MID RTP header extension (if the header
   // extension in included in the list of extensions).
@@ -840,7 +836,7 @@ struct RtpSendParameters : RtpParameters<Codec> {
 
  protected:
   std::map<std::string, std::string> ToStringMap() const override {
-    auto params = RtpParameters<Codec>::ToStringMap();
+    auto params = InternalRtpParameters::ToStringMap();
     params["max_bandwidth_bps"] = rtc::ToString(max_bandwidth_bps);
     params["mid"] = (mid.empty() ? "<not set>" : mid);
     params["extmap-allow-mixed"] = extmap_allow_mixed ? "true" : "false";
@@ -848,20 +844,20 @@ struct RtpSendParameters : RtpParameters<Codec> {
   }
 };
 
-struct AudioSendParameters : RtpSendParameters<AudioCodec> {
-  AudioSendParameters();
-  ~AudioSendParameters() override;
+struct AudioSenderParameters : RtpSenderParameters {
+  AudioSenderParameters();
+  ~AudioSenderParameters() override;
   AudioOptions options;
 
  protected:
   std::map<std::string, std::string> ToStringMap() const override;
 };
 
-struct AudioRecvParameters : RtpParameters<AudioCodec> {};
+struct AudioReceiverParameters : InternalRtpParameters {};
 
 class VoiceMediaSendChannelInterface : public MediaSendChannelInterface {
  public:
-  virtual bool SetSendParameters(const AudioSendParameters& params) = 0;
+  virtual bool SetSendParameters(const AudioSenderParameters& params) = 0;
   // Starts or stops sending (and potentially capture) of local audio.
   virtual void SetSend(bool send) = 0;
   // Configure stream for sending.
@@ -883,7 +879,7 @@ class VoiceMediaSendChannelInterface : public MediaSendChannelInterface {
 
 class VoiceMediaReceiveChannelInterface : public MediaReceiveChannelInterface {
  public:
-  virtual bool SetRecvParameters(const AudioRecvParameters& params) = 0;
+  virtual bool SetRecvParameters(const AudioReceiverParameters& params) = 0;
   // Get the receive parameters for the incoming stream identified by `ssrc`.
   virtual webrtc::RtpParameters GetRtpReceiveParameters(
       uint32_t ssrc) const = 0;
@@ -909,9 +905,9 @@ class VoiceMediaReceiveChannelInterface : public MediaReceiveChannelInterface {
 
 // TODO(deadbeef): Rename to VideoSenderParameters, since they're intended to
 // encapsulate all the parameters needed for a video RtpSender.
-struct VideoSendParameters : RtpSendParameters<VideoCodec> {
-  VideoSendParameters();
-  ~VideoSendParameters() override;
+struct VideoSenderParameters : RtpSenderParameters {
+  VideoSenderParameters();
+  ~VideoSenderParameters() override;
   // Use conference mode? This flag comes from the remote
   // description's SDP line 'a=x-google-flag:conference', copied over
   // by VideoChannel::SetRemoteContent_w, and ultimately used by
@@ -924,13 +920,11 @@ struct VideoSendParameters : RtpSendParameters<VideoCodec> {
   std::map<std::string, std::string> ToStringMap() const override;
 };
 
-// TODO(deadbeef): Rename to VideoReceiverParameters, since they're intended to
-// encapsulate all the parameters needed for a video RtpReceiver.
-struct VideoRecvParameters : RtpParameters<VideoCodec> {};
+struct VideoReceiverParameters : InternalRtpParameters {};
 
 class VideoMediaSendChannelInterface : public MediaSendChannelInterface {
  public:
-  virtual bool SetSendParameters(const VideoSendParameters& params) = 0;
+  virtual bool SetSendParameters(const VideoSenderParameters& params) = 0;
   // Gets the currently set codecs/payload types to be used for outgoing media.
   virtual absl::optional<VideoCodec> GetSendCodec() = 0;
   // Starts or stops transmission (and potentially capture) of local video.
@@ -956,7 +950,7 @@ class VideoMediaSendChannelInterface : public MediaSendChannelInterface {
 
 class VideoMediaReceiveChannelInterface : public MediaReceiveChannelInterface {
  public:
-  virtual bool SetRecvParameters(const VideoRecvParameters& params) = 0;
+  virtual bool SetRecvParameters(const VideoReceiverParameters& params) = 0;
   // Get the receive parameters for the incoming stream identified by `ssrc`.
   virtual webrtc::RtpParameters GetRtpReceiveParameters(
       uint32_t ssrc) const = 0;

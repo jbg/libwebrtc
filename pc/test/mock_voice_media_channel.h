@@ -116,11 +116,11 @@ class MockVoiceMediaChannel : public VoiceMediaChannel {
 
   MOCK_METHOD(bool,
               SetSendParameters,
-              (const AudioSendParameters& params),
+              (const AudioSenderParameters& params),
               (override));
   MOCK_METHOD(bool,
               SetRecvParameters,
-              (const AudioRecvParameters& params),
+              (const AudioReceiverParameters& params),
               (override));
   MOCK_METHOD(webrtc::RtpParameters,
               GetRtpReceiveParameters,
