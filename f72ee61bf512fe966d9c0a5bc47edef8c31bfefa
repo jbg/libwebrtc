@@ -16,6 +16,24 @@
       "message": "Jonas, didn\u0027t you have some fun with candidate priorities recently?",
       "revId": "f72ee61bf512fe966d9c0a5bc47edef8c31bfefa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50b22697_de9f18fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-06-14T13:16:38Z",
+      "side": 1,
+      "message": "For context, I was trying to run this CL as a A/B test with a libwebrtc-based server deployement. Didn\u0027t show a difference but that was because the issue was with the relay candidates sent by the client so this had no effect since the browser still sent the wrong priorities.\n\nWould like to merge it and then we need to discuss how to roll the fix out in Chrome and measure.\n\nAnother side effect of this bug is that you can have peerconnections where one side uses one pair for STUN + media while the other uses another one. We do have data for that and can show it.",
+      "parentUuid": "56efa15b_66acd3e4",
+      "revId": "f72ee61bf512fe966d9c0a5bc47edef8c31bfefa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
