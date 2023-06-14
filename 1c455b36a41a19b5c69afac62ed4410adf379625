@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbeb931c_4094f5ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-06-14T14:39:43Z",
+      "side": 1,
+      "message": "+1 with comment.\nIs this thread-safe? Or just \"as unsafe as it ever was\"?\n\n(thinking about yanking the generator away while it\u0027s being referenced)",
+      "revId": "1c455b36a41a19b5c69afac62ed4410adf379625",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d24156d_99e939ea",
+        "filename": "rtc_base/helpers_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-06-14T14:39:43Z",
+      "side": 1,
+      "message": "You can use EXPECT_CALL(*generator, Generate).Times(0) to explicitly test that it is not called; the expectation will be verified at the end of the test. (I think extra calls are reported as \"uninteresting function calls\" if you don\u0027t expect them or use StrictMock\u003cMockRandomGenerator\u003e, but I could be wrong about that.\n\n(I think there are multiple syntaxes for Times(0), but I don\u0027t remember the others).",
+      "revId": "1c455b36a41a19b5c69afac62ed4410adf379625",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
