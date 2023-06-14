@@ -17,6 +17,7 @@
 #include "api/audio_codecs/opus_audio_encoder_factory.h"
 #include "api/rtp_parameters.h"
 #include "api/stats/rtcstats_objects.h"
+#include "api/units/data_rate.h"
 #include "api/video_codecs/video_decoder_factory_template.h"
 #include "api/video_codecs/video_decoder_factory_template_dav1d_adapter.h"
 #include "api/video_codecs/video_decoder_factory_template_libvpx_vp8_adapter.h"
@@ -54,6 +55,12 @@ constexpr TimeDelta kDefaultTimeout = TimeDelta::Seconds(5);
 // TODO(https://crbug.com/webrtc/15076): Remove need for long rampup timeouts by
 // using simulated time.
 constexpr TimeDelta kLongTimeoutForRampingUp = TimeDelta::Minutes(1);
+
+// The target 1500 kbps may be subject to change in the future. What we're
+// interested in here is that all code paths that result in L1T3 result in the
+// same target bitrate.
+constexpr DataRate kExpectedTargetBitrateForL1T3 =
+    DataRate::KilobitsPerSec(1500);
 
 struct StringParamToString {
   std::string operator()(const ::testing::TestParamInfo<std::string>& info) {
@@ -245,11 +252,14 @@ class PeerConnectionEncodingsIntegrationTest : public ::testing::Test {
     return num_sending_layers == num_active_layers;
   }
 
+  // Returns true if the "outbound-rtp" with the specified RID has the specified
+  // scalability mode, frame height and (optionally) target bitrate.
   bool HasOutboundRtpWithRidAndScalabilityMode(
       rtc::scoped_refptr<PeerConnectionTestWrapper> pc_wrapper,
       absl::string_view rid,
       absl::string_view expected_scalability_mode,
-      uint32_t frame_height) {
+      uint32_t frame_height,
+      absl::optional<DataRate> target_bitrate = absl::nullopt) {
     rtc::scoped_refptr<const RTCStatsReport> report = GetStats(pc_wrapper);
     std::vector<const RTCOutboundRtpStreamStats*> outbound_rtps =
         report->GetStatsOfType<RTCOutboundRtpStreamStats>();
@@ -271,6 +281,21 @@ class PeerConnectionEncodingsIntegrationTest : public ::testing::Test {
       // Sleep to avoid log spam when this is used in ASSERT_TRUE_WAIT().
       rtc::Thread::Current()->SleepMs(1000);
       return false;
+    }
+    if (target_bitrate.has_value()) {
+      DataRate rtp_current_target = DataRate::BitsPerSec(0);
+      if (outbound_rtp->target_bitrate.is_defined()) {
+        rtp_current_target =
+            DataRate::BitsPerSec(*outbound_rtp->target_bitrate);
+      }
+      RTC_LOG(LS_INFO) << "Waiting for target bitrate ("
+                       << target_bitrate->kbps() << " kbps). Currently at "
+                       << rtp_current_target.kbps() << " kbps...";
+      if (rtp_current_target != *target_bitrate) {
+        // Sleep to avoid log spam when this is used in ASSERT_TRUE_WAIT().
+        rtc::Thread::Current()->SleepMs(1000);
+        return false;
+      }
     }
     return true;
   }
@@ -790,6 +815,77 @@ TEST_F(PeerConnectionEncodingsIntegrationTest,
   EXPECT_EQ(*outbound_rtps[0]->bytes_sent, 0u);
   EXPECT_EQ(*outbound_rtps[1]->bytes_sent, 0u);
   EXPECT_EQ(*outbound_rtps[2]->bytes_sent, 0u);
+}
+
+TEST_F(PeerConnectionEncodingsIntegrationTest, VP9_TargetBitrate_LegacyL1T3) {
+  rtc::scoped_refptr<PeerConnectionTestWrapper> local_pc_wrapper = CreatePc();
+  rtc::scoped_refptr<PeerConnectionTestWrapper> remote_pc_wrapper = CreatePc();
+  ExchangeIceCandidates(local_pc_wrapper, remote_pc_wrapper);
+
+  std::vector<cricket::SimulcastLayer> layers =
+      CreateLayers({"f", "h", "q"}, /*active=*/true);
+  rtc::scoped_refptr<RtpTransceiverInterface> transceiver =
+      AddTransceiverWithSimulcastLayers(local_pc_wrapper, remote_pc_wrapper,
+                                        layers);
+  std::vector<RtpCodecCapability> codecs =
+      GetCapabilitiesAndRestrictToCodec(local_pc_wrapper, "VP9");
+  transceiver->SetCodecPreferences(codecs);
+
+  // In legacy SVC, disabling the bottom two layers encodings is interpreted as
+  // disabling the bottom two spatial layers resulting in L1T3.
+  rtc::scoped_refptr<RtpSenderInterface> sender = transceiver->sender();
+  RtpParameters parameters = sender->GetParameters();
+  parameters.encodings[0].active = false;
+  parameters.encodings[1].active = false;
+  parameters.encodings[2].active = true;
+  sender->SetParameters(parameters);
+
+  NegotiateWithSimulcastTweaks(local_pc_wrapper, remote_pc_wrapper, layers);
+  local_pc_wrapper->WaitForConnection();
+  remote_pc_wrapper->WaitForConnection();
+
+  // Wait until 720p L1T3 has ramped up to target bitrate 1500 kbps.
+  ASSERT_TRUE_WAIT(
+      HasOutboundRtpWithRidAndScalabilityMode(
+          local_pc_wrapper, "f", "L1T3", 720, kExpectedTargetBitrateForL1T3),
+      kLongTimeoutForRampingUp.ms());
+}
+
+TEST_F(PeerConnectionEncodingsIntegrationTest, VP9_TargetBitrate_StandardL1T3) {
+  rtc::scoped_refptr<PeerConnectionTestWrapper> local_pc_wrapper = CreatePc();
+  rtc::scoped_refptr<PeerConnectionTestWrapper> remote_pc_wrapper = CreatePc();
+  ExchangeIceCandidates(local_pc_wrapper, remote_pc_wrapper);
+
+  std::vector<cricket::SimulcastLayer> layers =
+      CreateLayers({"f", "h", "q"}, /*active=*/true);
+  rtc::scoped_refptr<RtpTransceiverInterface> transceiver =
+      AddTransceiverWithSimulcastLayers(local_pc_wrapper, remote_pc_wrapper,
+                                        layers);
+  std::vector<RtpCodecCapability> codecs =
+      GetCapabilitiesAndRestrictToCodec(local_pc_wrapper, "VP9");
+  transceiver->SetCodecPreferences(codecs);
+
+  // With standard APIs, L1T3 is explicitly specified and the encodings refers
+  // to the RTP streams, not the spatial layers. The end result should be
+  // equivalent to the legacy L1T3 case.
+  rtc::scoped_refptr<RtpSenderInterface> sender = transceiver->sender();
+  RtpParameters parameters = sender->GetParameters();
+  parameters.encodings[0].active = true;
+  parameters.encodings[0].scale_resolution_down_by = 1.0;
+  parameters.encodings[0].scalability_mode = "L1T3";
+  parameters.encodings[1].active = false;
+  parameters.encodings[2].active = false;
+  sender->SetParameters(parameters);
+
+  NegotiateWithSimulcastTweaks(local_pc_wrapper, remote_pc_wrapper, layers);
+  local_pc_wrapper->WaitForConnection();
+  remote_pc_wrapper->WaitForConnection();
+
+  // Wait until 720p L1T3 has ramped up to target bitrate 1500 kbps.
+  ASSERT_TRUE_WAIT(
+      HasOutboundRtpWithRidAndScalabilityMode(
+          local_pc_wrapper, "f", "L1T3", 720, kExpectedTargetBitrateForL1T3),
+      kLongTimeoutForRampingUp.ms());
 }
 
 // Tests that use the standard path (specifying both `scalability_mode` and
