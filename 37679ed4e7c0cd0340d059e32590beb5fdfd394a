@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce103b95_b32cba44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-06-14T20:11:16Z",
+      "side": 1,
+      "message": "I wonder how much else goes wrong in that case.\nPlanning to land after branch cut without showing mercy ;-)",
+      "revId": "37679ed4e7c0cd0340d059e32590beb5fdfd394a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
