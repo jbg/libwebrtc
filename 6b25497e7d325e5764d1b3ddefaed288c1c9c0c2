@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9daf334d_bff4eaf5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20759
+      },
+      "writtenOn": "2023-06-14T16:10:13Z",
+      "side": 1,
+      "message": "We have discussed and found that there is also no need to dump userdata\nin logfiles. So I think we are in agreement 😊\n\nI have changed the patch, so that it only adds logging of packet size.",
+      "revId": "6b25497e7d325e5764d1b3ddefaed288c1c9c0c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
