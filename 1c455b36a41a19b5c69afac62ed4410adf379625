@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf1cf3d8_f734524c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17854
+      },
+      "writtenOn": "2023-06-14T22:36:02Z",
+      "side": 1,
+      "message": "Patchset #4 should be better. TestMode was unsafe previously, but the changes did make it more unsafe in non-test mode. So introduced locking only when setting a new generator.",
+      "parentUuid": "fbeb931c_4094f5ba",
+      "revId": "1c455b36a41a19b5c69afac62ed4410adf379625",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d24156d_99e939ea",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-06-14T14:39:43Z",
       "side": 1,
       "message": "You can use EXPECT_CALL(*generator, Generate).Times(0) to explicitly test that it is not called; the expectation will be verified at the end of the test. (I think extra calls are reported as \"uninteresting function calls\" if you don\u0027t expect them or use StrictMock\u003cMockRandomGenerator\u003e, but I could be wrong about that.\n\n(I think there are multiple syntaxes for Times(0), but I don\u0027t remember the others).",
+      "revId": "1c455b36a41a19b5c69afac62ed4410adf379625",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79cd7a61_40b6789e",
+        "filename": "rtc_base/helpers_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 17854
+      },
+      "writtenOn": "2023-06-14T22:36:02Z",
+      "side": 1,
+      "message": "Done!\n\nYou\u0027ve got the syntax and all else absolutely correct. I tried that earlier and reverted because gMock was convinced the mock object was being leaked. The problem was that I called SetDefaultRandomGenerator() _and then_ set EXPECT_CALL(*generator, Generate).Times(0). Of course, the *generator object has been deleted by that point so the expectation was set on garbage. So gMock went along with it and complained that the garbage object was being leaked.",
+      "parentUuid": "7d24156d_99e939ea",
       "revId": "1c455b36a41a19b5c69afac62ed4410adf379625",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
