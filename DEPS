@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'e931919cac06192efb43a60265b4db1024923d8c',
+  'chromium_revision': '8b933d3d3fc751251e1d92528b1f7d3e82bebc50',
 
   # Fetch the prebuilt binaries for llvm-cov and llvm-profdata. Needed to
   # process the raw profiles produced by instrumented targets (built with
@@ -48,7 +48,7 @@ deps = {
   'src/base':
     'https://chromium.googlesource.com/chromium/src/base@10164c5212afa28d54e94477b50254ae676d7f9f',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@36b58e2db19c65381222554c3f167e39e4cb85a0',
+    'https://chromium.googlesource.com/chromium/src/build@5ecf6e5689b96c87057f5d5a818c271255c93845',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@3739a3619309af3b788379ad0936ca00b981616e',
   # Gradle 6.6.1. Used for testing Android Studio project generation for WebRTC.
@@ -57,13 +57,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@d43c4a2b4f4981fcb77c59dc2e478beeb5d1df64',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@da7e8dee0ca0da96ba3d2b5160f6b4b5efd1b6a0',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@cd203c2a70491b124ecbc29985bfe49ded97d0b8',
+    'https://chromium.googlesource.com/chromium/src/testing@debac21fcc153c48f5c28fe09f0247e482c27e48',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@df1f3edceeaadaed9ca5893441e811cda14a65d6',
+    'https://chromium.googlesource.com/chromium/src/third_party@0d2f448f9d25016655de1362ccb155850b88b363',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -340,7 +340,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@24365a2574e38ba191e71a2eae560eb372376649',
+    'https://chromium.googlesource.com/chromium/src/tools@c0c49cd9a269654c02cdf4c2ecb456e67b299699',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
