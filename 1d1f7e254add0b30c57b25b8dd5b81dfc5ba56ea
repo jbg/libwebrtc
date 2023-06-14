@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a119ed8c_ff041933",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-06-14T09:19:43Z",
+      "side": 1,
+      "message": "LGTM assuming no change in behavior",
+      "revId": "1d1f7e254add0b30c57b25b8dd5b81dfc5ba56ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
