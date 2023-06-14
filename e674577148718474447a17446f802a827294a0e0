@@ -33,6 +33,24 @@
       "message": "Sorry for the negativity, but I don\u0027t think we should log user data into the text log, even if it is only at a verbose level.\n\nIs there a compelling reason why this needs to be checked in? I do see the value of these logs, but maybe you can keep them as a local patch?",
       "revId": "e674577148718474447a17446f802a827294a0e0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3906be35_c772a44f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20759
+      },
+      "writtenOn": "2023-06-14T10:05:21Z",
+      "side": 1,
+      "message": "hi, many thanks for your comment. I will discuss with the team and see\nif we can come up with a better patch.\n\nIs there a way to forward FlexFEC packets to JS so that it can be logged\nin the application ?\n\nOr is there a way to hide this logic behind a flag ?",
+      "parentUuid": "18873f2c_6f142387",
+      "revId": "e674577148718474447a17446f802a827294a0e0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
