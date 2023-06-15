@@ -34,6 +34,41 @@
       "parentUuid": "56efa15b_66acd3e4",
       "revId": "f72ee61bf512fe966d9c0a5bc47edef8c31bfefa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "858ec59e_a17bf85b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-06-15T09:04:22Z",
+      "side": 1,
+      "message": "this looks find to me,\n\n1) but i know a friend that does priority munging in the app\n(i.e modify the candidates before sending them into webrtc.)\nto affect which get selected...\ni would never do that 😊\n\n2) re different candidates on different peers,\nthe ice_controlled should react the the stun-ping\nfrom the ice_controlling and adjust it\u0027s locally selected pair ?\nso it is not unexpected for this to be a transient state,\nbut it sounds weird if it is a steady-state.",
+      "parentUuid": "50b22697_de9f18fe",
+      "revId": "f72ee61bf512fe966d9c0a5bc47edef8c31bfefa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7406f54_f78b67c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-06-15T09:04:22Z",
+      "side": 1,
+      "message": "A nit is that the name \"AdjustIcePriority\" is kind a broad,\nand I don\u0027t think it would be bad with a more explaning name.",
+      "revId": "f72ee61bf512fe966d9c0a5bc47edef8c31bfefa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
