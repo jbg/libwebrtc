@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86072e20_812ce30e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-06-15T17:07:43Z",
+      "side": 1,
+      "message": "LGTM with one optional comment cleanup.",
+      "revId": "ee4091aeee30d9124bdfc990e15206a430cd7e80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a011a97f_51c47352",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-06-15T17:07:43Z",
+      "side": 1,
+      "message": "NIT: Wording a bit awkward, consider:\n\n//Will be set to true while copying the frame data to the `current_frame` if we can already determine that the content of the new frame differs from the previous.",
+      "range": {
+        "startLine": 437,
+        "startChar": 0,
+        "endLine": 439,
+        "endChar": 22
+      },
+      "revId": "ee4091aeee30d9124bdfc990e15206a430cd7e80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
