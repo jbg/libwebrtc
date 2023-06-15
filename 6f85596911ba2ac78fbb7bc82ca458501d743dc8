@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd70bcf5_5ec0a6d8",
+        "filename": "video/adaptation/video_stream_encoder_resource_manager.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-06-15T07:59:06Z",
+      "side": 1,
+      "message": "I assume you now have an understanding of subtle difference between |encoder_config.number_of_streams| and |video_codec.numberOfSimulcastStreams|. Please add explaining comments to the struct declarations for future adventurers, exploring this labyrinth.",
+      "range": {
+        "startLine": 828,
+        "startChar": 6,
+        "endLine": 828,
+        "endChar": 47
+      },
+      "revId": "6f85596911ba2ac78fbb7bc82ca458501d743dc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
