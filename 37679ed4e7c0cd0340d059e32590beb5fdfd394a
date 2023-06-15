@@ -33,6 +33,24 @@
       "message": "Add a\u003dssrc line? This could feasibly be rejected because there\u0027s a ssrc-group with unrecognized SSRCs, though it looks like this is currently ignored",
       "revId": "37679ed4e7c0cd0340d059e32590beb5fdfd394a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a98064bd_5bfbac10",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 5081,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-06-15T05:24:36Z",
+      "side": 1,
+      "message": "True! Bad news is that we do happily parse a\n  ssrc-group 1234 1235\nwhich only has ssrc lines for the first. More consistency checks neede, will do as follow-up CL.",
+      "parentUuid": "4993ec70_5b6af7b9",
+      "revId": "37679ed4e7c0cd0340d059e32590beb5fdfd394a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
