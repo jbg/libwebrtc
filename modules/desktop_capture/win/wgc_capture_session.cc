@@ -90,6 +90,12 @@ void RecordGetFrameResult(GetFrameResult error) {
       static_cast<int>(error), static_cast<int>(GetFrameResult::kMaxValue));
 }
 
+bool SizeHasChanged(ABI::Windows::Graphics::SizeInt32 size_new,
+                    ABI::Windows::Graphics::SizeInt32 size_old) {
+  return (size_new.Height != size_old.Height ||
+          size_new.Width != size_old.Width);
+}
+
 }  // namespace
 
 WgcCaptureSession::WgcCaptureSession(ComPtr<ID3D11Device> d3d11_device,
@@ -370,7 +376,7 @@ HRESULT WgcCaptureSession::ProcessFrame() {
   // If the size changed, we must resize `mapped_texture_` and `frame_pool_` to
   // fit the new size. This must be done before `CopySubresourceRegion` so that
   // the textures are the same size.
-  if (size_.Height != new_size.Height || size_.Width != new_size.Width) {
+  if (SizeHasChanged(new_size, size_)) {
     hr = CreateMappedTexture(texture_2D, new_size.Width, new_size.Height);
     if (FAILED(hr)) {
       RecordGetFrameResult(GetFrameResult::kResizeMappedTextureFailed);
@@ -426,21 +432,43 @@ HRESULT WgcCaptureSession::ProcessFrame() {
   }
 
   DesktopFrame* current_frame = queue_.current_frame();
+  DesktopFrame* previous_frame = queue_.previous_frame();
+
+  // Will be set to true if we already while copying the frame data to the
+  // `current_frame` can determine that the content of the new frame differs
+  // from the previous. The idea is to get a low-complexity indication of if
+  // the content is static or not without performing a full/deep memory
+  // comparison.
+  bool frame_content_has_changed = false;
+
+  const bool frame_content_can_be_compared = FrameContentCanBeCompared();
 
   // Make a copy of the data pointed to by `map_info.pData` to the preallocated
   // `current_frame` so we are free to unmap our texture.
   uint8_t* src_data = static_cast<uint8_t*>(map_info.pData);
   uint8_t* dst_data = current_frame->data();
+  uint8_t* prev_data =
+      frame_content_can_be_compared ? previous_frame->data() : nullptr;
+  RTC_DCHECK_EQ(map_info.RowPitch, current_frame->stride());
+  const int width_in_bytes = map_info.RowPitch;
+  const int middle_pixel_offset =
+      (image_width / 2) * DesktopFrame::kBytesPerPixel;
   for (int i = 0; i < image_height; i++) {
-    memcpy(dst_data, src_data, current_frame->stride());
-    dst_data += current_frame->stride();
-    src_data += map_info.RowPitch;
+    memcpy(dst_data, src_data, width_in_bytes);
+    if (prev_data && !frame_content_has_changed) {
+      uint8_t* previous_pixel = prev_data + middle_pixel_offset;
+      uint8_t* current_pixel = dst_data + middle_pixel_offset;
+      frame_content_has_changed =
+          memcmp(previous_pixel, current_pixel, DesktopFrame::kBytesPerPixel);
+      prev_data += width_in_bytes;
+    }
+    dst_data += width_in_bytes;
+    src_data += width_in_bytes;
   }
 
   d3d_context->Unmap(mapped_texture_.Get(), 0);
 
   if (allow_zero_hertz()) {
-    DesktopFrame* previous_frame = queue_.previous_frame();
     if (previous_frame) {
       const int previous_frame_size =
           previous_frame->stride() * previous_frame->size().height();
@@ -450,13 +478,21 @@ HRESULT WgcCaptureSession::ProcessFrame() {
       // Compare the latest frame with the previous and check if the frames are
       // equal (both contain the exact same pixel values).
       if (current_frame_size == previous_frame_size) {
-        const bool frames_are_equal = !memcmp(
-            current_frame->data(), previous_frame->data(), current_frame_size);
-        if (!frames_are_equal) {
-          // TODO(https://crbug.com/1421242): If we had an API to report proper
-          // damage regions we should be doing AddRect() with a SetRect() call
-          // on a resize.
+        if (frame_content_has_changed) {
+          // Mark frame as damaged based on existing light-weight indicator.
+          // Avoids deep memcmp of complete frame and saves resources.
           damage_region_.SetRect(DesktopRect::MakeSize(current_frame->size()));
+        } else {
+          const bool frames_are_equal =
+              !memcmp(current_frame->data(), previous_frame->data(),
+                      current_frame_size);
+          if (!frames_are_equal) {
+            // TODO(https://crbug.com/1421242): If we had an API to report
+            // proper damage regions we should be doing AddRect() with a
+            // SetRect() call on a resize.
+            damage_region_.SetRect(
+                DesktopRect::MakeSize(current_frame->size()));
+          }
         }
       } else {
         // Mark resized frames as damaged.
@@ -495,6 +531,18 @@ void WgcCaptureSession::RemoveEventHandler() {
     if (FAILED(hr))
       RTC_LOG(LS_WARNING) << "Failed to remove Closed event handler: " << hr;
   }
+}
+
+bool WgcCaptureSession::FrameContentCanBeCompared() {
+  DesktopFrame* current_frame = queue_.current_frame();
+  DesktopFrame* previous_frame = queue_.previous_frame();
+  if (!current_frame || !previous_frame) {
+    return false;
+  }
+  if (current_frame->stride() != previous_frame->stride()) {
+    return false;
+  }
+  return current_frame->size().equals(previous_frame->size());
 }
 
 }  // namespace webrtc
