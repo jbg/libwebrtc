@@ -22,6 +22,30 @@
       },
       "revId": "6f85596911ba2ac78fbb7bc82ca458501d743dc8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25f95076_ad0dbc51",
+        "filename": "video/adaptation/video_stream_encoder_resource_manager.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-06-15T09:56:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd70bcf5_5ec0a6d8",
+      "range": {
+        "startLine": 828,
+        "startChar": 6,
+        "endLine": 828,
+        "endChar": 47
+      },
+      "revId": "6f85596911ba2ac78fbb7bc82ca458501d743dc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
