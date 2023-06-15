@@ -69,6 +69,42 @@
       "message": "A nit is that the name \"AdjustIcePriority\" is kind a broad,\nand I don\u0027t think it would be bad with a more explaning name.",
       "revId": "f72ee61bf512fe966d9c0a5bc47edef8c31bfefa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1733fdb6_b13789f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-06-15T11:01:43Z",
+      "side": 1,
+      "message": "WebRTC-IncreaseIceCandidatePriorityHostSrflx?",
+      "parentUuid": "d7406f54_f78b67c4",
+      "revId": "f72ee61bf512fe966d9c0a5bc47edef8c31bfefa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68d03972_7f227f0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-06-15T11:01:43Z",
+      "side": 1,
+      "message": "Interesting... but this won\u0027t let you modify the local candidates? And the problem is that the priority of the local candidate gets put into the STUN priority fields.\n\nAttached a screenshot to https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d13195#c25, can share the webrtc-internals dump if you want.",
+      "parentUuid": "858ec59e_a17bf85b",
+      "revId": "f72ee61bf512fe966d9c0a5bc47edef8c31bfefa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
