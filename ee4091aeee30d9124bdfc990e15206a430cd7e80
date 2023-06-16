@@ -39,6 +39,30 @@
       },
       "revId": "ee4091aeee30d9124bdfc990e15206a430cd7e80",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91e6778f_9cbd0be0",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-06-16T09:31:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a011a97f_51c47352",
+      "range": {
+        "startLine": 437,
+        "startChar": 0,
+        "endLine": 439,
+        "endChar": 22
+      },
+      "revId": "ee4091aeee30d9124bdfc990e15206a430cd7e80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
