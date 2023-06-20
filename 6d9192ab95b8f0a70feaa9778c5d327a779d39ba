@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dae5b3f1_ef3d26e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-06-20T19:22:01Z",
+      "side": 1,
+      "message": "Wonder if returning nullopt from audio is appropriate. Otherwise LGTM.",
+      "revId": "6d9192ab95b8f0a70feaa9778c5d327a779d39ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23d8464a_c2edf056",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1334,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-06-20T19:22:01Z",
+      "side": 1,
+      "message": "This seems odd. Can\u0027t you get the send codec from a voice channel? Or is it just that nobody\u0027s asked for it before, so you don\u0027t have an existing function to retrofit?\n\nThe VoiceEngine API has send_codecs() and receive_codecs() in it.",
+      "revId": "6d9192ab95b8f0a70feaa9778c5d327a779d39ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
