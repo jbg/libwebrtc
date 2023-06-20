@@ -234,7 +234,6 @@ rtc::ArrayView<AudioFrame* const> AudioMixerImpl::GetAudioFromSources(
   std::sort(audio_source_mixing_data_view.begin(),
             audio_source_mixing_data_view.end(), ShouldMixBefore);
 
-  int max_audio_frame_counter = max_sources_to_mix_;
   int ramp_list_length = 0;
   int audio_to_mix_count = 0;
   // Go through list in order and put unmuted frames in result list.
@@ -244,18 +243,18 @@ rtc::ArrayView<AudioFrame* const> AudioMixerImpl::GetAudioFromSources(
       p.source_status()->is_mixed = false;
       continue;
     }
+    // Keep frame in the mix to ramp out if it was previously mixed.
+    if (!p.source_status()->is_mixed &&
+        audio_to_mix_count >= max_sources_to_mix_) {
+      continue;
+    }
 
     // Add frame to result vector for mixing.
-    bool is_mixed = false;
-    if (max_audio_frame_counter > 0) {
-      --max_audio_frame_counter;
-      helper_containers_->audio_to_mix[audio_to_mix_count++] =
-          p.mutable_audio_frame();
-      helper_containers_->ramp_list[ramp_list_length++] =
-          SourceFrame(p.source_status(), p.mutable_audio_frame(), false, -1);
-      is_mixed = true;
-    }
-    p.source_status()->is_mixed = is_mixed;
+    helper_containers_->audio_to_mix[audio_to_mix_count++] =
+        p.mutable_audio_frame();
+    helper_containers_->ramp_list[ramp_list_length++] =
+        SourceFrame(p.source_status(), p.mutable_audio_frame(), false, -1);
+    p.source_status()->is_mixed = audio_to_mix_count <= max_sources_to_mix_;
   }
   RampAndUpdateGain(rtc::ArrayView<SourceFrame>(
       helper_containers_->ramp_list.data(), ramp_list_length));
