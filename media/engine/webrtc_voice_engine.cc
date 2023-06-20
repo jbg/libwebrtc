@@ -1330,6 +1330,10 @@ bool WebRtcVoiceSendChannel::SetSendParameters(
   return SetOptions(params.options);
 }
 
+absl::optional<Codec> WebRtcVoiceSendChannel::GetSendCodec() const {
+  return absl::nullopt;
+}
+
 // Utility function called from SetSendParameters() to extract current send
 // codec settings from the given list of codecs (originally from SDP). Both send
 // and receive streams may be reconfigured based on the new settings.
