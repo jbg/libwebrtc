@@ -49,6 +49,13 @@ class TestVideoCapturer : public rtc::VideoSourceInterface<VideoFrame> {
                              int height,
                              const absl::optional<int>& max_fps);
 
+  // Starts or resumes video capturing. Can be called multiple times during
+  // lifetime of this object.
+  virtual void Start() = 0;
+  // Stops or pauses video capturing. Can be called multiple times during
+  // lifetime of this object.
+  virtual void Stop() = 0;
+
   virtual int GetFrameWidth() const = 0;
   virtual int GetFrameHeight() const = 0;
 
