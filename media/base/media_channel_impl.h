@@ -79,6 +79,9 @@ class MediaChannelUtil {
   virtual ~MediaChannelUtil();
   // Returns the absolute sendtime extension id value from media channel.
   virtual int GetRtpSendTimeExtnId() const;
+
+  webrtc::Transport* transport() { return &transport_; }
+
   // Base method to send packet using MediaChannelNetworkInterface.
   bool SendPacket(rtc::CopyOnWriteBuffer* packet,
                   const rtc::PacketOptions& options);
@@ -121,10 +124,6 @@ class MediaChannelUtil {
       rtc::scoped_refptr<webrtc::FrameTransformerInterface> frame_transformer);
 
  protected:
-  int SetOptionLocked(MediaChannelNetworkInterface::SocketType type,
-                      rtc::Socket::Option opt,
-                      int option) RTC_RUN_ON(network_thread_);
-
   bool DscpEnabled() const;
 
   // This is the DSCP value used for both RTP and RTCP channels if DSCP is
@@ -132,34 +131,70 @@ class MediaChannelUtil {
   rtc::DiffServCodePoint PreferredDscp() const;
   void SetPreferredDscp(rtc::DiffServCodePoint new_dscp);
 
-  rtc::scoped_refptr<webrtc::PendingTaskSafetyFlag> network_safety();
-
-  // Utility implementation for derived classes (video/voice) that applies
-  // the packet options and passes the data onwards to `SendPacket`.
-  void SendRtp(const uint8_t* data,
-               size_t len,
-               const webrtc::PacketOptions& options);
-
-  void SendRtcp(const uint8_t* data, size_t len);
-
  private:
-  // Apply the preferred DSCP setting to the underlying network interface RTP
-  // and RTCP channels. If DSCP is disabled, then apply the default DSCP value.
-  void UpdateDscp() RTC_RUN_ON(network_thread_);
+  // Implementation of the webrtc::Transport interface required
+  // by Call().
+  class TransportForMediaChannels : public webrtc::Transport {
+   public:
+    TransportForMediaChannels(webrtc::TaskQueueBase* network_thread,
+                              bool enable_dscp,
+                              MediaChannelUtil* owner);
 
-  bool DoSendPacket(rtc::CopyOnWriteBuffer* packet,
-                    bool rtcp,
-                    const rtc::PacketOptions& options);
+    virtual ~TransportForMediaChannels();
 
-  const bool enable_dscp_;
-  const rtc::scoped_refptr<webrtc::PendingTaskSafetyFlag> network_safety_
-      RTC_PT_GUARDED_BY(network_thread_);
-  webrtc::TaskQueueBase* const network_thread_;
-  MediaChannelNetworkInterface* network_interface_
-      RTC_GUARDED_BY(network_thread_) = nullptr;
-  rtc::DiffServCodePoint preferred_dscp_ RTC_GUARDED_BY(network_thread_) =
-      rtc::DSCP_DEFAULT;
+    // Implementation of webrtc::Transport
+    bool SendRtp(const uint8_t* packet,
+                 size_t length,
+                 const webrtc::PacketOptions& options) override;
+    bool SendRtcp(const uint8_t* packet, size_t length) override;
+
+    // Not implementation of webrtc::Transport
+    void SetInterface(MediaChannelNetworkInterface* iface);
+
+    int SetOption(MediaChannelNetworkInterface::SocketType type,
+                  rtc::Socket::Option opt,
+                  int option);
+
+    // TODO(hta): Make private when callers have been moved.
+    bool DoSendPacket(rtc::CopyOnWriteBuffer* packet,
+                      bool rtcp,
+                      const rtc::PacketOptions& options);
+
+    bool HasNetworkInterface() const {
+      RTC_DCHECK_RUN_ON(network_thread_);
+      return network_interface_ != nullptr;
+    }
+    bool DscpEnabled() const { return enable_dscp_; }
+    rtc::DiffServCodePoint PreferredDscp() const {
+      RTC_DCHECK_RUN_ON(network_thread_);
+      return preferred_dscp_;
+    }
+
+    void SetPreferredDscp(rtc::DiffServCodePoint new_dscp);
+
+   private:
+    // Apply the preferred DSCP setting to the underlying network interface RTP
+    // and RTCP channels. If DSCP is disabled, then apply the default DSCP
+    // value.
+    void UpdateDscp() RTC_RUN_ON(network_thread_);
+
+    int SetOptionLocked(MediaChannelNetworkInterface::SocketType type,
+                        rtc::Socket::Option opt,
+                        int option) RTC_RUN_ON(network_thread_);
+
+    const rtc::scoped_refptr<webrtc::PendingTaskSafetyFlag> network_safety_
+        RTC_PT_GUARDED_BY(network_thread_);
+    webrtc::TaskQueueBase* const network_thread_;
+    const bool enable_dscp_;
+    MediaChannelNetworkInterface* network_interface_
+        RTC_GUARDED_BY(network_thread_) = nullptr;
+    rtc::DiffServCodePoint preferred_dscp_ RTC_GUARDED_BY(network_thread_) =
+        rtc::DSCP_DEFAULT;
+    MediaChannelUtil* const owner_;
+  };
+
   bool extmap_allow_mixed_ = false;
+  TransportForMediaChannels transport_;
 };
 
 // The `MediaChannel` class implements both the SendChannel and
@@ -179,9 +214,9 @@ class MediaChannel : public MediaChannelUtil,
     // TODO(bugs.webrtc.org/13931): Remove kBoth when usage is removed.
   };
 
-  explicit MediaChannel(Role role,
-                        webrtc::TaskQueueBase* network_thread,
-                        bool enable_dscp = false);
+  MediaChannel(Role role,
+               webrtc::TaskQueueBase* network_thread,
+               bool enable_dscp = false);
   virtual ~MediaChannel() = default;
 
   Role role() const { return role_; }

@@ -2691,10 +2691,10 @@ class WebRtcVideoChannelTest : public WebRtcVideoEngineTest {
 
   // Casts a shim channel to a webrtc::Transport. Used once.
   webrtc::Transport* ChannelImplAsTransport(VideoMediaChannel* channel) {
-    return static_cast<webrtc::Transport*>(
-        static_cast<cricket::WebRtcVideoSendChannel*>(
-            static_cast<VideoMediaShimChannel*>(channel)
-                ->SendImplForTesting()));
+    return static_cast<cricket::WebRtcVideoSendChannel*>(
+               static_cast<VideoMediaShimChannel*>(channel)
+                   ->SendImplForTesting())
+        ->transport();
   }
 
   cricket::VideoCodec GetEngineCodec(const std::string& name) {
