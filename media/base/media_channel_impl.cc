@@ -61,7 +61,8 @@ MediaChannelUtil::MediaChannelUtil(TaskQueueBase* network_thread,
                                    bool enable_dscp)
     : enable_dscp_(enable_dscp),
       network_safety_(PendingTaskSafetyFlag::CreateDetachedInactive()),
-      network_thread_(network_thread) {}
+      network_thread_(network_thread),
+      transport_(this) {}
 
 MediaChannel::MediaChannel(Role role,
                            TaskQueueBase* network_thread,
@@ -315,5 +316,21 @@ cricket::MediaType VideoMediaChannel::media_type() const {
 }
 
 void VideoMediaChannel::SetVideoCodecSwitchingEnabled(bool enabled) {}
+
+bool MediaChannelUtil::TransportForMediaChannels::SendRtp(
+    const uint8_t* packet,
+    size_t length,
+    const webrtc::PacketOptions& options) {
+  // TODO: Stop bouncing
+  owner_->SendRtp(packet, length, options);
+  return true;
+}
+
+bool MediaChannelUtil::TransportForMediaChannels::SendRtcp(
+    const uint8_t* packet,
+    size_t length) {
+  owner_->SendRtcp(packet, length);
+  return true;
+}
 
 }  // namespace cricket

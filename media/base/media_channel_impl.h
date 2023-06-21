@@ -79,6 +79,9 @@ class MediaChannelUtil {
   virtual ~MediaChannelUtil();
   // Returns the absolute sendtime extension id value from media channel.
   virtual int GetRtpSendTimeExtnId() const;
+
+  webrtc::Transport* transport() { return &transport_; }
+
   // Base method to send packet using MediaChannelNetworkInterface.
   bool SendPacket(rtc::CopyOnWriteBuffer* packet,
                   const rtc::PacketOptions& options);
@@ -143,6 +146,21 @@ class MediaChannelUtil {
   void SendRtcp(const uint8_t* data, size_t len);
 
  private:
+  // Implementation of the webrtc::Transport interface required
+  // by Call().
+  class TransportForMediaChannels : public webrtc::Transport {
+   public:
+    explicit TransportForMediaChannels(MediaChannelUtil* owner)
+        : owner_(owner) {}
+    bool SendRtp(const uint8_t* packet,
+                 size_t length,
+                 const webrtc::PacketOptions& options) override;
+    bool SendRtcp(const uint8_t* packet, size_t length) override;
+
+   private:
+    MediaChannelUtil* const owner_;
+  };
+
   // Apply the preferred DSCP setting to the underlying network interface RTP
   // and RTCP channels. If DSCP is disabled, then apply the default DSCP value.
   void UpdateDscp() RTC_RUN_ON(network_thread_);
@@ -160,6 +178,7 @@ class MediaChannelUtil {
   rtc::DiffServCodePoint preferred_dscp_ RTC_GUARDED_BY(network_thread_) =
       rtc::DSCP_DEFAULT;
   bool extmap_allow_mixed_ = false;
+  TransportForMediaChannels transport_;
 };
 
 // The `MediaChannel` class implements both the SendChannel and
