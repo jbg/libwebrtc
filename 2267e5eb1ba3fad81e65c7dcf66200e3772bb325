@@ -122,6 +122,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ec1d51c_23142738",
+        "filename": "common_video/h265/h265_common.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 20759
+      },
+      "writtenOn": "2023-06-21T09:06:37Z",
+      "side": 1,
+      "message": "small suggestion: Add a note saying which NALU types are defined where.\nFor example 0-40 is defined in HEVC bitstream spec,\nand AP,FU is defined in RFC 7798",
+      "revId": "2267e5eb1ba3fad81e65c7dcf66200e3772bb325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a8ca44c_db72e48f",
         "filename": "common_video/h265/h265_common.h",
         "patchSetId": 4
@@ -150,6 +167,23 @@
       "writtenOn": "2023-05-24T05:44:14Z",
       "side": 1,
       "message": "shouldn\u0027t this be included in slice parser instead of pps parser?",
+      "revId": "2267e5eb1ba3fad81e65c7dcf66200e3772bb325",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "422e0fea_8bdff58b",
+        "filename": "common_video/h265/h265_pps_parser.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 20759
+      },
+      "writtenOn": "2023-06-21T09:06:37Z",
+      "side": 1,
+      "message": "perhaps more clean if bool type is initialized to \"false\"...",
       "revId": "2267e5eb1ba3fad81e65c7dcf66200e3772bb325",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
