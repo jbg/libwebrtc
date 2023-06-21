@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96fa8cb7_f54c41dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6193
+      },
+      "writtenOn": "2023-06-21T10:28:32Z",
+      "side": 1,
+      "message": "FTR breakages are because of an incompatible change for the Luci infra in head, there is no guarantee new infra changes remain compatible with older ones, like in a release branch. NO_TRY\u003dTRUE is fine to use here.",
+      "revId": "2b33893386cc22d3b762964d804ac63e7fd1e3cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
