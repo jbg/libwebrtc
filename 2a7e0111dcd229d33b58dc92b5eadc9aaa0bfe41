@@ -22,6 +22,30 @@
       },
       "revId": "2a7e0111dcd229d33b58dc92b5eadc9aaa0bfe41",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85a3e4f5_bbe01d6e",
+        "filename": "test/test_video_capturer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2023-06-21T14:07:55Z",
+      "side": 1,
+      "message": "Here adaptation is enabled, but not required at this particular moment. For the next frame values may change and we will need to adapt frame.",
+      "parentUuid": "6af54f09_c6d5bff8",
+      "range": {
+        "startLine": 83,
+        "startChar": 4,
+        "endLine": 83,
+        "endChar": 58
+      },
+      "revId": "2a7e0111dcd229d33b58dc92b5eadc9aaa0bfe41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
