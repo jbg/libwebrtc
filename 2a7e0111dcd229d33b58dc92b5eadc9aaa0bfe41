@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6af54f09_c6d5bff8",
+        "filename": "test/test_video_capturer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2023-06-21T13:47:43Z",
+      "side": 1,
+      "message": "Isn\u0027t the !enable_adaptation already handled here ?",
+      "range": {
+        "startLine": 83,
+        "startChar": 4,
+        "endLine": 83,
+        "endChar": 58
+      },
+      "revId": "2a7e0111dcd229d33b58dc92b5eadc9aaa0bfe41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
