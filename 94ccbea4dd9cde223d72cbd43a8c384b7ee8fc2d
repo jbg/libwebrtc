@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "284f3821_944a2dcb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-06-22T08:44:34Z",
+      "side": 1,
+      "message": "Still LGTM",
+      "revId": "94ccbea4dd9cde223d72cbd43a8c384b7ee8fc2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
