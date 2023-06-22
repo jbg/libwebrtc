@@ -77,14 +77,31 @@ void DataChannelController::OnChannelStateChanged(
     SctpDataChannel* channel,
     DataChannelInterface::DataState state) {
   RTC_DCHECK_RUN_ON(network_thread());
+
+  // Stash away the internal id here in case `OnSctpDataChannelClosed` ends up
+  // releasing the last reference to the channel.
+  const int channel_id = channel->internal_id();
+
   if (state == DataChannelInterface::DataState::kClosed)
     OnSctpDataChannelClosed(channel);
 
+<<<<<<< HEAD   (d20849 [M114] sdp: reject duplicate ssrcs in ssrc-groups)
   signaling_thread()->PostTask(
       SafeTask(signaling_safety_.flag(),
                [this, channel_id = channel->internal_id(), state = state] {
                  pc_->OnSctpDataChannelStateChanged(channel_id, state);
                }));
+=======
+  DataChannelUsage channel_usage = sctp_data_channels_n_.empty()
+                                       ? DataChannelUsage::kHaveBeenUsed
+                                       : DataChannelUsage::kInUse;
+  signaling_thread()->PostTask(SafeTask(
+      signaling_safety_.flag(), [this, channel_id, state, channel_usage] {
+        RTC_DCHECK_RUN_ON(signaling_thread());
+        channel_usage_ = channel_usage;
+        pc_->OnSctpDataChannelStateChanged(channel_id, state);
+      }));
+>>>>>>> CHANGE (eec181 Avoid touching channel after OnSctpDataChannelClosed)
 }
 
 void DataChannelController::OnDataReceived(
