@@ -16,6 +16,24 @@
       "message": "This will also skip L2T3 (non DD) as well, but it\u0027s fine by me.",
       "revId": "13f8c3b2d50374bec27d0aef3e270e67455c47eb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0428d538_c2794528",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-06-26T17:00:59Z",
+      "side": 1,
+      "message": "IIUC this will be fixed soon, so let\u0027s land this one and re-enable it later.",
+      "parentUuid": "517ef257_2c830a5e",
+      "revId": "13f8c3b2d50374bec27d0aef3e270e67455c47eb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
