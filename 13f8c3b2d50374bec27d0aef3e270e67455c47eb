@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "517ef257_2c830a5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5366
+      },
+      "writtenOn": "2023-06-26T16:58:59Z",
+      "side": 1,
+      "message": "This will also skip L2T3 (non DD) as well, but it\u0027s fine by me.",
+      "revId": "13f8c3b2d50374bec27d0aef3e270e67455c47eb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
