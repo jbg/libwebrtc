@@ -50,6 +50,7 @@
 #include "rtc_base/numerics/safe_conversions.h"
 #include "rtc_base/rtc_certificate_generator.h"
 #include "rtc_base/system/file_wrapper.h"
+#include "system_wrappers/include/field_trial.h"
 
 namespace webrtc {
 
@@ -293,9 +294,9 @@ rtc::scoped_refptr<AudioTrackInterface> PeerConnectionFactory::CreateAudioTrack(
 std::unique_ptr<RtcEventLog> PeerConnectionFactory::CreateRtcEventLog_w() {
   RTC_DCHECK_RUN_ON(worker_thread());
 
-  auto encoding_type = RtcEventLog::EncodingType::Legacy;
-  if (IsTrialEnabled("WebRTC-RtcEventLogNewFormat"))
-    encoding_type = RtcEventLog::EncodingType::NewFormat;
+  auto encoding_type = RtcEventLog::EncodingType::NewFormat;
+  if (webrtc::field_trial::IsDisabled("WebRTC-RtcEventLogNewFormat"))
+    encoding_type = RtcEventLog::EncodingType::Legacy;
   return event_log_factory_ ? event_log_factory_->Create(encoding_type)
                             : std::make_unique<RtcEventLogNull>();
 }

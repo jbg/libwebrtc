@@ -62,6 +62,7 @@
 #include "rtc_base/string_encode.h"
 #include "rtc_base/trace_event.h"
 #include "rtc_base/unique_id_generator.h"
+#include "system_wrappers/include/field_trial.h"
 #include "system_wrappers/include/metrics.h"
 
 using cricket::ContentInfo;
@@ -1780,9 +1781,9 @@ bool PeerConnection::StartRtcEventLog(std::unique_ptr<RtcEventLogOutput> output,
 
 bool PeerConnection::StartRtcEventLog(
     std::unique_ptr<RtcEventLogOutput> output) {
-  int64_t output_period_ms = webrtc::RtcEventLog::kImmediateOutput;
-  if (trials().IsEnabled("WebRTC-RtcEventLogNewFormat")) {
-    output_period_ms = 5000;
+  int64_t output_period_ms = 5000;
+  if (webrtc::field_trial::IsDisabled("WebRTC-RtcEventLogNewFormat")) {
+    output_period_ms = webrtc::RtcEventLog::kImmediateOutput;
   }
   return StartRtcEventLog(std::move(output), output_period_ms);
 }
