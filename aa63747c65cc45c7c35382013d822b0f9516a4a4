@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "287e1bf8_676134b4",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1785,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-06-27T07:03:20Z",
+      "side": 1,
+      "message": "We should try to use trials() (https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/webrtc/pc/peer_connection.h;drc\u003db551fcd51d709e01cda7b5ef2587a3b4280fb4b7;l\u003d439) because we are trying to move towards injectable field trials (to move away from the global mutable string).",
+      "range": {
+        "startLine": 1785,
+        "startChar": 6,
+        "endLine": 1785,
+        "endChar": 37
+      },
+      "revId": "aa63747c65cc45c7c35382013d822b0f9516a4a4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08ebaab5_fb5e3e7d",
+        "filename": "pc/peer_connection_factory.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-06-27T07:03:20Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 298,
+        "startChar": 6,
+        "endLine": 298,
+        "endChar": 37
+      },
+      "revId": "aa63747c65cc45c7c35382013d822b0f9516a4a4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
