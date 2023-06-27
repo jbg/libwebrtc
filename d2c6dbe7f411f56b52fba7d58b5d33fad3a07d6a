@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e25e788a_16d23b87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2023-06-27T18:41:08Z",
+      "side": 1,
+      "message": "Hi Mirko, please take a look. This should unblock webrtc-review.googlesource.com/c/src/+/310621.",
+      "revId": "d2c6dbe7f411f56b52fba7d58b5d33fad3a07d6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
