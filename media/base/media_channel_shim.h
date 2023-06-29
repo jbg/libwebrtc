@@ -230,11 +230,17 @@ class VoiceMediaShimChannel : public VoiceMediaChannel {
   void SetRawAudioSink(
       uint32_t ssrc,
       std::unique_ptr<webrtc::AudioSinkInterface> sink) override {
-    return receive_impl()->SetRawAudioSink(ssrc, std::move(sink));
+    receive_impl()->SetRawAudioSink(ssrc, std::move(sink));
   }
   void SetDefaultRawAudioSink(
       std::unique_ptr<webrtc::AudioSinkInterface> sink) override {
-    return receive_impl()->SetDefaultRawAudioSink(std::move(sink));
+    receive_impl()->SetDefaultRawAudioSink(std::move(sink));
+  }
+  void SetAudioLevelCallback(
+      absl::optional<uint32_t> ssrc,
+      absl::AnyInvocable<void(uint32_t, absl::optional<uint8_t>)> callback)
+      override {
+    receive_impl()->SetAudioLevelCallback(ssrc, std::move(callback));
   }
   bool GetStats(VoiceMediaReceiveInfo* info, bool reset_legacy) override {
     return receive_impl_->GetStats(info, reset_legacy);
