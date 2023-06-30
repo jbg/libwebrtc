@@ -167,9 +167,10 @@ TEST(TaskQueuePacedSenderTest, PacesPacketsWithBurst) {
   TaskQueuePacedSender pacer(time_controller.GetClock(), &packet_router, trials,
 
                              PacingController::kMinSleepTime,
-                             TaskQueuePacedSender::kNoPacketHoldback,
-                             // Half a second of bursting.
-                             TimeDelta::Seconds(0.5));
+                             TaskQueuePacedSender::kNoPacketHoldback);
+  pacer.SetSendBurstInterval(
+      // Half a second of bursting.
+      TimeDelta::Seconds(0.5));
 
   // Insert a number of packets, covering one second.
   static constexpr size_t kPacketsToSend = 42;
