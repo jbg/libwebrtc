@@ -210,6 +210,7 @@ static NSUInteger const kBottomViewHeight = 200;
   [self setupActionItemsView];
 
   _scrollView = [[NSScrollView alloc] initWithFrame:NSZeroRect];
+  _scrollView = [[NSScrollView alloc] initWithFrame:NSZeroRect];
   [_scrollView setTranslatesAutoresizingMaskIntoConstraints:NO];
   [_scrollView setHasVerticalScroller:YES];
   [_scrollView setDocumentView:_logView];
@@ -238,7 +239,7 @@ static NSUInteger const kBottomViewHeight = 200;
   _connectButton = [[NSButton alloc] initWithFrame:NSZeroRect];
   [_connectButton setTranslatesAutoresizingMaskIntoConstraints:NO];
   _connectButton.title = @"Start call";
-  _connectButton.bezelStyle = NSRoundedBezelStyle;
+  _connectButton.bezelStyle = NSBezelStyleSmallSquare;
   _connectButton.target = self;
   _connectButton.action = @selector(startCall:);
   [_actionItemsView addSubview:_connectButton];
@@ -246,7 +247,7 @@ static NSUInteger const kBottomViewHeight = 200;
   _loopbackButton = [[NSButton alloc] initWithFrame:NSZeroRect];
   [_loopbackButton setTranslatesAutoresizingMaskIntoConstraints:NO];
   _loopbackButton.title = @"Loopback";
-  [_loopbackButton setButtonType:NSSwitchButton];
+  [_loopbackButton setButtonType:NSButtonTypeSwitch];
   [_actionItemsView addSubview:_loopbackButton];
 }
 
