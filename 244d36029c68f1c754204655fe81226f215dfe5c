@@ -33,6 +33,23 @@
       "message": "nah, seems like more tests should be updated....",
       "revId": "244d36029c68f1c754204655fe81226f215dfe5c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "837d48de_358b78ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-07-03T08:30:43Z",
+      "side": 1,
+      "message": "Nice!",
+      "revId": "244d36029c68f1c754204655fe81226f215dfe5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
