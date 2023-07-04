@@ -272,9 +272,7 @@ const int64_t kNanosecondsPerSecond = 1000000000;
     case UIDeviceOrientationLandscapeRight:
       _rotation = usingFrontCamera ? RTCVideoRotation_0 : RTCVideoRotation_180;
       break;
-    case UIDeviceOrientationFaceUp:
-    case UIDeviceOrientationFaceDown:
-    case UIDeviceOrientationUnknown:
+    default:
       // Ignore.
       break;
   }
@@ -523,7 +521,17 @@ const int64_t kNanosecondsPerSecond = 1000000000;
   NSAssert([RTC_OBJC_TYPE(RTCDispatcher) isOnQueueForType:RTCDispatcherTypeCaptureSession],
            @"updateOrientation must be called on the capture queue.");
 #if TARGET_OS_IPHONE
-  _orientation = [UIDevice currentDevice].orientation;
+  UIDeviceOrientation newOrientation = [UIDevice currentDevice].orientation;
+  switch (newOrientation) {
+    case UIDeviceOrientationUnknown:
+    case UIDeviceOrientationFaceUp:
+    case UIDeviceOrientationFaceDown:
+      // Ignore.
+      break;
+    default:
+      _orientation = newOrientation;
+      break;
+  }
 #endif
 }
 
