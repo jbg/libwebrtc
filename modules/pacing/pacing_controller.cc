@@ -293,7 +293,7 @@ TimeDelta PacingController::UpdateTimeAndGetElapsed(Timestamp now) {
   if (elapsed_time > kMaxElapsedTime) {
     RTC_LOG(LS_WARNING) << "Elapsed time (" << elapsed_time.ms()
                         << " ms) longer than expected, limiting to "
-                        << kMaxElapsedTime.ms();
+                        << kMaxElapsedTime.ms() << " ms";
     elapsed_time = kMaxElapsedTime;
   }
   return elapsed_time;
