@@ -51,6 +51,24 @@
       "parentUuid": "92ed0f73_1ea8dbe1",
       "revId": "6376c72626957ed2c8bb0342ad267d50815c351f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92310670_dc132973",
+        "filename": "DEPS",
+        "patchSetId": 2
+      },
+      "lineNbr": 2684,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-07-05T14:09:57Z",
+      "side": 1,
+      "message": "Yep, same error:\n\n```\nHook \u0027download_from_google_storage --directory --recursive --num_threads\u003d10 --no_auth --quiet --bucket chromium-webrtc-resources resources\u0027 took 15.03 secs\n________ running \u0027vpython3.bat testing/generate_location_tags.py --out testing/location_tags.json\u0027 in \u0027C:\\b\\s\\w\\ir\\cache\\builder\\src\u0027\nfailed to canonicalize \"\": failed to open \"\": The system cannot find the path specified.\nError: Command \u0027vpython3.bat testing/generate_location_tags.py --out testing/location_tags.json\u0027 returned non-zero exit status 1 in C:\\b\\s\\w\\ir\\cache\\builder\\src\nfailed to canonicalize \"\": failed to open \"\": The system cannot find the path specified.\n```\n\nBut on less bots...",
+      "parentUuid": "92e554a8_891475fe",
+      "revId": "6376c72626957ed2c8bb0342ad267d50815c351f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
