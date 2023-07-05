@@ -69,6 +69,24 @@
       "parentUuid": "92e554a8_891475fe",
       "revId": "6376c72626957ed2c8bb0342ad267d50815c351f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc33b833_a3acadb3",
+        "filename": "DEPS",
+        "patchSetId": 2
+      },
+      "lineNbr": 2684,
+      "author": {
+        "id": 11168
+      },
+      "writtenOn": "2023-07-05T15:12:01Z",
+      "side": 1,
+      "message": "This error seems to be coming from dirmd [0], invoked in https://crsrc.org/c/testing/generate_location_tags.py;l\u003d39?q\u003df:generate_location_tags\n\nI\u0027m not sure why SRC_DIR is an empty string. If you have a win machine, I suggest to run `vpython3.bat testing/generate_location_tags.py --out testing/location_tags.json`. If it fails, print cmd that py calls and see why SRC_DIR is empty.\n\nSeparately, there\u0027s also an internal failure with KeyError: \u0027src/build\u0027 -\u003e The key is now changed to just \u0027build\u0027 so that will need to change too.\n\n\n[0] https://source.chromium.org/chromium/infra/infra/+/main:go/src/infra/tools/dirmd/cli/cmd_location_tags.go;l\u003d63",
+      "parentUuid": "92310670_dc132973",
+      "revId": "6376c72626957ed2c8bb0342ad267d50815c351f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
