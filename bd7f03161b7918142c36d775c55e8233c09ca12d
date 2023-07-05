@@ -33,6 +33,24 @@
       "message": "Meybe I\u0027m missing something here, but I don\u0027t really understand what this CL changes?\n\nIt looks to me like the following scenario would already work correctly:\n- Receive orientation notification for Portrait\n- _orientation \u003d UIDeviceOrientationPortrait\n- _rotation \u003d RTCVideoRotation_90\n- Receive orientation notification for FaceUp:\n_ _orientation \u003d UIDeviceOrientationFaceUp\n- _rotation \u003d RTCVideoRotation_90\n\nWhat am I missing?",
       "revId": "bd7f03161b7918142c36d775c55e8233c09ca12d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8e737f9_44a3cbe3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15079
+      },
+      "writtenOn": "2023-07-05T07:21:40Z",
+      "side": 1,
+      "message": "Hi Kari, thanks for the quick review!\n\nIn the previous code _rotation is not set for face-up, face-down or unknown: https://webrtc.googlesource.com/src/+/refs/heads/main/sdk/objc/components/capturer/RTCCameraVideoCapturer.m#275\n\nSo I chose to ignore them and not set _orientation, thus taking the previous value. When you go from landscape to face-up for example, it\u0027s not possible to know (AFAICT) if 0 or 180 rotation should be used, so by ignoring it we use the previous value, which will work for the cases when you are in a given orientation, and then lay the device down.\n\nDoes that make sense? Happy to amend the commit messaage if necessary.",
+      "parentUuid": "a823d1d8_8f6d3c78",
+      "revId": "bd7f03161b7918142c36d775c55e8233c09ca12d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
