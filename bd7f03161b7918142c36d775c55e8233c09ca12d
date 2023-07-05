@@ -16,6 +16,23 @@
       "message": "Found this small issue that manifests when starting a stream in landscape mode, PTAL when you get a chance!",
       "revId": "bd7f03161b7918142c36d775c55e8233c09ca12d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a823d1d8_8f6d3c78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2023-07-05T06:47:04Z",
+      "side": 1,
+      "message": "Meybe I\u0027m missing something here, but I don\u0027t really understand what this CL changes?\n\nIt looks to me like the following scenario would already work correctly:\n- Receive orientation notification for Portrait\n- _orientation \u003d UIDeviceOrientationPortrait\n- _rotation \u003d RTCVideoRotation_90\n- Receive orientation notification for FaceUp:\n_ _orientation \u003d UIDeviceOrientationFaceUp\n- _rotation \u003d RTCVideoRotation_90\n\nWhat am I missing?",
+      "revId": "bd7f03161b7918142c36d775c55e8233c09ca12d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
