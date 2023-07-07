@@ -45,15 +45,15 @@ class Y4mFrameGenerator : public FrameGeneratorInterface {
 
   VideoFrameData NextFrame() override;
 
-  void ChangeResolution(size_t width, size_t height) override {
-    RTC_CHECK_NOTREACHED();
-  }
+  void ChangeResolution(size_t width, size_t height) override;
 
   Resolution GetResolution() const override;
 
   absl::optional<int> fps() const override { return fps_; }
 
  private:
+  rtc::scoped_refptr<I420Buffer> CreateI420Buffer(int width, int height);
+
   YuvFrameReaderImpl::RepeatMode ToYuvFrameReaderRepeatMode(
       RepeatMode repeat_mode) const;
   std::unique_ptr<webrtc::test::FrameReader> frame_reader_ = nullptr;
