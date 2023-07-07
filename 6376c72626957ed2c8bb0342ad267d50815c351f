@@ -105,6 +105,24 @@
       "parentUuid": "fc33b833_a3acadb3",
       "revId": "6376c72626957ed2c8bb0342ad267d50815c351f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f690852_8b24e19f",
+        "filename": "DEPS",
+        "patchSetId": 2
+      },
+      "lineNbr": 2684,
+      "author": {
+        "id": 11168
+      },
+      "writtenOn": "2023-07-07T15:07:08Z",
+      "side": 1,
+      "message": "filed https://crbug.com/1462939 to keep track of that.",
+      "parentUuid": "dcb83fc2_4a14863c",
+      "revId": "6376c72626957ed2c8bb0342ad267d50815c351f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
