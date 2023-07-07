@@ -87,6 +87,24 @@
       "parentUuid": "92310670_dc132973",
       "revId": "6376c72626957ed2c8bb0342ad267d50815c351f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcb83fc2_4a14863c",
+        "filename": "DEPS",
+        "patchSetId": 2
+      },
+      "lineNbr": 2684,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-07-07T15:04:19Z",
+      "side": 1,
+      "message": "I have no windows machine available. Is this something you are going to fix on Chromium side?\n\nIf yes, I can just wait.",
+      "parentUuid": "fc33b833_a3acadb3",
+      "revId": "6376c72626957ed2c8bb0342ad267d50815c351f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
