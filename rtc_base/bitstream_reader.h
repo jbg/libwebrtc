@@ -110,6 +110,8 @@ class BitstreamReader {
 
   std::string ReadString(int num_bytes);
 
+  uint32_t Log2Ceiling(uint32_t value);
+
  private:
   void set_last_read_is_verified(bool value) const;
 

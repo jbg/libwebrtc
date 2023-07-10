@@ -164,4 +164,19 @@ std::string BitstreamReader::ReadString(int num_bytes) {
   return Ok() ? res : std::string();
 }
 
+std::uint32_t BitstreamReader::Log2Ceiling(uint32_t value) {
+  uint32_t result = 0;
+  // If value is not a power of two an additional bit is required
+  // to account for the ceil() of log2() below.
+  if ((value & (value - 1)) != 0) {
+    ++result;
+  }
+  while (value > 0) {
+    value >>= 1;
+    ++result;
+  }
+
+  return result;
+}
+
 }  // namespace webrtc
