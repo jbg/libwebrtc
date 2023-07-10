@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6968d6c3_ed665124",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-07-10T06:06:10Z",
+      "side": 1,
+      "message": "you\u0027ll need to add fuzzer test for it - by any means this adds a new codec and increased the attack surface.",
+      "revId": "bd9167ca59453d3ed168706c10a93bbbfccf8560",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a80cc4b4_e83a1965",
+        "filename": "common_video/h265/h265_bitstream_parser.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-07-10T06:06:10Z",
+      "side": 1,
+      "message": "A general comment: for syntax elements that is not bool, you should validate the range before using it.\n\nThis avoids the possibility of a malformed bitstream to attack on the heap/stack.",
+      "revId": "bd9167ca59453d3ed168706c10a93bbbfccf8560",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f5c6796_7b100ad7",
+        "filename": "common_video/h265/h265_bitstream_parser.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-07-10T06:06:10Z",
+      "side": 1,
+      "message": "num_long_term_pics",
+      "revId": "bd9167ca59453d3ed168706c10a93bbbfccf8560",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78919775_058b9d71",
+        "filename": "common_video/h265/h265_bitstream_parser.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-07-10T06:06:10Z",
+      "side": 1,
+      "message": "can you move \u003d default to .cc?",
+      "revId": "bd9167ca59453d3ed168706c10a93bbbfccf8560",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "292c8120_266ccec6",
+        "filename": "common_video/h265/h265_bitstream_parser.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-07-10T06:06:10Z",
+      "side": 1,
+      "message": "If multi-layer encoding is enabled, it might be a vector of sps/pps. Make sps_/pps_ vector type?",
+      "revId": "bd9167ca59453d3ed168706c10a93bbbfccf8560",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbd01d7c_4b9b55fb",
+        "filename": "common_video/h265/h265_vps_parser.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-07-10T06:06:10Z",
+      "side": 1,
+      "message": "why are you including the two?",
+      "revId": "bd9167ca59453d3ed168706c10a93bbbfccf8560",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
