@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01ec016a_9c32fe9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-07-10T14:09:03Z",
+      "side": 1,
+      "message": "Mirko: ok to land with No-Try: true?\nIt also seems that me adding that to the commit message seems to have made me the committer? We\u0027ll see if that works in gerrit...",
+      "revId": "05f37a2a4396979f15ae481d18ee339cc9a99e79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
