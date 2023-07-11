@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94f406af_cbdde4bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2023-07-11T11:41:12Z",
+      "side": 1,
+      "message": "lgtm % nits",
+      "revId": "9d9173891de3b7673575fb40a8964c9cd9c72429",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8a599f1_f2f7acf1",
+        "filename": "test/testsupport/y4m_frame_generator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2023-07-11T11:41:12Z",
+      "side": 1,
+      "message": "Consider using `I420Buffer::SetBlack()` instead. Might not need a helper method then.",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 53
+      },
+      "revId": "9d9173891de3b7673575fb40a8964c9cd9c72429",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a7d9d2e_96e60b86",
+        "filename": "test/testsupport/y4m_frame_generator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2023-07-11T11:41:12Z",
+      "side": 1,
+      "message": "nit: `RTC_CHECK_GT(width_, 0);`",
+      "range": {
+        "startLine": 90,
+        "startChar": 2,
+        "endLine": 90,
+        "endChar": 24
+      },
+      "revId": "9d9173891de3b7673575fb40a8964c9cd9c72429",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
