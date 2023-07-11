@@ -16,6 +16,23 @@
       "message": "here is a small improvement from me ..",
       "revId": "65be02a066e6e4d5cd6d2fe18619eef281c07dd9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc2fb41d_e4a5e87f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20759
+      },
+      "writtenOn": "2023-07-11T09:56:05Z",
+      "side": 1,
+      "message": "Please review :)",
+      "revId": "65be02a066e6e4d5cd6d2fe18619eef281c07dd9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
