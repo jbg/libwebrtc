@@ -51,6 +51,24 @@
       "parentUuid": "a823d1d8_8f6d3c78",
       "revId": "bd7f03161b7918142c36d775c55e8233c09ca12d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7c15b28_1358ae13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2023-07-11T12:42:46Z",
+      "side": 1,
+      "message": "Hey, sorry for the delay in getting back to you. From my understanding of the existing code, `_rotation` should anyway have taken the previous value when _orientation was set to FaceUp or FaceDown by ending up in the `break` from the `switch` on line 262.\n\nMaybe a test case could help illustrate the issue and the effect of this change.",
+      "parentUuid": "a8e737f9_44a3cbe3",
+      "revId": "bd7f03161b7918142c36d775c55e8233c09ca12d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
