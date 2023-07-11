@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "febb0782_eca3f4e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2023-07-11T22:53:37Z",
+      "side": 1,
+      "message": "PTAL, was found by an automated internal tool",
+      "revId": "9dc7f257fc6d784642932e2fce565e3a8711e163",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
