@@ -20,6 +20,69 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ce73c09_79411719",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-07-12T08:33:14Z",
+      "side": 1,
+      "message": "Would it be better to copy-paste H265 parsers from chromium media/video [1] instead of writing new ones?\n\n[1] https://source.chromium.org/search?q\u003dfile:h265\u0026ss\u003dchromium%2Fchromium%2Fsrc:media%2Fvideo%2F",
+      "revId": "bd9167ca59453d3ed168706c10a93bbbfccf8560",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4773c18d_1cc1e95f",
+        "filename": "common_video/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-07-12T08:33:14Z",
+      "side": 1,
+      "message": "Include these files only if rtc_enable_h265 is enabled (like in chromium https://source.chromium.org/chromium/chromium/src/+/main:media/video/BUILD.gn;l\u003d54)\n\nMake rtc_enable_h265 \u003d proprietary_codecs (see \nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/webrtc.gni;l\u003d185)",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 3
+      },
+      "revId": "bd9167ca59453d3ed168706c10a93bbbfccf8560",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92513346_cdb4a12e",
+        "filename": "common_video/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-07-12T08:33:14Z",
+      "side": 1,
+      "message": "Include only if rtc_enable_h265 is enabled.",
+      "range": {
+        "startLine": 126,
+        "startChar": 4,
+        "endLine": 131,
+        "endChar": 5
+      },
+      "revId": "bd9167ca59453d3ed168706c10a93bbbfccf8560",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a80cc4b4_e83a1965",
         "filename": "common_video/h265/h265_bitstream_parser.cc",
         "patchSetId": 6
@@ -99,6 +162,29 @@
       "writtenOn": "2023-07-10T06:06:10Z",
       "side": 1,
       "message": "why are you including the two?",
+      "revId": "bd9167ca59453d3ed168706c10a93bbbfccf8560",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e76b846a_0066bb9d",
+        "filename": "rtc_base/bitstream_reader.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-07-12T08:33:14Z",
+      "side": 1,
+      "message": "Can we do something like this - https://source.chromium.org/chromiumos/chromiumos/codesearch/+/main:gen/arm-generic/chroot/build/arm-generic/usr/include/libchrome/base/bits.h;l\u003d232?q\u003dLog2Ceiling ?\n\nWebRtcSpl_CountLeadingZeros32 - https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/common_audio/signal_processing/include/spl_inl.h;l\u003d48;bpv\u003d0;bpt\u003d1. Should re-use or use similar for video.",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 0
+      },
       "revId": "bd9167ca59453d3ed168706c10a93bbbfccf8560",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
