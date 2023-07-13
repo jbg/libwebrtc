@@ -541,12 +541,6 @@ TEST_F(PacketRouterDeathTest, DoubleRegistrationOfReceiveModuleDisallowed) {
   packet_router_.RemoveReceiveRtpModule(&module);
 }
 
-TEST_F(PacketRouterDeathTest, RemovalOfNeverAddedSendModuleDisallowed) {
-  NiceMock<MockRtpRtcpInterface> module;
-
-  EXPECT_DEATH(packet_router_.RemoveSendRtpModule(&module), "");
-}
-
 TEST_F(PacketRouterDeathTest, RemovalOfNeverAddedReceiveModuleDisallowed) {
   NiceMock<MockRtpRtcpInterface> module;
 
