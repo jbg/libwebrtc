@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b5f6484_6d1336a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18439
+      },
+      "writtenOn": "2023-07-17T09:29:48Z",
+      "side": 1,
+      "message": "Hi Harald, I\u0027m cherry-picking it to the LTS branch, could you please review/submit it?",
+      "revId": "648ca999d38596b98c81b54f5d77f97488725b8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
