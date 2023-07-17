@@ -659,4 +659,19 @@ TEST_F(SdpOfferAnswerTest, ExpectAllSsrcsSpecifiedInSsrcGroupFecFr) {
   EXPECT_FALSE(pc->SetRemoteDescription(std::move(offer)));
 }
 
+TEST_F(SdpOfferAnswerTest, DuplicateSsrcsDisallowedInLocalDescription) {
+  auto pc = CreatePeerConnection();
+  pc->AddAudioTrack("audio_track", {});
+  pc->AddVideoTrack("video_track", {});
+  auto offer = pc->CreateOffer();
+  auto& offer_contents = offer->description()->contents();
+  ASSERT_EQ(offer_contents.size(), 2u);
+  uint32_t first_ssrc = offer_contents[0].media_description()->first_ssrc();
+  auto streams = offer_contents[1].media_description()->mutable_streams();
+  ASSERT_TRUE(!streams.empty());
+  streams[0].ssrcs[0] = first_ssrc;
+
+  EXPECT_FALSE(pc->SetLocalDescription(std::move(offer)));
+}
+
 }  // namespace webrtc
