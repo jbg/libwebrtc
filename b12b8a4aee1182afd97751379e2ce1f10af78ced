@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8d64d47_381223d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-07-18T06:40:44Z",
+      "side": 1,
+      "message": "You like consistency too, no? I wonder why some errors have the error message as a static string...",
+      "revId": "b12b8a4aee1182afd97751379e2ce1f10af78ced",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
