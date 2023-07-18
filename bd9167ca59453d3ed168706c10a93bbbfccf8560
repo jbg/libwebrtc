@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74391c84_274af67e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-07-18T09:40:38Z",
+      "side": 1,
+      "message": "The H265 parers in Chromium is used for decoding, so it parses all the properties in VPS/SPS/PPS and stores lots of properties. While for WebRTC, we only care some properties for H265 streams, so in this CL not all the properties are parsed for VPS/SPS/PPS, and also not all the properties are stored. This will make the WebRTC H265 parsing process quicker and save the memory.\n\nThis CL moves necessary parsing logic and range checking code from Chromium H265 parser.",
+      "parentUuid": "7ce73c09_79411719",
+      "revId": "bd9167ca59453d3ed168706c10a93bbbfccf8560",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4773c18d_1cc1e95f",
@@ -58,6 +76,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60c049e1_953ea2f4",
+        "filename": "common_video/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-07-18T09:40:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4773c18d_1cc1e95f",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 3
+      },
+      "revId": "bd9167ca59453d3ed168706c10a93bbbfccf8560",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92513346_cdb4a12e",
@@ -71,6 +113,30 @@
       "writtenOn": "2023-07-12T08:33:14Z",
       "side": 1,
       "message": "Include only if rtc_enable_h265 is enabled.",
+      "range": {
+        "startLine": 126,
+        "startChar": 4,
+        "endLine": 131,
+        "endChar": 5
+      },
+      "revId": "bd9167ca59453d3ed168706c10a93bbbfccf8560",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc0a6ea2_9c95fdc4",
+        "filename": "common_video/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-07-18T09:40:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92513346_cdb4a12e",
       "range": {
         "startLine": 126,
         "startChar": 4,
@@ -179,6 +245,30 @@
       "writtenOn": "2023-07-12T08:33:14Z",
       "side": 1,
       "message": "Can we do something like this - https://source.chromium.org/chromiumos/chromiumos/codesearch/+/main:gen/arm-generic/chroot/build/arm-generic/usr/include/libchrome/base/bits.h;l\u003d232?q\u003dLog2Ceiling ?\n\nWebRtcSpl_CountLeadingZeros32 - https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/common_audio/signal_processing/include/spl_inl.h;l\u003d48;bpv\u003d0;bpt\u003d1. Should re-use or use similar for video.",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 0
+      },
+      "revId": "bd9167ca59453d3ed168706c10a93bbbfccf8560",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5268aeef_30327f40",
+        "filename": "rtc_base/bitstream_reader.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-07-18T09:40:38Z",
+      "side": 1,
+      "message": "I use a simplified version of WebRtcSpl_CountLeadingZeros32 implementation in common_audio. A better way is to put this WebRtcSpl_CountLeadingZeros32 implementation to the rtc_base so that audio and video modules can both use it, but that modification will introduce a lot of changes for audio which is not related to this CL, so i just add a simplified version in common_video in this CL, and will commit another CL to move the WebRtcSpl_CountLeadingZeros32 implementaion to rtc_base for common usage.",
+      "parentUuid": "e76b846a_0066bb9d",
       "range": {
         "startLine": 167,
         "startChar": 0,
