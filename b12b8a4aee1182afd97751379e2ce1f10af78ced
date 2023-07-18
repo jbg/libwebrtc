@@ -33,6 +33,24 @@
       "message": "So is the above really a warning since we\u0027re returning an error? Why wouldn\u0027t you log the text as well in the LOG_AND_RETURN_ERROR?",
       "revId": "b12b8a4aee1182afd97751379e2ce1f10af78ced",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fb07559_ccb25d2f",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-07-18T09:04:42Z",
+      "side": 1,
+      "message": "I think it was trying to be helpful for folks who use SDES. Given that SDES is on the way out and no longer supported in the browser... away with it!",
+      "parentUuid": "3eb7e4a5_3544146e",
+      "revId": "b12b8a4aee1182afd97751379e2ce1f10af78ced",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
