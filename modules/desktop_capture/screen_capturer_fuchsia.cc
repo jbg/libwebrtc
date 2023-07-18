@@ -56,17 +56,8 @@ size_t RoundUpToMultiple(size_t value, size_t multiple) {
 
 std::unique_ptr<DesktopCapturer> DesktopCapturer::CreateRawScreenCapturer(
     const DesktopCaptureOptions& options) {
-  if (ScreenCapturerFuchsia::CheckRequirements()) {
-    std::unique_ptr<ScreenCapturerFuchsia> capturer(
-        new ScreenCapturerFuchsia());
-    return capturer;
-  }
-  return nullptr;
-}
-
-ScreenCapturerFuchsia::ScreenCapturerFuchsia()
-    : component_context_(sys::ComponentContext::Create()) {
-  RTC_DCHECK(CheckRequirements());
+  std::unique_ptr<ScreenCapturerFuchsia> capturer(new ScreenCapturerFuchsia());
+  return capturer;
 }
 
 ScreenCapturerFuchsia::~ScreenCapturerFuchsia() {
@@ -80,26 +71,6 @@ ScreenCapturerFuchsia::~ScreenCapturerFuchsia() {
     zx_status_t status = zx::vmar::root_self()->unmap(address, virt_mem_bytes);
     RTC_DCHECK(status == ZX_OK);
   }
-}
-
-// TODO(fxbug.dev/100303): Remove this function when Flatland is the only API.
-bool ScreenCapturerFuchsia::CheckRequirements() {
-  std::unique_ptr<sys::ComponentContext> component_context =
-      sys::ComponentContext::Create();
-  fuchsia::ui::scenic::ScenicSyncPtr scenic;
-  zx_status_t status = component_context->svc()->Connect(scenic.NewRequest());
-  if (status != ZX_OK) {
-    RTC_LOG(LS_ERROR) << "Failed to connect to Scenic: " << status;
-    return false;
-  }
-
-  bool scenic_uses_flatland = false;
-  scenic->UsesFlatland(&scenic_uses_flatland);
-  if (!scenic_uses_flatland) {
-    RTC_LOG(LS_ERROR) << "Screen capture not supported without Flatland.";
-  }
-
-  return scenic_uses_flatland;
 }
 
 void ScreenCapturerFuchsia::Start(Callback* callback) {
@@ -244,7 +215,6 @@ void ScreenCapturerFuchsia::SetupBuffers() {
   }
   width_ = display_info.width_in_px;
   height_ = display_info.height_in_px;
-
   status = component_context_->svc()->Connect(sysmem_allocator_.NewRequest());
   if (status != ZX_OK) {
     fatal_error_ = true;
