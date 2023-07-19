@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c34b018_95285239",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-07-19T15:58:43Z",
+      "side": 1,
+      "message": "no-try required for Android builds, the others passed thankfully.",
+      "revId": "4d6f98be357b99e562fb5000b6659b36bfc4f3f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
