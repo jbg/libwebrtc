@@ -123,6 +123,24 @@
       "parentUuid": "dcb83fc2_4a14863c",
       "revId": "6376c72626957ed2c8bb0342ad267d50815c351f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd29197a_b84b6f9d",
+        "filename": "DEPS",
+        "patchSetId": 2
+      },
+      "lineNbr": 2684,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-07-20T07:31:03Z",
+      "side": 1,
+      "message": "Thanks for fixing.",
+      "parentUuid": "1f690852_8b24e19f",
+      "revId": "6376c72626957ed2c8bb0342ad267d50815c351f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
