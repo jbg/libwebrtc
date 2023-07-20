@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "028609b5_a738e689",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-07-20T14:30:24Z",
+      "side": 1,
+      "message": "The internal fails because of delayed import, I think.",
+      "revId": "0fa9bb20c2b476da4331316dd68db8b121d1b92e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
