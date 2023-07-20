@@ -16,6 +16,52 @@
       "message": "The internal fails because of delayed import, I think.",
       "revId": "0fa9bb20c2b476da4331316dd68db8b121d1b92e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "039d4793_8627c439",
+        "filename": "api/video/video_content_type.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-07-20T15:28:25Z",
+      "side": 1,
+      "message": "Can\u0027t have this check, since this is called on the receive side while there might be some sender still running old code, which will populate some extra bits.",
+      "range": {
+        "startLine": 26,
+        "startChar": 2,
+        "endLine": 26,
+        "endChar": 79
+      },
+      "revId": "0fa9bb20c2b476da4331316dd68db8b121d1b92e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d6e6a47_61829add",
+        "filename": "api/video/video_content_type.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-07-20T15:28:25Z",
+      "side": 1,
+      "message": "Ditto, this will run on the receive side: https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/webrtc/modules/rtp_rtcp/source/rtp_header_extensions.cc;l\u003d464;drc\u003da328097ef1d47f51e76917b80110863037f4f744",
+      "range": {
+        "startLine": 32,
+        "startChar": 2,
+        "endLine": 32,
+        "endChar": 48
+      },
+      "revId": "0fa9bb20c2b476da4331316dd68db8b121d1b92e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
