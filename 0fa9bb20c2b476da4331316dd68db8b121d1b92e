@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12d4e053_172bc4c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-07-21T01:17:02Z",
+      "side": 1,
+      "message": "Some pushback - if we\u0027re going for a type (enum class) that normally operates only with valid values, we should have the check on that type.\n\nBut we should also modify VideoContentTypeExtension::Parse() to ignore all the other bits of the raw byte, so that it only sets the screenshare bit, in which case the RTC_CHECK is safe. (I added it because I wanted to see if there were tests in google3 that failed - it\u0027s a pity that the importer is not importing at the same time.)\n\nWill update the CL accordingly.",
+      "revId": "0fa9bb20c2b476da4331316dd68db8b121d1b92e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "039d4793_8627c439",
@@ -43,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8aaabe45_458bc56f",
+        "filename": "api/video/video_content_type.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-07-21T01:17:02Z",
+      "side": 1,
+      "message": "This is called after the incoming byte (raw \u003d untrusted data) is converted into a VideoContentType attribute. If we change VideoContentTypeExtension::Parse() to clear the extra bits, we should never hit the check.",
+      "parentUuid": "039d4793_8627c439",
+      "range": {
+        "startLine": 26,
+        "startChar": 2,
+        "endLine": 26,
+        "endChar": 79
+      },
+      "revId": "0fa9bb20c2b476da4331316dd68db8b121d1b92e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d6e6a47_61829add",
         "filename": "api/video/video_content_type.cc",
         "patchSetId": 4
@@ -54,6 +95,30 @@
       "writtenOn": "2023-07-20T15:28:25Z",
       "side": 1,
       "message": "Ditto, this will run on the receive side: https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:third_party/webrtc/modules/rtp_rtcp/source/rtp_header_extensions.cc;l\u003d464;drc\u003da328097ef1d47f51e76917b80110863037f4f744",
+      "range": {
+        "startLine": 32,
+        "startChar": 2,
+        "endLine": 32,
+        "endChar": 48
+      },
+      "revId": "0fa9bb20c2b476da4331316dd68db8b121d1b92e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7be9c49e_71fdb8f4",
+        "filename": "api/video/video_content_type.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-07-21T01:17:02Z",
+      "side": 1,
+      "message": "This is used by VideoContentExtension::Parse, so it\u0027s operating on untrusted data.\nThe result will be ignoring all extensions that have the extra bits set. For backwards compatibility, I think we should leave this one unchanged and add a comment that this is a temporary measure. (Ideally, we\u0027d instrument it with UMA).",
+      "parentUuid": "6d6e6a47_61829add",
       "range": {
         "startLine": 32,
         "startChar": 2,
