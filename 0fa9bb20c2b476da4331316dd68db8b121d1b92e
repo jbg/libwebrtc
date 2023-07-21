@@ -82,6 +82,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21cea843_848276c8",
+        "filename": "api/video/video_content_type.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-07-21T07:55:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8aaabe45_458bc56f",
+      "range": {
+        "startLine": 26,
+        "startChar": 2,
+        "endLine": 26,
+        "endChar": 79
+      },
+      "revId": "0fa9bb20c2b476da4331316dd68db8b121d1b92e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d6e6a47_61829add",
@@ -119,6 +143,30 @@
       "side": 1,
       "message": "This is used by VideoContentExtension::Parse, so it\u0027s operating on untrusted data.\nThe result will be ignoring all extensions that have the extra bits set. For backwards compatibility, I think we should leave this one unchanged and add a comment that this is a temporary measure. (Ideally, we\u0027d instrument it with UMA).",
       "parentUuid": "6d6e6a47_61829add",
+      "range": {
+        "startLine": 32,
+        "startChar": 2,
+        "endLine": 32,
+        "endChar": 48
+      },
+      "revId": "0fa9bb20c2b476da4331316dd68db8b121d1b92e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df049460_ea5f5a45",
+        "filename": "api/video/video_content_type.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-07-21T07:55:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7be9c49e_71fdb8f4",
       "range": {
         "startLine": 32,
         "startChar": 2,
