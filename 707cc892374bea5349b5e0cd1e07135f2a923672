@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c572170c_61aad8fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-07-22T21:42:57Z",
+      "side": 1,
+      "message": "Fuzzer caught this one. Shouldn\u0027t be possible in production - caused by a fuzzer bug. But worth guarding against.",
+      "revId": "707cc892374bea5349b5e0cd1e07135f2a923672",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
