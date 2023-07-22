@@ -68,7 +68,7 @@ class RtpPacketReceived : public RtpPacket {
 
  private:
   webrtc::Timestamp arrival_time_ = Timestamp::MinusInfinity();
-  int payload_type_frequency_ = 0;
+  int payload_type_frequency_ = -1;
   bool recovered_ = false;
   rtc::scoped_refptr<rtc::RefCountedBase> additional_data_;
 };
