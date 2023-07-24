@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "562e4d38_1fe8b292",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-07-24T14:05:33Z",
+      "side": 1,
+      "message": "Bandaid for https://crbug.com/1426440, though as per https://crbug.com/1426440#c6 it\u0027s not clear to me why the scalability mode value is not simply reverted to absl::nullopt on the next encoded frame without this fix. Will debug more when the Windows laptop is finished compiling...",
+      "revId": "4145ec47a0caa8c3e17cd3b6fd456f2d5d8191cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
