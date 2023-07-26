@@ -178,19 +178,19 @@ std::map<std::string, std::string> JavaToNativeStringMap(
 }
 
 ScopedJavaLocalRef<jobject> NativeToJavaBoolean(JNIEnv* env, bool b) {
-  return JNI_Boolean::Java_Boolean_ConstructorJLB_Z(env, b);
+  return JNI_Boolean::Java_Boolean_Constructor__boolean(env, b);
 }
 
 ScopedJavaLocalRef<jobject> NativeToJavaDouble(JNIEnv* env, double d) {
-  return JNI_Double::Java_Double_ConstructorJLD_D(env, d);
+  return JNI_Double::Java_Double_Constructor__double(env, d);
 }
 
 ScopedJavaLocalRef<jobject> NativeToJavaInteger(JNIEnv* jni, int32_t i) {
-  return JNI_Integer::Java_Integer_ConstructorJLI_I(jni, i);
+  return JNI_Integer::Java_Integer_Constructor__int(jni, i);
 }
 
 ScopedJavaLocalRef<jobject> NativeToJavaLong(JNIEnv* env, int64_t u) {
-  return JNI_Long::Java_Long_ConstructorJLLO_J(env, u);
+  return JNI_Long::Java_Long_Constructor__long(env, u);
 }
 
 ScopedJavaLocalRef<jstring> NativeToJavaString(JNIEnv* env, const char* str) {
@@ -324,17 +324,17 @@ ScopedJavaLocalRef<jobjectArray> NativeToJavaStringArray(
 }
 
 JavaListBuilder::JavaListBuilder(JNIEnv* env)
-    : env_(env), j_list_(JNI_ArrayList::Java_ArrayList_ConstructorJUALI(env)) {}
+    : env_(env), j_list_(JNI_ArrayList::Java_ArrayList_Constructor(env)) {}
 
 JavaListBuilder::~JavaListBuilder() = default;
 
 void JavaListBuilder::add(const JavaRef<jobject>& element) {
-  JNI_ArrayList::Java_ArrayList_addZ_JUE(env_, j_list_, element);
+  JNI_ArrayList::Java_ArrayList_add(env_, j_list_, element);
 }
 
 JavaMapBuilder::JavaMapBuilder(JNIEnv* env)
     : env_(env),
-      j_map_(JNI_LinkedHashMap::Java_LinkedHashMap_ConstructorJULIHM(env)) {}
+      j_map_(JNI_LinkedHashMap::Java_LinkedHashMap_Constructor(env)) {}
 
 JavaMapBuilder::~JavaMapBuilder() = default;
 
