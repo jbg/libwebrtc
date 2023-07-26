@@ -26,7 +26,7 @@ namespace jni {
 namespace {
 
 ScopedJavaLocalRef<jobject> NativeToJavaBigInteger(JNIEnv* env, uint64_t u) {
-  return JNI_BigInteger::Java_BigInteger_ConstructorJMBI_JLS(
+  return JNI_BigInteger::Java_BigInteger_Constructor__String(
       env, NativeToJavaString(env, rtc::ToString(u)));
 }
 
