@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "091588bd_761fbdfc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-07-27T22:18:28Z",
+      "side": 1,
+      "message": "LGTM. The ios-simulator issue is unrelated. I expect that to pass on a new run.",
+      "revId": "12ea2c17f62a1ad797f5884c96b5e4e7d124ed0b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
