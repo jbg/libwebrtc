@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0513f088_06a082a2",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 849,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-07-28T06:27:15Z",
+      "side": 0,
+      "message": "can do that rename next, in particular the RecvParameters one which does not look great. Separate CL, it will be a mess ;-)",
+      "revId": "8c9e035edbadd683da26887367e9e4f321b5ab4b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
