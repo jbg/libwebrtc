@@ -106,9 +106,6 @@ class RtpPayloadParams final {
   // ids for the `picture_id` are stored at the index `picture_id % 128`.
   std::vector<std::array<int64_t, RtpGenericFrameDescriptor::kMaxSpatialLayers>>
       last_vp9_frame_id_;
-  // Last frame id for each chain
-  std::array<int64_t, RtpGenericFrameDescriptor::kMaxSpatialLayers>
-      chain_last_frame_id_;
 
   // TODO(eladalon): When additional codecs are supported,
   // set kMaxCodecBuffersCount to the max() of these codecs' buffer count.

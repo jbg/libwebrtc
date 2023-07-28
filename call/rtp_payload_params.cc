@@ -181,7 +181,6 @@ RtpPayloadParams::RtpPayloadParams(const uint32_t ssrc,
   for (auto& spatial_layer : last_shared_frame_id_)
     spatial_layer.fill(-1);
 
-  chain_last_frame_id_.fill(-1);
   buffer_id_to_frame_id_.fill(-1);
 
   Random random(rtc::TimeMicros());
@@ -417,16 +416,17 @@ void RtpPayloadParams::GenericToGeneric(int64_t shared_frame_id,
   generic.frame_id = shared_frame_id;
   generic.decode_target_indications.push_back(DecodeTargetIndication::kSwitch);
 
+  std::vector<bool> part_of_chain({true});
   if (is_keyframe) {
-    generic.chain_diffs.push_back(0);
+    chains_calculator_.Reset(part_of_chain);
     last_shared_frame_id_[0].fill(-1);
   } else {
     int64_t frame_id = last_shared_frame_id_[0][0];
     RTC_DCHECK_NE(frame_id, -1);
     RTC_DCHECK_LT(frame_id, shared_frame_id);
-    generic.chain_diffs.push_back(shared_frame_id - frame_id);
     generic.dependencies.push_back(frame_id);
   }
+  generic.chain_diffs = chains_calculator_.From(shared_frame_id, part_of_chain);
 
   last_shared_frame_id_[0][0] = shared_frame_id;
 }
@@ -527,13 +527,11 @@ void RtpPayloadParams::Vp8ToGeneric(const CodecSpecificInfoVP8& vp8_info,
   }
 
   // Calculate chains.
-  generic.chain_diffs = {
-      (is_keyframe || chain_last_frame_id_[0] < 0)
-          ? 0
-          : static_cast<int>(shared_frame_id - chain_last_frame_id_[0])};
-  if (temporal_index == 0) {
-    chain_last_frame_id_[0] = shared_frame_id;
+  std::vector<bool> part_of_chain({temporal_index == 0});
+  if (is_keyframe) {
+    chains_calculator_.Reset(part_of_chain);
   }
+  generic.chain_diffs = chains_calculator_.From(shared_frame_id, part_of_chain);
 }
 
 void RtpPayloadParams::Vp9ToGeneric(const CodecSpecificInfoVP9& vp9_info,
@@ -645,29 +643,20 @@ void RtpPayloadParams::Vp9ToGeneric(const CodecSpecificInfoVP9& vp9_info,
       ((uint32_t{1} << num_temporal_layers * num_active_spatial_layers) - 1);
 
   // Calculate chains, asuming chain includes all frames with temporal_id = 0
-  if (!vp9_header.inter_pic_predicted && !vp9_header.inter_layer_predicted) {
-    // Assume frames without dependencies also reset chains.
-    for (int sid = spatial_index; sid < num_spatial_layers; ++sid) {
-      chain_last_frame_id_[sid] = -1;
-    }
-  }
-  result.chain_diffs.resize(num_spatial_layers, 0);
-  for (int sid = 0; sid < num_active_spatial_layers; ++sid) {
-    if (chain_last_frame_id_[sid] == -1) {
-      result.chain_diffs[sid] = 0;
-      continue;
-    }
-    result.chain_diffs[sid] = shared_frame_id - chain_last_frame_id_[sid];
-  }
-
+  std::vector<bool> part_of_chain(num_spatial_layers, false);
   if (temporal_index == 0) {
-    chain_last_frame_id_[spatial_index] = shared_frame_id;
+    part_of_chain[spatial_index] = true;
     if (!vp9_header.non_ref_for_inter_layer_pred) {
       for (int sid = spatial_index + 1; sid < num_spatial_layers; ++sid) {
-        chain_last_frame_id_[sid] = shared_frame_id;
+        part_of_chain[sid] = true;
       }
     }
   }
+  if (!vp9_header.inter_pic_predicted && !vp9_header.inter_layer_predicted) {
+    // Assume frames without dependencies also reset chains.
+    chains_calculator_.Reset(part_of_chain);
+  }
+  result.chain_diffs = chains_calculator_.From(shared_frame_id, part_of_chain);
 }
 
 void RtpPayloadParams::SetDependenciesVp8Deprecated(
