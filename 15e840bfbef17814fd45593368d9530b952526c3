@@ -16,6 +16,23 @@
       "message": "Can you try it this would break downstream?",
       "revId": "15e840bfbef17814fd45593368d9530b952526c3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b52fb81a_05825ef7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-07-31T09:36:25Z",
+      "side": 1,
+      "message": "I assume this means it is safe to land. Fingers crossed!",
+      "revId": "15e840bfbef17814fd45593368d9530b952526c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
