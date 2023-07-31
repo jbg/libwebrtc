@@ -22,6 +22,30 @@
       },
       "revId": "ae10ca46acf4866db029662c949b52bcb8617608",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6cc10d3_0312bf66",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-07-31T13:36:13Z",
+      "side": 1,
+      "message": "Ok, let\u0027s keep the custom_var for now.",
+      "parentUuid": "bf809ebb_855fe69b",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 34
+      },
+      "revId": "ae10ca46acf4866db029662c949b52bcb8617608",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
