@@ -34,7 +34,7 @@ class MockVoiceMediaReceiveChannelInterface
 
   // VoiceMediaReceiveChannelInterface
   MOCK_METHOD(bool,
-              SetRecvParameters,
+              SetReceiverParameters,
               (const AudioReceiverParameters& params),
               (override));
   MOCK_METHOD(webrtc::RtpParameters,

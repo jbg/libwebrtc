@@ -666,8 +666,8 @@ bool NonFlexfecReceiveCodecsHaveChanged(std::vector<VideoCodecSettings> before,
   absl::c_sort(after, comparison);
 
   // Changes in FlexFEC payload type are handled separately in
-  // WebRtcVideoReceiveChannel::GetChangedRecvParameters, so disregard FlexFEC
-  // in the comparison here.
+  // WebRtcVideoReceiveChannel::GetChangedReceiveParameters, so disregard
+  // FlexFEC in the comparison here.
   return !absl::c_equal(before, after,
                         VideoCodecSettings::EqualsDisregardingFlexfec);
 }
@@ -1044,11 +1044,11 @@ bool WebRtcVideoSendChannel::GetChangedSendParameters(
   return true;
 }
 
-bool WebRtcVideoSendChannel::SetSendParameters(
+bool WebRtcVideoSendChannel::SetSenderParameters(
     const VideoSenderParameters& params) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
-  TRACE_EVENT0("webrtc", "WebRtcVideoSendChannel::SetSendParameters");
-  RTC_LOG(LS_INFO) << "SetSendParameters: " << params.ToString();
+  TRACE_EVENT0("webrtc", "WebRtcVideoSendChannel::SetSenderParameters");
+  RTC_LOG(LS_INFO) << "SetSenderParameters: " << params.ToString();
   ChangedSendParameters changed_params;
   if (!GetChangedSendParameters(params, &changed_params)) {
     return false;
@@ -1181,7 +1181,7 @@ bool WebRtcVideoSendChannel::ApplyChangedParams(
   }
 
   for (auto& kv : send_streams_) {
-    kv.second->SetSendParameters(changed_params);
+    kv.second->SetSenderParameters(changed_params);
   }
   if (changed_params.send_codec || changed_params.rtcp_mode) {
     if (send_codec_changed_callback_) {
@@ -1796,7 +1796,7 @@ void WebRtcVideoSendChannel::WebRtcVideoSendStream::SetCodec(
   RecreateWebRtcStream();
 }
 
-void WebRtcVideoSendChannel::WebRtcVideoSendStream::SetSendParameters(
+void WebRtcVideoSendChannel::WebRtcVideoSendStream::SetSenderParameters(
     const ChangedSendParameters& params) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
   // `recreate_stream` means construction-time parameters have changed and the
@@ -1839,7 +1839,7 @@ void WebRtcVideoSendChannel::WebRtcVideoSendStream::SetSendParameters(
   }
   if (recreate_stream) {
     RTC_LOG(LS_INFO)
-        << "RecreateWebRtcStream (send) because of SetSendParameters";
+        << "RecreateWebRtcStream (send) because of SetSenderParameters";
     RecreateWebRtcStream();
   }
 }
@@ -2553,9 +2553,9 @@ WebRtcVideoReceiveChannel::GetDefaultRtpReceiveParameters() const {
   return rtp_params;
 }
 
-bool WebRtcVideoReceiveChannel::GetChangedRecvParameters(
+bool WebRtcVideoReceiveChannel::GetChangedReceiveParameters(
     const VideoReceiverParameters& params,
-    ChangedRecvParameters* changed_params) const {
+    ChangedReceiveParameters* changed_params) const {
   if (!ValidateCodecFormats(params.codecs) ||
       !ValidateRtpExtensions(params.extensions, recv_rtp_extensions_)) {
     return false;
@@ -2566,7 +2566,7 @@ bool WebRtcVideoReceiveChannel::GetChangedRecvParameters(
       MapCodecs(params.codecs);
   if (mapped_codecs.empty()) {
     RTC_LOG(LS_ERROR)
-        << "GetChangedRecvParameters called without any video codecs.";
+        << "GetChangedReceiveParameters called without any video codecs.";
     return false;
   }
 
@@ -2578,9 +2578,9 @@ bool WebRtcVideoReceiveChannel::GetChangedRecvParameters(
                                         /*include_rtx=*/true, call_->trials());
     for (const VideoCodecSettings& mapped_codec : mapped_codecs) {
       if (!FindMatchingCodec(local_supported_codecs, mapped_codec.codec)) {
-        RTC_LOG(LS_ERROR)
-            << "GetChangedRecvParameters called with unsupported video codec: "
-            << mapped_codec.codec.ToString();
+        RTC_LOG(LS_ERROR) << "GetChangedReceiveParameters called with "
+                             "unsupported video codec: "
+                          << mapped_codec.codec.ToString();
         return false;
       }
     }
@@ -2608,13 +2608,13 @@ bool WebRtcVideoReceiveChannel::GetChangedRecvParameters(
   return true;
 }
 
-bool WebRtcVideoReceiveChannel::SetRecvParameters(
+bool WebRtcVideoReceiveChannel::SetReceiverParameters(
     const VideoReceiverParameters& params) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
-  TRACE_EVENT0("webrtc", "WebRtcVideoReceiveChannel::SetRecvParameters");
-  RTC_LOG(LS_INFO) << "SetRecvParameters: " << params.ToString();
-  ChangedRecvParameters changed_params;
-  if (!GetChangedRecvParameters(params, &changed_params)) {
+  TRACE_EVENT0("webrtc", "WebRtcVideoReceiveChannel::SetReceiverParameters");
+  RTC_LOG(LS_INFO) << "SetReceiverParameters: " << params.ToString();
+  ChangedReceiveParameters changed_params;
+  if (!GetChangedReceiveParameters(params, &changed_params)) {
     return false;
   }
   if (changed_params.flexfec_payload_type) {
@@ -2637,7 +2637,7 @@ bool WebRtcVideoReceiveChannel::SetRecvParameters(
   }
 
   for (auto& kv : receive_streams_) {
-    kv.second->SetRecvParameters(changed_params);
+    kv.second->SetReceiverParameters(changed_params);
   }
   recv_params_ = params;
   return true;
@@ -3367,8 +3367,8 @@ void WebRtcVideoReceiveChannel::WebRtcVideoReceiveStream::SetFlexFecPayload(
   }
 }
 
-void WebRtcVideoReceiveChannel::WebRtcVideoReceiveStream::SetRecvParameters(
-    const ChangedRecvParameters& params) {
+void WebRtcVideoReceiveChannel::WebRtcVideoReceiveStream::SetReceiverParameters(
+    const ChangedReceiveParameters& params) {
   RTC_DCHECK(stream_);
   bool video_needs_recreation = false;
   if (params.codec_settings) {

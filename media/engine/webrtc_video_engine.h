@@ -190,7 +190,7 @@ class WebRtcVideoSendChannel : public MediaChannelUtil,
   // Common functions between sender and receiver
   void SetInterface(MediaChannelNetworkInterface* iface) override;
   // VideoMediaSendChannelInterface implementation
-  bool SetSendParameters(const VideoSenderParameters& params) override;
+  bool SetSenderParameters(const VideoSenderParameters& params) override;
   webrtc::RTCError SetRtpSendParameters(
       uint32_t ssrc,
       const webrtc::RtpParameters& parameters,
@@ -339,7 +339,7 @@ class WebRtcVideoSendChannel : public MediaChannelUtil,
         const VideoSenderParameters& send_params);
     ~WebRtcVideoSendStream();
 
-    void SetSendParameters(const ChangedSendParameters& send_params);
+    void SetSenderParameters(const ChangedSendParameters& send_params);
     webrtc::RTCError SetRtpParameters(const webrtc::RtpParameters& parameters,
                                       webrtc::SetParametersCallback callback);
     webrtc::RtpParameters GetRtpParameters() const;
@@ -525,7 +525,7 @@ class WebRtcVideoSendChannel : public MediaChannelUtil,
   std::vector<webrtc::RtpExtension> recv_rtp_extensions_
       RTC_GUARDED_BY(thread_checker_);
   // See reason for keeping track of the FlexFEC payload type separately in
-  // comment in WebRtcVideoChannel::ChangedRecvParameters.
+  // comment in WebRtcVideoChannel::ChangedReceiveParameters.
   int recv_flexfec_payload_type_ RTC_GUARDED_BY(thread_checker_);
   webrtc::BitrateConstraints bitrate_config_ RTC_GUARDED_BY(thread_checker_);
   // TODO(deadbeef): Don't duplicate information between
@@ -590,7 +590,7 @@ class WebRtcVideoReceiveChannel : public MediaChannelUtil,
   // Common functions between sender and receiver
   void SetInterface(MediaChannelNetworkInterface* iface) override;
   // VideoMediaReceiveChannelInterface implementation
-  bool SetRecvParameters(const VideoReceiverParameters& params) override;
+  bool SetReceiverParameters(const VideoReceiverParameters& params) override;
   webrtc::RtpParameters GetRtpReceiveParameters(uint32_t ssrc) const override;
   webrtc::RtpParameters GetDefaultRtpReceiveParameters() const override;
   void SetReceive(bool receive) override;
@@ -645,7 +645,7 @@ class WebRtcVideoReceiveChannel : public MediaChannelUtil,
 
  private:
   class WebRtcVideoReceiveStream;
-  struct ChangedRecvParameters {
+  struct ChangedReceiveParameters {
     // These optionals are unset if not changed.
     absl::optional<std::vector<VideoCodecSettings>> codec_settings;
     absl::optional<std::vector<webrtc::RtpExtension>> rtp_header_extensions;
@@ -719,7 +719,7 @@ class WebRtcVideoReceiveChannel : public MediaChannelUtil,
                                bool nack_enabled,
                                webrtc::RtcpMode rtcp_mode,
                                absl::optional<int> rtx_time);
-    void SetRecvParameters(const ChangedRecvParameters& recv_params);
+    void SetReceiverParameters(const ChangedReceiveParameters& recv_params);
 
     void OnFrame(const webrtc::VideoFrame& frame) override;
     bool IsDefaultStream() const;
@@ -786,9 +786,9 @@ class WebRtcVideoReceiveChannel : public MediaChannelUtil,
     RTC_NO_UNIQUE_ADDRESS webrtc::SequenceChecker thread_checker_;
     bool receiving_ RTC_GUARDED_BY(&thread_checker_);
   };
-  bool GetChangedRecvParameters(const VideoReceiverParameters& params,
-                                ChangedRecvParameters* changed_params) const
-      RTC_EXCLUSIVE_LOCKS_REQUIRED(thread_checker_);
+  bool GetChangedReceiveParameters(const VideoReceiverParameters& params,
+                                   ChangedReceiveParameters* changed_params)
+      const RTC_EXCLUSIVE_LOCKS_REQUIRED(thread_checker_);
 
   std::map<uint32_t, WebRtcVideoReceiveStream*> receive_streams_
       RTC_GUARDED_BY(thread_checker_);
@@ -857,7 +857,7 @@ class WebRtcVideoReceiveChannel : public MediaChannelUtil,
   std::vector<webrtc::RtpExtension> recv_rtp_extensions_
       RTC_GUARDED_BY(thread_checker_);
   // See reason for keeping track of the FlexFEC payload type separately in
-  // comment in WebRtcVideoChannel::ChangedRecvParameters.
+  // comment in WebRtcVideoChannel::ChangedReceiveParameters.
   int recv_flexfec_payload_type_ RTC_GUARDED_BY(thread_checker_);
   webrtc::BitrateConstraints bitrate_config_ RTC_GUARDED_BY(thread_checker_);
   // TODO(deadbeef): Don't duplicate information between
