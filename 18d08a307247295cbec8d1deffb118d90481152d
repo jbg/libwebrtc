@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dedb1d94_3f93b4a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19239
+      },
+      "writtenOn": "2023-08-02T19:41:53Z",
+      "side": 1,
+      "message": "Hi Mirko,\nNot sure how comfortable you are with pausing the auto-roller for more than a few hours. \nSo i\u0027ll wait till you\u0027re up, then merge https://chromium-review.googlesource.com/c/chromium/src/+/4666325\nthen roll the new commits in this CL, and hopefully that will get CQ passing here.\n\nin the mean time lmk if there are any webrtc changes I\u0027ve missed",
+      "revId": "18d08a307247295cbec8d1deffb118d90481152d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
