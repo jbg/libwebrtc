@@ -51,6 +51,24 @@
       "message": "Rubber stamping, still working on untangling things.",
       "revId": "18d08a307247295cbec8d1deffb118d90481152d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c0e09bb_8bd01452",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19239
+      },
+      "writtenOn": "2023-08-03T11:35:50Z",
+      "side": 1,
+      "message": "if i land the chromium/src CL and this CL does not there\u0027s no problem. \n\nbut before the auto-roller is on again, this CL (with updated commits to `build` and `buildtools`) should land.\n\nsince it\u0027s paused, I\u0027ll land the chromium/src CL and see how it goes with other repos using buildtools",
+      "parentUuid": "e5b30a98_db42bfe0",
+      "revId": "18d08a307247295cbec8d1deffb118d90481152d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
