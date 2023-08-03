@@ -542,7 +542,8 @@ void RtpPayloadParams::Vp9ToGeneric(const CodecSpecificInfoVP9& vp9_info,
   const auto& vp9_header =
       absl::get<RTPVideoHeaderVP9>(rtp_video_header.video_type_header);
   const int num_spatial_layers = kMaxSimulatedSpatialLayers;
-  const int num_active_spatial_layers = vp9_header.num_spatial_layers;
+  const int min_active_spatial_id = vp9_header.first_active_layer;
+  const int max_active_spatial_id_plus_1 = vp9_header.num_spatial_layers;
   const int num_temporal_layers = kMaxTemporalStreams;
   static_assert(num_spatial_layers <=
                 RtpGenericFrameDescriptor::kMaxSpatialLayers);
@@ -556,10 +557,16 @@ void RtpPayloadParams::Vp9ToGeneric(const CodecSpecificInfoVP9& vp9_info,
   int temporal_index =
       vp9_header.temporal_idx != kNoTemporalIdx ? vp9_header.temporal_idx : 0;
 
-  if (spatial_index >= num_spatial_layers ||
-      temporal_index >= num_temporal_layers ||
-      num_active_spatial_layers > num_spatial_layers) {
+  if (!(temporal_index < num_temporal_layers &&
+        min_active_spatial_id <= spatial_index &&
+        spatial_index < max_active_spatial_id_plus_1 &&
+        max_active_spatial_id_plus_1 <= num_spatial_layers)) {
     // Prefer to generate no generic layering than an inconsistent one.
+    RTC_LOG(LS_ERROR) << "Inconsistent layer id sid=" << spatial_index
+                      << ",tid=" << temporal_index
+                      << " in VP9 header. Active spatial ids: ["
+                      << min_active_spatial_id << ","
+                      << (max_active_spatial_id_plus_1 - 1) << "]";
     return;
   }
 
@@ -642,17 +649,20 @@ void RtpPayloadParams::Vp9ToGeneric(const CodecSpecificInfoVP9& vp9_info,
   }
 
   result.active_decode_targets =
-      ((uint32_t{1} << num_temporal_layers * num_active_spatial_layers) - 1);
+      ((uint32_t{1} << num_temporal_layers * max_active_spatial_id_plus_1) -
+       1) ^
+      ((uint32_t{1} << num_temporal_layers * min_active_spatial_id) - 1);
 
   // Calculate chains, asuming chain includes all frames with temporal_id = 0
   if (!vp9_header.inter_pic_predicted && !vp9_header.inter_layer_predicted) {
     // Assume frames without dependencies also reset chains.
-    for (int sid = spatial_index; sid < num_spatial_layers; ++sid) {
+    for (int sid = spatial_index; sid < max_active_spatial_id_plus_1; ++sid) {
       chain_last_frame_id_[sid] = -1;
     }
   }
   result.chain_diffs.resize(num_spatial_layers, 0);
-  for (int sid = 0; sid < num_active_spatial_layers; ++sid) {
+  for (int sid = min_active_spatial_id; sid < max_active_spatial_id_plus_1;
+       ++sid) {
     if (chain_last_frame_id_[sid] == -1) {
       result.chain_diffs[sid] = 0;
       continue;
@@ -671,7 +681,8 @@ void RtpPayloadParams::Vp9ToGeneric(const CodecSpecificInfoVP9& vp9_info,
   if (temporal_index == 0) {
     chain_last_frame_id_[spatial_index] = shared_frame_id;
     if (!vp9_header.non_ref_for_inter_layer_pred) {
-      for (int sid = spatial_index + 1; sid < num_spatial_layers; ++sid) {
+      for (int sid = spatial_index + 1; sid < max_active_spatial_id_plus_1;
+           ++sid) {
         chain_last_frame_id_[sid] = shared_frame_id;
       }
     }
