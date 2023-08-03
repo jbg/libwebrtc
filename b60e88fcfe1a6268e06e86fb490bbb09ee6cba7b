@@ -16,6 +16,29 @@
       "message": "Aligned naming rules and added fuzzer test for h265 parser, PTAL.",
       "revId": "b60e88fcfe1a6268e06e86fb490bbb09ee6cba7b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bba33fb_186e8ca5",
+        "filename": "webrtc.gni",
+        "patchSetId": 10
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-08-03T13:16:52Z",
+      "side": 1,
+      "message": "We need to enable rtc_use_h265 on test bots. @mbonadei@webrtc.org, do you know how/where? I see that rtc_use_h264 is enabled on bots but couldn\u0027t find where that is done.",
+      "range": {
+        "startLine": 189,
+        "startChar": 2,
+        "endLine": 189,
+        "endChar": 14
+      },
+      "revId": "b60e88fcfe1a6268e06e86fb490bbb09ee6cba7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
