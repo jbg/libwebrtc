@@ -16,6 +16,24 @@
       "message": "Hi Mirko,\nNot sure how comfortable you are with pausing the auto-roller for more than a few hours. \nSo i\u0027ll wait till you\u0027re up, then merge https://chromium-review.googlesource.com/c/chromium/src/+/4666325\nthen roll the new commits in this CL, and hopefully that will get CQ passing here.\n\nin the mean time lmk if there are any webrtc changes I\u0027ve missed",
       "revId": "18d08a307247295cbec8d1deffb118d90481152d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5b30a98_db42bfe0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-08-03T08:49:01Z",
+      "side": 1,
+      "message": "Hi Joanna, the roll to WebRTC has been broken for a few days (jansson@ is looking into it) so it is like it has been in pause for 10 days now. :) \n\nThere are probably stacked errors at the moment, so it will take a few more days to untangle.\n\nIf you land https://chromium-review.googlesource.com/c/chromium/src/+/4666325, and WebRTC doesn\u0027t land this CL what is the risk? IIUC WebRTC will still see the old BUILD.gn files from Chromium (pointing to buildtools) and still sync in buildtools/. Or do we risk a deeper breakage?",
+      "parentUuid": "dedb1d94_3f93b4a7",
+      "revId": "18d08a307247295cbec8d1deffb118d90481152d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
