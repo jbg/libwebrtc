@@ -34,6 +34,23 @@
       "parentUuid": "dedb1d94_3f93b4a7",
       "revId": "18d08a307247295cbec8d1deffb118d90481152d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ac933c0_0e83b08e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6193
+      },
+      "writtenOn": "2023-08-03T09:01:33Z",
+      "side": 1,
+      "message": "Rubber stamping, still working on untangling things.",
+      "revId": "18d08a307247295cbec8d1deffb118d90481152d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
