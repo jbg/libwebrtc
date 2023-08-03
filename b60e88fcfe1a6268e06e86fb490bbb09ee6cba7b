@@ -39,6 +39,30 @@
       },
       "revId": "b60e88fcfe1a6268e06e86fb490bbb09ee6cba7b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "805b056f_a6c1ba40",
+        "filename": "webrtc.gni",
+        "patchSetId": 10
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-08-03T14:27:25Z",
+      "side": 1,
+      "message": "Inside https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/tools_webrtc/mb/mb_config.pyl you can add the flags used by the bots.\n\nSee https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/tools_webrtc/mb/mb_config.pyl;l\u003d433-435;drc\u003dc787adcfbfa306558bed7c23afeb31c0ca40aa35 where we define the mixin openh264 which adds the \"rtc_use_h264\u003dtrue\".\n\nThe mixins can then be used by different bots definitions (which then map to bots here https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/tools_webrtc/mb/mb_config.pyl;l\u003d139-220;drc\u003dc787adcfbfa306558bed7c23afeb31c0ca40aa35) like you can see https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/tools_webrtc/mb/mb_config.pyl;l\u003d253;drc\u003dc787adcfbfa306558bed7c23afeb31c0ca40aa35.\n\nMy advice is to add an h265 mixin, add it to \"release_bot_x64\" and \"debug_bot_x64\" to run it on Linux rel and dbg. If that is green then add it where it fits (android/macos/etc..).",
+      "parentUuid": "1bba33fb_186e8ca5",
+      "range": {
+        "startLine": 189,
+        "startChar": 2,
+        "endLine": 189,
+        "endChar": 14
+      },
+      "revId": "b60e88fcfe1a6268e06e86fb490bbb09ee6cba7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
