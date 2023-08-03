@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "758e675c_6b03cfe6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-08-03T09:26:17Z",
+      "side": 1,
+      "message": "Webrtc SW decoders sets generic header and thus doesn\u0027t use this function.\n\nCurrently chromium HW encoders always set first_active_layer\u003d0, but\nthat should change. See \nhttps://chromium-review.googlesource.com/c/chromium/src/+/4738610/comments/cc36f03d_03ef2267 for the context",
+      "revId": "a50509b3a6494a44aa7789baebdd84fbcd9f33e0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
