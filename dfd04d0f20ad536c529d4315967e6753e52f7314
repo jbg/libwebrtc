@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04412358_c6dec2f2",
+        "filename": "call/rtp_payload_params.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-08-03T11:19:46Z",
+      "side": 1,
+      "message": "nit: `first_active_spatial_id`",
+      "range": {
+        "startLine": 545,
+        "startChar": 12,
+        "endLine": 545,
+        "endChar": 33
+      },
+      "revId": "dfd04d0f20ad536c529d4315967e6753e52f7314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63cdce11_f3df48f7",
+        "filename": "call/rtp_payload_params.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-08-03T11:19:46Z",
+      "side": 1,
+      "message": "nit: `last_active_spatial_id_plus_1`",
+      "range": {
+        "startLine": 546,
+        "startChar": 12,
+        "endLine": 546,
+        "endChar": 40
+      },
+      "revId": "dfd04d0f20ad536c529d4315967e6753e52f7314",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
