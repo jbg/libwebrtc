@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c87a3281_5f084506",
+        "filename": "modules/remote_bitrate_estimator/remote_bitrate_estimator_single_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-08-03T11:21:40Z",
+      "side": 1,
+      "message": "arithmetic and comparison are defined for infinities:\n\n-infinity + finite \u003d -infinity.\nnow \u003e\u003d -infinity is always true\n\n(if you think relying on infinity arithmetic is confusing, \nthen may be infinity values shouldn\u0027t exist.\ninstead we should use optional\u003cTimestamp\u003e to represent unset values)",
+      "parentUuid": "cae86632_f71bacc3",
+      "range": {
+        "startLine": 119,
+        "startChar": 32,
+        "endLine": 119,
+        "endChar": 50
+      },
+      "revId": "c0e25f017883655be55845358ffdc6be40206fe3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "911a13fd_253ab2d2",
@@ -47,6 +71,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc2af265_9965ff6f",
+        "filename": "modules/remote_bitrate_estimator/remote_bitrate_estimator_single_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-08-03T11:21:40Z",
+      "side": 1,
+      "message": "yes, line#74 sets last_packet_time to now after it was may be created.\n(no last packet - no entry in the overuse detectos map)",
+      "parentUuid": "911a13fd_253ab2d2",
+      "range": {
+        "startLine": 133,
+        "startChar": 25,
+        "endLine": 133,
+        "endChar": 41
+      },
+      "revId": "c0e25f017883655be55845358ffdc6be40206fe3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a96c21be_b5661b20",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-08-03T10:50:37Z",
       "side": 1,
       "message": "Is this a behavior change?",
+      "range": {
+        "startLine": 73,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 16
+      },
+      "revId": "c0e25f017883655be55845358ffdc6be40206fe3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "655d8104_36d410c4",
+        "filename": "modules/remote_bitrate_estimator/remote_bitrate_estimator_single_stream.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-08-03T11:21:40Z",
+      "side": 1,
+      "message": "no, BitrateTracker is (currently) a wrapper around RateStatistics with unit-friendly interface.\n\nThough tests fail. not sure why.",
+      "parentUuid": "a96c21be_b5661b20",
       "range": {
         "startLine": 73,
         "startChar": 2,
