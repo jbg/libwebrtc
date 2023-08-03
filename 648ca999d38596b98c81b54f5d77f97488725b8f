@@ -50,6 +50,23 @@
       "message": "(I think you\u0027ll need no-try in the commit message similar to the other CL)",
       "revId": "648ca999d38596b98c81b54f5d77f97488725b8f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "355dad81_6dca22ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18439
+      },
+      "writtenOn": "2023-08-03T14:49:14Z",
+      "side": 1,
+      "message": "Hello Harald/Florent, this CL is now approved for merge, but I don\u0027t have permissions to submit it, could you please submit it?",
+      "revId": "648ca999d38596b98c81b54f5d77f97488725b8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
