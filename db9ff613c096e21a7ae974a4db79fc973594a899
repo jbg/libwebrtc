@@ -16,6 +16,24 @@
       "message": "Just some naming suggestions, feel free to ignore them",
       "revId": "db9ff613c096e21a7ae974a4db79fc973594a899",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e68b344_b124330e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-08-03T11:31:43Z",
+      "side": 1,
+      "message": "I like that suggestion: it makes it easier to distinguish these two variables.",
+      "parentUuid": "50417563_376f641f",
+      "revId": "db9ff613c096e21a7ae974a4db79fc973594a899",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
