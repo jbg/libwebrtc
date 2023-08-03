@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cae86632_f71bacc3",
+        "filename": "modules/remote_bitrate_estimator/remote_bitrate_estimator_single_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-08-03T10:50:37Z",
+      "side": 1,
+      "message": "What if last_process_time is -infinity?",
+      "range": {
+        "startLine": 119,
+        "startChar": 32,
+        "endLine": 119,
+        "endChar": 50
+      },
+      "revId": "c0e25f017883655be55845358ffdc6be40206fe3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "911a13fd_253ab2d2",
+        "filename": "modules/remote_bitrate_estimator/remote_bitrate_estimator_single_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-08-03T10:50:37Z",
+      "side": 1,
+      "message": "Is last_packet_time guaranteed to be initialized to a finite value here?",
+      "range": {
+        "startLine": 133,
+        "startChar": 25,
+        "endLine": 133,
+        "endChar": 41
+      },
+      "revId": "c0e25f017883655be55845358ffdc6be40206fe3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a96c21be_b5661b20",
+        "filename": "modules/remote_bitrate_estimator/remote_bitrate_estimator_single_stream.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-08-03T10:50:37Z",
+      "side": 1,
+      "message": "Is this a behavior change?",
+      "range": {
+        "startLine": 73,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 16
+      },
+      "revId": "c0e25f017883655be55845358ffdc6be40206fe3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
