@@ -48,6 +48,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3032bb5c_95da9017",
+        "filename": "modules/remote_bitrate_estimator/remote_bitrate_estimator_single_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-08-03T14:51:11Z",
+      "side": 1,
+      "message": "I\u0027ve changed to absl::optional\u003cTimestamp\u003e for clarity.\n\n(in particular after I needed some extra logic there:\narithmetic and comparision are defined for infinity, but .ms() convertor is not)",
+      "parentUuid": "c87a3281_5f084506",
+      "range": {
+        "startLine": 119,
+        "startChar": 32,
+        "endLine": 119,
+        "endChar": 50
+      },
+      "revId": "c0e25f017883655be55845358ffdc6be40206fe3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "911a13fd_253ab2d2",
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "no, BitrateTracker is (currently) a wrapper around RateStatistics with unit-friendly interface.\n\nThough tests fail. not sure why.",
       "parentUuid": "a96c21be_b5661b20",
+      "range": {
+        "startLine": 73,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 16
+      },
+      "revId": "c0e25f017883655be55845358ffdc6be40206fe3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af912b9d_021740c6",
+        "filename": "modules/remote_bitrate_estimator/remote_bitrate_estimator_single_stream.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-08-03T14:51:11Z",
+      "side": 1,
+      "message": "after some investigation it turn out to be precision of calling \u0027Process\u0027 function.\n\nTests advance time in microseconds. Old code rounds time to millisecond. new code doesn\u0027t. That resulted in different behavior.\n\nNot sure if it is tests that are too sensetive, or the algorithm, so changed the algorithm to continue using rounding to milliseconds.",
+      "parentUuid": "655d8104_36d410c4",
       "range": {
         "startLine": 73,
         "startChar": 2,
