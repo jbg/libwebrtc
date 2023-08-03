@@ -84,6 +84,24 @@
       "message": "Mirko: ok to land with no-try? The android/ios issues were there before but I\u0027ve never seen linux_rel fail.",
       "revId": "648ca999d38596b98c81b54f5d77f97488725b8f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ff166e8_40542217",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-08-03T15:56:04Z",
+      "side": 1,
+      "message": "Yes, there is no other way to test this on the old branch unfortunately.\n\nLGTM to land with No-Try.",
+      "parentUuid": "0b318b4e_06c6e326",
+      "revId": "648ca999d38596b98c81b54f5d77f97488725b8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
