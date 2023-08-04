@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fd9b2e7_79be281f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-04T08:55:21Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "c70d074e_cee35354",
+      "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cee963e6_7804d2e7",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-08-03T13:31:30Z",
       "side": 1,
       "message": "Hm. Messing up the type is a bug, but since this is a network interface and you can\u0027t trust what comes off the wire, it is good not to CHECK on it.\n\nStill, that kind of error seems to me that it deserves a log message.\n\nNon-presence of the attribute is fine to just accept without making a fuss about it.",
+      "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da84c400_e416e498",
+        "filename": "p2p/base/stun_dictionary.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-04T08:55:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cee963e6_7804d2e7",
       "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -52,6 +88,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bf5a754_4a829100",
+        "filename": "p2p/base/stun_dictionary.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-04T08:55:21Z",
+      "side": 1,
+      "message": "possible...but then I need to implement an operator\u003d\u003d for attributes,\nwhich seems \"complicated\" for a DCHECK",
+      "parentUuid": "e724143e_d993cb85",
+      "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "791d1e1a_2706831d",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-08-03T13:31:30Z",
       "side": 1,
       "message": "\u003ddefault?",
+      "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cae67c76_7c47d8f6",
+        "filename": "p2p/base/stun_dictionary.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-04T08:55:21Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "791d1e1a_2706831d",
       "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -86,6 +158,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "939b8c74_678e0869",
+        "filename": "p2p/base/stun_dictionary.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-04T08:55:21Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "83c6a60b_5c897016",
+      "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2d5ff68_1504fbe9",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-08-03T13:31:30Z",
       "side": 1,
       "message": "argue choice of namespace with me....",
+      "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "367b52db_e1922039",
+        "filename": "p2p/base/stun_dictionary.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-04T08:55:21Z",
+      "side": 1,
+      "message": "Acknowledged 😊",
+      "parentUuid": "c2d5ff68_1504fbe9",
       "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -120,6 +228,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83371818_d6168df0",
+        "filename": "p2p/base/stun_dictionary.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-04T08:55:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57cb18d9_d7f725c1",
+      "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4bf6bf09_fd356301",
@@ -133,6 +259,24 @@
       "writtenOn": "2023-08-03T13:31:30Z",
       "side": 1,
       "message": "Naming: A Reader is supposed to be a class that reads from an underlying object. This class has a writer (ApplyDelta). Should it be called StunDictionaryCopyStorage?",
+      "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a055c311_7c04c1a2",
+        "filename": "p2p/base/stun_dictionary.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-04T08:55:21Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4bf6bf09_fd356301",
       "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -154,6 +298,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe819295_78fdbeb6",
+        "filename": "p2p/base/stun_dictionary.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-04T08:55:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f051df9_3dcb38fa",
+      "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "401f2edc_ee7253ba",
@@ -167,6 +329,24 @@
       "writtenOn": "2023-08-03T13:31:30Z",
       "side": 1,
       "message": "Unsure what this should be called - it resembles a builder, but it survives the Build() call equivalent (CreateDelta) and can be used multiple times.\n\nStunDictionaryAuthoritativeStorage?",
+      "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eba0e85a_b3397c7d",
+        "filename": "p2p/base/stun_dictionary.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-04T08:55:21Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "401f2edc_ee7253ba",
       "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -188,6 +368,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d487e06_6d248f43",
+        "filename": "p2p/base/stun_dictionary.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-04T08:55:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "870f890c_7ad3b690",
+      "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb62048c_9c35857f",
@@ -201,6 +399,24 @@
       "writtenOn": "2023-08-03T13:31:30Z",
       "side": 1,
       "message": "This looks like a debug log while trying to debug XorToggle. Remove?",
+      "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74fce445_11ba61d5",
+        "filename": "p2p/base/stun_dictionary_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-04T08:55:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb62048c_9c35857f",
       "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -222,6 +438,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38c97e37_4100f2e2",
+        "filename": "p2p/base/stun_dictionary_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-04T08:55:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c961823e_ccf89dcd",
+      "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c71b535b_50a7883a",
@@ -235,6 +469,24 @@
       "writtenOn": "2023-08-03T13:31:30Z",
       "side": 1,
       "message": "What is being demonstrated here?\n\nOffhand, it looks as if you\u0027re having two authoritative copies updating one non-authoritative copy. That shouldn\u0027t work.",
+      "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6dbf190_adb46bfb",
+        "filename": "p2p/base/stun_dictionary_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-04T08:55:21Z",
+      "side": 1,
+      "message": "updated comment in .h\nthis is actually possible...",
+      "parentUuid": "c71b535b_50a7883a",
       "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -256,6 +508,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97ba2fb5_b08bd287",
+        "filename": "p2p/base/stun_dictionary_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-04T08:55:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6840122c_23dddca0",
+      "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd366486_5188eb02",
@@ -273,6 +543,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9e843a7_dc9f39f3",
+        "filename": "p2p/base/stun_dictionary_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-04T08:55:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd366486_5188eb02",
+      "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c5c8978_5912abf7",
@@ -286,6 +574,24 @@
       "writtenOn": "2023-08-03T13:31:30Z",
       "side": 1,
       "message": "Is that a design bug?",
+      "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9840da7b_2505de1b",
+        "filename": "p2p/base/stun_dictionary_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-04T08:55:21Z",
+      "side": 1,
+      "message": "not really,\nthe delta is supposed to be embedded inside a stun-message.\nand the stun message has a message integrity, which will fail\nif the attribute is truncated.",
+      "parentUuid": "1c5c8978_5912abf7",
       "revId": "c7bd2d83b5f1121bc9d849cb3bf588fe46f61e4a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
