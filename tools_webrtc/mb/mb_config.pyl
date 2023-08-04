@@ -252,7 +252,7 @@
     'codesearch_gen_linux_bot': ['openh264', 'debug_bot', 'minimal_symbols'],
     'debug_bot_arm': ['openh264', 'debug_bot', 'arm'],
     'debug_bot_arm64': ['openh264', 'debug_bot', 'arm64'],
-    'debug_bot_x64': ['openh264', 'debug_bot', 'x64'],
+    'debug_bot_x64': ['openh264', 'debug_bot', 'x64', 'h265'],
     'debug_bot_x86': ['openh264', 'debug_bot', 'x86'],
     'dummy_audio_file_devices_no_protobuf_android_arm': [
       'android', 'debug_static_bot', 'arm', 'dummy_audio_file_devices',
@@ -298,7 +298,7 @@
     'pure_release_bot_x86': ['openh264', 'pure_release_bot', 'x86'],
     'release_bot_arm': ['openh264', 'release_bot', 'arm'],
     'release_bot_arm64': ['openh264', 'release_bot', 'arm64'],
-    'release_bot_x64': ['openh264', 'release_bot', 'x64'],
+    'release_bot_x64': ['openh264', 'release_bot', 'x64', 'h265'],
     'release_bot_x64_fuchsia': ['openh264', 'release_bot', 'x64', 'fuchsia'],
     'release_bot_x86': ['openh264', 'release_bot', 'x86'],
     'rtti_no_sctp_android_arm':
@@ -402,6 +402,9 @@
     },
     'full_symbols': {
       'gn_args': 'symbol_level=2',
+    },
+    'h265': {
+      'gn_args': 'rtc_use_h265=true',
     },
     'ios': {
       'gn_args': 'target_os="ios"',
