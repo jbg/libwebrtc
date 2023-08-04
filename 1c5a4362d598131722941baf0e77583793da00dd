@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2415d5f_852f801f",
+        "filename": "p2p/base/stun_dictionary.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-04T10:27:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0160524_517bef91",
+      "revId": "1c5a4362d598131722941baf0e77583793da00dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9dfc45c_3421da34",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-08-04T10:07:48Z",
       "side": 1,
       "message": "\"modifications to A are transferred to B\"?",
+      "revId": "1c5a4362d598131722941baf0e77583793da00dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ac3190e_142e84a5",
+        "filename": "p2p/base/stun_dictionary.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-04T10:27:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9dfc45c_3421da34",
       "revId": "1c5a4362d598131722941baf0e77583793da00dd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -69,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bc1da78_fb13a8dc",
+        "filename": "p2p/base/stun_dictionary.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-04T10:27:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27cb8955_37dc379e",
+      "revId": "1c5a4362d598131722941baf0e77583793da00dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3a64501_8731fbab",
@@ -86,6 +140,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e414698_101f98e9",
+        "filename": "p2p/base/stun_dictionary.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-04T10:27:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3a64501_8731fbab",
+      "revId": "1c5a4362d598131722941baf0e77583793da00dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b121aab_7e306d6d",
@@ -99,6 +171,24 @@
       "writtenOn": "2023-08-04T10:07:48Z",
       "side": 1,
       "message": "can you explicitly delete the copy operators so that it\u0027s obvious to the compiler too?",
+      "revId": "1c5a4362d598131722941baf0e77583793da00dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b64947e2_764eb079",
+        "filename": "p2p/base/stun_dictionary.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-04T10:27:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b121aab_7e306d6d",
       "revId": "1c5a4362d598131722941baf0e77583793da00dd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
