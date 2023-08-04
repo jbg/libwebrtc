@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce2c3b8f_1a64d15e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-04T10:07:48Z",
+      "side": 1,
+      "message": "Looks better. Just a few nits, approving.",
+      "revId": "1c5a4362d598131722941baf0e77583793da00dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0160524_517bef91",
+        "filename": "p2p/base/stun_dictionary.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-04T10:07:48Z",
+      "side": 1,
+      "message": "Nit: Apply a delta ack",
+      "revId": "1c5a4362d598131722941baf0e77583793da00dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9dfc45c_3421da34",
+        "filename": "p2p/base/stun_dictionary.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-04T10:07:48Z",
+      "side": 1,
+      "message": "\"modifications to A are transferred to B\"?",
+      "revId": "1c5a4362d598131722941baf0e77583793da00dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27cb8955_37dc379e",
+        "filename": "p2p/base/stun_dictionary.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-04T10:07:48Z",
+      "side": 1,
+      "message": "Nit: Needs comma after StunDictionariView.\nNit: Start the bullet points with an uppercase letter.",
+      "revId": "1c5a4362d598131722941baf0e77583793da00dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3a64501_8731fbab",
+        "filename": "p2p/base/stun_dictionary.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-04T10:07:48Z",
+      "side": 1,
+      "message": "vector of keys?",
+      "revId": "1c5a4362d598131722941baf0e77583793da00dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b121aab_7e306d6d",
+        "filename": "p2p/base/stun_dictionary.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-04T10:07:48Z",
+      "side": 1,
+      "message": "can you explicitly delete the copy operators so that it\u0027s obvious to the compiler too?",
+      "revId": "1c5a4362d598131722941baf0e77583793da00dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
