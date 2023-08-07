@@ -24,6 +24,7 @@
 #include "p2p/base/connection.h"
 #include "p2p/base/packet_transport_internal.h"
 #include "p2p/base/port.h"
+#include "p2p/base/stun_dictionary.h"
 #include "p2p/base/transport_description.h"
 #include "rtc_base/network_constants.h"
 #include "rtc_base/system/rtc_export.h"
@@ -293,6 +294,11 @@ class RTC_EXPORT IceTransportInternal : public rtc::PacketTransportInternal {
   virtual absl::optional<const CandidatePair> GetSelectedCandidatePair()
       const = 0;
 
+  virtual absl::optional<std::reference_wrapper<StunDictionaryWriter>>
+  GetLocalDictionary() {
+    return absl::nullopt;
+  }
+
   sigslot::signal1<IceTransportInternal*> SignalGatheringState;
 
   // Handles sending and receiving of candidates.
@@ -330,6 +336,19 @@ class RTC_EXPORT IceTransportInternal : public rtc::PacketTransportInternal {
 
   // Invoked when the transport is being destroyed.
   sigslot::signal1<IceTransportInternal*> SignalDestroyed;
+
+  // Invoked when remote dictionary has been updated,
+  // i.e. modifications to attributes from remote ice agent has
+  // reflected in our StunDictionaryView.
+  sigslot::signal3<IceTransportInternal*,
+                   const StunDictionaryView&,
+                   rtc::ArrayView<uint16_t>>
+      SignalDictionaryViewUpdated;
+
+  // Invoked when local dictionary has been synchronized,
+  // i.e. remote ice agent has reported acknowledged updates from us.
+  sigslot::signal2<IceTransportInternal*, const StunDictionaryWriter&>
+      SignalDictionaryWriterSynced;
 };
 
 }  // namespace cricket

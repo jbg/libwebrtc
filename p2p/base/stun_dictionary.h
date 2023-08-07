@@ -175,8 +175,16 @@ class StunDictionaryWriter {
   const StunDictionaryView* dictionary() { return dictionary_.get(); }
   const StunDictionaryView* operator->() { return dictionary_.get(); }
 
+  // Disable writer,
+  // i.e CreateDelta always return null, and no modifications are made.
+  // This is called if remote peer does not support GOOG_DELTA.
+  void Disable();
+  bool disabled() const { return disabled_; }
+
  private:
   void Set(std::unique_ptr<StunAttribute> attr);
+
+  bool disabled_ = false;
 
   // version of modification.
   int64_t version_ = 1;

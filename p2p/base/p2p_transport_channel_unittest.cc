@@ -250,6 +250,28 @@ bool HasRemoteAddress(const cricket::CandidatePairInterface* pair,
   return pair->remote_candidate().address().EqualIPs(address);
 }
 
+template <typename A1, typename A2>
+class MockSigslot2 : public sigslot::has_slots<> {
+ public:
+  explicit MockSigslot2(sigslot::signal<A1, A2>* signal) {
+    signal->connect(this, &MockSigslot2::HandleSignal);
+  }
+  MockSigslot2(const MockSigslot2&) = delete;
+  void operator=(const MockSigslot2&) = delete;
+  MOCK_METHOD(void, HandleSignal, (A1 arg1, A2 arg2));
+};
+
+template <typename A1, typename A2, typename A3>
+class MockSigslot3 : public sigslot::has_slots<> {
+ public:
+  explicit MockSigslot3(sigslot::signal<A1, A2, A3>* signal) {
+    signal->connect(this, &MockSigslot3::HandleSignal);
+  }
+  MockSigslot3(const MockSigslot3&) = delete;
+  void operator=(const MockSigslot3&) = delete;
+  MOCK_METHOD(void, HandleSignal, (A1 arg1, A2 arg2, A3 arg3));
+};
+
 }  // namespace
 
 namespace cricket {
@@ -3415,6 +3437,34 @@ TEST_F(P2PTransportChannelMultihomedTest, TestVpnOnlyVpn) {
   clock.AdvanceTime(webrtc::TimeDelta::Millis(kDefaultTimeout));
   EXPECT_TRUE_SIMULATED_WAIT(!CheckConnected(ep1_ch1(), ep2_ch1()),
                              kDefaultTimeout, clock);
+}
+
+TEST_F(P2PTransportChannelMultihomedTest, StunDictionary) {
+  rtc::ScopedFakeClock clock;
+  AddAddress(0, kPublicAddrs[0], "eth0", rtc::ADAPTER_TYPE_CELLULAR);
+  AddAddress(0, kAlternateAddrs[0], "vpn0", rtc::ADAPTER_TYPE_VPN,
+             rtc::ADAPTER_TYPE_ETHERNET);
+  AddAddress(1, kPublicAddrs[1]);
+
+  // Create channels and let them go writable, as usual.
+  CreateChannels();
+
+  MockSigslot3<IceTransportInternal*, const StunDictionaryView&,
+               rtc::ArrayView<uint16_t>>
+      view_updated(&ep2_ch1()->SignalDictionaryViewUpdated);
+  MockSigslot2<IceTransportInternal*, const StunDictionaryWriter&>
+      writer_synced(&ep1_ch1()->SignalDictionaryWriterSynced);
+  auto& dict_writer = ep1_ch1()->GetLocalDictionary()->get();
+  dict_writer.SetByteString(12)->CopyBytes("keso");
+  EXPECT_CALL(view_updated, HandleSignal)
+      .WillOnce([&](auto* channel, auto& view, auto keys) {
+        EXPECT_EQ(keys.size(), 1u);
+        EXPECT_EQ(keys[0], 12);
+        EXPECT_EQ(view.GetByteString(12)->string_view(), "keso");
+      });
+  EXPECT_CALL(writer_synced, HandleSignal).Times(1);
+  EXPECT_TRUE_SIMULATED_WAIT(CheckConnected(ep1_ch1(), ep2_ch1()),
+                             kMediumTimeout, clock);
 }
 
 // A collection of tests which tests a single P2PTransportChannel by sending

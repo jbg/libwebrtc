@@ -286,6 +286,13 @@ void P2PTransportChannel::AddConnection(Connection* connection) {
 
   connection->set_ice_event_log(&ice_event_log_);
   connection->SetIceFieldTrials(&ice_field_trials_);
+  connection->SetStunDictConsumer(
+      [this](const StunByteStringAttribute* delta) {
+        return GoogDeltaReceived(delta);
+      },
+      [this](webrtc::RTCErrorOr<const StunUInt64Attribute*> delta_ack) {
+        GoogDeltaAckReceived(std::move(delta_ack));
+      });
   LogCandidatePairConfig(connection,
                          webrtc::IceCandidatePairConfigType::kAdded);
 
@@ -2058,7 +2065,7 @@ void P2PTransportChannel::PingConnection(Connection* conn) {
   conn->set_nomination(nomination);
   conn->set_use_candidate_attr(use_candidate_attr);
   last_ping_sent_ms_ = rtc::TimeMillis();
-  conn->Ping(last_ping_sent_ms_);
+  conn->Ping(last_ping_sent_ms_, stun_dict_writer_.CreateDelta());
 }
 
 uint32_t P2PTransportChannel::GetNominationAttr(Connection* conn) const {
@@ -2129,11 +2136,12 @@ void P2PTransportChannel::OnConnectionDestroyed(Connection* connection) {
   }
 }
 
-void P2PTransportChannel::RemoveConnection(const Connection* connection) {
+void P2PTransportChannel::RemoveConnection(Connection* connection) {
   RTC_DCHECK_RUN_ON(network_thread_);
   auto it = absl::c_find(connections_, connection);
   RTC_DCHECK(it != connections_.end());
   connections_.erase(it);
+  connection->ClearStunDictConsumer();
   ice_controller_->OnConnectionDestroyed(connection);
 }
 
@@ -2305,6 +2313,35 @@ void P2PTransportChannel::LogCandidatePairConfig(
   }
   ice_event_log_.LogCandidatePairConfig(type, conn->id(),
                                         conn->ToLogDescription());
+}
+
+std::unique_ptr<StunAttribute> P2PTransportChannel::GoogDeltaReceived(
+    const StunByteStringAttribute* delta) {
+  auto error = stun_dict_view_.ApplyDelta(*delta);
+  if (error.ok()) {
+    auto& result = error.value();
+    RTC_LOG(LS_INFO) << "Applied GOOG_DELTA";
+    SignalDictionaryViewUpdated(this, stun_dict_view_, result.second);
+    return std::move(result.first);
+  } else {
+    RTC_LOG(LS_ERROR) << "Failed to apply GOOG_DELTA: "
+                      << error.error().message();
+  }
+  return nullptr;
+}
+
+void P2PTransportChannel::GoogDeltaAckReceived(
+    webrtc::RTCErrorOr<const StunUInt64Attribute*> error_or_ack) {
+  if (error_or_ack.ok()) {
+    RTC_LOG(LS_ERROR) << "Applied GOOG_DELTA_ACK";
+    auto ack = error_or_ack.value();
+    stun_dict_writer_.ApplyDeltaAck(*ack);
+    SignalDictionaryWriterSynced(this, stun_dict_writer_);
+  } else {
+    stun_dict_writer_.Disable();
+    RTC_LOG(LS_ERROR) << "Failed GOOG_DELTA_ACK: "
+                      << error_or_ack.error().message();
+  }
 }
 
 }  // namespace cricket
