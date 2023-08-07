@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9f99a6e_12a50c66",
+        "filename": "p2p/base/connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-07T11:18:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c5866e3_9d99a1f8",
+      "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "961b01f6_20538130",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-08-07T09:32:40Z",
       "side": 1,
       "message": "isn\u0027t this an error?",
+      "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b95bd1fd_65090183",
+        "filename": "p2p/base/connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1453,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-07T11:18:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "961b01f6_20538130",
       "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -69,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3999b280_990b2928",
+        "filename": "p2p/base/connection.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-07T11:18:55Z",
+      "side": 1,
+      "message": "yes, that is the \"normal\"\na connection is long lived.\ndelta can go both back and forth on the same connection.",
+      "parentUuid": "be910ea1_684dd91b",
+      "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c70a2493_a60bef02",
@@ -82,6 +136,24 @@
       "writtenOn": "2023-08-07T09:32:40Z",
       "side": 1,
       "message": "Seems iffy to default this to true right off the bat. Field trial?",
+      "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e015f2ef_84c38035",
+        "filename": "p2p/base/connection.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-07T11:18:55Z",
+      "side": 1,
+      "message": "yes, will do, thanks!",
+      "parentUuid": "c70a2493_a60bef02",
       "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -103,6 +175,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f69a1f1_a3948d91",
+        "filename": "p2p/base/ice_transport_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-07T11:18:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3131a43_8712494c",
+      "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20295e92_9239e697",
@@ -116,6 +206,24 @@
       "writtenOn": "2023-08-07T09:32:40Z",
       "side": 1,
       "message": "Same comment.",
+      "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8109eff2_f0af26de",
+        "filename": "p2p/base/ice_transport_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-07T11:18:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20295e92_9239e697",
       "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -137,6 +245,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a98fe58_53bdb409",
+        "filename": "p2p/base/p2p_transport_channel.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-07T11:18:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "228e9bea_520f7f75",
+      "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ef4d387_8a19204a",
@@ -150,6 +276,24 @@
       "writtenOn": "2023-08-07T09:32:40Z",
       "side": 1,
       "message": "Kill!",
+      "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c405109b_b18ce96c",
+        "filename": "p2p/base/p2p_transport_channel_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-07T11:18:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ef4d387_8a19204a",
       "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -171,6 +315,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e77668fb_b99a2df9",
+        "filename": "p2p/base/p2p_transport_channel_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3442,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-07T11:18:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "862ae14b_129cd533",
+      "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67d29c2c_4a728e0d",
@@ -184,6 +346,24 @@
       "writtenOn": "2023-08-07T09:32:40Z",
       "side": 1,
       "message": "Should you EXPECT on disabled() too?",
+      "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a173c26b_61f5c2cd",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 4011,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-08-07T11:18:55Z",
+      "side": 1,
+      "message": "this test is w/o any actual StunDictionaries...it only tests the Connection part.\nHence, this is no disabled.",
+      "parentUuid": "67d29c2c_4a728e0d",
       "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
