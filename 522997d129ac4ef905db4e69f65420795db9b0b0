@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e5c0188_7c4df59a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17854
+      },
+      "writtenOn": "2023-08-07T13:33:27Z",
+      "side": 1,
+      "message": "Sorry for the delay, I was on vacation. LGTM, adding jonaso@ for code-owner.",
+      "revId": "522997d129ac4ef905db4e69f65420795db9b0b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
