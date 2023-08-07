@@ -16,6 +16,23 @@
       "message": "Sorry for the delay, I was on vacation. LGTM, adding jonaso@ for code-owner.",
       "revId": "522997d129ac4ef905db4e69f65420795db9b0b0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96746d27_3a930abc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-08-07T15:08:58Z",
+      "side": 1,
+      "message": "Thanks. My expectation for review time is \"sometime during the next ten weeks\" during the summer ;-)",
+      "revId": "522997d129ac4ef905db4e69f65420795db9b0b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
