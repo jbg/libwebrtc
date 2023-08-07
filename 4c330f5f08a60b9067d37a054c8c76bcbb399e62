@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c6218b2_aa90c2d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-07T09:32:40Z",
+      "side": 1,
+      "message": "Some comments. Most important one is don\u0027t use sigslot - \"we\u0027re in a hole, but at least we should stop digging!\"",
+      "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c5866e3_9d99a1f8",
+        "filename": "p2p/base/connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-07T09:32:40Z",
+      "side": 1,
+      "message": "You\u0027ve chosen to have a default argument. Why not use it?",
+      "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "961b01f6_20538130",
+        "filename": "p2p/base/connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1453,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-07T09:32:40Z",
+      "side": 1,
+      "message": "isn\u0027t this an error?",
+      "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be910ea1_684dd91b",
+        "filename": "p2p/base/connection.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-07T09:32:40Z",
+      "side": 1,
+      "message": "Will those two ever be set on the same entity?\nIf not - should there be two Set functions?",
+      "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c70a2493_a60bef02",
+        "filename": "p2p/base/connection.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-07T09:32:40Z",
+      "side": 1,
+      "message": "Seems iffy to default this to true right off the bat. Field trial?",
+      "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3131a43_8712494c",
+        "filename": "p2p/base/ice_transport_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-07T09:32:40Z",
+      "side": 1,
+      "message": "Please don\u0027t add more sigslot signals. Use a CallbackList if you have to, a simple callback if you don\u0027t.",
+      "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20295e92_9239e697",
+        "filename": "p2p/base/ice_transport_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-07T09:32:40Z",
+      "side": 1,
+      "message": "Same comment.",
+      "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "228e9bea_520f7f75",
+        "filename": "p2p/base/p2p_transport_channel.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-07T09:32:40Z",
+      "side": 1,
+      "message": "GetLocalDictionaryWriter? GetDictionaryWriter?",
+      "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ef4d387_8a19204a",
+        "filename": "p2p/base/p2p_transport_channel_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-07T09:32:40Z",
+      "side": 1,
+      "message": "Kill!",
+      "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "862ae14b_129cd533",
+        "filename": "p2p/base/p2p_transport_channel_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3442,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-07T09:32:40Z",
+      "side": 1,
+      "message": "StunDictionaryPerformsSync",
+      "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67d29c2c_4a728e0d",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 4011,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-07T09:32:40Z",
+      "side": 1,
+      "message": "Should you EXPECT on disabled() too?",
+      "revId": "4c330f5f08a60b9067d37a054c8c76bcbb399e62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
