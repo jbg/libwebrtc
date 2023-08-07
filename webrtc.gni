@@ -78,6 +78,10 @@ declare_args() {
     rtc_exclude_field_trial_default = false
   }
 
+  # If set to true, C++ code will refer to the new JNI Generator symbols.
+  # If set to false the old ones will be used (to provide a nice update path).
+  rtc_jni_generator_legacy_symbols = false
+
   # Setting this to true will define WEBRTC_EXCLUDE_METRICS_DEFAULT which
   # will tell the pre-processor to remove the default definition of symbols
   # needed to use metrics. In that case a new implementation needs to be
