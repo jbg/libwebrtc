@@ -192,6 +192,7 @@ void UlpfecReceiver::ProcessReceivedFec() {
       received_packets;
   received_packets.swap(received_packets_);
   RtpHeaderExtensionMap* last_recovered_extension_map = nullptr;
+  bool any_packet_recovered = false;
 
   for (const auto& received_packet : received_packets) {
     // Send received media packet to VCM.
@@ -217,9 +218,14 @@ void UlpfecReceiver::ProcessReceivedFec() {
       // different set of the RTP header extensions and thus different byte
       // representation than the original packet, That will corrupt
       // FEC calculation.
-      fec_->DecodeFec(*received_packet, &recovered_packets_);
+      fec_->DecodeFec(*received_packet, &recovered_packets_,
+                      &any_packet_recovered);
       last_recovered_extension_map = &received_packet->extensions;
     }
+  }
+
+  if (!any_packet_recovered) {
+    return;
   }
 
   // Send any recovered media packets to VCM.

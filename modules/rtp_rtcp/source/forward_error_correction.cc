@@ -666,7 +666,8 @@ bool ForwardErrorCorrection::RecoverPacket(const ReceivedFecPacket& fec_packet,
 }
 
 void ForwardErrorCorrection::AttemptRecovery(
-    RecoveredPacketList* recovered_packets) {
+    RecoveredPacketList* recovered_packets,
+    bool* any_packet_recovered) {
   auto fec_packet_it = received_fec_packets_.begin();
   while (fec_packet_it != received_fec_packets_.end()) {
     // Search for each FEC packet's protected media packets.
@@ -681,6 +682,10 @@ void ForwardErrorCorrection::AttemptRecovery(
         // Can't recover using this packet, drop it.
         fec_packet_it = received_fec_packets_.erase(fec_packet_it);
         continue;
+      }
+
+      if (any_packet_recovered) {
+        *any_packet_recovered = true;
       }
 
       auto* recovered_packet_ptr = recovered_packet.get();
@@ -759,7 +764,8 @@ uint32_t ForwardErrorCorrection::ParseSsrc(const uint8_t* packet) {
 }
 
 void ForwardErrorCorrection::DecodeFec(const ReceivedPacket& received_packet,
-                                       RecoveredPacketList* recovered_packets) {
+                                       RecoveredPacketList* recovered_packets,
+                                       bool* any_packet_recovered) {
   RTC_DCHECK(recovered_packets);
 
   const size_t max_media_packets = fec_header_reader_->MaxMediaPackets();
@@ -782,7 +788,7 @@ void ForwardErrorCorrection::DecodeFec(const ReceivedPacket& received_packet,
   }
 
   InsertPacket(received_packet, recovered_packets);
-  AttemptRecovery(recovered_packets);
+  AttemptRecovery(recovered_packets, any_packet_recovered);
 }
 
 size_t ForwardErrorCorrection::MaxPacketOverhead() const {
