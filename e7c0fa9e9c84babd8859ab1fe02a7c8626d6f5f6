@@ -16,6 +16,23 @@
       "message": "Found while trying to write a test for the other issue...",
       "revId": "e7c0fa9e9c84babd8859ab1fe02a7c8626d6f5f6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef172c50_ecec8eed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2023-08-09T07:13:16Z",
+      "side": 1,
+      "message": "This was probably an attempt (from yours truly many moons ago) to also ensure that only 7 bits are used for the PT. Not very elegant, I admit.",
+      "revId": "e7c0fa9e9c84babd8859ab1fe02a7c8626d6f5f6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
