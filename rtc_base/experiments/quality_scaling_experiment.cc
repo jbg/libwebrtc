@@ -13,6 +13,8 @@
 
 #include <string>
 
+#include "api/video/video_codec_type.h"
+#include "rtc_base/experiments/field_trial_parser.h"
 #include "rtc_base/logging.h"
 #include "system_wrappers/include/field_trial.h"
 
@@ -72,6 +74,17 @@ QualityScalingExperiment::ParseSettings() {
 
 absl::optional<VideoEncoder::QpThresholds>
 QualityScalingExperiment::GetQpThresholds(VideoCodecType codec_type) {
+  if (codec_type == kVideoCodecAV1) {
+    FieldTrialOptional<int> low("low");
+    FieldTrialOptional<int> high("high");
+    ParseFieldTrial({&low, &high}, webrtc::field_trial::FindFullName(
+                                       "WebRTC-Video-QualityScaling-AV1"));
+    if (low && high) {
+      return {{*low, *high}};
+    }
+    return absl::nullopt;
+  }
+
   const auto settings = ParseSettings();
   if (!settings)
     return absl::nullopt;

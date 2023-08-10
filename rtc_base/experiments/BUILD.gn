@@ -103,7 +103,9 @@ rtc_library("quality_scaling_experiment") {
   ]
   deps = [
     "..:logging",
+    "../../api/video:video_frame",
     "../../api/video_codecs:video_codecs_api",
+    "../../rtc_base/experiments:field_trial_parser",
     "../../system_wrappers:field_trial",
   ]
   absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]

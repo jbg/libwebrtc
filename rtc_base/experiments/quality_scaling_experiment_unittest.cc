@@ -183,4 +183,14 @@ TEST(QualityScalingExperimentTest, GetThresholdsFailsForInvalidGenericValue) {
       QualityScalingExperiment::GetQpThresholds(kVideoCodecGeneric);
   EXPECT_FALSE(thresholds);
 }
+
+TEST(QualityScalingExperimentTest, GetThresholdsForAv1) {
+  webrtc::test::ScopedFieldTrials field_trials(
+      "WebRTC-Video-QualityScaling-AV1/low:12,high:34/");
+  const auto thresholds =
+      QualityScalingExperiment::GetQpThresholds(kVideoCodecAV1);
+  EXPECT_TRUE(thresholds);
+  EXPECT_EQ(thresholds->low, 12);
+  EXPECT_EQ(thresholds->high, 34);
+}
 }  // namespace webrtc
