@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f494f3fd_8fb63ade",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-08-10T09:40:05Z",
+      "side": 1,
+      "message": "https://google.github.io/styleguide/cppguide.html#Inputs_and_Outputs\n\n“Prefer using return values over output parameters”\n\nI think \u0027anything happend\u0027 looks like a reasonable return value,\nbut if you think this boolean might be unclear as a return value, consider wrapping it into a struct:\n```\nstruct DecodeFecResult {\n  bool any_packet_recovered \u003d false;\n};\n\nDecodeFecResult DecodeFec(const ReceivedPacket\u0026 received_packet,\n                          RecoveredPacketList* recovered_packets);\n```\n                          \n(`recovered_packets` might be good to refactor too, but that looks out of scope of this change).",
+      "range": {
+        "startLine": 234,
+        "startChar": 17,
+        "endLine": 234,
+        "endChar": 53
+      },
+      "revId": "93730409aa7d5ee15d1b16ffc526de7757789c90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
