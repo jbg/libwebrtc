@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9938822d_3794239c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2023-08-10T17:53:12Z",
+      "side": 1,
+      "message": "OnPortalDone() should only be called once or something is really wrong here. If we get there twice, then I\u0027m pretty sure that other parts of the code need to handle that as well. Or am I missing something here? How is it called twice?",
+      "revId": "49aabf996c8dba175ab759f9a50737371149ffb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
