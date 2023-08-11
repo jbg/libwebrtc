@@ -33,6 +33,155 @@
       "message": "This LGTM.\n\n@philipel@webrtc.org, @sprang@webrtc.org, Could you please take a look?",
       "revId": "b8120b2f5eea83c1f7f876c85116e77fbfe7071c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58a327c4_c912ea7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-08-11T15:56:05Z",
+      "side": 1,
+      "message": "I see some mixed use of ptr+length and rtc::ArrayView. Maybe I\u0027m missing something, but I think we should update all function to use rtc::ArrayView instead.\n\nAlso a bit curious, have you run the fuzzer locally? It might be worth doing for just 30 min or so to find some potentially low hanging bugs.",
+      "revId": "b8120b2f5eea83c1f7f876c85116e77fbfe7071c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1000ed99_0d72541f",
+        "filename": "common_video/h265/h265_bitstream_parser.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-08-11T15:56:05Z",
+      "side": 1,
+      "message": "This should be something like:\n\n    if (!sps) {\n      return kInvalidStream;  // or maybe kUnknownSps\n    }\n    \nright?",
+      "range": {
+        "startLine": 100,
+        "startChar": 2,
+        "endLine": 100,
+        "endChar": 18
+      },
+      "revId": "b8120b2f5eea83c1f7f876c85116e77fbfe7071c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7522516f_f079849f",
+        "filename": "common_video/h265/h265_bitstream_parser.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-08-11T15:56:05Z",
+      "side": 1,
+      "message": "I know there are other checks for these parameters that should ensure that they are within range, but maybe add a \n\n    RTC_CHECK_LE(num_long_term, kMaxLongTermRefPicSets);\n\nhere since we use them for indexing into a fixed size array.",
+      "range": {
+        "startLine": 366,
+        "startChar": 11,
+        "endLine": 366,
+        "endChar": 24
+      },
+      "revId": "b8120b2f5eea83c1f7f876c85116e77fbfe7071c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7201afe_e43593f4",
+        "filename": "common_video/h265/h265_common.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-08-11T15:56:05Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 5
+      },
+      "revId": "b8120b2f5eea83c1f7f876c85116e77fbfe7071c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8432f689_abaad2e4",
+        "filename": "common_video/h265/h265_inline.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-08-11T15:56:05Z",
+      "side": 1,
+      "message": "Would this not be promoted to a 64 bit int on a 64 bit platform? Then this could still cause an overflow even when shifted down by 26 bits",
+      "range": {
+        "startLine": 35,
+        "startChar": 49,
+        "endLine": 35,
+        "endChar": 63
+      },
+      "revId": "b8120b2f5eea83c1f7f876c85116e77fbfe7071c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f303b06a_006fd001",
+        "filename": "common_video/h265/h265_sps_parser.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-08-11T15:56:05Z",
+      "side": 1,
+      "message": "Please define constants for these values\n\n    constexpr int kMaxNumSizeIds \u003d 4;\n    constexpr int kMaxNumMatrixIds \u003d 6;\n    constexpr int kMaxNumCoefs \u003d 64;",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 33
+      },
+      "revId": "b8120b2f5eea83c1f7f876c85116e77fbfe7071c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0190b3eb_273db985",
+        "filename": "common_video/h265/h265_sps_parser.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-08-11T15:56:05Z",
+      "side": 1,
+      "message": "There are a lot of raw array access going on in this function. I don\u0027t know HEVC well enough to know whether an OOB access could be triggered by a maliciously crafted bitstream or just by an implementation mistake.\n\nCould we add some OOB checks in this function (`RTC_DCHECK` to catch implementation mistakes, `...RETURN` if input validation).",
+      "revId": "b8120b2f5eea83c1f7f876c85116e77fbfe7071c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
