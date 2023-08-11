@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dd009ab_d2f72a9b",
+        "filename": "modules/video_capture/linux/camera_portal.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2023-08-11T11:41:23Z",
+      "side": 1,
+      "message": "Can this deadlock? This locks the connection lock and I\u0027m not sure if OnOpenResponse() is called with that lock.",
+      "revId": "fc36f0d05170b9fe2dc88681819cb72f951d2758",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
