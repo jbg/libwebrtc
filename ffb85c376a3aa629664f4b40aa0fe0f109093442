@@ -73,6 +73,24 @@
       "message": "```suggestion\n  if (num_recovered_packets \u003d\u003d 0) {\n```",
       "revId": "ffb85c376a3aa629664f4b40aa0fe0f109093442",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b5c6385_95359c04",
+        "filename": "modules/rtp_rtcp/source/ulpfec_receiver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-08-11T09:20:02Z",
+      "side": 1,
+      "message": "around here type of the `num_recovered_packets` is not immediately obvious.\ne.g. it could be \u0027optional\u003cint\u003e\u0027 or \u0027int*\u0027\nthen !num_recovered_packets would mean \u0027nullopt, i.e. no information\u0027 rather than \u0027zero packets\u0027\n\nit is easier to read when comparison to zero is explicit.",
+      "parentUuid": "ff812aad_308ba2b1",
+      "revId": "ffb85c376a3aa629664f4b40aa0fe0f109093442",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
