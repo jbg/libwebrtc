@@ -34,6 +34,24 @@
       "parentUuid": "9938822d_3794239c",
       "revId": "49aabf996c8dba175ab759f9a50737371149ffb0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9947eee_12fccf27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-08-11T09:24:46Z",
+      "side": 1,
+      "message": "Looks we still need this, but I just updated the description as you are right it will not get called twice, but we have to make sure it will not get called during destruction. I know we are calling cancel on `g_cancellable`, but I\u0027m not sure how reliable this is since we might already being in the response call and at that point it\u0027s too late.",
+      "parentUuid": "08a1fd63_22468c58",
+      "revId": "49aabf996c8dba175ab759f9a50737371149ffb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ],
   "submitRequirementResults": [
