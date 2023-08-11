@@ -16,6 +16,24 @@
       "message": "Can this deadlock? This locks the connection lock and I\u0027m not sure if OnOpenResponse() is called with that lock.",
       "revId": "fc36f0d05170b9fe2dc88681819cb72f951d2758",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c426377_f12e2b68",
+        "filename": "modules/video_capture/linux/camera_portal.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-08-11T12:03:22Z",
+      "side": 1,
+      "message": "I\u0027m not sure what do you mean by the connection lock? But you are right the lock was held for more than it was necessary.",
+      "parentUuid": "0dd009ab_d2f72a9b",
+      "revId": "fc36f0d05170b9fe2dc88681819cb72f951d2758",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
