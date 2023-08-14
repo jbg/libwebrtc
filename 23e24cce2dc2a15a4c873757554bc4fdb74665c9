@@ -33,6 +33,23 @@
       "message": "Change LGTM but my vote doesn\u0027t count in certain ways ;-)",
       "revId": "23e24cce2dc2a15a4c873757554bc4fdb74665c9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5721730_e88b8bc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-08-14T13:04:34Z",
+      "side": 1,
+      "message": "Erik, do you mind approving this change.\n\n(I\u0027ve removed an empty line in the description and that seems important enough change for the system to disregard mine \u0027+1\u0027)",
+      "revId": "23e24cce2dc2a15a4c873757554bc4fdb74665c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
