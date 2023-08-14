@@ -16,6 +16,23 @@
       "message": "Philipp, do you want to review this change?\nIf not, can you please move yourself from reviewers to CC",
       "revId": "23e24cce2dc2a15a4c873757554bc4fdb74665c9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2f5e6d0_597a7383",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-08-14T12:57:05Z",
+      "side": 1,
+      "message": "Change LGTM but my vote doesn\u0027t count in certain ways ;-)",
+      "revId": "23e24cce2dc2a15a4c873757554bc4fdb74665c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
