@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99324dc9_aa46e060",
+        "filename": "modules/video_coding/include/video_coding_defines.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-08-14T15:15:40Z",
+      "side": 1,
+      "message": "This is a breaking change.\n\nIs it possible to create a reland with backwards compatibility? (e.g. 2 ctors) and then remove the one with 4 params later?",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 63
+      },
+      "revId": "0e37f5ebd44183d9fe5318d844235aae28fda86a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
