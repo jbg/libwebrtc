@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d6072ab_36bbfcbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-08-15T06:42:51Z",
+      "side": 1,
+      "message": "Removed the ptr+length function defined in h265_bitstream_parser.cc and use the rtc::ArrayView to implement.\n\nYes, i have run fuzzer locally for over 2 hours.",
+      "parentUuid": "58a327c4_c912ea7c",
+      "revId": "b8120b2f5eea83c1f7f876c85116e77fbfe7071c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1000ed99_0d72541f",
@@ -65,6 +83,30 @@
       "writtenOn": "2023-08-11T15:56:05Z",
       "side": 1,
       "message": "This should be something like:\n\n    if (!sps) {\n      return kInvalidStream;  // or maybe kUnknownSps\n    }\n    \nright?",
+      "range": {
+        "startLine": 100,
+        "startChar": 2,
+        "endLine": 100,
+        "endChar": 18
+      },
+      "revId": "b8120b2f5eea83c1f7f876c85116e77fbfe7071c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d2b1c4e_cc5174f2",
+        "filename": "common_video/h265/h265_bitstream_parser.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-08-15T06:42:51Z",
+      "side": 1,
+      "message": "We already validated sps when we parsed the PPS. sps should be valid since we get valid pps in previous step. Added a check to avoid abnormal cases.",
+      "parentUuid": "1000ed99_0d72541f",
       "range": {
         "startLine": 100,
         "startChar": 2,
@@ -98,6 +140,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae2ed29d_617ba213",
+        "filename": "common_video/h265/h265_bitstream_parser.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-08-15T06:42:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7522516f_f079849f",
+      "range": {
+        "startLine": 366,
+        "startChar": 11,
+        "endLine": 366,
+        "endChar": 24
+      },
+      "revId": "b8120b2f5eea83c1f7f876c85116e77fbfe7071c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7201afe_e43593f4",
@@ -111,6 +177,30 @@
       "writtenOn": "2023-08-11T15:56:05Z",
       "side": 1,
       "message": "remove",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 5
+      },
+      "revId": "b8120b2f5eea83c1f7f876c85116e77fbfe7071c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da06a0f0_a54a50a9",
+        "filename": "common_video/h265/h265_common.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-08-15T06:42:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7201afe_e43593f4",
       "range": {
         "startLine": 44,
         "startChar": 0,
@@ -144,6 +234,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "489ee3a5_d7f6513a",
+        "filename": "common_video/h265/h265_inline.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-08-15T06:42:51Z",
+      "side": 1,
+      "message": "32 bit is enough for H265 parsing, so we don\u0027t need to promote to a 64 bit int on a 64 bit platform.",
+      "parentUuid": "8432f689_abaad2e4",
+      "range": {
+        "startLine": 35,
+        "startChar": 49,
+        "endLine": 35,
+        "endChar": 63
+      },
+      "revId": "b8120b2f5eea83c1f7f876c85116e77fbfe7071c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f303b06a_006fd001",
@@ -167,6 +281,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f838138d_6cc4bdbd",
+        "filename": "common_video/h265/h265_sps_parser.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-08-15T06:42:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f303b06a_006fd001",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 33
+      },
+      "revId": "b8120b2f5eea83c1f7f876c85116e77fbfe7071c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0190b3eb_273db985",
@@ -180,6 +318,24 @@
       "writtenOn": "2023-08-11T15:56:05Z",
       "side": 1,
       "message": "There are a lot of raw array access going on in this function. I don\u0027t know HEVC well enough to know whether an OOB access could be triggered by a maliciously crafted bitstream or just by an implementation mistake.\n\nCould we add some OOB checks in this function (`RTC_DCHECK` to catch implementation mistakes, `...RETURN` if input validation).",
+      "revId": "b8120b2f5eea83c1f7f876c85116e77fbfe7071c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85a7a514_b91c5fdd",
+        "filename": "common_video/h265/h265_sps_parser.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-08-15T06:42:51Z",
+      "side": 1,
+      "message": "According to range check when reading num_short_term_ref_pic_sets, OOB access should not happen here. And range check when reading num_negative_pics and num_positive_pics also make sure OOB access should not happen in following raw array access. Add RTC_DCHECK_LE to avoid abnormal cases.",
+      "parentUuid": "0190b3eb_273db985",
       "revId": "b8120b2f5eea83c1f7f876c85116e77fbfe7071c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
