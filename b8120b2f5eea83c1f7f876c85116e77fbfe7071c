@@ -258,6 +258,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "039fed8d_e20a0164",
+        "filename": "common_video/h265/h265_inline.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-08-15T08:33:58Z",
+      "side": 1,
+      "message": "My worry was that 0x8c0b2891 would be of type int64_t on a 64 bit platform, so after multiplication and shifting you could still potentially have a 36 bit number, but apparently it will be a uint32_t since the value is written in hex and can fit in a uint32_t.\n\nTIL...",
+      "parentUuid": "489ee3a5_d7f6513a",
+      "range": {
+        "startLine": 35,
+        "startChar": 49,
+        "endLine": 35,
+        "endChar": 63
+      },
+      "revId": "b8120b2f5eea83c1f7f876c85116e77fbfe7071c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f303b06a_006fd001",
