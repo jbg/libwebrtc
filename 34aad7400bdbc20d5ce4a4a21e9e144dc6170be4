@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf968d04_4fd5168b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-08-15T15:59:29Z",
+      "side": 1,
+      "message": "video",
+      "range": {
+        "startLine": 7,
+        "startChar": 25,
+        "endLine": 7,
+        "endChar": 31
+      },
+      "revId": "34aad7400bdbc20d5ce4a4a21e9e144dc6170be4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbcbeff1_e5a2f18a",
+        "filename": "api/test/video/test_video_track_source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-08-15T15:59:29Z",
+      "side": 1,
+      "message": "std::move of both the optional and the underlying string?",
+      "range": {
+        "startLine": 26,
+        "startChar": 20,
+        "endLine": 26,
+        "endChar": 32
+      },
+      "revId": "34aad7400bdbc20d5ce4a4a21e9e144dc6170be4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f92bb2b_a3742b34",
+        "filename": "api/test/video/test_video_track_source.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-08-15T15:59:29Z",
+      "side": 1,
+      "message": "present",
+      "range": {
+        "startLine": 79,
+        "startChar": 51,
+        "endLine": 79,
+        "endChar": 60
+      },
+      "revId": "34aad7400bdbc20d5ce4a4a21e9e144dc6170be4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
