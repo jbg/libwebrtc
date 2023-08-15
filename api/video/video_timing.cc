@@ -98,4 +98,13 @@ std::string TimingFrameInfo::ToString() const {
   return sb.str();
 }
 
+bool VideoPlayoutDelay::Set(TimeDelta min, TimeDelta max) {
+  if (TimeDelta::Zero() <= min && min <= max && max <= kMax) {
+    min_ms = min.ms();
+    max_ms = max.ms();
+    return true;
+  }
+  return false;
+}
+
 }  // namespace webrtc
