@@ -33,6 +33,23 @@
       "message": "Thanks, the internal change has not landed yet, but I can +1 and +2 this CL when it is done",
       "revId": "acd69d4e846cf818a89c1f38e2ace51650ac9d7b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a699e8e3_ea714783",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-08-16T08:59:06Z",
+      "side": 1,
+      "message": "The fix is in!",
+      "revId": "acd69d4e846cf818a89c1f38e2ace51650ac9d7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
