@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1882c7ef_8b48b1e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-08-16T15:34:59Z",
+      "side": 1,
+      "message": "Would you agree with this direction: nullopt instead of special values, class instead of struct for api.\n\nit is possible to migrate to TimeDelta differently: still use special values (negative) to represent unset delays.",
+      "revId": "784f1a16646c7c4bc28e7d55d93bb9f66bd7622e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
