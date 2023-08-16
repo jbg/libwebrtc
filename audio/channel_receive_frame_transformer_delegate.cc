@@ -13,6 +13,7 @@
 #include <utility>
 
 #include "rtc_base/buffer.h"
+#include "rtc_base/logging.h"
 
 namespace webrtc {
 namespace {
@@ -113,11 +114,27 @@ void ChannelReceiveFrameTransformerDelegate::ReceiveFrame(
   RTC_DCHECK_RUN_ON(&sequence_checker_);
   if (!receive_frame_callback_)
     return;
-  RTC_CHECK_EQ(frame->GetDirection(),
-               TransformableFrameInterface::Direction::kReceiver);
-  auto* transformed_frame =
-      static_cast<TransformableIncomingAudioFrame*>(frame.get());
-  receive_frame_callback_(transformed_frame->GetData(),
-                          transformed_frame->Header());
+
+  RTPHeader header;
+  if (frame->GetDirection() ==
+      TransformableFrameInterface::Direction::kSender) {
+    auto* transformed_frame =
+        static_cast<TransformableAudioFrameInterface*>(frame.get());
+    header.payloadType = transformed_frame->GetPayloadType();
+    header.timestamp = transformed_frame->GetTimestamp();
+    header.ssrc = transformed_frame->GetSsrc();
+    if (transformed_frame->AbsoluteCaptureTimestamp().has_value()) {
+      header.extension.absolute_capture_time = AbsoluteCaptureTime();
+      header.extension.absolute_capture_time->absolute_capture_timestamp =
+          transformed_frame->AbsoluteCaptureTimestamp().value();
+    }
+  } else {
+    auto* transformed_frame =
+        static_cast<TransformableIncomingAudioFrame*>(frame.get());
+    header = transformed_frame->Header();
+  }
+
+  // TODO(1464860): Refactor ReceiveFrameCallback to stop using RTPHeader.
+  receive_frame_callback_(frame->GetData(), header);
 }
 }  // namespace webrtc
