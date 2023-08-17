@@ -18,6 +18,57 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f69eaf86_b388464e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-17T08:52:13Z",
+      "side": 1,
+      "message": "Drive-by comments.",
+      "revId": "bc9d3145f3309d1f75fdebe4322ad3e0fff66312",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc305221_087168fa",
+        "filename": "api/video_codecs/h265_profile_tier_level.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-17T08:52:13Z",
+      "side": 1,
+      "message": "Please add a comment on where these numeric constants come from.\nMagic numbers in the code are generally a Bad Thing, but spec references help.",
+      "revId": "bc9d3145f3309d1f75fdebe4322ad3e0fff66312",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26acb6bf_b763c674",
+        "filename": "api/video_codecs/h265_profile_tier_level.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-17T08:52:13Z",
+      "side": 1,
+      "message": "When you have a symmetric pair of functions like these, it is good to have a test that verifies that the numbers round-trip as expected.",
+      "revId": "bc9d3145f3309d1f75fdebe4322ad3e0fff66312",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5f8ba9f_e1360ed3",
@@ -55,6 +106,30 @@
       "side": 1,
       "message": "I like switch better for this specific case. Since the input cannot be controlled, find() call on the map for invalid input is O(logN). \nIf the input for key is controlled, it will be natural to use map.",
       "parentUuid": "c5f8ba9f_e1360ed3",
+      "range": {
+        "startLine": 81,
+        "startChar": 2,
+        "endLine": 110,
+        "endChar": 3
+      },
+      "revId": "bc9d3145f3309d1f75fdebe4322ad3e0fff66312",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "656ac24f_172b5547",
+        "filename": "api/video_codecs/h265_profile_tier_level.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-17T08:52:13Z",
+      "side": 1,
+      "message": "I would like a two-way map better, since it avoids the problem of inconsistencies. YMMV.",
+      "parentUuid": "8b9c5f21_e8f40662",
       "range": {
         "startLine": 81,
         "startChar": 2,
