@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d237807_c6286305",
+        "filename": "api/frame_transformer_factory.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-08-17T08:41:54Z",
+      "side": 1,
+      "message": "Maybe do this in another cl where we\u0027re touching this file?",
+      "revId": "55e470dd189149a8a2d95f55c364364d11d5b630",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac0843a5_9bc7d1e2",
+        "filename": "audio/channel_receive_frame_transformer_delegate.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-08-17T08:41:54Z",
+      "side": 1,
+      "message": "Could we get a test?",
+      "revId": "55e470dd189149a8a2d95f55c364364d11d5b630",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "551401dd_b6c14add",
+        "filename": "audio/channel_receive_frame_transformer_delegate.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-08-17T08:41:54Z",
+      "side": 1,
+      "message": "Could you include a little more context for future us who won\u0027t remember why? ie \"Take an explicit struct with the required information rather than the RTPHeader kitchen sink, to make it easier to construct the required information when injecting transformed frames not originally from this receiver.\"",
+      "range": {
+        "startLine": 137,
+        "startChar": 53,
+        "endLine": 137,
+        "endChar": 74
+      },
+      "revId": "55e470dd189149a8a2d95f55c364364d11d5b630",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df6180df_8c91f469",
+        "filename": "audio/channel_receive_frame_transformer_delegate.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-08-17T08:41:54Z",
+      "side": 1,
+      "message": "At least include the crbug.com/ prefix, to make it clear this isn\u0027t a webrtc bug",
+      "range": {
+        "startLine": 137,
+        "startChar": 10,
+        "endLine": 137,
+        "endChar": 17
+      },
+      "revId": "55e470dd189149a8a2d95f55c364364d11d5b630",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
