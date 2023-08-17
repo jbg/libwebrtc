@@ -469,6 +469,9 @@ bool RTPSenderVideo::SendVideo(int payload_type,
       std::string(VideoFrameTypeToString(video_header.frame_type)));
   RTC_CHECK_RUNS_SERIALIZED(&send_checker_);
 
+  RTC_LOG(LS_ERROR) << __func__ << ", rtp_timestamp" << rtp_timestamp
+                    << ", capture_time " << capture_time;
+
   if (video_header.frame_type == VideoFrameType::kEmptyFrame)
     return true;
 

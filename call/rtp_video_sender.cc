@@ -580,6 +580,10 @@ EncodedImageCallback::Result RtpVideoSender::OnEncodedImage(
       encoded_image.Timestamp() +
       rtp_streams_[simulcast_index].rtp_rtcp->StartTimestamp();
 
+  RTC_LOG(LS_ERROR) << __func__ << ", encoded_image.Timestamp() "
+                    << encoded_image.Timestamp() << ", rtp_timestamp"
+                    << rtp_timestamp;
+
   // RTCPSender has it's own copy of the timestamp offset, added in
   // RTCPSender::BuildSR, hence we must not add the in the offset for this call.
   // TODO(nisse): Delete RTCPSender:timestamp_offset_, and see if we can confine

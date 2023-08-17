@@ -31,10 +31,11 @@ std::unique_ptr<TransformableAudioFrameInterface> CloneAudioFrame(
   return CloneSenderAudioFrame(original);
 }
 
+// TODO(crbug.com/1464847): Remove this once callers have been migrated to call
+// Clone() directly on the video frame object.
 std::unique_ptr<TransformableVideoFrameInterface> CloneVideoFrame(
     TransformableVideoFrameInterface* original) {
-  // At the moment, only making sender frames from receiver frames is supported.
-  return CloneSenderVideoFrame(original);
+  return original->Clone();
 }
 
 }  // namespace webrtc

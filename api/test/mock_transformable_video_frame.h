@@ -11,6 +11,7 @@
 #ifndef API_TEST_MOCK_TRANSFORMABLE_VIDEO_FRAME_H_
 #define API_TEST_MOCK_TRANSFORMABLE_VIDEO_FRAME_H_
 
+#include <memory>
 #include <vector>
 
 #include "api/frame_transformer_interface.h"
@@ -37,6 +38,10 @@ class MockTransformableVideoFrame
               (),
               (const, override));
   MOCK_METHOD(VideoFrameMetadata, Metadata, (), (const, override));
+  MOCK_METHOD(std::unique_ptr<TransformableVideoFrameInterface>,
+              Clone,
+              (),
+              (const, override));
 };
 
 static_assert(!std::is_abstract_v<MockTransformableVideoFrame>, "");

@@ -31,15 +31,41 @@ class TransformableVideoSenderFrame : public TransformableVideoFrameInterface {
                                 TimeDelta expected_retransmission_time,
                                 uint32_t ssrc,
                                 std::vector<uint32_t> csrcs)
-      : encoded_data_(encoded_image.GetEncodedData()),
-        pre_transform_payload_size_(encoded_image.size()),
+      : TransformableVideoSenderFrame(encoded_image.GetEncodedData(),
+                                      encoded_image.size(),
+                                      video_header,
+                                      encoded_image._frameType,
+                                      payload_type,
+                                      codec_type,
+                                      rtp_timestamp,
+                                      encoded_image.CaptureTime(),
+                                      encoded_image.CaptureTimeIdentifier(),
+                                      expected_retransmission_time,
+                                      ssrc,
+                                      csrcs) {}
+
+  TransformableVideoSenderFrame(
+      rtc::scoped_refptr<EncodedImageBufferInterface> encoded_data,
+      size_t pre_transform_payload_size,
+      const RTPVideoHeader& video_header,
+      VideoFrameType frame_type,
+      int payload_type,
+      absl::optional<VideoCodecType> codec_type,
+      uint32_t rtp_timestamp,
+      Timestamp capture_time,
+      absl::optional<Timestamp> capture_time_identifier,
+      TimeDelta expected_retransmission_time,
+      uint32_t ssrc,
+      std::vector<uint32_t> csrcs)
+      : encoded_data_(std::move(encoded_data)),
+        pre_transform_payload_size_(pre_transform_payload_size),
         header_(video_header),
-        frame_type_(encoded_image._frameType),
+        frame_type_(frame_type),
         payload_type_(payload_type),
         codec_type_(codec_type),
-        timestamp_(rtp_timestamp),
-        capture_time_(encoded_image.CaptureTime()),
-        capture_time_identifier_(encoded_image.CaptureTimeIdentifier()),
+        rtp_timestamp_(rtp_timestamp),
+        capture_time_(capture_time),
+        capture_time_identifier_(capture_time_identifier),
         expected_retransmission_time_(expected_retransmission_time),
         ssrc_(ssrc),
         csrcs_(csrcs) {
@@ -62,8 +88,10 @@ class TransformableVideoSenderFrame : public TransformableVideoFrameInterface {
     return pre_transform_payload_size_;
   }
 
-  uint32_t GetTimestamp() const override { return timestamp_; }
-  void SetRTPTimestamp(uint32_t timestamp) override { timestamp_ = timestamp; }
+  uint32_t GetTimestamp() const override { return rtp_timestamp_; }
+  void SetRTPTimestamp(uint32_t timestamp) override {
+    rtp_timestamp_ = timestamp;
+  }
 
   uint32_t GetSsrc() const override { return ssrc_; }
 
@@ -98,6 +126,15 @@ class TransformableVideoSenderFrame : public TransformableVideoFrameInterface {
 
   Direction GetDirection() const override { return Direction::kSender; }
 
+  std::unique_ptr<TransformableVideoFrameInterface> Clone() const override {
+    return std::make_unique<TransformableVideoSenderFrame>(
+        EncodedImageBuffer::Create(encoded_data_->data(),
+                                   encoded_data_->size()),
+        pre_transform_payload_size_, header_, frame_type_, payload_type_,
+        codec_type_, rtp_timestamp_, capture_time_, capture_time_identifier_,
+        expected_retransmission_time_, ssrc_, csrcs_);
+  }
+
  private:
   rtc::scoped_refptr<EncodedImageBufferInterface> encoded_data_;
   const size_t pre_transform_payload_size_;
@@ -105,7 +142,7 @@ class TransformableVideoSenderFrame : public TransformableVideoFrameInterface {
   const VideoFrameType frame_type_;
   const uint8_t payload_type_;
   const absl::optional<VideoCodecType> codec_type_ = absl::nullopt;
-  uint32_t timestamp_;
+  uint32_t rtp_timestamp_;
   const Timestamp capture_time_;
   const absl::optional<Timestamp> capture_time_identifier_;
   const TimeDelta expected_retransmission_time_;

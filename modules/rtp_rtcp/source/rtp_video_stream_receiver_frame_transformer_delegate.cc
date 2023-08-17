@@ -78,6 +78,30 @@ class TransformableVideoReceiverFrame
 
   const RtpVideoFrameReceiver* Receiver() { return receiver_; }
 
+  std::unique_ptr<TransformableVideoFrameInterface> Clone() const override {
+    EncodedImage::Timing timing = frame_->video_timing();
+    VideoSendTiming send_timing;
+    send_timing.flags = timing.flags;
+    int64_t ntp_time_ms = frame_->NtpTimeMs();
+    send_timing.encode_start_delta_ms = timing.encode_start_ms - ntp_time_ms;
+    absl::optional<webrtc::ColorSpace> color_space =
+        frame_->ColorSpace()
+            ? absl::optional<webrtc::ColorSpace>(*(frame_->ColorSpace()))
+            : absl::nullopt;
+
+    auto rtp_frame_object = std::make_unique<RtpFrameObject>(
+        frame_->first_seq_num(), frame_->last_seq_num(),
+        frame_->is_last_spatial_layer, frame_->times_nacked(),
+        frame_->ReceivedTime(), frame_->Timestamp(), ntp_time_ms,
+        frame_->video_timing(), frame_->PayloadType(), frame_->codec_type(),
+        frame_->rotation(), frame_->contentType(), frame_->GetRtpVideoHeader(),
+        color_space, frame_->PacketInfos(),
+        EncodedImageBuffer::Create(frame_->data(), frame_->size()));
+
+    return std::make_unique<TransformableVideoReceiverFrame>(
+        std::move(rtp_frame_object), metadata_.GetSsrc(), receiver_);
+  }
+
  private:
   std::unique_ptr<RtpFrameObject> frame_;
   VideoFrameMetadata metadata_;

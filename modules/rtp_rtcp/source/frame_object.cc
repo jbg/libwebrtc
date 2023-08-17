@@ -19,6 +19,34 @@
 #include "rtc_base/checks.h"
 
 namespace webrtc {
+
+namespace {
+EncodedImage::Timing MakeTimingFromSendTiming(
+    const VideoSendTiming& send_timing,
+    int64_t first_packet_received_time,
+    int64_t last_packet_received_time,
+    int64_t ntp_time_ms) {
+  EncodedImage::Timing timing;
+  if (send_timing.flags != VideoSendTiming::kInvalid) {
+    // ntp_time_ms_ may be -1 if not estimated yet. This is not a problem,
+    // as this will be dealt with at the time of reporting.
+    timing.encode_start_ms = ntp_time_ms + send_timing.encode_start_delta_ms;
+    timing.encode_finish_ms = ntp_time_ms + send_timing.encode_finish_delta_ms;
+    timing.packetization_finish_ms =
+        ntp_time_ms + send_timing.packetization_finish_delta_ms;
+    timing.pacer_exit_ms = ntp_time_ms + send_timing.pacer_exit_delta_ms;
+    timing.network_timestamp_ms =
+        ntp_time_ms + send_timing.network_timestamp_delta_ms;
+    timing.network2_timestamp_ms =
+        ntp_time_ms + send_timing.network2_timestamp_delta_ms;
+  }
+  timing.receive_start_ms = first_packet_received_time;
+  timing.receive_finish_ms = last_packet_received_time;
+  timing.flags = send_timing.flags;
+  return timing;
+}
+}  // namespace
+
 RtpFrameObject::RtpFrameObject(
     uint16_t first_seq_num,
     uint16_t last_seq_num,
@@ -29,6 +57,43 @@ RtpFrameObject::RtpFrameObject(
     uint32_t rtp_timestamp,
     int64_t ntp_time_ms,
     const VideoSendTiming& timing,
+    uint8_t payload_type,
+    VideoCodecType codec,
+    VideoRotation rotation,
+    VideoContentType content_type,
+    const RTPVideoHeader& video_header,
+    const absl::optional<webrtc::ColorSpace>& color_space,
+    RtpPacketInfos packet_infos,
+    rtc::scoped_refptr<EncodedImageBuffer> image_buffer)
+    : RtpFrameObject(first_seq_num,
+                     last_seq_num,
+                     markerBit,
+                     times_nacked,
+                     last_packet_received_time,
+                     rtp_timestamp,
+                     ntp_time_ms,
+                     MakeTimingFromSendTiming(timing,
+                                              first_packet_received_time,
+                                              last_packet_received_time,
+                                              ntp_time_ms),
+                     payload_type,
+                     codec,
+                     rotation,
+                     content_type,
+                     video_header,
+                     color_space,
+                     packet_infos,
+                     image_buffer) {}
+
+RtpFrameObject::RtpFrameObject(
+    uint16_t first_seq_num,
+    uint16_t last_seq_num,
+    bool markerBit,
+    int times_nacked,
+    int64_t last_packet_received_time,
+    uint32_t rtp_timestamp,
+    int64_t ntp_time_ms,
+    EncodedImage::Timing timing,
     uint8_t payload_type,
     VideoCodecType codec,
     VideoRotation rotation,
@@ -52,7 +117,6 @@ RtpFrameObject::RtpFrameObject(
   CopyCodecSpecific(&rtp_video_header_);
   _payloadType = payload_type;
   SetTimestamp(rtp_timestamp);
-  ntp_time_ms_ = ntp_time_ms;
   _frameType = rtp_video_header_.frame_type;
 
   // Setting frame's playout delays to the same values
@@ -74,23 +138,9 @@ RtpFrameObject::RtpFrameObject(
   SetColorSpace(color_space);
   SetVideoFrameTrackingId(rtp_video_header_.video_frame_tracking_id);
   content_type_ = content_type;
-  if (timing.flags != VideoSendTiming::kInvalid) {
-    // ntp_time_ms_ may be -1 if not estimated yet. This is not a problem,
-    // as this will be dealt with at the time of reporting.
-    timing_.encode_start_ms = ntp_time_ms_ + timing.encode_start_delta_ms;
-    timing_.encode_finish_ms = ntp_time_ms_ + timing.encode_finish_delta_ms;
-    timing_.packetization_finish_ms =
-        ntp_time_ms_ + timing.packetization_finish_delta_ms;
-    timing_.pacer_exit_ms = ntp_time_ms_ + timing.pacer_exit_delta_ms;
-    timing_.network_timestamp_ms =
-        ntp_time_ms_ + timing.network_timestamp_delta_ms;
-    timing_.network2_timestamp_ms =
-        ntp_time_ms_ + timing.network2_timestamp_delta_ms;
-  }
-  timing_.receive_start_ms = first_packet_received_time;
-  timing_.receive_finish_ms = last_packet_received_time;
-  timing_.flags = timing.flags;
   is_last_spatial_layer = markerBit;
+  timing_ = timing;
+  ntp_time_ms_ = ntp_time_ms;
 }
 
 RtpFrameObject::~RtpFrameObject() {}
