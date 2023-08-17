@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2156a5a4_5681662d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-08-17T12:36:45Z",
+      "side": 1,
+      "message": "I\u0027d like a unittest, but we do get coverage from the WPT you mentioned so I won\u0027t block on it.\nLGTM otherwise!",
+      "revId": "25c9d8bfaf3b4747bf57e74b17fc48b4ba7654b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f275c62b_b1ec6a36",
+        "filename": "audio/channel_receive_frame_transformer_delegate.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-08-17T12:36:45Z",
+      "side": 1,
+      "message": "Is it much extra work to add a unittest? TransformRunsChannelReceiveCallback looks pretty close to what we\u0027d want - just instead call OnTransformedFrame() with a constructed sender frame and verify that mock_channel::ReceiveFrame() is called with something sensible.",
+      "parentUuid": "25d103ce_0910a770",
+      "revId": "55e470dd189149a8a2d95f55c364364d11d5b630",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "551401dd_b6c14add",
         "filename": "audio/channel_receive_frame_transformer_delegate.cc",
         "patchSetId": 3
