@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'c7e600fcc1db43305bd6c22dbd0fae2ca03db402',
+  'chromium_revision': 'c6bf5ced8662001d4abd0e33611e458fded57dbc',
 
   # Fetch the prebuilt binaries for llvm-cov and llvm-profdata. Needed to
   # process the raw profiles produced by instrumented targets (built with
@@ -50,9 +50,9 @@ vars = {
 deps = {
   # TODO(kjellander): Move this to be Android-only.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@be6204b68b4a830581e803018b13188d26caec73',
+    'https://chromium.googlesource.com/chromium/src/base@f3839990a5b3a2d6b3e44df23c09fdc26eb9fa2a',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@f090abe96749834c5517f528cdea962b518ef933',
+    'https://chromium.googlesource.com/chromium/src/build@4439c8aa49c90b8e6df919f925a8a30f2c4e148e',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@a5ad15786678fa08f9e2eac76b3e78cf22dccb25',
   # Gradle 6.6.1. Used for testing Android Studio project generation for WebRTC.
@@ -61,13 +61,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@d11fd27b462c8fe3ef776ccc00ae76a82e52b653',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@84b8aac03e635958f0d04c07ba6c66cb4cea6668',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@e14a17b3a4bb0a2ac09057c9b904d1242d02e539',
+    'https://chromium.googlesource.com/chromium/src/testing@20d0d3bf04a1165d281aff9675898687d5a79d53',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@33cd7d2d5a7e2acecfa745c61d7be2ad7a1a7a09',
+    'https://chromium.googlesource.com/chromium/src/third_party@c55e893b76326191e3fe19b58a2ccbaead2b0b55',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -174,11 +174,11 @@ deps = {
   },
 
   'src/third_party/boringssl/src':
-    'https://boringssl.googlesource.com/boringssl.git@180066d66d469c26ca605f522bf5c1f08547be3e',
+    'https://boringssl.googlesource.com/boringssl.git@b8e012e1ff736cc794273af4a7db521e6b18bcd5',
   'src/third_party/breakpad/breakpad':
     'https://chromium.googlesource.com/breakpad/breakpad.git@8988364bcddd9b194b0bf931c10bc125987330ed',
   'src/third_party/catapult':
-    'https://chromium.googlesource.com/catapult.git@84747457395344276fbbe5b6e227f6daba6a06cb',
+    'https://chromium.googlesource.com/catapult.git@7326781c59fd535d4af12e46fd2d05538c742d69',
   'src/third_party/ced/src': {
     'url': 'https://chromium.googlesource.com/external/github.com/google/compact_enc_det.git@ba412eaaacd3186085babcd901679a48863c7dd5',
   },
@@ -295,7 +295,7 @@ deps = {
       'condition': 'checkout_android',
   },
   'src/third_party/perfetto':
-    'https://android.googlesource.com/platform/external/perfetto.git@42a117e9cd3ff638304b917de756d99644e13685',
+    'https://android.googlesource.com/platform/external/perfetto.git@029945afde0d4e9781174b207f248922c66d8213',
   'src/third_party/libvpx/source/libvpx':
     'https://chromium.googlesource.com/webm/libvpx.git@e1c124f8965f166d3e9ca26c9215ebc3ec3a1d72',
   'src/third_party/libyuv':
@@ -344,7 +344,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@05d9644800b46b840211671476fe386d742bf65a',
+    'https://chromium.googlesource.com/chromium/src/tools@4c7d3fa7ee573c100d5521582637a3388e143d22',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
@@ -416,7 +416,7 @@ deps = {
     'packages': [
       {
           'package': 'chromium/third_party/androidx',
-          'version': '72OrhoxRCpPaLpIr0nDrlhaTfN8VorgC81HCZrVo5sMC',
+          'version': 'GwPHeH5nDbKXURzYxNpCMayK7NE1pOW-GpMPLDYGKK8C',
       },
     ],
     'condition': 'checkout_android',
