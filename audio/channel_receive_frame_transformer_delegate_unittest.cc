@@ -13,6 +13,7 @@
 #include <memory>
 #include <utility>
 
+#include "audio/channel_send_frame_transformer_delegate.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
 #include "test/mock_frame_transformer.h"
@@ -21,6 +22,7 @@
 namespace webrtc {
 namespace {
 
+using ::testing::_;
 using ::testing::NiceMock;
 using ::testing::SaveArg;
 
@@ -89,6 +91,41 @@ TEST(ChannelReceiveFrameTransformerDelegateTest,
       .WillByDefault(
           [&callback](std::unique_ptr<TransformableFrameInterface> frame) {
             callback->OnTransformedFrame(std::move(frame));
+          });
+  delegate->Transform(packet, header, 1111 /*ssrc*/);
+  rtc::ThreadManager::ProcessAllMessageQueuesForTesting();
+}
+
+// Test that when the delegate receives a transformed frame from the frame
+// transformer, it passes it to the channel using the ReceiveFrameCallback.
+TEST(ChannelReceiveFrameTransformerDelegateTest,
+     TransformRunsChannelReceiveCallbackForSenderFrame) {
+  rtc::AutoThread main_thread;
+  rtc::scoped_refptr<MockFrameTransformer> mock_frame_transformer =
+      rtc::make_ref_counted<NiceMock<MockFrameTransformer>>();
+  MockChannelReceive mock_channel;
+  rtc::scoped_refptr<ChannelReceiveFrameTransformerDelegate> delegate =
+      rtc::make_ref_counted<ChannelReceiveFrameTransformerDelegate>(
+          mock_channel.callback(), mock_frame_transformer,
+          rtc::Thread::Current());
+  rtc::scoped_refptr<TransformedFrameCallback> callback;
+  EXPECT_CALL(*mock_frame_transformer, RegisterTransformedFrameCallback)
+      .WillOnce(SaveArg<0>(&callback));
+  delegate->Init();
+  ASSERT_TRUE(callback);
+
+  const uint8_t data[] = {1, 2, 3, 4};
+  rtc::ArrayView<const uint8_t> packet(data, sizeof(data));
+  RTPHeader header;
+  EXPECT_CALL(mock_channel, ReceiveFrame(packet, _));
+  ON_CALL(*mock_frame_transformer, Transform)
+      .WillByDefault(
+          [&callback](std::unique_ptr<TransformableFrameInterface> frame) {
+            auto* transformed_frame =
+                static_cast<TransformableAudioFrameInterface*>(frame.get());
+            std::unique_ptr<TransformableAudioFrameInterface> outgoing_frame =
+                CloneSenderAudioFrame(transformed_frame);
+            callback->OnTransformedFrame(std::move(outgoing_frame));
           });
   delegate->Transform(packet, header, 1111 /*ssrc*/);
   rtc::ThreadManager::ProcessAllMessageQueuesForTesting();
