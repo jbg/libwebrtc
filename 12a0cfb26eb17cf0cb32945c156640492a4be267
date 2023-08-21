@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29a84364_759fde44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-08-21T15:15:22Z",
+      "side": 1,
+      "message": "Cool! Guess it works in some manual end-to-end testing?",
+      "revId": "12a0cfb26eb17cf0cb32945c156640492a4be267",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90bd8d81_be42001e",
+        "filename": "audio/channel_send_frame_transformer_delegate.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-08-21T15:15:22Z",
+      "side": 1,
+      "message": "This means we have different timestamp behaviours for sender and receiver frames right?\nIf I take an audio frame about to be sent, then re-write the rtp timestamp field in JS, the frame which actually gets sent on the RTP connection will have a timestamp of `my_timestamp - outgoing_start_timestamp + outgoing_start_timestamp  \u003d my_timestamp`, but if I take a received frame, re-write the rtp ts, then the actual sent RTP packet will have ts `my_timestamp + outgoing_start_timestamp`. Is this an issue?",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 3
+      },
+      "revId": "12a0cfb26eb17cf0cb32945c156640492a4be267",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ace8f35_3d6af4da",
+        "filename": "audio/channel_send_frame_transformer_delegate_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-08-21T15:15:22Z",
+      "side": 1,
+      "message": "What if we just have a MockTransformableFrame which says it\u0027s an incoming frame here? Then we can leave TransformableIncomingAudioFrame just in the .cc and avoid leaking the implementation details outside of the class.\nBut maybe that\u0027s then testing less - but it would be testing that this sender side can handle any frame which implements the TransformableFrameInterface which is maybe better? WDYT?",
+      "revId": "12a0cfb26eb17cf0cb32945c156640492a4be267",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
