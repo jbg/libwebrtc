@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2788dfd1_f46b3e18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-08-21T11:54:20Z",
+      "side": 1,
+      "message": "to allow use them in chromium component build,\ni.e. avoid linking errors in\nhttps://chromium-review.googlesource.com/c/chromium/src/+/4797849",
+      "revId": "3780293dfa52141ca9a0dcff7d22ed80f5fd72de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
