@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "536d7854_9c59fec1",
+        "filename": "video/frame_dumping_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-08-22T07:05:11Z",
+      "side": 1,
+      "message": "In the case of simulcast/SVC, you need to dump spatial layers to separate files. Otherwise, if, for example, you dump all VP8 simulcast layers into 1 file, you will get undecodable stream.",
+      "range": {
+        "startLine": 69,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 66
+      },
+      "revId": "eca6f268badf610f12aa79e68009e802413790a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
