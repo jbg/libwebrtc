@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f86007e3_80fef470",
+        "filename": "audio/channel_send_frame_transformer_delegate.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 20324
+      },
+      "writtenOn": "2023-08-23T12:00:21Z",
+      "side": 1,
+      "message": "It\u0027s in audio-only folder. So it should be only audio frames, right?",
+      "parentUuid": "a4ea1dea_59a92999",
+      "revId": "2d813ba3839a837aee79349de511635aa15ba8e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e8903e7_d68cc648",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-08-23T11:19:45Z",
       "side": 1,
       "message": "Static_cast is usually a sign something is not well designed.\nIs it possible to hide this - for instance adding an AsAudio() method on TransformableFrameInterface, and implementing it as \"throw an exception\" on the base class and overriding it in the subclass with \"return this\"?",
+      "revId": "2d813ba3839a837aee79349de511635aa15ba8e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e40fd00e_9dae35e0",
+        "filename": "audio/channel_send_frame_transformer_delegate.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 20324
+      },
+      "writtenOn": "2023-08-23T12:00:21Z",
+      "side": 1,
+      "message": "Yes, I think so. Can I do this in a follow-up CL though?",
+      "parentUuid": "0e8903e7_d68cc648",
       "revId": "2d813ba3839a837aee79349de511635aa15ba8e5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -69,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58a89850_e7ed2b24",
+        "filename": "audio/channel_send_frame_transformer_delegate_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 20324
+      },
+      "writtenOn": "2023-08-23T12:00:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5febadc_15625bbc",
+      "revId": "2d813ba3839a837aee79349de511635aa15ba8e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28bce737_6253a5f4",
@@ -86,6 +140,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14d1a07b_901f0ef2",
+        "filename": "audio/channel_send_frame_transformer_delegate_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 20324
+      },
+      "writtenOn": "2023-08-23T12:00:21Z",
+      "side": 1,
+      "message": "Same as above. This test is inside an audio folder, so I guess it\u0027s appropriate.",
+      "parentUuid": "28bce737_6253a5f4",
+      "revId": "2d813ba3839a837aee79349de511635aa15ba8e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8dcef781_29faa735",
@@ -99,6 +171,24 @@
       "writtenOn": "2023-08-23T11:19:45Z",
       "side": 1,
       "message": "Seems strange to add this mock in this CL....",
+      "revId": "2d813ba3839a837aee79349de511635aa15ba8e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa64d9b7_47f7f113",
+        "filename": "test/mock_transformable_frame.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 20324
+      },
+      "writtenOn": "2023-08-23T12:00:21Z",
+      "side": 1,
+      "message": "I had to add \u0027GetContributingSources\u0027 mock function in this CL as it is declared in class TransformableAudioFrameInterface and not in TransformableFrameInterface.\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/api/frame_transformer_interface.h;l\u003d73;drc\u003d392e4714e763da9fecb0d93ee30821bef8ee8597",
+      "parentUuid": "8dcef781_29faa735",
       "revId": "2d813ba3839a837aee79349de511635aa15ba8e5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
