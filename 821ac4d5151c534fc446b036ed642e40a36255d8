@@ -34,6 +34,47 @@
       "parentUuid": "1e5bea19_68b53f91",
       "revId": "821ac4d5151c534fc446b036ed642e40a36255d8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55aae509_1d3909f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-08-23T10:55:34Z",
+      "side": 1,
+      "message": "Regarding 2)\n\nI\u0027m strongly in favor of not supporting out of band SPS/PPS/VPS. From my experience with H264, there were issues with the RTP spec of course (which is why we ended up with the non-standardized sps-pps-idr-in-keyframe fmtp), but there were also problems with the ecosystem of H264 encoders. Often we would find encoders that would not update the SPS/PPS ID, even if those parameter changed.\n\nI don\u0027t know if the same is true for H265 encoders, but I rather not take the risk because if the size of SPS+PPS+VPS is similar to H264 SPS+PPS (~30-50 bytes) then the potential bandwidth saving is meaningless, even in very low bitrate scenarios.",
+      "parentUuid": "5576baa2_87fb3abd",
+      "revId": "821ac4d5151c534fc446b036ed642e40a36255d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec9c5306_833401aa",
+        "filename": "api/video_codecs/h265_profile_tier_level.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-08-23T10:55:34Z",
+      "side": 1,
+      "message": "nit: `profile_tier_level_specified \u003d true;`\n\nChange for tier and level as well",
+      "range": {
+        "startLine": 164,
+        "startChar": 33,
+        "endLine": 164,
+        "endChar": 36
+      },
+      "revId": "821ac4d5151c534fc446b036ed642e40a36255d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
