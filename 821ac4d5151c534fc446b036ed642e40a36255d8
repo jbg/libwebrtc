@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e5bea19_68b53f91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-08-23T00:26:09Z",
+      "side": 1,
+      "message": "Adding phancke@ due to IETF proposal here:\nhttps://datatracker.ietf.org/doc/draft-aboba-avtcore-hevc-webrtc/\n\nA few comments to the proposal:\n1. For level-id:\nYour proposal asks level-id to be explicitly signaled in SDP. However, RFC7798 assumes level 3.1 if this is not explicitly signaled. I think we should follow RFC 7798.\n\n2. For sprop-vps/sprop-sps/sprop-pps\nThe proposal suggests to ignore those params. My suggestion is to first look at in-band params, and if not existing, take those params from sdp.  As WebRTC offerer in Chrome, we may opt to not signal them, but we should allow them to exist from a remote offerer,and we\u0027d better honor them as we do in AVC.\n\n3. About max-cpb/max-dpb\nActual implementation rarely depends on them. My suggestion is not to handle them, but instead let encoder/decode decide by themselves.\n\n4. About max-fps/max-br\nI don\u0027t think it is good idea to signal them in SDP. We\u0027re already trying to avoid SDP mungling for bandwidth, we should avoid bring this back.",
+      "revId": "821ac4d5151c534fc446b036ed642e40a36255d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
