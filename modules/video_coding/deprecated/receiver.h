@@ -18,13 +18,13 @@
 #include "modules/video_coding/deprecated/event_wrapper.h"
 #include "modules/video_coding/deprecated/jitter_buffer.h"
 #include "modules/video_coding/deprecated/packet.h"
-#include "modules/video_coding/encoded_frame.h"
 #include "modules/video_coding/include/video_coding_defines.h"
 #include "modules/video_coding/timing/timing.h"
 
 namespace webrtc {
 
 class Clock;
+class EncodedFrame;
 
 class VCMReceiver {
  public:
@@ -45,9 +45,9 @@ class VCMReceiver {
   ~VCMReceiver();
 
   int32_t InsertPacket(const VCMPacket& packet);
-  VCMEncodedFrame* FrameForDecoding(uint16_t max_wait_time_ms,
-                                    bool prefer_late_decoding);
-  void ReleaseFrame(VCMEncodedFrame* frame);
+  EncodedFrame* FrameForDecoding(uint16_t max_wait_time_ms,
+                                 bool prefer_late_decoding);
+  void ReleaseFrame(EncodedFrame* frame);
 
   // NACK.
   void SetNackSettings(size_t max_nack_list_size,
