@@ -33,6 +33,24 @@
       "message": "You\u0027ll need to add H265 to IsSameCodecSpecific too:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/api/video_codecs/sdp_video_format.cc;l\u003d48;drc\u003d99c4c73dbfa097a56e5da9f52a151c0db026f1ab\nbut that can happen in a follow-up CL",
       "revId": "c563678848e051c69c81d8dd34130e8e56ebb3a4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "190b2552_b40d9fad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-08-24T07:24:37Z",
+      "side": 1,
+      "message": "Acked. That will be handled in https://webrtc-review.googlesource.com/c/src/+/316283",
+      "parentUuid": "fdf2b9b5_ad04087c",
+      "revId": "c563678848e051c69c81d8dd34130e8e56ebb3a4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
