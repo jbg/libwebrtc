@@ -32,6 +32,7 @@
 
 namespace webrtc {
 
+class EncodedFrame;
 class VideoBitrateAllocator;
 class VideoBitrateAllocationObserver;
 
@@ -80,11 +81,11 @@ class DEPRECATED_VCMDecoderDataBase {
   // nullptr is returned if no decoder with the specified payload type was found
   // and the function failed to create one.
   VCMGenericDecoder* GetDecoder(
-      const VCMEncodedFrame& frame,
+      const EncodedFrame& frame,
       VCMDecodedFrameCallback* decoded_frame_callback);
 
  private:
-  void CreateAndInitDecoder(const VCMEncodedFrame& frame)
+  void CreateAndInitDecoder(const EncodedFrame& frame)
       RTC_RUN_ON(decoder_sequence_checker_);
 
   SequenceChecker decoder_sequence_checker_;
@@ -129,7 +130,7 @@ class VideoReceiver {
   void Process();
 
  protected:
-  int32_t Decode(const webrtc::VCMEncodedFrame& frame);
+  int32_t Decode(const EncodedFrame& frame);
   int32_t RequestKeyFrame();
 
  private:

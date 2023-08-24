@@ -16,16 +16,16 @@
 
 #include <vector>
 
+#include "api/video/encoded_frame.h"
 #include "modules/rtp_rtcp/source/rtp_video_header.h"
 #include "modules/video_coding/codecs/vp9/include/vp9_globals.h"
 #include "modules/video_coding/deprecated/jitter_buffer_common.h"
 #include "modules/video_coding/deprecated/packet.h"
 #include "modules/video_coding/deprecated/session_info.h"
-#include "modules/video_coding/encoded_frame.h"
 
 namespace webrtc {
 
-class VCMFrameBuffer : public VCMEncodedFrame {
+class VCMFrameBuffer : public EncodedFrame {
  public:
   VCMFrameBuffer();
   virtual ~VCMFrameBuffer();
