@@ -54,6 +54,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "595f21c0_afe2e602",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-08-24T07:19:35Z",
+      "side": 1,
+      "message": "Thanks for the feedback. Bernard Aboba filed a couple of issues against https://github.com/aboba/hevc-webrtc/issues, shall we continue the discussion there?\n\nFor (1) we\u0027ll update the draft. It looks like we violate the default for H264 and assume for 3.1 for backward compat reasons with \"old chrome versions\"... whoops:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/api/video_codecs/h264_profile_level_id.cc;l\u003d182;drc\u003d93f41097bb9b07efd4b8e7e4536b8bf920baa915;bpv\u003d1;bpt\u003d1\n\nFor (2) I agree with Philip. sprop-parameter-sets as a similar codepath for H264 however that codepath (H264SpropParameterSets::DecodeSprop) is very much untested in the browser. https://www.rfc-editor.org/rfc/rfc7742#section-6.2 also forbids that actually.\n\nFor (3) SHOULD interpret means it is ok not to do so for now so you don\u0027t need to add them so the implementation seems fine.\n\nRe (4) the VP8 equivalents of those, max-fr and max-fs are also a MUST in RFC 7741 yet the missing support for them one of the longest-standing WebRTC bugs:\nhttps://bugs.chromium.org/p/webrtc/issues/detail?id\u003d2488\n\nWhat the CL does looks compatible to the draft.",
+      "parentUuid": "55aae509_1d3909f3",
+      "revId": "821ac4d5151c534fc446b036ed642e40a36255d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec9c5306_833401aa",
