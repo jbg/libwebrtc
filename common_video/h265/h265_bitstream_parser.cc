@@ -375,13 +375,17 @@ H265BitstreamParser::Result H265BitstreamParser::ParseNonParameterSetNalu(
         return kUnsupportedStream;
       }
       // five_minus_max_num_merge_cand: ue(v)
-      int five_minus_max_num_merge_cand = slice_reader.ReadExponentialGolomb();
+      uint32_t five_minus_max_num_merge_cand =
+          slice_reader.ReadExponentialGolomb();
       IN_RANGE_OR_RETURN(5 - five_minus_max_num_merge_cand, 1, 5);
     }
   }
 
   // slice_qp_delta: se(v)
   int32_t last_slice_qp_delta = slice_reader.ReadSignedExponentialGolomb();
+  // pps->init_qp_minus26 is in range (-74, 25), pps->qp_bd_offset_y is in range
+  // (0, 48)
+  IN_RANGE_OR_RETURN(last_slice_qp_delta, -99, 99);
   IN_RANGE_OR_RETURN(26 + pps->init_qp_minus26 + last_slice_qp_delta,
                      -pps->qp_bd_offset_y, 51);
   if (!slice_reader.Ok() || (abs(last_slice_qp_delta) > kMaxAbsQpDeltaValue)) {
