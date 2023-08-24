@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "878bfd7a_2dd1c28a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-08-24T12:32:38Z",
+      "side": 1,
+      "message": "I didn\u0027t think about that last fuzzer fix, but please add a unittest for this.",
+      "revId": "00dd14d37d1bb01c987e71cd76a29bcddeef067f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "748dbdde_9dacb2cf",
