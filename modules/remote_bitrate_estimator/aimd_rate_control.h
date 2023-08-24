@@ -106,8 +106,6 @@ class AimdRateControl {
   // If "Disabled",  estimated link capacity is not used as upper bound.
   FieldTrialFlag disable_estimate_bounded_increase_{"Disabled"};
   absl::optional<DataRate> last_decrease_;
-  FieldTrialOptional<TimeDelta> initial_backoff_interval_;
-  FieldTrialFlag link_capacity_fix_;
 };
 }  // namespace webrtc
 
