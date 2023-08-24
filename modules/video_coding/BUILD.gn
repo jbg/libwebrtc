@@ -9,29 +9,6 @@
 import("//third_party/libaom/options.gni")
 import("../../webrtc.gni")
 
-rtc_library("encoded_frame") {
-  visibility = [ "*" ]
-  sources = [ "encoded_frame.h" ]
-  deps = [
-    ":codec_globals_headers",
-    ":video_codec_interface",
-    "../../api/video:encoded_frame",
-    "../../api/video:video_frame",
-    "../../api/video:video_rtp_headers",
-    "../../modules:module_api_public",
-    "../../modules/rtp_rtcp:rtp_video_header",
-    "../../rtc_base:checks",
-    "../../rtc_base/experiments:alr_experiment",
-    "../../rtc_base/experiments:rtt_mult_experiment",
-    "../../rtc_base/system:rtc_export",
-    "../../system_wrappers",
-  ]
-  absl_deps = [
-    "//third_party/abseil-cpp/absl/types:optional",
-    "//third_party/abseil-cpp/absl/types:variant",
-  ]
-}
-
 rtc_library("chain_diff_calculator") {
   sources = [
     "chain_diff_calculator.cc",
@@ -199,7 +176,6 @@ rtc_library("video_coding") {
 
   deps = [
     ":codec_globals_headers",
-    ":encoded_frame",
     ":frame_helpers",
     ":video_codec_interface",
     ":video_coding_utility",
@@ -309,7 +285,6 @@ rtc_library("video_coding_legacy") {
   ]
   deps = [
     ":codec_globals_headers",
-    ":encoded_frame",
     ":video_codec_interface",
     ":video_coding",
     "..:module_api",
@@ -320,6 +295,7 @@ rtc_library("video_coding_legacy") {
     "../../api:sequence_checker",
     "../../api/transport:field_trial_based_config",
     "../../api/units:timestamp",
+    "../../api/video:encoded_frame",
     "../../api/video:encoded_image",
     "../../api/video:video_frame",
     "../../api/video:video_frame_type",
@@ -1231,7 +1207,6 @@ if (rtc_include_tests) {
     deps = [
       ":chain_diff_calculator",
       ":codec_globals_headers",
-      ":encoded_frame",
       ":frame_dependencies_calculator",
       ":frame_helpers",
       ":h264_packet_buffer",
