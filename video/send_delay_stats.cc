@@ -20,11 +20,11 @@ namespace {
 // Packet with a larger delay are removed and excluded from the delay stats.
 // Set to larger than max histogram delay which is 10 seconds.
 constexpr TimeDelta kMaxSentPacketDelay = TimeDelta::Seconds(11);
-const size_t kMaxPacketMapSize = 2000;
+constexpr size_t kMaxPacketMapSize = 2000;
 
 // Limit for the maximum number of streams to calculate stats for.
-const size_t kMaxSsrcMapSize = 50;
-const int kMinRequiredPeriodicSamples = 5;
+constexpr size_t kMaxSsrcMapSize = 50;
+constexpr int kMinRequiredPeriodicSamples = 5;
 }  // namespace
 
 SendDelayStats::SendDelayStats(Clock* clock)
@@ -42,31 +42,78 @@ SendDelayStats::~SendDelayStats() {
 
 void SendDelayStats::UpdateHistograms() {
   MutexLock lock(&mutex_);
-  for (const auto& it : send_delay_counters_) {
-    AggregatedStats stats = it.second->GetStats();
+  for (auto& [unused_ssrc, counters] : send_delay_counters_) {
+    AggregatedStats stats = counters.send_delay.GetStats();
     if (stats.num_samples >= kMinRequiredPeriodicSamples) {
       RTC_HISTOGRAM_COUNTS_10000("WebRTC.Video.SendDelayInMs", stats.average);
       RTC_LOG(LS_INFO) << "WebRTC.Video.SendDelayInMs, " << stats.ToString();
     }
+
+    if (counters.send_side_delay.num_samples() >= 200) {
+      if (counters.is_screencast) {
+        RTC_HISTOGRAM_COUNTS_10000("WebRTC.Video.Screenshare.SendSideDelayInMs",
+                                   counters.send_side_delay.AvgAvgDelay().ms());
+        RTC_HISTOGRAM_COUNTS_10000(
+            "WebRTC.Video.Screenshare.SendSideDelayMaxInMs",
+            counters.send_side_delay.AvgMaxDelay().ms());
+      } else {
+        RTC_HISTOGRAM_COUNTS_10000("WebRTC.Video.SendSideDelayInMs",
+                                   counters.send_side_delay.AvgAvgDelay().ms());
+        RTC_HISTOGRAM_COUNTS_10000("WebRTC.Video.SendSideDelayMaxInMs",
+                                   counters.send_side_delay.AvgMaxDelay().ms());
+      }
+    }
   }
 }
 
-void SendDelayStats::AddSsrcs(const VideoSendStream::Config& config) {
+void SendDelayStats::AddSsrcs(const VideoSendStream::Config& config,
+                              VideoEncoderConfig::ContentType content_type) {
   MutexLock lock(&mutex_);
-  if (ssrcs_.size() > kMaxSsrcMapSize)
+  if (send_delay_counters_.size() + config.rtp.ssrcs.size() > kMaxSsrcMapSize)
     return;
-  for (const auto& ssrc : config.rtp.ssrcs)
-    ssrcs_.insert(ssrc);
+
+  bool is_screencast = content_type == VideoEncoderConfig::ContentType::kScreen;
+  for (uint32_t ssrc : config.rtp.ssrcs) {
+    send_delay_counters_.try_emplace(ssrc, is_screencast, clock_);
+  }
 }
 
-AvgCounter* SendDelayStats::GetSendDelayCounter(uint32_t ssrc) {
-  const auto& it = send_delay_counters_.find(ssrc);
-  if (it != send_delay_counters_.end())
-    return it->second.get();
+void SendDelayStats::SendSideDelayCounter::Add(Timestamp now, TimeDelta delay) {
+  // Replecating RtpSenderEgress::UpdateDelayStatistics with few improvemens
+  RemoveOld(now);
 
-  AvgCounter* counter = new AvgCounter(clock_, nullptr, false);
-  send_delay_counters_[ssrc].reset(counter);
-  return counter;
+  // Add new entry to the window.
+  delays_.push_back({.send_time = now, .value = delay});
+  sum_delay_ += delay;
+  if (max_delay_ == nullptr || delay > *max_delay_) {
+    max_delay_ = &delays_.back().value;
+  }
+
+  // Replecating SendStatisticsProxy::SendSideDelayUpdated.
+  ++num_samples_;
+  sum_avg_ += (sum_delay_ / delays_.size());
+  sum_max_ += *max_delay_;
+}
+
+void SendDelayStats::SendSideDelayCounter::RemoveOld(Timestamp now) {
+  Timestamp too_old = now - kWindow;
+  while (!delays_.empty() && delays_.front().send_time < too_old) {
+    sum_delay_ -= delays_.front().value;
+    if (max_delay_ == &delays_.front().value) {
+      max_delay_ = nullptr;
+    }
+    delays_.pop_front();
+  }
+
+  // Recompute max delay if previous max was pushed out of the window.
+  if (max_delay_ == nullptr && !delays_.empty()) {
+    max_delay_ = &delays_.front().value;
+    for (SendDelayEntry& entry : delays_) {
+      if (entry.value > *max_delay_) {
+        max_delay_ = &entry.value;
+      }
+    }
+  }
 }
 
 void SendDelayStats::OnSendPacket(uint16_t packet_id,
@@ -74,17 +121,26 @@ void SendDelayStats::OnSendPacket(uint16_t packet_id,
                                   uint32_t ssrc) {
   // Packet sent to transport.
   MutexLock lock(&mutex_);
-  if (ssrcs_.find(ssrc) == ssrcs_.end())
+  auto it = send_delay_counters_.find(ssrc);
+  if (it == send_delay_counters_.end())
     return;
 
   Timestamp now = clock_->CurrentTime();
   RemoveOld(now, &packets_);
 
+  // Replicating RtpSenderEgress::UpdateDelayStatistics: delay is accounted even
+  // if packet is later dropped.
+  it->second.send_side_delay.Add(now, capture_time - now);
+
   if (packets_.size() > kMaxPacketMapSize) {
     ++num_skipped_packets_;
     return;
   }
-  packets_.insert(std::make_pair(packet_id, Packet(ssrc, capture_time, now)));
+
+  packets_.emplace(packet_id,
+                   Packet{.send_delay_counter = &it->second.send_delay,
+                          .capture_time = capture_time,
+                          .send_time = now});
 }
 
 bool SendDelayStats::OnSentPacket(int packet_id, Timestamp time) {
@@ -97,10 +153,9 @@ bool SendDelayStats::OnSentPacket(int packet_id, Timestamp time) {
   if (it == packets_.end())
     return false;
 
-  // TODO(asapersson): Remove SendSideDelayUpdated(), use capture -> sent.
   // Elapsed time from send (to transport) -> sent (leaving socket).
   TimeDelta diff = time - it->second.send_time;
-  GetSendDelayCounter(it->second.ssrc)->Add(diff.ms());
+  it->second.send_delay_counter->Add(diff.ms());
   packets_.erase(it);
   return true;
 }

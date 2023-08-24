@@ -902,7 +902,7 @@ webrtc::VideoSendStream* Call::CreateVideoSendStream(
 
   EnsureStarted();
 
-  video_send_delay_stats_->AddSsrcs(config);
+  video_send_delay_stats_->AddSsrcs(config, encoder_config.content_type);
   for (size_t ssrc_index = 0; ssrc_index < config.rtp.ssrcs.size();
        ++ssrc_index) {
     event_log_->Log(std::make_unique<RtcEventVideoSendStreamConfig>(

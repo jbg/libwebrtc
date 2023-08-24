@@ -37,7 +37,7 @@ class SendDelayStatsTest : public ::testing::Test {
  protected:
   virtual void SetUp() {
     stats_.reset(new SendDelayStats(&clock_));
-    stats_->AddSsrcs(config_);
+    stats_->AddSsrcs(config_, VideoEncoderConfig::ContentType::kRealtimeVideo);
   }
 
   VideoSendStream::Config CreateConfig() {

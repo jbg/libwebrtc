@@ -342,8 +342,6 @@ class SendStatisticsProxy : public VideoStreamEncoderObserver,
     BoolSampleCounter cpu_limited_frame_counter_;
     BoolSampleCounter bw_limited_frame_counter_;
     SampleCounter bw_resolutions_disabled_counter_;
-    SampleCounter delay_counter_;
-    SampleCounter max_delay_counter_;
     rtc::RateTracker input_frame_rate_tracker_;
     RateCounter input_fps_counter_;
     RateCounter sent_fps_counter_;
