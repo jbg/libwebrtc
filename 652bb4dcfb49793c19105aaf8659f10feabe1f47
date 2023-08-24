@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4490eb8_493a02e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-08-24T16:42:11Z",
+      "side": 1,
+      "message": "Is this a right direction for removing SendSideDelayUpdated function?\ni.e. calculate and report SendSideDelayInMs in SendDelayStats, instead of calculating it in RtpSenderEgress and reporting in SendStatisticProxy?\n\nor you had some other approach in mind?",
+      "revId": "652bb4dcfb49793c19105aaf8659f10feabe1f47",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
