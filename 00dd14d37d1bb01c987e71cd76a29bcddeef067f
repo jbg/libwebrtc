@@ -16,6 +16,29 @@
       "message": "Fixed another fuzzer testing issue reported by Chromium fuzzing test.",
       "revId": "00dd14d37d1bb01c987e71cd76a29bcddeef067f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "748dbdde_9dacb2cf",
+        "filename": "common_video/h265/h265_bitstream_parser.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-08-24T09:03:37Z",
+      "side": 1,
+      "message": "Could you please use precise boundaries here for given sps-\u003ebit_depth_luma_minus8?",
+      "range": {
+        "startLine": 386,
+        "startChar": 2,
+        "endLine": 391,
+        "endChar": 79
+      },
+      "revId": "00dd14d37d1bb01c987e71cd76a29bcddeef067f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
