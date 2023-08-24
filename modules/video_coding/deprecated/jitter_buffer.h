@@ -23,7 +23,6 @@
 #include "modules/video_coding/deprecated/decoding_state.h"
 #include "modules/video_coding/deprecated/event_wrapper.h"
 #include "modules/video_coding/deprecated/jitter_buffer_common.h"
-#include "modules/video_coding/encoded_frame.h"
 #include "modules/video_coding/include/video_coding_defines.h"
 #include "modules/video_coding/timing/inter_frame_delay_variation_calculator.h"
 #include "modules/video_coding/timing/jitter_estimator.h"
@@ -34,6 +33,7 @@ namespace webrtc {
 
 // forward declarations
 class Clock;
+class EncodedFrame;
 class VCMFrameBuffer;
 class VCMPacket;
 
@@ -98,23 +98,23 @@ class VCMJitterBuffer {
 
   // Wait `max_wait_time_ms` for a complete frame to arrive.
   // If found, a pointer to the frame is returned. Returns nullptr otherwise.
-  VCMEncodedFrame* NextCompleteFrame(uint32_t max_wait_time_ms)
+  EncodedFrame* NextCompleteFrame(uint32_t max_wait_time_ms)
       RTC_LOCKS_EXCLUDED(mutex_);
 
   // Extract frame corresponding to input timestamp.
   // Frame will be set to a decoding state.
-  VCMEncodedFrame* ExtractAndSetDecode(uint32_t timestamp)
+  EncodedFrame* ExtractAndSetDecode(uint32_t timestamp)
       RTC_LOCKS_EXCLUDED(mutex_);
 
   // Releases a frame returned from the jitter buffer, should be called when
   // done with decoding.
-  void ReleaseFrame(VCMEncodedFrame* frame) RTC_LOCKS_EXCLUDED(mutex_);
+  void ReleaseFrame(EncodedFrame* frame) RTC_LOCKS_EXCLUDED(mutex_);
 
   // Returns the time in ms when the latest packet was inserted into the frame.
   // Retransmitted is set to true if any of the packets belonging to the frame
   // has been retransmitted.
-  int64_t LastPacketTime(const VCMEncodedFrame* frame,
-                         bool* retransmitted) const RTC_LOCKS_EXCLUDED(mutex_);
+  int64_t LastPacketTime(const EncodedFrame* frame, bool* retransmitted) const
+      RTC_LOCKS_EXCLUDED(mutex_);
 
   // Inserts a packet into a frame returned from GetFrame().
   // If the return value is <= 0, `frame` is invalidated and the pointer must

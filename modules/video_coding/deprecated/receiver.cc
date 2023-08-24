@@ -16,9 +16,9 @@
 #include <vector>
 
 #include "absl/memory/memory.h"
+#include "api/video/encoded_frame.h"
 #include "api/video/encoded_image.h"
 #include "modules/video_coding/deprecated/jitter_buffer_common.h"
-#include "modules/video_coding/encoded_frame.h"
 #include "modules/video_coding/internal_defines.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/numerics/safe_conversions.h"
@@ -77,12 +77,12 @@ int32_t VCMReceiver::InsertPacket(const VCMPacket& packet) {
   return VCM_OK;
 }
 
-VCMEncodedFrame* VCMReceiver::FrameForDecoding(uint16_t max_wait_time_ms,
-                                               bool prefer_late_decoding) {
+EncodedFrame* VCMReceiver::FrameForDecoding(uint16_t max_wait_time_ms,
+                                            bool prefer_late_decoding) {
   const int64_t start_time_ms = clock_->TimeInMilliseconds();
   int64_t render_time_ms = 0;
   // Exhaust wait time to get a complete frame for decoding.
-  VCMEncodedFrame* found_frame =
+  EncodedFrame* found_frame =
       jitter_buffer_.NextCompleteFrame(max_wait_time_ms);
 
   if (found_frame == nullptr) {
@@ -156,7 +156,7 @@ VCMEncodedFrame* VCMReceiver::FrameForDecoding(uint16_t max_wait_time_ms,
   }
 
   // Extract the frame from the jitter buffer and set the render time.
-  VCMEncodedFrame* frame = jitter_buffer_.ExtractAndSetDecode(frame_timestamp);
+  EncodedFrame* frame = jitter_buffer_.ExtractAndSetDecode(frame_timestamp);
   if (frame == NULL) {
     return NULL;
   }
@@ -166,7 +166,7 @@ VCMEncodedFrame* VCMReceiver::FrameForDecoding(uint16_t max_wait_time_ms,
   return frame;
 }
 
-void VCMReceiver::ReleaseFrame(VCMEncodedFrame* frame) {
+void VCMReceiver::ReleaseFrame(EncodedFrame* frame) {
   jitter_buffer_.ReleaseFrame(frame);
 }
 

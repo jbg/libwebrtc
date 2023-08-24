@@ -105,7 +105,7 @@ bool DEPRECATED_VCMDecoderDataBase::DeregisterReceiveCodec(
 }
 
 VCMGenericDecoder* DEPRECATED_VCMDecoderDataBase::GetDecoder(
-    const VCMEncodedFrame& frame,
+    const EncodedFrame& frame,
     VCMDecodedFrameCallback* decoded_frame_callback) {
   RTC_DCHECK_RUN_ON(&decoder_sequence_checker_);
   RTC_DCHECK(decoded_frame_callback->UserReceiveCallback());
@@ -137,7 +137,7 @@ VCMGenericDecoder* DEPRECATED_VCMDecoderDataBase::GetDecoder(
 }
 
 void DEPRECATED_VCMDecoderDataBase::CreateAndInitDecoder(
-    const VCMEncodedFrame& frame) {
+    const EncodedFrame& frame) {
   uint8_t payload_type = frame.PayloadType();
   RTC_LOG(LS_INFO) << "Initializing decoder with payload type '"
                    << int{payload_type} << "'.";

@@ -19,6 +19,7 @@
 
 #include "absl/algorithm/container.h"
 #include "absl/types/optional.h"
+#include "api/video/encoded_frame.h"
 #include "api/video/video_timing.h"
 #include "api/video_codecs/video_decoder.h"
 #include "modules/include/module_common_types_public.h"
@@ -281,7 +282,7 @@ bool VCMGenericDecoder::Configure(const VideoDecoder::Settings& settings) {
   return ok;
 }
 
-int32_t VCMGenericDecoder::Decode(const VCMEncodedFrame& frame, Timestamp now) {
+int32_t VCMGenericDecoder::Decode(const EncodedFrame& frame, Timestamp now) {
   TRACE_EVENT1("webrtc", "VCMGenericDecoder::Decode", "timestamp",
                frame.Timestamp());
   FrameInfo frame_info;
