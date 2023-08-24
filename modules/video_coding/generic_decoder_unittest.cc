@@ -17,6 +17,7 @@
 #include "absl/types/optional.h"
 #include "api/array_view.h"
 #include "api/rtp_packet_infos.h"
+#include "api/video/encoded_frame.h"
 #include "api/video_codecs/video_decoder.h"
 #include "common_video/test/utilities.h"
 #include "modules/video_coding/timing/timing.h"
@@ -94,7 +95,7 @@ class GenericDecoderTest : public ::testing::Test {
 
 TEST_F(GenericDecoderTest, PassesPacketInfos) {
   RtpPacketInfos packet_infos = CreatePacketInfos(3);
-  VCMEncodedFrame encoded_frame;
+  EncodedFrame encoded_frame;
   encoded_frame.SetPacketInfos(packet_infos);
   generic_decoder_.Decode(encoded_frame, clock_->CurrentTime());
   time_controller_.AdvanceTime(TimeDelta::Millis(10));
@@ -107,7 +108,7 @@ TEST_F(GenericDecoderTest, FrameDroppedIfTooManyFramesInFlight) {
   constexpr int kMaxFramesInFlight = 10;
   decoder_.SetDelayedDecoding(10);
   for (int i = 0; i < kMaxFramesInFlight + 1; ++i) {
-    VCMEncodedFrame encoded_frame;
+    EncodedFrame encoded_frame;
     encoded_frame.SetTimestamp(90000 * i);
     generic_decoder_.Decode(encoded_frame, clock_->CurrentTime());
   }
@@ -128,7 +129,7 @@ TEST_F(GenericDecoderTest, PassesPacketInfosForDelayedDecoders) {
 
   {
     // Ensure the original frame is destroyed before the decoding is completed.
-    VCMEncodedFrame encoded_frame;
+    EncodedFrame encoded_frame;
     encoded_frame.SetPacketInfos(packet_infos);
     generic_decoder_.Decode(encoded_frame, clock_->CurrentTime());
   }
@@ -140,7 +141,7 @@ TEST_F(GenericDecoderTest, PassesPacketInfosForDelayedDecoders) {
 }
 
 TEST_F(GenericDecoderTest, MaxCompositionDelayNotSetByDefault) {
-  VCMEncodedFrame encoded_frame;
+  EncodedFrame encoded_frame;
   generic_decoder_.Decode(encoded_frame, clock_->CurrentTime());
   time_controller_.AdvanceTime(TimeDelta::Millis(10));
   absl::optional<VideoFrame> decoded_frame = user_callback_.PopLastFrame();
@@ -151,7 +152,7 @@ TEST_F(GenericDecoderTest, MaxCompositionDelayNotSetByDefault) {
 }
 
 TEST_F(GenericDecoderTest, MaxCompositionDelayActivatedByPlayoutDelay) {
-  VCMEncodedFrame encoded_frame;
+  EncodedFrame encoded_frame;
   // VideoReceiveStream2 would set MaxCompositionDelayInFrames if playout delay
   // is specified as X,Y, where X=0, Y>0.
   constexpr int kMaxCompositionDelayInFrames = 3;  // ~50 ms at 60 fps.
@@ -167,7 +168,7 @@ TEST_F(GenericDecoderTest, MaxCompositionDelayActivatedByPlayoutDelay) {
 }
 
 TEST_F(GenericDecoderTest, IsLowLatencyStreamFalseByDefault) {
-  VCMEncodedFrame encoded_frame;
+  EncodedFrame encoded_frame;
   generic_decoder_.Decode(encoded_frame, clock_->CurrentTime());
   time_controller_.AdvanceTime(TimeDelta::Millis(10));
   absl::optional<VideoFrame> decoded_frame = user_callback_.PopLastFrame();
@@ -176,7 +177,7 @@ TEST_F(GenericDecoderTest, IsLowLatencyStreamFalseByDefault) {
 }
 
 TEST_F(GenericDecoderTest, IsLowLatencyStreamActivatedByPlayoutDelay) {
-  VCMEncodedFrame encoded_frame;
+  EncodedFrame encoded_frame;
   const VideoPlayoutDelay kPlayoutDelay(TimeDelta::Zero(),
                                         TimeDelta::Millis(50));
   timing_.set_min_playout_delay(kPlayoutDelay.min());

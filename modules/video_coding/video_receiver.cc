@@ -15,13 +15,13 @@
 
 #include "api/rtp_headers.h"
 #include "api/sequence_checker.h"
+#include "api/video/encoded_frame.h"
 #include "api/video_codecs/video_codec.h"
 #include "api/video_codecs/video_decoder.h"
 #include "modules/video_coding/decoder_database.h"
 #include "modules/video_coding/deprecated/jitter_buffer.h"
 #include "modules/video_coding/deprecated/packet.h"
 #include "modules/video_coding/deprecated/receiver.h"
-#include "modules/video_coding/encoded_frame.h"
 #include "modules/video_coding/generic_decoder.h"
 #include "modules/video_coding/include/video_coding.h"
 #include "modules/video_coding/include/video_coding_defines.h"
@@ -150,7 +150,7 @@ int32_t VideoReceiver::RegisterPacketRequestCallback(
 // Should be called as often as possible to get the most out of the decoder.
 int32_t VideoReceiver::Decode(uint16_t maxWaitTimeMs) {
   RTC_DCHECK_RUN_ON(&decoder_thread_checker_);
-  VCMEncodedFrame* frame = _receiver.FrameForDecoding(maxWaitTimeMs, true);
+  EncodedFrame* frame = _receiver.FrameForDecoding(maxWaitTimeMs, true);
 
   if (!frame)
     return VCM_FRAME_NOT_READY;
@@ -207,7 +207,7 @@ int32_t VideoReceiver::RequestKeyFrame() {
 }
 
 // Must be called from inside the receive side critical section.
-int32_t VideoReceiver::Decode(const VCMEncodedFrame& frame) {
+int32_t VideoReceiver::Decode(const EncodedFrame& frame) {
   RTC_DCHECK_RUN_ON(&decoder_thread_checker_);
   TRACE_EVENT0("webrtc", "VideoReceiver::Decode");
   // Change decoder if payload type has changed

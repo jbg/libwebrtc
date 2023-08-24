@@ -19,13 +19,13 @@
 #include "api/field_trials_view.h"
 #include "api/sequence_checker.h"
 #include "api/video_codecs/video_decoder.h"
-#include "modules/video_coding/encoded_frame.h"
 #include "modules/video_coding/timing/timing.h"
 #include "rtc_base/synchronization/mutex.h"
 
 namespace webrtc {
 
 class VCMReceiveCallback;
+class EncodedFrame;
 
 struct FrameInfo {
   FrameInfo() = default;
@@ -102,7 +102,7 @@ class VCMGenericDecoder {
    *
    * inputVideoBuffer reference to encoded video frame
    */
-  int32_t Decode(const VCMEncodedFrame& inputFrame, Timestamp now);
+  int32_t Decode(const EncodedFrame& inputFrame, Timestamp now);
 
   /**
    * Set decode callback. Deregistering while decoding is illegal.

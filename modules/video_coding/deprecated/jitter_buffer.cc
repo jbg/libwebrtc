@@ -14,6 +14,7 @@
 #include <utility>
 
 #include "api/units/timestamp.h"
+#include "api/video/encoded_frame.h"
 #include "modules/video_coding/deprecated/frame_buffer.h"
 #include "modules/video_coding/deprecated/jitter_buffer_common.h"
 #include "modules/video_coding/deprecated/packet.h"
@@ -214,7 +215,7 @@ int VCMJitterBuffer::num_duplicated_packets() const {
 
 // Returns immediately or a `max_wait_time_ms` ms event hang waiting for a
 // complete frame, `max_wait_time_ms` decided by caller.
-VCMEncodedFrame* VCMJitterBuffer::NextCompleteFrame(uint32_t max_wait_time_ms) {
+EncodedFrame* VCMJitterBuffer::NextCompleteFrame(uint32_t max_wait_time_ms) {
   MutexLock lock(&mutex_);
   if (!running_) {
     return nullptr;
@@ -256,7 +257,7 @@ VCMEncodedFrame* VCMJitterBuffer::NextCompleteFrame(uint32_t max_wait_time_ms) {
   return decodable_frames_.Front();
 }
 
-VCMEncodedFrame* VCMJitterBuffer::ExtractAndSetDecode(uint32_t timestamp) {
+EncodedFrame* VCMJitterBuffer::ExtractAndSetDecode(uint32_t timestamp) {
   MutexLock lock(&mutex_);
   if (!running_) {
     return NULL;
@@ -306,7 +307,7 @@ VCMEncodedFrame* VCMJitterBuffer::ExtractAndSetDecode(uint32_t timestamp) {
 
 // Release frame when done with decoding. Should never be used to release
 // frames from within the jitter buffer.
-void VCMJitterBuffer::ReleaseFrame(VCMEncodedFrame* frame) {
+void VCMJitterBuffer::ReleaseFrame(EncodedFrame* frame) {
   RTC_CHECK(frame != nullptr);
   MutexLock lock(&mutex_);
   VCMFrameBuffer* frame_buffer = static_cast<VCMFrameBuffer*>(frame);
@@ -346,7 +347,7 @@ VCMFrameBufferEnum VCMJitterBuffer::GetFrame(const VCMPacket& packet,
   return kNoError;
 }
 
-int64_t VCMJitterBuffer::LastPacketTime(const VCMEncodedFrame* frame,
+int64_t VCMJitterBuffer::LastPacketTime(const EncodedFrame* frame,
                                         bool* retransmitted) const {
   RTC_DCHECK(retransmitted);
   MutexLock lock(&mutex_);

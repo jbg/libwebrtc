@@ -216,7 +216,7 @@ void VCMFrameBuffer::Reset() {
   _nackCount = 0;
   _latestPacketTimeMs = -1;
   _state = kStateEmpty;
-  VCMEncodedFrame::Reset();
+  EncodedFrame::Reset();
 }
 
 // Set state of frame

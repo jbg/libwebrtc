@@ -16,10 +16,10 @@
 #include <queue>
 #include <vector>
 
+#include "api/video/encoded_frame.h"
 #include "modules/video_coding/deprecated/jitter_buffer_common.h"
 #include "modules/video_coding/deprecated/packet.h"
 #include "modules/video_coding/deprecated/stream_generator.h"
-#include "modules/video_coding/encoded_frame.h"
 #include "modules/video_coding/timing/timing.h"
 #include "rtc_base/checks.h"
 #include "system_wrappers/include/clock.h"
@@ -72,7 +72,7 @@ class TestVCMReceiver : public ::testing::Test {
   }
 
   bool DecodeNextFrame() {
-    VCMEncodedFrame* frame = receiver_.FrameForDecoding(0, false);
+    EncodedFrame* frame = receiver_.FrameForDecoding(0, false);
     if (!frame)
       return false;
     receiver_.ReleaseFrame(frame);
@@ -419,7 +419,7 @@ TEST_F(VCMReceiverTimingTest, FrameForDecoding) {
   // build bot to kill the test.
   while (num_frames_return < kNumFrames) {
     int64_t start_time = clock_.TimeInMilliseconds();
-    VCMEncodedFrame* frame = receiver_.FrameForDecoding(kMaxWaitTime, false);
+    EncodedFrame* frame = receiver_.FrameForDecoding(kMaxWaitTime, false);
     int64_t end_time = clock_.TimeInMilliseconds();
 
     // In any case the FrameForDecoding should not wait longer than
@@ -476,7 +476,7 @@ TEST_F(VCMReceiverTimingTest, FrameForDecodingPreferLateDecoding) {
   while (num_frames_return < kNumFrames) {
     int64_t start_time = clock_.TimeInMilliseconds();
 
-    VCMEncodedFrame* frame =
+    EncodedFrame* frame =
         receiver_.FrameForDecoding(kMaxWaitTime, prefer_late_decoding);
     int64_t end_time = clock_.TimeInMilliseconds();
     if (frame) {

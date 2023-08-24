@@ -884,7 +884,6 @@ if (rtc_include_tests) {
       "../modules/utility:utility",
       "../modules/video_coding",
       "../modules/video_coding:codec_globals_headers",
-      "../modules/video_coding:encoded_frame",
       "../modules/video_coding:packet_buffer",
       "../modules/video_coding:video_codec_interface",
       "../modules/video_coding:video_coding_utility",
