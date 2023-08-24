@@ -464,6 +464,8 @@ RTCErrorOr<rtc::scoped_refptr<PeerConnection>> PeerConnection::Create(
   // If neither is given, create a BasicAsyncDnsResolverFactory.
   // TODO(bugs.webrtc.org/12598): Remove code once all callers pass a
   // AsyncDnsResolverFactory.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
   if (dependencies.async_dns_resolver_factory &&
       dependencies.async_resolver_factory) {
     RTC_LOG(LS_ERROR)
@@ -479,6 +481,7 @@ RTCErrorOr<rtc::scoped_refptr<PeerConnection>> PeerConnection::Create(
     dependencies.async_dns_resolver_factory =
         std::make_unique<BasicAsyncDnsResolverFactory>();
   }
+#pragma clang diagnostic pop
 
   // The PeerConnection constructor consumes some, but not all, dependencies.
   auto pc = rtc::make_ref_counted<PeerConnection>(
