@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0581f550_71f19151",
+        "filename": "pc/sdp_offer_answer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-08-25T09:19:44Z",
+      "side": 1,
+      "message": "turns out I did not understand them either! This is still not throwing an error (because the metrics did not look good enough) so needs to test if the counters increase.",
+      "parentUuid": "426a146b_49a4a179",
+      "revId": "53915f9c8d96debb145bb021f12711097f6fab42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9402cd29_d175b8bd",
         "filename": "pc/sdp_offer_answer_unittest.cc",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2023-08-25T08:37:26Z",
       "side": 1,
       "message": "Same question here.",
+      "revId": "53915f9c8d96debb145bb021f12711097f6fab42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75a56a55_7baaf510",
+        "filename": "pc/sdp_offer_answer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-08-25T09:19:44Z",
+      "side": 1,
+      "message": "The previous SRD call worked but then I tried to call SRD with answer in stable state... not the right thing to do!",
+      "parentUuid": "9402cd29_d175b8bd",
       "revId": "53915f9c8d96debb145bb021f12711097f6fab42",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
