@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bea68bd9_e32dbef3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-25T11:52:04Z",
+      "side": 1,
+      "message": "CL in Chromium was complicated due to need to export symbols. Pushed that off to another CL (another week).",
+      "revId": "ff2254b06adb6ffb9579693de422b326c585e95f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
