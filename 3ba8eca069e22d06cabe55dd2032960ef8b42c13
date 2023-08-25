@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d240503_5e0d0d83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-08-25T14:23:12Z",
+      "side": 1,
+      "message": "Just about managed to fit this into the fixit too 😊\nA fix to the internal build break caused by this is in submit queue already.",
+      "revId": "3ba8eca069e22d06cabe55dd2032960ef8b42c13",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
