@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c2d6bf1_0dde866c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-08-25T00:45:24Z",
+      "side": 1,
+      "message": "Updated addressing remaining review comments. PT-Another-L.",
+      "revId": "942ff478b9b2aa4d36dc1e863aae140beaad6fb3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
