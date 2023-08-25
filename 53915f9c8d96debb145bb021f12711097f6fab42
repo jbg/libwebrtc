@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0073a16_cdb5558b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-25T08:37:26Z",
+      "side": 1,
+      "message": "Code seems reasonable, but I don\u0027t understand the tests.",
+      "revId": "53915f9c8d96debb145bb021f12711097f6fab42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "426a146b_49a4a179",
+        "filename": "pc/sdp_offer_answer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-25T08:37:26Z",
+      "side": 1,
+      "message": "What is this testing, exactly?\n\nIt\u0027s expecting the SRD to fail, but why is it failing, and how does this test the tolerance for clashes?",
+      "revId": "53915f9c8d96debb145bb021f12711097f6fab42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9402cd29_d175b8bd",
+        "filename": "pc/sdp_offer_answer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-25T08:37:26Z",
+      "side": 1,
+      "message": "Same question here.",
+      "revId": "53915f9c8d96debb145bb021f12711097f6fab42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
