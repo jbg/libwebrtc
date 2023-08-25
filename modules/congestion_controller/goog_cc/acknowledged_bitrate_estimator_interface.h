@@ -33,7 +33,7 @@ struct RobustThroughputEstimatorSettings {
   explicit RobustThroughputEstimatorSettings(
       const FieldTrialsView* key_value_config);
 
-  bool enabled = false;  // Set to true to use RobustThroughputEstimator.
+  bool enabled = true;  // Set to true to use RobustThroughputEstimator.
 
   // The estimator keeps the smallest window containing at least
   // `window_packets` and at least the packets received during the last
