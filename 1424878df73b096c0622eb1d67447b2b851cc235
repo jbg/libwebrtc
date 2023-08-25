@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f7ee824_95140876",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-08-25T13:51:22Z",
+      "side": 1,
+      "message": "Alternative approach to \nhttps://webrtc-review.googlesource.com/c/src/+/317605\npropagate the delay into the Proxy, do all the calculations there.",
+      "revId": "1424878df73b096c0622eb1d67447b2b851cc235",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
