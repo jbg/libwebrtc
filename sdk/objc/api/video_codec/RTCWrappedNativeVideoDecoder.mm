@@ -47,7 +47,6 @@
 }
 
 - (NSInteger)decode:(RTC_OBJC_TYPE(RTCEncodedImage) *)encodedImage
-        missingFrames:(BOOL)missingFrames
     codecSpecificInfo:(nullable id<RTC_OBJC_TYPE(RTCCodecSpecificInfo)>)info
          renderTimeMs:(int64_t)renderTimeMs {
   RTC_DCHECK_NOTREACHED();
