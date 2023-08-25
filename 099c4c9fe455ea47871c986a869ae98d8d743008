@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7f45ba3_d883f51e",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-08-25T11:24:45Z",
+      "side": 1,
+      "message": "orphis had a good question here. Is media_description always valid at this point, even for unsupported contents? I\u0027d say \"yes\", it returns a UnsupportedContentDescription.\nBut better safe than sorry and check, leaving the DCHECK as a trip wire.\n\nAnd it lead to more consistency below even.",
+      "revId": "099c4c9fe455ea47871c986a869ae98d8d743008",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
