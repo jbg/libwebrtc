@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55ea25ca_504eea1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-08-26T06:33:20Z",
+      "side": 1,
+      "message": "Which issue did you want to tag? 10489 is a wontfixed-due-to-lack-of-feedback one ;-)",
+      "revId": "b5dedfc8562389f42121d4a44af32cfd802600bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
