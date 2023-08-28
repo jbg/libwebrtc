@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a79a541_66f08cc5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-28T09:55:50Z",
+      "side": 1,
+      "message": "OK, not breaking on the issue, but DCHECKs are nice.",
+      "revId": "2d813ba3839a837aee79349de511635aa15ba8e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4ea1dea_59a92999",
@@ -66,6 +83,24 @@
       "side": 1,
       "message": "It\u0027s in audio-only folder. So it should be only audio frames, right?",
       "parentUuid": "a4ea1dea_59a92999",
+      "revId": "2d813ba3839a837aee79349de511635aa15ba8e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62f81eef_9d9ee141",
+        "filename": "audio/channel_send_frame_transformer_delegate.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-28T09:55:50Z",
+      "side": 1,
+      "message": "RTC_DCHECK(frame is audio) would make me unconcerned.",
+      "parentUuid": "f86007e3_80fef470",
       "revId": "2d813ba3839a837aee79349de511635aa15ba8e5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
