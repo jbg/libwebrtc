@@ -58,6 +58,10 @@ constexpr int kMaxRefIdxActive = 15;
 
 namespace webrtc {
 
+H265PpsParser::PpsState::PpsState() {
+  memset(reinterpret_cast<void*>(this), 0, sizeof(*this));
+}
+
 // General note: this is based off the 08/2021 version of the H.265 standard.
 // You can find it on this page:
 // http://www.itu.int/rec/T-REC-H.265
@@ -228,12 +232,6 @@ absl::optional<H265PpsParser::PpsState> H265PpsParser::ParseInternal(
   }
   // lists_modification_present_flag: u(1)
   pps.lists_modification_present_flag = reader.Read<bool>();
-  // log2_parallel_merge_level_minus2: ue(v)
-  uint32_t log2_parallel_merge_level_minus2 = reader.ReadExponentialGolomb();
-  IN_RANGE_OR_RETURN_NULL(log2_parallel_merge_level_minus2, 0,
-                          sps->ctb_log2_size_y - 2);
-  // slice_segment_header_extension_present_flag: u(1)
-  reader.ConsumeBits(1);
 
   if (!reader.Ok()) {
     return absl::nullopt;
