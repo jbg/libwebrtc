@@ -36,6 +36,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f17839b8_973bac15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-08-28T07:54:18Z",
+      "side": 1,
+      "message": "Najs",
+      "parentUuid": "5322d628_48b23a21",
+      "revId": "12a0cfb26eb17cf0cb32945c156640492a4be267",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90bd8d81_be42001e",
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "It does seem inconsistent for sender and receiver frames. Should we instead change rtp_timestamp_ \u003d timestamp here?\n https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/audio/channel_send_frame_transformer_delegate.cc;l\u003d93;drc\u003d392e4714e763da9fecb0d93ee30821bef8ee8597",
       "parentUuid": "90bd8d81_be42001e",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 3
+      },
+      "revId": "12a0cfb26eb17cf0cb32945c156640492a4be267",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af7bc473_1d5c98d4",
+        "filename": "audio/channel_send_frame_transformer_delegate.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-08-28T07:54:18Z",
+      "side": 1,
+      "message": "Actually, I don\u0027t think it\u0027s a problem with how we\u0027re storing the timestamps inside the TransformableAudioFrame subclasses (TransformableOutgoingAudioFrame just subtracts the offset in the setter, then adds it back on in the getter).\n\nIt\u0027s more a problem that we should be using the destination Sender\u0027s start timestamp no matter where a frame came from, so that if transformed_frame-\u003eGetTimestamp() is the same, we provide the same value to the send_frame_callback_. I\u0027ll work on a patch.",
+      "parentUuid": "95cec113_ee4ba10c",
       "range": {
         "startLine": 165,
         "startChar": 0,
