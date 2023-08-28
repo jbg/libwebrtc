@@ -20,6 +20,7 @@
 #include "api/units/timestamp.h"
 #include "call/rtp_transport_controller_send.h"
 #include "test/gtest.h"
+#include "test/mock_frame_transformer.h"
 #include "test/mock_transport.h"
 #include "test/scoped_key_value_config.h"
 #include "test/time_controller/simulated_time_controller.h"
@@ -31,6 +32,7 @@ namespace {
 using ::testing::Invoke;
 using ::testing::NiceMock;
 using ::testing::Return;
+using ::testing::SaveArg;
 
 constexpr int kRtcpIntervalMs = 1000;
 constexpr int kSsrc = 333;
@@ -145,6 +147,45 @@ TEST_F(ChannelSendTest, IncreaseRtpTimestampByPauseDuration) {
   EXPECT_EQ(timestamp_gap_ms, 10020);
 }
 
+TEST_F(ChannelSendTest, FrameTransformerGetsCorrectTimestamp) {
+  rtc::scoped_refptr<MockFrameTransformer> mock_frame_transformer =
+      rtc::make_ref_counted<MockFrameTransformer>();
+  channel_->SetEncoderToPacketizerFrameTransformer(mock_frame_transformer);
+  rtc::scoped_refptr<TransformedFrameCallback> callback;
+  EXPECT_CALL(*mock_frame_transformer, RegisterTransformedFrameCallback)
+      .WillOnce(SaveArg<0>(&callback));
+  EXPECT_CALL(*mock_frame_transformer, UnregisterTransformedFrameCallback);
+
+  uint32_t sent_timestamp;
+  auto send_rtp = [&](rtc::ArrayView<const uint8_t> data,
+                      const PacketOptions& options) {
+    RtpPacketReceived packet;
+    packet.Parse(data);
+    sent_timestamp = packet.Timestamp();
+    return true;
+  };
+  EXPECT_CALL(transport_, SendRtp).WillRepeatedly(Invoke(send_rtp));
+
+  channel_->StartSend();
+  int64_t transformable_frame_timestamp = -1;
+  rtc::Event frame_processed_event;
+  EXPECT_CALL(*mock_frame_transformer, Transform)
+      .WillOnce([&](std::unique_ptr<TransformableFrameInterface> frame) {
+        transformable_frame_timestamp = frame->GetTimestamp();
+        callback->OnTransformedFrame(std::move(frame));
+        frame_processed_event.Set();
+      });
+  // Insert two frames which should trigger a new packet.
+  ProcessNextFrame();
+  ProcessNextFrame();
+  frame_processed_event.Wait(TimeDelta::Seconds(1));
+
+  // Ensure the RTP timestamp on the frame passed to the transformer
+  // includes the RTP offset and matches the actual RTP timestamp on the sent
+  // packet.
+  EXPECT_GT(transformable_frame_timestamp, 0);
+  EXPECT_EQ(transformable_frame_timestamp, sent_timestamp);
+}
 }  // namespace
 }  // namespace voe
 }  // namespace webrtc
