@@ -91,7 +91,6 @@ class H265SpsParser {
     std::vector<H265SpsParser::ShortTermRefPicSet> short_term_ref_pic_set;
     uint32_t long_term_ref_pics_present_flag = 0;
     uint32_t num_long_term_ref_pics_sps = 0;
-    std::vector<uint32_t> lt_ref_pic_poc_lsb_sps;
     std::vector<uint32_t> used_by_curr_pic_lt_sps_flag;
     uint32_t sps_temporal_mvp_enabled_flag = 0;
     uint32_t width = 0;
@@ -100,7 +99,6 @@ class H265SpsParser {
     uint32_t vps_id = 0;
     uint32_t pic_width_in_ctbs_y = 0;
     uint32_t pic_height_in_ctbs_y = 0;
-    uint32_t ctb_log2_size_y = 0;
     uint32_t bit_depth_luma_minus8 = 0;
   };
 

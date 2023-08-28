@@ -24,7 +24,7 @@ class H265PpsParser {
   // The parsed state of the PPS. Only some select values are stored.
   // Add more as they are actually needed.
   struct PpsState {
-    PpsState() = default;
+    PpsState();
 
     bool dependent_slice_segments_enabled_flag = false;
     bool cabac_init_present_flag = false;
