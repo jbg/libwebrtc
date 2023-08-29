@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cad76ca8_f0987a52",
+        "filename": "audio/channel_send_frame_transformer_delegate.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-08-29T08:49:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37c8bf81_cbaa15cd",
+      "revId": "32453083475cbde792c47f837f7c52166377fbd3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5456488_27262b5d",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-08-29T08:23:04Z",
       "side": 1,
       "message": "Initialize variable to an impossible value, or use an optional. You want consistent behavior for the failiure case where send_rtp never gets called.",
+      "revId": "32453083475cbde792c47f837f7c52166377fbd3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d34661dd_62c604a2",
+        "filename": "audio/channel_send_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-08-29T08:49:58Z",
+      "side": 1,
+      "message": "Ah, good point. Added an event and a wait on it to ensure send_rtp has been called.",
+      "parentUuid": "a5456488_27262b5d",
       "revId": "32453083475cbde792c47f837f7c52166377fbd3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -69,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8441aebd_4f9f4e0d",
+        "filename": "audio/channel_send_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-08-29T08:49:58Z",
+      "side": 1,
+      "message": "This is waiting for up to a second for the frame_processed_event to be set, which happens at the end of the mock_frame_transformer Transform handler. Should usually be quick.\n\nNot sure how it compares to ASSERT_TRUE_WAIT tbh - I\u0027d guess the event is better, as we don\u0027t need to loop checking the condition so much? Probs not much difference in the end.\n\nAdded another event to wait for the packet to actually be sent though, in case SendRtp() doesn\u0027t get called synchronously in future.",
+      "parentUuid": "076379ef_5c47e0de",
+      "revId": "32453083475cbde792c47f837f7c52166377fbd3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73901f2c_a8c9ec89",
@@ -82,6 +136,24 @@
       "writtenOn": "2023-08-29T08:23:04Z",
       "side": 1,
       "message": "I don\u0027t understand how this check verifies that the offset has been correctly added. Where\u0027s the offset set, and what\u0027s its value?",
+      "revId": "32453083475cbde792c47f837f7c52166377fbd3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55983630_ff9434b9",
+        "filename": "audio/channel_send_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-08-29T08:49:58Z",
+      "side": 1,
+      "message": "It was weakly checked by the `\u003e 0` expect, but now found a hook to actually be able to get to the offset. Done.",
+      "parentUuid": "73901f2c_a8c9ec89",
       "revId": "32453083475cbde792c47f837f7c52166377fbd3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
