@@ -16,6 +16,46 @@
       "message": "Added unit test case for invalid QP value and remove useless properties and code.",
       "revId": "775770d5e4e59b52e8df72c5da71885db45a61e5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6248a304_2be5984b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2023-08-29T11:37:48Z",
+      "side": 1,
+      "message": "rslgtm % comment",
+      "revId": "775770d5e4e59b52e8df72c5da71885db45a61e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73a302f6_080ee01f",
+        "filename": "common_video/h265/h265_sps_parser.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2023-08-29T11:37:48Z",
+      "side": 1,
+      "message": "Please make sure all member are zero initialized in the declaration or initializer list instead, don\u0027t manually memset. It looks like all you need is to update\n`uint32_t sps_max_sub_layers_minus1 \u003d 0;`\nand\n`uint32_t sps_max_dec_pic_buffering_minus1[kMaxSubLayers] \u003d {};`",
+      "range": {
+        "startLine": 67,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 58
+      },
+      "revId": "775770d5e4e59b52e8df72c5da71885db45a61e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
