@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '0e815932e7b2f6fbe53d367c6cf80c00825b181e',
+  'chromium_revision': '045e706e85c244d2c0b338cd51be87da1c444e05',
 
   # Fetch the prebuilt binaries for llvm-cov and llvm-profdata. Needed to
   # process the raw profiles produced by instrumented targets (built with
@@ -67,7 +67,7 @@ deps = {
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@723ff780d37db1d6a3bacf71c94fd8c1e28c4334',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@2e6fa2aa9b8495ff28022a0c22945d9ad357ceb1',
+    'https://chromium.googlesource.com/chromium/src/third_party@a98cae7c89452ab6ada583d393e425fe164638a6',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -117,7 +117,7 @@ deps = {
   'src/third_party/libc++/src':
     'https://chromium.googlesource.com/external/github.com/llvm/llvm-project/libcxx.git@84fb809dd6dae36d556dc0bb702c6cc2ce9d4b80',
   'src/third_party/libc++abi/src':
-    'https://chromium.googlesource.com/external/github.com/llvm/llvm-project/libcxxabi.git@6a8358a1423aa37f33d87b300b634c067b2741c1',
+    'https://chromium.googlesource.com/external/github.com/llvm/llvm-project/libcxxabi.git@3d83ca7bd2ab81f042bafe6996da08c9cd57c119',
   'src/third_party/libunwind/src':
     'https://chromium.googlesource.com/external/github.com/llvm/llvm-project/libunwind.git@76e621a89787516da745489245d8b65a48ad60d8',
 
@@ -191,7 +191,7 @@ deps = {
   'src/third_party/crc32c/src':
     'https://chromium.googlesource.com/external/github.com/google/crc32c.git@fa5ade41ee480003d9c5af6f43567ba22e4e17e6',
   'src/third_party/depot_tools':
-    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@e6f40ea0341552c3e78fb107fe9f37b87d95f321',
+    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@6c8d2a9ce540ae481fefd3028aa91753c7ed796c',
   'src/third_party/ffmpeg':
     'https://chromium.googlesource.com/chromium/third_party/ffmpeg.git@0ba37733400593b162e5ae9ff26b384cff49c250',
   'src/third_party/flatbuffers/src':
@@ -344,7 +344,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@ce48a9ac80cd6d9d4d0e018009fdf2f07fbf2f4f',
+    'https://chromium.googlesource.com/chromium/src/tools@b14346820bedd7ba4ce30f40d49b01b44395ed78',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
