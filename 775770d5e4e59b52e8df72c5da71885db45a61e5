@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "feae10dd_3b4fd98e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-08-29T00:55:05Z",
+      "side": 1,
+      "message": "Added unit test case for invalid QP value and remove useless properties and code.",
+      "revId": "775770d5e4e59b52e8df72c5da71885db45a61e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
