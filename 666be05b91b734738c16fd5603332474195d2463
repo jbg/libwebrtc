@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d32f512_70efd202",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-08-29T07:15:40Z",
+      "side": 1,
+      "message": "H.265",
+      "range": {
+        "startLine": 32,
+        "startChar": 17,
+        "endLine": 32,
+        "endChar": 21
+      },
+      "revId": "666be05b91b734738c16fd5603332474195d2463",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5611d8fb_a6a85a1e",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-08-29T07:15:40Z",
+      "side": 1,
+      "message": "Please use H265 here and in other places.",
+      "range": {
+        "startLine": 33,
+        "startChar": 21,
+        "endLine": 33,
+        "endChar": 25
+      },
+      "revId": "666be05b91b734738c16fd5603332474195d2463",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
