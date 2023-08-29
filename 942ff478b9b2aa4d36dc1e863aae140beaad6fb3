@@ -103,6 +103,24 @@
       "parentUuid": "237c8862_b2cd369a",
       "revId": "942ff478b9b2aa4d36dc1e863aae140beaad6fb3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fa4621a_33a378f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-08-29T07:31:15Z",
+      "side": 1,
+      "message": "Oh, sorry. I was comparing patch 6 vs 7 and that removed BUILD.gn from the list of files.",
+      "parentUuid": "e3819e04_f961bcb0",
+      "revId": "942ff478b9b2aa4d36dc1e863aae140beaad6fb3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
