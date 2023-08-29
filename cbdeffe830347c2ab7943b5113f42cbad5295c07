@@ -122,6 +122,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9c5bbb2b_4476b9b0",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-08-29T07:49:55Z",
+      "side": 1,
+      "message": "Re-examing this, it looks fine since you\u0027re already stripping the NALU header for the first fragment.\nPlease add a comment here, and also use another constexpr named kH265FuPayloadHdrSize \u003d 2 so this seems less confusing,",
+      "parentUuid": "f1e2dab9_dc4e0bb6",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "97e154bf_e879cebb",
         "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
         "patchSetId": 1

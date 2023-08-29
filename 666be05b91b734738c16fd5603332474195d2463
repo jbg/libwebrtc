@@ -45,6 +45,40 @@
       },
       "revId": "666be05b91b734738c16fd5603332474195d2463",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fcd955e_714df753",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-08-29T07:49:55Z",
+      "side": 1,
+      "message": "You should",
+      "revId": "666be05b91b734738c16fd5603332474195d2463",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3beacc82_6cfc2ea7",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-08-29T07:49:55Z",
+      "side": 1,
+      "message": "RFC requires all receivers to support tx-mode\u003dMRST/MRMT/SRST. You may add a comment here to explain why for packetizer you don\u0027t pass tx-mode related param to it.\nOtherwise it seems asymmetric when you compare packetizer and depacketizer.",
+      "revId": "666be05b91b734738c16fd5603332474195d2463",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
