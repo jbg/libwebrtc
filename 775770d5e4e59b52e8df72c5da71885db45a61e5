@@ -56,6 +56,30 @@
       },
       "revId": "775770d5e4e59b52e8df72c5da71885db45a61e5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70cb973a_28cd6eea",
+        "filename": "common_video/h265/h265_sps_parser.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-08-29T12:22:56Z",
+      "side": 1,
+      "message": "sprang@ in the parser domain, for complex syntax elements like SPS/PPS, in Chromium we typically memset the entire structure in initializer, instead of setting them one by one.\n\nExamples are [1] [2], [3].\n\nWe understand with typical coding style it should be initialized in declaration, however the benefit of current chromium practice:\n1. h26x syntax typically defaults to 0 if they\u0027re not explicitly present in the bitstream, and they actually impact the parsing flow. So when you pass SPS/PPS structure to be filled in by corresponding parser, those syntax not readout by parser from bitstream, but instead implied, will by default gets 0 value if the entire structure is always memset to 0 in initializer.\n2. SPS/PPS contains too many syntax elements that we actually intend to initialize to 0. Set them in declaration or initializer list, it doesn\u0027t look good.\n\n\n[1]https://source.chromium.org/chromium/chromium/src/+/main:media/video/h264_parser.cc;l\u003d68\n[2]https://source.chromium.org/chromium/chromium/src/+/main:media/video/h265_parser.cc;l\u003d98\n[3]https://source.chromium.org/chromium/chromium/src/+/main:media/video/h266_parser.cc;l\u003d57",
+      "parentUuid": "73a302f6_080ee01f",
+      "range": {
+        "startLine": 67,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 58
+      },
+      "revId": "775770d5e4e59b52e8df72c5da71885db45a61e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
