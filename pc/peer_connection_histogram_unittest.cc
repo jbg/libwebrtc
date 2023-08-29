@@ -269,10 +269,14 @@ class PeerConnectionUsageHistogramTest : public ::testing::Test {
         std::make_unique<webrtc::FakeMdnsResponder>(rtc::Thread::Current()));
     fake_network->AddInterface(NextLocalAddress());
 
+#if 0
     std::unique_ptr<cricket::BasicPortAllocator> port_allocator(
         new cricket::BasicPortAllocator(
             fake_network,
             std::make_unique<rtc::BasicPacketSocketFactory>(vss_.get())));
+#else
+    std::unique_ptr<cricket::BasicPortAllocator> port_allocator;
+#endif
 
     deps.async_dns_resolver_factory = std::move(resolver_factory);
     deps.allocator = std::move(port_allocator);
@@ -294,9 +298,13 @@ class PeerConnectionUsageHistogramTest : public ::testing::Test {
     fake_network->AddInterface(NextLocalAddress());
     fake_network->AddInterface(kPrivateLocalAddress);
 
+#if 0
     auto port_allocator = std::make_unique<cricket::BasicPortAllocator>(
         fake_network,
         std::make_unique<rtc::BasicPacketSocketFactory>(vss_.get()));
+#else
+    std::unique_ptr<cricket::BasicPortAllocator> port_allocator;
+#endif
     RTCConfiguration config;
     config.sdp_semantics = SdpSemantics::kUnifiedPlan;
     return CreatePeerConnection(config,
@@ -309,9 +317,13 @@ class PeerConnectionUsageHistogramTest : public ::testing::Test {
     fake_network->AddInterface(NextLocalAddress());
     fake_network->AddInterface(kPrivateIpv6LocalAddress);
 
+#if 0
     auto port_allocator = std::make_unique<cricket::BasicPortAllocator>(
         fake_network,
         std::make_unique<rtc::BasicPacketSocketFactory>(vss_.get()));
+#else
+    std::unique_ptr<cricket::BasicPortAllocator> port_allocator;
+#endif
 
     RTCConfiguration config;
     config.sdp_semantics = SdpSemantics::kUnifiedPlan;
@@ -343,9 +355,11 @@ class PeerConnectionUsageHistogramTest : public ::testing::Test {
     if (!deps.allocator) {
       auto fake_network = NewFakeNetwork();
       fake_network->AddInterface(NextLocalAddress());
+#if 0
       deps.allocator = std::make_unique<cricket::BasicPortAllocator>(
           fake_network,
           std::make_unique<rtc::BasicPacketSocketFactory>(vss_.get()));
+#endif
     }
 
     auto observer = std::make_unique<ObserverForUsageHistogramTest>();

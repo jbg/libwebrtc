@@ -41,10 +41,13 @@ class RTC_EXPORT BasicPortAllocator : public PortAllocator {
                      webrtc::TurnCustomizer* customizer = nullptr,
                      RelayPortFactoryInterface* relay_port_factory = nullptr,
                      const webrtc::FieldTrialsView* field_trials = nullptr);
+  // Test only?
+#if 0
   BasicPortAllocator(
       rtc::NetworkManager* network_manager,
       std::unique_ptr<rtc::PacketSocketFactory> owned_socket_factory,
       const webrtc::FieldTrialsView* field_trials = nullptr);
+#endif
   BasicPortAllocator(
       rtc::NetworkManager* network_manager,
       std::unique_ptr<rtc::PacketSocketFactory> owned_socket_factory,

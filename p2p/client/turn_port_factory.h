@@ -27,9 +27,12 @@ class TurnPortFactory : public RelayPortFactoryInterface {
   std::unique_ptr<Port> Create(const CreateRelayPortArgs& args,
                                rtc::AsyncPacketSocket* udp_socket) override;
 
+  // For tests only?
+#if 1
   std::unique_ptr<Port> Create(const CreateRelayPortArgs& args,
                                int min_port,
                                int max_port) override;
+#endif
 };
 
 }  // namespace cricket
