@@ -88,6 +88,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96a01c3b_244641ad",
+        "filename": "audio/channel_send_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-08-29T10:03:01Z",
+      "side": 1,
+      "message": "Changed to an optional, per chat.",
+      "parentUuid": "d34661dd_62c604a2",
+      "revId": "32453083475cbde792c47f837f7c52166377fbd3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "076379ef_5c47e0de",
@@ -119,6 +137,24 @@
       "side": 1,
       "message": "This is waiting for up to a second for the frame_processed_event to be set, which happens at the end of the mock_frame_transformer Transform handler. Should usually be quick.\n\nNot sure how it compares to ASSERT_TRUE_WAIT tbh - I\u0027d guess the event is better, as we don\u0027t need to loop checking the condition so much? Probs not much difference in the end.\n\nAdded another event to wait for the packet to actually be sent though, in case SendRtp() doesn\u0027t get called synchronously in future.",
       "parentUuid": "076379ef_5c47e0de",
+      "revId": "32453083475cbde792c47f837f7c52166377fbd3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60d845cb_6ca5d887",
+        "filename": "audio/channel_send_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-08-29T10:03:01Z",
+      "side": 1,
+      "message": "Switched to ASSERT_TRUE_WAIT for readability, per chat.",
+      "parentUuid": "8441aebd_4f9f4e0d",
       "revId": "32453083475cbde792c47f837f7c52166377fbd3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
