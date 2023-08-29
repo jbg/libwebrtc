@@ -1,0 +1,242 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa2fbb38_cd66203d",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-08-29T06:03:04Z",
+      "side": 1,
+      "message": "Why explicitly place the packet layout for FU here?",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "302def06_56e7235e",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-08-29T06:03:04Z",
+      "side": 1,
+      "message": "constexpr, same for below.",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8606ee12_52135d89",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-08-29T06:03:04Z",
+      "side": 1,
+      "message": "This is not accurate. Fu is constructed of 2-byte payload hdr, 1 byte FU header and then payload.",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c3ab68a_83d266b6",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-08-29T06:03:04Z",
+      "side": 1,
+      "message": "HevcFuBitMasks",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faebc356_90ae9578",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-08-29T06:03:04Z",
+      "side": 1,
+      "message": "why don\u0027t your simply clear it?",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bab3ef25_c35ca730",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-08-29T06:03:04Z",
+      "side": 1,
+      "message": "\u003d default",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1e2dab9_dc4e0bb6",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-08-29T06:03:04Z",
+      "side": 1,
+      "message": "If I understand RFC correctly, I don\u0027t think FU payload includes the NALU header part. Rather, information included in NALU header needs to be calculated from FU header and NAL unit header of fragmented packets. As a result, you should not include kHevcNalHeaderSize here.",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97e154bf_e879cebb",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-08-29T06:03:04Z",
+      "side": 1,
+      "message": "how this would ever happen to be empty?",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5dbf4e3_8c759725",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-08-29T06:03:04Z",
+      "side": 1,
+      "message": "Please add a comment for AP and FU packetization, referencing the RFC section.",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e6b4195_35f78b64",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-08-29T06:03:04Z",
+      "side": 1,
+      "message": "Similarly, I don\u0027t think it is correct to copy starting from NAL header. But Safari is already doing so, and H.264 is also doing the same?",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01effc32_c8178b76",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-08-29T06:03:04Z",
+      "side": 1,
+      "message": "The two are exactly the same, why branching them?",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41487a0e_d541f916",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-08-29T06:03:04Z",
+      "side": 1,
+      "message": "clean up",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dd8d51c_cf11a9c9",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-08-29T06:03:04Z",
+      "side": 1,
+      "message": "The API document is incorrect. Your API only accepts one param |rtp_packet|",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af394744_36c12bf0",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-08-29T06:03:04Z",
+      "side": 1,
+      "message": "Please explain on why you don\u0027t reuse Packet struct of H.264",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
