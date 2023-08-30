@@ -87,6 +87,8 @@ class TurnPort : public Port {
                      args.config->tls_cert_verifier, args.field_trials));
   }
 
+// Testing only?
+#if 1
   // Create a TURN port that will use a new socket, bound to `network` and
   // using a port in the range between `min_port` and `max_port`.
   static std::unique_ptr<TurnPort> Create(const CreateRelayPortArgs& args,
@@ -104,6 +106,7 @@ class TurnPort : public Port {
                      args.config->tls_elliptic_curves, args.turn_customizer,
                      args.config->tls_cert_verifier, args.field_trials));
   }
+#endif
 
   ~TurnPort() override;
 

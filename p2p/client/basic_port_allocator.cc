@@ -170,6 +170,7 @@ BasicPortAllocator::BasicPortAllocator(
     : field_trials_(field_trials),
       network_manager_(network_manager),
       socket_factory_(socket_factory) {
+  RTC_DCHECK(relay_port_factory);
   Init(relay_port_factory);
   RTC_DCHECK(relay_port_factory_ != nullptr);
   RTC_DCHECK(network_manager_ != nullptr);
@@ -178,6 +179,8 @@ BasicPortAllocator::BasicPortAllocator(
                    webrtc::NO_PRUNE, customizer);
 }
 
+// Test only?
+#if 0
 BasicPortAllocator::BasicPortAllocator(
     rtc::NetworkManager* network_manager,
     std::unique_ptr<rtc::PacketSocketFactory> owned_socket_factory,
@@ -190,7 +193,10 @@ BasicPortAllocator::BasicPortAllocator(
   RTC_DCHECK(network_manager_ != nullptr);
   RTC_CHECK(socket_factory_ != nullptr);
 }
+#endif
 
+// Test only?
+#if 0
 BasicPortAllocator::BasicPortAllocator(
     rtc::NetworkManager* network_manager,
     std::unique_ptr<rtc::PacketSocketFactory> owned_socket_factory,
@@ -206,6 +212,7 @@ BasicPortAllocator::BasicPortAllocator(
   SetConfiguration(stun_servers, std::vector<RelayServerConfig>(), 0,
                    webrtc::NO_PRUNE, nullptr);
 }
+#endif
 
 BasicPortAllocator::BasicPortAllocator(
     rtc::NetworkManager* network_manager,

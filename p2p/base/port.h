@@ -191,6 +191,9 @@ class RTC_EXPORT Port : public PortInterface, public sigslot::has_slots<> {
        absl::string_view username_fragment,
        absl::string_view password,
        const webrtc::FieldTrialsView* field_trials = nullptr);
+
+  // Constructor for testing only?
+#if 1
   Port(webrtc::TaskQueueBase* thread,
        absl::string_view type,
        rtc::PacketSocketFactory* factory,
@@ -200,6 +203,8 @@ class RTC_EXPORT Port : public PortInterface, public sigslot::has_slots<> {
        absl::string_view username_fragment,
        absl::string_view password,
        const webrtc::FieldTrialsView* field_trials = nullptr);
+#endif
+
   ~Port() override;
 
   // Note that the port type does NOT uniquely identify different subclasses of
