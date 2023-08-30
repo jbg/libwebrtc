@@ -35,4 +35,7 @@ public interface AudioDeviceModule {
 
   /** Control muting/unmuting the microphone. */
   void setMicrophoneMute(boolean mute);
+
+  /** Enable or disable built in noise suppressor. */
+  void setNoiseSuppressorEnabled(boolean mute);
 }
