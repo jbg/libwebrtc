@@ -41,5 +41,4 @@ std::unique_ptr<Port> TurnPortFactory::Create(const CreateRelayPortArgs& args,
   port->SetTurnLoggingId(args.config->turn_logging_id);
   return std::move(port);
 }
-
 }  // namespace cricket

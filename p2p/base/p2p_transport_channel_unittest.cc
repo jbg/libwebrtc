@@ -187,10 +187,14 @@ cricket::BasicPortAllocator* CreateBasicPortAllocator(
   }
   std::vector<cricket::RelayServerConfig> turn_servers(1, turn_server);
 
+#if 0
   std::unique_ptr<cricket::BasicPortAllocator> allocator =
       std::make_unique<cricket::BasicPortAllocator>(
           network_manager,
           std::make_unique<rtc::BasicPacketSocketFactory>(socket_server));
+#else
+  std::unique_ptr<cricket::BasicPortAllocator> allocator;
+#endif
   allocator->Initialize();
   allocator->SetConfiguration(stun_servers, turn_servers, 0, webrtc::NO_PRUNE);
   return allocator.release();

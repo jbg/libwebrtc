@@ -173,9 +173,13 @@ class PeerConnectionIceBaseTest : public ::testing::Test {
 
   WrapperPtr CreatePeerConnection(const RTCConfiguration& config) {
     auto* fake_network = NewFakeNetwork();
+#if 0
     auto port_allocator = std::make_unique<cricket::BasicPortAllocator>(
         fake_network,
         std::make_unique<rtc::BasicPacketSocketFactory>(vss_.get()));
+#else
+    std::unique_ptr<cricket::BasicPortAllocator> port_allocator;
+#endif
     port_allocator->set_flags(cricket::PORTALLOCATOR_DISABLE_TCP |
                               cricket::PORTALLOCATOR_DISABLE_RELAY);
     port_allocator->set_step_delay(cricket::kMinimumStepDelay);
