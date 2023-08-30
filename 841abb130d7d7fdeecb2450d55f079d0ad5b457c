@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "371d54ec_4e98eb3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-08-30T10:36:34Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "841abb130d7d7fdeecb2450d55f079d0ad5b457c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94c26cb0_a7c97dd7",
@@ -52,6 +69,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d8e8f22_cbd10965",
+        "filename": "api/video_codecs/video_decoder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-08-30T10:36:34Z",
+      "side": 1,
+      "message": "Yep, indeed, we need to land this to add the new Decode(input_image, render_time_ms) method, then migrate Chrome, then deprecate this, then remove it.",
+      "parentUuid": "94c26cb0_a7c97dd7",
+      "revId": "841abb130d7d7fdeecb2450d55f079d0ad5b457c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e42524a_27d02457",
@@ -65,6 +100,24 @@
       "writtenOn": "2023-08-30T10:28:07Z",
       "side": 1,
       "message": "I take it lack of familiarity with the language is the reason for not doing it in this CL? Do we have someone this can be burdened on?",
+      "revId": "841abb130d7d7fdeecb2450d55f079d0ad5b457c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc618b35_98b35297",
+        "filename": "sdk/objc/api/video_codec/RTCWrappedNativeVideoDecoder.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-08-30T10:36:34Z",
+      "side": 1,
+      "message": "Right, I had tried, but some quick web searching said there\u0027s no way to supply a default implementation in an ObjectiveC protocol, (ie in sdk/objc/base/RTCVideoDecoder.h), and we have internal usages which fail to compile if we just jump straight over.\n\nSo... yeah, I couldn\u0027t work it out, so punted working on it to a smaller follow-up cl. At least we\u0027re in a better state!",
+      "parentUuid": "0e42524a_27d02457",
       "revId": "841abb130d7d7fdeecb2450d55f079d0ad5b457c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
