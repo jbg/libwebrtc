@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43c0c2e2_668f1e53",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-08-30T04:04:33Z",
+      "side": 1,
+      "message": "remove",
+      "parentUuid": "aa2fbb38_cd66203d",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "302def06_56e7235e",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-08-29T06:03:04Z",
       "side": 1,
       "message": "constexpr, same for below.",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3294952_e6f0fb78",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-08-30T04:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "302def06_56e7235e",
       "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -52,6 +88,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f1e0a51_a8208f81",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-08-30T04:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8606ee12_52135d89",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c3ab68a_83d266b6",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-08-29T06:03:04Z",
       "side": 1,
       "message": "HevcFuBitMasks",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d2fcf32_b19f316f",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-08-30T04:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c3ab68a_83d266b6",
       "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -86,6 +158,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b46e226_30e77573",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-08-30T04:04:33Z",
+      "side": 1,
+      "message": "packets_ is a queue, there is no clear function for std queue.",
+      "parentUuid": "faebc356_90ae9578",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bab3ef25_c35ca730",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-08-29T06:03:04Z",
       "side": 1,
       "message": "\u003d default",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cc6a9d2_a58f3cc5",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-08-30T04:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bab3ef25_c35ca730",
       "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -138,6 +246,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e37b17c_3c72c6ee",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-08-30T04:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c5bbb2b_4476b9b0",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97e154bf_e879cebb",
@@ -151,6 +277,24 @@
       "writtenOn": "2023-08-29T06:03:04Z",
       "side": 1,
       "message": "how this would ever happen to be empty?",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ae601be_a4b69f76",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-08-30T04:04:33Z",
+      "side": 1,
+      "message": "when capacity is not enough to put a single byte into one of the packets or first_packet_reduction + last_packet_reduction \u003e\u003d max_payload_len.",
+      "parentUuid": "97e154bf_e879cebb",
       "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -172,6 +316,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3933622_a0763fe4",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-08-30T04:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5dbf4e3_8c759725",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e6b4195_35f78b64",
@@ -185,6 +347,24 @@
       "writtenOn": "2023-08-29T06:03:04Z",
       "side": 1,
       "message": "Similarly, I don\u0027t think it is correct to copy starting from NAL header. But Safari is already doing so, and H.264 is also doing the same?",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29b94bb1_1e57002c",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-08-30T04:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e6b4195_35f78b64",
       "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -206,6 +386,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca9e2dad_ac89da34",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-08-30T04:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01effc32_c8178b76",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41487a0e_d541f916",
@@ -219,6 +417,24 @@
       "writtenOn": "2023-08-29T06:03:04Z",
       "side": 1,
       "message": "clean up",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6949a620_f0acb194",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-08-30T04:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41487a0e_d541f916",
       "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -240,6 +456,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f82653b0_2ee0b4d8",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-08-30T04:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5dd8d51c_cf11a9c9",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af394744_36c12bf0",
@@ -253,6 +487,24 @@
       "writtenOn": "2023-08-29T06:03:04Z",
       "side": 1,
       "message": "Please explain on why you don\u0027t reuse Packet struct of H.264",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "631ffbd1_42de9e3a",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-08-30T04:04:33Z",
+      "side": 1,
+      "message": "H.264 header length is 8 bits while H.265 header length is 16 bits",
+      "parentUuid": "af394744_36c12bf0",
       "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
