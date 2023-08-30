@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98ba42c7_747aac7b",
+        "filename": "video/config/simulcast.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-08-30T08:59:58Z",
+      "side": 1,
+      "message": "Should not AV1 bitrate limits come from https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/video_coding/codecs/av1/av1_svc_config.cc;l\u003d56 ?",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 44
+      },
+      "revId": "ac555cf12022be80b8432b598e39868672d4cbc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
