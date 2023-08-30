@@ -16,6 +16,57 @@
       "message": "PTAL Philip, took some work \u0026 extra changes to get the internal compile working\n\n+Harald for owners of all the small things (api/test, media/engine/fake*, rtc_tools/, sdk/, test/)\n\nThanks",
       "revId": "841abb130d7d7fdeecb2450d55f079d0ad5b457c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aeb9e8e2_10aad463",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-30T10:28:07Z",
+      "side": 1,
+      "message": "Phew, that was a lot of nitty-gritty changes! Great to get it done!",
+      "revId": "841abb130d7d7fdeecb2450d55f079d0ad5b457c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94c26cb0_a7c97dd7",
+        "filename": "api/video_codecs/video_decoder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-30T10:28:07Z",
+      "side": 1,
+      "message": "Does it work to add [[deprecated]] here?\n\nWill probably require some #pragma magic around the stuff you need for backwards compatiblity, and requires Chrome to update first, if needed (it doesn\u0027t tolerate deprecated WebRTC stuff).",
+      "revId": "841abb130d7d7fdeecb2450d55f079d0ad5b457c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e42524a_27d02457",
+        "filename": "sdk/objc/api/video_codec/RTCWrappedNativeVideoDecoder.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-08-30T10:28:07Z",
+      "side": 1,
+      "message": "I take it lack of familiarity with the language is the reason for not doing it in this CL? Do we have someone this can be burdened on?",
+      "revId": "841abb130d7d7fdeecb2450d55f079d0ad5b457c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
