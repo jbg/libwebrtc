@@ -33,6 +33,23 @@
       "message": "rslgtm",
       "revId": "555fb3096010662f849478d1c52d3319c1d0d93b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b060a459_c17474e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-08-30T08:47:47Z",
+      "side": 1,
+      "message": "Thanks for review. Let\u0027s submit it!",
+      "revId": "555fb3096010662f849478d1c52d3319c1d0d93b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
