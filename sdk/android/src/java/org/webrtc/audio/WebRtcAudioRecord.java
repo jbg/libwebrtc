@@ -511,6 +511,15 @@ class WebRtcAudioRecord {
     microphoneMute = mute;
   }
 
+  public void setNoiseSuppressorEnabled(boolean enabled) {
+    if (!WebRtcAudioEffects.isNoiseSuppressorSupported()) {
+      Logging.e(TAG, "Noise suppressor is not supported.");
+      return;
+    }
+    Logging.w(TAG, "SetNoiseSuppressorEnabled(" + enabled + ")");
+    effects.setNSImmediate(enabled);
+  }
+
   // Releases the native AudioRecord resources.
   private void releaseAudioResources() {
     Logging.d(TAG, "releaseAudioResources");
