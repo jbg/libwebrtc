@@ -507,6 +507,24 @@
       "parentUuid": "af394744_36c12bf0",
       "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12b84124_bf52271b",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-08-31T04:16:24Z",
+      "side": 1,
+      "message": "Please move this to the source code itself instead of placing a single line document \"Different from H.264\".",
+      "parentUuid": "631ffbd1_42de9e3a",
+      "revId": "cbdeffe830347c2ab7943b5113f42cbad5295c07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
