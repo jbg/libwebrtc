@@ -338,6 +338,22 @@ static bool ValidateStreamParams(const StreamParams& sp) {
       return false;
     }
   }
+  if (sp.has_ssrc_group(kSimSsrcGroupSemantics)) {
+    std::vector<uint32_t> secondary_ssrcs;
+    sp.GetSecondarySsrcs(kSimSsrcGroupSemantics, primary_ssrcs,
+                         &secondary_ssrcs);
+    for (uint32_t secondary_ssrc : secondary_ssrcs) {
+      auto it = absl::c_find_if(sp.ssrcs, [&secondary_ssrc](uint32_t ssrc) {
+        return ssrc == secondary_ssrc;
+      });
+      if (it == sp.ssrcs.end()) {
+        RTC_LOG(LS_ERROR) << "SSRC '" << secondary_ssrc
+                          << "' missing from StreamParams ssrcs with semantics "
+                          << kSimSsrcGroupSemantics << ": " << sp.ToString();
+        return false;
+      }
+    }
+  }
   return true;
 }
 
