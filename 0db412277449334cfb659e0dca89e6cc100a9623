@@ -16,6 +16,40 @@
       "message": "Took some fiddling, but no changes to the callers needed.",
       "revId": "0db412277449334cfb659e0dca89e6cc100a9623",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e9ffee6_041dd197",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-08-31T08:43:50Z",
+      "side": 1,
+      "message": "lgtm - looks like it\u0027s a couple of bytes smaller too 😊 - unless it\u0027s the callback_ member variable (and not additional args to the lambda) that makes the difference?",
+      "revId": "0db412277449334cfb659e0dca89e6cc100a9623",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69f6496a_d773aa50",
+        "filename": "rtc_base/async_dns_resolver.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-08-31T08:43:50Z",
+      "side": 1,
+      "message": "curious - why is this needed now?",
+      "revId": "0db412277449334cfb659e0dca89e6cc100a9623",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
