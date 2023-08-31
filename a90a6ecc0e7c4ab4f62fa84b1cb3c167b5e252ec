@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e16a3f40_f476632b",
+        "filename": "sdk/android/api/org/webrtc/audio/AudioDeviceModule.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2023-08-31T11:32:58Z",
+      "side": 1,
+      "message": "Should that be a goal, to remove the default implementation? Isn’t that reasonable to have implementations of this interface not supporting noise suppression?",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 58
+      },
+      "revId": "a90a6ecc0e7c4ab4f62fa84b1cb3c167b5e252ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a046214d_77b52ed5",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioEffects.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2023-08-31T11:32:58Z",
+      "side": 1,
+      "message": "This is a bit confusing to have this method alongside setNS. Could you add documentation to this method to explain the difference?\n\nAlso, could this return a boolean denoting success? Like returning false if `ns \u003d\u003d null`, and otherwise returning `ns.setEnabled(enable) \u003d\u003d AudioEffect.SUCCESS`? And this value could be propagated throughout the call stack.",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 40
+      },
+      "revId": "a90a6ecc0e7c4ab4f62fa84b1cb3c167b5e252ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
