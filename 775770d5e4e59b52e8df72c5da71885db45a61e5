@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "733d5f08_9172f553",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-09-01T09:40:38Z",
+      "side": 1,
+      "message": "can\u0027t resist to note: If we had copy-pasted H265 parser from chromium, as I suggested in https://webrtc-review.googlesource.com/c/src/+/298421/comments/7ce73c09_79411719, we would have avoided ~all these fuzzer issues.",
+      "revId": "775770d5e4e59b52e8df72c5da71885db45a61e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73a302f6_080ee01f",
