@@ -172,7 +172,7 @@ struct StreamParams {
   // secondary SSRCS will be smaller than the list of primary SSRCs.
   void GetSecondarySsrcs(const std::string& semantic,
                          const std::vector<uint32_t>& primary_ssrcs,
-                         std::vector<uint32_t>* fid_ssrcs) const;
+                         std::vector<uint32_t>* secondary_ssrcs) const;
 
   // Convenience to get all the FID SSRCs for the given primary ssrcs.
   // If a given primary SSRC does not have a FID SSRC, the list of FID
