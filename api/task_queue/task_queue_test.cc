@@ -16,8 +16,11 @@
 #include "api/task_queue/task_queue_base.h"
 #include "api/units/time_delta.h"
 #include "rtc_base/event.h"
+#include "rtc_base/logging.h"
 #include "rtc_base/ref_counter.h"
+#include "rtc_base/thread.h"
 #include "rtc_base/time_utils.h"
+#include "system_wrappers/include/clock.h"
 
 namespace webrtc {
 namespace {
@@ -118,6 +121,28 @@ TEST_P(TaskQueueTest, PostDelayed) {
   // which is why we have a little bit of leeway backwards as well.
   EXPECT_GE(end - start, 90u);
   EXPECT_NEAR(end - start, 190u, 100u);  // Accept 90-290.
+}
+
+TEST_P(TaskQueueTest, PostDelayedFromQueue) {
+  std::unique_ptr<webrtc::TaskQueueFactory> factory = GetParam()(nullptr);
+  auto queue =
+      CreateTaskQueue(factory, "PostDelayed", TaskQueueFactory::Priority::HIGH);
+  Clock* clock = Clock::GetRealTimeClock();
+  Timestamp begin = clock->CurrentTime();
+  rtc::Event finalized;
+  queue->PostTask([&] {
+    queue->PostDelayedHighPrecisionTask(
+        [&] {
+          auto diff = clock->CurrentTime() - begin - TimeDelta::Millis(1000);
+          RTC_LOG(LS_ERROR) << "diff " << diff;
+          // macOS seems to add ~10% leeway unless special QoS given.
+          EXPECT_LE(diff.Abs(), TimeDelta::Millis(150));
+          finalized.Set();
+        },
+        TimeDelta::Millis(1000));
+    rtc::Thread::SleepMs(900);
+  });
+  finalized.Wait(rtc::Event::kForever);
 }
 
 TEST_P(TaskQueueTest, PostMultipleDelayed) {
