@@ -114,14 +114,18 @@ void AsyncDnsResolver::Start(const rtc::SocketAddress& addr,
                           callback = std::move(callback)] {
     std::vector<rtc::IPAddress> addresses;
     int error = ResolveHostname(addr.hostname(), family, addresses);
-    caller_task_queue->PostTask(
-        SafeTask(flag, [this, error, addresses = std::move(addresses),
-                        callback = std::move(callback)] {
-          RTC_DCHECK_RUN_ON(&result_.sequence_checker_);
-          result_.addresses_ = addresses;
-          result_.error_ = error;
-          callback();
-        }));
+    // We assume that the caller task queue is still around if the
+    // caller object is still around.
+    if (flag->alive()) {
+      caller_task_queue->PostTask(
+          SafeTask(flag, [this, error, addresses = std::move(addresses),
+                          callback = std::move(callback)] {
+            RTC_DCHECK_RUN_ON(&result_.sequence_checker_);
+            result_.addresses_ = addresses;
+            result_.error_ = error;
+            callback();
+          }));
+    }
   };
 #if defined(WEBRTC_MAC) || defined(WEBRTC_IOS)
   PostTaskToGlobalQueue(
