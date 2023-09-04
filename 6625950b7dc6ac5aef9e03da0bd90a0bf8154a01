@@ -37,6 +37,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8384a51d_61828906",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-04T07:03:45Z",
+      "side": 1,
+      "message": "No, since ResolveHostname is calling the OS and waiting there, Flush() will not work. Thanks for the review!",
+      "revId": "6625950b7dc6ac5aef9e03da0bd90a0bf8154a01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f122999c_da7665c3",
         "filename": "rtc_base/async_dns_resolver.cc",
         "patchSetId": 3
@@ -48,6 +65,24 @@
       "writtenOn": "2023-09-04T06:55:26Z",
       "side": 1,
       "message": "Many (even all by now?) platforms support asynchronous, cancelable alternatives to getaddrinfo() (e.g. getaddrinfo_a). Perhaps we should move over to those at some point.",
+      "revId": "6625950b7dc6ac5aef9e03da0bd90a0bf8154a01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5d9c69d_bd0571ba",
+        "filename": "rtc_base/async_dns_resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-04T07:03:45Z",
+      "side": 1,
+      "message": "Would be good to do so and avoid the extra thread. But a later project...",
+      "parentUuid": "f122999c_da7665c3",
       "revId": "6625950b7dc6ac5aef9e03da0bd90a0bf8154a01",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -65,6 +100,30 @@
       "writtenOn": "2023-09-04T06:55:26Z",
       "side": 1,
       "message": "Use `loop.Flush()` instead",
+      "range": {
+        "startLine": 53,
+        "startChar": 33,
+        "endLine": 53,
+        "endChar": 34
+      },
+      "revId": "6625950b7dc6ac5aef9e03da0bd90a0bf8154a01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a84297c7_713ff9d7",
+        "filename": "rtc_base/async_dns_resolver_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-04T07:03:45Z",
+      "side": 1,
+      "message": "I tried that. Unfortunately it causes the callback to call back after the test finishes - which would cause the test to not detect that the callback was in fact called if there was a bug there.\n\nThis method of resolving spins up a new thread, runs ResolveHostname on that thread, ResolveHostname causes a jump to the kernel and wait for the result - at which time the main thread will be allowed to execute.\n\nThis causes the test to succeed (having observed that \"done\" is still false) and therefore is useless in actually testing the behavior.\n\nVerified by putting RTC_LOG statements in the callback.",
+      "parentUuid": "06f407fa_bd4f7d52",
       "range": {
         "startLine": 53,
         "startChar": 33,
