@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e75c58ea_2543950f",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-09-04T14:47:07Z",
+      "side": 1,
+      "message": "Assuming that:\n* SSRC is acronym\n* \"ssrc-group\" is name of an SDP attribute\n\n```suggestion\n  // Validate that a primary SSRC can only have one ssrc-group per semantics.\n```",
+      "range": {
+        "startLine": 308,
+        "startChar": 29,
+        "endLine": 308,
+        "endChar": 33
+      },
+      "revId": "98337335d4caf7372064cafee205fd407f719d65",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4795c64b_5c9c0159",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-09-04T14:47:07Z",
+      "side": 1,
+      "message": "```suggestion\n      // A duplicate SSRC was found, check for duplicate semantics.\n```",
+      "range": {
+        "startLine": 314,
+        "startChar": 21,
+        "endLine": 314,
+        "endChar": 25
+      },
+      "revId": "98337335d4caf7372064cafee205fd407f719d65",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4473c3d6_d983e1df",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-09-04T14:47:07Z",
+      "side": 1,
+      "message": "```suggestion\n                          \u003c\u003c \" for primary SSRC \" \u003c\u003c group.ssrcs[0] \u003c\u003c \" \"\n```",
+      "range": {
+        "startLine": 318,
+        "startChar": 43,
+        "endLine": 318,
+        "endChar": 47
+      },
+      "revId": "98337335d4caf7372064cafee205fd407f719d65",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
