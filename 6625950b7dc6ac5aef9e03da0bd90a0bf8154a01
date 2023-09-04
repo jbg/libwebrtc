@@ -16,6 +16,63 @@
       "message": "Couldn\u0027t wait until Monday with this buzzing around.",
       "revId": "6625950b7dc6ac5aef9e03da0bd90a0bf8154a01",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90d9deae_894ade69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-09-04T06:55:26Z",
+      "side": 1,
+      "message": "lgtm % using Flush() instead of Sleep()",
+      "revId": "6625950b7dc6ac5aef9e03da0bd90a0bf8154a01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f122999c_da7665c3",
+        "filename": "rtc_base/async_dns_resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-09-04T06:55:26Z",
+      "side": 1,
+      "message": "Many (even all by now?) platforms support asynchronous, cancelable alternatives to getaddrinfo() (e.g. getaddrinfo_a). Perhaps we should move over to those at some point.",
+      "revId": "6625950b7dc6ac5aef9e03da0bd90a0bf8154a01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06f407fa_bd4f7d52",
+        "filename": "rtc_base/async_dns_resolver_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-09-04T06:55:26Z",
+      "side": 1,
+      "message": "Use `loop.Flush()` instead",
+      "range": {
+        "startLine": 53,
+        "startChar": 33,
+        "endLine": 53,
+        "endChar": 34
+      },
+      "revId": "6625950b7dc6ac5aef9e03da0bd90a0bf8154a01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
