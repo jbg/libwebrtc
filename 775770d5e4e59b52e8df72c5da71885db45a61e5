@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c6900e2_a22fd889",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-09-04T02:47:28Z",
+      "side": 1,
+      "message": "Acked. In fact,issue reported by [1]  should also exist in Chromium h265 parser, but I am not sure why fuzzer test did not report issue on it. \nWe will create cl to fix Chromium parser as well.\n\n[1]https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1475195",
+      "parentUuid": "733d5f08_9172f553",
+      "revId": "775770d5e4e59b52e8df72c5da71885db45a61e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73a302f6_080ee01f",
@@ -113,6 +131,30 @@
       "side": 1,
       "message": "Then I suggest the examples you mentioned to should be updated too. Having too many members doesn\u0027t sound like a good excuse.\n\nIn this particular class, I believe the code is not correct or at least not portable as stl afaik makes no guarantee that zeroing the memory of an std::vector instance will leave it in a correct state.",
       "parentUuid": "70cb973a_28cd6eea",
+      "range": {
+        "startLine": 67,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 58
+      },
+      "revId": "775770d5e4e59b52e8df72c5da71885db45a61e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3a1a8ee_c19bff3d",
+        "filename": "common_video/h265/h265_sps_parser.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-09-04T02:47:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b06feb79_557b1e32",
       "range": {
         "startLine": 67,
         "startChar": 2,
