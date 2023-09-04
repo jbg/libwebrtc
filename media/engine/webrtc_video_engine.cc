@@ -305,6 +305,23 @@ static bool ValidateStreamParams(const StreamParams& sp) {
     return false;
   }
 
+  // Validate that a primary ssrc can only have one ssrc-group per semantics.
+  std::map<uint32_t, std::set<std::string>> primary_ssrc_to_semantics;
+  for (const auto& group : sp.ssrc_groups) {
+    auto result = primary_ssrc_to_semantics.try_emplace(
+        group.ssrcs[0], std::set<std::string>({group.semantics}));
+    if (!result.second) {
+      // A duplicate ssrc was found, check for duplicate semantics.
+      auto semantics_it = result.first->second.insert(group.semantics);
+      if (!semantics_it.second) {
+        RTC_LOG(LS_ERROR) << "Duplicate ssrc-group '" << group.semantics
+                          << " for primary ssrc " << group.ssrcs[0] << " "
+                          << sp.ToString();
+        return false;
+      }
+    }
+  }
+
   std::vector<uint32_t> primary_ssrcs;
   sp.GetPrimarySsrcs(&primary_ssrcs);
   for (const auto& semantic :
