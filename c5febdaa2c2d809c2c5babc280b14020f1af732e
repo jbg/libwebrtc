@@ -16,6 +16,57 @@
       "message": "while I was writing similar tests...",
       "revId": "c5febdaa2c2d809c2c5babc280b14020f1af732e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5127f7c_99d8da11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-05T19:58:31Z",
+      "side": 1,
+      "message": "I think this can be done more simply....",
+      "revId": "c5febdaa2c2d809c2c5babc280b14020f1af732e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f41b81c7_15015179",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-05T19:58:31Z",
+      "side": 1,
+      "message": "do you have to go to as_audio() to get codecs() now that Florent has merged the AudioCodec and VideoCodec classes?\n\nIf not - perhaps you can merge the two branches here?",
+      "revId": "c5febdaa2c2d809c2c5babc280b14020f1af732e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a854e655_4718e36f",
+        "filename": "pc/sdp_offer_answer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 976,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-05T19:58:31Z",
+      "side": 1,
+      "message": "If I were really feeling ornery, I\u0027d have you loop over (-1, LowerRange+1, UpperRange-1, 256) in this test.\n\nBut do that if you feel like it :-)",
+      "revId": "c5febdaa2c2d809c2c5babc280b14020f1af732e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
