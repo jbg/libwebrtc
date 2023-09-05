@@ -3494,6 +3494,8 @@ bool ParseSsrcAttribute(absl::string_view line,
         return ssrc_info.ssrc_id == ssrc_id;
       });
   if (ssrc_info_it == ssrc_infos->end()) {
+    RTC_LOG(LS_ERROR) << "creating new ssrc info " << ssrc_id << " "
+                      << attribute;
     SsrcInfo info;
     info.ssrc_id = ssrc_id;
     ssrc_infos->push_back(info);
