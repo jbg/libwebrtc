@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd170984_19c27d81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-09-05T07:27:59Z",
+      "side": 1,
+      "message": "sprang@, please help add CQ+2 for this CL, i don\u0027t have permission to do that currently. Thanks.",
+      "revId": "d990e5d363bca5ab5f7cc24fa5fc21aa9aa2fff4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
