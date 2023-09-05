@@ -16,6 +16,23 @@
       "message": "Thanks!",
       "revId": "19faefbdad7b9ade545e0825a5b1942de1c6df0e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a34ba9c3_1f5246b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-05T11:04:31Z",
+      "side": 1,
+      "message": "I wonder if this was causing some plan-b misattribution in the past. But then why would anyone do video-rtx but not add msid lines...",
+      "revId": "19faefbdad7b9ade545e0825a5b1942de1c6df0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
