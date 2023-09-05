@@ -3641,6 +3641,9 @@ RTCError SdpOfferAnswerHandler::ValidateSessionDescription(
       if ((desc.type() == cricket::MEDIA_TYPE_AUDIO ||
            desc.type() == cricket::MEDIA_TYPE_VIDEO) &&
           desc.streams().size() > 1u) {
+        for (const auto& stream : desc.streams()) {
+          RTC_LOG(LS_ERROR) << "STREAM: " << stream.ToString();
+        }
         LOG_AND_RETURN_ERROR(
             RTCErrorType::INVALID_PARAMETER,
             "Media section has more than one track specified with a=ssrc lines "
