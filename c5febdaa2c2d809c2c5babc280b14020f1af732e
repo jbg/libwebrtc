@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb2b61de_e2932863",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-06T06:15:52Z",
+      "side": 1,
+      "message": "We are not there yet but I think we can move codecs() and codecs_ to MediaContentDescription very soon. Until then we have this antipattern spread quite a bit.",
+      "parentUuid": "f41b81c7_15015179",
+      "revId": "c5febdaa2c2d809c2c5babc280b14020f1af732e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a854e655_4718e36f",
         "filename": "pc/sdp_offer_answer_unittest.cc",
         "patchSetId": 1
@@ -65,6 +83,24 @@
       "writtenOn": "2023-09-05T19:58:31Z",
       "side": 1,
       "message": "If I were really feeling ornery, I\u0027d have you loop over (-1, LowerRange+1, UpperRange-1, 256) in this test.\n\nBut do that if you feel like it :-)",
+      "revId": "c5febdaa2c2d809c2c5babc280b14020f1af732e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1abfbd70_4b335428",
+        "filename": "pc/sdp_offer_answer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 976,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-06T06:15:52Z",
+      "side": 1,
+      "message": "This would generate quite some logspam. Think of the bots ;-)",
+      "parentUuid": "a854e655_4718e36f",
       "revId": "c5febdaa2c2d809c2c5babc280b14020f1af732e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
