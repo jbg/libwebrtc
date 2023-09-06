@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83628d31_88c566b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-09-06T11:24:11Z",
+      "side": 1,
+      "message": "+sprang for DEPS change",
+      "revId": "e86be6b58924a7e9e33ab9831fe8ed2fdb2d5991",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
