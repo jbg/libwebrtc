@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0ac4780_8da139b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-09-06T15:07:49Z",
+      "side": 1,
+      "message": "I\u0027ve also updated google style guide by adding this kind of reason to prefer class over struct, so this rule won\u0027t contradict style guide.\n\nHowever that change is not public yet.\n\nCurrently style guide mentions just invariants and extra functions as a reason to prefer class over struct. (I suspect lot\u0027s of our api structs de-facto have invariants, but are still implemented as structs)",
+      "revId": "12aeeaaa787cd91a0f0a4e796eb31d896786db0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
