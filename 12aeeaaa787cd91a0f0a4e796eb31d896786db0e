@@ -16,6 +16,40 @@
       "message": "I\u0027ve also updated google style guide by adding this kind of reason to prefer class over struct, so this rule won\u0027t contradict style guide.\n\nHowever that change is not public yet.\n\nCurrently style guide mentions just invariants and extra functions as a reason to prefer class over struct. (I suspect lot\u0027s of our api structs de-facto have invariants, but are still implemented as structs)",
       "revId": "12aeeaaa787cd91a0f0a4e796eb31d896786db0e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44362e45_a6902837",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-06T18:17:30Z",
+      "side": 1,
+      "message": "Approved with language nit.",
+      "revId": "12aeeaaa787cd91a0f0a4e796eb31d896786db0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3e1e38d_4254f4aa",
+        "filename": "api/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-06T18:17:30Z",
+      "side": 1,
+      "message": "can you delete \"that is\"? It made sense when \"cc files are free to #include\", but now that there\u0027s a new bullet after that, it doesn\u0027t make sense any more. Removing \"that is\" makes the paragraph work standalone.",
+      "revId": "12aeeaaa787cd91a0f0a4e796eb31d896786db0e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
