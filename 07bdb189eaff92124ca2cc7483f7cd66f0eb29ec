@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96c1039e_c1fbdbc1",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-09-06T07:45:11Z",
+      "side": 1,
+      "message": "Use {} even for single line statements. Here and in other places.\n\nhttps://google.github.io/styleguide/cppguide.html#Formatting_Looping_Branching allows omitting parenthesis for single line statements. But, that is an exception, not a rule.",
+      "range": {
+        "startLine": 131,
+        "startChar": 4,
+        "endLine": 131,
+        "endChar": 42
+      },
+      "revId": "07bdb189eaff92124ca2cc7483f7cd66f0eb29ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b448d224_0058e121",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-09-06T07:45:11Z",
+      "side": 1,
+      "message": "This comment doesn\u0027t seem to bring any value. Remove?",
+      "range": {
+        "startLine": 65,
+        "startChar": 20,
+        "endLine": 65,
+        "endChar": 44
+      },
+      "revId": "07bdb189eaff92124ca2cc7483f7cd66f0eb29ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
