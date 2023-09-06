@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67d3dc6c_8deab7fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-06T18:40:38Z",
+      "side": 1,
+      "message": "The release manager is still contemplating this patch, but given that there was a bit of a rush with getting the M117 merge done, I\u0027m making the CL ready.\nWon\u0027t submit unless I get merge-approved-116 on the bug.",
+      "revId": "48e99fee995d7cf83039872b43da7def6bc313f7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
