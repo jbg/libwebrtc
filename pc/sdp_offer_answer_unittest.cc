@@ -959,4 +959,21 @@ TEST_F(SdpOfferAnswerTest, OfferWithRtxAndNoMsidIsNotRejected) {
   EXPECT_TRUE(pc->SetRemoteDescription(std::move(offer)));
 }
 
+TEST_F(SdpOfferAnswerTest, SdpMungingWithInvalidPayloadTypeIsRejected) {
+  auto pc = CreatePeerConnection();
+  pc->AddAudioTrack("audio_track", {});
+
+  auto offer = pc->CreateOffer();
+  ASSERT_EQ(offer->description()->contents().size(), 1u);
+  auto* audio =
+      offer->description()->contents()[0].media_description()->as_audio();
+  ASSERT_GT(audio->codecs().size(), 0u);
+  EXPECT_TRUE(audio->rtcp_mux());
+  auto codecs = audio->codecs();
+  codecs[0].id = 66;
+  audio->set_codecs(codecs);
+  EXPECT_FALSE(pc->SetLocalDescription(offer->Clone()));
+  EXPECT_FALSE(pc->SetRemoteDescription(std::move(offer)));
+}
+
 }  // namespace webrtc
