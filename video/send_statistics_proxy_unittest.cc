@@ -69,7 +69,7 @@ class SendStatisticsProxyTest : public ::testing::Test {
   SendStatisticsProxyTest() : SendStatisticsProxyTest("") {}
   explicit SendStatisticsProxyTest(const std::string& field_trials)
       : override_field_trials_(field_trials),
-        fake_clock_(1234),
+        fake_clock_(Timestamp::Seconds(1234)),
         config_(GetTestConfig()) {}
   virtual ~SendStatisticsProxyTest() {}
 
@@ -320,24 +320,29 @@ TEST_F(SendStatisticsProxyTest, Bitrate) {
 }
 
 TEST_F(SendStatisticsProxyTest, SendSideDelay) {
-  SendSideDelayObserver* observer = statistics_proxy_.get();
   for (const auto& ssrc : config_.rtp.ssrcs) {
     // Use ssrc as avg_delay_ms and max_delay_ms to get a unique value for each
     // stream.
-    int avg_delay_ms = ssrc;
-    int max_delay_ms = ssrc + 1;
-    observer->SendSideDelayUpdated(avg_delay_ms, max_delay_ms, ssrc);
-    expected_.substreams[ssrc].avg_delay_ms = avg_delay_ms;
-    expected_.substreams[ssrc].max_delay_ms = max_delay_ms;
+    expected_.substreams[ssrc].avg_delay_ms = ssrc;
+    expected_.substreams[ssrc].max_delay_ms = ssrc + 1;
+    statistics_proxy_->OnSendPacket(ssrc,
+                                    /*capture_time=*/fake_clock_.CurrentTime() -
+                                        TimeDelta::Millis(ssrc + 1));
+    statistics_proxy_->OnSendPacket(ssrc,
+                                    /*capture_time=*/fake_clock_.CurrentTime() -
+                                        TimeDelta::Millis(ssrc - 1));
   }
   for (const auto& ssrc : config_.rtp.rtx.ssrcs) {
     // Use ssrc as avg_delay_ms and max_delay_ms to get a unique value for each
     // stream.
-    int avg_delay_ms = ssrc;
-    int max_delay_ms = ssrc + 1;
-    observer->SendSideDelayUpdated(avg_delay_ms, max_delay_ms, ssrc);
-    expected_.substreams[ssrc].avg_delay_ms = avg_delay_ms;
-    expected_.substreams[ssrc].max_delay_ms = max_delay_ms;
+    expected_.substreams[ssrc].avg_delay_ms = ssrc;
+    expected_.substreams[ssrc].max_delay_ms = ssrc + 1;
+    statistics_proxy_->OnSendPacket(ssrc,
+                                    /*capture_time=*/fake_clock_.CurrentTime() -
+                                        TimeDelta::Millis(ssrc + 1));
+    statistics_proxy_->OnSendPacket(ssrc,
+                                    /*capture_time=*/fake_clock_.CurrentTime() -
+                                        TimeDelta::Millis(ssrc - 1));
   }
   VideoSendStream::Stats stats = statistics_proxy_->GetStats();
   ExpectEqual(expected_, stats);
@@ -2353,7 +2358,8 @@ TEST_F(SendStatisticsProxyTest, EncodedResolutionTimesOut) {
   EXPECT_EQ(kEncodedHeight, stats.substreams[config_.rtp.ssrcs[1]].height);
 
   // Forward almost to timeout, this should not have removed stats.
-  fake_clock_.AdvanceTimeMilliseconds(SendStatisticsProxy::kStatsTimeoutMs - 1);
+  fake_clock_.AdvanceTime(SendStatisticsProxy::kStatsTimeout -
+                          TimeDelta::Millis(1));
   stats = statistics_proxy_->GetStats();
   EXPECT_EQ(kEncodedWidth, stats.substreams[config_.rtp.ssrcs[0]].width);
   EXPECT_EQ(kEncodedHeight, stats.substreams[config_.rtp.ssrcs[0]].height);
