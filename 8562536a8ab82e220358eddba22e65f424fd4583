@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ed07f4b_e7866005",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-07T18:40:15Z",
+      "side": 1,
+      "message": "Native version of https://jsfiddle.net/fippo/Lm2py3zu/ that I found by accident.\n\nExplicitly rejecting this is better but I wonder if we are missing a\n  I rejected that content in the offer, why are you unrejecting it in the answer???\ncheck *somewhere*",
+      "revId": "8562536a8ab82e220358eddba22e65f424fd4583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
