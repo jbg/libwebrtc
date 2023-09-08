@@ -50,6 +50,24 @@
       "message": "so you have to take out the BUNDLE line because otherwise the answer gets rejected because it contains a reference to a rejected M-line, even though that is rejected only in the offer?",
       "revId": "8562536a8ab82e220358eddba22e65f424fd4583",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "929acf2e_a5ec3bb8",
+        "filename": "pc/sdp_offer_answer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-08T07:43:20Z",
+      "side": 1,
+      "message": "Yep, we reject with a proper\n  A BUNDLE group was added in the answer that did not exist in the offer\nerror otherwise!",
+      "parentUuid": "1b585b08_7597cb30",
+      "revId": "8562536a8ab82e220358eddba22e65f424fd4583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
