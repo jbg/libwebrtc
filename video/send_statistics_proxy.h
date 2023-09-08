@@ -12,6 +12,7 @@
 #define VIDEO_SEND_STATISTICS_PROXY_H_
 
 #include <array>
+#include <deque>
 #include <map>
 #include <memory>
 #include <string>
@@ -42,8 +43,7 @@ class SendStatisticsProxy : public VideoStreamEncoderObserver,
                             public RtcpPacketTypeCounterObserver,
                             public StreamDataCountersCallback,
                             public BitrateStatisticsObserver,
-                            public FrameCountObserver,
-                            public SendSideDelayObserver {
+                            public FrameCountObserver {
  public:
   static constexpr TimeDelta kStatsTimeout = TimeDelta::Seconds(5);
   // Number of required samples to be collected before a metric is added
@@ -103,6 +103,8 @@ class SendStatisticsProxy : public VideoStreamEncoderObserver,
   void OnEncodedFrameTimeMeasured(int encode_time_ms,
                                   int encode_usage_percent) override;
 
+  void OnSendPacket(uint32_t ssrc, Timestamp capture_time);
+
   int GetInputFrameRate() const override;
   int GetSendFrameRate() const;
 
@@ -125,11 +127,6 @@ class SendStatisticsProxy : public VideoStreamEncoderObserver,
   // From FrameCountObserver.
   void FrameCountUpdated(const FrameCounts& frame_counts,
                          uint32_t ssrc) override;
-
-  // From SendSideDelayObserver.
-  void SendSideDelayUpdated(int avg_delay_ms,
-                            int max_delay_ms,
-                            uint32_t ssrc) override;
 
  private:
   class SampleCounter {
@@ -248,6 +245,10 @@ class SendStatisticsProxy : public VideoStreamEncoderObserver,
     MaskedAdaptationCounts Mask(const VideoAdaptationCounters& counters,
                                 const AdaptationSettings& settings) const;
   };
+  struct SendDelayEntry {
+    Timestamp when;
+    TimeDelta send_delay;
+  };
   // Collection of various stats that are tracked per ssrc.
   struct Trackers {
     Trackers();
@@ -256,6 +257,15 @@ class SendStatisticsProxy : public VideoStreamEncoderObserver,
 
     Timestamp resolution_update = Timestamp::MinusInfinity();
     rtc::RateTracker encoded_frame_rate;
+
+    std::deque<SendDelayEntry> send_delays;
+
+    // The sum of `send_delay` in `send_delays`.
+    TimeDelta send_delay_sum = TimeDelta::Zero();
+
+    // Pointer to the maximum `send_delay` in `send_delays` or nullptr if
+    // `send_delays.empty()`
+    TimeDelta* send_delay_max = nullptr;
   };
 
   void SetAdaptTimer(const MaskedAdaptationCounts& counts, StatsTimer* timer)
