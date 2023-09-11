@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14a46630_e33c2914",
+        "filename": "modules/video_capture/linux/video_capture_v4l2.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-09-11T12:03:48Z",
+      "side": 1,
+      "message": "this would need to be:\n\n`rtc::scoped_refptr\u003cVideoCaptureModuleV4L2\u003e(this)`\n\nI think the convention is to declare such variables outside of the capture section of the lambda.\n\nIn practice, is this an actual problem though? THe scope of `_captureThread` (which is joinable), from the call to `SpawnJoinable()` and until the call to `Finalize()` is inclusive of the scope of the thread. Right?\n\nBtw, the risk of allocating a ref count on the worker thread could also be that unexpectedly teardown might happen on the worker thread and not where Finalize() is called from.",
+      "revId": "bd53b6cf74c3a4363937f4080ab7a0455f1a1e43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
