@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e98172fa_0ca5d09a",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-09-11T11:54:43Z",
+      "side": 1,
+      "message": "Just checking - Is it correct that due to the RTC_CHECK in the above line (93), this isn\u0027t a functional change in terms of runtime behavior?\n(i.e. since we\u0027d always terminate if `.size()` was equal to or larger than `kOutputDirMaxLength`)",
+      "revId": "81b8f945de79100709049f9c6bcdbc96402b06ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
