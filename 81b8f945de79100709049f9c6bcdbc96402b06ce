@@ -34,6 +34,24 @@
       "parentUuid": "e98172fa_0ca5d09a",
       "revId": "81b8f945de79100709049f9c6bcdbc96402b06ce",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da80fc96_5044fc2f",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-09-11T14:21:39Z",
+      "side": 1,
+      "message": "Yup, I understand the point of the CL.\n\nWhat I\u0027m pointing out is, if you take a look at the CHECK in the preceding line, is that `output_dir.size()` is always less than `kOutputDirMaxLength`.\n\nSo the n-1 part of how strcpyn is implemented, isn\u0027t relevant (in practice - I do agree that we should land the change, just pointing out that this is not a security problem).",
+      "parentUuid": "d8c24b03_15fd0f57",
+      "revId": "81b8f945de79100709049f9c6bcdbc96402b06ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
