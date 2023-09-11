@@ -16,6 +16,24 @@
       "message": "Just checking - Is it correct that due to the RTC_CHECK in the above line (93), this isn\u0027t a functional change in terms of runtime behavior?\n(i.e. since we\u0027d always terminate if `.size()` was equal to or larger than `kOutputDirMaxLength`)",
       "revId": "81b8f945de79100709049f9c6bcdbc96402b06ce",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8c24b03_15fd0f57",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-09-11T14:08:24Z",
+      "side": 1,
+      "message": "I think the point of the CL is that strcpyn is reserving the last byte of the buffer for a null byte, so if we attempt to copy a string of length n to a buffer of length n, then it would only copy the first n-1 characters. https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/rtc_base/string_utils.cc;l\u003d23;drc\u003de5b22206501ba1edd38018981e0dae8358986a3d",
+      "parentUuid": "e98172fa_0ca5d09a",
+      "revId": "81b8f945de79100709049f9c6bcdbc96402b06ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
