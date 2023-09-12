@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ab80edd_abdf57ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6720
+      },
+      "writtenOn": "2023-09-12T09:47:13Z",
+      "side": 1,
+      "message": "submitting 😊",
+      "revId": "81b8f945de79100709049f9c6bcdbc96402b06ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e98172fa_0ca5d09a",
@@ -68,6 +85,24 @@
       "side": 1,
       "message": "Right; it shouldn\u0027t be a security problem but I think it *is* a functional change in `SetOutputDirectory`.\n\nFor example,\n```\nsize_t kOutputDirMaxLength \u003d 1024;\nchar buffer[kOutputDirMaxLength];\nstring output_dir \u003d \"/foo/bar\"\nrtc::strcpyn(buffer, output_dir.size(), output_dir);\n```\nwould pass the `RTC_CHECK_LT(output_dir.size(), kOutputDirMaxLength)` check,\nbut `strcpyn` would only copy \"/foo/ba\".",
       "parentUuid": "da80fc96_5044fc2f",
+      "revId": "81b8f945de79100709049f9c6bcdbc96402b06ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "981c075b_b2c0a785",
+        "filename": "modules/audio_processing/logging/apm_data_dumper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 6720
+      },
+      "writtenOn": "2023-09-12T09:47:13Z",
+      "side": 1,
+      "message": "oh I see! Thanks for clarifying that. Looks like this has been in there for years.",
+      "parentUuid": "e20acdba_0c0a3cf1",
       "revId": "81b8f945de79100709049f9c6bcdbc96402b06ce",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
