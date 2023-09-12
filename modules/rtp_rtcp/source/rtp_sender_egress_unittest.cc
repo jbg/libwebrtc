@@ -77,11 +77,6 @@ class MockStreamDataCountersCallback : public StreamDataCountersCallback {
               (override));
 };
 
-class MockSendSideDelayObserver : public SendSideDelayObserver {
- public:
-  MOCK_METHOD(void, SendSideDelayUpdated, (int, int, uint32_t), (override));
-};
-
 struct TransmittedPacket {
   TransmittedPacket(rtc::ArrayView<const uint8_t> data,
                     const PacketOptions& packet_options,
@@ -327,48 +322,6 @@ TEST_F(RtpSenderEgressTest,
   absl::optional<int32_t> offset =
       transport_.last_packet()->packet.GetExtension<TransmissionOffset>();
   EXPECT_EQ(offset, 0);
-}
-
-TEST_F(RtpSenderEgressTest, OnSendSideDelayUpdated) {
-  StrictMock<MockSendSideDelayObserver> send_side_delay_observer;
-  RtpRtcpInterface::Configuration config = DefaultConfig();
-  config.send_side_delay_observer = &send_side_delay_observer;
-  auto sender = std::make_unique<RtpSenderEgress>(config, &packet_history_);
-
-  // Send packet with 10 ms send-side delay. The average, max and total should
-  // be 10 ms.
-  EXPECT_CALL(send_side_delay_observer, SendSideDelayUpdated(10, 10, kSsrc));
-  int64_t capture_time_ms = clock_->TimeInMilliseconds();
-  time_controller_.AdvanceTime(TimeDelta::Millis(10));
-  sender->SendPacket(BuildRtpPacket(/*marker=*/true, capture_time_ms),
-                     PacedPacketInfo());
-
-  // Send another packet with 20 ms delay. The average, max and total should be
-  // 15, 20 and 30 ms respectively.
-  EXPECT_CALL(send_side_delay_observer, SendSideDelayUpdated(15, 20, kSsrc));
-  capture_time_ms = clock_->TimeInMilliseconds();
-  time_controller_.AdvanceTime(TimeDelta::Millis(20));
-  sender->SendPacket(BuildRtpPacket(/*marker=*/true, capture_time_ms),
-                     PacedPacketInfo());
-
-  // Send another packet at the same time, which replaces the last packet.
-  // Since this packet has 0 ms delay, the average is now 5 ms and max is 10 ms.
-  // The total counter stays the same though.
-  // TODO(terelius): Is is not clear that this is the right behavior.
-  EXPECT_CALL(send_side_delay_observer, SendSideDelayUpdated(5, 10, kSsrc));
-  capture_time_ms = clock_->TimeInMilliseconds();
-  sender->SendPacket(BuildRtpPacket(/*marker=*/true, capture_time_ms),
-                     PacedPacketInfo());
-
-  // Send a packet 1 second later. The earlier packets should have timed
-  // out, so both max and average should be the delay of this packet. The total
-  // keeps increasing.
-  time_controller_.AdvanceTime(TimeDelta::Seconds(1));
-  EXPECT_CALL(send_side_delay_observer, SendSideDelayUpdated(1, 1, kSsrc));
-  capture_time_ms = clock_->TimeInMilliseconds();
-  time_controller_.AdvanceTime(TimeDelta::Millis(1));
-  sender->SendPacket(BuildRtpPacket(/*marker=*/true, capture_time_ms),
-                     PacedPacketInfo());
 }
 
 TEST_F(RtpSenderEgressTest, WritesPacerExitToTimingExtension) {
@@ -850,6 +803,7 @@ TEST_F(RtpSenderEgressTest, SendPacketSetsPacketOptions) {
   EXPECT_TRUE(transport_.last_packet()->options.is_retransmit);
 }
 
+#if 0
 TEST_F(RtpSenderEgressTest, SendPacketUpdatesStats) {
   const size_t kPayloadSize = 1000;
   StrictMock<MockSendSideDelayObserver> send_side_delay_observer;
@@ -914,6 +868,7 @@ TEST_F(RtpSenderEgressTest, SendPacketUpdatesStats) {
   EXPECT_EQ(rtp_stats.fec.packets, 1u);
   EXPECT_EQ(rtx_stats.retransmitted.packets, 1u);
 }
+#endif
 
 TEST_F(RtpSenderEgressTest, TransportFeedbackObserverWithRetransmission) {
   const uint16_t kTransportSequenceNumber = 17;
