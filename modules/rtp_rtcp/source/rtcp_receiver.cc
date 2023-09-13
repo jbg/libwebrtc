@@ -609,7 +609,7 @@ void RTCPReceiver::HandleReportBlock(const ReportBlock& report_block,
     TimeDelta rtt = CompactNtpRttToTimeDelta(rtt_ntp);
     report_block_data->AddRoundTripTimeSample(rtt);
     if (report_block.source_ssrc() == local_media_ssrc()) {
-      rtts_[remote_ssrc].AddRtt(rtt);
+      rtts_[remote_ssrc_].AddRtt(rtt);
     }
 
     packet_information->rtt = rtt;
