@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e52541a_51ca0acb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-09-13T14:18:41Z",
+      "side": 1,
+      "message": "since you\u0027re trying to use the same key when setting and retrieving RTT,\nmay be do not keep rtt_ as map\n\nDo you expect it to have more than one entry?\nDo you want to reset rtt measurements if remote ssrc changes?\nDo you want to retain old rtt measurments if remote ssrc changes back?\n\nI would suggest to change `map\u003cssrc, RttInfo\u003e rtts_` to `optional\u003cRttInfo\u003e rtt_`,\nand may be reset it when remote_ssrc changes.",
+      "revId": "5edda14fdd45b3b18de97078ec502914bf795693",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
