@@ -16,6 +16,24 @@
       "message": "Can you loop through the whole range instead?",
       "revId": "ff97f988a2fdb3a4a6650e660710904e29a800a9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f142c64d_9d4f0a02",
+        "filename": "pc/sdp_offer_answer_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1007,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2023-09-14T14:09:55Z",
+      "side": 1,
+      "message": "But you can always do that in another CL too.",
+      "parentUuid": "17f7ff31_77224510",
+      "revId": "ff97f988a2fdb3a4a6650e660710904e29a800a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
