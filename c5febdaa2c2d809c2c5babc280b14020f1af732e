@@ -88,6 +88,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45e9a750_a302f6a8",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-14T14:10:28Z",
+      "side": 1,
+      "message": "MediaContentDescription already has a lot of RTP concepts like rtcp_mux, direction, rsize etc. If we want to actually clean it up that means making MCD and interface and then having a subclass for RTP so that we avoid the cast to the subtype which causes the current code duplication and templating. But lets burn the templating first ;-)",
+      "parentUuid": "eb7943c4_9dac2347",
+      "revId": "c5febdaa2c2d809c2c5babc280b14020f1af732e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a854e655_4718e36f",
