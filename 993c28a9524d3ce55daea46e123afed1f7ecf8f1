@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "482b8bba_00c653d0",
+        "filename": "api/task_queue/task_queue_base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-09-15T12:41:07Z",
+      "side": 1,
+      "message": "nit: \n\n`PostDelayedTaskTraits traits \u003d {.high_precision \u003d true};` ? 😊",
+      "revId": "993c28a9524d3ce55daea46e123afed1f7ecf8f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
