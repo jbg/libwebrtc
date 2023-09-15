@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b06d3c8_f7f2e19c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-09-15T13:20:00Z",
+      "side": 1,
+      "message": "do you think it is ok to delete all this code in single change,\nor would you prefer me to split it?",
+      "revId": "d91e51ae8d4b951d7891f6f1c09e4ec25006bb50",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
