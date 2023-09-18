@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b026f0c_4214cf46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-09-18T14:03:29Z",
+      "side": 1,
+      "message": "+Philip for api/video/encoded_image.h - the root change.\n+Harald for global approval of all the renames that follow.\n\n(can\u0027t mark two old functions as deprecated because chromium uses them)",
+      "revId": "6c47cf443bc897aab7c818aae7034abe88253aab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

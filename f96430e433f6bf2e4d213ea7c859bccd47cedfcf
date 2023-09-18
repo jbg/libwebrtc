@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebf3e24e_0d4e22bc",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-09-18T14:03:29Z",
+      "side": 0,
+      "message": "long term I think this class shouldn\u0027t have 4 representation of the capture time:\n`RtpTimestamp()`, `CaptureTime()`, `NtpTimeMs()`, `CaptureTimeIdentifier()`\n\nso `RtpTimesetamp` would likely become something like\n```\nuint32_t RtpTimestamp() { \n return ToRtpTimestamp(CaptureTime(), /*clock_rate_hz\u003d*/90\u0027000);\n}\n```\n\ni.e. won\u0027t be simple accessor.\nThus I suggest not to use getter/accessor notations for these two functions.",
+      "range": {
+        "startLine": 82,
+        "startChar": 49,
+        "endLine": 82,
+        "endChar": 77
+      },
+      "revId": "f96430e433f6bf2e4d213ea7c859bccd47cedfcf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
