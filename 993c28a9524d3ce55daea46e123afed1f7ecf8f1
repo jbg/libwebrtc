@@ -52,6 +52,24 @@
       "parentUuid": "d79cf72d_4ecd1098",
       "revId": "993c28a9524d3ce55daea46e123afed1f7ecf8f1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4e1f2b6_3b120920",
+        "filename": "api/task_queue/task_queue_base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-09-18T08:01:24Z",
+      "side": 1,
+      "message": "No worries, I thought there was an aspect of designated initializers I didn\u0027t know about.",
+      "parentUuid": "79f2f967_3479d5d0",
+      "revId": "993c28a9524d3ce55daea46e123afed1f7ecf8f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
