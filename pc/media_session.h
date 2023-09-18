@@ -177,10 +177,19 @@ class MediaSessionDescriptionFactory {
     is_unified_plan_ = is_unified_plan;
   }
 
+  // ABSL_DEPRECATED("Use CreateOfferOrError")
   std::unique_ptr<SessionDescription> CreateOffer(
       const MediaSessionOptions& options,
       const SessionDescription* current_description) const;
+  webrtc::RTCErrorOr<std::unique_ptr<SessionDescription>> CreateOfferOrError(
+      const MediaSessionOptions& options,
+      const SessionDescription* current_description) const;
+  // ABSL_DEPRECATED("Use CreateAnswerOrError")
   std::unique_ptr<SessionDescription> CreateAnswer(
+      const SessionDescription* offer,
+      const MediaSessionOptions& options,
+      const SessionDescription* current_description) const;
+  webrtc::RTCErrorOr<std::unique_ptr<SessionDescription>> CreateAnswerOrError(
       const SessionDescription* offer,
       const MediaSessionOptions& options,
       const SessionDescription* current_description) const;
@@ -215,11 +224,12 @@ class MediaSessionDescriptionFactory {
       bool extmap_allow_mixed,
       const std::vector<MediaDescriptionOptions>& media_description_options)
       const;
-  bool AddTransportOffer(const std::string& content_name,
-                         const TransportOptions& transport_options,
-                         const SessionDescription* current_desc,
-                         SessionDescription* offer,
-                         IceCredentialsIterator* ice_credentials) const;
+  webrtc::RTCError AddTransportOffer(
+      const std::string& content_name,
+      const TransportOptions& transport_options,
+      const SessionDescription* current_desc,
+      SessionDescription* offer,
+      IceCredentialsIterator* ice_credentials) const;
 
   std::unique_ptr<TransportDescription> CreateTransportAnswer(
       const std::string& content_name,
@@ -229,15 +239,16 @@ class MediaSessionDescriptionFactory {
       bool require_transport_attributes,
       IceCredentialsIterator* ice_credentials) const;
 
-  bool AddTransportAnswer(const std::string& content_name,
-                          const TransportDescription& transport_desc,
-                          SessionDescription* answer_desc) const;
+  webrtc::RTCError AddTransportAnswer(
+      const std::string& content_name,
+      const TransportDescription& transport_desc,
+      SessionDescription* answer_desc) const;
 
   // Helpers for adding media contents to the SessionDescription. Returns true
   // it succeeds or the media content is not needed, or false if there is any
   // error.
 
-  bool AddAudioContentForOffer(
+  webrtc::RTCError AddAudioContentForOffer(
       const MediaDescriptionOptions& media_description_options,
       const MediaSessionOptions& session_options,
       const ContentInfo* current_content,
@@ -248,7 +259,7 @@ class MediaSessionDescriptionFactory {
       SessionDescription* desc,
       IceCredentialsIterator* ice_credentials) const;
 
-  bool AddVideoContentForOffer(
+  webrtc::RTCError AddVideoContentForOffer(
       const MediaDescriptionOptions& media_description_options,
       const MediaSessionOptions& session_options,
       const ContentInfo* current_content,
@@ -259,7 +270,7 @@ class MediaSessionDescriptionFactory {
       SessionDescription* desc,
       IceCredentialsIterator* ice_credentials) const;
 
-  bool AddDataContentForOffer(
+  webrtc::RTCError AddDataContentForOffer(
       const MediaDescriptionOptions& media_description_options,
       const MediaSessionOptions& session_options,
       const ContentInfo* current_content,
@@ -268,7 +279,7 @@ class MediaSessionDescriptionFactory {
       SessionDescription* desc,
       IceCredentialsIterator* ice_credentials) const;
 
-  bool AddUnsupportedContentForOffer(
+  webrtc::RTCError AddUnsupportedContentForOffer(
       const MediaDescriptionOptions& media_description_options,
       const MediaSessionOptions& session_options,
       const ContentInfo* current_content,
@@ -276,7 +287,7 @@ class MediaSessionDescriptionFactory {
       SessionDescription* desc,
       IceCredentialsIterator* ice_credentials) const;
 
-  bool AddAudioContentForAnswer(
+  webrtc::RTCError AddAudioContentForAnswer(
       const MediaDescriptionOptions& media_description_options,
       const MediaSessionOptions& session_options,
       const ContentInfo* offer_content,
@@ -290,7 +301,7 @@ class MediaSessionDescriptionFactory {
       SessionDescription* answer,
       IceCredentialsIterator* ice_credentials) const;
 
-  bool AddVideoContentForAnswer(
+  webrtc::RTCError AddVideoContentForAnswer(
       const MediaDescriptionOptions& media_description_options,
       const MediaSessionOptions& session_options,
       const ContentInfo* offer_content,
@@ -304,7 +315,7 @@ class MediaSessionDescriptionFactory {
       SessionDescription* answer,
       IceCredentialsIterator* ice_credentials) const;
 
-  bool AddDataContentForAnswer(
+  webrtc::RTCError AddDataContentForAnswer(
       const MediaDescriptionOptions& media_description_options,
       const MediaSessionOptions& session_options,
       const ContentInfo* offer_content,
@@ -316,7 +327,7 @@ class MediaSessionDescriptionFactory {
       SessionDescription* answer,
       IceCredentialsIterator* ice_credentials) const;
 
-  bool AddUnsupportedContentForAnswer(
+  webrtc::RTCError AddUnsupportedContentForAnswer(
       const MediaDescriptionOptions& media_description_options,
       const MediaSessionOptions& session_options,
       const ContentInfo* offer_content,
