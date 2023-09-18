@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6894ee18_9d98dbdf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-18T13:00:18Z",
+      "side": 1,
+      "message": "That is the easy part, the trickier part is doing the update dance with MediaSessionDescriptionFactory::CreateOffer and MediaSessionDescriptionFactory::CreateOfferOrError.",
+      "revId": "81baf04f12d4deca97f102105261101a817c8eaa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
