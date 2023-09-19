@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e73fa028_a1ca5728",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-09-19T13:18:53Z",
+      "side": 1,
+      "message": "Thanks for finding this bug! However, I some follow-up requests.",
+      "revId": "f8c70c9c3412409f60587c991e8122b438b9fd61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dfd323d_85ecc8a7",
+        "filename": "modules/audio_device/linux/audio_device_alsa_linux.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-09-19T13:18:53Z",
+      "side": 1,
+      "message": "I guess this works, but the reason is not entirely obvious.\n\nAfaik, the comparison on line 595 relies on the \"usual arithmetic conversions\". Specifically\n- If the integer conversion rank of U is greater than or equal to the integer conversion rank of S, C is U.\n- Otherwise, if S can represent all of the values of U, C is S.\n- Otherwise, C is the unsigned integer type corresponding to S\n\nhttps://en.cppreference.com/w/cpp/language/usual_arithmetic_conversions\n\nIn this case, `index` has smaller width than `nDevices`, and int32_t can represent all values of uint16_t, so both sides are compared as int32_t. However, I believe that changing the signature of `SetPlayoutDevice` to\n```\nint32_t SetPlayoutDevice(uint32_t index)\n```\nwould cause the code to break again since both sides would be cast to uint32_t.\n\nPlease consider filing a bug (for visibility) and adding validation on the return value from GetDevicesInfo, e.g.\n```\nint32_t nDevices \u003d GetDevicesInfo(0, true);\nif (nDevices \u003c 1) {\n  RTC_LOG(LS_VERBOSE) \u003c\u003c \"Something\";\n  return -1;\n}\n```",
+      "range": {
+        "startLine": 591,
+        "startChar": 0,
+        "endLine": 591,
+        "endChar": 45
+      },
+      "revId": "f8c70c9c3412409f60587c991e8122b438b9fd61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a16617cc_78ffb487",
+        "filename": "modules/audio_device/linux/audio_device_alsa_linux.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-09-19T13:18:53Z",
+      "side": 1,
+      "message": "The same applies here.",
+      "range": {
+        "startLine": 660,
+        "startChar": 0,
+        "endLine": 660,
+        "endChar": 46
+      },
+      "revId": "f8c70c9c3412409f60587c991e8122b438b9fd61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
