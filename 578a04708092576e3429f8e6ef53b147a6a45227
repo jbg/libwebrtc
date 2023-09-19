@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c3ad722_1d55911c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6116
+      },
+      "writtenOn": "2023-09-19T20:01:29Z",
+      "side": 1,
+      "message": "Alex is OOO. Tommi, can you PTAL?",
+      "revId": "578a04708092576e3429f8e6ef53b147a6a45227",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
