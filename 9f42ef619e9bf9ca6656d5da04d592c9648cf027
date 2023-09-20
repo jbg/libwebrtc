@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6875e67_451316a5",
+        "filename": "pc/webrtc_session_description_factory.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-20T12:43:50Z",
+      "side": 1,
+      "message": "same same",
+      "revId": "9f42ef619e9bf9ca6656d5da04d592c9648cf027",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

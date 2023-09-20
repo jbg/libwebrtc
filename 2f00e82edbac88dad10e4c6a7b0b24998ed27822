@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81ada192_3971ef7d",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2272,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-20T12:43:50Z",
+      "side": 1,
+      "message": "should this be a (D)CHECK?",
+      "revId": "2f00e82edbac88dad10e4c6a7b0b24998ed27822",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bdd25d8_b157134b",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2297,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-20T12:43:50Z",
+      "side": 1,
+      "message": "should this be a (D)CHECK?",
+      "revId": "2f00e82edbac88dad10e4c6a7b0b24998ed27822",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63d692fd_ed5761b7",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2643,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-20T12:43:50Z",
+      "side": 1,
+      "message": "(D)CHECK? (here and below)",
+      "revId": "2f00e82edbac88dad10e4c6a7b0b24998ed27822",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0eba427_b31fcb69",
+        "filename": "pc/webrtc_session_description_factory.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-20T12:43:50Z",
+      "side": 1,
+      "message": "Should this be a CHECK following the CHECK-all-the-things rule?",
+      "revId": "2f00e82edbac88dad10e4c6a7b0b24998ed27822",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

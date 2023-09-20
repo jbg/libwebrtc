@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ebc6ad7_ded9fbbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-20T12:43:50Z",
+      "side": 1,
+      "message": "I have questions but overall this was easier than I expected.\nIgnore media_session_unittest for now apart from the question",
+      "revId": "cd585fd9470d7f5ac251ff0644d8bc3924cb66c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb390ef6_d4c81d15",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-20T12:43:50Z",
+      "side": 1,
+      "message": "compiler question... why aren\u0027t these usings scoped by the anonymous namespace? Pre-existing issue, the unique random generator is used outside the namespace.",
+      "revId": "cd585fd9470d7f5ac251ff0644d8bc3924cb66c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c26499c9_23c30e41",
+        "filename": "pc/media_session.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-20T12:43:50Z",
+      "side": 1,
+      "message": "do I need to deprecate or can I remove right away?",
+      "revId": "cd585fd9470d7f5ac251ff0644d8bc3924cb66c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
