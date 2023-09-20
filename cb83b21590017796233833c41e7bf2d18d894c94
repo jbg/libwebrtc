@@ -16,6 +16,23 @@
       "message": "hi guys, here is a small patch from me ...",
       "revId": "cb83b21590017796233833c41e7bf2d18d894c94",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f599bdf9_abe8ddd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-09-20T15:01:35Z",
+      "side": 1,
+      "message": "lg, but I\u0027m not an owner in audio/",
+      "revId": "cb83b21590017796233833c41e7bf2d18d894c94",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
