@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a71b5655_ad26ff98",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-20T19:05:10Z",
+      "side": 1,
+      "message": "cppreference.com: \"using-declaration: makes the symbol member-name from the namespace ns-name accessible for unqualified lookup as if declared in the same class scope, block scope, or namespace as where this using-declaration appears.\"\n\n\"3) Unnamed namespace definition. Its members have potential scope from their point of declaration to the end of the translation unit, and have internal linkage.\"\n\nhttps://en.cppreference.com/w/cpp/language/namespace\n\nI take the two quotes together to mean that using-declarations within a namespace make the names available until the end of the translation unit.\nC++ - always another special rule.....",
+      "parentUuid": "eb390ef6_d4c81d15",
+      "revId": "cd585fd9470d7f5ac251ff0644d8bc3924cb66c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c26499c9_23c30e41",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-09-20T12:43:50Z",
       "side": 1,
       "message": "do I need to deprecate or can I remove right away?",
+      "revId": "cd585fd9470d7f5ac251ff0644d8bc3924cb66c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce646eb8_d7ed7eb4",
+        "filename": "pc/media_session.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-20T19:05:10Z",
+      "side": 1,
+      "message": "Nit: Use [[deprecated]] rather than ABSL_DEPRECATED.\n\nA quick look didn\u0027t discover external references - this isn\u0027t supposed to be an external interface. Try deleting?",
+      "parentUuid": "c26499c9_23c30e41",
       "revId": "cd585fd9470d7f5ac251ff0644d8bc3924cb66c9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }

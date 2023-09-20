@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73b9315b_56e17275",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-20T19:05:10Z",
+      "side": 1,
+      "message": "I like this :-)\n\nLet\u0027s do another round before submitting, though.",
+      "revId": "dbc698ea7613ef70d2c482a6828af3f1f124f885",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3de6175a_d5b2607c",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-20T19:05:10Z",
+      "side": 1,
+      "message": "If you want to modernize this file, extend the anonymous namespace to after the \"static\" declarations and delete the \"static\" keyword.\n\nThe \"static\" has been there since at least 2013 (file version 1).",
+      "revId": "dbc698ea7613ef70d2c482a6828af3f1f124f885",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "546ad875_98b7b08a",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2365,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-20T19:05:10Z",
+      "side": 1,
+      "message": "Now this is one I\u0027d like to be a (D)CHECK, but let\u0027s keep it like that for this CL.",
+      "revId": "dbc698ea7613ef70d2c482a6828af3f1f124f885",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "657621b5_d5c71de6",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2650,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-20T19:05:10Z",
+      "side": 1,
+      "message": "Should be \"Failed to create answer, audio_transport is missing\".",
+      "revId": "dbc698ea7613ef70d2c482a6828af3f1f124f885",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53c2a1b4_d901fa46",
+        "filename": "pc/media_session_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-20T19:05:10Z",
+      "side": 1,
+      "message": "I like the implicit \"and no error happened, or this crashes\" here.",
+      "revId": "dbc698ea7613ef70d2c482a6828af3f1f124f885",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

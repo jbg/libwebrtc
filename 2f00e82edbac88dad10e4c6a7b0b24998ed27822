@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "860becae_767b2497",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2272,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-20T19:05:10Z",
+      "side": 1,
+      "message": "Suspect that this is a typical \"allowance for unit tests\". DCHECK would certainly be more readable.",
+      "parentUuid": "81ada192_3971ef7d",
+      "revId": "2f00e82edbac88dad10e4c6a7b0b24998ed27822",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0bdd25d8_b157134b",
         "filename": "pc/media_session.cc",
         "patchSetId": 2
@@ -65,6 +83,24 @@
       "writtenOn": "2023-09-20T12:43:50Z",
       "side": 1,
       "message": "Should this be a CHECK following the CHECK-all-the-things rule?",
+      "revId": "2f00e82edbac88dad10e4c6a7b0b24998ed27822",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26cdd701_41fa7d5b",
+        "filename": "pc/webrtc_session_description_factory.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-20T19:05:10Z",
+      "side": 1,
+      "message": "The only way to get here without a valid pointer is if CreateOfferOrError() doesn\u0027t live up to its contract (internal error). I\u0027d leave it at DCHECK, this is something that can\u0027t be triggered by external input (we hope).",
+      "parentUuid": "f0eba427_b31fcb69",
       "revId": "2f00e82edbac88dad10e4c6a7b0b24998ed27822",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
