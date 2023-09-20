@@ -33,6 +33,23 @@
       "message": "LGTM",
       "revId": "b6a108d2b2fee7294158a7ef793ad50c6e0da1a3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de7a3f01_7854eb8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 21944
+      },
+      "writtenOn": "2023-09-20T13:37:58Z",
+      "side": 1,
+      "message": "+mbonadei for OWNERS review. ptal; thanks.",
+      "revId": "b6a108d2b2fee7294158a7ef793ad50c6e0da1a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
