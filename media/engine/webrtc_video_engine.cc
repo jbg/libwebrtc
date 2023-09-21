@@ -75,10 +75,6 @@ using ::webrtc::ParseRtpSsrc;
 
 constexpr int64_t kUnsignaledSsrcCooldownMs = rtc::kNumMillisecsPerSec / 2;
 
-// TODO(bugs.webrtc.org/13166): Remove AV1X when backwards compatibility is not
-// needed.
-constexpr char kAv1xCodecName[] = "AV1X";
-
 // This constant is really an on/off, lower-level configurable NACK history
 // duration hasn't been implemented.
 const int kNackHistoryMs = 1000;
@@ -133,8 +129,7 @@ void AddDefaultFeedbackParams(VideoCodec* codec,
 // Should be used when adding new codecs (or variants).
 bool IsCodecValidForLowerRange(const VideoCodec& codec) {
   if (absl::EqualsIgnoreCase(codec.name, kFlexfecCodecName) ||
-      absl::EqualsIgnoreCase(codec.name, kAv1CodecName) ||
-      absl::EqualsIgnoreCase(codec.name, kAv1xCodecName)) {
+      absl::EqualsIgnoreCase(codec.name, kAv1CodecName)) {
     return true;
   } else if (absl::EqualsIgnoreCase(codec.name, kH264CodecName)) {
     std::string profile_level_id;
