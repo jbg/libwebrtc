@@ -37,6 +37,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "66d3180d_720898d1",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-21T08:11:30Z",
+      "side": 1,
+      "message": "I tried but a lot of these things end up depending on cricket::... lets postpone until we merge cricket, webrtc and rtc (there is a bug for at least one of those)? ;-)",
+      "parentUuid": "3de6175a_d5b2607c",
+      "revId": "dbc698ea7613ef70d2c482a6828af3f1f124f885",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "546ad875_98b7b08a",
         "filename": "pc/media_session.cc",
         "patchSetId": 8
@@ -48,6 +66,24 @@
       "writtenOn": "2023-09-20T19:05:10Z",
       "side": 1,
       "message": "Now this is one I\u0027d like to be a (D)CHECK, but let\u0027s keep it like that for this CL.",
+      "revId": "dbc698ea7613ef70d2c482a6828af3f1f124f885",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3e80497_4dce100c",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2365,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-21T08:11:30Z",
+      "side": 1,
+      "message": "nah, the very purpose of this CL was to expose this error to telemetry ;-)",
+      "parentUuid": "546ad875_98b7b08a",
       "revId": "dbc698ea7613ef70d2c482a6828af3f1f124f885",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -69,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ac91442_e22bba3e",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2650,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-21T08:11:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "657621b5_d5c71de6",
+      "revId": "dbc698ea7613ef70d2c482a6828af3f1f124f885",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53c2a1b4_d901fa46",
@@ -82,6 +136,24 @@
       "writtenOn": "2023-09-20T19:05:10Z",
       "side": 1,
       "message": "I like the implicit \"and no error happened, or this crashes\" here.",
+      "revId": "dbc698ea7613ef70d2c482a6828af3f1f124f885",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1f87c65_ffc7d069",
+        "filename": "pc/media_session_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-21T08:11:30Z",
+      "side": 1,
+      "message": "here and elsewhere? ;-)",
+      "parentUuid": "53c2a1b4_d901fa46",
       "revId": "dbc698ea7613ef70d2c482a6828af3f1f124f885",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
