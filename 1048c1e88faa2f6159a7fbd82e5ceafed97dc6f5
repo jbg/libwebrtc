@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7caed5d_6502f1ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-09-21T11:39:02Z",
+      "side": 1,
+      "message": "PTAL\n\nFor context, see https://source.chromium.org/chromium/chromium/src/+/main:buildtools/reclient_cfgs/fetch_reclient_cfgs.py;l\u003d8-9;drc\u003db9191035fba12c974874b16f7fd031176f3acf87",
+      "revId": "1048c1e88faa2f6159a7fbd82e5ceafed97dc6f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
