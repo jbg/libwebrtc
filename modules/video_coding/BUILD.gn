@@ -370,6 +370,10 @@ rtc_source_set("codec_globals_headers") {
     "codecs/vp9/include/vp9_globals.h",
   ]
 
+  if (rtc_use_h265) {
+    sources += [ "codecs/h265/include/h265_globals.h" ]
+  }
+
   deps = [ "../../rtc_base:checks" ]
 }
 
