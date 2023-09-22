@@ -22,6 +22,30 @@
       },
       "revId": "4b39e8627f72f7d3c7e778000999b8cda824d396",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "788f775f_6fddaa42",
+        "filename": ".style.yapf",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2023-09-22T09:59:27Z",
+      "side": 0,
+      "message": "The style says:\n\n\u003e New scripts should not follow these deviations, but they should be followed when making changes to files that follow them.\n\nSo they don\u0027t plan to migrate existing files.\n\nI didn\u0027t anticipate that this would affect existing files, maybe it does?\n\nLooks like their strategy is to add a new `.style.yapf` in new directories to enforce the style locally. Maybe we should follow that approach instead?",
+      "parentUuid": "b4569401_7c251165",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 16
+      },
+      "revId": "4b39e8627f72f7d3c7e778000999b8cda824d396",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
