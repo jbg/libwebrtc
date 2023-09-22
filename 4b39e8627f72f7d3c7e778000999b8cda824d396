@@ -70,6 +70,30 @@
       },
       "revId": "4b39e8627f72f7d3c7e778000999b8cda824d396",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "532e1fa3_e668ea1f",
+        "filename": ".style.yapf",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2023-09-22T10:11:46Z",
+      "side": 0,
+      "message": "Ah, it will have an effect once it\u0027s modified.\n\nAll right then!",
+      "parentUuid": "ec971b48_179a0dd7",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 16
+      },
+      "revId": "4b39e8627f72f7d3c7e778000999b8cda824d396",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
