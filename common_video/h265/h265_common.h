@@ -56,7 +56,8 @@ enum NaluType : uint8_t {
   kPrefixSei = 39,
   kSuffixSei = 40,
   kAP = 48,
-  kFU = 49
+  kFU = 49,
+  kPACI = 50
 };
 
 // Slice type definition. See table 7-7 of the H265 spec
