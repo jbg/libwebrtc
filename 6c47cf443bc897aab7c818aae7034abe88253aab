@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b73408fa_e898f53e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-09-22T11:20:32Z",
+      "side": 1,
+      "message": "Rasmus, do you have an owner opinion about this naming change in api/video/encoded_image.h",
+      "revId": "6c47cf443bc897aab7c818aae7034abe88253aab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0fa45767_ff533608",
@@ -48,6 +65,24 @@
       "writtenOn": "2023-09-22T11:08:05Z",
       "side": 1,
       "message": "[[deprecated]]?",
+      "revId": "6c47cf443bc897aab7c818aae7034abe88253aab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cb924da_7c1f5d3a",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-09-22T11:20:32Z",
+      "side": 1,
+      "message": "chromium uses it...\ne.g.\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/platform/peerconnection/rtc_video_encoder.cc;l\u003d1168;drc\u003d8f5c47fd8d80208c191fe575f0817b26a9093837\n\nI even thinking if should have something special for such scenario:\nhttps://webrtc-review.googlesource.com/c/src/+/321160",
+      "parentUuid": "0fa45767_ff533608",
       "revId": "6c47cf443bc897aab7c818aae7034abe88253aab",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
