@@ -46,6 +46,30 @@
       },
       "revId": "4b39e8627f72f7d3c7e778000999b8cda824d396",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec971b48_179a0dd7",
+        "filename": ".style.yapf",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2023-09-22T10:10:21Z",
+      "side": 0,
+      "message": "Yes this does impact impact existing files, you can try by modifying an existing .py and run \u0027git cl format\u0027.\nPersonally I\u0027m ok to go with this change and slowly update the python files.",
+      "parentUuid": "788f775f_6fddaa42",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 16
+      },
+      "revId": "4b39e8627f72f7d3c7e778000999b8cda824d396",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
