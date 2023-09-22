@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8b786af_15e712c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-22T10:44:43Z",
+      "side": 1,
+      "message": "Wasn\u0027t sure whether that belongs into the Codec or the UsedIds... UsedIds won because it knows about the dead zone.\n\nI also considered validating header extension ids in ValidateBundledRtpHeaderExtensions\nbut that should be done after branch cut to maximize time in flight.",
+      "revId": "c594c7454802414e9e57731d4cb01c7b99fddf79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
