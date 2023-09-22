@@ -22,6 +22,10 @@ rtp stream (SVC), or independent spatial layers sent on multiple rtp streams
 
 ## RTP header extension format
 
+Note: when including the optional width, height and maximum framerate
+the length of the extension exceeds 16 bytes and is sent as a two-byte
+header extension.
+
 ### Data layout
 
 ```
