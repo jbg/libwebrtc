@@ -83,4 +83,8 @@ id, spatial id) ascending order.
 An empty layer allocation (i.e nothing sent on ssrc) is encoded as
 special case with a single 0 byte.
 
+Note: when including the optional width, height and maximum framerate
+the length of the extension exceeds 16 bytes and is sent as a two-byte
+header extension.
+
 [1] https://aomediacodec.github.io/av1-spec/#leb128
