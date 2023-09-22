@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4569401_7c251165",
+        "filename": ".style.yapf",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2023-09-22T09:53:47Z",
+      "side": 0,
+      "message": "So pep8 indentation is 4 which will impact all existing py files.\n\nAre you sure Chromium has migrated yet ?\nFor example https://source.chromium.org/chromium/chromium/src/+/main:tools/mb/mb.py has commits from yesterday but the indentation is still 2.",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 16
+      },
+      "revId": "4b39e8627f72f7d3c7e778000999b8cda824d396",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
