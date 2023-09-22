@@ -118,7 +118,7 @@ absl::optional<VideoPlayoutDelay> LoadVideoPlayoutDelayOverride(
 
 // Some packets can be skipped and the stream can still be decoded. Those
 // packets are less likely to be retransmitted if they are lost.
-bool PacketWillLikelyBeRequestedForRestransmitionIfLost(
+bool PacketWillLikelyBeRequestedForRestransmissionIfLost(
     const RTPVideoHeader& video_header) {
   return IsBaseLayer(video_header) &&
          !(video_header.generic.has_value()
@@ -733,7 +733,7 @@ bool RTPSenderVideo::SendVideo(int payload_type,
   }
 
   if (video_header.frame_type == VideoFrameType::kVideoFrameKey ||
-      PacketWillLikelyBeRequestedForRestransmitionIfLost(video_header)) {
+      PacketWillLikelyBeRequestedForRestransmissionIfLost(video_header)) {
     // This frame will likely be delivered, no need to populate playout
     // delay extensions until it changes again.
     playout_delay_pending_ = false;
