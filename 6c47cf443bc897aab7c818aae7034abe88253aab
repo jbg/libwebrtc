@@ -16,6 +16,40 @@
       "message": "+Philip for api/video/encoded_image.h - the root change.\n+Harald for global approval of all the renames that follow.\n\n(can\u0027t mark two old functions as deprecated because chromium uses them)",
       "revId": "6c47cf443bc897aab7c818aae7034abe88253aab",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f8da774_dcb6a624",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-22T11:08:05Z",
+      "side": 1,
+      "message": "Looks good to me.",
+      "revId": "6c47cf443bc897aab7c818aae7034abe88253aab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fa45767_ff533608",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-22T11:08:05Z",
+      "side": 1,
+      "message": "[[deprecated]]?",
+      "revId": "6c47cf443bc897aab7c818aae7034abe88253aab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
