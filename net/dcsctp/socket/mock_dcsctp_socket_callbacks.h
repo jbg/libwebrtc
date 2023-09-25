@@ -65,6 +65,9 @@ class MockDcSctpSocketCallbacks : public DcSctpSocketCallbacks {
         });
     ON_CALL(*this, OnMessageReceived)
         .WillByDefault([this](DcSctpMessage message) {
+          RTC_LOG(LS_INFO) << log_prefix_
+                           << "Received message: " << message.payload().size();
+
           received_messages_.emplace_back(std::move(message));
         });
 

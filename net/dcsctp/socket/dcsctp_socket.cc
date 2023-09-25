@@ -478,6 +478,9 @@ SendStatus DcSctpSocket::Send(DcSctpMessage message,
                               const SendOptions& send_options) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
   CallbackDeferrer::ScopedDeferrer deferrer(callbacks_);
+  RTC_LOG(LS_INFO) << "SENAP: " << log_prefix_
+                   << " SEND: sid=" << *message.stream_id()
+                   << ", size=" << message.payload().size();
   LifecycleId lifecycle_id = send_options.lifecycle_id;
 
   if (message.payload().empty()) {
@@ -533,6 +536,8 @@ ResetStreamsStatus DcSctpSocket::ResetStreams(
     rtc::ArrayView<const StreamID> outgoing_streams) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
   CallbackDeferrer::ScopedDeferrer deferrer(callbacks_);
+  RTC_LOG(LS_INFO) << "SENAP: " << log_prefix_
+                   << " RESET STREAMS: sid=" << **outgoing_streams.begin();
 
   if (tcb_ == nullptr) {
     callbacks_.OnError(ErrorKind::kWrongSequence,
@@ -750,6 +755,8 @@ bool DcSctpSocket::ValidatePacket(const SctpPacket& packet) {
 void DcSctpSocket::HandleTimeout(TimeoutID timeout_id) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
   CallbackDeferrer::ScopedDeferrer deferrer(callbacks_);
+  RTC_LOG(LS_INFO) << "SENAP: " << log_prefix_
+                   << " HANDLE TIMEOUT: " << *timeout_id;
 
   timer_manager_.HandleTimeout(timeout_id);
 
@@ -764,6 +771,8 @@ void DcSctpSocket::HandleTimeout(TimeoutID timeout_id) {
 void DcSctpSocket::ReceivePacket(rtc::ArrayView<const uint8_t> data) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
   CallbackDeferrer::ScopedDeferrer deferrer(callbacks_);
+  RTC_LOG(LS_INFO) << "SENAP: " << log_prefix_
+                   << " RECEIVE PACKET: " << data.size();
 
   ++metrics_.rx_packets_count;
 

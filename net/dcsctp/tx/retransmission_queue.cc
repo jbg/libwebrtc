@@ -486,6 +486,7 @@ std::vector<std::pair<TSN, Data>> RetransmissionQueue::GetChunksToSend(
       break;
     }
 
+    size_t payload_size = chunk_opt->data.size();
     size_t chunk_size = GetSerializedChunkSize(chunk_opt->data);
     max_bytes -= chunk_size;
     rwnd_ -= chunk_size;
@@ -498,6 +499,8 @@ std::vector<std::pair<TSN, Data>> RetransmissionQueue::GetChunksToSend(
         chunk_opt->lifecycle_id);
 
     if (tsn.has_value()) {
+      RTC_LOG(LS_VERBOSE) << "SENAP: Sending produced " << *tsn->Wrap()
+                          << " with " << payload_size << " bytes of payload";
       if (chunk_opt->lifecycle_id.IsSet()) {
         RTC_DCHECK(chunk_opt->data.is_end);
         callbacks_.OnLifecycleMessageFullySent(chunk_opt->lifecycle_id);

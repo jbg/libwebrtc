@@ -162,6 +162,7 @@ absl::optional<SendQueue::DataToSend> RRSendQueue::OutgoingStream::Produce(
     }
 
     // Grab the next `max_size` fragment from this message and calculate flags.
+    size_t remaining = item.remaining_size;
     rtc::ArrayView<const uint8_t> chunk_payload =
         item.message.payload().subview(item.remaining_offset, max_size);
     rtc::ArrayView<const uint8_t> message_payload = message.payload();
@@ -169,6 +170,8 @@ absl::optional<SendQueue::DataToSend> RRSendQueue::OutgoingStream::Produce(
                                    message_payload.data());
     Data::IsEnd is_end((chunk_payload.data() + chunk_payload.size()) ==
                        (message_payload.data() + message_payload.size()));
+    RTC_DLOG(LS_VERBOSE) << "SENAP: Carved out " << chunk_payload.size()
+                         << " out of " << remaining << ", is_end=" << *is_end;
 
     StreamID stream_id = message.stream_id();
     PPID ppid = message.ppid();

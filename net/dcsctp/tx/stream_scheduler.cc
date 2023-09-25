@@ -82,7 +82,7 @@ absl::optional<SendQueue::DataToSend> StreamScheduler::Produce(
 
   RTC_DCHECK(data->data.stream_id == current_stream_->stream_id());
 
-  RTC_DLOG(LS_VERBOSE) << log_prefix_ << "Producing DATA, type="
+  RTC_DLOG(LS_VERBOSE) << log_prefix_ << "Produced DATA, type="
                        << (data->data.is_unordered ? "unordered" : "ordered")
                        << "::"
                        << (*data->data.is_beginning && *data->data.is_end
@@ -91,6 +91,7 @@ absl::optional<SendQueue::DataToSend> StreamScheduler::Produce(
                            : *data->data.is_end       ? "last"
                                                       : "middle")
                        << ", stream_id=" << *current_stream_->stream_id()
+                       << ", ssn=" << *data->data.ssn
                        << ", ppid=" << *data->data.ppid
                        << ", length=" << data->data.payload.size();
 

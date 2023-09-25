@@ -205,8 +205,11 @@ size_t TraditionalReassemblyStreams::OrderedStream::TryToAssembleMessages() {
 int TraditionalReassemblyStreams::OrderedStream::Add(UnwrappedTSN tsn,
                                                      Data data) {
   int queued_bytes = data.size();
-
   UnwrappedSSN ssn = ssn_unwrapper_.Unwrap(data.ssn);
+  RTC_DLOG(LS_VERBOSE) << parent_.log_prefix_ << "Add " << *tsn.Wrap()
+                       << ", ssn=" << *ssn.Wrap()
+                       << ", next expected=" << *next_ssn_.Wrap();
+
   auto [unused, inserted] = chunks_by_ssn_[ssn].emplace(tsn, std::move(data));
   if (!inserted) {
     return 0;
