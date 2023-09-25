@@ -43,10 +43,12 @@ namespace {
 using ::testing::MockFunction;
 using State = ::dcsctp::RetransmissionQueue::State;
 using ::testing::_;
+using ::testing::AllOf;
 using ::testing::ElementsAre;
 using ::testing::IsEmpty;
 using ::testing::NiceMock;
 using ::testing::Pair;
+using ::testing::Property;
 using ::testing::Return;
 using ::testing::SizeIs;
 using ::testing::UnorderedElementsAre;
@@ -1587,6 +1589,127 @@ TEST_F(RetransmissionQueueTest, CanAlwaysSendOnePacket) {
   EXPECT_THAT(queue.GetChunksToSend(now_, mtu), ElementsAre(Pair(TSN(13), _)));
   EXPECT_THAT(queue.GetChunksToSend(now_, mtu), ElementsAre(Pair(TSN(14), _)));
   EXPECT_THAT(queue.GetChunksToSend(now_, mtu), IsEmpty());
+}
+
+TEST_F(RetransmissionQueueTest, GeneratesForwardTsnUntilNextStreamResetTsn) {
+  // This test generates:
+  // * Stream 1: TSN 10, 11, 12 <RESET>
+  // * Stream 2: TSN 13, 14 <RESET>
+  // * Stream 3: TSN 15, 16
+  //
+  // Then it expires chunk 12-15, and ensures that the generated FORWARD-TSN
+  // only includes up till TSN 12 until the cum ack TSN has reached 12, and then
+  // 13 and 14 are included, and then after the cum ack TSN has reached 14, then
+  // 15 is included.
+  //
+  // What it shouldn't do, is to generate a FORWARD-TSN directly at the start
+  // with new TSN=15, and setting [(sid=1, ssn=44), (sid=2, ssn=46),
+  // (sid=3, ssn=47)], because that will confuse the receiver at TSN=17,
+  // receiving SID=1, SSN=0 (it's reset!), expecting SSN to be 45.
+  RetransmissionQueue queue = CreateQueue();
+  constexpr DataGeneratorOptions kStream1 = {.stream_id = StreamID(1)};
+  constexpr DataGeneratorOptions kStream2 = {.stream_id = StreamID(2)};
+  constexpr DataGeneratorOptions kStream3 = {.stream_id = StreamID(3)};
+  EXPECT_CALL(producer_, Produce)
+      .WillOnce([&](auto...) {  // 10
+        SendQueue::DataToSend dts(gen_.Ordered({1, 2, 3, 4}, "BE", kStream1));
+        return dts;
+      })
+      .WillOnce([&](auto...) {  // 11
+        SendQueue::DataToSend dts(gen_.Ordered({1, 2, 3, 4}, "BE", kStream1));
+        return dts;
+      })
+      .WillOnce([&](auto...) {  // 12
+        SendQueue::DataToSend dts(gen_.Ordered({1, 2, 3, 4}, "BE", kStream1));
+        dts.max_retransmissions = MaxRetransmits(0);
+        return dts;
+      })
+      .WillOnce([](auto...) { return absl::nullopt; })
+      .WillOnce([&](auto...) {  // 13
+        SendQueue::DataToSend dts(gen_.Ordered({1, 2, 3, 4}, "BE", kStream2));
+        dts.max_retransmissions = MaxRetransmits(0);
+        return dts;
+      })
+      .WillOnce([&](auto...) {  // 14
+        SendQueue::DataToSend dts(gen_.Ordered({1, 2, 3, 4}, "BE", kStream2));
+        dts.max_retransmissions = MaxRetransmits(0);
+        return dts;
+      })
+      .WillOnce([](auto...) { return absl::nullopt; })
+      .WillOnce([&](auto...) {  // 15
+        SendQueue::DataToSend dts(gen_.Ordered({1, 2, 3, 4}, "BE", kStream3));
+        dts.max_retransmissions = MaxRetransmits(0);
+        return dts;
+      })
+      .WillOnce([&](auto...) {  // 16
+        SendQueue::DataToSend dts(gen_.Ordered({1, 2, 3, 4}, "BE", kStream3));
+        return dts;
+      })
+      .WillRepeatedly([](auto...) { return absl::nullopt; });
+
+  queue.PrepareResetStream(StreamID(1));
+  EXPECT_THAT(
+      queue.GetChunksToSend(now_, 1000),
+      ElementsAre(Pair(TSN(10), _), Pair(TSN(11), _), Pair(TSN(12), _)));
+  queue.BeginResetStreams();
+  EXPECT_THAT(queue.GetChunksToSend(now_, 1000),
+              ElementsAre(Pair(TSN(13), _), Pair(TSN(14), _)));
+  queue.PrepareResetStream(StreamID(2));
+  queue.BeginResetStreams();
+  EXPECT_THAT(queue.GetChunksToSend(now_, 1000),
+              ElementsAre(Pair(TSN(15), _), Pair(TSN(16), _)));
+
+  queue.HandleSack(now_, SackChunk(TSN(11), kArwnd, {}, {}));
+  queue.HandleT3RtxTimerExpiry();
+
+  EXPECT_THAT(queue.GetChunkStatesForTesting(),
+              ElementsAre(Pair(TSN(11), State::kAcked),      //
+                          Pair(TSN(12), State::kAbandoned),  //
+                          Pair(TSN(13), State::kAbandoned),  //
+                          Pair(TSN(14), State::kAbandoned),  //
+                          Pair(TSN(15), State::kAbandoned),  //
+                          Pair(TSN(16), State::kToBeRetransmitted)));
+
+  EXPECT_TRUE(queue.ShouldSendForwardTsn(now_));
+  EXPECT_THAT(
+      queue.CreateForwardTsn(),
+      AllOf(Property(&ForwardTsnChunk::new_cumulative_tsn, TSN(12)),
+            Property(&ForwardTsnChunk::skipped_streams,
+                     UnorderedElementsAre(ForwardTsnChunk::SkippedStream(
+                         StreamID(1), SSN(44))))));
+
+  // Ack 12, allowing a FORWARD-TSN that spans to TSN=14 to be created.
+  queue.HandleSack(now_, SackChunk(TSN(12), kArwnd, {}, {}));
+  EXPECT_TRUE(queue.ShouldSendForwardTsn(now_));
+  EXPECT_THAT(
+      queue.CreateForwardTsn(),
+      AllOf(Property(&ForwardTsnChunk::new_cumulative_tsn, TSN(14)),
+            Property(&ForwardTsnChunk::skipped_streams,
+                     UnorderedElementsAre(ForwardTsnChunk::SkippedStream(
+                         StreamID(2), SSN(46))))));
+
+  // Ack 13, allowing a FORWARD-TSN that spans to TSN=14 to be created.
+  queue.HandleSack(now_, SackChunk(TSN(13), kArwnd, {}, {}));
+  EXPECT_TRUE(queue.ShouldSendForwardTsn(now_));
+  EXPECT_THAT(
+      queue.CreateForwardTsn(),
+      AllOf(Property(&ForwardTsnChunk::new_cumulative_tsn, TSN(14)),
+            Property(&ForwardTsnChunk::skipped_streams,
+                     UnorderedElementsAre(ForwardTsnChunk::SkippedStream(
+                         StreamID(2), SSN(46))))));
+
+  // Ack 14, allowing a FORWARD-TSN that spans to TSN=15 to be created.
+  queue.HandleSack(now_, SackChunk(TSN(14), kArwnd, {}, {}));
+  EXPECT_TRUE(queue.ShouldSendForwardTsn(now_));
+  EXPECT_THAT(
+      queue.CreateForwardTsn(),
+      AllOf(Property(&ForwardTsnChunk::new_cumulative_tsn, TSN(15)),
+            Property(&ForwardTsnChunk::skipped_streams,
+                     UnorderedElementsAre(ForwardTsnChunk::SkippedStream(
+                         StreamID(3), SSN(47))))));
+
+  queue.HandleSack(now_, SackChunk(TSN(15), kArwnd, {}, {}));
+  EXPECT_FALSE(queue.ShouldSendForwardTsn(now_));
 }
 
 }  // namespace
