@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51dc07b2_c7b597c6",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-09-25T11:32:48Z",
+      "side": 1,
+      "message": "same as with normal comparision, prefer to put variable as 1st argument, constant - as 2nd.",
+      "revId": "383335968023e3d9c424fdc8d98bf2026ac4fa6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d2612a4_62755e56",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-09-25T11:32:48Z",
+      "side": 1,
+      "message": "put the destructor after deleted copy constructor and assign operator\n\nhttps://google.github.io/styleguide/cppguide.html#Declaration_Order",
+      "revId": "383335968023e3d9c424fdc8d98bf2026ac4fa6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb263620_eb53f323",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-09-25T11:32:48Z",
+      "side": 1,
+      "message": "this struct looks unused.",
+      "revId": "383335968023e3d9c424fdc8d98bf2026ac4fa6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb255010_deab0105",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-09-25T11:32:48Z",
+      "side": 1,
+      "message": "instead of having this constructor might be cleaner not to declare any, and instead create the struct with designated initializers:\n\ni.e. instead of\n```\npackets_.push(PacketUnit(fragment.subview(offset, packet_length),\n                             /*first_fragment\u003d*/i \u003d\u003d 0,\n                             /*last_fragment\u003d*/i \u003d\u003d payload_sizes.size() - 1,\n                             false, header));\n```\n\nwrite\n\n```\npackets_.push({.source_fragment \u003d fragment.subview(offset, packet_length),\n                             .first_fragment \u003d (i \u003d\u003d 0),\n                             .last_fragment \u003d (i \u003d\u003d payload_sizes.size() - 1),\n                             .aggregated \u003d false, .header \u003d header});\n```",
+      "revId": "383335968023e3d9c424fdc8d98bf2026ac4fa6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e277f3dd_dfba31d1",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-09-25T11:32:48Z",
+      "side": 1,
+      "message": "looks unused, prefer not to have it.",
+      "revId": "383335968023e3d9c424fdc8d98bf2026ac4fa6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
