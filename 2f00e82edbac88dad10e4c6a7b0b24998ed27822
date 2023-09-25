@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c211eda9_e9480347",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2272,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-25T12:24:34Z",
+      "side": 1,
+      "message": "Wonder if it\u0027s more sensible to put an RTC_CHECK into the MediaSessionDescriptionFactory construtor and delete all the checks later. The pointer is const.\n\n(After the advice on refs vs pointers changed a year or two back, it should probably be a reference not a pointer.)",
+      "parentUuid": "860becae_767b2497",
+      "revId": "2f00e82edbac88dad10e4c6a7b0b24998ed27822",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0bdd25d8_b157134b",
         "filename": "pc/media_session.cc",
         "patchSetId": 2

@@ -33,6 +33,24 @@
       "message": "This branch *is* covered but one can only see it on line 2795, not the subsequent ones. Apparently this lcov behavior is known for GTEST macros: https://stackoverflow.com/questions/43495370/coverage-analysis-of-some-googletest-macros-shows-incomplete-coverage-when-sprea\nbut it is just known, not fixable.",
       "revId": "b2457883fc6d120c667cf83551d7356adf537d1f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94bb2d22_ff8838dc",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 2799,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-25T12:24:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b980923d_81d538ea",
+      "revId": "b2457883fc6d120c667cf83551d7356adf537d1f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
