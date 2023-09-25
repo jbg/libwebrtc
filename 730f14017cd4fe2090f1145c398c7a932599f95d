@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31356f77_fff48570",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-25T11:16:19Z",
+      "side": 1,
+      "message": "Makes sense, just want commentary on why not webrtc::Timestamp.",
+      "revId": "730f14017cd4fe2090f1145c398c7a932599f95d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2762c294_b2f2da74",
+        "filename": "audio/channel_send_frame_transformer_delegate.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-25T11:16:19Z",
+      "side": 1,
+      "message": "Hm. There\u0027s a drive to use webrtc::Timestamp everywhere we do times. Is there any particular reason for not doing that here?",
+      "revId": "730f14017cd4fe2090f1145c398c7a932599f95d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
