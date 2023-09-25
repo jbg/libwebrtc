@@ -16,6 +16,40 @@
       "message": "Wasn\u0027t sure whether that belongs into the Codec or the UsedIds... UsedIds won because it knows about the dead zone.\n\nI also considered validating header extension ids in ValidateBundledRtpHeaderExtensions\nbut that should be done after branch cut to maximize time in flight.",
       "revId": "c594c7454802414e9e57731d4cb01c7b99fddf79",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2665dd3d_20cc241a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-25T12:35:59Z",
+      "side": 1,
+      "message": "We have constants, must use them :-)",
+      "revId": "c594c7454802414e9e57731d4cb01c7b99fddf79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32247b23_7343d0f9",
+        "filename": "pc/used_ids.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-25T12:35:59Z",
+      "side": 1,
+      "message": "127 -\u003e kLastDynamicPayloadUpperRange",
+      "revId": "c594c7454802414e9e57731d4cb01c7b99fddf79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
