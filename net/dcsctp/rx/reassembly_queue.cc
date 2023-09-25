@@ -56,8 +56,6 @@ ReassemblyQueue::ReassemblyQueue(absl::string_view log_prefix,
     : log_prefix_(log_prefix),
       max_size_bytes_(max_size_bytes),
       watermark_bytes_(max_size_bytes * kHighWatermarkLimit),
-      last_assembled_tsn_watermark_(
-          tsn_unwrapper_.Unwrap(TSN(*peer_initial_tsn - 1))),
       last_completed_reset_req_seq_nbr_(ReconfigRequestSN(0)),
       streams_(CreateStreams(
           log_prefix_,
@@ -78,13 +76,6 @@ void ReassemblyQueue::Add(TSN tsn, Data data) {
                                                             : "middle");
 
   UnwrappedTSN unwrapped_tsn = tsn_unwrapper_.Unwrap(tsn);
-
-  if (unwrapped_tsn <= last_assembled_tsn_watermark_ ||
-      delivered_tsns_.find(unwrapped_tsn) != delivered_tsns_.end()) {
-    RTC_DLOG(LS_VERBOSE) << log_prefix_
-                         << "Chunk has already been delivered - skipping";
-    return;
-  }
 
   // If a stream reset has been received with a "sender's last assigned tsn" in
   // the future, the socket is in "deferred reset processing" mode and must
@@ -217,50 +208,12 @@ void ReassemblyQueue::AddReassembledMessage(
                        << ", ppid=" << *message.ppid()
                        << ", payload=" << message.payload().size() << " bytes";
 
-  for (const UnwrappedTSN tsn : tsns) {
-    if (tsn <= last_assembled_tsn_watermark_) {
-      // This can be provoked by a misbehaving peer by sending FORWARD-TSN with
-      // invalid SSNs, allowing ordered messages to stay in the queue that
-      // should've been discarded.
-      RTC_DLOG(LS_VERBOSE)
-          << log_prefix_
-          << "Message is built from fragments already seen - skipping";
-      return;
-    } else if (tsn == last_assembled_tsn_watermark_.next_value()) {
-      // Update watermark, or insert into delivered_tsns_
-      last_assembled_tsn_watermark_.Increment();
-    } else {
-      delivered_tsns_.insert(tsn);
-    }
-  }
-
-  // With new TSNs in delivered_tsns, gaps might be filled.
-  MaybeMoveLastAssembledWatermarkFurther();
-
   reassembled_messages_.emplace_back(std::move(message));
-}
-
-void ReassemblyQueue::MaybeMoveLastAssembledWatermarkFurther() {
-  // `delivered_tsns_` contain TSNS when there is a gap between ranges of
-  // assembled TSNs. `last_assembled_tsn_watermark_` should not be adjacent to
-  // that list, because if so, it can be moved.
-  while (!delivered_tsns_.empty() &&
-         *delivered_tsns_.begin() ==
-             last_assembled_tsn_watermark_.next_value()) {
-    last_assembled_tsn_watermark_.Increment();
-    delivered_tsns_.erase(delivered_tsns_.begin());
-  }
 }
 
 void ReassemblyQueue::Handle(const AnyForwardTsnChunk& forward_tsn) {
   RTC_DCHECK(IsConsistent());
   UnwrappedTSN tsn = tsn_unwrapper_.Unwrap(forward_tsn.new_cumulative_tsn());
-
-  last_assembled_tsn_watermark_ = std::max(last_assembled_tsn_watermark_, tsn);
-  delivered_tsns_.erase(delivered_tsns_.begin(),
-                        delivered_tsns_.upper_bound(tsn));
-
-  MaybeMoveLastAssembledWatermarkFurther();
 
   queued_bytes_ -=
       streams_->HandleForwardTsn(tsn, forward_tsn.skipped_streams());
@@ -268,13 +221,6 @@ void ReassemblyQueue::Handle(const AnyForwardTsnChunk& forward_tsn) {
 }
 
 bool ReassemblyQueue::IsConsistent() const {
-  // `delivered_tsns_` and `last_assembled_tsn_watermark_` mustn't overlap or be
-  // adjacent.
-  if (!delivered_tsns_.empty() &&
-      last_assembled_tsn_watermark_.next_value() >= *delivered_tsns_.begin()) {
-    return false;
-  }
-
   // Allow queued_bytes_ to be larger than max_size_bytes, as it's not actively
   // enforced in this class. This comparison will still trigger if queued_bytes_
   // became "negative".
@@ -283,9 +229,6 @@ bool ReassemblyQueue::IsConsistent() const {
 
 HandoverReadinessStatus ReassemblyQueue::GetHandoverReadiness() const {
   HandoverReadinessStatus status = streams_->GetHandoverReadiness();
-  if (!delivered_tsns_.empty()) {
-    status.Add(HandoverUnreadinessReason::kReassemblyQueueDeliveredTSNsGap);
-  }
   if (deferred_reset_streams_.has_value()) {
     status.Add(HandoverUnreadinessReason::kStreamResetDeferred);
   }
@@ -293,7 +236,6 @@ HandoverReadinessStatus ReassemblyQueue::GetHandoverReadiness() const {
 }
 
 void ReassemblyQueue::AddHandoverState(DcSctpSocketHandoverState& state) {
-  state.rx.last_assembled_tsn = last_assembled_tsn_watermark_.Wrap().value();
   state.rx.last_completed_deferred_reset_req_sn =
       last_completed_reset_req_seq_nbr_.value();
   streams_->AddHandoverState(state);
@@ -303,8 +245,6 @@ void ReassemblyQueue::RestoreFromState(const DcSctpSocketHandoverState& state) {
   // Validate that the component is in pristine state.
   RTC_DCHECK(last_completed_reset_req_seq_nbr_ == ReconfigRequestSN(0));
 
-  last_assembled_tsn_watermark_ =
-      tsn_unwrapper_.Unwrap(TSN(state.rx.last_assembled_tsn));
   last_completed_reset_req_seq_nbr_ =
       ReconfigRequestSN(state.rx.last_completed_deferred_reset_req_sn);
   streams_->RestoreFromState(state);

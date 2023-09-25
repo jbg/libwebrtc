@@ -735,5 +735,54 @@ TEST_F(DataTrackerTest, HandoverWhileSendingSackEveryPacketOnPacketLoss) {
   EXPECT_FALSE(tracker_->ShouldSendAck());
   EXPECT_TRUE(timer_->is_running());
 }
+
+TEST_F(DataTrackerTest, DoesntAcceptDataBeforeForwardTsnTsn) {
+  Observer({12, 13, 14, 15, 17});
+  tracker_->ObservePacketEnd();
+
+  tracker_->HandleForwardTsn(TSN(13));
+
+  EXPECT_FALSE(tracker_->Observe(TSN(11)));
+}
+
+TEST_F(DataTrackerTest, DoesntAcceptDataAtForwardTsn) {
+  Observer({12, 13, 14, 15, 17});
+  tracker_->ObservePacketEnd();
+
+  tracker_->HandleForwardTsn(TSN(16));
+
+  EXPECT_FALSE(tracker_->Observe(TSN(16)));
+}
+
+TEST_F(DataTrackerTest, DoesntAcceptDataBeforeCumAckTsn) {
+  EXPECT_EQ(kInitialTSN, TSN(11));
+  EXPECT_FALSE(tracker_->Observe(TSN(10)));
+}
+
+TEST_F(DataTrackerTest, DoesntAcceptContiguousDuplicateData) {
+  EXPECT_EQ(kInitialTSN, TSN(11));
+  EXPECT_TRUE(tracker_->Observe(TSN(11)));
+  EXPECT_FALSE(tracker_->Observe(TSN(11)));
+  EXPECT_TRUE(tracker_->Observe(TSN(12)));
+  EXPECT_FALSE(tracker_->Observe(TSN(12)));
+  EXPECT_FALSE(tracker_->Observe(TSN(11)));
+  EXPECT_FALSE(tracker_->Observe(TSN(10)));
+}
+
+TEST_F(DataTrackerTest, DoesntAcceptGapsWithDuplicateData) {
+  EXPECT_EQ(kInitialTSN, TSN(11));
+  EXPECT_TRUE(tracker_->Observe(TSN(11)));
+  EXPECT_FALSE(tracker_->Observe(TSN(11)));
+
+  EXPECT_TRUE(tracker_->Observe(TSN(14)));
+  EXPECT_FALSE(tracker_->Observe(TSN(14)));
+
+  EXPECT_TRUE(tracker_->Observe(TSN(13)));
+  EXPECT_FALSE(tracker_->Observe(TSN(13)));
+
+  EXPECT_TRUE(tracker_->Observe(TSN(12)));
+  EXPECT_FALSE(tracker_->Observe(TSN(12)));
+}
+
 }  // namespace
 }  // namespace dcsctp
