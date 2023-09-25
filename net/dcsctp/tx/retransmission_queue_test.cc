@@ -1588,6 +1588,5 @@ TEST_F(RetransmissionQueueTest, CanAlwaysSendOnePacket) {
   EXPECT_THAT(queue.GetChunksToSend(now_, mtu), ElementsAre(Pair(TSN(14), _)));
   EXPECT_THAT(queue.GetChunksToSend(now_, mtu), IsEmpty());
 }
-
 }  // namespace
 }  // namespace dcsctp
