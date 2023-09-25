@@ -47,15 +47,13 @@ TEST(DcsctpFuzzersTest, CanFuzzSocket) {
 
 // for dcsctp_connection_fuzzer
 TEST(DcsctpFuzzersTest, CanPrintFuzzConnection) {
-  uint8_t data[] = {0x27, 0x2a, 0x32, 0x04, 0x27, 0x18, 0x09,
-                    0x04, 0x09, 0x00, 0x2a, 0x32, 0x24};
+  uint8_t data[] = {0x18, 0x32, 0x16, 0x00, 0x04, 0x09, 0x32, 0x16};
   RTC_LOG(LS_INFO) << "\n" << PrintFuzzCommands(MakeFuzzCommands(data));
 }
 
 // for dcsctp_connection_fuzzer
 TEST(DcsctpFuzzersTest, CanFuzzConnectionFromBinary) {
-  uint8_t data[] = {0x27, 0x2a, 0x32, 0x04, 0x27, 0x18, 0x09,
-                    0x04, 0x09, 0x00, 0x2a, 0x32, 0x24};
+  uint8_t data[] = {0x18, 0x32, 0x16, 0x00, 0x04, 0x09, 0x32, 0x16};
   auto commands = MakeFuzzCommands(data);
 
   FuzzedSocket a("A", GetPacketObserver("A"));
@@ -68,28 +66,22 @@ TEST(DcsctpFuzzersTest, CanFuzzConnectionFromBinary) {
 TEST(DcsctpFuzzersTest, CanFuzzConnectionFromCommands) {
   std::vector<FuzzCommand> commands = {
       FuzzCommandSendMessage{.socket_is_a = 1,
-                             .stream_id = 2,
+                             .stream_id = 1,
                              .unordered = 0,
                              .max_retransmissions = 0,
-                             .message_size = 2000},
-      FuzzCommandResetStream{.socket_is_a = 1, .reset_1 = 0, .reset_2 = 1},
-      FuzzCommandReceivePackets{.a_to_z = 1, .count = 1},
+                             .message_size = 100},
+      FuzzCommandResetStream{.socket_is_a = 1, .reset_1 = 1, .reset_2 = 0},
       FuzzCommandSendMessage{.socket_is_a = 1,
                              .stream_id = 1,
-                             .unordered = 1,
-                             .max_retransmissions = 0,
-                             .message_size = 100},
-      FuzzCommandReceivePackets{.a_to_z = 1, .count = 2},
-      FuzzCommandReceivePackets{.a_to_z = 0, .count = 2},
-      FuzzCommandAdvanceTime{},
-      FuzzCommandSendMessage{.socket_is_a = 1,
-                             .stream_id = 2,
                              .unordered = 0,
                              .max_retransmissions = -1,
                              .message_size = 100},
-      FuzzCommandResetStream{.socket_is_a = 1, .reset_1 = 0, .reset_2 = 1},
+      FuzzCommandAdvanceTime{},
+      FuzzCommandReceivePackets{.a_to_z = 1, .count = 2},
+      FuzzCommandReceivePackets{.a_to_z = 0, .count = 4},
+      FuzzCommandResetStream{.socket_is_a = 1, .reset_1 = 1, .reset_2 = 0},
       FuzzCommandSendMessage{.socket_is_a = 1,
-                             .stream_id = 2,
+                             .stream_id = 1,
                              .unordered = 0,
                              .max_retransmissions = -1,
                              .message_size = 100},
