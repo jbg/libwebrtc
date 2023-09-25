@@ -29,7 +29,10 @@
 #include "net/dcsctp/public/types.h"
 #include "net/dcsctp/socket/dcsctp_socket.h"
 #include "net/dcsctp/socket/state_cookie.h"
+#include "rtc_base/crc32.h"
 #include "rtc_base/logging.h"
+#include "rtc_base/random.h"
+#include "rtc_base/strings/string_builder.h"
 
 namespace dcsctp {
 namespace dcsctp_fuzzers {
@@ -37,6 +40,14 @@ namespace {
 static constexpr int kRandomValue = FuzzerCallbacks::kRandomValue;
 static constexpr size_t kMinInputLength = 5;
 static constexpr size_t kMaxInputLength = 1024;
+constexpr size_t kMaxMessageSize = 3012;
+
+struct DataPayloadHeader {
+  uint32_t message_id;
+  uint32_t stream_id;
+  uint32_t size;
+  uint32_t crc;
+};
 
 // A starting state for the socket, when fuzzing.
 enum class StartingState : int {
@@ -83,78 +94,72 @@ class FuzzState {
   size_t offset_ = 0;
 };
 
-void SetSocketState(DcSctpSocketInterface& socket,
-                    FuzzerCallbacks& socket_cb,
-                    StartingState state) {
-  // We'll use another temporary peer socket for the establishment.
-  FuzzerCallbacks peer_cb;
-  DcSctpSocket peer("peer", peer_cb, nullptr, {});
-
+void SetSocketState(FuzzedSocket& a, FuzzedSocket& z, StartingState state) {
   switch (state) {
     case StartingState::kConnectNotCalled:
       return;
     case StartingState::kConnectCalled:
-      socket.Connect();
+      a.socket.Connect();
       return;
     case StartingState::kReceivedInitAck:
-      socket.Connect();
-      peer.ReceivePacket(socket_cb.ConsumeSentPacket());  // INIT
-      socket.ReceivePacket(peer_cb.ConsumeSentPacket());  // INIT_ACK
+      a.socket.Connect();
+      z.socket.ReceivePacket(a.cb.ConsumeSentPacket());  // INIT
+      a.socket.ReceivePacket(z.cb.ConsumeSentPacket());  // INIT_ACK
       return;
     case StartingState::kReceivedCookieAck:
-      socket.Connect();
-      peer.ReceivePacket(socket_cb.ConsumeSentPacket());  // INIT
-      socket.ReceivePacket(peer_cb.ConsumeSentPacket());  // INIT_ACK
-      peer.ReceivePacket(socket_cb.ConsumeSentPacket());  // COOKIE_ECHO
-      socket.ReceivePacket(peer_cb.ConsumeSentPacket());  // COOKIE_ACK
+      a.socket.Connect();
+      z.socket.ReceivePacket(a.cb.ConsumeSentPacket());  // INIT
+      a.socket.ReceivePacket(z.cb.ConsumeSentPacket());  // INIT_ACK
+      z.socket.ReceivePacket(a.cb.ConsumeSentPacket());  // COOKIE_ECHO
+      a.socket.ReceivePacket(z.cb.ConsumeSentPacket());  // COOKIE_ACK
       return;
     case StartingState::kShutdownCalled:
-      socket.Connect();
-      peer.ReceivePacket(socket_cb.ConsumeSentPacket());  // INIT
-      socket.ReceivePacket(peer_cb.ConsumeSentPacket());  // INIT_ACK
-      peer.ReceivePacket(socket_cb.ConsumeSentPacket());  // COOKIE_ECHO
-      socket.ReceivePacket(peer_cb.ConsumeSentPacket());  // COOKIE_ACK
-      socket.Shutdown();
+      a.socket.Connect();
+      z.socket.ReceivePacket(a.cb.ConsumeSentPacket());  // INIT
+      a.socket.ReceivePacket(z.cb.ConsumeSentPacket());  // INIT_ACK
+      z.socket.ReceivePacket(a.cb.ConsumeSentPacket());  // COOKIE_ECHO
+      a.socket.ReceivePacket(z.cb.ConsumeSentPacket());  // COOKIE_ACK
+      a.socket.Shutdown();
       return;
     case StartingState::kReceivedShutdownAck:
-      socket.Connect();
-      peer.ReceivePacket(socket_cb.ConsumeSentPacket());  // INIT
-      socket.ReceivePacket(peer_cb.ConsumeSentPacket());  // INIT_ACK
-      peer.ReceivePacket(socket_cb.ConsumeSentPacket());  // COOKIE_ECHO
-      socket.ReceivePacket(peer_cb.ConsumeSentPacket());  // COOKIE_ACK
-      socket.Shutdown();
-      peer.ReceivePacket(socket_cb.ConsumeSentPacket());  // SHUTDOWN
-      socket.ReceivePacket(peer_cb.ConsumeSentPacket());  // SHUTDOWN_ACK
+      a.socket.Connect();
+      z.socket.ReceivePacket(a.cb.ConsumeSentPacket());  // INIT
+      a.socket.ReceivePacket(z.cb.ConsumeSentPacket());  // INIT_ACK
+      z.socket.ReceivePacket(a.cb.ConsumeSentPacket());  // COOKIE_ECHO
+      a.socket.ReceivePacket(z.cb.ConsumeSentPacket());  // COOKIE_ACK
+      a.socket.Shutdown();
+      z.socket.ReceivePacket(a.cb.ConsumeSentPacket());  // SHUTDOWN
+      a.socket.ReceivePacket(z.cb.ConsumeSentPacket());  // SHUTDOWN_ACK
       return;
     case StartingState::kReceivedInit:
-      peer.Connect();
-      socket.ReceivePacket(peer_cb.ConsumeSentPacket());  // INIT
+      z.socket.Connect();
+      a.socket.ReceivePacket(z.cb.ConsumeSentPacket());  // INIT
       return;
     case StartingState::kReceivedCookieEcho:
-      peer.Connect();
-      socket.ReceivePacket(peer_cb.ConsumeSentPacket());  // INIT
-      peer.ReceivePacket(socket_cb.ConsumeSentPacket());  // INIT_ACK
-      socket.ReceivePacket(peer_cb.ConsumeSentPacket());  // COOKIE_ECHO
+      z.socket.Connect();
+      a.socket.ReceivePacket(z.cb.ConsumeSentPacket());  // INIT
+      z.socket.ReceivePacket(a.cb.ConsumeSentPacket());  // INIT_ACK
+      a.socket.ReceivePacket(z.cb.ConsumeSentPacket());  // COOKIE_ECHO
       return;
     case StartingState::kReceivedShutdown:
-      socket.Connect();
-      peer.ReceivePacket(socket_cb.ConsumeSentPacket());  // INIT
-      socket.ReceivePacket(peer_cb.ConsumeSentPacket());  // INIT_ACK
-      peer.ReceivePacket(socket_cb.ConsumeSentPacket());  // COOKIE_ECHO
-      socket.ReceivePacket(peer_cb.ConsumeSentPacket());  // COOKIE_ACK
-      peer.Shutdown();
-      socket.ReceivePacket(peer_cb.ConsumeSentPacket());  // SHUTDOWN
+      a.socket.Connect();
+      z.socket.ReceivePacket(a.cb.ConsumeSentPacket());  // INIT
+      a.socket.ReceivePacket(z.cb.ConsumeSentPacket());  // INIT_ACK
+      z.socket.ReceivePacket(a.cb.ConsumeSentPacket());  // COOKIE_ECHO
+      a.socket.ReceivePacket(z.cb.ConsumeSentPacket());  // COOKIE_ACK
+      z.socket.Shutdown();
+      a.socket.ReceivePacket(z.cb.ConsumeSentPacket());  // SHUTDOWN
       return;
     case StartingState::kReceivedShutdownComplete:
-      socket.Connect();
-      peer.ReceivePacket(socket_cb.ConsumeSentPacket());  // INIT
-      socket.ReceivePacket(peer_cb.ConsumeSentPacket());  // INIT_ACK
-      peer.ReceivePacket(socket_cb.ConsumeSentPacket());  // COOKIE_ECHO
-      socket.ReceivePacket(peer_cb.ConsumeSentPacket());  // COOKIE_ACK
-      peer.Shutdown();
-      socket.ReceivePacket(peer_cb.ConsumeSentPacket());  // SHUTDOWN
-      peer.ReceivePacket(socket_cb.ConsumeSentPacket());  // SHUTDOWN_ACK
-      socket.ReceivePacket(peer_cb.ConsumeSentPacket());  // SHUTDOWN_COMPLETE
+      a.socket.Connect();
+      z.socket.ReceivePacket(a.cb.ConsumeSentPacket());  // INIT
+      a.socket.ReceivePacket(z.cb.ConsumeSentPacket());  // INIT_ACK
+      z.socket.ReceivePacket(a.cb.ConsumeSentPacket());  // COOKIE_ECHO
+      a.socket.ReceivePacket(z.cb.ConsumeSentPacket());  // COOKIE_ACK
+      z.socket.Shutdown();
+      a.socket.ReceivePacket(z.cb.ConsumeSentPacket());  // SHUTDOWN
+      z.socket.ReceivePacket(a.cb.ConsumeSentPacket());  // SHUTDOWN_ACK
+      a.socket.ReceivePacket(z.cb.ConsumeSentPacket());  // SHUTDOWN_COMPLETE
       return;
     case StartingState::kNumberOfStates:
       RTC_CHECK(false);
@@ -395,9 +400,30 @@ std::vector<uint8_t> GeneratePacket(FuzzState& state) {
 }
 }  // namespace
 
-void FuzzSocket(DcSctpSocketInterface& socket,
-                FuzzerCallbacks& cb,
-                rtc::ArrayView<const uint8_t> data) {
+void FuzzerCallbacks::OnMessageReceived(DcSctpMessage message) {
+  size_t size = message.payload().size();
+  RTC_CHECK_EQ(size % 4, 0);
+  RTC_CHECK_GE(size, sizeof(DataPayloadHeader));
+  RTC_CHECK_LE(size, kMaxMessageSize);
+
+  const DataPayloadHeader* hdr =
+      reinterpret_cast<const DataPayloadHeader*>(message.payload().data());
+  RTC_DLOG(LS_INFO) << "SCTP_FUZZ: Received message on sid="
+                    << *message.stream_id()
+                    << ", message_id=" << hdr->message_id
+                    << ", size=" << message.payload().size()
+                    << ", hdr_size=" << hdr->size;
+
+  auto [unused, inserted] = received_message_ids_.insert(hdr->message_id);
+  RTC_CHECK(inserted);
+  RTC_CHECK_EQ(hdr->stream_id, message.stream_id().value());
+  RTC_CHECK_EQ(hdr->size, size);
+  uint32_t crc = rtc::ComputeCrc32(message.payload().data() + sizeof(*hdr),
+                                   size - sizeof(*hdr));
+  RTC_CHECK_EQ(hdr->crc, crc);
+}
+
+void FuzzSocket(FuzzedSocket& a, rtc::ArrayView<const uint8_t> data) {
   if (data.size() < kMinInputLength || data.size() > kMaxInputLength) {
     return;
   }
@@ -406,7 +432,9 @@ void FuzzSocket(DcSctpSocketInterface& socket,
   }
 
   // Set the socket in a specified valid starting state
-  SetSocketState(socket, cb, static_cast<StartingState>(data[0]));
+  // We'll use another temporary peer socket for the establishment.
+  FuzzedSocket z("Z");
+  SetSocketState(a, z, static_cast<StartingState>(data[0]));
 
   FuzzState state(data.subview(1));
 
@@ -414,20 +442,20 @@ void FuzzSocket(DcSctpSocketInterface& socket,
     switch (state.GetByte()) {
       case 1:
         // Generate a valid SCTP packet (based on fuzz data) and "receive it".
-        socket.ReceivePacket(GeneratePacket(state));
+        a.socket.ReceivePacket(GeneratePacket(state));
         break;
       case 2:
-        socket.Connect();
+        a.socket.Connect();
         break;
       case 3:
-        socket.Shutdown();
+        a.socket.Shutdown();
         break;
       case 4:
-        socket.Close();
+        a.socket.Close();
         break;
       case 5: {
         StreamID streams[] = {StreamID(state.GetByte())};
-        socket.ResetStreams(streams);
+        a.socket.ResetStreams(streams);
       } break;
       case 6: {
         uint8_t flags = state.GetByte();
@@ -438,17 +466,19 @@ void FuzzSocket(DcSctpSocketInterface& socket,
         options.lifecycle_id = LifecycleId(42);
         size_t payload_exponent = (flags >> 2) % 16;
         size_t payload_size = static_cast<size_t>(1) << payload_exponent;
-        socket.Send(DcSctpMessage(StreamID(state.GetByte()), PPID(53),
-                                  std::vector<uint8_t>(payload_size)),
-                    options);
+        a.socket.Send(DcSctpMessage(StreamID(state.GetByte()), PPID(53),
+                                    std::vector<uint8_t>(payload_size)),
+                      options);
         break;
       }
       case 7: {
-        // Expire an active timeout/timer.
-        uint8_t timeout_idx = state.GetByte();
-        absl::optional<TimeoutID> timeout_id = cb.ExpireTimeout(timeout_idx);
-        if (timeout_id.has_value()) {
-          socket.HandleTimeout(*timeout_id);
+        // Expire the next timeout/timer.
+        TimeMs ts = a.cb.PeekNextExpiryTime();
+        if (ts != TimeMs::InfiniteFuture()) {
+          absl::optional<TimeoutID> timeout_id = a.cb.AdvanceTimeTowards(ts);
+          if (timeout_id.has_value()) {
+            a.socket.HandleTimeout(*timeout_id);
+          }
         }
         break;
       }
@@ -457,5 +487,254 @@ void FuzzSocket(DcSctpSocketInterface& socket,
     }
   }
 }
+
+void ExchangeMessages(FuzzedSocket& a, FuzzedSocket& z, int max_count = 1000) {
+  bool delivered_packet = false;
+  do {
+    delivered_packet = false;
+    std::vector<uint8_t> packet_from_a = a.cb.ConsumeSentPacket();
+    if (!packet_from_a.empty()) {
+      delivered_packet = true;
+      z.socket.ReceivePacket(std::move(packet_from_a));
+    }
+    std::vector<uint8_t> packet_from_z = z.cb.ConsumeSentPacket();
+    if (!packet_from_z.empty()) {
+      delivered_packet = true;
+      a.socket.ReceivePacket(std::move(packet_from_z));
+    }
+  } while (--max_count > 0 && delivered_packet);
+}
+
+std::vector<FuzzCommand> MakeFuzzCommands(rtc::ArrayView<const uint8_t> data) {
+  std::vector<FuzzCommand> commands;
+  if (data.size() < kMinInputLength || data.size() > kMaxInputLength) {
+    return commands;
+  }
+  FuzzState state(data);
+
+  while (!state.empty()) {
+    uint8_t cmd = state.GetByte();
+    bool actor_is_a = (cmd & 0x01) == 0;
+    cmd = cmd >> 1;
+    if (cmd == 0) {
+      commands.push_back(FuzzCommandAdvanceTime{});
+    } else if (cmd >= 1 && cmd < 5) {
+      commands.push_back(
+          FuzzCommandReceivePackets{.a_to_z = actor_is_a, .count = cmd});
+    } else if (cmd == 5) {
+      commands.push_back(FuzzCommandDropPacket{.socket_is_a = actor_is_a});
+    } else if (cmd >= 6 && cmd < 22) {
+      uint8_t flags = cmd - 6;
+      commands.push_back(FuzzCommandSendMessage{
+          .socket_is_a = actor_is_a,
+          .stream_id = (flags & 0x8) == 0 ? 1 : 2,
+          .unordered = (flags & 0x4) == 0,
+          .max_retransmissions = (flags & 0x02) == 0 ? -1 : 0,
+          .message_size = (flags & 0x1) == 0 ? 100 : kMaxMessageSize,
+      });
+    } else if (cmd >= 22 && cmd < 26) {
+      uint8_t flags = cmd - 22;
+      commands.push_back(
+          FuzzCommandResetStream{.socket_is_a = actor_is_a,
+                                 .reset_1 = (flags & 0x02) != 0,
+                                 .reset_2 = (flags & 0x01) != 0});
+    } else if (cmd >= 26 && cmd < 36) {
+      commands.push_back((FuzzCommandRetransmitPacket{
+          .a_to_z = actor_is_a, .lookback = static_cast<size_t>(cmd - 26)}));
+    }
+  }
+
+  return commands;
+}
+struct FuzzCommandPrinter {
+  rtc::StringBuilder sb;
+
+  void operator()(FuzzCommandAdvanceTime cmd) {
+    sb << "FuzzCommandAdvanceTime{},\n";
+  }
+  void operator()(FuzzCommandReceivePackets cmd) {
+    sb << "FuzzCommandReceivePackets{.a_to_z=" << cmd.a_to_z
+       << ", .count=" << cmd.count << "},\n";
+  }
+  void operator()(FuzzCommandDropPacket cmd) {
+    sb << "FuzzCommandDropPacket{.socket_is_a=" << cmd.socket_is_a << "},\n";
+  }
+  void operator()(FuzzCommandRetransmitPacket cmd) {
+    sb << "FuzzCommandRetransmitPacket{.a_to_z=" << cmd.a_to_z
+       << ", .lookback=" << cmd.lookback << "},\n";
+  }
+  void operator()(FuzzCommandSendMessage cmd) {
+    sb << "FuzzCommandSendMessage{.socket_is_a=" << cmd.socket_is_a
+       << ", .stream_id=" << cmd.stream_id << ", .unordered=" << cmd.unordered
+       << ", .max_retransmissions=" << cmd.max_retransmissions
+       << ", .message_size=" << cmd.message_size << "},\n";
+  }
+  void operator()(FuzzCommandResetStream cmd) {
+    sb << "FuzzCommandResetStream{.socket_is_a=" << cmd.socket_is_a
+       << ", .reset_1=" << cmd.reset_1 << ", .reset_2=" << cmd.reset_2
+       << "},\n";
+  }
+};
+
+std::string PrintFuzzCommands(rtc::ArrayView<const FuzzCommand> commands) {
+  FuzzCommandPrinter fcp{};
+  for (const auto& command : commands) {
+    std::visit(fcp, command);
+  }
+  return fcp.sb.Release();
+}
+
+std::string PrintFuzzCommand(FuzzCommand cmd) {
+  FuzzCommandPrinter fcp{};
+  std::visit(fcp, cmd);
+  return fcp.sb.Release();
+}
+
+void ExecuteFuzzCommands(FuzzedSocket& a,
+                         FuzzedSocket& z,
+                         rtc::ArrayView<const FuzzCommand> commands) {
+  struct FuzzCommandExecutor {
+    FuzzedSocket& a;
+    FuzzedSocket& z;
+    webrtc::Random& random;
+    bool command_was_useful = false;
+
+    void operator()(FuzzCommandAdvanceTime cmd) {
+      // Move time to next interesting event.
+      TimeMs a_next_time = a.cb.PeekNextExpiryTime();
+      TimeMs z_next_time = z.cb.PeekNextExpiryTime();
+      TimeMs next_time = std::min(a_next_time, z_next_time);
+      if (next_time != TimeMs::InfiniteFuture()) {
+        command_was_useful = true;
+        RTC_DLOG(LS_INFO) << "SCTP_FUZZ: Advancing time " << *next_time
+                          << " ms";
+        RTC_DCHECK(next_time >= a.cb.TimeMillis());
+        for (;;) {
+          absl::optional<TimeoutID> timeout_a =
+              a.cb.AdvanceTimeTowards(next_time);
+          if (timeout_a.has_value()) {
+            a.socket.HandleTimeout(*timeout_a);
+          }
+          absl::optional<TimeoutID> timeout_z =
+              z.cb.AdvanceTimeTowards(next_time);
+          if (timeout_z.has_value()) {
+            z.socket.HandleTimeout(*timeout_z);
+          }
+          if (!timeout_a.has_value() && !timeout_z.has_value()) {
+            break;
+          }
+        }
+        RTC_DCHECK(a.cb.TimeMillis() == next_time);
+        RTC_DCHECK(z.cb.TimeMillis() == next_time);
+      }
+    }
+    void operator()(FuzzCommandReceivePackets cmd) {
+      FuzzedSocket& from = (cmd.a_to_z) ? a : z;
+      FuzzedSocket& to = (cmd.a_to_z) ? z : a;
+      for (size_t i = 0; i < cmd.count; ++i) {
+        std::vector<uint8_t> packet = from.cb.ConsumeSentPacket();
+        if (!packet.empty()) {
+          command_was_useful = true;
+          RTC_DLOG(LS_INFO)
+              << "SCTP_FUZZ: Received packet on " << to.cb.GetName();
+          to.socket.ReceivePacket(std::move(packet));
+        }
+      }
+    }
+    void operator()(FuzzCommandDropPacket cmd) {
+      FuzzedSocket& socket = (cmd.socket_is_a) ? a : z;
+      std::vector<uint8_t> dropped_packet = socket.cb.ConsumeSentPacket();
+      if (!dropped_packet.empty()) {
+        command_was_useful = true;
+        RTC_DLOG(LS_INFO) << "SCTP_FUZZ: Dropped packet on "
+                          << socket.cb.GetName();
+      }
+    }
+    void operator()(FuzzCommandRetransmitPacket cmd) {
+      FuzzedSocket& from = (cmd.a_to_z) ? a : z;
+      FuzzedSocket& to = (cmd.a_to_z) ? z : a;
+      std::vector<uint8_t> packet = from.cb.GetPacketFromHistory(cmd.lookback);
+      if (!packet.empty()) {
+        command_was_useful = true;
+        RTC_DLOG(LS_INFO) << "SCTP_FUZZ: Re-receiving packet, lookback="
+                          << cmd.lookback << " on " << to.cb.GetName();
+        to.socket.ReceivePacket(std::move(packet));
+      }
+    }
+    void operator()(FuzzCommandSendMessage cmd) {
+      command_was_useful = true;
+      FuzzedSocket& socket = (cmd.socket_is_a) ? a : z;
+      SendOptions options;
+      options.unordered = IsUnordered(cmd.unordered);
+      options.max_retransmissions =
+          cmd.max_retransmissions < 0
+              ? absl::nullopt
+              : absl::make_optional(cmd.max_retransmissions);
+      std::vector<uint8_t> payload(cmd.message_size);
+      uint32_t* data = reinterpret_cast<uint32_t*>(payload.data());
+      for (size_t i = 0; i < cmd.message_size / 4; ++i) {
+        data[i] = random.Rand<uint32_t>();
+      }
+
+      DataPayloadHeader* hdr =
+          reinterpret_cast<DataPayloadHeader*>(payload.data());
+      hdr->message_id = socket.cb.GetNextMessageId();
+      hdr->stream_id = cmd.stream_id;
+      hdr->size = cmd.message_size;
+      hdr->crc = rtc::ComputeCrc32(payload.data() + sizeof(*hdr),
+                                   cmd.message_size - sizeof(*hdr));
+
+      RTC_DLOG(LS_INFO) << "SCTP_FUZZ: Sending message on sid=" << cmd.stream_id
+                        << ", message_id=" << hdr->message_id
+                        << ", size=" << hdr->size;
+
+      socket.socket.Send(
+          DcSctpMessage(StreamID(cmd.stream_id), PPID(53), std::move(payload)),
+          options);
+    }
+    void operator()(FuzzCommandResetStream cmd) {
+      command_was_useful = true;
+      FuzzedSocket& socket = (cmd.socket_is_a) ? a : z;
+      std::vector<StreamID> streams;
+      if (cmd.reset_1) {
+        streams.push_back((StreamID(1)));
+      }
+      if (cmd.reset_2) {
+        streams.push_back((StreamID(2)));
+      }
+      socket.socket.ResetStreams(streams);
+    }
+  };
+  SetSocketState(a, z, StartingState::kReceivedCookieAck);
+
+  webrtc::Random random(42);
+
+  for (const auto& command : commands) {
+    if (a.cb.IsAborted() || z.cb.IsAborted()) {
+      return;
+    }
+    RTC_DLOG(LS_INFO) << "SCTP_FUZZ: " << PrintFuzzCommand(command);
+    FuzzCommandExecutor executor{a, z, random};
+    std::visit(executor, command);
+    if (!executor.command_was_useful) {
+      RTC_DLOG(LS_INFO) << "SCTP_FUZZ: Previous command wasn't useful - abort";
+      //return;
+    }
+  }
+
+  // Deliver all remaining messages.
+  ExchangeMessages(a, z);
+}
+
+void FuzzConnection(FuzzedSocket& a,
+                    FuzzedSocket& z,
+                    rtc::ArrayView<const uint8_t> data) {
+  std::vector<FuzzCommand> commands = MakeFuzzCommands(data);
+  if (commands.empty()) {
+    return;
+  }
+  ExecuteFuzzCommands(a, z, commands);
+}
+
 }  // namespace dcsctp_fuzzers
 }  // namespace dcsctp

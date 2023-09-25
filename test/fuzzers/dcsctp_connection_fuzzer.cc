@@ -17,9 +17,10 @@
 namespace webrtc {
 
 void FuzzOneInput(const uint8_t* data, size_t size) {
-  dcsctp::dcsctp_fuzzers::FuzzedSocket socket("A");
+  dcsctp::dcsctp_fuzzers::FuzzedSocket socket_a("A");
+  dcsctp::dcsctp_fuzzers::FuzzedSocket socket_z("Z");
 
-  dcsctp::dcsctp_fuzzers::FuzzSocket(socket,
-                                     rtc::ArrayView<const uint8_t>(data, size));
+  dcsctp::dcsctp_fuzzers::FuzzConnection(
+      socket_a, socket_z, rtc::ArrayView<const uint8_t>(data, size));
 }
 }  // namespace webrtc
