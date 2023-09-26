@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee6e7edb_a1104d72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-26T07:33:16Z",
+      "side": 1,
+      "message": "last PS was a rebase but gerrit doesn\u0027t show what conflict was resolved...",
+      "revId": "b93409a57d2205b2870f6b031d6c21b8b3ff6528",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
