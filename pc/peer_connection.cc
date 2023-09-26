@@ -2856,6 +2856,8 @@ void PeerConnection::ReportNegotiatedCiphers(
 
   int srtp_crypto_suite = stats.channel_stats[0].srtp_crypto_suite;
   int ssl_cipher_suite = stats.channel_stats[0].ssl_cipher_suite;
+  uint16_t ssl_peer_signature_algorithm =
+      stats.channel_stats[0].ssl_peer_signature_algorithm;
   if (srtp_crypto_suite == rtc::kSrtpInvalidCryptoSuite &&
       ssl_cipher_suite == rtc::kTlsNullWithNullNull) {
     return;
@@ -2884,6 +2886,11 @@ void PeerConnection::ReportNegotiatedCiphers(
           continue;
       }
     }
+  }
+  if (ssl_peer_signature_algorithm != 0) {
+    RTC_HISTOGRAM_ENUMERATION_SPARSE(
+        "WebRTC.PeerConnection.SslPeerSignatureAlgorithm",
+        ssl_peer_signature_algorithm, 0xffff);
   }
 }
 
