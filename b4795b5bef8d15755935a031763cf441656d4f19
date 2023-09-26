@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab740b6c_e049e563",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-26T19:21:52Z",
+      "side": 1,
+      "message": "To test,\n- apply in Chrome\n- with Wireshark on, make a call on https://webrtc.github.io/samples/src/content/peerconnection/bandwidth/\n- check chrome://histograms, search for WebRTC.PeerConnection.SslPeerSignatureAlgorithm\n- inspect the value, convert it to hex 0x403 \n- search for that value in Wireshark, find it in the client hello signature_algorithms extensions, the servers Certificate Request and the clients Certificate Verify messages\n\nWhat we are looking for is the size of the bucket with rsa_pkcs1_sha1 (0x0201)",
+      "revId": "b4795b5bef8d15755935a031763cf441656d4f19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6425531_8932a881",
+        "filename": "p2p/base/dtls_transport_internal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-26T19:21:52Z",
+      "side": 1,
+      "message": "inheritance seems broken here since the JSEP transport depends on DtlsTransportInternal? :-(",
+      "revId": "b4795b5bef8d15755935a031763cf441656d4f19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd6b6cb6_7f23c960",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2893,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-26T19:21:52Z",
+      "side": 1,
+      "message": "We don\u0027t seem to have the full sparse histogram used in https://chromium-review.googlesource.com/c/chromium/src/+/3378927\n\ndavidben: can (and should) we apply a lower limit here? From Wireshark i\u0027d say 0x1000 as limit and \u0026 0xfff the value?",
+      "revId": "b4795b5bef8d15755935a031763cf441656d4f19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
