@@ -71,6 +71,8 @@ class DtlsTransportInternal : public rtc::PacketTransportInternal {
   // TODO(zhihuang): Remove this once all dependencies implement this.
   virtual bool GetSslCipherSuite(int* cipher) = 0;
 
+  virtual uint16_t GetSslPeerSignatureAlgorithm() const { return 0; }
+
   // Gets the local RTCCertificate used for DTLS.
   virtual rtc::scoped_refptr<rtc::RTCCertificate> GetLocalCertificate()
       const = 0;
