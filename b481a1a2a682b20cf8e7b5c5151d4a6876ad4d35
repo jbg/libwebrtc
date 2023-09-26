@@ -16,6 +16,23 @@
       "message": "A cipher suite is a specific thing in TLS and doesn\u0027t include the signature algorithm. This isn\u0027t a cipher suite. Also, if you do certificates in both directions, there are two signatures and they may negotiate different algorithms, so \"the signature\" is off.\n\nPerhaps:\n\n`// Find out which signature algorithm was used by the peer`\n\nThat\u0027s why this API says peer in it. This is \"which signature algorithm did the peer sign / I verify\" rather than \"which signature algorithm did I sign\". (Don\u0027t think we currently retain that one... Chrome doesn\u0027t need it because we already inject a custom signer and can just histogram there.)",
       "revId": "b481a1a2a682b20cf8e7b5c5151d4a6876ad4d35",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac0af945_7c87ab82",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2860,
+      "author": {
+        "id": 8070
+      },
+      "writtenOn": "2023-09-26T20:33:37Z",
+      "side": 1,
+      "message": "Existing and all, but I\u0027m curious why this is routed all the way up here, rather than just histogramed in OpenSSLStreamAdapter.",
+      "revId": "b481a1a2a682b20cf8e7b5c5151d4a6876ad4d35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
