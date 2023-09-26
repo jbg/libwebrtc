@@ -50,6 +50,24 @@
       "message": "We don\u0027t seem to have the full sparse histogram used in https://chromium-review.googlesource.com/c/chromium/src/+/3378927\n\ndavidben: can (and should) we apply a lower limit here? From Wireshark i\u0027d say 0x1000 as limit and \u0026 0xfff the value?",
       "revId": "b4795b5bef8d15755935a031763cf441656d4f19",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eac03e47_15f2aae5",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2893,
+      "author": {
+        "id": 8070
+      },
+      "writtenOn": "2023-09-26T20:32:27Z",
+      "side": 1,
+      "message": "The allocations are a bit all over the place due to some... interesting historical quirks.\nhttps://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-signaturescheme\n\nIt happens that we haven\u0027t currently allocated anything with a high bit, but there\u0027s no guarantee of that. (Usually IETF likes to allocate small numbers and we\u0027ll pick large random numbers for pre-standard stuff. But there hasn\u0027t been any pre-standard signature schemes right now. Maybe there will be when we start playing with PQ here, if PQ ends up looking like that.)\n\nSo, uh, it\u0027d probably work for now, but it\u0027s fragile?\n\nI\u0027m not sure I\u0027m following the comment about \"full sparse histogram\". What\u0027s the concern with `RTC_HISTOGRAM_ENUMERATION_SPARSE`? `kSslCipherSuiteMaxValue` is 0xffff, so it seems to have been fine for cipher suites.",
+      "parentUuid": "dd6b6cb6_7f23c960",
+      "revId": "b4795b5bef8d15755935a031763cf441656d4f19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
