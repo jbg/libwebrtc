@@ -416,6 +416,11 @@ bool DtlsTransport::GetSslVersionBytes(int* version) const {
   return dtls_->GetSslVersionBytes(version);
 }
 
+uint16_t DtlsTransport::GetSslPeerSignatureAlgorithm() const {
+  // Will return 0 (not applicable) before connected.
+  return dtls_->GetPeerSignatureAlgorithm();
+}
+
 // Called from upper layers to send a media packet.
 int DtlsTransport::SendPacket(const char* data,
                               size_t size,
