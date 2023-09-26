@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3f170324_0fa2c237",
+        "filename": "common_video/h265/h265_common.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-09-26T02:01:55Z",
+      "side": 1,
+      "message": "kFu \u0026 kPaci. Maybe document them here.",
+      "revId": "e46dc8b74007ae9d2c7545cf33c1ddd44a74368d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa3f9636_e8253725",
         "filename": "modules/rtp_rtcp/source/rtp_video_header.h",
         "patchSetId": 2
@@ -116,6 +133,125 @@
       "writtenOn": "2023-09-26T01:07:11Z",
       "side": 1,
       "message": "There is no section 4.2.2. Could you recheck the reference.",
+      "revId": "e46dc8b74007ae9d2c7545cf33c1ddd44a74368d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a07d9705_bbd8a9fd",
+        "filename": "modules/rtp_rtcp/source/video_rtp_depacketizer_h265.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-09-26T02:01:55Z",
+      "side": 1,
+      "message": "better check the rtp payload size first before you proceed.",
+      "revId": "e46dc8b74007ae9d2c7545cf33c1ddd44a74368d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "876841d8_c2f7d8af",
+        "filename": "modules/rtp_rtcp/source/video_rtp_depacketizer_h265.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-09-26T02:01:55Z",
+      "side": 1,
+      "message": "This TODO is not correct. H.265 VUI parameters does not contain information of max reorder pics and max_dec_pic_buffering like H.264 does.\n\nAll these information is in VPS if that\u0027s something you want to modify.",
+      "revId": "e46dc8b74007ae9d2c7545cf33c1ddd44a74368d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aab7436_5bdc784a",
+        "filename": "modules/rtp_rtcp/source/video_rtp_depacketizer_h265.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-09-26T02:01:55Z",
+      "side": 1,
+      "message": "Is the width/height already considering the crop window?",
+      "revId": "e46dc8b74007ae9d2c7545cf33c1ddd44a74368d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbcd40c1_4cdcf866",
+        "filename": "modules/rtp_rtcp/source/video_rtp_depacketizer_h265.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-09-26T02:01:55Z",
+      "side": 1,
+      "message": "\u003e\u003d ?",
+      "revId": "e46dc8b74007ae9d2c7545cf33c1ddd44a74368d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e081732_f810af47",
+        "filename": "modules/rtp_rtcp/source/video_rtp_depacketizer_h265.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-09-26T02:01:55Z",
+      "side": 1,
+      "message": "Please put these default value to struct def.",
+      "revId": "e46dc8b74007ae9d2c7545cf33c1ddd44a74368d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e58b5f40_e65c7673",
+        "filename": "modules/rtp_rtcp/source/video_rtp_depacketizer_h265.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-09-26T02:01:55Z",
+      "side": 1,
+      "message": "document should be Single NALU or AP.",
+      "revId": "e46dc8b74007ae9d2c7545cf33c1ddd44a74368d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f790cfe1_35a40ef2",
+        "filename": "test/fuzzers/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-09-26T02:01:55Z",
+      "side": 1,
+      "message": "I doubt if you should use h264 fuzzer corpus. After all the packet layout is different.",
       "revId": "e46dc8b74007ae9d2c7545cf33c1ddd44a74368d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
