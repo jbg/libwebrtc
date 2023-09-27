@@ -68,6 +68,24 @@
       "parentUuid": "dd6b6cb6_7f23c960",
       "revId": "b4795b5bef8d15755935a031763cf441656d4f19",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e51142b5_f0e58e67",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2893,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-27T07:38:10Z",
+      "side": 1,
+      "message": "kSslCipherSuiteMaxValue is better!\n\nIn practice I hope we will not see much else then the ~10 values we see in Chrome so this should be light enough on UMA. And hopefully won\u0027t stay for long.",
+      "parentUuid": "eac03e47_15f2aae5",
+      "revId": "b4795b5bef8d15755935a031763cf441656d4f19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

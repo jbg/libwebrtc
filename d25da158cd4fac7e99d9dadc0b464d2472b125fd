@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f1488f9_c2069d74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-27T07:38:10Z",
+      "side": 1,
+      "message": "Split up per media type. The hypothesis is that audio-only callcenter SBC show a slightly different distribution.",
+      "revId": "d25da158cd4fac7e99d9dadc0b464d2472b125fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

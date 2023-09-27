@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70aca5bc_1dc29a39",
+        "filename": "p2p/base/dtls_transport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-27T07:38:10Z",
+      "side": 1,
+      "message": "Done, thank you.\n\nOne thing that is different between WebRTC and HTTP is that we always use client certificates. The numbers we gather here will be only for one direction but it seems unlikely to me that the supported signature algorithms implemented would differ.",
+      "parentUuid": "24652998_14b62b2e",
+      "revId": "b481a1a2a682b20cf8e7b5c5151d4a6876ad4d35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac0af945_7c87ab82",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-09-26T20:33:37Z",
       "side": 1,
       "message": "Existing and all, but I\u0027m curious why this is routed all the way up here, rather than just histogramed in OpenSSLStreamAdapter.",
+      "revId": "b481a1a2a682b20cf8e7b5c5151d4a6876ad4d35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ce167bf_ec73dda8",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2860,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-27T07:38:10Z",
+      "side": 1,
+      "message": "Good question. I went here mostly because my favorite PeerConnection::ReportFirstConnectUsageMetrics didn\u0027t have the right infrastructure to query the transports.\nAnd reporting only on first connect comes from the attempt to burn DTLS 1.0 which used the wrong number for \"all connections\" - not a risk here since the UMA ignore \"0\" which will be returned for unconnected connections (unit tests seem to be a bit weird and call this without an actual connection which caused the test failures in PS2)\n\nThe advantage of doing it here is that it gets very easy to expose in the getStats API which then makes it easy to wire it up to chrome://webrtc-internals and add a prominent \"you are using things we want to get rid of\" notice.\nWe might even make that web-exposed via getStats similar to https://w3c.github.io/webrtc-stats/#dom-rtctransportstats-dtlscipher but that is probably too much effort in terms of process ;-)",
+      "parentUuid": "ac0af945_7c87ab82",
       "revId": "b481a1a2a682b20cf8e7b5c5151d4a6876ad4d35",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
