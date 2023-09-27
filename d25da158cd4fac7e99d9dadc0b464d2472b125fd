@@ -67,6 +67,24 @@
       "message": "The reason for separating the types is presumably to figure out whether the offending partner is an audio-only, AV-only or data-only application?\n\nOtherwise the separation seems to have low value, since majority users are A/V+Data.",
       "revId": "d25da158cd4fac7e99d9dadc0b464d2472b125fd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe1a1eaf_447841ad",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2894,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-27T08:36:03Z",
+      "side": 1,
+      "message": "The dreaded audio-only SBC in a callcenter which also insists on not using rtcp-mux and takes twelve months to upgrade...",
+      "parentUuid": "4a27254e_2171b6a1",
+      "revId": "d25da158cd4fac7e99d9dadc0b464d2472b125fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

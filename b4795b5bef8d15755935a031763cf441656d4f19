@@ -53,6 +53,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffb62337_d439822b",
+        "filename": "p2p/base/dtls_transport_internal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-09-27T08:36:03Z",
+      "side": 1,
+      "message": "Made it pure virtual and added it to the fake dtls transport.\n\n(is this class simply misnamed and should be DtlsTransportInterface?)",
+      "parentUuid": "0b1b3ea1_7a0d1a83",
+      "revId": "b4795b5bef8d15755935a031763cf441656d4f19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd6b6cb6_7f23c960",
