@@ -287,6 +287,9 @@ void AimdRateControl::ChangeBitrate(const RateControlInput& input,
       // Set bit rate to something slightly lower than the measured throughput
       // to get rid of any self-induced delay.
       decreased_bitrate = estimated_throughput * beta_;
+      if (decreased_bitrate > DataRate::KilobitsPerSec(5)) {
+        decreased_bitrate = decreased_bitrate - DataRate::KilobitsPerSec(5);
+      }
       if (decreased_bitrate > current_bitrate_) {
         // TODO(terelius): The link_capacity estimate may be based on old
         // throughput measurements. Relying on them may lead to unnecessary
