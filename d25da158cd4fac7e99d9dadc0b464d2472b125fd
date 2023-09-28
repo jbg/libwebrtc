@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fa5d187_77e49364",
+        "filename": "p2p/base/dtls_transport.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-28T07:26:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4d09705_79043ce7",
+      "revId": "d25da158cd4fac7e99d9dadc0b464d2472b125fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a27254e_2171b6a1",
@@ -83,6 +101,24 @@
       "side": 1,
       "message": "The dreaded audio-only SBC in a callcenter which also insists on not using rtcp-mux and takes twelve months to upgrade...",
       "parentUuid": "4a27254e_2171b6a1",
+      "revId": "d25da158cd4fac7e99d9dadc0b464d2472b125fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de393fd9_c3008115",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2894,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-28T07:26:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fe1a1eaf_447841ad",
       "revId": "d25da158cd4fac7e99d9dadc0b464d2472b125fd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }

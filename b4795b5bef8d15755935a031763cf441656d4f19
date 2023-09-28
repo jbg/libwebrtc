@@ -71,6 +71,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eee2e2b_d89edd40",
+        "filename": "p2p/base/dtls_transport_internal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-28T07:26:43Z",
+      "side": 1,
+      "message": "I think a lot of the Internal things here are subclasses of a (public) Interface, and define an internal interface that is then implemented by some other class.\nSometimes because depending on the implementation class would create a dependency cycle, other times for less good reasons (I suspect).\n\nBut each case requires examining the inheritance tree.\nNot touching in this CL anyway.",
+      "parentUuid": "ffb62337_d439822b",
+      "revId": "b4795b5bef8d15755935a031763cf441656d4f19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd6b6cb6_7f23c960",
