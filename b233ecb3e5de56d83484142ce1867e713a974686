@@ -52,6 +52,24 @@
       "parentUuid": "9d71c7e7_0336e4b5",
       "revId": "b233ecb3e5de56d83484142ce1867e713a974686",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46d6446a_93328d26",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-09-28T06:39:07Z",
+      "side": 1,
+      "message": "Ok, let me change the internal docs then. Let\u0027s not land this one.",
+      "parentUuid": "d6cb01a8_88e64725",
+      "revId": "b233ecb3e5de56d83484142ce1867e713a974686",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
