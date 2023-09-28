@@ -69,6 +69,24 @@
       "parentUuid": "ac0af945_7c87ab82",
       "revId": "b481a1a2a682b20cf8e7b5c5151d4a6876ad4d35",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aa0f8d3_e41cc5a1",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2860,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2023-09-28T16:53:02Z",
+      "side": 1,
+      "message": "Fair enough. I don\u0027t know WebRTC very well, so will defer to you all on that one.\n\nI might suggest not exposing it via `getStats` through. Then we\u0027ll need to do a lot of extra work if, say, TLS 1.4 changes the kinds of parameters that are negotiated. E.g. TLS 1.2 to TLS 1.3 narrowed what cipher suites mean and combined (HashAlgorithm, SignatureAlgorithm) tuples into a single SignatureScheme. Who knows, maybe KEM-TLS will be the answer for postquantum and we don\u0027t have an in-protocol signature anymore.",
+      "parentUuid": "6ce167bf_ec73dda8",
+      "revId": "b481a1a2a682b20cf8e7b5c5151d4a6876ad4d35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
