@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47714a5b_b90604b2",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5106
+      },
+      "writtenOn": "2023-09-28T05:13:41Z",
+      "side": 1,
+      "message": "This will require non-Googler to set download_remoteexec_cfg to be False.\nBut I think current error is not so instructive to do that for them.\n\nLet me improve error message in fetching script.",
+      "revId": "b233ecb3e5de56d83484142ce1867e713a974686",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
