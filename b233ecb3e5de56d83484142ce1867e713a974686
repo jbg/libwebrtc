@@ -16,6 +16,24 @@
       "message": "This will require non-Googler to set download_remoteexec_cfg to be False.\nBut I think current error is not so instructive to do that for them.\n\nLet me improve error message in fetching script.",
       "revId": "b233ecb3e5de56d83484142ce1867e713a974686",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d71c7e7_0336e4b5",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-09-28T06:34:45Z",
+      "side": 1,
+      "message": "Will the error happen at \"gclient sync\" time?\n\nI am OK following Chromium on this one, is Chromium keeping this to False in DEPS and asking to flip it in .gclient?",
+      "parentUuid": "47714a5b_b90604b2",
+      "revId": "b233ecb3e5de56d83484142ce1867e713a974686",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
