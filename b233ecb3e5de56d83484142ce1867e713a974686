@@ -34,6 +34,24 @@
       "parentUuid": "47714a5b_b90604b2",
       "revId": "b233ecb3e5de56d83484142ce1867e713a974686",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6cb01a8_88e64725",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5106
+      },
+      "writtenOn": "2023-09-28T06:35:58Z",
+      "side": 1,
+      "message": "\u003e Will the error happen at \"gclient sync\" time?\n\u003e \n\nYes.\n\n\u003e I am OK following Chromium on this one, is Chromium keeping this to False in DEPS and asking to flip it in .gclient?\n\nYes.",
+      "parentUuid": "9d71c7e7_0336e4b5",
+      "revId": "b233ecb3e5de56d83484142ce1867e713a974686",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
