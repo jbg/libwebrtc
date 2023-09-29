@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b74739c_cda173b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-29T07:46:51Z",
+      "side": 1,
+      "message": "Not 100% sure I understand all the implications here, but think this sounds correct (and a better place in the stack to do the checks).",
+      "revId": "8d24cf576f7b9015065a456f8e70ceb72d91f537",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "839f53e6_cd7c8c19",
+        "filename": "net/dcsctp/rx/data_tracker_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 739,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-29T07:46:51Z",
+      "side": 1,
+      "message": "ForwardTsnTsn???? Seems like you need another word in the name...",
+      "revId": "8d24cf576f7b9015065a456f8e70ceb72d91f537",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b56af35_be311847",
+        "filename": "net/dcsctp/rx/data_tracker_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-29T07:46:51Z",
+      "side": 1,
+      "message": "Nit: I find \"DoesNot\" more readable in CamelCase than \"Doesnt\". May be a matter of taste.",
+      "revId": "8d24cf576f7b9015065a456f8e70ceb72d91f537",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba08b20b_0bd5479e",
+        "filename": "net/dcsctp/socket/dcsctp_socket.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1712,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-09-29T07:46:51Z",
+      "side": 1,
+      "message": "So this is the core change - that checks for \"stuff that we shouldn\u0027t handle\" is moved from reassaembly_queue().Handle() to data_tracker().HandleForwardTsn?",
+      "revId": "8d24cf576f7b9015065a456f8e70ceb72d91f537",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
