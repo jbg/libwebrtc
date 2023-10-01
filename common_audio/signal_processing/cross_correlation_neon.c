@@ -72,7 +72,7 @@ void WebRtcSpl_CrossCorrelationNeon(int32_t* cross_correlation,
                                     size_t dim_cross_correlation,
                                     int right_shifts,
                                     int step_seq2) {
-  size_t i = 0;
+  int i = 0;
 
   for (i = 0; i < dim_cross_correlation; i++) {
     const int16_t* seq1_ptr = seq1;

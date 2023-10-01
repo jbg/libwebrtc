@@ -22,8 +22,8 @@ int WebRtcSpl_DownsampleFastNeon(const int16_t* data_in,
                                  size_t coefficients_length,
                                  int factor,
                                  size_t delay) {
-  size_t i = 0;
-  size_t j = 0;
+  int i = 0;
+  int j = 0;
   int32_t out_s32 = 0;
   size_t endpos = delay + factor * (data_out_length - 1) + 1;
   size_t res = data_out_length & 0x7;
