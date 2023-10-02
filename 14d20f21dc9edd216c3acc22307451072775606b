@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "35934857_33b417d3",
+        "filename": "common_audio/signal_processing/cross_correlation_neon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 18169
+      },
+      "writtenOn": "2023-10-02T10:20:44Z",
+      "side": 1,
+      "message": "It\u0027s the step_seq2 that can be negative. When multiplied by a size_t in the expression `seq2 + (step_seq2 * i)`, it is upsized and becomes a large size_t: https://godbolt.org/z/39cMra9bG.",
+      "parentUuid": "ea424f42_813ebe48",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 12
+      },
+      "revId": "14d20f21dc9edd216c3acc22307451072775606b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb9b50cd_5c477ce4",
@@ -78,6 +102,30 @@
       "side": 1,
       "message": "factor should never be set to negative.\n(https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/common_audio/signal_processing/include/signal_processing_library.h;drc\u003d96315752d2499e12794507d6dea0c2652373754e;l\u003d665)\n\nIt would be good to add a DCHECK to ensure that does not happen.\n\nBut with factor being nonnegative I don\u0027t see why the change from size_t to int for i,j is needed.",
       "parentUuid": "eb9b50cd_5c477ce4",
+      "range": {
+        "startLine": 172,
+        "startChar": 40,
+        "endLine": 172,
+        "endChar": 50
+      },
+      "revId": "14d20f21dc9edd216c3acc22307451072775606b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24fccb64_2f0a00b1",
+        "filename": "common_audio/signal_processing/downsample_fast_neon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 18169
+      },
+      "writtenOn": "2023-10-02T10:20:44Z",
+      "side": 1,
+      "message": "It\u0027s the expression `i-j` below that can become negative. When i and j were size_t, `i-j` was a large size_t. Using this large number as an index apparently is interpreted as using a signed negative index. It works but it\u0027s undefined behavior, which ubsan has detected in the downstream project.\n\nDetails: https://stackoverflow.com/questions/48429021/is-a-pointer-considered-an-unsigned-value-in-c",
+      "parentUuid": "137f889d_2633f5c1",
       "range": {
         "startLine": 172,
         "startChar": 40,
