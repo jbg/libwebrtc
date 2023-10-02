@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1e82b8c_0d1874dc",
+        "filename": "net/dcsctp/rx/data_tracker_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 739,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2023-10-02T14:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "839f53e6_cd7c8c19",
+      "revId": "8d24cf576f7b9015065a456f8e70ceb72d91f537",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b56af35_be311847",
@@ -52,6 +70,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cb104ec_6c4223ad",
+        "filename": "net/dcsctp/rx/data_tracker_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2023-10-02T14:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b56af35_be311847",
+      "revId": "8d24cf576f7b9015065a456f8e70ceb72d91f537",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba08b20b_0bd5479e",
@@ -65,6 +101,24 @@
       "writtenOn": "2023-09-29T07:46:51Z",
       "side": 1,
       "message": "So this is the core change - that checks for \"stuff that we shouldn\u0027t handle\" is moved from reassaembly_queue().Handle() to data_tracker().HandleForwardTsn?",
+      "revId": "8d24cf576f7b9015065a456f8e70ceb72d91f537",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01d78dce_76a6f62a",
+        "filename": "net/dcsctp/socket/dcsctp_socket.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1712,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2023-10-02T14:23:43Z",
+      "side": 1,
+      "message": "Yes - I\u0027ve updated the commit message to indicate that - thanks.",
+      "parentUuid": "ba08b20b_0bd5479e",
       "revId": "8d24cf576f7b9015065a456f8e70ceb72d91f537",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }

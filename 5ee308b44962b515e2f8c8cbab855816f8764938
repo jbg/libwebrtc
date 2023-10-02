@@ -16,6 +16,24 @@
       "message": "It\u0027s not obvious to me that the situations that these tests were testing are covered by the new tests, but I\u0027ll trust your word for it.",
       "revId": "5ee308b44962b515e2f8c8cbab855816f8764938",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c042f275_1bb93c0c",
+        "filename": "net/dcsctp/rx/reassembly_queue_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2023-10-02T14:23:43Z",
+      "side": 0,
+      "message": "The fuzzer will prove I\u0027m wrong, in case I\u0027m wrong.",
+      "parentUuid": "12e4d7d4_ca806dd6",
+      "revId": "5ee308b44962b515e2f8c8cbab855816f8764938",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
