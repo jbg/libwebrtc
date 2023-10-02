@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "538497b8_0cd66577",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20759
+      },
+      "writtenOn": "2023-10-02T15:59:13Z",
+      "side": 1,
+      "message": "This is my proposal to remove the old \"AV1X\" string ...\nAny comments about it ?",
+      "revId": "c534a9b9d0f31a77055705b5c3c249b3d927aa3c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
