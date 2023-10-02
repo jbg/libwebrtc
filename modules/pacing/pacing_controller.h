@@ -24,6 +24,7 @@
 #include "api/function_view.h"
 #include "api/transport/field_trial_based_config.h"
 #include "api/transport/network_types.h"
+#include "api/units/time_delta.h"
 #include "modules/pacing/bitrate_prober.h"
 #include "modules/pacing/interval_budget.h"
 #include "modules/pacing/prioritized_packet_queue.h"
@@ -86,6 +87,10 @@ class PacingController {
   // set to 1ms as this is intended to allow times be rounded down to the
   // nearest millisecond.
   static const TimeDelta kMaxEarlyProbeProcessing;
+  // The pacer is allowed to send enqued packets in bursts and can build up a
+  // packet "debt" that correspond to approximately the send rate during
+  // the burst interval.
+  static constexpr TimeDelta kDefaultBurstInterval = TimeDelta::Millis(40);
 
   PacingController(Clock* clock,
                    PacketSender* packet_sender,
