@@ -16,6 +16,23 @@
       "message": "This is my proposal to remove the old \"AV1X\" string ...\nAny comments about it ?",
       "revId": "c534a9b9d0f31a77055705b5c3c249b3d927aa3c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6356465_46e59151",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-10-02T16:59:07Z",
+      "side": 1,
+      "message": "We still have projects which use AV1X.",
+      "revId": "c534a9b9d0f31a77055705b5c3c249b3d927aa3c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
