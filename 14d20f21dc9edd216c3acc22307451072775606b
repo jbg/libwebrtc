@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2094a3a2_0d4430b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18169
+      },
+      "writtenOn": "2023-10-02T10:24:56Z",
+      "side": 1,
+      "message": "Note that a similar issue was fixed before in the generic versions of the functions: https://webrtc-review.googlesource.com/70780",
+      "revId": "14d20f21dc9edd216c3acc22307451072775606b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea424f42_813ebe48",
