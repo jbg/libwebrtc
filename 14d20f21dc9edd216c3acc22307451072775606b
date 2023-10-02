@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ea424f42_813ebe48",
+        "filename": "common_audio/signal_processing/cross_correlation_neon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2023-10-02T08:41:42Z",
+      "side": 1,
+      "message": "I don\u0027t really understand the need for this change.\ndim_cross_correlation cannot be negative, and since the loop increases i  from 0 to dim_cross_correlation it should never become negative.\n\n(the change rather introduces the risk for a wraparound since with this change i in theory could wraparound in the loop)",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 12
+      },
+      "revId": "14d20f21dc9edd216c3acc22307451072775606b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb9b50cd_5c477ce4",
         "filename": "common_audio/signal_processing/downsample_fast_neon.c",
         "patchSetId": 1
@@ -31,6 +54,30 @@
       "writtenOn": "2023-10-02T07:48:41Z",
       "side": 1,
       "message": "Is the problem that `factor` can be negative?",
+      "range": {
+        "startLine": 172,
+        "startChar": 40,
+        "endLine": 172,
+        "endChar": 50
+      },
+      "revId": "14d20f21dc9edd216c3acc22307451072775606b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "137f889d_2633f5c1",
+        "filename": "common_audio/signal_processing/downsample_fast_neon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2023-10-02T08:41:42Z",
+      "side": 1,
+      "message": "factor should never be set to negative.\n(https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/common_audio/signal_processing/include/signal_processing_library.h;drc\u003d96315752d2499e12794507d6dea0c2652373754e;l\u003d665)\n\nIt would be good to add a DCHECK to ensure that does not happen.\n\nBut with factor being nonnegative I don\u0027t see why the change from size_t to int for i,j is needed.",
+      "parentUuid": "eb9b50cd_5c477ce4",
       "range": {
         "startLine": 172,
         "startChar": 40,
