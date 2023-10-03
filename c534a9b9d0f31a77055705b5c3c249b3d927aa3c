@@ -51,6 +51,24 @@
       "parentUuid": "d6356465_46e59151",
       "revId": "c534a9b9d0f31a77055705b5c3c249b3d927aa3c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c2343d5_294710bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-10-03T11:05:47Z",
+      "side": 1,
+      "message": "I would give it 1 more year at least. I would suggest to drop this CL (-\u003e abandon).",
+      "parentUuid": "a08a8609_903cf11a",
+      "revId": "c534a9b9d0f31a77055705b5c3c249b3d927aa3c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
