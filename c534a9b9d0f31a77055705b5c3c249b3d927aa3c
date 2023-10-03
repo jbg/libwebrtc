@@ -33,6 +33,24 @@
       "message": "We still have projects which use AV1X.",
       "revId": "c534a9b9d0f31a77055705b5c3c249b3d927aa3c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a08a8609_903cf11a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20759
+      },
+      "writtenOn": "2023-10-03T09:55:00Z",
+      "side": 1,
+      "message": "Thanks for the feedback. Should I keep this CL open, or should I close it?\n\nDo you have any timeline for updating your projects to remove that string ?\n\nBr,\nAlfred",
+      "parentUuid": "d6356465_46e59151",
+      "revId": "c534a9b9d0f31a77055705b5c3c249b3d927aa3c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
