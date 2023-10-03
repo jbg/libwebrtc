@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "139c669e_9038ad96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-10-03T12:36:35Z",
+      "side": 1,
+      "message": "LGTM.\n\nCould you please fix the build?:\n\nERROR at //modules/rtp_rtcp/source/rtp_packetizer_h265.h:19:11: Can\u0027t include this header from here.\n#include \"modules/include/module_common_types.h\"\n          ^------------------------------------\nThe target:\n  //modules/rtp_rtcp:rtp_rtcp\nis including a file from the target:\n  //modules:module_api\n\nIt\u0027s usually best to depend directly on the destination target.\nIn some cases, the destination target is considered a subcomponent\nof an intermediate target. In this case, the intermediate target\nshould depend publicly on the destination to forward the ability\nto include headers.\n\nDependency chain (there may also be others):\n  //modules/rtp_rtcp:rtp_rtcp --\u003e",
+      "revId": "22f0661034c33d73fcfac8018f9028d5010199a4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
