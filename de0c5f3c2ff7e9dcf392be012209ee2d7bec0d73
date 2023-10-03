@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc63d4ce_130f75a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-10-03T13:27:45Z",
+      "side": 1,
+      "message": "LGTM.\n\nQ: When temporal layering is used, would it make sense to force encoding T0 frame (not just a random Tx)? T0 will be delivered to all receivers. Tx\u003e0 may not be delivered to all receivers. And receivers of T\u003cx may still timeout and request a keyframe.",
+      "revId": "de0c5f3c2ff7e9dcf392be012209ee2d7bec0d73",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
