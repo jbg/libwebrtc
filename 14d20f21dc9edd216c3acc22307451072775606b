@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7259f45b_d8392532",
+        "filename": "common_audio/signal_processing/cross_correlation_neon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-10-03T14:31:46Z",
+      "side": 1,
+      "message": "Thanks for the repro on Godbolt Sergey!\n\nAnd step_seq2 is actually set to -1 here https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/audio_coding/neteq/expand.cc;l\u003d495;drc\u003dd00ce747c7588b1541ad6a0c0db7895487b5a618.\n\nPer, are the size_t inputs needed or can we change the type and remove the danger of wraparound?",
+      "parentUuid": "35934857_33b417d3",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 12
+      },
+      "revId": "14d20f21dc9edd216c3acc22307451072775606b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb9b50cd_5c477ce4",
         "filename": "common_audio/signal_processing/downsample_fast_neon.c",
         "patchSetId": 1
