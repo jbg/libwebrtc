@@ -16,6 +16,7 @@
 #include <vector>
 
 #include "api/fec_controller_override.h"
+#include "api/units/timestamp.h"
 #include "api/video/encoded_image.h"
 #include "api/video/video_frame.h"
 #include "api/video_codecs/video_encoder.h"
@@ -132,6 +133,7 @@ class LibvpxVp8Encoder : public VideoEncoder {
   std::vector<vpx_codec_enc_cfg_t> vpx_configs_;
   std::vector<Vp8EncoderConfig> config_overrides_;
   std::vector<vpx_rational_t> downsampling_factors_;
+  std::vector<Timestamp> last_encoder_output_time_;
 
   // Variable frame-rate screencast related fields and methods.
   const struct VariableFramerateExperiment {
