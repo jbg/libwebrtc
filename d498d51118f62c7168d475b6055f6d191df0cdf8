@@ -16,6 +16,24 @@
       "message": "Do we have stats collector unittests for simulcast? Searching for simulcast didn\u0027t show any :-(",
       "revId": "d498d51118f62c7168d475b6055f6d191df0cdf8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a3b5366_7b2fe81e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-10-03T13:26:29Z",
+      "side": 1,
+      "message": "Check out third_party/webrtc/pc/peer_connection_encodings_integrationtest.cc\n\nTo avoid copy-pasting all the code required to set up simulcast, I think it\u0027s fine to add a stats-related test in that file. They already use getStats to test other stuff, though most of the tests are about making sure media is flowing (bytesSent \u003e 0) or that RIDs and scalabilityModes are set up properly. Let\u0027s add rtxSsrc to the mix :)",
+      "parentUuid": "e5b6df9e_1be21c98",
+      "revId": "d498d51118f62c7168d475b6055f6d191df0cdf8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
