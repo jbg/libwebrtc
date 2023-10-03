@@ -34,6 +34,69 @@
       "parentUuid": "dc63d4ce_130f75a2",
       "revId": "de0c5f3c2ff7e9dcf392be012209ee2d7bec0d73",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f9013c6_b2524059",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-10-03T16:19:05Z",
+      "side": 1,
+      "message": "The logic itself LGTM.",
+      "revId": "de0c5f3c2ff7e9dcf392be012209ee2d7bec0d73",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdb106de_9f2948cb",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1007,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-10-03T16:19:05Z",
+      "side": 1,
+      "message": "Guard with a kill-switch? This is not a trivial change.",
+      "range": {
+        "startLine": 995,
+        "startChar": 1,
+        "endLine": 1007,
+        "endChar": 3
+      },
+      "revId": "de0c5f3c2ff7e9dcf392be012209ee2d7bec0d73",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a692f35_752919e3",
+        "filename": "modules/video_coding/codecs/vp8/test/vp8_impl_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-10-03T16:19:05Z",
+      "side": 1,
+      "message": "Maybe add a test (I would just parameterise this one) that triggers long frame dropping and verifies that without the feature max inter frame interval exceeds kMaxFrameDelta. Without this we don\u0027t really know that the feature is working (max inter frame time may be less than kMaxFrameDelta because encoder stopped dropping frames without us disabling frame dropping).",
+      "range": {
+        "startLine": 841,
+        "startChar": 20,
+        "endLine": 841,
+        "endChar": 48
+      },
+      "revId": "de0c5f3c2ff7e9dcf392be012209ee2d7bec0d73",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
