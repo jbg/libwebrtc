@@ -16,6 +16,23 @@
       "message": "Standard question: can you tell what broke and needs to be fixed for relanding?",
       "revId": "c27034b6948bd7fcfecf04a7934e6eeeeb7ab263",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7afd0d8c_6c66d54a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20779
+      },
+      "writtenOn": "2023-10-04T09:57:52Z",
+      "side": 1,
+      "message": "What was broken here? A little confused since the original change didn\u0027t modify any existing behavior, only adding new methods.",
+      "revId": "c27034b6948bd7fcfecf04a7934e6eeeeb7ab263",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
