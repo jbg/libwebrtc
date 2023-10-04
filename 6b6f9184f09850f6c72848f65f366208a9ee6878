@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f7700ea_fa316641",
+        "filename": "modules/video_coding/codecs/vp8/test/vp8_impl_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 992,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-10-04T09:13:46Z",
+      "side": 1,
+      "message": "You can wrap test param into tuple\u003cstring field_trial, TimeDelta min_max_frame_delta, max_max_frame_delta\u003e\n\nthen in test:\nauto [field_trial, min_max_frame_delta, max_max_frame_delta] \u003d GetParam();\n...\nEXPECT_GE(*std::max_element(deltas.begin(), deltas.end()), min_max_frame_delta);\nEXPECT_LE(*std::max_element(deltas.begin(), deltas.end()), max_max_frame_delta);\n\nin INSTANTIATE_TEST_SUITE_P:\n...\nValues(std::make_tuple(\"WebRTC-VP8-MaxFrameInterval/Disabled/\", TimeDelta::Seconds(2), TimeDelta::PlusInfinity()),\nstd::make_tuple(\"WebRTC-VP8-MaxFrameInterval/interval:1s/\", TimeDelta::Seconds(0), TimeDelta::Seconds(1)))\n\nand then you can get rid of FrameDropLimit, GetTrialStringFor and FrameDropLimit -\u003e max_frame_delta switch in the test.",
+      "range": {
+        "startLine": 992,
+        "startChar": 0,
+        "endLine": 992,
+        "endChar": 24
+      },
+      "revId": "6b6f9184f09850f6c72848f65f366208a9ee6878",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
