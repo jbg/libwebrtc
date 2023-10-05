@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73c4934f_0ccd68ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-10-05T15:17:39Z",
+      "side": 1,
+      "message": "Sergey, I see the following failures:\n\n```\nC 14:56:03.803  235.197s Main  ../../modules/video_coding/codecs/test/videocodec_test_fixture_impl.cc:659: Failure\nC 14:56:03.803  235.197s Main  Expected: (video_stat.avg_delay_sec) \u003c\u003d (rc_thresholds-\u003emax_avg_buffer_level_sec), actual: 0.103466 vs 0.1\nC 14:56:03.803  235.197s Main  ../../modules/video_coding/codecs/test/videocodec_test_fixture_impl.cc:666: Failure\nC 14:56:03.803  235.198s Main  Expected: (video_stat.num_key_frames) \u003c\u003d (rc_thresholds-\u003emax_num_key_frames), actual: 10 vs 1\n```\n\nAre they expected when running on a different device?",
+      "revId": "1bd25ab159085a14244223febce9eae903cb958f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
