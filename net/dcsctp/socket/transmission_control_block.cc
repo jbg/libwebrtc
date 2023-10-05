@@ -100,6 +100,7 @@ TransmissionControlBlock::TransmissionControlBlock(
           capabilities.partial_reliability,
           capabilities.message_interleaving),
       stream_reset_handler_(log_prefix,
+                            options,
                             this,
                             &timer_manager,
                             &data_tracker_,

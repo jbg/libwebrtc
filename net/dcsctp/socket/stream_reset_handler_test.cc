@@ -26,6 +26,7 @@
 #include "net/dcsctp/packet/parameter/parameter.h"
 #include "net/dcsctp/packet/parameter/reconfiguration_response_parameter.h"
 #include "net/dcsctp/public/dcsctp_message.h"
+#include "net/dcsctp/public/dcsctp_options.h"
 #include "net/dcsctp/rx/data_tracker.h"
 #include "net/dcsctp/rx/reassembly_queue.h"
 #include "net/dcsctp/socket/mock_context.h"
@@ -117,6 +118,7 @@ class StreamResetHandlerTest : public testing::Test {
             DcSctpOptions())),
         handler_(
             std::make_unique<StreamResetHandler>("log: ",
+                                                 options_,
                                                  &ctx_,
                                                  &timer_manager_,
                                                  data_tracker_.get(),
@@ -206,10 +208,11 @@ class StreamResetHandlerTest : public testing::Test {
         /*use_message_interleaving=*/false);
     retransmission_queue_->RestoreFromState(state);
     handler_ = std::make_unique<StreamResetHandler>(
-        "log: ", &ctx_, &timer_manager_, data_tracker_.get(), reasm_.get(),
-        retransmission_queue_.get(), &state);
+        "log: ", options_, &ctx_, &timer_manager_, data_tracker_.get(),
+        reasm_.get(), retransmission_queue_.get(), &state);
   }
 
+  const DcSctpOptions options_;
   DataGenerator gen_;
   NiceMock<MockDcSctpSocketCallbacks> callbacks_;
   NiceMock<MockContext> ctx_;
