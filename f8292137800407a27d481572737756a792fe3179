@@ -22,6 +22,30 @@
       },
       "revId": "f8292137800407a27d481572737756a792fe3179",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4e919be_4f32ec71",
+        "filename": "video/adaptation/overuse_frame_detector.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-10-05T15:08:23Z",
+      "side": 1,
+      "message": "Thanks. So you are OK if I keep it as is?",
+      "parentUuid": "f6a24122_19e41a5d",
+      "range": {
+        "startLine": 627,
+        "startChar": 15,
+        "endLine": 627,
+        "endChar": 29
+      },
+      "revId": "f8292137800407a27d481572737756a792fe3179",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
