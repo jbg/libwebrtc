@@ -16,6 +16,29 @@
       "message": "Sergey, I see the following failures:\n\n```\nC 14:56:03.803  235.197s Main  ../../modules/video_coding/codecs/test/videocodec_test_fixture_impl.cc:659: Failure\nC 14:56:03.803  235.197s Main  Expected: (video_stat.avg_delay_sec) \u003c\u003d (rc_thresholds-\u003emax_avg_buffer_level_sec), actual: 0.103466 vs 0.1\nC 14:56:03.803  235.197s Main  ../../modules/video_coding/codecs/test/videocodec_test_fixture_impl.cc:666: Failure\nC 14:56:03.803  235.198s Main  Expected: (video_stat.num_key_frames) \u003c\u003d (rc_thresholds-\u003emax_num_key_frames), actual: 10 vs 1\n```\n\nAre they expected when running on a different device?",
       "revId": "1bd25ab159085a14244223febce9eae903cb958f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0107488c_7d06fcc5",
+        "filename": "infra/specs/waterfalls.pyl",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2023-10-05T16:16:14Z",
+      "side": 1,
+      "message": "I would use the crosshatch machine only for svc tests by modifying this line:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/infra/specs/test_suites.pyl;l\u003d45",
+      "range": {
+        "startLine": 16,
+        "startChar": 11,
+        "endLine": 16,
+        "endChar": 21
+      },
+      "revId": "1bd25ab159085a14244223febce9eae903cb958f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
