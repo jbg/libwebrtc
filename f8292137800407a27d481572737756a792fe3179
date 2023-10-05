@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6a24122_19e41a5d",
+        "filename": "video/adaptation/overuse_frame_detector.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-10-05T15:00:26Z",
+      "side": 1,
+      "message": "On the second look, it\u0027s not needed here.\n\nYou have \"action\" above as `const char*` from a literal constant too, but it\u0027s just fine.\n\nThe issue would be if you passed a `char[]` on the stack.\n\nI won\u0027t push on it, it\u0027s just as fine to copy things here and it rises less questions like that.",
+      "range": {
+        "startLine": 627,
+        "startChar": 15,
+        "endLine": 627,
+        "endChar": 29
+      },
+      "revId": "f8292137800407a27d481572737756a792fe3179",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
