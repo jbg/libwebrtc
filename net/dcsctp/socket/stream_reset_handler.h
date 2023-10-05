@@ -66,6 +66,7 @@ namespace dcsctp {
 class StreamResetHandler {
  public:
   StreamResetHandler(absl::string_view log_prefix,
+                     const DcSctpOptions& options,
                      Context* context,
                      TimerManager* timer_manager,
                      DataTracker* data_tracker,
@@ -80,7 +81,10 @@ class StreamResetHandler {
         reconfig_timer_(timer_manager->CreateTimer(
             "re-config",
             absl::bind_front(&StreamResetHandler::OnReconfigTimerExpiry, this),
-            TimerOptions(DurationMs(0)))),
+            TimerOptions(options.rto_initial,
+                         TimerBackoffAlgorithm::kExponential,
+                         /*max_restarts=*/absl::nullopt,
+                         options.max_timer_backoff_duration))),
         next_outgoing_req_seq_nbr_(
             handover_state
                 ? ReconfigRequestSN(handover_state->tx.next_reset_req_sn)
