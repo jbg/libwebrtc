@@ -51,6 +51,14 @@
       }
     }
   },
+  'crosshatch': {
+    'swarming': {
+      'dimensions': {
+        'device_type': 'crosshatch',
+        'os': 'Android'
+      }
+    }
+  },
   'fuchsia-gtest-output': {
     'args': [
       '--test-launcher-summary-output=${ISOLATED_OUTDIR}/gtest_output.json',
@@ -261,14 +269,6 @@
       'io_timeout': 10800
     }
   },
-  'walleye': {
-    'swarming': {
-      'dimensions': {
-        'device_type': 'walleye',
-        'os': 'Android'
-      }
-    }
-  },
   'webrtc-xctest': {
     'args': ['--xctest']
   },
@@ -312,10 +312,10 @@
     }
   },
   'xcode_15_main': {
-    'args': ['--xcode-build-version', '15a5229h'],
+    'args': ['--xcode-build-version', '15a240d'],
     'swarming': {
       'named_caches': [{
-        'name': 'xcode_ios_15a5229h',
+        'name': 'xcode_ios_15a240d',
         'path': 'Xcode.app'
       }]
     }

@@ -13,7 +13,7 @@
     'machines': {
       'Android32': {
         'mixins': [
-          'walleye', 'android-devices', 'has_native_resultdb_integration',
+          'crosshatch', 'android-devices', 'has_native_resultdb_integration',
           'chromium-tester-service-account'
         ],
         'test_suites': {
@@ -23,7 +23,7 @@
       },
       'Android32 (dbg)': {
         'mixins': [
-          'walleye', 'android-devices', 'has_native_resultdb_integration',
+          'crosshatch', 'android-devices', 'has_native_resultdb_integration',
           'chromium-tester-service-account'
         ],
         'test_suites': {
@@ -33,7 +33,7 @@
       },
       'Android32 (more configs)': {
         'mixins': [
-          'walleye', 'android-devices', 'has_native_resultdb_integration',
+          'crosshatch', 'android-devices', 'has_native_resultdb_integration',
           'chromium-tester-service-account'
         ],
         'test_suites': {
@@ -45,7 +45,7 @@
       'Android32 Builder x86 (dbg)': {},
       'Android64': {
         'mixins': [
-          'walleye', 'android-devices', 'has_native_resultdb_integration',
+          'crosshatch', 'android-devices', 'has_native_resultdb_integration',
           'chromium-tester-service-account'
         ],
         'test_suites': {
@@ -55,7 +55,7 @@
       },
       'Android64 (dbg)': {
         'mixins': [
-          'walleye', 'android-devices', 'has_native_resultdb_integration',
+          'crosshatch', 'android-devices', 'has_native_resultdb_integration',
           'chromium-tester-service-account'
         ],
         'test_suites': {
@@ -363,7 +363,7 @@
     'machines': {
       'android_arm64_dbg': {
         'mixins': [
-          'walleye', 'android-devices', 'has_native_resultdb_integration',
+          'crosshatch', 'android-devices', 'has_native_resultdb_integration',
           'chromium-tester-service-account'
         ],
         'test_suites': {
@@ -373,7 +373,7 @@
       },
       'android_arm64_rel': {
         'mixins': [
-          'walleye', 'android-devices', 'has_native_resultdb_integration',
+          'crosshatch', 'android-devices', 'has_native_resultdb_integration',
           'chromium-tester-service-account'
         ],
         'test_suites': {
@@ -383,7 +383,7 @@
       },
       'android_arm_dbg': {
         'mixins': [
-          'walleye', 'android-devices', 'has_native_resultdb_integration',
+          'crosshatch', 'android-devices', 'has_native_resultdb_integration',
           'chromium-tester-service-account'
         ],
         'test_suites': {
@@ -393,7 +393,7 @@
       },
       'android_arm_more_configs': {
         'mixins': [
-          'walleye', 'android-devices', 'has_native_resultdb_integration',
+          'crosshatch', 'android-devices', 'has_native_resultdb_integration',
           'chromium-tester-service-account'
         ],
         'test_suites': {
@@ -402,7 +402,7 @@
       },
       'android_arm_rel': {
         'mixins': [
-          'walleye', 'android-devices', 'has_native_resultdb_integration',
+          'crosshatch', 'android-devices', 'has_native_resultdb_integration',
           'chromium-tester-service-account'
         ],
         'test_suites': {
