@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "490521dc_eabe68f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-10-05T11:51:19Z",
+      "side": 1,
+      "message": "android_arm_rel bot has been dealt with",
+      "revId": "0c681e3c92ba407f1a6cd45071c16e059e3e0af6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
