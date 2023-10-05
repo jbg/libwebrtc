@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3379303a_cd092f0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2023-10-05T20:30:47Z",
+      "side": 1,
+      "message": "Seems https://webrtc-review.googlesource.com/c/src/+/321880 was a bit too strict",
+      "revId": "7dbcfd42f16af893d74e5d201e8ef1e9db00370a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
