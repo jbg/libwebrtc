@@ -137,7 +137,7 @@ void BaseCapturerPipeWire::Start(Callback* callback) {
         ScreenCastPortal::PersistMode::kTransient);
     if (selected_source_id_) {
       screencast_portal->SetRestoreToken(
-          RestoreTokenManager::GetInstance().TakeToken(selected_source_id_));
+          RestoreTokenManager::GetInstance().GetToken(selected_source_id_));
     }
   }
 
@@ -210,6 +210,9 @@ void BaseCapturerPipeWire::EnsureVisible() {
   // Clear any previously selected state/capture
   portal_->Stop();
   options_.screencast_stream()->StopScreenCastStream();
+
+  // Remove previously used token as the source id is going to change
+  RestoreTokenManager::GetInstance().RemoveToken(source_id_);
 
   // Get a new source id to reflect that the source has changed.
   source_id_ = RestoreTokenManager::GetInstance().GetUnusedId();
