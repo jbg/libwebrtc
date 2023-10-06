@@ -132,6 +132,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bed0105d_38aef7f1",
+        "filename": "common_audio/signal_processing/cross_correlation_neon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-10-06T09:28:21Z",
+      "side": 1,
+      "message": "\u003e `step_seq2` is already an `int` input. Are you talking about the two other `size_t` inputs `dim_seq` and `dim_cross_correlation`? They seem to be non-negative by nature.\n\nYes, I was highlighting that `step_seq2` is actually passed with a negative value already, hence the problem we are discussing here is not hypotetical.\n\n\u003e Are you talking about the two other size_t inputs dim_seq and dim_cross_correlation? They seem to be non-negative by nature.\n\nYes, would you keep them as size_t then?",
+      "parentUuid": "ff08614f_f359fb6a",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 12
+      },
+      "revId": "14d20f21dc9edd216c3acc22307451072775606b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb9b50cd_5c477ce4",
         "filename": "common_audio/signal_processing/downsample_fast_neon.c",
         "patchSetId": 1
