@@ -154,6 +154,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87b2925b_45dc51d4",
+        "filename": "common_audio/signal_processing/cross_correlation_neon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 18169
+      },
+      "writtenOn": "2023-10-06T10:37:52Z",
+      "side": 1,
+      "message": "Yes, keeping them unchanged.",
+      "parentUuid": "bed0105d_38aef7f1",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 12
+      },
+      "revId": "14d20f21dc9edd216c3acc22307451072775606b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb9b50cd_5c477ce4",
