@@ -23,11 +23,13 @@ void RestoreTokenManager::AddToken(DesktopCapturer::SourceId id,
   restore_tokens_.insert({id, token});
 }
 
-std::string RestoreTokenManager::TakeToken(DesktopCapturer::SourceId id) {
+std::string RestoreTokenManager::GetToken(DesktopCapturer::SourceId id) {
   std::string token = restore_tokens_[id];
-  // Remove the token as it cannot be used anymore
-  restore_tokens_.erase(id);
   return token;
+}
+
+void RestoreTokenManager::RemoveToken(DesktopCapturer::SourceId id) {
+  restore_tokens_.erase(id);
 }
 
 DesktopCapturer::SourceId RestoreTokenManager::GetUnusedId() {
