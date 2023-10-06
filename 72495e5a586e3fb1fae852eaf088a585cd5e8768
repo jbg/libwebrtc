@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d54b42d_d45b1bb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2023-10-06T10:42:07Z",
+      "side": 1,
+      "message": "Good question - no it\u0027s not. The handover code requires that the socket is in \"resting state\" when it\u0027s handed over, meaning that both the retransmission queue and send queue are empty. So after a handover, the OutgoingMessageId will clearly be reset to zero, but that\u0027s fine, as there can\u0027t be any other message what that identifier at that time.",
+      "parentUuid": "74a009da_ec4dc0aa",
+      "revId": "72495e5a586e3fb1fae852eaf088a585cd5e8768",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0e4a451_67f15af3",
