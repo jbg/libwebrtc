@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "668eebc5_39ff70d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2023-10-06T10:23:38Z",
+      "side": 1,
+      "message": "Thanks for reviewing!",
+      "revId": "72495e5a586e3fb1fae852eaf088a585cd5e8768",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0e4a451_67f15af3",
@@ -31,6 +48,24 @@
       "writtenOn": "2023-10-06T09:52:27Z",
       "side": 1,
       "message": "MaxRetransmits(0) seems more reasonable than MaxRetransmits::NoLimit() given the comment that says what you want to achieve, but how did the previous ever work?",
+      "revId": "72495e5a586e3fb1fae852eaf088a585cd5e8768",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "713cad66_332d94b2",
+        "filename": "net/dcsctp/tx/outstanding_data.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2023-10-06T10:23:38Z",
+      "side": 1,
+      "message": "This chunk is the \"fake-added end\" of an unsent message, sharing the same MID - which we do want to have abandoned together with `item`. And that\u0027s why it worked before - it would get abandoned in line 305 in the base revision.\n\nAnd it additionally worked, because I didn\u0027t have the DCHECK at line 66-67 in this commented revision. With that DCHECK, it would fail. So this code is more correct, but the previous code worked just as well.",
+      "parentUuid": "d0e4a451_67f15af3",
       "revId": "72495e5a586e3fb1fae852eaf088a585cd5e8768",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },

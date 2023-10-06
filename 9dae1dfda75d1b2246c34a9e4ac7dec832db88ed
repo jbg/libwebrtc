@@ -16,6 +16,24 @@
       "message": "Is this test no longer needed?",
       "revId": "9dae1dfda75d1b2246c34a9e4ac7dec832db88ed",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "260b00dd_50108719",
+        "filename": "net/dcsctp/tx/outstanding_data_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2023-10-06T10:23:38Z",
+      "side": 0,
+      "message": "To be honest, that test was a bit flawed, which the comment tried to explain.\n\nWhat it did, adding a message with some parts that were \"reliable\" and one part that was \"unreliable\" isn\u0027t something that can happen - note that this is the sender side and not receiver side, where we can\u0027t trust what the other peer is doing; As a sender-side, we can assume that our send queue is behaving correctly. But this test assumed that \"with a bad send queue, we would get issues\".\n\nI don\u0027t remember exactly how the fuzzer did this, but if it happens again (I have since added much more validation), then I\u0027ll solve it differently.",
+      "parentUuid": "8e2eea04_5dcfea90",
+      "revId": "9dae1dfda75d1b2246c34a9e4ac7dec832db88ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
