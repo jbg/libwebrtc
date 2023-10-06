@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffd39893_f92c635d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-06T09:37:27Z",
+      "side": 1,
+      "message": "Should there be tests?",
+      "revId": "08ba06fd8f9381c7f8dbe0a82b1cc9ed41038b65",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c7759db_ddf73b50",
+        "filename": "net/dcsctp/socket/stream_reset_handler.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-06T09:37:27Z",
+      "side": 1,
+      "message": "This seems like a significant change (from initial 0 to initial options.rto_initial).",
+      "revId": "08ba06fd8f9381c7f8dbe0a82b1cc9ed41038b65",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
