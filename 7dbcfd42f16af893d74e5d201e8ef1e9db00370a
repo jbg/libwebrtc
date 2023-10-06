@@ -16,6 +16,24 @@
       "message": "Seems https://webrtc-review.googlesource.com/c/src/+/321880 was a bit too strict",
       "revId": "7dbcfd42f16af893d74e5d201e8ef1e9db00370a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eff8af18_55325d13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-10-06T06:37:57Z",
+      "side": 1,
+      "message": "😊\n\nThis is WAI. WebRTC-VP8-MaxFrameInterval was added before the CL landed and not registered to the field trial registry. I will ping Emil.",
+      "parentUuid": "3379303a_cd092f0d",
+      "revId": "7dbcfd42f16af893d74e5d201e8ef1e9db00370a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
