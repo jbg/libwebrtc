@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74a009da_ec4dc0aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-06T09:52:27Z",
+      "side": 1,
+      "message": "Q: Is \"current message ID\" part of the connection state that needs to be moved when transferring a connection?\nOffhand, I didn\u0027t see new code that would move the message ID as part of state, but I could have missed it.\n\nA couple of questions elsewhere. Otherwise, this is \"mostly knock-on effects\".",
+      "revId": "72495e5a586e3fb1fae852eaf088a585cd5e8768",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0e4a451_67f15af3",
+        "filename": "net/dcsctp/tx/outstanding_data.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-06T09:52:27Z",
+      "side": 1,
+      "message": "MaxRetransmits(0) seems more reasonable than MaxRetransmits::NoLimit() given the comment that says what you want to achieve, but how did the previous ever work?",
+      "revId": "72495e5a586e3fb1fae852eaf088a585cd5e8768",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ed02311_f988cec8",
+        "filename": "net/dcsctp/tx/retransmission_queue_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1119,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-06T09:52:27Z",
+      "side": 1,
+      "message": "Nice test!",
+      "revId": "72495e5a586e3fb1fae852eaf088a585cd5e8768",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

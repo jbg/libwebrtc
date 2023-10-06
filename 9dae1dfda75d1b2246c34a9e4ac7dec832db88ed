@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e2eea04_5dcfea90",
+        "filename": "net/dcsctp/tx/outstanding_data_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-06T09:52:27Z",
+      "side": 0,
+      "message": "Is this test no longer needed?",
+      "revId": "9dae1dfda75d1b2246c34a9e4ac7dec832db88ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
