@@ -16,6 +16,24 @@
       "message": "This LGTM, but I\u0027m a bit concerned by this comment here: https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d15544#c6\n\nShould we actually be consuming the restore token but just storing whatever token we receive upon restoring it to line up with the documentation? (Relying on undocumented behavior is a recipe to have that undocumented behavior patched 😊)",
       "revId": "8b26fdabc4f4e73ca523e9b0c4df01e5c562d2a9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f56620a_17ab6876",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2023-10-06T16:55:18Z",
+      "side": 1,
+      "message": "Yes, I will update the change.",
+      "parentUuid": "aac69ab1_6c9d490a",
+      "revId": "8b26fdabc4f4e73ca523e9b0c4df01e5c562d2a9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
