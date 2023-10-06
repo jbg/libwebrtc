@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4304497_fa5355c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-10-06T11:14:09Z",
+      "side": 1,
+      "message": "metrics landed. Sadly only in M120 but this isn\u0027t urgent ;-)",
+      "revId": "0d4e8cd2ba0f24da338e189292a289d2673e2dff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
