@@ -137,7 +137,7 @@ void BaseCapturerPipeWire::Start(Callback* callback) {
         ScreenCastPortal::PersistMode::kTransient);
     if (selected_source_id_) {
       screencast_portal->SetRestoreToken(
-          RestoreTokenManager::GetInstance().TakeToken(selected_source_id_));
+          RestoreTokenManager::GetInstance().GetToken(selected_source_id_));
     }
   }
 
