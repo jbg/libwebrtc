@@ -525,7 +525,6 @@ rtc_library("rate_limiter") {
     ":macromagic",
     ":rate_statistics",
     "../system_wrappers",
-    "../system_wrappers:field_trial",
     "synchronization:mutex",
   ]
   absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
