@@ -180,6 +180,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f9768434_3403f008",
+        "filename": "common_audio/signal_processing/cross_correlation_neon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2023-10-09T06:47:06Z",
+      "side": 1,
+      "message": "To me the issue seems to be that step_seq2 is passed as a negative value, rather than that this code cannot handle it being a negative value.\nDo you know in what code this is called when it happens to be negative?",
+      "parentUuid": "87b2925b_45dc51d4",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 12
+      },
+      "revId": "14d20f21dc9edd216c3acc22307451072775606b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb9b50cd_5c477ce4",
         "filename": "common_audio/signal_processing/downsample_fast_neon.c",
         "patchSetId": 1
@@ -239,6 +263,30 @@
       "side": 1,
       "message": "It\u0027s the expression `i-j` below that can become negative. When i and j were size_t, `i-j` was a large size_t. Using this large number as an index apparently is interpreted as using a signed negative index. It works but it\u0027s undefined behavior, which ubsan has detected in the downstream project.\n\nDetails: https://stackoverflow.com/questions/48429021/is-a-pointer-considered-an-unsigned-value-in-c",
       "parentUuid": "137f889d_2633f5c1",
+      "range": {
+        "startLine": 172,
+        "startChar": 40,
+        "endLine": 172,
+        "endChar": 50
+      },
+      "revId": "14d20f21dc9edd216c3acc22307451072775606b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17d25a53_f301b51f",
+        "filename": "common_audio/signal_processing/downsample_fast_neon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2023-10-09T06:47:06Z",
+      "side": 1,
+      "message": "But if i-j can become negative, that\u0027d then be indexing data_in with negative indices, which should be equally bad as indexing them with a large index.\nSo I don\u0027t really see that this solves anything?",
+      "parentUuid": "24fccb64_2f0a00b1",
       "range": {
         "startLine": 172,
         "startChar": 40,
