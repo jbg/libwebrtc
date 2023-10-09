@@ -228,6 +228,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b67a2746_13c20f09",
+        "filename": "common_audio/signal_processing/cross_correlation_neon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-10-09T08:49:27Z",
+      "side": 1,
+      "message": "step_seq2 is set to -1 in most cases (moving backwards in seq2): https://source.chromium.org/search?q\u003dCrossCorrelationWithAutoShift\u0026ss\u003dchromium%2Fchromium%2Fsrc:third_party%2Fwebrtc%2Fmodules%2Faudio_coding%2Fneteq%2F\n\nIt is also permitted in the comment here: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/common_audio/signal_processing/include/signal_processing_library.h;l\u003d511;drc\u003d92ea95e34af5966555903026f45164afbd7e2088",
+      "parentUuid": "c9189f5f_f54598e5",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 12
+      },
+      "revId": "14d20f21dc9edd216c3acc22307451072775606b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb9b50cd_5c477ce4",
         "filename": "common_audio/signal_processing/downsample_fast_neon.c",
         "patchSetId": 1
