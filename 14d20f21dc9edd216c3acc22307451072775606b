@@ -343,6 +343,30 @@
       },
       "revId": "14d20f21dc9edd216c3acc22307451072775606b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7034add4_ce80b3dd",
+        "filename": "common_audio/signal_processing/downsample_fast_neon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2023-10-09T08:30:13Z",
+      "side": 1,
+      "message": "True, and looking at the code calling this function (and the code calling the function that calls this function, etc) it seems that the intention is for negative indices to be used here.",
+      "parentUuid": "5076f4f8_0980e9d9",
+      "range": {
+        "startLine": 172,
+        "startChar": 40,
+        "endLine": 172,
+        "endChar": 50
+      },
+      "revId": "14d20f21dc9edd216c3acc22307451072775606b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
