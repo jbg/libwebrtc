@@ -16,6 +16,29 @@
       "message": "Alex, still looking good with the changes I did?",
       "revId": "4f28d5ba03297d4931175fbbb6098eb2e333bbfc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e21fe8a_847e48cb",
+        "filename": "modules/desktop_capture/linux/wayland/restore_token_manager.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-10-09T16:41:04Z",
+      "side": 1,
+      "message": "I don\u0027t think we should be using `at` or at least not `at` without prior bounds checking, since `at` enforces bounds checking and it\u0027s possible to query this for a token that we don\u0027t have.",
+      "range": {
+        "startLine": 27,
+        "startChar": 28,
+        "endLine": 27,
+        "endChar": 51
+      },
+      "revId": "4f28d5ba03297d4931175fbbb6098eb2e333bbfc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
