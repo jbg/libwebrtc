@@ -204,6 +204,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c9189f5f_f54598e5",
+        "filename": "common_audio/signal_processing/cross_correlation_neon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-10-09T07:51:41Z",
+      "side": 1,
+      "message": "I talked with Per about this in our weekly 1:1. Looping in Jakob to take a look from a NetEq point of view.\n\nJakob, this code seems to have UB. As Per mentioned, it is not clear if this CL is the right fix or if there is more that needs to be done to ensure other issues don\u0027t happen.\n\nIn the C implementation, there is no problem with `step_seq2` since it is used like this https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/common_audio/signal_processing/cross_correlation.c;l\u003d27;drc\u003d92ea95e34af5966555903026f45164afbd7e2088, while here in the NEON implementation there is UB.",
+      "parentUuid": "f9768434_3403f008",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 12
+      },
+      "revId": "14d20f21dc9edd216c3acc22307451072775606b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb9b50cd_5c477ce4",
         "filename": "common_audio/signal_processing/downsample_fast_neon.c",
         "patchSetId": 1
