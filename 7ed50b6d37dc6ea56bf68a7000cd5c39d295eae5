@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ffc2b1e_c11979ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-10T04:53:44Z",
+      "side": 1,
+      "message": "Taking it slow and deprecating the old functions and classes one at a time.",
+      "revId": "7ed50b6d37dc6ea56bf68a7000cd5c39d295eae5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
