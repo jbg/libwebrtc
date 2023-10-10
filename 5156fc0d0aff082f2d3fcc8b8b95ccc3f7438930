@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc4332c1_8b6dcc5e",
+        "filename": "examples/peerconnection/client/peer_connection_client.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-10T11:30:47Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "30161335_637a73dc",
+      "revId": "5156fc0d0aff082f2d3fcc8b8b95ccc3f7438930",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1726e366_234c5625",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-10-10T11:20:16Z",
       "side": 1,
       "message": "is this basically the same as:\n```\nif (result.GetError() !\u003d 0 ||\n    !result.GetResolvedAddress(AF_INET, \u0026server_address_)) {\n  callback_-\u003eOnServerConnectionFailure();\n  resolver_.reset();\n  state_ \u003d NOT_CONNECTED;\n  return;\n}\n\nDoConnect();\n```\n? Just so that we don\u0027t need to repeat the same steps for failure cases.",
+      "revId": "5156fc0d0aff082f2d3fcc8b8b95ccc3f7438930",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a245f7a1_6bb0b660",
+        "filename": "examples/peerconnection/client/peer_connection_client.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-10T11:30:47Z",
+      "side": 1,
+      "message": "Thought about it, I don\u0027t like having modify-my-argument functions in if statements. Matter of taste, I suppose.\n\nAlso thought about letting failure set a boolean and testing on that, but that seemed too much typing for the case (and we should check GetError() before GetResolvedAddress(), so that\u0027s two booleans).",
+      "parentUuid": "1726e366_234c5625",
       "revId": "5156fc0d0aff082f2d3fcc8b8b95ccc3f7438930",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
