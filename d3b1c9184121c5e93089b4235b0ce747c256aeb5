@@ -16,6 +16,57 @@
       "message": "Now it should be easier to land...",
       "revId": "d3b1c9184121c5e93089b4235b0ce747c256aeb5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd1af0fa_503752c4",
+        "filename": "examples/peerconnection/client/peer_connection_client.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-10-10T09:54:57Z",
+      "side": 1,
+      "message": "can we add a dcheck for the correct state? (or at least that it\u0027s not RESOLVING?)\nI\u0027d also expect resolver_ to be nullptr.",
+      "revId": "d3b1c9184121c5e93089b4235b0ce747c256aeb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "817d3087_1d38a61b",
+        "filename": "examples/peerconnection/client/peer_connection_client.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-10-10T09:54:57Z",
+      "side": 1,
+      "message": "any chance that this could have a bad effect since the OnResolveResult callback is presumably being called by the resolver?",
+      "revId": "d3b1c9184121c5e93089b4235b0ce747c256aeb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91841971_7bbd3f80",
+        "filename": "examples/peerconnection/client/peer_connection_client.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-10-10T09:54:57Z",
+      "side": 1,
+      "message": "since these two steps are always done (resetting resolver and setting state to NOT_CONNECTED), move them out of the if/else.",
+      "revId": "d3b1c9184121c5e93089b4235b0ce747c256aeb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
