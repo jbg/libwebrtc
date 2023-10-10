@@ -220,6 +220,29 @@ rtc_source_set("video_encoder_factory_template_libaom_av1_adapter") {
   absl_deps = [ "//third_party/abseil-cpp/absl/container:inlined_vector" ]
 }
 
+rtc_source_set("video_decoder_factory_combiner") {
+  visibility = [ "*" ]
+  public = [ "video_decoder_factory_combiner.h" ]
+  sources = [ "video_decoder_factory_combiner.cc" ]
+  deps = [
+    ":video_codecs_api",
+    ":video_decoder_factory_item",
+    "..:field_trials_view",
+    "../../rtc_base/system:rtc_export",
+    "../transport:field_trial_based_config",
+  ]
+  absl_deps = [ "//third_party/abseil-cpp/absl/base:core_headers" ]
+}
+
+rtc_source_set("video_decoder_factory_item") {
+  visibility = [ "*" ]
+  public = [ "video_decoder_factory_item.h" ]
+  deps = [
+    ":video_codecs_api",
+    "..:field_trials_view",
+  ]
+}
+
 rtc_source_set("video_decoder_factory_template") {
   visibility = [ "*" ]
   allow_poison = [ "software_video_codecs" ]
@@ -244,12 +267,42 @@ rtc_source_set("video_decoder_factory_template_libvpx_vp8_adapter") {
   ]
 }
 
+rtc_source_set("video_decoder_factory_libvpx_vp8") {
+  visibility = [ "*" ]
+  allow_poison = [ "software_video_codecs" ]
+  sources = [
+    "video_decoder_factory_libvpx_vp8.cc",
+    "video_decoder_factory_libvpx_vp8.h",
+  ]
+
+  deps = [
+    ":video_decoder_factory_item",
+    "..:field_trials_view",
+    "../../modules/video_coding:webrtc_vp8",
+  ]
+}
+
 rtc_source_set("video_decoder_factory_template_libvpx_vp9_adapter") {
   visibility = [ "*" ]
   allow_poison = [ "software_video_codecs" ]
   public = [ "video_decoder_factory_template_libvpx_vp9_adapter.h" ]
 
   deps = [ "../../modules/video_coding:webrtc_vp9" ]
+}
+
+rtc_source_set("video_decoder_factory_libvpx_vp9") {
+  visibility = [ "*" ]
+  allow_poison = [ "software_video_codecs" ]
+  sources = [
+    "video_decoder_factory_libvpx_vp9.cc",
+    "video_decoder_factory_libvpx_vp9.h",
+  ]
+
+  deps = [
+    ":video_decoder_factory_item",
+    "..:field_trials_view",
+    "../../modules/video_coding:webrtc_vp9",
+  ]
 }
 
 rtc_source_set("video_decoder_factory_template_open_h264_adapter") {
@@ -323,4 +376,21 @@ rtc_library("rtc_software_fallback_wrappers") {
     "//third_party/abseil-cpp/absl/strings",
     "//third_party/abseil-cpp/absl/types:optional",
   ]
+}
+
+if (rtc_include_tests) {
+  rtc_library("video_decoder_factory_unittests") {
+    testonly = true
+    sources = [ "video_decoder_factory_combiner_unittest.cc" ]
+
+    deps = [
+      ":video_decoder_factory_combiner",
+      ":video_decoder_factory_item",
+      ":video_decoder_factory_libvpx_vp8",
+      ":video_decoder_factory_libvpx_vp9",
+      "..:mock_video_decoder",
+      "../../test:test_support",
+    ]
+    absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
+  }
 }

@@ -14,6 +14,7 @@
 #include <memory>
 
 #include "absl/types/optional.h"
+#include "api/field_trials_view.h"
 #include "api/video/encoded_image.h"
 #include "api/video_codecs/video_decoder.h"
 #include "common_video/include/video_frame_buffer_pool.h"
@@ -26,7 +27,7 @@ namespace webrtc {
 
 class LibvpxVp8Decoder : public VideoDecoder {
  public:
-  LibvpxVp8Decoder();
+  explicit LibvpxVp8Decoder(const FieldTrialsView& field_trials);
   ~LibvpxVp8Decoder() override;
 
   bool Configure(const Settings& settings) override;

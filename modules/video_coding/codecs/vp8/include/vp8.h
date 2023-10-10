@@ -14,6 +14,7 @@
 #include <memory>
 #include <vector>
 
+#include "api/field_trials_view.h"
 #include "api/video_codecs/video_encoder.h"
 #include "api/video_codecs/vp8_frame_buffer_controller.h"
 #include "modules/video_coding/include/video_codec_interface.h"
@@ -42,8 +43,13 @@ class VP8Encoder {
 
 class VP8Decoder {
  public:
+  // TODO(bugs.webrtc.org/10335):  deprecate in favor of factory that uses
+  // propagated field trials.
   static std::unique_ptr<VideoDecoder> Create();
 };
+
+std::unique_ptr<VideoDecoder> CreateVp8Decoder(
+    const FieldTrialsView& field_trials);
 
 }  // namespace webrtc
 
