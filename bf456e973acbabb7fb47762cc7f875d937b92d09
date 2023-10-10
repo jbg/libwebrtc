@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d56b0a3b_114adcfe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-10T04:41:35Z",
+      "side": 1,
+      "message": "What\u0027s the consequence of starting a stream without source_?\nIn particular, what calls should error out when called without source_?\nDo we have tests for those?",
+      "revId": "bf456e973acbabb7fb47762cc7f875d937b92d09",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
