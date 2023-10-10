@@ -103,6 +103,24 @@
       "parentUuid": "1726e366_234c5625",
       "revId": "5156fc0d0aff082f2d3fcc8b8b95ccc3f7438930",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb98428f_78cde1a9",
+        "filename": "examples/peerconnection/client/peer_connection_client.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-10-10T12:52:57Z",
+      "side": 1,
+      "message": "yup. Another way of looking at it (and then I\u0027ll stop the bikeshed) would be to handle the success case first:\n\n```\nvoid PeerConnectionClient::OnResolveResult(\n    const webrtc::AsyncDnsResolverResult\u0026 result) {\n  if (result.GetError() \u003d\u003d 0 \u0026\u0026\n      result.GetResolvedAddress(AF_INET, \u0026server_address_)) {\n    DoConnect();\n  } else {\n    callback_-\u003eOnServerConnectionFailure();\n    resolver_.reset();\n    state_ \u003d NOT_CONNECTED;\n  }\n}\n```\n\nActually, it looks like GetResolvedAddress() won\u0027t return success unless there\u0027s no error, so this would do it:\n\n```\nvoid PeerConnectionClient::OnResolveResult(\n    const webrtc::AsyncDnsResolverResult\u0026 result) {\n  if (result.GetResolvedAddress(AF_INET, \u0026server_address_)) {\n    DoConnect();\n  } else {\n    callback_-\u003eOnServerConnectionFailure();\n    resolver_.reset();\n    state_ \u003d NOT_CONNECTED;\n  }\n}\n```",
+      "parentUuid": "a245f7a1_6bb0b660",
+      "revId": "5156fc0d0aff082f2d3fcc8b8b95ccc3f7438930",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
