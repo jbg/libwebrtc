@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc237e28_988feaa2",
+        "filename": "examples/peerconnection/client/peer_connection_client.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-10T10:17:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd1af0fa_503752c4",
+      "revId": "d3b1c9184121c5e93089b4235b0ce747c256aeb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "817d3087_1d38a61b",
@@ -52,6 +70,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c957132_15fbc491",
+        "filename": "examples/peerconnection/client/peer_connection_client.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-10T10:17:52Z",
+      "side": 1,
+      "message": "We\u0027re not accessing either the result or the resolver after this, so it should be OK to delete the resolver here. (Don\u0027t see why we need to delete it at all, but that\u0027s what the code previously did...)",
+      "parentUuid": "817d3087_1d38a61b",
+      "revId": "d3b1c9184121c5e93089b4235b0ce747c256aeb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91841971_7bbd3f80",
@@ -65,6 +101,24 @@
       "writtenOn": "2023-10-10T09:54:57Z",
       "side": 1,
       "message": "since these two steps are always done (resetting resolver and setting state to NOT_CONNECTED), move them out of the if/else.",
+      "revId": "d3b1c9184121c5e93089b4235b0ce747c256aeb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3947876d_05945d8b",
+        "filename": "examples/peerconnection/client/peer_connection_client.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-10T10:17:52Z",
+      "side": 1,
+      "message": "Ouch. I forgot an \"else\" here, I think. We don\u0027t fail if DoConnect() is executed. Fixing (rewriting with early-return-on-failure).\n\n(Previous code ignored the case where getting the address failed even if lookup succeeded)",
+      "parentUuid": "91841971_7bbd3f80",
       "revId": "d3b1c9184121c5e93089b4235b0ce747c256aeb5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }

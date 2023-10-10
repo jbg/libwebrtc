@@ -51,6 +51,24 @@
       "parentUuid": "b89285fa_6cd428c8",
       "revId": "7ed50b6d37dc6ea56bf68a7000cd5c39d295eae5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "679c83d4_fd27173d",
+        "filename": "rtc_base/async_resolver.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-10T10:17:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be6b3d96_eddad3ff",
+      "revId": "7ed50b6d37dc6ea56bf68a7000cd5c39d295eae5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
