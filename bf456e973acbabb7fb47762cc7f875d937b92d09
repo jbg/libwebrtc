@@ -34,6 +34,24 @@
       "parentUuid": "d56b0a3b_114adcfe",
       "revId": "bf456e973acbabb7fb47762cc7f875d937b92d09",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7b84656_a3ac3902",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-10T15:46:53Z",
+      "side": 1,
+      "message": "EXPECT_DEBUG_DEATH is the tool if you really feel like writing a test for it :-)\n\nI was more worried about code that goes \"source_-\u003esomeaction\" without checking that source_ is non-null.",
+      "parentUuid": "2173f8ab_9b0ed645",
+      "revId": "bf456e973acbabb7fb47762cc7f875d937b92d09",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
