@@ -33,6 +33,24 @@
       "message": "If this constructor is not exercised by tests, should we try deleting it?",
       "revId": "24abfb8f68b008a29413dfe33a93cf3f3a5ff6ae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cc25781_74fff6b1",
+        "filename": "media/engine/simulcast_encoder_adapter.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2023-10-11T11:06:00Z",
+      "side": 1,
+      "message": "It is used outside of WebRTC, I\u0027ll have a look to remove it.",
+      "parentUuid": "46c4187a_bafee6d9",
+      "revId": "24abfb8f68b008a29413dfe33a93cf3f3a5ff6ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
