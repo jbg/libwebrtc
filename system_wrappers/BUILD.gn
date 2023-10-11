@@ -80,7 +80,6 @@ rtc_library("system_wrappers") {
 }
 
 rtc_library("field_trial") {
-  visibility = [ "*" ]
   public = [ "include/field_trial.h" ]
   sources = [ "source/field_trial.cc" ]
   if (rtc_exclude_field_trial_default) {
