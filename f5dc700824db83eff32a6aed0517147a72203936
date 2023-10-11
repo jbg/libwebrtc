@@ -16,6 +16,23 @@
       "message": "Can you please review the idea of adjusted way to create factories.\n\nWould you find new api better enough to motivate yet another migration of the Video(De|En)coderFactories? If not, no worries, I can find a way to propagate field trials through templated apis.\n\n[changes to libvpx_vp8_decoder are included just to show why I\u0027m looking at this api in the 1st place]",
       "revId": "f5dc700824db83eff32a6aed0517147a72203936",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35405672_2a4aa317",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2023-10-11T12:04:01Z",
+      "side": 1,
+      "message": "LG overall.\n\nIf it\u0027s worth replacing the templated version with this version is up to you. I can say that we are refactoring the video encoder and video encoder factory API, and while the need is not as great on the decode side I would like to think that a similar refactoring would happen on the decode side in the not so very distant future. Still, it\u0027s going to be quite a while until that happens.",
+      "revId": "f5dc700824db83eff32a6aed0517147a72203936",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
