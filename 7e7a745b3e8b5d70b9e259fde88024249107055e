@@ -56,6 +56,30 @@
       },
       "revId": "7e7a745b3e8b5d70b9e259fde88024249107055e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "714ce37b_549324ba",
+        "filename": "modules/pacing/pacing_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-10-11T14:15:53Z",
+      "side": 1,
+      "message": "As discussed, it was picked to be lower than 64Kbyte if send socket buffers are 64. Chrome IPC is according to sprang@ 256Kbyte.",
+      "parentUuid": "1d8aa469_a013f9f3",
+      "range": {
+        "startLine": 94,
+        "startChar": 60,
+        "endLine": 94,
+        "endChar": 69
+      },
+      "revId": "7e7a745b3e8b5d70b9e259fde88024249107055e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
