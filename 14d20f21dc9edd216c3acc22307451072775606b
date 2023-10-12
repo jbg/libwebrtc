@@ -314,6 +314,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67785258_7c683ec3",
+        "filename": "common_audio/signal_processing/cross_correlation_neon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 18169
+      },
+      "writtenOn": "2023-10-12T12:02:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e181a47f_66c1fa22",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 47
+      },
+      "revId": "14d20f21dc9edd216c3acc22307451072775606b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ceecbf76_8ddd9d4a",
@@ -327,6 +351,30 @@
       "writtenOn": "2023-10-12T07:11:50Z",
       "side": 1,
       "message": "[518/5794] CC obj/common_audio/common_audio_neon_c/downsample_fast_neon.o\nFAILED: obj/common_audio/common_audio_neon_c/downsample_fast_neon.o\n../../buildtools/reclient/rewrapper -cfg\u003d../../buildtools/reclient_cfgs/chromium-browser-clang/rewra...(too long)\n../../common_audio/signal_processing/downsample_fast_neon.c:42:25: error: comparison of integers of different signs: \u0027int\u0027 and \u0027size_t\u0027 (aka \u0027unsigned int\u0027) [-Werror,-Wsign-compare]\n42 |       for (i \u003d delay; i \u003c endpos1; i +\u003d 16) {\n|                       ~ ^ ~~~~~~~\n../../common_audio/signal_processing/downsample_fast_neon.c:90:23: error: comparison of integers of different signs: \u0027int\u0027 and \u0027size_t\u0027 (aka \u0027unsigned int\u0027) [-Werror,-Wsign-compare]",
+      "range": {
+        "startLine": 42,
+        "startChar": 6,
+        "endLine": 42,
+        "endChar": 45
+      },
+      "revId": "14d20f21dc9edd216c3acc22307451072775606b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9119839e_01014b9d",
+        "filename": "common_audio/signal_processing/downsample_fast_neon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 18169
+      },
+      "writtenOn": "2023-10-12T12:02:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ceecbf76_8ddd9d4a",
       "range": {
         "startLine": 42,
         "startChar": 6,
