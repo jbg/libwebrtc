@@ -21,7 +21,6 @@
 #include "api/transport/stun.h"
 #include "api/units/time_delta.h"
 #include "rtc_base/async_packet_socket.h"
-#include "rtc_base/async_resolver_interface.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/helpers.h"
 #include "rtc_base/logging.h"
