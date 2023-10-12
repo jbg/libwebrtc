@@ -76,6 +76,8 @@ class ConnectionContext final
   rtc::Thread* network_thread() { return network_thread_; }
   const rtc::Thread* network_thread() const { return network_thread_; }
 
+  TaskQueueFactory* task_queue_factory() { return task_queue_factory_.get(); }
+
   // Field trials associated with the PeerConnectionFactory.
   // Note: that there can be different field trials for different
   // PeerConnections (but they are not supposed change after creating the
@@ -121,6 +123,8 @@ class ConnectionContext final
   rtc::Thread* const network_thread_;
   AlwaysValidPointer<rtc::Thread> const worker_thread_;
   rtc::Thread* const signaling_thread_;
+
+  std::unique_ptr<TaskQueueFactory> task_queue_factory_;
 
   // Accessed both on signaling thread and worker thread.
   std::unique_ptr<FieldTrialsView> const trials_;

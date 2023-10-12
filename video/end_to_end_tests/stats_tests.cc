@@ -12,6 +12,7 @@
 
 #include "absl/algorithm/container.h"
 #include "absl/types/optional.h"
+#include "api/context_builder.h"
 #include "api/task_queue/task_queue_base.h"
 #include "api/test/simulated_network.h"
 #include "api/test/video/function_video_encoder_factory.h"
@@ -518,9 +519,11 @@ TEST_F(StatsEndToEndTest, MAYBE_ContentTypeSwitches) {
 
   metrics::Reset();
 
-  Call::Config send_config(send_event_log_.get());
+  Call::Config send_config(
+      ContextBuilder().With(send_event_log_.get()).Build());
   test.ModifySenderBitrateConfig(&send_config.bitrate_config);
-  Call::Config recv_config(recv_event_log_.get());
+  Call::Config recv_config(
+      ContextBuilder().With(recv_event_log_.get()).Build());
   test.ModifyReceiverBitrateConfig(&recv_config.bitrate_config);
 
   VideoEncoderConfig encoder_config_with_screenshare;

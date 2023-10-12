@@ -18,6 +18,7 @@
 #include "absl/memory/memory.h"
 #include "absl/strings/string_view.h"
 #include "api/audio_codecs/builtin_audio_decoder_factory.h"
+#include "api/context_builder.h"
 #include "api/media_types.h"
 #include "api/rtc_event_log/rtc_event_log.h"
 #include "api/task_queue/default_task_queue_factory.h"
@@ -40,6 +41,7 @@
 #include "test/mock_transport.h"
 #include "test/run_loop.h"
 
+namespace webrtc {
 namespace {
 
 using ::testing::_;
@@ -50,8 +52,7 @@ using ::testing::StrictMock;
 
 struct CallHelper {
   explicit CallHelper(bool use_null_audio_processing) {
-    task_queue_factory_ = webrtc::CreateDefaultTaskQueueFactory();
-    webrtc::AudioState::Config audio_state_config;
+    AudioState::Config audio_state_config;
     audio_state_config.audio_mixer =
         rtc::make_ref_counted<webrtc::test::MockAudioMixer>();
     audio_state_config.audio_processing =
@@ -61,27 +62,17 @@ struct CallHelper {
                   NiceMock<webrtc::test::MockAudioProcessing>>();
     audio_state_config.audio_device_module =
         rtc::make_ref_counted<webrtc::test::MockAudioDeviceModule>();
-    webrtc::Call::Config config(&event_log_);
-    config.audio_state = webrtc::AudioState::Create(audio_state_config);
-    config.task_queue_factory = task_queue_factory_.get();
-    config.trials = &field_trials_;
-    call_.reset(webrtc::Call::Create(config));
+    Call::Config config(ContextBuilder().Build());
+    config.audio_state = AudioState::Create(audio_state_config);
+    call_ = webrtc::Call::Create(config);
   }
 
   webrtc::Call* operator->() { return call_.get(); }
 
  private:
-  webrtc::test::RunLoop loop_;
-  webrtc::RtcEventLogNull event_log_;
-  webrtc::FieldTrialBasedConfig field_trials_;
-  std::unique_ptr<webrtc::TaskQueueFactory> task_queue_factory_;
+  test::RunLoop loop_;
   std::unique_ptr<webrtc::Call> call_;
 };
-}  // namespace
-
-namespace webrtc {
-
-namespace {
 
 rtc::scoped_refptr<Resource> FindResourceWhoseNameContains(
     const std::vector<rtc::scoped_refptr<Resource>>& resources,
@@ -92,8 +83,6 @@ rtc::scoped_refptr<Resource> FindResourceWhoseNameContains(
   }
   return nullptr;
 }
-
-}  // namespace
 
 TEST(CallTest, ConstructDestruct) {
   for (bool use_null_audio_processing : {false, true}) {
@@ -516,4 +505,5 @@ TEST(CallTest, AddAdaptationResourceBeforeCreatingVideoSendStream) {
   call->DestroyVideoSendStream(stream2);
 }
 
+}  // namespace
 }  // namespace webrtc

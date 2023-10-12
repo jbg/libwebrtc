@@ -85,32 +85,28 @@ CallFactory::CallFactory() {
 
 Call* CallFactory::CreateCall(const Call::Config& config) {
   RTC_DCHECK_RUN_ON(&call_thread_);
-  RTC_DCHECK(config.trials);
 
   std::vector<DegradedCall::TimeScopedNetworkConfig> send_degradation_configs =
-      GetNetworkConfigs(*config.trials, /*send=*/true);
+      GetNetworkConfigs(config.context.experiments(), /*send=*/true);
   std::vector<DegradedCall::TimeScopedNetworkConfig>
       receive_degradation_configs =
-          GetNetworkConfigs(*config.trials, /*send=*/false);
+          GetNetworkConfigs(config.context.experiments(), /*send=*/false);
 
-  RtpTransportConfig transportConfig = config.ExtractTransportConfig();
-
-  Call* call =
-      Call::Create(config, Clock::GetRealTimeClock(),
-                   config.rtp_transport_controller_send_factory->Create(
-                       transportConfig, Clock::GetRealTimeClock()));
+  std::unique_ptr<Call> call =
+      Call::Create(config, config.rtp_transport_controller_send_factory->Create(
+                               config.ExtractTransportConfig()));
 
   if (!send_degradation_configs.empty() ||
       !receive_degradation_configs.empty()) {
-    return new DegradedCall(absl::WrapUnique(call), send_degradation_configs,
+    return new DegradedCall(std::move(call), send_degradation_configs,
                             receive_degradation_configs);
   }
 
-  return call;
+  return call.release();
 }
 
 std::unique_ptr<CallFactoryInterface> CreateCallFactory() {
-  return std::unique_ptr<CallFactoryInterface>(new CallFactory());
+  return std::make_unique<CallFactory>();
 }
 
 }  // namespace webrtc

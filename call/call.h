@@ -58,11 +58,11 @@ class Call {
     int64_t rtt_ms = -1;
   };
 
-  static Call* Create(const Call::Config& config);
-  static Call* Create(const Call::Config& config,
-                      Clock* clock,
-                      std::unique_ptr<RtpTransportControllerSendInterface>
-                          transportControllerSend);
+  static std::unique_ptr<Call> Create(const Call::Config& config);
+  static std::unique_ptr<Call> Create(
+      const Call::Config& config,
+      std::unique_ptr<RtpTransportControllerSendInterface>
+          transportControllerSend);
 
   virtual AudioSendStream* CreateAudioSendStream(
       const AudioSendStream::Config& config) = 0;
@@ -148,7 +148,7 @@ class Call {
   virtual TaskQueueBase* network_thread() const = 0;
   virtual TaskQueueBase* worker_thread() const = 0;
 
-  virtual ~Call() {}
+  virtual ~Call() = default;
 };
 
 }  // namespace webrtc

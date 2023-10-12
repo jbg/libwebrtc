@@ -1271,6 +1271,7 @@ if (!build_with_chromium) {
       ":video_test_common",
       ":video_test_constants",
       "../api:array_view",
+      "../api:context_builder",
       "../api:create_frame_generator",
       "../api:frame_generator_api",
       "../api:rtp_headers",
