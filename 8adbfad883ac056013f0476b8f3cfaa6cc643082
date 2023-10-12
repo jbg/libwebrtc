@@ -16,6 +16,23 @@
       "message": "Added couple DCHECKs. Fixed the -Wsign-compare error. PTAL.",
       "revId": "8adbfad883ac056013f0476b8f3cfaa6cc643082",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3321db7_3540c28a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-10-12T12:25:02Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8adbfad883ac056013f0476b8f3cfaa6cc643082",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
