@@ -14,7 +14,6 @@
 #include <utility>
 
 #include "absl/strings/match.h"
-#include "api/async_resolver_factory.h"
 #include "api/call/call_factory_interface.h"
 #include "api/fec_controller.h"
 #include "api/ice_transport_interface.h"
@@ -27,7 +26,6 @@
 #include "call/audio_state.h"
 #include "call/rtp_transport_controller_send_factory.h"
 #include "media/base/media_engine.h"
-#include "p2p/base/basic_async_resolver_factory.h"
 #include "p2p/base/basic_packet_socket_factory.h"
 #include "p2p/base/default_ice_transport_factory.h"
 #include "p2p/base/port_allocator.h"
