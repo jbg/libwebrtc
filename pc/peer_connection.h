@@ -24,6 +24,7 @@
 #include "api/adaptation/resource.h"
 #include "api/async_dns_resolver.h"
 #include "api/candidate.h"
+#include "api/context.h"
 #include "api/crypto/crypto_options.h"
 #include "api/data_channel_interface.h"
 #include "api/dtls_transport_interface.h"
@@ -435,7 +436,7 @@ class PeerConnection : public PeerConnectionInternal,
   void TeardownDataChannelTransport_n(RTCError error) override
       RTC_RUN_ON(network_thread());
 
-  const FieldTrialsView& trials() const override { return *trials_; }
+  const FieldTrialsView& trials() const override { return c_.experiments(); }
 
   bool ConfiguredForMedia() const;
 
@@ -605,12 +606,7 @@ class PeerConnection : public PeerConnectionInternal,
   InitializeUnDemuxablePacketHandler();
 
   const rtc::scoped_refptr<ConnectionContext> context_;
-  // Field trials active for this PeerConnection is the first of:
-  // a) Specified in PeerConnectionDependencies (owned).
-  // b) Accessed via ConnectionContext (e.g PeerConnectionFactoryDependencies>
-  // c) Created as Default (FieldTrialBasedConfig).
-  const webrtc::AlwaysValidPointer<const FieldTrialsView, FieldTrialBasedConfig>
-      trials_;
+  const std::unique_ptr<const FieldTrialsView> trials_store_;
   const PeerConnectionFactoryInterface::Options options_;
   PeerConnectionObserver* observer_ RTC_GUARDED_BY(signaling_thread()) =
       nullptr;
@@ -619,10 +615,7 @@ class PeerConnection : public PeerConnectionInternal,
 
   // The EventLog needs to outlive `call_` (and any other object that uses it).
   std::unique_ptr<RtcEventLog> event_log_ RTC_GUARDED_BY(worker_thread());
-
-  // Points to the same thing as `event_log_`. Since it's const, we may read the
-  // pointer (but not touch the object) from any thread.
-  RtcEventLog* const event_log_ptr_ RTC_PT_GUARDED_BY(worker_thread());
+  const Context c_;
 
   IceConnectionState ice_connection_state_ RTC_GUARDED_BY(signaling_thread()) =
       kIceConnectionNew;

@@ -13,6 +13,7 @@
 
 #include <memory>
 
+#include "api/context.h"
 #include "api/field_trials_view.h"
 #include "api/network_state_predictor.h"
 #include "api/rtc_event_log/rtc_event_log.h"
@@ -23,16 +24,11 @@
 namespace webrtc {
 
 struct RtpTransportConfig {
+  Context context;
+
   // Bitrate config used until valid bitrate estimates are calculated. Also
   // used to cap total bitrate used. This comes from the remote connection.
   BitrateConstraints bitrate_config;
-
-  // RtcEventLog to use for this call. Required.
-  // Use webrtc::RtcEventLog::CreateNull() for a null implementation.
-  RtcEventLog* event_log = nullptr;
-
-  // Task Queue Factory to be used in this call. Required.
-  TaskQueueFactory* task_queue_factory = nullptr;
 
   // NetworkStatePredictor to use for this call.
   NetworkStatePredictorFactoryInterface* network_state_predictor_factory =
@@ -40,10 +36,6 @@ struct RtpTransportConfig {
 
   // Network controller factory to use for this call.
   NetworkControllerFactoryInterface* network_controller_factory = nullptr;
-
-  // Key-value mapping of internal configurations to apply,
-  // e.g. field trials.
-  const FieldTrialsView* trials = nullptr;
 
   // The burst interval of the pacer, see TaskQueuePacedSender constructor.
   absl::optional<TimeDelta> pacer_burst_interval;

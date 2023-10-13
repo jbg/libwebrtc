@@ -22,10 +22,9 @@ namespace webrtc {
 class CallFactory : public CallFactoryInterface {
  public:
   CallFactory();
+  ~CallFactory() override = default;
 
  private:
-  ~CallFactory() override {}
-
   Call* CreateCall(const CallConfig& config) override;
 
   RTC_NO_UNIQUE_ADDRESS SequenceChecker call_thread_;

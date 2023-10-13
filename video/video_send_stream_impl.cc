@@ -217,7 +217,7 @@ PacingConfig::PacingConfig(const PacingConfig&) = default;
 PacingConfig::~PacingConfig() = default;
 
 VideoSendStreamImpl::VideoSendStreamImpl(
-    Clock* clock,
+    const Context& context,
     SendStatisticsProxy* stats_proxy,
     RtpTransportControllerSendInterface* transport,
     BitrateAllocatorInterface* bitrate_allocator,
@@ -226,12 +226,11 @@ VideoSendStreamImpl::VideoSendStreamImpl(
     int initial_encoder_max_bitrate,
     double initial_encoder_bitrate_priority,
     VideoEncoderConfig::ContentType content_type,
-    RtpVideoSenderInterface* rtp_video_sender,
-    const FieldTrialsView& field_trials)
-    : clock_(clock),
+    RtpVideoSenderInterface* rtp_video_sender)
+    : c_(context),
       has_alr_probing_(config->periodic_alr_bandwidth_probing ||
                        GetAlrSettings(content_type)),
-      pacing_config_(PacingConfig(field_trials)),
+      pacing_config_(PacingConfig(c_.experiments())),
       stats_proxy_(stats_proxy),
       config_(config),
       worker_queue_(TaskQueueBase::Current()),
@@ -250,7 +249,7 @@ VideoSendStreamImpl::VideoSendStreamImpl(
       configured_pacing_factor_(GetConfiguredPacingFactor(*config_,
                                                           content_type,
                                                           pacing_config_,
-                                                          field_trials)) {
+                                                          c_.experiments())) {
   RTC_DCHECK_GE(config_->rtp.payload_type, 0);
   RTC_DCHECK_LE(config_->rtp.payload_type, 127);
   RTC_DCHECK(!config_->rtp.ssrcs.empty());
@@ -284,7 +283,7 @@ VideoSendStreamImpl::VideoSendStreamImpl(
       queue_time_limit_ms = alr_settings->max_paced_queue_time;
     } else {
       RateControlSettings rate_control_settings =
-          RateControlSettings::ParseFromKeyValueConfig(&field_trials);
+          RateControlSettings::ParseFromKeyValueConfig(&c_.experiments());
       enable_alr_bw_probing = rate_control_settings.UseAlrProbing();
       queue_time_limit_ms = pacing_config_.max_pacing_delay.Get().ms();
     }
@@ -400,7 +399,7 @@ void VideoSendStreamImpl::OnBitrateAllocationUpdated(
     if (encoder_target_rate_bps_ == 0) {
       return;
     }
-    int64_t now_ms = clock_->TimeInMilliseconds();
+    int64_t now_ms = c_.clock().TimeInMilliseconds();
     if (video_bitrate_allocation_context_) {
       // If new allocation is within kMaxVbaSizeDifferencePercent larger
       // than the previously sent allocation and the same streams are still

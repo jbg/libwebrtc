@@ -22,6 +22,7 @@
 #include <string>
 #include <vector>
 
+#include "api/context_builder.h"
 #include "api/fec_controller_override.h"
 #include "api/rtc_event_log_output_file.h"
 #include "api/task_queue/default_task_queue_factory.h"
@@ -1247,8 +1248,10 @@ void VideoQualityTest::RunWithAnalyzer(const Params& params) {
   }
 
   SendTask(task_queue(), [this, &params, &send_transport, &recv_transport]() {
-    Call::Config send_call_config(send_event_log_.get());
-    Call::Config recv_call_config(recv_event_log_.get());
+    Call::Config send_call_config(
+        ContextBuilder().With(send_event_log_.get()).Build());
+    Call::Config recv_call_config(
+        ContextBuilder().With(recv_event_log_.get()).Build());
     send_call_config.bitrate_config = params.call.call_bitrate_config;
     recv_call_config.bitrate_config = params.call.call_bitrate_config;
     if (params_.audio.enabled)
@@ -1475,9 +1478,11 @@ void VideoQualityTest::RunWithRenderers(const Params& params) {
 
     // TODO(ivica): Remove bitrate_config and use the default Call::Config(), to
     // match the full stack tests.
-    Call::Config send_call_config(send_event_log_.get());
+    Call::Config send_call_config(
+        ContextBuilder().With(send_event_log_.get()).Build());
     send_call_config.bitrate_config = params_.call.call_bitrate_config;
-    Call::Config recv_call_config(recv_event_log_.get());
+    Call::Config recv_call_config(
+        ContextBuilder().With(recv_event_log_.get()).Build());
 
     if (params_.audio.enabled)
       InitializeAudioDevice(&send_call_config, &recv_call_config,

@@ -15,6 +15,7 @@
 #include <vector>
 
 #include "absl/memory/memory.h"
+#include "api/context_builder.h"
 #include "api/rtc_event_log/rtc_event_log.h"
 #include "api/task_queue/default_task_queue_factory.h"
 #include "api/task_queue/task_queue_base.h"
@@ -43,17 +44,17 @@ MultiStreamTester::MultiStreamTester() {
 MultiStreamTester::~MultiStreamTester() = default;
 
 void MultiStreamTester::RunTest() {
-  webrtc::RtcEventLogNull event_log;
   auto task_queue_factory = CreateDefaultTaskQueueFactory();
   // Use high prioirity since this task_queue used for fake network delivering
   // at correct time. Those test tasks should be prefered over code under test
   // to make test more stable.
   auto task_queue = task_queue_factory->CreateTaskQueue(
       "TaskQueue", TaskQueueFactory::Priority::HIGH);
-  Call::Config config(&event_log);
   test::ScopedKeyValueConfig field_trials;
-  config.trials = &field_trials;
-  config.task_queue_factory = task_queue_factory.get();
+  Call::Config config(ContextBuilder()
+                          .With(task_queue_factory.get())
+                          .With(&field_trials)
+                          .Build());
   std::unique_ptr<Call> sender_call;
   std::unique_ptr<Call> receiver_call;
   std::unique_ptr<test::DirectTransport> sender_transport;
@@ -69,8 +70,8 @@ void MultiStreamTester::RunTest() {
   InternalDecoderFactory decoder_factory;
 
   SendTask(task_queue.get(), [&]() {
-    sender_call = absl::WrapUnique(Call::Create(config));
-    receiver_call = absl::WrapUnique(Call::Create(config));
+    sender_call = Call::Create(config);
+    receiver_call = Call::Create(config);
     sender_transport = CreateSendTransport(task_queue.get(), sender_call.get());
     receiver_transport =
         CreateReceiveTransport(task_queue.get(), receiver_call.get());
