@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36d2083f_6f587c7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-13T08:51:26Z",
+      "side": 1,
+      "message": "This CL cannot be submitted before December 1 (the date set in the PSA).\nIt\u0027s uploaded so that we can get an early start on fixing the issues.",
+      "revId": "f889cb1cd1c58f500b23c37d7ee9ed16eac6c011",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
