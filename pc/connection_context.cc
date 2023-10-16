@@ -96,6 +96,7 @@ ConnectionContext::ConnectionContext(
                      }),
       signaling_thread_(MaybeWrapThread(dependencies->signaling_thread,
                                         wraps_current_thread_)),
+      task_queue_factory_(std::move(dependencies->task_queue_factory)),
       trials_(dependencies->trials ? std::move(dependencies->trials)
                                    : std::make_unique<FieldTrialBasedConfig>()),
       media_engine_(std::move(dependencies->media_engine)),

@@ -23,6 +23,7 @@
 #include "absl/strings/match.h"
 #include "absl/strings/string_view.h"
 #include "absl/types/optional.h"
+#include "api/connection_environment_builder.h"
 #include "api/jsep_ice_candidate.h"
 #include "api/media_types.h"
 #include "api/rtp_parameters.h"
@@ -506,12 +507,17 @@ PeerConnection::PeerConnection(
     PeerConnectionDependencies& dependencies,
     bool dtls_enabled)
     : context_(context),
-      trials_(std::move(dependencies.trials), &context->field_trials()),
+      trials_store_(std::move(dependencies.trials)),
       options_(options),
       observer_(dependencies.observer),
       is_unified_plan_(is_unified_plan),
       event_log_(std::move(event_log)),
-      event_log_ptr_(event_log_.get()),
+      env_(ConnectionEnvironmentBuilder()
+               .With(event_log_.get())
+               .With(&context_->field_trials())
+               .With(trials_store_.get())
+               .With(context_->task_queue_factory())
+               .Build()),
       async_dns_resolver_factory_(
           std::move(dependencies.async_dns_resolver_factory)),
       port_allocator_(std::move(dependencies.allocator)),
@@ -706,7 +712,7 @@ JsepTransportController* PeerConnection::InitializeTransportController_n(
   config.transport_observer = this;
   config.rtcp_handler = InitializeRtcpCallback();
   config.un_demuxable_packet_handler = InitializeUnDemuxablePacketHandler();
-  config.event_log = event_log_ptr_;
+  config.event_log = &env_.event_log();
 #if defined(ENABLE_EXTERNAL_AUTH)
   config.enable_external_auth = true;
 #endif
@@ -725,7 +731,7 @@ JsepTransportController* PeerConnection::InitializeTransportController_n(
         }
       };
 
-  config.field_trials = trials_.get();
+  config.field_trials = &env_.experiments();
 
   transport_controller_.reset(new JsepTransportController(
       network_thread(), port_allocator_.get(),

@@ -35,10 +35,31 @@ rtc_source_set("callfactory_api") {
   ]
 }
 
+rtc_source_set("connection_environment") {
+  visibility = [ "*" ]
+  sources = [ "connection_environment.h" ]
+  deps = [ "../rtc_base/system:rtc_export" ]
+}
+
+rtc_source_set("connection_environment_builder") {
+  visibility = [ "*" ]
+  sources = [
+    "connection_environment_builder.cc",
+    "connection_environment_builder.h",
+  ]
+  deps = [
+    ":connection_environment",
+    "../rtc_base/system:rtc_export",
+    "../system_wrappers",
+    "rtc_event_log",
+    "task_queue:default_task_queue_factory",
+    "transport:field_trial_based_config",
+  ]
+}
+
 if (!build_with_chromium) {
   rtc_library("create_peerconnection_factory") {
     visibility = [ "*" ]
-    allow_poison = [ "default_task_queue" ]
     sources = [
       "create_peerconnection_factory.cc",
       "create_peerconnection_factory.h",
@@ -1407,6 +1428,7 @@ if (rtc_include_tests) {
 
     deps = [
       ":callfactory_api",
+      ":connection_environment_builder",
       ":time_controller",
       "../call",
       "../call:call_interfaces",

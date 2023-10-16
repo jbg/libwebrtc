@@ -732,7 +732,6 @@ rtc_source_set("peerconnection") {
   visibility = [ "*" ]  # Used by Chromium and others
   cflags = []
   sources = []
-
   deps = [
     ":audio_rtp_receiver",
     ":audio_track",
@@ -1207,6 +1206,8 @@ rtc_source_set("peer_connection") {
     ":webrtc_session_description_factory",
     "../api:async_dns_resolver",
     "../api:candidate",
+    "../api:connection_environment",
+    "../api:connection_environment_builder",
     "../api:dtls_transport_interface",
     "../api:field_trials_view",
     "../api:ice_transport_interface",
@@ -1499,6 +1500,8 @@ rtc_source_set("peer_connection_factory") {
     ":peer_connection_proxy",
     "../api:audio_options_api",
     "../api:callfactory_api",
+    "../api:connection_environment",
+    "../api:connection_environment_builder",
     "../api:fec_controller_api",
     "../api:field_trials_view",
     "../api:ice_transport_interface",

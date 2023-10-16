@@ -108,7 +108,6 @@ class RtpGenerator final : public webrtc::Transport {
   std::unique_ptr<VideoDecoderFactory> video_decoder_factory_;
   std::unique_ptr<VideoBitrateAllocatorFactory>
       video_bitrate_allocator_factory_;
-  std::unique_ptr<RtcEventLog> event_log_;
   std::unique_ptr<Call> call_;
   std::unique_ptr<test::RtpFileWriter> rtp_dump_writer_;
   std::vector<std::unique_ptr<test::FrameGeneratorCapturer>> frame_generators_;
