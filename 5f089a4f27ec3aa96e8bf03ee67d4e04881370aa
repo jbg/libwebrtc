@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1538beab_ef9172e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2023-10-16T14:23:00Z",
+      "side": 1,
+      "message": "Nit: Wrap to 72 (or 80) columns",
+      "revId": "5f089a4f27ec3aa96e8bf03ee67d4e04881370aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef8db7cb_d0bbb201",
+        "filename": "api/transport/field_trial_based_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2023-10-16T14:23:00Z",
+      "side": 1,
+      "message": "Can\u0027t `webrtc::FieldTrials` (instantiated from the global string) be exported and used instead?",
+      "revId": "5f089a4f27ec3aa96e8bf03ee67d4e04881370aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
