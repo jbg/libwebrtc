@@ -69,6 +69,24 @@
       "parentUuid": "9e3a731c_628c7460",
       "revId": "5f089a4f27ec3aa96e8bf03ee67d4e04881370aa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ed38a2e_cf78a60f",
+        "filename": "api/transport/field_trial_based_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2023-10-16T15:17:01Z",
+      "side": 1,
+      "message": "IIUC CreateNoGlobal will not work for field trials that haven\u0027t migrated to the new API. If so, it\u0027s probably a bit early to use this.\n\nWhat I\u0027m trying to achieve is to use in Chromium the constructor of SimulcastEncoderAdapter that takes a FieldTrialView so that the one that doesn\u0027t take a FieldTrialView can be removed.\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/media/engine/simulcast_encoder_adapter.h;l\u003d50-52\n\nFieldTrialView will probably be added to more WebRTC API in the future so I thought exporting FieldTrialBasedConfig might be useful to migrate client without changing their behavior.",
+      "parentUuid": "9befe0c6_4e1014f3",
+      "revId": "5f089a4f27ec3aa96e8bf03ee67d4e04881370aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
