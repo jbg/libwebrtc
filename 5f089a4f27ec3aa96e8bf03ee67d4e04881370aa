@@ -33,6 +33,24 @@
       "message": "Can\u0027t `webrtc::FieldTrials` (instantiated from the global string) be exported and used instead?",
       "revId": "5f089a4f27ec3aa96e8bf03ee67d4e04881370aa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e3a731c_628c7460",
+        "filename": "api/transport/field_trial_based_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2023-10-16T14:30:05Z",
+      "side": 1,
+      "message": "So in Chromium the code would like like this ?\nwebrtc::FieldTrial field_trials(webrtc::field_trial::GetFieldTrialString());\n\nBoth solutions are fine with me.",
+      "parentUuid": "ef8db7cb_d0bbb201",
+      "revId": "5f089a4f27ec3aa96e8bf03ee67d4e04881370aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
