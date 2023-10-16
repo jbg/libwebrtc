@@ -41,6 +41,7 @@ rtc_library("call_interfaces") {
     ":receive_stream_interface",
     ":rtp_interfaces",
     ":video_stream_api",
+    "../api:context",
     "../api:fec_controller_api",
     "../api:field_trials_view",
     "../api:frame_transformer_interface",
@@ -110,6 +111,7 @@ rtc_library("rtp_interfaces") {
   ]
   deps = [
     "../api:array_view",
+    "../api:context",
     "../api:fec_controller_api",
     "../api:field_trials_view",
     "../api:frame_transformer_interface",
@@ -480,6 +482,7 @@ if (rtc_include_tests) {
         ":rtp_sender",
         ":simulated_network",
         "../api:array_view",
+        "../api:context_builder",
         "../api:create_frame_generator",
         "../api:mock_audio_mixer",
         "../api:rtp_headers",
@@ -561,6 +564,7 @@ if (rtc_include_tests) {
         ":call_interfaces",
         ":simulated_network",
         ":video_stream_api",
+        "../api:context_builder",
         "../api:rtc_event_log_output_file",
         "../api:simulated_network_api",
         "../api/audio_codecs:builtin_audio_encoder_factory",

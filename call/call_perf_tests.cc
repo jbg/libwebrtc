@@ -16,6 +16,7 @@
 #include "absl/flags/flag.h"
 #include "absl/strings/string_view.h"
 #include "api/audio_codecs/builtin_audio_encoder_factory.h"
+#include "api/context_builder.h"
 #include "api/numerics/samples_stats_counter.h"
 #include "api/rtc_event_log/rtc_event_log.h"
 #include "api/task_queue/pending_task_safety_flag.h"
@@ -223,12 +224,14 @@ void CallPerfTest::TestAudioVideoSync(FecMode fec,
     send_audio_state_config.audio_processing =
         AudioProcessingBuilder().Create();
     send_audio_state_config.audio_device_module = fake_audio_device;
-    CallConfig sender_config(send_event_log_.get());
+    CallConfig sender_config(
+        ContextBuilder().With(send_event_log_.get()).Build());
 
     auto audio_state = AudioState::Create(send_audio_state_config);
     fake_audio_device->RegisterAudioCallback(audio_state->audio_transport());
     sender_config.audio_state = audio_state;
-    CallConfig receiver_config(recv_event_log_.get());
+    CallConfig receiver_config(
+        ContextBuilder().With(recv_event_log_.get()).Build());
     receiver_config.audio_state = audio_state;
     CreateCalls(sender_config, receiver_config);
 

@@ -15,6 +15,7 @@
 #include <string>
 
 #include "absl/types/optional.h"
+#include "api/context_builder.h"
 #include "api/rtc_event_log/rtc_event_log.h"
 #include "api/sequence_checker.h"
 #include "api/task_queue/task_queue_base.h"
@@ -162,10 +163,13 @@ class VideoSendStreamImplTest : public ::testing::Test {
     std::map<uint32_t, RtpState> suspended_ssrcs;
     std::map<uint32_t, RtpPayloadState> suspended_payload_states;
     auto ret = std::make_unique<VideoSendStreamImpl>(
-        time_controller_.GetClock(), &stats_proxy_, &transport_controller_,
-        &bitrate_allocator_, &video_stream_encoder_, &config_,
-        initial_encoder_max_bitrate, initial_encoder_bitrate_priority,
-        content_type, &rtp_video_sender_, field_trials_);
+        ContextBuilder()
+            .With(time_controller_.GetClock())
+            .With(&field_trials_)
+            .Build(),
+        &stats_proxy_, &transport_controller_, &bitrate_allocator_,
+        &video_stream_encoder_, &config_, initial_encoder_max_bitrate,
+        initial_encoder_bitrate_priority, content_type, &rtp_video_sender_);
 
     // The call to GetStartBitrate() executes asynchronously on the tq.
     // Ensure all tasks get to run.

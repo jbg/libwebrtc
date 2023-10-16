@@ -12,6 +12,7 @@
 
 #include <memory>
 
+#include "api/context_builder.h"
 #include "call/call.h"
 #include "call/rtp_transport_config.h"
 #include "call/rtp_transport_controller_send_factory_interface.h"
@@ -37,11 +38,12 @@ std::unique_ptr<CallFactoryInterface> CreateTimeControllerBasedCallFactory(
     explicit TimeControllerBasedCallFactory(TimeController* time_controller)
         : time_controller_(time_controller) {}
     std::unique_ptr<Call> CreateCall(const CallConfig& config) override {
-      RtpTransportConfig transportConfig = config.ExtractTransportConfig();
-
-      return Call::Create(config, time_controller_->GetClock(),
+      CallConfig c = config;
+      c.context =
+          ContextBuilder(c.context).With(time_controller_->GetClock()).Build();
+      return Call::Create(config,
                           config.rtp_transport_controller_send_factory->Create(
-                              transportConfig, time_controller_->GetClock()));
+                              config.ExtractTransportConfig()));
     }
 
    private:

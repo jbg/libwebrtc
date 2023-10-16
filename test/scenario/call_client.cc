@@ -13,6 +13,7 @@
 #include <memory>
 #include <utility>
 
+#include "api/context_builder.h"
 #include "api/media_types.h"
 #include "api/rtc_event_log/rtc_event_log.h"
 #include "api/rtc_event_log/rtc_event_log_factory.h"
@@ -65,22 +66,23 @@ std::unique_ptr<Call> CreateCall(
     CallClientConfig config,
     LoggingNetworkControllerFactory* network_controller_factory,
     rtc::scoped_refptr<AudioState> audio_state) {
-  CallConfig call_config(event_log);
+  CallConfig call_config(ContextBuilder()
+                             .With(event_log)
+                             .With(time_controller->GetClock())
+                             .With(time_controller->GetTaskQueueFactory())
+                             .With(config.field_trials)
+                             .Build());
   call_config.bitrate_config.max_bitrate_bps =
       config.transport.rates.max_rate.bps_or(-1);
   call_config.bitrate_config.min_bitrate_bps =
       config.transport.rates.min_rate.bps();
   call_config.bitrate_config.start_bitrate_bps =
       config.transport.rates.start_rate.bps();
-  call_config.task_queue_factory = time_controller->GetTaskQueueFactory();
   call_config.network_controller_factory = network_controller_factory;
   call_config.audio_state = audio_state;
   call_config.pacer_burst_interval = config.pacer_burst_interval;
-  call_config.trials = config.field_trials;
-  Clock* clock = time_controller->GetClock();
-  return Call::Create(call_config, clock,
-                      RtpTransportControllerSendFactory().Create(
-                          call_config.ExtractTransportConfig(), clock));
+  return Call::Create(call_config, RtpTransportControllerSendFactory().Create(
+                                       call_config.ExtractTransportConfig()));
 }
 
 std::unique_ptr<RtcEventLog> CreateEventLog(
