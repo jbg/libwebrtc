@@ -51,6 +51,24 @@
       "parentUuid": "ef8db7cb_d0bbb201",
       "revId": "5f089a4f27ec3aa96e8bf03ee67d4e04881370aa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9befe0c6_4e1014f3",
+        "filename": "api/transport/field_trial_based_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2023-10-16T14:50:13Z",
+      "side": 1,
+      "message": "Yes, `FieldTrialBasedConfig` is essentially a wrapper around the global string implementing the `FieldTrialsView` interface, but there\u0027s no way to instantiate it with an initial string. The string must be passed down from somewhere once the global string (and `webrtc::field_trial::GetFieldTrialString`) is gone so `webrtc::FieldTrials` seem to be a better contender.\n\nBut looking at the disclaimer about not having multiple instances [1] you\u0027d have to use the `FieldTrials::CreateNoGlobal` factory for the time being...\n\nEventually, when the global string is removed, I envision that a user of WebRTC crates one or more instances of `webrtc::FieldTrials` that are then passed down as a `FieldTrialsView`.\n\nDo you think it would be easier to get all the necessary plumbing done with `FieldTrialBasedConfig` instead?\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/api/field_trials.h;drc\u003d1c8103d4dbe1ea1296e1c28dede4d03707e04765;l\u003d34",
+      "parentUuid": "9e3a731c_628c7460",
+      "revId": "5f089a4f27ec3aa96e8bf03ee67d4e04881370aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
