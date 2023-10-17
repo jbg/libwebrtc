@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39a22f7c_43acf324",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-17T10:45:00Z",
+      "side": 1,
+      "message": "Looks good to me (works), but could be improved. Adding LGTM to get myself out of the way.",
+      "revId": "bcfc3b067b12294973a486effb9fc7c7fddc354a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15e25c38_a1e62945",
+        "filename": "rtc_tools/network_tester/network_tester_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-17T10:45:00Z",
+      "side": 1,
+      "message": "Don\u0027t be shy - use 1024 and 65535! (all ports above the \"reserved\" ports)\nAlternatively, use 49152-65535. (RFC 6335 section 6)",
+      "revId": "bcfc3b067b12294973a486effb9fc7c7fddc354a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa2cd14a_09d2cbc2",
+        "filename": "rtc_tools/network_tester/network_tester_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-17T10:45:00Z",
+      "side": 1,
+      "message": "Use a random number generator. webrtc::Random(rtc::TimeMicros()).Rand(low, high) will work if you don\u0027t want to use platform random. This ensures that those who read the code know that you\u0027re looking for randomness.",
+      "revId": "bcfc3b067b12294973a486effb9fc7c7fddc354a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71282c88_a8c3a748",
+        "filename": "rtc_tools/network_tester/network_tester_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-17T10:45:00Z",
+      "side": 1,
+      "message": "(editorial comment, not suggestion) It\u0027s a bit silly that TestController doesn\u0027t have an accessor for its port number, or this code could have been made even simpler and less error prone by passing in MIN_PORT and MAX_PORT here, and retrieving the port number to connect to.",
+      "revId": "bcfc3b067b12294973a486effb9fc7c7fddc354a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
