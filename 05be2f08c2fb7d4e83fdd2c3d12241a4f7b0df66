@@ -34,6 +34,24 @@
       "parentUuid": "e7ed2184_a1134b07",
       "revId": "05be2f08c2fb7d4e83fdd2c3d12241a4f7b0df66",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "748ca1ce_6fe63be8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-10-17T13:28:37Z",
+      "side": 1,
+      "message": "That did the trick (but requires codec specifics), thank you!",
+      "parentUuid": "b485a21f_e56ad44b",
+      "revId": "05be2f08c2fb7d4e83fdd2c3d12241a4f7b0df66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
