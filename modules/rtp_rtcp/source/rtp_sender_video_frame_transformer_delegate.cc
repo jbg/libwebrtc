@@ -10,6 +10,7 @@
 
 #include "modules/rtp_rtcp/source/rtp_sender_video_frame_transformer_delegate.h"
 
+#include <string>
 #include <utility>
 #include <vector>
 
@@ -17,6 +18,7 @@
 #include "api/task_queue/task_queue_factory.h"
 #include "modules/rtp_rtcp/source/rtp_descriptor_authentication.h"
 #include "rtc_base/checks.h"
+#include "rtc_base/logging.h"
 
 namespace webrtc {
 namespace {
@@ -97,6 +99,13 @@ class TransformableVideoSenderFrame : public TransformableVideoFrameInterface {
   }
 
   Direction GetDirection() const override { return Direction::kSender; }
+  std::string GetMimeType() const override {
+    if (!codec_type_.has_value()) {
+      return "video/x-unknown";
+    }
+    std::string mime_type = "video/";
+    return mime_type + CodecTypeToPayloadString(*codec_type_);
+  }
 
  private:
   rtc::scoped_refptr<EncodedImageBufferInterface> encoded_data_;
@@ -139,6 +148,9 @@ bool RTPSenderVideoFrameTransformerDelegate::TransformFrame(
     const EncodedImage& encoded_image,
     RTPVideoHeader video_header,
     TimeDelta expected_retransmission_time) {
+  RTC_LOG(LS_ERROR) << "TRANSFORM "
+                    << (codec_type.has_value() ? *codec_type : -1) << " -- "
+                    << payload_type;
   frame_transformer_->Transform(std::make_unique<TransformableVideoSenderFrame>(
       encoded_image, video_header, payload_type, codec_type, rtp_timestamp,
       expected_retransmission_time, ssrc_,
@@ -231,7 +243,9 @@ std::unique_ptr<TransformableVideoFrameInterface> CloneSenderVideoFrame(
   // TODO(bugs.webrtc.org/14708): Fill in other EncodedImage parameters
 
   VideoFrameMetadata metadata = original->Metadata();
+  RTC_LOG(LS_ERROR) << "ORIGINAL " << metadata.GetCodec();
   RTPVideoHeader new_header = RTPVideoHeader::FromMetadata(metadata);
+  RTC_LOG(LS_ERROR) << "NEW HEADER " << new_header.codec;
   return std::make_unique<TransformableVideoSenderFrame>(
       encoded_image, new_header, original->GetPayloadType(), new_header.codec,
       original->GetTimestamp(),

@@ -14,6 +14,7 @@
 
 #include "api/test/mock_transformable_video_frame.h"
 #include "rtc_base/event.h"
+#include "rtc_base/logging.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
 #include "test/mock_frame_transformer.h"
@@ -159,9 +160,14 @@ TEST_F(RtpSenderVideoFrameTransformerDelegateTest, CloneSenderVideoFrame) {
   auto& video_frame = static_cast<TransformableVideoFrameInterface&>(*frame);
   std::unique_ptr<TransformableVideoFrameInterface> clone =
       CloneSenderVideoFrame(&video_frame);
+  RTC_LOG(LS_ERROR) << "CODEC TYPE SHOULD BE VP8 (1) but is Generic (0) "
+                    << video_frame.Metadata().GetCodec();
+  RTC_LOG(LS_ERROR) << "CLONE " << clone->GetMimeType();
+  RTC_LOG(LS_ERROR) << "ORIGINAL " << video_frame.GetMimeType();
 
   EXPECT_EQ(clone->IsKeyFrame(), video_frame.IsKeyFrame());
   EXPECT_EQ(clone->GetPayloadType(), video_frame.GetPayloadType());
+  EXPECT_EQ(clone->GetMimeType(), video_frame.GetMimeType());
   EXPECT_EQ(clone->GetSsrc(), video_frame.GetSsrc());
   EXPECT_EQ(clone->GetTimestamp(), video_frame.GetTimestamp());
   EXPECT_EQ(clone->Metadata(), video_frame.Metadata());
@@ -182,6 +188,7 @@ TEST_F(RtpSenderVideoFrameTransformerDelegateTest, CloneKeyFrame) {
 
   EXPECT_EQ(clone->IsKeyFrame(), video_frame.IsKeyFrame());
   EXPECT_EQ(clone->GetPayloadType(), video_frame.GetPayloadType());
+  EXPECT_EQ(clone->GetMimeType(), video_frame.GetMimeType());
   EXPECT_EQ(clone->GetSsrc(), video_frame.GetSsrc());
   EXPECT_EQ(clone->GetTimestamp(), video_frame.GetTimestamp());
   EXPECT_EQ(clone->Metadata(), video_frame.Metadata());
