@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ef9c6e5_64032415",
+        "filename": "rtc_tools/network_tester/network_tester_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-10-17T11:03:47Z",
+      "side": 1,
+      "message": "```suggestion\n  // running the test in parallel in stress runs.\n```",
+      "range": {
+        "startLine": 25,
+        "startChar": 44,
+        "endLine": 25,
+        "endChar": 48
+      },
+      "revId": "bcfc3b067b12294973a486effb9fc7c7fddc354a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15e25c38_a1e62945",
         "filename": "rtc_tools/network_tester/network_tester_unittest.cc",
         "patchSetId": 1
@@ -31,6 +54,24 @@
       "writtenOn": "2023-10-17T10:45:00Z",
       "side": 1,
       "message": "Don\u0027t be shy - use 1024 and 65535! (all ports above the \"reserved\" ports)\nAlternatively, use 49152-65535. (RFC 6335 section 6)",
+      "revId": "bcfc3b067b12294973a486effb9fc7c7fddc354a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1caf040b_d78aaee7",
+        "filename": "rtc_tools/network_tester/network_tester_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-10-17T11:03:47Z",
+      "side": 1,
+      "message": "Personally, I think 49152-65535 is cleaner (i.e. avoiding any registered ports), but I don\u0027t have a strong opinion on this.",
+      "parentUuid": "15e25c38_a1e62945",
       "revId": "bcfc3b067b12294973a486effb9fc7c7fddc354a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
