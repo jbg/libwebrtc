@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7ed2184_a1134b07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-10-17T10:25:34Z",
+      "side": 1,
+      "message": "Can you help me figure out why clone-ing drops the codec_type?\nPS2..3 has the test which fails, bot run with more logging happened for PS3.\n\nI tried copying frame_type_ in TransformableVideoSenderFrame::Metadata() but that just lead to TypedThrowBadVariantAccess\u003cconst webrtc::RTPVideoHeaderVP8 \u0026\u003e when running the test :-/",
+      "revId": "05be2f08c2fb7d4e83fdd2c3d12241a4f7b0df66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
