@@ -16,6 +16,40 @@
       "message": "Long-term I wonder if we even need audio/video specializations of RtpMediaContentDescription. I hope we do not!",
       "revId": "7e6259cec1220532b8082577d407fd5703fcc4d7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1716a5b5_91ff77c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-18T06:46:16Z",
+      "side": 1,
+      "message": "Good riddance!",
+      "revId": "7e6259cec1220532b8082577d407fd5703fcc4d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8a0e95c_e498b668",
+        "filename": "pc/channel_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-18T06:46:16Z",
+      "side": 1,
+      "message": "Can we get rid of this traits member altogether?",
+      "revId": "7e6259cec1220532b8082577d407fd5703fcc4d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
