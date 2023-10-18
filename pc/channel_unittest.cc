@@ -62,15 +62,14 @@ using ::testing::Field;
 using ::webrtc::RtpTransceiverDirection;
 using ::webrtc::SdpType;
 
-const cricket::AudioCodec kPcmuCodec =
+const cricket::Codec kPcmuCodec =
     cricket::CreateAudioCodec(0, "PCMU", 64000, 1);
-const cricket::AudioCodec kPcmaCodec =
+const cricket::Codec kPcmaCodec =
     cricket::CreateAudioCodec(8, "PCMA", 64000, 1);
-const cricket::AudioCodec kIsacCodec =
+const cricket::Codec kIsacCodec =
     cricket::CreateAudioCodec(103, "ISAC", 40000, 1);
-const cricket::VideoCodec kH264Codec = cricket::CreateVideoCodec(97, "H264");
-const cricket::VideoCodec kH264SvcCodec =
-    cricket::CreateVideoCodec(99, "H264-SVC");
+const cricket::Codec kH264Codec = cricket::CreateVideoCodec(97, "H264");
+const cricket::Codec kH264SvcCodec = cricket::CreateVideoCodec(99, "H264-SVC");
 const uint32_t kSsrc1 = 0x1111;
 const uint32_t kSsrc2 = 0x2222;
 const uint32_t kSsrc3 = 0x3333;
@@ -108,7 +107,7 @@ class VoiceTraits : public Traits<cricket::VoiceChannel,
                                   cricket::VoiceMediaSendChannelInterface,
                                   cricket::VoiceMediaReceiveChannelInterface,
                                   cricket::AudioContentDescription,
-                                  cricket::AudioCodec,
+                                  cricket::Codec,
                                   cricket::VoiceMediaInfo,
                                   cricket::AudioOptions> {};
 
@@ -118,7 +117,7 @@ class VideoTraits : public Traits<cricket::VideoChannel,
                                   cricket::VideoMediaSendChannelInterface,
                                   cricket::VideoMediaReceiveChannelInterface,
                                   cricket::VideoContentDescription,
-                                  cricket::VideoCodec,
+                                  cricket::Codec,
                                   cricket::VideoMediaInfo,
                                   cricket::VideoOptions> {};
 
@@ -507,8 +506,8 @@ class ChannelTest : public ::testing::Test, public sigslot::has_slots<> {
   bool CheckNoRtp2() { return media_send_channel2_impl()->CheckNoRtp(); }
 
   void CreateContent(int flags,
-                     const cricket::AudioCodec& audio_codec,
-                     const cricket::VideoCodec& video_codec,
+                     const cricket::Codec& audio_codec,
+                     const cricket::Codec& video_codec,
                      typename T::Content* content) {
     // overridden in specialized classes
   }
@@ -1562,8 +1561,8 @@ std::unique_ptr<cricket::VoiceChannel> ChannelTest<VoiceTraits>::CreateChannel(
 template <>
 void ChannelTest<VoiceTraits>::CreateContent(
     int flags,
-    const cricket::AudioCodec& audio_codec,
-    const cricket::VideoCodec& video_codec,
+    const cricket::Codec& audio_codec,
+    const cricket::Codec& video_codec,
     cricket::AudioContentDescription* audio) {
   audio->AddCodec(audio_codec);
   audio->set_rtcp_mux((flags & RTCP_MUX) != 0);
@@ -1577,8 +1576,8 @@ void ChannelTest<VoiceTraits>::CopyContent(
 }
 
 template <>
-bool ChannelTest<VoiceTraits>::CodecMatches(const cricket::AudioCodec& c1,
-                                            const cricket::AudioCodec& c2) {
+bool ChannelTest<VoiceTraits>::CodecMatches(const cricket::Codec& c1,
+                                            const cricket::Codec& c2) {
   return c1.name == c2.name && c1.clockrate == c2.clockrate &&
          c1.bitrate == c2.bitrate && c1.channels == c2.channels;
 }
@@ -1649,8 +1648,8 @@ std::unique_ptr<cricket::VideoChannel> ChannelTest<VideoTraits>::CreateChannel(
 template <>
 void ChannelTest<VideoTraits>::CreateContent(
     int flags,
-    const cricket::AudioCodec& audio_codec,
-    const cricket::VideoCodec& video_codec,
+    const cricket::Codec& audio_codec,
+    const cricket::Codec& video_codec,
     cricket::VideoContentDescription* video) {
   video->AddCodec(video_codec);
   video->set_rtcp_mux((flags & RTCP_MUX) != 0);
