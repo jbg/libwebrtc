@@ -50,6 +50,24 @@
       "message": "Testing?\n\nShould be enough to \"decorate\" some of the tests for encoded-transform with \"and oh yes, the MIME type is what we expect, too\".",
       "revId": "de218aa0367eb85abed5babc2c3b4c991c4aeda5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbe3fe32_c8815526",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-10-18T12:55:00Z",
+      "side": 1,
+      "message": "But where are those tests in C++? The clones were the only ones I found...",
+      "parentUuid": "cc60d276_36d942b5",
+      "revId": "de218aa0367eb85abed5babc2c3b4c991c4aeda5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
