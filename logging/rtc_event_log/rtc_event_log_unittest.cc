@@ -19,6 +19,7 @@
 #include <utility>
 #include <vector>
 
+#include "api/connection_environment_builder.h"
 #include "api/rtc_event_log/rtc_event_log_factory.h"
 #include "api/task_queue/default_task_queue_factory.h"
 #include "logging/rtc_event_log/events/rtc_event_audio_network_adaptation.h"
@@ -50,6 +51,7 @@
 #include "rtc_base/checks.h"
 #include "rtc_base/fake_clock.h"
 #include "rtc_base/random.h"
+#include "test/explicit_key_value_config.h"
 #include "test/gtest.h"
 #include "test/logging/memory_log_writer.h"
 #include "test/testsupport/file_utils.h"
@@ -57,6 +59,8 @@
 namespace webrtc {
 
 namespace {
+
+using ::webrtc::test::ExplicitKeyValueConfig;
 
 struct EventCounts {
   size_t audio_send_streams = 0;
@@ -104,6 +108,21 @@ struct EventCounts {
     return total_nonconfig_events() + total_config_events();
   }
 };
+
+std::unique_ptr<FieldTrialsView> Experiments(
+    RtcEventLog::EncodingType encoding_type) {
+  switch (encoding_type) {
+    case RtcEventLog::EncodingType::Legacy:
+      return std::make_unique<ExplicitKeyValueConfig>(
+          "WebRTC-RtcEventLogNewFormat/Disabled");
+    case RtcEventLog::EncodingType::NewFormat:
+      return std::make_unique<ExplicitKeyValueConfig>(
+          "WebRTC-RtcEventLogNewFormat/Enabled");
+    case RtcEventLog::EncodingType::ProtoFree:
+      RTC_CHECK(false);
+      return nullptr;
+  }
+}
 
 class RtcEventLogSession
     : public ::testing::TestWithParam<
@@ -339,11 +358,10 @@ void RtcEventLogSession::WriteLog(EventCounts count,
   // TODO(terelius): Allow test to run with either a real or a fake clock_.
   // Maybe always use the ScopedFakeClock, but conditionally SleepMs()?
 
-  auto task_queue_factory = CreateDefaultTaskQueueFactory();
-  RtcEventLogFactory rtc_event_log_factory(task_queue_factory.get());
+  RtcEventLogFactory rtc_event_log_factory;
   // The log will be flushed to output when the event_log goes out of scope.
-  std::unique_ptr<RtcEventLog> event_log =
-      rtc_event_log_factory.CreateRtcEventLog(encoding_type_);
+  std::unique_ptr<RtcEventLog> event_log = rtc_event_log_factory.Create(
+      ConnectionEnvironmentBuilder().With(Experiments(encoding_type_)).Build());
 
   // We can't send or receive packets without configured streams.
   RTC_CHECK_GE(count.video_recv_streams, 1);
@@ -934,12 +952,13 @@ TEST_P(RtcEventLogCircularBufferTest, KeepsMostRecentEvents) {
   int64_t start_time_us, utc_start_time_us, stop_time_us;
 
   {
-    auto task_queue_factory = CreateDefaultTaskQueueFactory();
-    RtcEventLogFactory rtc_event_log_factory(task_queue_factory.get());
+    RtcEventLogFactory rtc_event_log_factory;
     // When `log` goes out of scope, the contents are flushed
     // to the output.
     std::unique_ptr<RtcEventLog> log =
-        rtc_event_log_factory.CreateRtcEventLog(encoding_type_);
+        rtc_event_log_factory.Create(ConnectionEnvironmentBuilder()
+                                         .With(Experiments(encoding_type_))
+                                         .Build());
 
     for (size_t i = 0; i < kNumEvents; i++) {
       // The purpose of the test is to verify that the log can handle

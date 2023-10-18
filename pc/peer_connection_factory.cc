@@ -16,6 +16,7 @@
 #include "absl/strings/match.h"
 #include "api/async_resolver_factory.h"
 #include "api/call/call_factory_interface.h"
+#include "api/connection_environment.h"
 #include "api/fec_controller.h"
 #include "api/ice_transport_interface.h"
 #include "api/network_state_predictor.h"
@@ -89,7 +90,6 @@ PeerConnectionFactory::PeerConnectionFactory(
     rtc::scoped_refptr<ConnectionContext> context,
     PeerConnectionFactoryDependencies* dependencies)
     : context_(context),
-      task_queue_factory_(std::move(dependencies->task_queue_factory)),
       event_log_factory_(std::move(dependencies->event_log_factory)),
       fec_controller_factory_(std::move(dependencies->fec_controller_factory)),
       network_state_predictor_factory_(
@@ -232,17 +232,59 @@ PeerConnectionFactory::CreatePeerConnectionOrError(
   dependencies.allocator->SetNetworkIgnoreMask(options().network_ignore_mask);
   dependencies.allocator->SetVpnList(configuration.vpn_list);
 
-  std::unique_ptr<RtcEventLog> event_log =
-      worker_thread()->BlockingCall([this] { return CreateRtcEventLog_w(); });
+  rtc::scoped_refptr<rtc::RefCountedBase> storage;
+  Clock* clock = Clock::GetRealTimeClock();
+  const FieldTrialsView* experiments = dependencies.trials.get();
+  if (experiments == nullptr) {
+    experiments = &context_->field_trials();
+  }
+  TaskQueueFactory* task_queue_factory = context_->task_queue_factory();
 
-  const FieldTrialsView* trials =
-      dependencies.trials ? dependencies.trials.get() : &field_trials();
-  std::unique_ptr<Call> call =
-      worker_thread()->BlockingCall([this, &event_log, trials, &configuration] {
-        return CreateCall_w(event_log.get(), *trials, configuration);
-      });
+  // TODO(danilchap): May be make Clock injectable.
+  struct ConnectionEnvironmentStorageForRtcEventLog
+      : public rtc::RefCountedBase {
+    rtc::scoped_refptr<ConnectionContext> context;
+    std::unique_ptr<FieldTrialsView> pc_field_trials;
+    RtcEventLogNull null_rtc_event_log;
+  };
+  auto storage_for_event_log =
+      rtc::make_ref_counted<ConnectionEnvironmentStorageForRtcEventLog>();
+  storage_for_event_log->context = context_;
+  storage_for_event_log->pc_field_trials = std::move(dependencies.trials);
+  RtcEventLog* rtc_event_log = &storage_for_event_log->null_rtc_event_log;
 
-  auto result = PeerConnection::Create(context_, options_, std::move(event_log),
+  if (event_log_factory_) {
+    ConnectionEnvironment env_for_rtc_event_log(
+        std::move(storage_for_event_log), clock, task_queue_factory,
+        experiments, rtc_event_log);
+
+    struct ConnectionEnvironmentStorageForPc : public rtc::RefCountedBase {
+      rtc::scoped_refptr<ConnectionEnvironmentStorageForRtcEventLog> base_env;
+      std::unique_ptr<RtcEventLog> event_log;
+    };
+    auto s = rtc::make_ref_counted<ConnectionEnvironmentStorageForPc>();
+    s->base_env = storage_for_event_log;
+    s->event_log = worker_thread()->BlockingCall([&] {
+      RTC_DCHECK_RUN_ON(worker_thread());
+      return event_log_factory_->Create(env_for_rtc_event_log);
+    });
+    rtc_event_log = s->event_log.get();
+    storage = std::move(s);
+  } else {
+    storage = std::move(storage_for_event_log);
+  }
+
+  RTC_CHECK(clock);
+  RTC_CHECK(experiments);
+  RTC_CHECK(rtc_event_log);
+  RTC_CHECK(task_queue_factory);
+  ConnectionEnvironment env(std::move(storage), clock, task_queue_factory,
+                            experiments, rtc_event_log);
+
+  std::unique_ptr<Call> call = worker_thread()->BlockingCall(
+      [this, env, &configuration] { return CreateCall_w(env, configuration); });
+
+  auto result = PeerConnection::Create(std::move(env), context_, options_,
                                        std::move(call), configuration,
                                        std::move(dependencies));
   if (!result.ok()) {
@@ -285,23 +327,12 @@ rtc::scoped_refptr<AudioTrackInterface> PeerConnectionFactory::CreateAudioTrack(
   return AudioTrackProxy::Create(signaling_thread(), track);
 }
 
-std::unique_ptr<RtcEventLog> PeerConnectionFactory::CreateRtcEventLog_w() {
-  RTC_DCHECK_RUN_ON(worker_thread());
-
-  auto encoding_type = RtcEventLog::EncodingType::NewFormat;
-  if (field_trials().IsDisabled("WebRTC-RtcEventLogNewFormat"))
-    encoding_type = RtcEventLog::EncodingType::Legacy;
-  return event_log_factory_ ? event_log_factory_->Create(encoding_type)
-                            : std::make_unique<RtcEventLogNull>();
-}
-
 std::unique_ptr<Call> PeerConnectionFactory::CreateCall_w(
-    RtcEventLog* event_log,
-    const FieldTrialsView& field_trials,
+    ConnectionEnvironment env,
     const PeerConnectionInterface::RTCConfiguration& configuration) {
   RTC_DCHECK_RUN_ON(worker_thread());
 
-  CallConfig call_config(event_log, network_thread());
+  CallConfig call_config(env, network_thread());
   if (!media_engine() || !context_->call_factory()) {
     return nullptr;
   }
@@ -314,7 +345,7 @@ std::unique_ptr<Call> PeerConnectionFactory::CreateCall_w(
   FieldTrialParameter<DataRate> max_bandwidth("max",
                                               DataRate::KilobitsPerSec(2000));
   ParseFieldTrial({&min_bandwidth, &start_bandwidth, &max_bandwidth},
-                  field_trials.Lookup("WebRTC-PcFactoryDefaultBitrates"));
+                  env.experiments().Lookup("WebRTC-PcFactoryDefaultBitrates"));
 
   call_config.bitrate_config.min_bitrate_bps =
       rtc::saturated_cast<int>(min_bandwidth->bps());
@@ -324,12 +355,11 @@ std::unique_ptr<Call> PeerConnectionFactory::CreateCall_w(
       rtc::saturated_cast<int>(max_bandwidth->bps());
 
   call_config.fec_controller_factory = fec_controller_factory_.get();
-  call_config.task_queue_factory = task_queue_factory_.get();
   call_config.network_state_predictor_factory =
       network_state_predictor_factory_.get();
   call_config.neteq_factory = neteq_factory_.get();
 
-  if (IsTrialEnabled("WebRTC-Bwe-InjectedCongestionController")) {
+  if (env.experiments().IsEnabled("WebRTC-Bwe-InjectedCongestionController")) {
     RTC_LOG(LS_INFO) << "Using injected network controller factory";
     call_config.network_controller_factory =
         injected_network_controller_factory_.get();
@@ -337,7 +367,6 @@ std::unique_ptr<Call> PeerConnectionFactory::CreateCall_w(
     RTC_LOG(LS_INFO) << "Using default network controller factory";
   }
 
-  call_config.trials = &field_trials;
   call_config.rtp_transport_controller_send_factory =
       transport_controller_send_factory_.get();
   call_config.metronome = metronome_.get();
