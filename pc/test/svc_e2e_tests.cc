@@ -91,6 +91,11 @@ enum class UseDependencyDescriptor {
   Disabled,
 };
 
+enum class ContentType {
+  kRealtimeVideo,
+  kScreenshare,
+};
+
 struct SvcTestParameters {
   static SvcTestParameters Create(const std::string& codec_name,
                                   const std::string& scalability_mode_str) {
@@ -114,8 +119,9 @@ struct SvcTestParameters {
   int expected_temporal_layers;
 };
 
-class SvcTest : public testing::TestWithParam<
-                    std::tuple<SvcTestParameters, UseDependencyDescriptor>> {
+class SvcTest
+    : public testing::TestWithParam<
+          std::tuple<SvcTestParameters, UseDependencyDescriptor, ContentType>> {
  public:
   SvcTest()
       : video_codec_config(ToVideoCodecConfig(SvcTestParameters().codec_name)) {
@@ -139,6 +145,10 @@ class SvcTest : public testing::TestWithParam<
     return std::get<1>(GetParam()) == UseDependencyDescriptor::Enabled;
   }
 
+  bool IsScreenShare() const {
+    return std::get<2>(GetParam()) == ContentType::kScreenshare;
+  }
+
   bool IsSMode() const {
     return SvcTestParameters().scalability_mode[0] == 'S';
   }
@@ -151,7 +161,9 @@ std::string SvcTestNameGenerator(
     const testing::TestParamInfo<SvcTest::ParamType>& info) {
   return std::get<0>(info.param).scalability_mode +
          (std::get<1>(info.param) == UseDependencyDescriptor::Enabled ? "_DD"
-                                                                      : "");
+                                                                      : "") +
+         (std::get<2>(info.param) == ContentType::kScreenshare ? "_Screenshare"
+                                                               : "");
 }
 
 }  // namespace
@@ -334,6 +346,9 @@ TEST_P(SvcTest, ScalabilityModeSupported) {
               SvcTestParameters().expected_spatial_layers - 1,
               SvcTestParameters().expected_temporal_layers - 1);
         }
+        if (IsScreenShare()) {
+          video.content_hint = VideoTrackInterface::ContentHint::kText;
+        }
         RtpEncodingParameters parameters;
         parameters.scalability_mode = SvcTestParameters().scalability_mode;
         video.encoding_params.push_back(parameters);
@@ -390,7 +405,8 @@ INSTANTIATE_TEST_SUITE_P(
                    SvcTestParameters::Create(kVp8CodecName, "L1T2"),
                    SvcTestParameters::Create(kVp8CodecName, "L1T3")),
             Values(UseDependencyDescriptor::Disabled,
-                   UseDependencyDescriptor::Enabled)),
+                   UseDependencyDescriptor::Enabled),
+            Values(ContentType::kRealtimeVideo)),
     SvcTestNameGenerator);
 
 #if defined(WEBRTC_USE_H264)
@@ -404,7 +420,8 @@ INSTANTIATE_TEST_SUITE_P(
             }),
             // Like AV1, H.264 RTP format does not include SVC related
             // information, so always use Dependency Descriptor.
-            Values(UseDependencyDescriptor::Enabled)),
+            Values(UseDependencyDescriptor::Enabled),
+            Values(ContentType::kRealtimeVideo, ContentType::kScreenshare)),
     SvcTestNameGenerator);
 #endif
 
@@ -454,7 +471,8 @@ INSTANTIATE_TEST_SUITE_P(
             SvcTestParameters::Create(kVp9CodecName, "S3T3h"),
         }),
         Values(UseDependencyDescriptor::Disabled,
-               UseDependencyDescriptor::Enabled)),
+               UseDependencyDescriptor::Enabled),
+        Values(ContentType::kRealtimeVideo)),
     SvcTestNameGenerator);
 
 INSTANTIATE_TEST_SUITE_P(
@@ -499,7 +517,8 @@ INSTANTIATE_TEST_SUITE_P(
                 SvcTestParameters::Create(kAv1CodecName, "S3T3"),
                 SvcTestParameters::Create(kAv1CodecName, "S3T3h"),
             }),
-            Values(UseDependencyDescriptor::Enabled)),
+            Values(UseDependencyDescriptor::Enabled),
+            Values(ContentType::kRealtimeVideo)),
     SvcTestNameGenerator);
 
 #endif
