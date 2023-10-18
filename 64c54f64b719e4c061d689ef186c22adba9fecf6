@@ -16,6 +16,29 @@
       "message": "Quite a bit nicer! +1 stands.",
       "revId": "64c54f64b719e4c061d689ef186c22adba9fecf6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1573b77_4a0d5f24",
+        "filename": "rtc_tools/network_tester/network_tester_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-10-18T12:08:01Z",
+      "side": 1,
+      "message": "nit: Prefer explicit type. In this case, the TestController expects int.",
+      "range": {
+        "startLine": 26,
+        "startChar": 8,
+        "endLine": 26,
+        "endChar": 12
+      },
+      "revId": "64c54f64b719e4c061d689ef186c22adba9fecf6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
