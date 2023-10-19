@@ -90,7 +90,7 @@ class H264EncoderImpl : public H264Encoder {
   }
 
  private:
-  SEncParamExt CreateEncoderParams(size_t i) const;
+  absl::optional<SEncParamExt> CreateEncoderParams(size_t i) const;
 
   webrtc::H264BitstreamParser h264_bitstream_parser_;
   // Reports statistics with histograms.

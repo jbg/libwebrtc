@@ -293,10 +293,15 @@ int32_t H264EncoderImpl::InitEncode(const VideoCodec* inst,
     configurations_[i].target_bps = codec_.startBitrate * 1000;
 
     // Create encoder parameters based on the layer configuration.
-    SEncParamExt encoder_params = CreateEncoderParams(i);
+    absl::optional<SEncParamExt> encoder_params = CreateEncoderParams(i);
+    if (!encoder_params) {
+      Release();
+      ReportError();
+      return WEBRTC_VIDEO_CODEC_ERROR;
+    }
 
     // Initialize.
-    if (openh264_encoder->InitializeExt(&encoder_params) != 0) {
+    if (openh264_encoder->InitializeExt(&encoder_params.value()) != 0) {
       RTC_LOG(LS_ERROR) << "Failed to initialize OpenH264 encoder";
       Release();
       ReportError();
@@ -601,7 +606,8 @@ int32_t H264EncoderImpl::Encode(
 // memset(&p, 0, sizeof(SEncParamBase)) used in Initialize, and SEncParamExt
 // which is a superset of SEncParamBase (cleared with GetDefaultParams) used
 // in InitializeExt.
-SEncParamExt H264EncoderImpl::CreateEncoderParams(size_t i) const {
+absl::optional<SEncParamExt> H264EncoderImpl::CreateEncoderParams(
+    size_t i) const {
   SEncParamExt encoder_params;
   encoders_[i]->GetDefaultParams(&encoder_params);
   if (codec_.mode == VideoCodecMode::kRealtimeVideo) {
@@ -658,6 +664,14 @@ SEncParamExt H264EncoderImpl::CreateEncoderParams(size_t i) const {
     // references to be used to prediction of a given frame. Encoder can
     // theoretically use all available reference buffers.
     encoder_params.iNumRefFrame = encoder_params.iTemporalLayerNum - 1;
+
+    // SCREEN_CONTENT_REAL_TIME does not supports 2 or more reference buffers.
+    if (encoder_params.iTemporalLayerNum > 2 &&
+        codec_.mode == VideoCodecMode::kScreensharing) {
+      RTC_LOG(LS_ERROR)
+          << "Screen sharing with more than 2 temporal layers is not supported";
+      return absl::nullopt;
+    }
   }
   RTC_LOG(LS_INFO) << "OpenH264 version is " << OPENH264_MAJOR << "."
                    << OPENH264_MINOR;
