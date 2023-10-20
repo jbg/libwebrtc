@@ -16,6 +16,7 @@
 #include <utility>
 
 #include "absl/functional/any_invocable.h"
+#include "api/connection_environment_builder.h"
 #include "call/rtp_transport_controller_send.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/rtp_rtcp/source/byte_io.h"
@@ -123,14 +124,16 @@ class RtpVideoSenderTestFixture {
                                             rtx_ssrcs,
                                             payload_type)),
         bitrate_config_(GetBitrateConfig()),
-        transport_controller_(
-            time_controller_.GetClock(),
-            RtpTransportConfig{
-                .bitrate_config = bitrate_config_,
-                .event_log = &event_log_,
-                .task_queue_factory = time_controller_.GetTaskQueueFactory(),
-                .trials = field_trials ? field_trials : &field_trials_,
-            }),
+        transport_controller_(RtpTransportConfig{
+            .env = ConnectionEnvironmentBuilder()
+                       .With(&event_log_)
+                       .With(time_controller_.GetTaskQueueFactory())
+                       .With(time_controller_.GetClock())
+                       .With(&field_trials_)
+                       .With(field_trials)
+                       .Build(),
+            .bitrate_config = bitrate_config_,
+        }),
         stats_proxy_(time_controller_.GetClock(),
                      config_,
                      VideoEncoderConfig::ContentType::kRealtimeVideo,

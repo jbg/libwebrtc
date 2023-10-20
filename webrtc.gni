@@ -480,6 +480,8 @@ all_poison_types = [
   # Default echo detector implementation.
   "default_echo_detector",
 
+  "connection_environment_builder",
+
   # JSON parsing should not be needed in the "slim and modular" WebRTC.
   "rtc_json",
 
