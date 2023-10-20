@@ -51,7 +51,7 @@ class RtpTransportControllerSend final
       public TransportFeedbackObserver,
       public NetworkStateEstimateObserver {
  public:
-  RtpTransportControllerSend(Clock* clock, const RtpTransportConfig& config);
+  explicit RtpTransportControllerSend(const RtpTransportConfig& config);
   ~RtpTransportControllerSend() override;
 
   RtpTransportControllerSend(const RtpTransportControllerSend&) = delete;
@@ -146,9 +146,7 @@ class RtpTransportControllerSend final
   void ProcessSentPacketUpdates(NetworkControlUpdate updates)
       RTC_RUN_ON(sequence_checker_);
 
-  Clock* const clock_;
-  RtcEventLog* const event_log_;
-  TaskQueueFactory* const task_queue_factory_;
+  const ConnectionEnvironment env_;
   SequenceChecker sequence_checker_;
   TaskQueueBase* task_queue_;
   PacketRouter packet_router_;
@@ -207,8 +205,6 @@ class RtpTransportControllerSend final
   RateLimiter retransmission_rate_limiter_;
 
   ScopedTaskSafety safety_;
-
-  const FieldTrialsView& field_trials_;
 };
 
 }  // namespace webrtc

@@ -19,6 +19,7 @@ rtc_library("rtc_event_log") {
   ]
 
   deps = [
+    "..:connection_environment",
     "..:libjingle_logging_api",
     "../../rtc_base:checks",
     "../../rtc_base:timeutils",
@@ -35,9 +36,10 @@ rtc_library("rtc_event_log_factory") {
 
   deps = [
     ":rtc_event_log",
+    "..:connection_environment",
+    "..:field_trials_view",
     "../../rtc_base:checks",
     "../../rtc_base/system:rtc_export",
-    "../../system_wrappers:field_trial",
     "../task_queue",
   ]
 
