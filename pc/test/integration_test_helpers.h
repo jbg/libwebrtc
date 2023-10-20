@@ -813,8 +813,7 @@ class PeerConnectionIntegrationWrapper : public webrtc::PeerConnectionObserver,
       pc_factory_dependencies.event_log_factory = std::move(event_log_factory);
     } else {
       pc_factory_dependencies.event_log_factory =
-          std::make_unique<webrtc::RtcEventLogFactory>(
-              pc_factory_dependencies.task_queue_factory.get());
+          std::make_unique<webrtc::RtcEventLogFactory>();
     }
     peer_connection_factory_ = webrtc::CreateModularPeerConnectionFactory(
         std::move(pc_factory_dependencies));

@@ -60,8 +60,7 @@ void SetMandatoryEntities(InjectableComponents* components,
   }
   if (components->pcf_dependencies->event_log_factory == nullptr) {
     components->pcf_dependencies->event_log_factory =
-        std::make_unique<RtcEventLogFactory>(
-            components->pcf_dependencies->task_queue_factory.get());
+        std::make_unique<RtcEventLogFactory>();
   }
   if (!components->pcf_dependencies->trials) {
     components->pcf_dependencies->trials =
