@@ -382,6 +382,7 @@ void ZeroHertzAdapterMode::OnFrame(Timestamp post_time,
   queue_->PostDelayedHighPrecisionTask(
       SafeTask(safety_.flag(),
                [this, frame_id, frame] {
+                 RTC_UNUSED(frame_id);
                  RTC_DCHECK_RUN_ON(&sequence_checker_);
                  TRACE_EVENT_ASYNC_END0(TRACE_DISABLED_BY_DEFAULT("webrtc"),
                                         "QueueToEncode", frame_id);
