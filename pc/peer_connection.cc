@@ -2127,8 +2127,12 @@ void PeerConnection::SetSctpDataInfo(absl::string_view mid,
   SetSctpTransportName(std::string(transport_name));
 }
 
-void PeerConnection::ResetSctpDataInfo() {
+void PeerConnection::DestroyDataChannelTransport(RTCError error) {
   RTC_DCHECK_RUN_ON(signaling_thread());
+  network_thread()->BlockingCall([&] {
+    RTC_DCHECK_RUN_ON(network_thread());
+    TeardownDataChannelTransport_n(error);
+  });
   sctp_mid_s_.reset();
   SetSctpTransportName("");
 }

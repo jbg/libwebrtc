@@ -365,7 +365,7 @@ class FakePeerConnectionBase : public PeerConnectionInternal {
   void TeardownDataChannelTransport_n(RTCError error) override {}
   void SetSctpDataInfo(absl::string_view mid,
                        absl::string_view transport_name) override {}
-  void ResetSctpDataInfo() override {}
+  void DestroyDataChannelTransport(RTCError error) override {}
 
   const FieldTrialsView& trials() const override { return field_trials_; }
 

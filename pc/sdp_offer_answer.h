@@ -528,10 +528,6 @@ class SdpOfferAnswerHandler : public SdpStateProvider {
 
   bool CreateDataChannel(const std::string& mid);
 
-  // Destroys the RTP data channel transport and/or the SCTP data channel
-  // transport and clears it.
-  void DestroyDataChannelTransport(RTCError error);
-
   // Generates MediaDescriptionOptions for the `session_opts` based on existing
   // local description or remote description.
   void GenerateMediaDescriptionOptions(

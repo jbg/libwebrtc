@@ -272,7 +272,7 @@ class MockPeerConnectionInternal : public PeerConnectionInternal {
               SetSctpDataInfo,
               (absl::string_view, absl::string_view),
               (override));
-  MOCK_METHOD(void, ResetSctpDataInfo, (), (override));
+  MOCK_METHOD(void, DestroyDataChannelTransport, (RTCError error), (override));
   MOCK_METHOD(const FieldTrialsView&, trials, (), (const, override));
 
   // PeerConnectionInternal

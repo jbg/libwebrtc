@@ -3991,7 +3991,7 @@ RTCError SdpOfferAnswerHandler::UpdateDataChannel(
     sb << "Rejected data channel transport with mid=" << content.mid();
     RTCError error(RTCErrorType::OPERATION_ERROR_WITH_DATA, sb.Release());
     error.set_error_detail(RTCErrorDetailType::DATA_CHANNEL_FAILURE);
-    DestroyDataChannelTransport(error);
+    pc_->DestroyDataChannelTransport(error);
   } else if (!CreateDataChannel(content.name)) {
     LOG_AND_RETURN_ERROR(RTCErrorType::INTERNAL_ERROR,
                          "Failed to create data channel.");
@@ -5003,14 +5003,14 @@ void SdpOfferAnswerHandler::RemoveUnusedChannels(
     RTCError error(RTCErrorType::OPERATION_ERROR_WITH_DATA,
                    "No data channel section in the description.");
     error.set_error_detail(RTCErrorDetailType::DATA_CHANNEL_FAILURE);
-    DestroyDataChannelTransport(error);
+    pc_->DestroyDataChannelTransport(error);
   } else if (data_info->rejected) {
     rtc::StringBuilder sb;
     sb << "Rejected data channel with mid=" << data_info->name << ".";
 
     RTCError error(RTCErrorType::OPERATION_ERROR_WITH_DATA, sb.Release());
     error.set_error_detail(RTCErrorDetailType::DATA_CHANNEL_FAILURE);
-    DestroyDataChannelTransport(error);
+    pc_->DestroyDataChannelTransport(error);
   }
 }
 
@@ -5218,16 +5218,6 @@ bool SdpOfferAnswerHandler::CreateDataChannel(const std::string& mid) {
   return true;
 }
 
-void SdpOfferAnswerHandler::DestroyDataChannelTransport(RTCError error) {
-  RTC_DCHECK_RUN_ON(signaling_thread());
-  context_->network_thread()->BlockingCall(
-      [&, data_channel_controller = data_channel_controller()] {
-        RTC_DCHECK_RUN_ON(context_->network_thread());
-        pc_->TeardownDataChannelTransport_n(error);
-      });
-  pc_->ResetSctpDataInfo();
-}
-
 void SdpOfferAnswerHandler::DestroyAllChannels() {
   RTC_DCHECK_RUN_ON(signaling_thread());
   if (!transceivers()) {
@@ -5252,7 +5242,7 @@ void SdpOfferAnswerHandler::DestroyAllChannels() {
     }
   }
 
-  DestroyDataChannelTransport({});
+  pc_->DestroyDataChannelTransport({});
 }
 
 void SdpOfferAnswerHandler::GenerateMediaDescriptionOptions(

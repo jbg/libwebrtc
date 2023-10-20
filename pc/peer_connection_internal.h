@@ -126,8 +126,7 @@ class PeerConnectionSdpMethods {
   virtual void TeardownDataChannelTransport_n(RTCError error) = 0;
   virtual void SetSctpDataInfo(absl::string_view mid,
                                absl::string_view transport_name) = 0;
-  virtual void ResetSctpDataInfo() = 0;
-
+  virtual void DestroyDataChannelTransport(RTCError error) = 0;
   virtual const FieldTrialsView& trials() const = 0;
 
   virtual void ClearStatsCache() = 0;
