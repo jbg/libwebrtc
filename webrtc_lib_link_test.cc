@@ -63,8 +63,7 @@ webrtc::PeerConnectionFactoryDependencies CreateSomePcfDeps() {
   pcf_deps.network_thread = rtc::Thread::Current();
   pcf_deps.worker_thread = rtc::Thread::Current();
   pcf_deps.call_factory = webrtc::CreateCallFactory();
-  pcf_deps.event_log_factory = std::make_unique<webrtc::RtcEventLogFactory>(
-      pcf_deps.task_queue_factory.get());
+  pcf_deps.event_log_factory = std::make_unique<webrtc::RtcEventLogFactory>();
   auto media_deps = CreateSomeMediaDeps(pcf_deps.task_queue_factory.get());
   pcf_deps.media_engine = cricket::CreateMediaEngine(std::move(media_deps));
   return pcf_deps;

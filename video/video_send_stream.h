@@ -16,6 +16,7 @@
 #include <string>
 #include <vector>
 
+#include "api/connection_environment.h"
 #include "api/fec_controller.h"
 #include "api/field_trials_view.h"
 #include "api/sequence_checker.h"
@@ -56,21 +57,18 @@ class VideoSendStream : public webrtc::VideoSendStream {
   using RtpPayloadStateMap = std::map<uint32_t, RtpPayloadState>;
 
   VideoSendStream(
-      Clock* clock,
+      const ConnectionEnvironment& env,
       int num_cpu_cores,
-      TaskQueueFactory* task_queue_factory,
       TaskQueueBase* network_queue,
       RtcpRttStats* call_stats,
       RtpTransportControllerSendInterface* transport,
       BitrateAllocatorInterface* bitrate_allocator,
       SendDelayStats* send_delay_stats,
-      RtcEventLog* event_log,
       VideoSendStream::Config config,
       VideoEncoderConfig encoder_config,
       const std::map<uint32_t, RtpState>& suspended_ssrcs,
       const std::map<uint32_t, RtpPayloadState>& suspended_payload_states,
-      std::unique_ptr<FecController> fec_controller,
-      const FieldTrialsView& field_trials);
+      std::unique_ptr<FecController> fec_controller);
 
   ~VideoSendStream() override;
 

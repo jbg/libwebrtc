@@ -651,8 +651,7 @@ class PeerConnectionFactoryForTest : public webrtc::PeerConnectionFactory {
     dependencies.media_engine =
         cricket::CreateMediaEngine(std::move(media_deps));
     dependencies.call_factory = webrtc::CreateCallFactory();
-    dependencies.event_log_factory = std::make_unique<RtcEventLogFactory>(
-        dependencies.task_queue_factory.get());
+    dependencies.event_log_factory = std::make_unique<RtcEventLogFactory>();
 
     return rtc::make_ref_counted<PeerConnectionFactoryForTest>(
         std::move(dependencies));
