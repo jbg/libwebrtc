@@ -373,7 +373,7 @@ void ZeroHertzAdapterMode::OnFrame(Timestamp post_time,
 
   // Store the frame in the queue and schedule deferred processing.
   queued_frames_.push_back(frame);
-  int frame_id = current_frame_id_;
+  [[maybe_unused]] int frame_id = current_frame_id_;
   current_frame_id_++;
   scheduled_repeat_ = absl::nullopt;
   TimeDelta time_spent_since_post = clock_->CurrentTime() - post_time;
