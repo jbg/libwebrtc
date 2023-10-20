@@ -5224,8 +5224,6 @@ void SdpOfferAnswerHandler::DestroyAllChannels() {
       transceiver->internal()->ClearChannel();
     }
   }
-
-  pc_->DestroyDataChannelTransport({});
 }
 
 void SdpOfferAnswerHandler::GenerateMediaDescriptionOptions(

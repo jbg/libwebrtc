@@ -567,6 +567,8 @@ PeerConnection::~PeerConnection() {
     // Don't destroy BaseChannels until after stats has been cleaned up so that
     // the last stats request can still read from the channels.
     sdp_handler_->DestroyAllChannels();
+    // TODO(tommi): Move out of `if (sdp_handler_)`.
+    DestroyDataChannelTransport({});
 
     RTC_LOG(LS_INFO) << "Session: " << session_id() << " is destroyed.";
 
@@ -1900,6 +1902,8 @@ void PeerConnection::Close() {
   // Don't destroy BaseChannels until after stats has been cleaned up so that
   // the last stats request can still read from the channels.
   sdp_handler_->DestroyAllChannels();
+  // TODO(tommi): combine these teardown steps with others..
+  DestroyDataChannelTransport({});
 
   // The event log is used in the transport controller, which must be outlived
   // by the former. CreateOffer by the peer connection is implemented
