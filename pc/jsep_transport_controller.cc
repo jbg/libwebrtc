@@ -360,12 +360,12 @@ bool JsepTransportController::GetStats(const std::string& transport_name,
 
 void JsepTransportController::SetActiveResetSrtpParams(
     bool active_reset_srtp_params) {
-  if (!network_thread_->IsCurrent()) {
-    network_thread_->BlockingCall(
-        [=] { SetActiveResetSrtpParams(active_reset_srtp_params); });
+  RTC_DCHECK_RUN_ON(network_thread_);
+  if (active_reset_srtp_params_ == active_reset_srtp_params) {
+    RTC_DLOG(LS_INFO) << "SetActiveResetSrtpParams: noop";
     return;
   }
-  RTC_DCHECK_RUN_ON(network_thread_);
+
   RTC_LOG(LS_INFO)
       << "Updating the active_reset_srtp_params for JsepTransportController: "
       << active_reset_srtp_params;
