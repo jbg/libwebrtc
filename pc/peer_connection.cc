@@ -264,6 +264,31 @@ RTCError ValidateConfiguration(
       ParseIceConfig(config));
 }
 
+// Checks for valid pool size range and if a previous value has already been
+// set, which is done via SetLocalDescription.
+RTCError ValidateIceCandidatePoolSize(
+    int ice_candidate_pool_size,
+    absl::optional<int> previous_ice_candidate_pool_size) {
+  // Note that this isn't possible through chromium, since it's an unsigned
+  // short in WebIDL.
+  if (ice_candidate_pool_size < 0 ||
+      ice_candidate_pool_size > static_cast<int>(UINT16_MAX)) {
+    return RTCError(RTCErrorType::INVALID_RANGE);
+  }
+
+  // According to JSEP, after setLocalDescription, changing the candidate pool
+  // size is not allowed, and changing the set of ICE servers will not result
+  // in new candidates being gathered.
+  if (previous_ice_candidate_pool_size.has_value() &&
+      ice_candidate_pool_size != previous_ice_candidate_pool_size.value()) {
+    LOG_AND_RETURN_ERROR(RTCErrorType::INVALID_MODIFICATION,
+                         "Can't change candidate pool size after calling "
+                         "SetLocalDescription.");
+  }
+
+  return RTCError::OK();
+}
+
 bool HasRtcpMuxEnabled(const cricket::ContentInfo* content) {
   return content->media_description()->rtcp_mux();
 }
@@ -284,6 +309,46 @@ bool DtlsEnabled(const PeerConnectionInterface::RTCConfiguration& configuration,
 #else
   return default_enabled;
 #endif
+}
+
+// Calls `ParseIceServersOrError` to extract ice server information from the
+// `configuration` and then validates the extracted configuration. For a
+// non-empty list of servers, usage gets recorded via `usage_pattern`.
+RTCError ParseAndValidateIceServersFromConfiguration(
+    const PeerConnectionInterface::RTCConfiguration& configuration,
+    cricket::ServerAddresses& stun_servers,
+    std::vector<cricket::RelayServerConfig>& turn_servers,
+    UsagePattern& usage_pattern) {
+  RTC_DCHECK(stun_servers.empty());
+  RTC_DCHECK(turn_servers.empty());
+  RTCError err = ParseIceServersOrError(configuration.servers, &stun_servers,
+                                        &turn_servers);
+  if (!err.ok()) {
+    return err;
+  }
+
+  // Restrict number of TURN servers.
+  if (turn_servers.size() > cricket::kMaxTurnServers) {
+    RTC_LOG(LS_WARNING) << "Number of configured TURN servers is "
+                        << turn_servers.size()
+                        << " which exceeds the maximum allowed number of "
+                        << cricket::kMaxTurnServers;
+    turn_servers.resize(cricket::kMaxTurnServers);
+  }
+
+  // Add the turn logging id to all turn servers
+  for (cricket::RelayServerConfig& turn_server : turn_servers) {
+    turn_server.turn_logging_id = configuration.turn_logging_id;
+  }
+
+  // Note if STUN or TURN servers were supplied.
+  if (!stun_servers.empty()) {
+    usage_pattern.NoteUsageEvent(UsageEvent::STUN_SERVER_ADDED);
+  }
+  if (!turn_servers.empty()) {
+    usage_pattern.NoteUsageEvent(UsageEvent::TURN_SERVER_ADDED);
+  }
+  return RTCError::OK();
 }
 
 }  // namespace
@@ -605,33 +670,10 @@ RTCError PeerConnection::Initialize(
 
   cricket::ServerAddresses stun_servers;
   std::vector<cricket::RelayServerConfig> turn_servers;
-
-  RTCError parse_error = ParseIceServersOrError(configuration.servers,
-                                                &stun_servers, &turn_servers);
+  RTCError parse_error = ParseAndValidateIceServersFromConfiguration(
+      configuration, stun_servers, turn_servers, usage_pattern_);
   if (!parse_error.ok()) {
     return parse_error;
-  }
-
-  // Restrict number of TURN servers.
-  if (turn_servers.size() > cricket::kMaxTurnServers) {
-    RTC_LOG(LS_WARNING) << "Number of configured TURN servers is "
-                        << turn_servers.size()
-                        << " which exceeds the maximum allowed number of "
-                        << cricket::kMaxTurnServers;
-    turn_servers.resize(cricket::kMaxTurnServers);
-  }
-
-  // Add the turn logging id to all turn servers
-  for (cricket::RelayServerConfig& turn_server : turn_servers) {
-    turn_server.turn_logging_id = configuration.turn_logging_id;
-  }
-
-  // Note if STUN or TURN servers were supplied.
-  if (!stun_servers.empty()) {
-    NoteUsageEvent(UsageEvent::STUN_SERVER_ADDED);
-  }
-  if (!turn_servers.empty()) {
-    NoteUsageEvent(UsageEvent::TURN_SERVER_ADDED);
   }
 
   // Network thread initialization.
@@ -1505,17 +1547,18 @@ RTCError PeerConnection::SetConfiguration(
                          "SetConfiguration: PeerConnection is closed.");
   }
 
-  // According to JSEP, after setLocalDescription, changing the candidate pool
-  // size is not allowed, and changing the set of ICE servers will not result
-  // in new candidates being gathered.
-  if (local_description() && configuration.ice_candidate_pool_size !=
-                                 configuration_.ice_candidate_pool_size) {
-    LOG_AND_RETURN_ERROR(RTCErrorType::INVALID_MODIFICATION,
-                         "Can't change candidate pool size after calling "
-                         "SetLocalDescription.");
+  const bool has_local_description = local_description() != nullptr;
+
+  RTCError validate_error = ValidateIceCandidatePoolSize(
+      configuration.ice_candidate_pool_size,
+      has_local_description
+          ? absl::optional<int>(configuration_.ice_candidate_pool_size)
+          : absl::nullopt);
+  if (!validate_error.ok()) {
+    return validate_error;
   }
 
-  if (local_description() &&
+  if (has_local_description &&
       configuration.crypto_options != configuration_.crypto_options) {
     LOG_AND_RETURN_ERROR(RTCErrorType::INVALID_MODIFICATION,
                          "Can't change crypto_options after calling "
@@ -1560,50 +1603,19 @@ RTCError PeerConnection::SetConfiguration(
   }
 
   // Validate the modified configuration.
-  RTCError validate_error = ValidateConfiguration(modified_config);
+  validate_error = ValidateConfiguration(modified_config);
   if (!validate_error.ok()) {
     return validate_error;
-  }
-
-  // Note that this isn't possible through chromium, since it's an unsigned
-  // short in WebIDL.
-  if (configuration.ice_candidate_pool_size < 0 ||
-      configuration.ice_candidate_pool_size > static_cast<int>(UINT16_MAX)) {
-    return RTCError(RTCErrorType::INVALID_RANGE);
   }
 
   // Parse ICE servers before hopping to network thread.
   cricket::ServerAddresses stun_servers;
   std::vector<cricket::RelayServerConfig> turn_servers;
-  RTCError parse_error = ParseIceServersOrError(configuration.servers,
-                                                &stun_servers, &turn_servers);
-  if (!parse_error.ok()) {
-    return parse_error;
+  validate_error = ParseAndValidateIceServersFromConfiguration(
+      configuration, stun_servers, turn_servers, usage_pattern_);
+  if (!validate_error.ok()) {
+    return validate_error;
   }
-
-  // Restrict number of TURN servers.
-  if (turn_servers.size() > cricket::kMaxTurnServers) {
-    RTC_LOG(LS_WARNING) << "Number of configured TURN servers is "
-                        << turn_servers.size()
-                        << " which exceeds the maximum allowed number of "
-                        << cricket::kMaxTurnServers;
-    turn_servers.resize(cricket::kMaxTurnServers);
-  }
-
-  // Add the turn logging id to all turn servers
-  for (cricket::RelayServerConfig& turn_server : turn_servers) {
-    turn_server.turn_logging_id = configuration.turn_logging_id;
-  }
-
-  // Note if STUN or TURN servers were supplied.
-  if (!stun_servers.empty()) {
-    NoteUsageEvent(UsageEvent::STUN_SERVER_ADDED);
-  }
-  if (!turn_servers.empty()) {
-    NoteUsageEvent(UsageEvent::TURN_SERVER_ADDED);
-  }
-
-  const bool has_local_description = local_description() != nullptr;
 
   const bool needs_ice_restart =
       modified_config.servers != configuration_.servers ||
@@ -2219,7 +2231,12 @@ bool PeerConnection::ReconfigurePortAllocator_n(
   // size is not allowed, and changing the set of ICE servers will not result
   // in new candidates being gathered.
   if (have_local_description) {
-    port_allocator_->FreezeCandidatePool();
+    // TODO(tommi): We're repeating the `have_local_description` logic inside
+    // port allocator. PortAllocator::SetConfiguration can be simplified and
+    // things like valid pool size values there can be turned into DCHECKs
+    // and instead validated at an earlier stage before we get to
+    // ReconfigurePortAllocator_n.
+    RTC_DCHECK_EQ(candidate_pool_size, port_allocator_->candidate_pool_size());
   }
   // Add the custom tls turn servers if they exist.
   auto turn_servers_copy = turn_servers;
