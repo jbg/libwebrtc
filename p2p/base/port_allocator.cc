@@ -141,6 +141,7 @@ bool PortAllocator::SetConfiguration(
     webrtc::PortPrunePolicy turn_port_prune_policy,
     webrtc::TurnCustomizer* turn_customizer,
     const absl::optional<int>& stun_candidate_keepalive_interval) {
+  RTC_DCHECK_GE(candidate_pool_size, 0);
   CheckRunOnValidThreadIfInitialized();
   // A positive candidate pool size would lead to the creation of a pooled
   // allocator session and starting getting ports, which we should only do on
@@ -159,11 +160,6 @@ bool PortAllocator::SetConfiguration(
       return false;
     }
     return true;
-  }
-
-  if (candidate_pool_size < 0) {
-    RTC_LOG(LS_ERROR) << "Can't set negative pool size.";
-    return false;
   }
 
   candidate_pool_size_ = candidate_pool_size;

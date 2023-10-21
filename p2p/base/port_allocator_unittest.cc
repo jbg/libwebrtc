@@ -150,11 +150,6 @@ TEST_F(PortAllocatorTest, SetConfigurationUpdatesCandidatePoolSize) {
   EXPECT_EQ(4, allocator_->candidate_pool_size());
 }
 
-// A negative pool size should just be treated as zero.
-TEST_F(PortAllocatorTest, SetConfigurationWithNegativePoolSizeFails) {
-  SetConfigurationWithPoolSizeExpectFailure(-1);
-}
-
 // Test that if the candidate pool size is nonzero, pooled sessions are
 // created, and StartGettingPorts is called on them.
 TEST_F(PortAllocatorTest, SetConfigurationCreatesPooledSessions) {
