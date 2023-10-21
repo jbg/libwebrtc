@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "507999d0_c6cdcf7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-21T13:14:54Z",
+      "side": 1,
+      "message": "Seems to increase the separation between datachannel handling and media handling (which is good). I\u0027d like to eventually have all the stuff that touches datachannels in one place (DataChannelController, probably) and all the stuff that touches media in another place (where TBD - Call might be a good starting point).",
+      "revId": "b28ef49a90be45ccf768aedf1b5cf2394c0a7317",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
