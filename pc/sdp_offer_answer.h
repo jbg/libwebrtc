@@ -526,12 +526,6 @@ class SdpOfferAnswerHandler : public SdpStateProvider {
   // This method will also delete any existing media channels before creating.
   RTCError CreateChannels(const cricket::SessionDescription& desc);
 
-  bool CreateDataChannel(const std::string& mid);
-
-  // Destroys the RTP data channel transport and/or the SCTP data channel
-  // transport and clears it.
-  void DestroyDataChannelTransport(RTCError error);
-
   // Generates MediaDescriptionOptions for the `session_opts` based on existing
   // local description or remote description.
   void GenerateMediaDescriptionOptions(
