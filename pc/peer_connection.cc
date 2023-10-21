@@ -264,6 +264,32 @@ RTCError ValidateConfiguration(
       ParseIceConfig(config));
 }
 
+// Checks for valid pool size range and if a previous value has already been
+// set, which is done via SetLocalDescription.
+RTCError ValidateIceCandidatePoolSize(
+    int ice_candidate_pool_size,
+    absl::optional<int> previous_ice_candidate_pool_size) {
+  // Note that this isn't possible through chromium, since it's an unsigned
+  // short in WebIDL.
+  if (ice_candidate_pool_size < 0 ||
+      ice_candidate_pool_size > static_cast<int>(UINT16_MAX)) {
+    return RTCError(RTCErrorType::INVALID_RANGE);
+  }
+
+  // According to JSEP, after setLocalDescription, changing the candidate pool
+  // size is not allowed, and changing the set of ICE servers will not result
+  // in new candidates being gathered.
+  if (previous_ice_candidate_pool_size.has_value()) {
+    if (ice_candidate_pool_size != previous_ice_candidate_pool_size.value()) {
+      LOG_AND_RETURN_ERROR(RTCErrorType::INVALID_MODIFICATION,
+                           "Can't change candidate pool size after calling "
+                           "SetLocalDescription.");
+    }
+  }
+
+  return RTCError::OK();
+}
+
 bool HasRtcpMuxEnabled(const cricket::ContentInfo* content) {
   return content->media_description()->rtcp_mux();
 }
@@ -1505,21 +1531,21 @@ RTCError PeerConnection::SetConfiguration(
                          "SetConfiguration: PeerConnection is closed.");
   }
 
-  // According to JSEP, after setLocalDescription, changing the candidate pool
-  // size is not allowed, and changing the set of ICE servers will not result
-  // in new candidates being gathered.
-  if (local_description() && configuration.ice_candidate_pool_size !=
-                                 configuration_.ice_candidate_pool_size) {
-    LOG_AND_RETURN_ERROR(RTCErrorType::INVALID_MODIFICATION,
-                         "Can't change candidate pool size after calling "
-                         "SetLocalDescription.");
+  RTCError validate_error = ValidateIceCandidatePoolSize(
+      configuration.ice_candidate_pool_size,
+      local_description()
+          ? absl::optional<int>(configuration_.ice_candidate_pool_size)
+          : absl::nullopt);
+  if (!validate_error.ok()) {
+    return validate_error;
   }
 
-  if (local_description() &&
-      configuration.crypto_options != configuration_.crypto_options) {
-    LOG_AND_RETURN_ERROR(RTCErrorType::INVALID_MODIFICATION,
-                         "Can't change crypto_options after calling "
-                         "SetLocalDescription.");
+  if (local_description()) {
+    if (configuration.crypto_options != configuration_.crypto_options) {
+      LOG_AND_RETURN_ERROR(RTCErrorType::INVALID_MODIFICATION,
+                           "Can't change crypto_options after calling "
+                           "SetLocalDescription.");
+    }
   }
 
   // The simplest (and most future-compatible) way to tell if the config was
@@ -1560,25 +1586,18 @@ RTCError PeerConnection::SetConfiguration(
   }
 
   // Validate the modified configuration.
-  RTCError validate_error = ValidateConfiguration(modified_config);
+  validate_error = ValidateConfiguration(modified_config);
   if (!validate_error.ok()) {
     return validate_error;
-  }
-
-  // Note that this isn't possible through chromium, since it's an unsigned
-  // short in WebIDL.
-  if (configuration.ice_candidate_pool_size < 0 ||
-      configuration.ice_candidate_pool_size > static_cast<int>(UINT16_MAX)) {
-    return RTCError(RTCErrorType::INVALID_RANGE);
   }
 
   // Parse ICE servers before hopping to network thread.
   cricket::ServerAddresses stun_servers;
   std::vector<cricket::RelayServerConfig> turn_servers;
-  RTCError parse_error = ParseIceServersOrError(configuration.servers,
-                                                &stun_servers, &turn_servers);
-  if (!parse_error.ok()) {
-    return parse_error;
+  validate_error = ParseIceServersOrError(configuration.servers, &stun_servers,
+                                          &turn_servers);
+  if (!validate_error.ok()) {
+    return validate_error;
   }
 
   // Restrict number of TURN servers.
