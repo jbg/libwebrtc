@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "70cb84f1_b24db1c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-10-21T14:40:08Z",
+      "side": 1,
+      "message": "Agree.\n\nThe \"move\" of the steps (as I put in the CL description) from the SDP class isn\u0027t so much about adding to PC but more about removing from SDP - or at least that\u0027s what I intended to say.\n\nThe steps that were in the SDP class were around a couple of operations on the PC owned state and nothing else. Having the SDP class in control of those took away flexibility from PC, effectively forcing it to do additional blocking calls.\n\nI agree that the PC class is, even after significant refactoring, still very complex. I definitely don\u0027t want to go back into the previous god class direction. There are still lots of long functions that are difficult to reason about and code that pins down the design of other classes. E.g. calls to the `channel()` accessor on transcievers from the signaling thread, which makes it harder for transceivers to manage their internal state.",
+      "parentUuid": "00fbf9b9_6c4995f6",
+      "revId": "33c3c3b17ed5a95cac99487150e274126aaeec01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c2fa27e7_cec47977",
@@ -52,6 +70,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db508468_dda6832d",
+        "filename": "pc/peer_connection_internal.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-10-21T14:40:08Z",
+      "side": 1,
+      "message": "Done.\n\nWhile doing that I realized that we had both `sctp_mid()` and `GetDataMid()`. Since the Create/Destroy methods for the data channel transport have the effect that `transport_name()` also gets an assigned value, I chose to remove `GetDataMid()` and update the places we were using it to call `sctp_mid()` instead. That way both those transport properties are consistently named.",
+      "parentUuid": "960b6831_9d54ecfa",
+      "revId": "33c3c3b17ed5a95cac99487150e274126aaeec01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "440271da_61beedd3",
@@ -65,6 +101,24 @@
       "writtenOn": "2023-10-21T11:00:20Z",
       "side": 1,
       "message": "This function should change name to UpdateDataChannelTransport.",
+      "revId": "33c3c3b17ed5a95cac99487150e274126aaeec01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d3a7883_46b0faac",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 3982,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-10-21T14:40:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "440271da_61beedd3",
       "revId": "33c3c3b17ed5a95cac99487150e274126aaeec01",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
