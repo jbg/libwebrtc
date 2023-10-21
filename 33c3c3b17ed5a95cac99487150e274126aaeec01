@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00fbf9b9_6c4995f6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-21T11:00:20Z",
+      "side": 1,
+      "message": "We should probably have a discussion (design doc?) about what we want the final state of work distribution to be - I\u0027d like to have the SDP class isolated as much as possible from the implementation details of everything *but* SDP - which means that we\u0027d want to have it invoke higher level primitives that are implemented elsewhere.\n\nI\u0027d like to avoid adding things to the PC class - that started out as a \"god class\", and I\u0027ve been trying to devolve functionality from it whenever possible.\n\nBut that\u0027s for a design document, not necessarily for this CL.",
+      "revId": "33c3c3b17ed5a95cac99487150e274126aaeec01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2fa27e7_cec47977",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-21T11:00:20Z",
+      "side": 1,
+      "message": "I like the move. But I think we should take the opportunity to make terminology more consistent - that DataChannel is a single datachannel, and DataChannelTransport is the SCTP session that carries all the datachannels.",
+      "revId": "33c3c3b17ed5a95cac99487150e274126aaeec01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "960b6831_9d54ecfa",
+        "filename": "pc/peer_connection_internal.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-21T11:00:20Z",
+      "side": 1,
+      "message": "Can you add function comments on these?\nThe names may seem obvious, but in some places in specs, \"data channel transport\" is used to designate the SCTP channel pair, not the SCTP transport connection.",
+      "revId": "33c3c3b17ed5a95cac99487150e274126aaeec01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "440271da_61beedd3",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 3982,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-21T11:00:20Z",
+      "side": 1,
+      "message": "This function should change name to UpdateDataChannelTransport.",
+      "revId": "33c3c3b17ed5a95cac99487150e274126aaeec01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
