@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1edb6a41_7e1b5199",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-21T16:44:21Z",
+      "side": 1,
+      "message": "A couple of questions, but refactoring seems sane.",
+      "revId": "ba367c57fbdb8c32f8d2064249a1c53e542c56b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ef48c51_c95a5ed7",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 1666,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-21T16:44:21Z",
+      "side": 1,
+      "message": "old code had this only happening if active_reset_srtp_params was different from old configuration\u0027s active_reset_srtp_params - where did this \"if\" go?\n(\"Into SetActiveResetSrtpParams\" is perfectly fine, if true)",
+      "revId": "ba367c57fbdb8c32f8d2064249a1c53e542c56b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
