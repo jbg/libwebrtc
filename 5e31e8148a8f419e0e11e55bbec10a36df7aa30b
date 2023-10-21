@@ -16,6 +16,24 @@
       "message": "Apart from the simplicity of the test, why delete it?\n(The helper is called only from this 1 place, so can be inlined.)",
       "revId": "5e31e8148a8f419e0e11e55bbec10a36df7aa30b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b12b378_0903b083",
+        "filename": "p2p/base/port_allocator_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-10-21T17:18:01Z",
+      "side": 0,
+      "message": "Since at the API layer in PeerConnection::SetConfiguration(), we check for the -1 situation and return an error. That happens before the code that\u0027s under test here gets invoked. I then changed PortAllocator to DCHECK on those invalid ranges rather than handling them and returning an error value.\n\nThat leaves the current implementation of SetConfiguration in PortAllocator always returning `true` (as of this CL). That in turn allows us the option of changing the return type to void and make it a candidate for allowing the pool size to be set asynchronously instead of via a blocking call.",
+      "parentUuid": "2b1df6f4_ef3d14e7",
+      "revId": "5e31e8148a8f419e0e11e55bbec10a36df7aa30b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

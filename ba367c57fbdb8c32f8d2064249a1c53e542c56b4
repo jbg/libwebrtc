@@ -33,6 +33,24 @@
       "message": "old code had this only happening if active_reset_srtp_params was different from old configuration\u0027s active_reset_srtp_params - where did this \"if\" go?\n(\"Into SetActiveResetSrtpParams\" is perfectly fine, if true)",
       "revId": "ba367c57fbdb8c32f8d2064249a1c53e542c56b4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68cd65ef_7cf508d1",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 1666,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2023-10-21T17:18:01Z",
+      "side": 1,
+      "message": "It vanished! 😄 I can bring it back though. The biggest value of that check was to avoid the blocking call we used to do. But there is a call tree inside of `SetActiveResetSrtpParams` where we could introduce such a check (e.g. inside `JsepTransportController::SetActiveResetSrtpParams`). I looked into it and for now decided that since it effectively iterates over a relatively small set of objects and sets a bool, that adding a check wouldn\u0027t be the same optimization as it used to be (and that SetConfiguration() calls aren\u0027t frequent enough generally).\n\nBut wdyt, bring it back?",
+      "parentUuid": "2ef48c51_c95a5ed7",
+      "revId": "ba367c57fbdb8c32f8d2064249a1c53e542c56b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
