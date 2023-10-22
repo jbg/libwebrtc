@@ -118,6 +118,7 @@ class LossBasedBweV2 {
     int min_num_observations = 0;
     double lower_bound_by_acked_rate_factor = 0.0;
     bool use_padding_for_increase = false;
+    double hold_duration_factor = 0.0;
   };
 
   struct Derivatives {
@@ -190,6 +191,8 @@ class LossBasedBweV2 {
   DataRate max_bitrate_ = DataRate::PlusInfinity();
   DataRate delay_based_estimate_ = DataRate::PlusInfinity();
   LossBasedBweV2::Result loss_based_result_ = LossBasedBweV2::Result();
+  Timestamp last_hold_timestamp_ = Timestamp::MinusInfinity();
+  TimeDelta hold_duration_ = TimeDelta::Zero();
 };
 
 }  // namespace webrtc
