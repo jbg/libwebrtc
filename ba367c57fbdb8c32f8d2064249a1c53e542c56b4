@@ -51,6 +51,24 @@
       "parentUuid": "2ef48c51_c95a5ed7",
       "revId": "ba367c57fbdb8c32f8d2064249a1c53e542c56b4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46295093_1df8381a",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 1666,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-22T06:59:32Z",
+      "side": 1,
+      "message": "if setting active_reset_srtp_params to the same value again is a no-op (no events fired, no counters updated), let\u0027s not bother.",
+      "parentUuid": "68cd65ef_7cf508d1",
+      "revId": "ba367c57fbdb8c32f8d2064249a1c53e542c56b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
