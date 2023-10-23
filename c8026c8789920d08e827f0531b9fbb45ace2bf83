@@ -51,6 +51,24 @@
       "parentUuid": "cac2276d_37f1fabf",
       "revId": "c8026c8789920d08e827f0531b9fbb45ace2bf83",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "630655c3_466f55fe",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-10-23T09:28:59Z",
+      "side": 1,
+      "message": "Or we could say that `track.stats` also applies to remote tracks, and add inter-frame delay metrics here matching `deliveredFrames`. Not have this in WebRTC at all.",
+      "parentUuid": "71009e33_6bd531ed",
+      "revId": "c8026c8789920d08e827f0531b9fbb45ace2bf83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
