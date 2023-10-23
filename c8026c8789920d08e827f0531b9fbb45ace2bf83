@@ -33,6 +33,24 @@
       "message": "does this have the same problem as the track metrics of defining exactly what handover point we\u0027re standardizing? (thinking of what \"frame rendered\" means when the sink is a BreakoutBox, for instance).",
       "revId": "c8026c8789920d08e827f0531b9fbb45ace2bf83",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71009e33_6bd531ed",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-10-23T09:27:42Z",
+      "side": 1,
+      "message": "I think so... measuring a rendering event is measuring something that happens some time after the frame is emitted from WebRTC, which arguably is not the responsbility of WebRTC. We added it here because it is a useful metric for WebRTC and we didn\u0027t have a better API for it, but ultimately the implementation never went outside the boundaries of WebRTC, so in truth we never implemented harmonic fps for rendering, only harmonic fps for delivery to sink (or something similar).\n\nAlternatively we could change the spec to measure \"framesEmitted\" instead of \"framesRendered\" to match the implementation and have the definition make sense even if BreakoutBox is the recipient.\n\nIf we still want harmonic *rendering* FPS, we could look into having video tag-specific APIs, not WebRTC getStats(). WDYT?",
+      "parentUuid": "cac2276d_37f1fabf",
+      "revId": "c8026c8789920d08e827f0531b9fbb45ace2bf83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
