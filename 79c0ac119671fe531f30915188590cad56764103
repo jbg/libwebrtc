@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8424d2f_6be61dcd",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video_frame_transformer_delegate_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-10-23T09:49:44Z",
+      "side": 1,
+      "message": "other codec/mimetype comparisons are using STRCASEEQ so yes, it should for the sake of consistency!",
+      "parentUuid": "0bdf12b1_e25cf67c",
+      "revId": "79c0ac119671fe531f30915188590cad56764103",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "687d724e_3e06f722",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-10-21T10:49:47Z",
       "side": 1,
       "message": "Same question here.",
+      "revId": "79c0ac119671fe531f30915188590cad56764103",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "362522e1_132387be",
+        "filename": "modules/rtp_rtcp/source/rtp_video_stream_receiver_frame_transformer_delegate_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-10-23T09:49:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "687d724e_3e06f722",
       "revId": "79c0ac119671fe531f30915188590cad56764103",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
