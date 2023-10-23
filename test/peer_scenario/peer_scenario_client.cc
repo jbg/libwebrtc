@@ -250,8 +250,7 @@ PeerScenarioClient::PeerScenarioClient(
       CreateTimeControllerBasedCallFactory(net->time_controller());
   pcf_deps.task_queue_factory =
       net->time_controller()->CreateTaskQueueFactory();
-  pcf_deps.event_log_factory =
-      std::make_unique<RtcEventLogFactory>(task_queue_factory_);
+  pcf_deps.event_log_factory = std::make_unique<RtcEventLogFactory>();
   pcf_deps.trials = std::make_unique<FieldTrialBasedConfig>();
 
   cricket::MediaEngineDependencies media_deps;
