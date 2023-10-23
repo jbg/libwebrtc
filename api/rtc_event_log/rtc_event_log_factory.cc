@@ -13,8 +13,9 @@
 #include <memory>
 #include <utility>
 
+#include "api/connection_environment.h"
+#include "api/field_trials_view.h"
 #include "rtc_base/checks.h"
-#include "system_wrappers/include/field_trial.h"
 
 #ifdef WEBRTC_ENABLE_RTC_EVENT_LOG
 #include "logging/rtc_event_log/rtc_event_log_impl.h"
@@ -22,27 +23,22 @@
 
 namespace webrtc {
 
-RtcEventLogFactory::RtcEventLogFactory(TaskQueueFactory* task_queue_factory)
-    : task_queue_factory_(task_queue_factory) {
-  RTC_DCHECK(task_queue_factory_);
-}
-
 std::unique_ptr<RtcEventLog> RtcEventLogFactory::Create(
-    RtcEventLog::EncodingType encoding_type) const {
+    const ConnectionEnvironment& env) const {
 #ifdef WEBRTC_ENABLE_RTC_EVENT_LOG
-  if (field_trial::IsEnabled("WebRTC-RtcEventLogKillSwitch")) {
+  if (env.field_trials().IsEnabled("WebRTC-RtcEventLogKillSwitch")) {
     return std::make_unique<RtcEventLogNull>();
   }
+  RtcEventLog::EncodingType encoding_type =
+      env.field_trials().IsDisabled("WebRTC-RtcEventLogNewFormat")
+          ? RtcEventLog::EncodingType::Legacy
+          : RtcEventLog::EncodingType::NewFormat;
+
   return std::make_unique<RtcEventLogImpl>(
-      RtcEventLogImpl::CreateEncoder(encoding_type), task_queue_factory_);
+      env, RtcEventLogImpl::CreateEncoder(encoding_type));
 #else
   return std::make_unique<RtcEventLogNull>();
 #endif
-}
-
-std::unique_ptr<RtcEventLog> RtcEventLogFactory::CreateRtcEventLog(
-    RtcEventLog::EncodingType encoding_type) {
-  return Create(encoding_type);
 }
 
 }  // namespace webrtc
