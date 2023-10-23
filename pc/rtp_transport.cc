@@ -173,11 +173,16 @@ bool RtpTransport::RegisterRtpDemuxerSink(const RtpDemuxerCriteria& criteria,
 }
 
 bool RtpTransport::UnregisterRtpDemuxerSink(RtpPacketSinkInterface* sink) {
+  RTC_LOG(LS_ERROR) << "RtpTransport::UnregisterRtpDemuxerSink";
   if (!rtp_demuxer_.RemoveSink(sink)) {
     RTC_LOG(LS_ERROR) << "Failed to unregister the sink for RTP demuxer.";
     return false;
   }
   return true;
+}
+
+flat_set<uint32_t> RtpTransport::GetSsrcsForSink(RtpPacketSinkInterface* sink) {
+  return rtp_demuxer_.GetSsrcsForSink(sink);
 }
 
 void RtpTransport::DemuxPacket(rtc::CopyOnWriteBuffer packet,

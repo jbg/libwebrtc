@@ -519,4 +519,18 @@ void SrtpTransport::MaybeUpdateWritableState() {
   }
 }
 
+bool SrtpTransport::UnregisterRtpDemuxerSink(RtpPacketSinkInterface* sink) {
+  // This also gets called when closing the peerconnection but then the whole
+  // session is already removed so this is a no-op.
+  if (recv_session_) {
+    RTC_LOG(LS_ERROR) << "SRtpTransport::UnregisterRtpDemuxerSink";
+    auto ssrcs = GetSsrcsForSink(sink);
+    for (const auto ssrc : GetSsrcsForSink(sink)) {
+      bool ok = recv_session_->RemoveSsrcFromSession(ssrc);
+      RTC_LOG(LS_ERROR) << "FIPPO Unregister SSRC " << ssrc << " ok " << ok;
+    }
+  }
+  return RtpTransport::UnregisterRtpDemuxerSink(sink);
+}
+
 }  // namespace webrtc
