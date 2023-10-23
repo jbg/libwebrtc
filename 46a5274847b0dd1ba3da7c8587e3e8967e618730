@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0154c5f8_d8f97b7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-10-23T07:30:11Z",
+      "side": 1,
+      "message": "Sergey@, please help trigger the CQ, thanks~",
+      "revId": "46a5274847b0dd1ba3da7c8587e3e8967e618730",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
