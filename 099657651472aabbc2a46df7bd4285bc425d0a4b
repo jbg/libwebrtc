@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0f4dfbd_5ec81429",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2023-10-23T08:21:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cc5e616_fcad698d",
+      "range": {
+        "startLine": 327,
+        "startChar": 7,
+        "endLine": 327,
+        "endChar": 11
+      },
+      "revId": "099657651472aabbc2a46df7bd4285bc425d0a4b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45c84391_2254f0df",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-23T07:49:28Z",
       "side": 1,
       "message": "/s getting stuck in",
+      "range": {
+        "startLine": 356,
+        "startChar": 69,
+        "endLine": 356,
+        "endChar": 70
+      },
+      "revId": "099657651472aabbc2a46df7bd4285bc425d0a4b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0e2f05f_5a836564",
+        "filename": "modules/congestion_controller/goog_cc/loss_based_bwe_v2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 19004
+      },
+      "writtenOn": "2023-10-23T08:21:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45c84391_2254f0df",
       "range": {
         "startLine": 356,
         "startChar": 69,
