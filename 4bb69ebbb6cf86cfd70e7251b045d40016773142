@@ -16,6 +16,24 @@
       "message": "To unblock cl/576086187",
       "revId": "4bb69ebbb6cf86cfd70e7251b045d40016773142",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6db2a675_a5ca95b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-10-24T11:46:48Z",
+      "side": 1,
+      "message": "I sent you cl/576099349.",
+      "parentUuid": "5a2d2495_ede21ea4",
+      "revId": "4bb69ebbb6cf86cfd70e7251b045d40016773142",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
