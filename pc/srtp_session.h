@@ -97,6 +97,9 @@ class SrtpSession {
   // been set.
   bool IsExternalAuthActive() const;
 
+  // Removes a SSRC from the underlying libSRTP session.
+  bool RemoveSsrcFromSession(uint32_t ssrc);
+
  private:
   bool DoSetKey(int type,
                 int crypto_suite,
