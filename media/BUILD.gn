@@ -301,6 +301,7 @@ rtc_library("stream_params") {
 }
 
 rtc_library("media_constants") {
+  visibility = [ "*" ]
   sources = [
     "base/media_constants.cc",
     "base/media_constants.h",
