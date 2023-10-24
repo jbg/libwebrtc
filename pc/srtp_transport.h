@@ -109,6 +109,10 @@ class SrtpTransport : public RtpTransport {
     rtp_abs_sendtime_extn_id_ = rtp_abs_sendtime_extn_id;
   }
 
+  // Overrides the RTP transport UnregisterDemuxerSink to grab the list
+  // of remote SSRCs known and unregister them with libSRTP.
+  bool UnregisterRtpDemuxerSink(RtpPacketSinkInterface* sink) override;
+
  protected:
   // If the writable state changed, fire the SignalWritableState.
   void MaybeUpdateWritableState();
