@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "345ef857_136fa309",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-10-24T14:06:33Z",
+      "side": 1,
+      "message": "downstream projects have been updated in cl/576120141",
+      "revId": "c82cefe5f4416b8f33b08cf68bf787ace4e13091",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
