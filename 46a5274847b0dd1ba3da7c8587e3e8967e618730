@@ -16,6 +16,190 @@
       "message": "Sergey@, please help trigger the CQ, thanks~",
       "revId": "46a5274847b0dd1ba3da7c8587e3e8967e618730",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99db3f0f_89ec4b00",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-10-24T08:49:24Z",
+      "side": 1,
+      "message": "seems not needed",
+      "range": {
+        "startLine": 240,
+        "startChar": 4,
+        "endLine": 240,
+        "endChar": 49
+      },
+      "revId": "46a5274847b0dd1ba3da7c8587e3e8967e618730",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abc7a096_331b242d",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-10-24T08:49:24Z",
+      "side": 1,
+      "message": "not used",
+      "range": {
+        "startLine": 251,
+        "startChar": 44,
+        "endLine": 251,
+        "endChar": 53
+      },
+      "revId": "46a5274847b0dd1ba3da7c8587e3e8967e618730",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23aa4963_8a457e8a",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-10-24T08:49:24Z",
+      "side": 1,
+      "message": "FU-A is an H264 thing. It is just FU in H265: https://datatracker.ietf.org/doc/html/rfc7798.\n\nI would suggest to get rid of \"A\". Here and in all other places including variable names and comments.",
+      "range": {
+        "startLine": 37,
+        "startChar": 20,
+        "endLine": 37,
+        "endChar": 21
+      },
+      "revId": "46a5274847b0dd1ba3da7c8587e3e8967e618730",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56c0bb7f_c52b0a46",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-10-24T08:49:24Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 41,
+        "startChar": 20,
+        "endLine": 41,
+        "endChar": 29
+      },
+      "revId": "46a5274847b0dd1ba3da7c8587e3e8967e618730",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22e0aa9a_93f4d506",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-10-24T08:49:24Z",
+      "side": 1,
+      "message": "This only tests FU + AP case. I think more cases should be covered. Perhaps this set would be enough:\n1. FU + AP + FU\n2. AP + FU + AP\n\nI would suggest to convert this to a parametrized test with parameters set consisting of NALU sizes and expected output packets.",
+      "range": {
+        "startLine": 307,
+        "startChar": 28,
+        "endLine": 307,
+        "endChar": 38
+      },
+      "revId": "46a5274847b0dd1ba3da7c8587e3e8967e618730",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2813dda9_d201911f",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-10-24T08:49:24Z",
+      "side": 1,
+      "message": "FU",
+      "range": {
+        "startLine": 375,
+        "startChar": 43,
+        "endLine": 375,
+        "endChar": 46
+      },
+      "revId": "46a5274847b0dd1ba3da7c8587e3e8967e618730",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33df607e_4d819a34",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-10-24T08:49:24Z",
+      "side": 1,
+      "message": "FU",
+      "range": {
+        "startLine": 384,
+        "startChar": 71,
+        "endLine": 384,
+        "endChar": 74
+      },
+      "revId": "46a5274847b0dd1ba3da7c8587e3e8967e618730",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ac31053_9553891a",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_h265_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-10-24T08:49:24Z",
+      "side": 1,
+      "message": "Fu. Here and in other places.",
+      "range": {
+        "startLine": 408,
+        "startChar": 28,
+        "endLine": 408,
+        "endChar": 31
+      },
+      "revId": "46a5274847b0dd1ba3da7c8587e3e8967e618730",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
