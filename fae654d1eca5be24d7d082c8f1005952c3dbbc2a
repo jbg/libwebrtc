@@ -16,6 +16,23 @@
       "message": "I pondered about two-time pad since this enables reuse of SSRCs:\n  https://www.rfc-editor.org/rfc/rfc3711#section-9.1\nHowever, this CL only removes from the receive session which isn\u0027t the party doing the wrong thing.",
       "revId": "fae654d1eca5be24d7d082c8f1005952c3dbbc2a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24046bcf_4e0e62a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-25T07:11:42Z",
+      "side": 1,
+      "message": "Looks good.\nJust hoping nobody gets inspired by this to replicate on the send side :-)",
+      "revId": "fae654d1eca5be24d7d082c8f1005952c3dbbc2a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
