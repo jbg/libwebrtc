@@ -186,6 +186,8 @@ struct RTC_EXPORT Codec {
 // TODO(webrtc:15214): Compatibility names, to be migrated away and removed.
 using VideoCodec = Codec;
 using AudioCodec = Codec;
+typedef std::vector<Codec> AudioCodecs;
+typedef std::vector<Codec> VideoCodecs;
 
 Codec CreateAudioCodec(int id,
                        const std::string& name,
