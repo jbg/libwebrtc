@@ -138,14 +138,12 @@ struct SimulationSettings {
   absl::optional<std::string> aec_dump_output_filename;
   bool fixed_interface = false;
   bool store_intermediate_output = false;
-  bool print_aec_parameter_values = false;
   bool dump_internal_data = false;
   WavFile::SampleFormat wav_output_format = WavFile::SampleFormat::kInt16;
   absl::optional<std::string> dump_internal_data_output_dir;
   absl::optional<int> dump_set_to_use;
   absl::optional<std::string> call_order_input_filename;
   absl::optional<std::string> call_order_output_filename;
-  absl::optional<std::string> aec_settings_filename;
   absl::optional<absl::string_view> aec_dump_input_string;
   std::vector<float>* processed_capture_samples = nullptr;
   bool analysis_only = false;

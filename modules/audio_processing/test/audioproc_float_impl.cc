@@ -264,14 +264,6 @@ ABSL_FLAG(std::string,
           "",
           "Generate custom process API call order file from AEC dump");
 ABSL_FLAG(bool,
-          print_aec_parameter_values,
-          false,
-          "Print parameter values used in AEC in JSON-format");
-ABSL_FLAG(std::string,
-          aec_settings,
-          "",
-          "File in JSON-format with custom AEC settings");
-ABSL_FLAG(bool,
           dump_data,
           false,
           "Dump internal data during the call (requires build flag)");
@@ -454,8 +446,6 @@ SimulationSettings CreateSettings() {
                         &settings.call_order_input_filename);
   SetSettingIfSpecified(absl::GetFlag(FLAGS_output_custom_call_order_file),
                         &settings.call_order_output_filename);
-  SetSettingIfSpecified(absl::GetFlag(FLAGS_aec_settings),
-                        &settings.aec_settings_filename);
   settings.initial_mic_level = absl::GetFlag(FLAGS_initial_mic_level);
   SetSettingIfFlagSet(absl::GetFlag(FLAGS_multi_channel_render),
                       &settings.multi_channel_render);
@@ -483,8 +473,6 @@ SimulationSettings CreateSettings() {
   settings.fixed_interface = absl::GetFlag(FLAGS_fixed_interface);
   settings.store_intermediate_output =
       absl::GetFlag(FLAGS_store_intermediate_output);
-  settings.print_aec_parameter_values =
-      absl::GetFlag(FLAGS_print_aec_parameter_values);
   settings.dump_internal_data = absl::GetFlag(FLAGS_dump_data);
   SetSettingIfSpecified(absl::GetFlag(FLAGS_dump_data_output_dir),
                         &settings.dump_internal_data_output_dir);
@@ -721,16 +709,6 @@ void PerformBasicParameterSanityChecks(
       pre_constructed_ap_provided && pre_constructed_ap_builder_provided,
       "Error: The AudioProcessing and the AudioProcessingBuilder cannot both "
       "be specified at the same time.\n");
-
-  ReportConditionalErrorAndExit(
-      settings.aec_settings_filename && pre_constructed_ap_provided,
-      "Error: The aec_settings_filename cannot be specified when a "
-      "pre-constructed audio processing object is provided.\n");
-
-  ReportConditionalErrorAndExit(
-      settings.aec_settings_filename && pre_constructed_ap_provided,
-      "Error: The print_aec_parameter_values cannot be set when a "
-      "pre-constructed audio processing object is provided.\n");
 
   if (settings.linear_aec_output_filename && pre_constructed_ap_provided) {
     std::cout << "Warning: For the linear AEC output to be stored, this must "
