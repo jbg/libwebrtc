@@ -33,6 +33,24 @@
       "message": "Looks good.\nJust hoping nobody gets inspired by this to replicate on the send side :-)",
       "revId": "fae654d1eca5be24d7d082c8f1005952c3dbbc2a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58824592_7bff1963",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-10-25T10:26:04Z",
+      "side": 1,
+      "message": "Added wording to discourage that. Also asked libSRTP folks:\n  https://github.com/cisco/libsrtp/issues/656\nbecause I\u0027d rather not do something stupid with cryptography",
+      "parentUuid": "24046bcf_4e0e62a0",
+      "revId": "fae654d1eca5be24d7d082c8f1005952c3dbbc2a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
