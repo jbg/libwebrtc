@@ -16,6 +16,24 @@
       "message": "Is this CL a run of \u0027lucicfg generate infra/config/config.star\u0027 with the new lucicfg version ?",
       "revId": "95b54f8578e495f88f6a5206e7cd74ad5b63903a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf21fb72_8034bd14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6193
+      },
+      "writtenOn": "2023-10-25T07:16:34Z",
+      "side": 1,
+      "message": "Yes, otherwise it would not pass the presubmit on the bots (the local one did but I guess it\u0027s using the one part of the gclient repo, I hadn\u0027t synced).",
+      "parentUuid": "a84c077d_43d015a4",
+      "revId": "95b54f8578e495f88f6a5206e7cd74ad5b63903a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
