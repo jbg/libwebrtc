@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a84c077d_43d015a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12299
+      },
+      "writtenOn": "2023-10-25T07:12:19Z",
+      "side": 1,
+      "message": "Is this CL a run of \u0027lucicfg generate infra/config/config.star\u0027 with the new lucicfg version ?",
+      "revId": "95b54f8578e495f88f6a5206e7cd74ad5b63903a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
