@@ -19,7 +19,6 @@
 #include <vector>
 
 #include "absl/strings/string_view.h"
-#include "api/audio/echo_canceller3_config_json.h"
 #include "api/audio/echo_canceller3_factory.h"
 #include "api/audio/echo_detector_creator.h"
 #include "modules/audio_processing/aec_dump/aec_dump_factory.h"
@@ -29,37 +28,11 @@
 #include "modules/audio_processing/test/fake_recording_device.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
-#include "rtc_base/strings/json.h"
 #include "rtc_base/strings/string_builder.h"
 
 namespace webrtc {
 namespace test {
 namespace {
-// Helper for reading JSON from a file and parsing it to an AEC3 configuration.
-EchoCanceller3Config ReadAec3ConfigFromJsonFile(absl::string_view filename) {
-  std::string json_string;
-  std::string s;
-  std::ifstream f(std::string(filename).c_str());
-  if (f.fail()) {
-    std::cout << "Failed to open the file " << filename << std::endl;
-    RTC_CHECK_NOTREACHED();
-  }
-  while (std::getline(f, s)) {
-    json_string += s;
-  }
-
-  bool parsing_successful;
-  EchoCanceller3Config cfg;
-  Aec3ConfigFromJsonString(json_string, &cfg, &parsing_successful);
-  if (!parsing_successful) {
-    std::cout << "Parsing of json string failed: " << std::endl
-              << json_string << std::endl;
-    RTC_CHECK_NOTREACHED();
-  }
-  RTC_CHECK(EchoCanceller3Config::Validate(&cfg));
-
-  return cfg;
-}
 
 std::string GetIndexedOutputWavFilename(absl::string_view wav_name,
                                         int counter) {
@@ -155,10 +128,7 @@ AudioProcessingSimulator::AudioProcessingSimulator(
       << "The AudioProcessing and the AudioProcessingBuilder cannot both be "
          "specified at the same time.";
 
-  if (ap_) {
-    RTC_CHECK(!settings_.aec_settings_filename);
-    RTC_CHECK(!settings_.print_aec_parameter_values);
-  } else {
+  if (!ap_) {
     // Use specied builder if such is provided, otherwise create a new builder.
     std::unique_ptr<AudioProcessingBuilder> builder =
         !!ap_builder ? std::move(ap_builder)
@@ -168,22 +138,8 @@ AudioProcessingSimulator::AudioProcessingSimulator(
     const bool use_aec = settings_.use_aec && *settings_.use_aec;
     if (use_aec) {
       EchoCanceller3Config cfg;
-      if (settings_.aec_settings_filename) {
-        if (settings_.use_verbose_logging) {
-          std::cout << "Reading AEC Parameters from JSON input." << std::endl;
-        }
-        cfg = ReadAec3ConfigFromJsonFile(*settings_.aec_settings_filename);
-      }
-
       if (settings_.linear_aec_output_filename) {
         cfg.filter.export_linear_aec_output = true;
-      }
-
-      if (settings_.print_aec_parameter_values) {
-        if (!settings_.use_quiet_output) {
-          std::cout << "AEC settings:" << std::endl;
-        }
-        std::cout << Aec3ConfigToJsonString(cfg) << std::endl;
       }
 
       auto echo_control_factory = std::make_unique<EchoCanceller3Factory>(cfg);
