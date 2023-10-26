@@ -33,6 +33,24 @@
       "message": "I think I miss some context here.\nMy understanding is that this field trial just to check what happen without rate limiting retransmission.\nBut retransmission still should be limited somehow.\n\nswapping default to \u0027delete rate limiter\u0027 looks too risky to me.\nWhere can I find more details about decision to launch this for everyone?",
       "revId": "d90fc27aa5cf55908279606724f4ddb319d02c19",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "862c85c8_7d861eed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2023-10-26T15:00:34Z",
+      "side": 1,
+      "message": "Discussed with Danil offline. overall the experiment looks pretty neutral for all endpoints. We plan to limit retransmission bitrate with method that know about video layer information.",
+      "parentUuid": "49b53a68_1ba211b4",
+      "revId": "d90fc27aa5cf55908279606724f4ddb319d02c19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
