@@ -58,8 +58,7 @@ rtc::scoped_refptr<PeerConnectionFactoryInterface> CreatePeerConnectionFactory(
   PeerConnectionFactoryDependencies pcf_deps;
   pcf_deps.task_queue_factory = CreateDefaultTaskQueueFactory();
   pcf_deps.call_factory = CreateCallFactory();
-  pcf_deps.event_log_factory =
-      std::make_unique<RtcEventLogFactory>(pcf_deps.task_queue_factory.get());
+  pcf_deps.event_log_factory = std::make_unique<RtcEventLogFactory>();
   pcf_deps.network_thread = network_thread;
   pcf_deps.signaling_thread = signaling_thread;
   pcf_deps.trials = std::make_unique<FieldTrialBasedConfig>();

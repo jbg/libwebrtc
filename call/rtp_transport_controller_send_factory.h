@@ -22,13 +22,11 @@ class RtpTransportControllerSendFactory
     : public RtpTransportControllerSendFactoryInterface {
  public:
   std::unique_ptr<RtpTransportControllerSendInterface> Create(
-      const RtpTransportConfig& config,
-      Clock* clock) override {
-    RTC_CHECK(config.trials);
-    return std::make_unique<RtpTransportControllerSend>(clock, config);
+      const RtpTransportConfig& config) override {
+    return std::make_unique<RtpTransportControllerSend>(config);
   }
 
-  virtual ~RtpTransportControllerSendFactory() {}
+  ~RtpTransportControllerSendFactory() override = default;
 };
 }  // namespace webrtc
 #endif  // CALL_RTP_TRANSPORT_CONTROLLER_SEND_FACTORY_H_

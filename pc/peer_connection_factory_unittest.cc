@@ -683,6 +683,7 @@ TEST(PeerConnectionFactoryDependenciesTest, UsesNetworkManager) {
 
   webrtc::PeerConnectionFactoryDependencies pcf_dependencies;
   pcf_dependencies.network_manager = std::move(mock_network_manager);
+  pcf_dependencies.task_queue_factory = CreateDefaultTaskQueueFactory();
 
   rtc::scoped_refptr<webrtc::PeerConnectionFactoryInterface> pcf =
       CreateModularPeerConnectionFactory(std::move(pcf_dependencies));
@@ -712,6 +713,7 @@ TEST(PeerConnectionFactoryDependenciesTest, UsesPacketSocketFactory) {
 
   webrtc::PeerConnectionFactoryDependencies pcf_dependencies;
   pcf_dependencies.packet_socket_factory = std::move(mock_socket_factory);
+  pcf_dependencies.task_queue_factory = CreateDefaultTaskQueueFactory();
 
   rtc::scoped_refptr<webrtc::PeerConnectionFactoryInterface> pcf =
       CreateModularPeerConnectionFactory(std::move(pcf_dependencies));

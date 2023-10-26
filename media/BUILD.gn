@@ -814,6 +814,7 @@ if (rtc_include_tests) {
         ":rtp_utils",
         ":stream_params",
         ":turn_utils",
+        "../api:connection_environment_builder",
         "../api:create_simulcast_test_fixture_api",
         "../api:field_trials_view",
         "../api:libjingle_peerconnection_api",

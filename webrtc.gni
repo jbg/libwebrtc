@@ -480,6 +480,8 @@ all_poison_types = [
   # Default echo detector implementation.
   "default_echo_detector",
 
+  "connection_environment_builder",
+
   # Software video codecs (VP8 and VP9 through libvpx).
   "software_video_codecs",
 ]
