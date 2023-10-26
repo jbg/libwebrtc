@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a27eaedb_23dbaf8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20534
+      },
+      "writtenOn": "2023-10-26T02:51:36Z",
+      "side": 1,
+      "message": "Remove fua/stap expression and add parametrized test for AP/FU mixed situation",
+      "revId": "f12db2a181af789ab88907245eb219fbb8e8e85f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
