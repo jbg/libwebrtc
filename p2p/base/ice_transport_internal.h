@@ -105,7 +105,7 @@ webrtc::RTCError VerifyCandidates(const Candidates& candidates);
 // Information about ICE configuration.
 // TODO(deadbeef): Use absl::optional to represent unset values, instead of
 // -1.
-struct IceConfig {
+struct RTC_EXPORT IceConfig {
   // The ICE connection receiving timeout value in milliseconds.
   absl::optional<int> receiving_timeout;
   // Time interval in milliseconds to ping a backup connection when the ICE
