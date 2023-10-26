@@ -16,6 +16,23 @@
       "message": "make config default as experiment concluded.",
       "revId": "d90fc27aa5cf55908279606724f4ddb319d02c19",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49b53a68_1ba211b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-10-26T10:10:12Z",
+      "side": 1,
+      "message": "I think I miss some context here.\nMy understanding is that this field trial just to check what happen without rate limiting retransmission.\nBut retransmission still should be limited somehow.\n\nswapping default to \u0027delete rate limiter\u0027 looks too risky to me.\nWhere can I find more details about decision to launch this for everyone?",
+      "revId": "d90fc27aa5cf55908279606724f4ddb319d02c19",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
