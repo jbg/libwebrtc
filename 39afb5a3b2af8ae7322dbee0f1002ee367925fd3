@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d31b1950_fbbdd67c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-27T07:08:51Z",
+      "side": 1,
+      "message": "Not happy about exporting a non-api/ type, but the right fix is probably to move this definition into an api/ file. Would be nice if you can add a TODO() and bug to do that.\n\nApproving \"because we need it now\".",
+      "revId": "39afb5a3b2af8ae7322dbee0f1002ee367925fd3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
