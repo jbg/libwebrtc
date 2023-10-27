@@ -423,6 +423,10 @@ if (is_android) {
     visibility = [ "*" ]
     sources = [
       "api/org/webrtc/audio/JavaAudioDeviceModule.java",
+      "src/java/org/webrtc/audio/AudioRecordCreator.java",
+      "src/java/org/webrtc/audio/AudioTrackCreator.java",
+      "src/java/org/webrtc/audio/BaseWebRtcAudioRecord.java",
+      "src/java/org/webrtc/audio/BaseWebRtcAudioTrack.java",
       "src/java/org/webrtc/audio/LowLatencyAudioBufferManager.java",
       "src/java/org/webrtc/audio/VolumeLogger.java",
       "src/java/org/webrtc/audio/WebRtcAudioEffects.java",
@@ -1459,6 +1463,8 @@ if (current_os == "linux" || is_android) {
 
   generate_jni("generated_java_audio_device_module_native_jni") {
     sources = [
+      "src/java/org/webrtc/audio/BaseWebRtcAudioRecord.java",
+      "src/java/org/webrtc/audio/BaseWebRtcAudioTrack.java",
       "src/java/org/webrtc/audio/WebRtcAudioRecord.java",
       "src/java/org/webrtc/audio/WebRtcAudioTrack.java",
     ]

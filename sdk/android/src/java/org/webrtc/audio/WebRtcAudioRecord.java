@@ -44,7 +44,7 @@ import org.webrtc.audio.JavaAudioDeviceModule.AudioRecordStartErrorCode;
 import org.webrtc.audio.JavaAudioDeviceModule.AudioRecordStateCallback;
 import org.webrtc.audio.JavaAudioDeviceModule.SamplesReadyCallback;
 
-class WebRtcAudioRecord {
+class WebRtcAudioRecord extends BaseWebRtcAudioRecord {
   private static final String TAG = "WebRtcAudioRecordExternal";
 
   // Requested size of each recorded buffer provided to the client.
@@ -225,25 +225,25 @@ class WebRtcAudioRecord {
     Logging.d(TAG, "ctor" + WebRtcAudioUtils.getThreadInfo());
   }
 
-  @CalledByNative
+  @Override
   public void setNativeAudioRecord(long nativeAudioRecord) {
     this.nativeAudioRecord = nativeAudioRecord;
   }
 
-  @CalledByNative
-  boolean isAcousticEchoCancelerSupported() {
+  @Override
+  public boolean isAcousticEchoCancelerSupported() {
     return isAcousticEchoCancelerSupported;
   }
 
-  @CalledByNative
-  boolean isNoiseSuppressorSupported() {
+  @Override
+  public boolean isNoiseSuppressorSupported() {
     return isNoiseSuppressorSupported;
   }
 
   // Returns true if a valid call to verifyAudioConfig() has been done. Should always be
   // checked before using the returned value of isAudioSourceMatchingRecordingSession().
-  @CalledByNative
-  boolean isAudioConfigVerified() {
+  @Override
+  public boolean isAudioConfigVerified() {
     return audioSourceMatchesRecordingSessionRef.get() != null;
   }
 
@@ -251,8 +251,8 @@ class WebRtcAudioRecord {
   // startRecording() has been called. Hence, should preferably be called in combination with
   // stopRecording() to ensure that it has been set properly. `isAudioConfigVerified` is
   // enabled in WebRtcAudioRecord to ensure that the returned value is valid.
-  @CalledByNative
-  boolean isAudioSourceMatchingRecordingSession() {
+  @Override
+  public boolean isAudioSourceMatchingRecordingSession() {
     Boolean audioSourceMatchesRecordingSession = audioSourceMatchesRecordingSessionRef.get();
     if (audioSourceMatchesRecordingSession == null) {
       Logging.w(TAG, "Audio configuration has not yet been verified");
@@ -261,20 +261,20 @@ class WebRtcAudioRecord {
     return audioSourceMatchesRecordingSession;
   }
 
-  @CalledByNative
-  private boolean enableBuiltInAEC(boolean enable) {
+  @Override
+  public boolean enableBuiltInAEC(boolean enable) {
     Logging.d(TAG, "enableBuiltInAEC(" + enable + ")");
     return effects.setAEC(enable);
   }
 
-  @CalledByNative
-  private boolean enableBuiltInNS(boolean enable) {
+  @Override
+  public boolean enableBuiltInNS(boolean enable) {
     Logging.d(TAG, "enableBuiltInNS(" + enable + ")");
     return effects.setNS(enable);
   }
 
-  @CalledByNative
-  private int initRecording(int sampleRate, int channels) {
+  @Override
+  public int initRecording(int sampleRate, int channels) {
     Logging.d(TAG, "initRecording(sampleRate=" + sampleRate + ", channels=" + channels + ")");
     if (audioRecord != null) {
       reportWebRtcAudioRecordInitError("InitRecording called twice without StopRecording.");
@@ -360,7 +360,8 @@ class WebRtcAudioRecord {
    */
   @RequiresApi(Build.VERSION_CODES.M)
   @TargetApi(Build.VERSION_CODES.M)
-  void setPreferredDevice(@Nullable AudioDeviceInfo preferredDevice) {
+  @Override
+  public void setPreferredDevice(@Nullable AudioDeviceInfo preferredDevice) {
     Logging.d(
         TAG, "setPreferredDevice " + (preferredDevice != null ? preferredDevice.getId() : null));
     this.preferredDevice = preferredDevice;
@@ -371,8 +372,8 @@ class WebRtcAudioRecord {
     }
   }
 
-  @CalledByNative
-  private boolean startRecording() {
+  @Override
+  public boolean startRecording() {
     Logging.d(TAG, "startRecording");
     assertTrue(audioRecord != null);
     assertTrue(audioThread == null);
@@ -395,8 +396,23 @@ class WebRtcAudioRecord {
     return true;
   }
 
-  @CalledByNative
-  private boolean stopRecording() {
+  @TargetApi(Build.VERSION_CODES.M)
+  private static AudioRecord createAudioRecordOnMOrHigher(
+      int audioSource, int sampleRate, int channelConfig, int audioFormat, int bufferSizeInBytes) {
+    Logging.d(TAG, "createAudioRecordOnMOrHigher");
+    return new AudioRecord.Builder()
+        .setAudioSource(audioSource)
+        .setAudioFormat(new AudioFormat.Builder()
+                            .setEncoding(audioFormat)
+                            .setSampleRate(sampleRate)
+                            .setChannelMask(channelConfig)
+                            .build())
+        .setBufferSizeInBytes(bufferSizeInBytes)
+        .build();
+  }
+
+  @Override
+  public boolean stopRecording() {
     Logging.d(TAG, "stopRecording");
     assertTrue(audioThread != null);
     if (future != null) {
@@ -415,21 +431,6 @@ class WebRtcAudioRecord {
     effects.release();
     releaseAudioResources();
     return true;
-  }
-
-  @TargetApi(Build.VERSION_CODES.M)
-  private static AudioRecord createAudioRecordOnMOrHigher(
-      int audioSource, int sampleRate, int channelConfig, int audioFormat, int bufferSizeInBytes) {
-    Logging.d(TAG, "createAudioRecordOnMOrHigher");
-    return new AudioRecord.Builder()
-        .setAudioSource(audioSource)
-        .setAudioFormat(new AudioFormat.Builder()
-                            .setEncoding(audioFormat)
-                            .setSampleRate(sampleRate)
-                            .setChannelMask(channelConfig)
-                            .build())
-        .setBufferSizeInBytes(bufferSizeInBytes)
-        .build();
   }
 
   private static AudioRecord createAudioRecordOnLowerThanM(
@@ -499,13 +500,9 @@ class WebRtcAudioRecord {
     return (channels == 1 ? AudioFormat.CHANNEL_IN_MONO : AudioFormat.CHANNEL_IN_STEREO);
   }
 
-  private native void nativeCacheDirectBufferAddress(
-      long nativeAudioRecordJni, ByteBuffer byteBuffer);
-  private native void nativeDataIsRecorded(
-      long nativeAudioRecordJni, int bytes, long captureTimestampNs);
-
   // Sets all recorded samples to zero if `mute` is true, i.e., ensures that
   // the microphone is muted.
+  @Override
   public void setMicrophoneMute(boolean mute) {
     Logging.w(TAG, "setMicrophoneMute(" + mute + ")");
     microphoneMute = mute;
@@ -514,6 +511,7 @@ class WebRtcAudioRecord {
   // Sets whether NoiseSuppressor should be enabled or disabled.
   // Returns true if the enabling was successful, otherwise false is returned (this is also the case
   // if the NoiseSuppressor effect is not supported).
+  @Override
   public boolean setNoiseSuppressorEnabled(boolean enabled) {
     if (!WebRtcAudioEffects.isNoiseSuppressorSupported()) {
       Logging.e(TAG, "Noise suppressor is not supported.");

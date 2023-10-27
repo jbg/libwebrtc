@@ -18,6 +18,7 @@
 #include "rtc_base/logging.h"
 #include "rtc_base/platform_thread.h"
 #include "rtc_base/time_utils.h"
+#include "sdk/android/generated_java_audio_device_module_native_jni/BaseWebRtcAudioRecord_jni.h"
 #include "sdk/android/generated_java_audio_device_module_native_jni/WebRtcAudioRecord_jni.h"
 #include "sdk/android/src/jni/audio_device/audio_common.h"
 #include "sdk/android/src/jni/jni_helpers.h"
@@ -69,8 +70,8 @@ AudioRecordJni::AudioRecordJni(JNIEnv* env,
       audio_device_buffer_(nullptr) {
   RTC_LOG(LS_INFO) << "ctor";
   RTC_DCHECK(audio_parameters_.is_valid());
-  Java_WebRtcAudioRecord_setNativeAudioRecord(env, j_audio_record_,
-                                              jni::jlongFromPointer(this));
+  Java_BaseWebRtcAudioRecord_setNativeAudioRecord(env, j_audio_record_,
+                                                  jni::jlongFromPointer(this));
   // Detach from this thread since construction is allowed to happen on a
   // different thread.
   thread_checker_.Detach();
@@ -108,7 +109,7 @@ int32_t AudioRecordJni::InitRecording() {
   RTC_DCHECK(!recording_);
   ScopedHistogramTimer timer("WebRTC.Audio.InitRecordingDurationMs");
 
-  int frames_per_buffer = Java_WebRtcAudioRecord_initRecording(
+  int frames_per_buffer = Java_BaseWebRtcAudioRecord_initRecording(
       env_, j_audio_record_, audio_parameters_.sample_rate(),
       static_cast<int>(audio_parameters_.channels()));
   if (frames_per_buffer < 0) {
@@ -143,7 +144,7 @@ int32_t AudioRecordJni::StartRecording() {
     return 0;
   }
   ScopedHistogramTimer timer("WebRTC.Audio.StartRecordingDurationMs");
-  if (!Java_WebRtcAudioRecord_startRecording(env_, j_audio_record_)) {
+  if (!Java_BaseWebRtcAudioRecord_startRecording(env_, j_audio_record_)) {
     RTC_LOG(LS_ERROR) << "StartRecording failed";
     return -1;
   }
@@ -159,9 +160,9 @@ int32_t AudioRecordJni::StopRecording() {
   }
   // Check if the audio source matched the activated recording session but only
   // if a valid results exists to avoid invalid statistics.
-  if (Java_WebRtcAudioRecord_isAudioConfigVerified(env_, j_audio_record_)) {
+  if (Java_BaseWebRtcAudioRecord_isAudioConfigVerified(env_, j_audio_record_)) {
     const bool session_was_ok =
-        Java_WebRtcAudioRecord_isAudioSourceMatchingRecordingSession(
+        Java_BaseWebRtcAudioRecord_isAudioSourceMatchingRecordingSession(
             env_, j_audio_record_);
     RTC_HISTOGRAM_BOOLEAN("WebRTC.Audio.SourceMatchesRecordingSession",
                           session_was_ok);
@@ -169,7 +170,7 @@ int32_t AudioRecordJni::StopRecording() {
         << "HISTOGRAM(WebRTC.Audio.SourceMatchesRecordingSession): "
         << session_was_ok;
   }
-  if (!Java_WebRtcAudioRecord_stopRecording(env_, j_audio_record_)) {
+  if (!Java_BaseWebRtcAudioRecord_stopRecording(env_, j_audio_record_)) {
     RTC_LOG(LS_ERROR) << "StopRecording failed";
     return -1;
   }
@@ -201,20 +202,21 @@ void AudioRecordJni::AttachAudioBuffer(AudioDeviceBuffer* audioBuffer) {
 
 bool AudioRecordJni::IsAcousticEchoCancelerSupported() const {
   RTC_DCHECK(thread_checker_.IsCurrent());
-  return Java_WebRtcAudioRecord_isAcousticEchoCancelerSupported(
+  return Java_BaseWebRtcAudioRecord_isAcousticEchoCancelerSupported(
       env_, j_audio_record_);
 }
 
 bool AudioRecordJni::IsNoiseSuppressorSupported() const {
   RTC_DCHECK(thread_checker_.IsCurrent());
-  return Java_WebRtcAudioRecord_isNoiseSuppressorSupported(env_,
-                                                           j_audio_record_);
+  return Java_BaseWebRtcAudioRecord_isNoiseSuppressorSupported(env_,
+                                                               j_audio_record_);
 }
 
 int32_t AudioRecordJni::EnableBuiltInAEC(bool enable) {
   RTC_LOG(LS_INFO) << "EnableBuiltInAEC(" << enable << ")";
   RTC_DCHECK(thread_checker_.IsCurrent());
-  return Java_WebRtcAudioRecord_enableBuiltInAEC(env_, j_audio_record_, enable)
+  return Java_BaseWebRtcAudioRecord_enableBuiltInAEC(env_, j_audio_record_,
+                                                     enable)
              ? 0
              : -1;
 }
@@ -222,7 +224,8 @@ int32_t AudioRecordJni::EnableBuiltInAEC(bool enable) {
 int32_t AudioRecordJni::EnableBuiltInNS(bool enable) {
   RTC_LOG(LS_INFO) << "EnableBuiltInNS(" << enable << ")";
   RTC_DCHECK(thread_checker_.IsCurrent());
-  return Java_WebRtcAudioRecord_enableBuiltInNS(env_, j_audio_record_, enable)
+  return Java_BaseWebRtcAudioRecord_enableBuiltInNS(env_, j_audio_record_,
+                                                    enable)
              ? 0
              : -1;
 }
