@@ -16,6 +16,23 @@
       "message": "downstream projects have been updated in cl/576120141",
       "revId": "c82cefe5f4416b8f33b08cf68bf787ace4e13091",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6bd7c51_a0ccd585",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-10-27T08:52:11Z",
+      "side": 1,
+      "message": "@sprang@webrtc.org, could you please take a look?",
+      "revId": "c82cefe5f4416b8f33b08cf68bf787ace4e13091",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
