@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c5a9a69_c852ca2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-10-30T16:55:01Z",
+      "side": 1,
+      "message": "Slice of the https://webrtc-review.googlesource.com/c/src/+/325064\nShould be enough to update some production usage, including both chromium usages",
+      "revId": "bddec2b644b8ee770f6965778abd1f70c040470e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
