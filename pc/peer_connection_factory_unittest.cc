@@ -18,6 +18,7 @@
 #include "api/audio/audio_mixer.h"
 #include "api/audio_codecs/builtin_audio_decoder_factory.h"
 #include "api/audio_codecs/builtin_audio_encoder_factory.h"
+#include "api/create_media_factory.h"
 #include "api/create_peerconnection_factory.h"
 #include "api/data_channel_interface.h"
 #include "api/jsep.h"
@@ -35,7 +36,6 @@
 #include "api/video_codecs/video_encoder_factory_template_libvpx_vp9_adapter.h"
 #include "api/video_codecs/video_encoder_factory_template_open_h264_adapter.h"
 #include "media/base/fake_frame_source.h"
-#include "media/engine/webrtc_media_engine.h"
 #include "modules/audio_device/include/audio_device.h"
 #include "modules/audio_processing/include/audio_processing.h"
 #include "p2p/base/fake_port_allocator.h"
@@ -272,29 +272,23 @@ CreatePeerConnectionFactoryWithRtxDisabled() {
   pcf_dependencies.worker_thread = rtc::Thread::Current();
   pcf_dependencies.network_thread = rtc::Thread::Current();
   pcf_dependencies.task_queue_factory = CreateDefaultTaskQueueFactory();
-  pcf_dependencies.call_factory = CreateCallFactory();
   pcf_dependencies.trials = std::make_unique<webrtc::FieldTrialBasedConfig>();
 
-  cricket::MediaEngineDependencies media_dependencies;
-  media_dependencies.task_queue_factory =
-      pcf_dependencies.task_queue_factory.get();
-  media_dependencies.adm = rtc::scoped_refptr<webrtc::AudioDeviceModule>(
+  pcf_dependencies.adm = rtc::scoped_refptr<webrtc::AudioDeviceModule>(
       FakeAudioCaptureModule::Create());
-  media_dependencies.audio_encoder_factory =
+  pcf_dependencies.audio_encoder_factory =
       webrtc::CreateBuiltinAudioEncoderFactory();
-  media_dependencies.audio_decoder_factory =
+  pcf_dependencies.audio_decoder_factory =
       webrtc::CreateBuiltinAudioDecoderFactory();
-  media_dependencies.video_encoder_factory =
+  pcf_dependencies.video_encoder_factory =
       std::make_unique<VideoEncoderFactoryTemplate<
           LibvpxVp8EncoderTemplateAdapter, LibvpxVp9EncoderTemplateAdapter,
           OpenH264EncoderTemplateAdapter, LibaomAv1EncoderTemplateAdapter>>();
-  media_dependencies.video_decoder_factory =
+  pcf_dependencies.video_decoder_factory =
       std::make_unique<VideoDecoderFactoryTemplate<
           LibvpxVp8DecoderTemplateAdapter, LibvpxVp9DecoderTemplateAdapter,
           OpenH264DecoderTemplateAdapter, Dav1dDecoderTemplateAdapter>>(),
-  media_dependencies.trials = pcf_dependencies.trials.get();
-  pcf_dependencies.media_engine =
-      cricket::CreateMediaEngine(std::move(media_dependencies));
+  pcf_dependencies.media_factory = CreateMediaFactory();
 
   rtc::scoped_refptr<webrtc::ConnectionContext> context =
       ConnectionContext::Create(&pcf_dependencies);
