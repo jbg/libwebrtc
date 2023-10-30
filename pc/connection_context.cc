@@ -78,6 +78,16 @@ std::unique_ptr<SctpTransportFactoryInterface> MaybeCreateSctpFactory(
 // Static
 rtc::scoped_refptr<ConnectionContext> ConnectionContext::Create(
     PeerConnectionFactoryDependencies* dependencies) {
+  if (dependencies->media_factory != nullptr) {
+    RTC_CHECK(dependencies->media_engine == nullptr)
+        << "media_factory replaces media_engine. Do not set media_engine.";
+    RTC_CHECK(dependencies->call_factory == nullptr)
+        << "media_factory replaces call_factory. Do not set call_factory.";
+    dependencies->media_engine =
+        dependencies->media_factory->CreateMediaEngine(*dependencies);
+    dependencies->call_factory = std::move(dependencies->media_factory);
+  }
+
   return rtc::scoped_refptr<ConnectionContext>(
       new ConnectionContext(dependencies));
 }

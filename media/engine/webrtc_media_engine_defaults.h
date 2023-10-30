@@ -17,6 +17,9 @@
 namespace webrtc {
 
 // Sets required but null dependencies with default factories.
+// TODO(bugs.webrtc.org/15574): Deprecate and delete this helper in favor
+// of `FillDefaultMediaDependencies` when users migrate from injecting
+// media_engine to injecting media_factory in PeerConnectionFactoryDependencies.
 RTC_EXPORT void SetMediaEngineDefaults(cricket::MediaEngineDependencies* deps);
 
 }  // namespace webrtc
