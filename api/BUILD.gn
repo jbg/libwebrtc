@@ -35,6 +35,25 @@ rtc_source_set("callfactory_api") {
   ]
 }
 
+rtc_source_set("media_factory") {
+  sources = [ "media_factory.h" ]
+  deps = [ ":callfactory_api" ]
+}
+
+rtc_source_set("create_media_factory") {
+  visibility = [ "*" ]
+  sources = [
+    "create_media_factory.cc",
+    "create_media_factory.h",
+  ]
+  deps = [
+    ":libjingle_peerconnection_api",
+    ":media_factory",
+    "../call",
+    "../media:rtc_audio_video",
+  ]
+}
+
 if (!build_with_chromium) {
   rtc_library("create_peerconnection_factory") {
     visibility = [ "*" ]
@@ -290,6 +309,7 @@ rtc_library("libjingle_peerconnection_api") {
     ":ice_transport_interface",
     ":libjingle_logging_api",
     ":make_ref_counted",
+    ":media_factory",
     ":media_stream_interface",
     ":network_state_predictor_api",
     ":packet_socket_factory",
@@ -1422,6 +1442,7 @@ if (rtc_include_tests) {
       "array_view_unittest.cc",
       "field_trials_unittest.cc",
       "function_view_unittest.cc",
+      "peer_connection_interface_unittest.cc",
       "rtc_error_unittest.cc",
       "rtc_event_log_output_file_unittest.cc",
       "rtp_packet_info_unittest.cc",
@@ -1435,6 +1456,7 @@ if (rtc_include_tests) {
 
     deps = [
       ":array_view",
+      ":create_media_factory",
       ":create_time_controller",
       ":field_trials",
       ":field_trials_view",
@@ -1462,6 +1484,9 @@ if (rtc_include_tests) {
       "../test:fileutils",
       "../test:rtc_expect_death",
       "../test:test_support",
+      "audio_codecs:builtin_audio_decoder_factory",
+      "audio_codecs:builtin_audio_encoder_factory",
+      "task_queue:default_task_queue_factory",
       "task_queue:task_queue_default_factory_unittests",
       "test/pclf:media_configuration",
       "test/video:video_frame_writer",
@@ -1472,6 +1497,8 @@ if (rtc_include_tests) {
       "video:frame_buffer_unittest",
       "video:rtp_video_frame_assembler_unittests",
       "video:video_frame_metadata_unittest",
+      "video_codecs:builtin_video_decoder_factory",
+      "video_codecs:builtin_video_encoder_factory",
     ]
     absl_deps = [
       "//third_party/abseil-cpp/absl/strings",
