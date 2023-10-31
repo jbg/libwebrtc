@@ -14,6 +14,7 @@
 #include <memory>
 #include <utility>
 
+#include "api/connection_environment_builder.h"
 #include "api/task_queue/default_task_queue_factory.h"
 #include "api/test/create_frame_generator.h"
 #include "api/video_codecs/video_decoder_factory_template.h"
@@ -183,11 +184,10 @@ RtpGenerator::RtpGenerator(const RtpGeneratorOptions& options)
               webrtc::Dav1dDecoderTemplateAdapter>>()),
       video_bitrate_allocator_factory_(
           CreateBuiltinVideoBitrateAllocatorFactory()),
-      event_log_(std::make_unique<RtcEventLogNull>()),
-      call_(Call::Create(CallConfig(event_log_.get()))),
+      call_(Call::Create(CallConfig(ConnectionEnvironmentBuilder().Build()))),
       task_queue_(CreateDefaultTaskQueueFactory()) {
-  constexpr int kMinBitrateBps = 30000;    // 30 Kbps
-  constexpr int kMaxBitrateBps = 2500000;  // 2.5 Mbps
+  constexpr int kMinBitrateBps = 30'000;     // 30 Kbps
+  constexpr int kMaxBitrateBps = 2'500'000;  // 2.5 Mbps
 
   int stream_count = 0;
   webrtc::VideoEncoder::EncoderInfo encoder_info;
