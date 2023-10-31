@@ -49,10 +49,12 @@
 #include "rtc_base/strings/string_builder.h"
 #include "rtc_base/system/no_unique_address.h"
 #include "rtc_base/thread_annotations.h"
+#include "rtc_base/time_utils.h"
 #include "rtc_base/trace_event.h"
 #include "system_wrappers/include/metrics.h"
 #include "video/adaptation/video_stream_encoder_resource_manager.h"
 #include "video/alignment_adjuster.h"
+#include "video/capture_to_send_voucher.h"
 #include "video/config/encoder_stream_factory.h"
 #include "video/frame_cadence_adapter.h"
 #include "video/frame_dumping_encoder.h"
@@ -2033,6 +2035,9 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
                out_frame.timestamp());
 
   frame_encode_metadata_writer_.OnEncodeStarted(out_frame);
+
+  CaptureToSendCompleteAnnex::AttachToCurrentVoucher(
+      out_frame.reference_time().value_or(clock_->CurrentTime()));
 
   const int32_t encode_status = encoder_->Encode(out_frame, &next_frame_types_);
   was_encode_called_since_last_initialization_ = true;

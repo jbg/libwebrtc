@@ -12,8 +12,10 @@
 #include "absl/base/attributes.h"
 #include "absl/base/config.h"
 #include "absl/functional/any_invocable.h"
+#include "api/make_ref_counted.h"
 #include "api/units/time_delta.h"
 #include "rtc_base/checks.h"
+#include "rtc_base/synchronization/mutex.h"
 
 #if defined(ABSL_HAVE_THREAD_LOCAL)
 
@@ -22,10 +24,95 @@ namespace {
 
 ABSL_CONST_INIT thread_local TaskQueueBase* current = nullptr;
 
+rtc::FinalRefCountedObject<TaskQueueBase::Voucher>*& CurrentVoucherStorage() {
+  static thread_local rtc::FinalRefCountedObject<TaskQueueBase::Voucher>*
+      storage = nullptr;
+  return storage;
+}
+
 }  // namespace
+
+TaskQueueBase::Voucher::ScopedSetter::ScopedSetter(Ptr voucher)
+    : old_current_(Voucher::Current()) {
+  Voucher::SetCurrent(std::move(voucher));
+}
+
+TaskQueueBase::Voucher::ScopedSetter::~ScopedSetter() {
+  Voucher::SetCurrent(std::move(old_current_));
+}
+
+TaskQueueBase::Voucher::Annex::Id TaskQueueBase::Voucher::Annex::GetNextId() {
+  static std::atomic<TaskQueueBase::Voucher::Annex::Id> current_id = 0;
+  auto id = current_id.fetch_add(1);
+  RTC_CHECK(id < TaskQueueBase::Voucher::kAnnexCapacity);
+  return id;
+}
+
+TaskQueueBase::Voucher::Ptr
+TaskQueueBase::Voucher::CurrentOrCreateForCurrentTask() {
+  auto& storage = CurrentVoucherStorage();
+  TaskQueueBase::Voucher::Ptr result(storage);
+  if (!result) {
+    result = rtc::make_ref_counted<TaskQueueBase::Voucher>();
+    storage = result.get();
+    storage->AddRef();
+  }
+  return result;
+}
+
+TaskQueueBase::Voucher::Ptr TaskQueueBase::Voucher::Current() {
+  auto& storage = CurrentVoucherStorage();
+  TaskQueueBase::Voucher::Ptr result(storage);
+  return result;
+}
+
+TaskQueueBase::Voucher::Voucher()
+    : annex_(TaskQueueBase::Voucher::kAnnexCapacity) {}
+
+TaskQueueBase::Voucher::~Voucher() = default;
+
+void TaskQueueBase::Voucher::SetCurrent(TaskQueueBase::Voucher::Ptr value) {
+  auto& storage = CurrentVoucherStorage();
+  if (value.get() != storage) {
+    if (storage) {
+      storage->Release();
+    }
+    storage = value.release();
+  }
+}
+
+TaskQueueBase::Voucher::Annex* TaskQueueBase::Voucher::GetAnnex(Annex::Id id) {
+  RTC_CHECK(id < kAnnexCapacity);
+  MutexLock lock(&mu_);
+  return annex_[id].get();
+}
+
+void TaskQueueBase::Voucher::SetAnnex(Annex::Id id,
+                                      std::unique_ptr<Annex> annex) {
+  RTC_CHECK(id < kAnnexCapacity);
+  MutexLock lock(&mu_);
+  annex_[id] = std::move(annex);
+}
 
 TaskQueueBase* TaskQueueBase::Current() {
   return current;
+}
+
+void TaskQueueBase::PostTask(absl::AnyInvocable<void() &&> task,
+                             const Location& location) {
+  PostTaskInternal(std::move(task), PostTaskTraits{}, location);
+}
+
+void TaskQueueBase::PostTaskInternal(absl::AnyInvocable<void() &&> task,
+                                     const PostTaskTraits& traits,
+                                     const Location& location) {
+  auto current = Voucher::Current();
+  PostTaskImpl(
+      [task = std::move(task), current = std::move(current)]() mutable {
+        Voucher::ScopedSetter setter(std::move(current));
+        std::move(task)();
+      },
+      traits, location);
 }
 
 TaskQueueBase::CurrentTaskQueueSetter::CurrentTaskQueueSetter(
