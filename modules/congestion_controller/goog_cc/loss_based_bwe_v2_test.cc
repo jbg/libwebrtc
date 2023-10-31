@@ -854,7 +854,7 @@ TEST_F(LossBasedBweV2Test, EnsureIncreaseEvenIfAckedBitrateBound) {
   ASSERT_EQ(result.state, LossBasedState::kIncreasing);
   // The estimate increases by 1kbps.
   EXPECT_EQ(result.bandwidth_estimate,
-            estimate_1 + DataRate::KilobitsPerSec(1));
+            estimate_1 + DataRate::BitsPerSec(1));
 }
 
 // After loss based bwe backs off, the estimate is bounded during the delayed
