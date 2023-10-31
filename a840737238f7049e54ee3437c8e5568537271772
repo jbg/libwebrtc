@@ -51,6 +51,24 @@
       "message": "Is there a design document for this idea?\n\nI get scared whenever I see new basic concepts of unclear applicability introduced in very base foundation classes.",
       "revId": "a840737238f7049e54ee3437c8e5568537271772",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bcf4759_de58c5c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-10-31T09:49:21Z",
+      "side": 1,
+      "message": "It says \"do not land\" at the moment, no need to get frightened (yet) 😊",
+      "parentUuid": "851fe760_c432620f",
+      "revId": "a840737238f7049e54ee3437c8e5568537271772",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
