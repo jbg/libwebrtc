@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8ff20e5_c8c888f4",
+        "filename": "api/create_media_factory.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-10-31T12:19:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7736ef1_82b844eb",
+      "revId": "f8ac75bf75974c724dc47e7f4cc3101732f11432",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "685c77ef_d6cb7c95",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-10-31T10:58:59Z",
       "side": 1,
       "message": "Does this file need to be in api/ at all, given that CreateMediaFactory() doesn\u0027t have to refer to it?",
+      "revId": "f8ac75bf75974c724dc47e7f4cc3101732f11432",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e446299a_ad33df05",
+        "filename": "api/media_factory.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-10-31T12:19:37Z",
+      "side": 1,
+      "message": "after some thoughts redesigned the new api so that MediaFactory declaration doesn\u0027t need to be in the api at all.\n\n(previously with std::unique_ptr\u003cMediaFactory\u003e CreateMedia() api user would need access to MediaFactory destructor. now it can be hidden)",
+      "parentUuid": "685c77ef_d6cb7c95",
       "revId": "f8ac75bf75974c724dc47e7f4cc3101732f11432",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -69,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d810b44_d39b9cba",
+        "filename": "api/media_factory.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-10-31T12:19:37Z",
+      "side": 1,
+      "message": "https://webrtc.googlesource.com/src/+/HEAD/api/README.md\n\"For headers in api/ that need to refer to non-public types, forward declarations are often a lesser evil than including non-public header files.\"\n\nbut now that this header is no longer leaked in the api, I removed most forwared declarations. I kept one and added a comment why I keep it forward declared.\nDoes it look reasonable? if not - I can remove that forward declaration too.",
+      "parentUuid": "f3d8ec04_1fe6e7f8",
+      "revId": "f8ac75bf75974c724dc47e7f4cc3101732f11432",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b703030_189e3470",
@@ -82,6 +136,24 @@
       "writtenOn": "2023-10-31T10:58:59Z",
       "side": 1,
       "message": "It\u0027s possible we don\u0027t need this?\n(But a strict reading of https://webrtc.googlesource.com/src/+/HEAD/g3doc/style-guide.md#forward-declarations says we should include it)",
+      "revId": "f8ac75bf75974c724dc47e7f4cc3101732f11432",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "174ced99_5d812594",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-10-31T12:19:37Z",
+      "side": 1,
+      "message": "possible with a bit more redesign, done.",
+      "parentUuid": "1b703030_189e3470",
       "revId": "f8ac75bf75974c724dc47e7f4cc3101732f11432",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -103,6 +175,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea8b14d9_7dedafa9",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-10-31T12:19:37Z",
+      "side": 1,
+      "message": "Done except the CHECKs - do not see a nice way to move checks too.\n(those checks would be naturally deleted when call_factory and media_engine are removed from the PCF dependencies struct)",
+      "parentUuid": "2aa4f817_c211dd1f",
+      "revId": "f8ac75bf75974c724dc47e7f4cc3101732f11432",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0825394e_c8e166e8",
@@ -116,6 +206,24 @@
       "writtenOn": "2023-10-31T10:58:59Z",
       "side": 1,
       "message": "This line seems strange, in that we move stuff from a field we want to perpetuate into a field we want to get rid of.\n\nConnectionContext::Create() consumes some of its dependencies (lots of moves) - PCF::Create is a bit weird in that some of the dependencies are consumed by the CC constructor and some are consumed by the PCF constructor. But call_factory is not consumed by the PCF constructor.",
+      "revId": "f8ac75bf75974c724dc47e7f4cc3101732f11432",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cea9cb33_d5ef2c84",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-10-31T12:19:37Z",
+      "side": 1,
+      "message": "moved into the constructor, so it looks less strange now.",
+      "parentUuid": "0825394e_c8e166e8",
       "revId": "f8ac75bf75974c724dc47e7f4cc3101732f11432",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
