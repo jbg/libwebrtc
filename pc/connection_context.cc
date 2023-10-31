@@ -17,6 +17,7 @@
 #include "api/transport/field_trial_based_config.h"
 #include "media/base/media_engine.h"
 #include "media/sctp/sctp_transport_factory.h"
+#include "pc/media_factory.h"
 #include "rtc_base/helpers.h"
 #include "rtc_base/internal/default_socket_server.h"
 #include "rtc_base/socket_server.h"
@@ -78,6 +79,16 @@ std::unique_ptr<SctpTransportFactoryInterface> MaybeCreateSctpFactory(
 // Static
 rtc::scoped_refptr<ConnectionContext> ConnectionContext::Create(
     PeerConnectionFactoryDependencies* dependencies) {
+  if (dependencies->media_factory != nullptr) {
+    RTC_CHECK(dependencies->media_engine == nullptr)
+        << "media_factory replaces media_engine. Do not set media_engine.";
+    RTC_CHECK(dependencies->call_factory == nullptr)
+        << "media_factory replaces call_factory. Do not set call_factory.";
+    dependencies->media_engine =
+        dependencies->media_factory->CreateMediaEngine(*dependencies);
+    dependencies->call_factory = std::move(dependencies->media_factory);
+  }
+
   return rtc::scoped_refptr<ConnectionContext>(
       new ConnectionContext(dependencies));
 }
