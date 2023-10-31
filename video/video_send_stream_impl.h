@@ -19,6 +19,7 @@
 #include <vector>
 
 #include "absl/types/optional.h"
+#include "api/connection_environment.h"
 #include "api/field_trials_view.h"
 #include "api/task_queue/pending_task_safety_flag.h"
 #include "api/task_queue/task_queue_base.h"
@@ -64,7 +65,7 @@ struct PacingConfig {
 class VideoSendStreamImpl : public webrtc::BitrateAllocatorObserver,
                             public VideoStreamEncoderInterface::EncoderSink {
  public:
-  VideoSendStreamImpl(Clock* clock,
+  VideoSendStreamImpl(const ConnectionEnvironment& env,
                       SendStatisticsProxy* stats_proxy,
                       RtpTransportControllerSendInterface* transport,
                       BitrateAllocatorInterface* bitrate_allocator,
@@ -73,8 +74,7 @@ class VideoSendStreamImpl : public webrtc::BitrateAllocatorObserver,
                       int initial_encoder_max_bitrate,
                       double initial_encoder_bitrate_priority,
                       VideoEncoderConfig::ContentType content_type,
-                      RtpVideoSenderInterface* rtp_video_sender,
-                      const FieldTrialsView& field_trials);
+                      RtpVideoSenderInterface* rtp_video_sender);
   ~VideoSendStreamImpl() override;
 
   void DeliverRtcp(const uint8_t* packet, size_t length);
@@ -130,7 +130,7 @@ class VideoSendStreamImpl : public webrtc::BitrateAllocatorObserver,
       RTC_RUN_ON(thread_checker_);
 
   RTC_NO_UNIQUE_ADDRESS SequenceChecker thread_checker_;
-  Clock* const clock_;
+  const ConnectionEnvironment env_;
   const bool has_alr_probing_;
   const PacingConfig pacing_config_;
 
