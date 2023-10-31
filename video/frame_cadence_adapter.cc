@@ -249,7 +249,7 @@ class FrameCadenceAdapterImpl : public FrameCadenceAdapterInterface {
       const VideoTrackSourceConstraints& constraints) override;
 
  private:
-  // Called from OnFrame in zero-hertz mode.
+  // Called from OnFrame in both pass-through and zero-hertz mode.
   void OnFrameOnMainQueue(Timestamp post_time,
                           int frames_scheduled_for_processing,
                           const VideoFrame& frame) RTC_RUN_ON(queue_);
@@ -657,14 +657,21 @@ void FrameCadenceAdapterImpl::OnFrame(const VideoFrame& frame) {
   // Local time in webrtc time base.
   Timestamp post_time = clock_->CurrentTime();
   frames_scheduled_for_processing_.fetch_add(1, std::memory_order_relaxed);
-  TRACE_EVENT_ASYNC_BEGIN0(TRACE_DISABLED_BY_DEFAULT("webrtc"),
-                           "OnFrameToEncode", frame.video_frame_buffer().get());
-  TRACE_EVENT_ASYNC_BEGIN0(TRACE_DISABLED_BY_DEFAULT("webrtc"),
-                           "OnFrameToQueue", frame.video_frame_buffer().get());
+  if (zero_hertz_adapter_.has_value()) {
+    TRACE_EVENT_ASYNC_BEGIN0(TRACE_DISABLED_BY_DEFAULT("webrtc"),
+                             "OnFrameToEncode",
+                             frame.video_frame_buffer().get());
+    TRACE_EVENT_ASYNC_BEGIN0(TRACE_DISABLED_BY_DEFAULT("webrtc"),
+                             "OnFrameToQueue",
+                             frame.video_frame_buffer().get());
+  }
   queue_->PostTask(SafeTask(safety_.flag(), [this, post_time, frame] {
     RTC_DCHECK_RUN_ON(queue_);
-    TRACE_EVENT_ASYNC_END0(TRACE_DISABLED_BY_DEFAULT("webrtc"),
-                           "OnFrameToQueue", frame.video_frame_buffer().get());
+    if (zero_hertz_adapter_.has_value()) {
+      TRACE_EVENT_ASYNC_END0(TRACE_DISABLED_BY_DEFAULT("webrtc"),
+                             "OnFrameToQueue",
+                             frame.video_frame_buffer().get());
+    }
     if (zero_hertz_adapter_created_timestamp_.has_value()) {
       TimeDelta time_until_first_frame =
           clock_->CurrentTime() - *zero_hertz_adapter_created_timestamp_;
