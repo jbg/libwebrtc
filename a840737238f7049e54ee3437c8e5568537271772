@@ -16,6 +16,24 @@
       "message": "Hi Mirko, what would your advise be given the dependency issues in this CL?\n\n** Presubmit ERRORS: 1 **\nYou added one or more #includes that violate checkdeps rules.\nCheck that the DEPS files in these locations contain valid rules.\nSee https://cs.chromium.org/chromium/src/buildtools/checkdeps/ for more details about checkdeps.\n  api/task_queue/task_queue_base.h\n      Illegal include: \"rtc_base/ref_counted_object.h\"\n    Because of \"-rtc_base\" from api\u0027s include_rules.\n  api/task_queue/task_queue_base.h\n      Illegal include: \"rtc_base/synchronization/mutex.h\"\n    Because of \"-rtc_base\" from api\u0027s include_rules.",
       "revId": "a840737238f7049e54ee3437c8e5568537271772",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d5df57c_ebf8b21f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-10-31T09:10:32Z",
+      "side": 1,
+      "message": "You need to do something like this https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/api/DEPS;l\u003d245-247;drc\u003d3e6931b183aca64b6eb54d08528a15cc7921b720.\n\nWe have this limit to avoid to leak headers from API headers.",
+      "parentUuid": "3dacdfe2_02078056",
+      "revId": "a840737238f7049e54ee3437c8e5568537271772",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
