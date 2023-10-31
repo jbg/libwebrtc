@@ -72,10 +72,7 @@ class PassthroughAdapterMode : public AdapterMode {
   // Adapter overrides.
   void OnFrame(Timestamp post_time,
                int frames_scheduled_for_processing,
-               const VideoFrame& frame) override {
-    RTC_DCHECK_RUN_ON(&sequence_checker_);
-    callback_->OnFrame(post_time, frames_scheduled_for_processing, frame);
-  }
+               const VideoFrame& frame) override;
 
   absl::optional<uint32_t> GetInputFrameRateFps() override {
     RTC_DCHECK_RUN_ON(&sequence_checker_);
@@ -302,6 +299,15 @@ class FrameCadenceAdapterImpl : public FrameCadenceAdapterInterface {
   ScopedTaskSafetyDetached safety_;
 };
 
+// Pass-through adapter overrides AdapterMode::OnFrame.
+void PassthroughAdapterMode::OnFrame(Timestamp post_time,
+                                     int frames_scheduled_for_processing,
+                                     const VideoFrame& frame) {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
+  callback_->OnFrame(post_time, frames_scheduled_for_processing, frame);
+}
+
+// Zero-hertz input adapter implementation.
 ZeroHertzAdapterMode::ZeroHertzAdapterMode(
     TaskQueueBase* queue,
     Clock* clock,
