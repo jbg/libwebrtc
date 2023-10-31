@@ -175,6 +175,24 @@ rtc_library("video") {
   }
 }
 
+rtc_library("capture_to_send_annex") {
+  visibility = [ "*" ]
+
+  sources = [
+    "capture_to_send_annex.cc",
+    "capture_to_send_annex.h",
+  ]
+
+  deps = [
+    "../api/task_queue",
+    "../api/units:timestamp",
+    "../rtc_base:event_tracer",
+    "../rtc_base:voucher",
+    "../system_wrappers",
+    "../system_wrappers:metrics",
+  ]
+}
+
 rtc_library("frame_dumping_decoder") {
   visibility = [ "*" ]
 
@@ -399,6 +417,7 @@ rtc_library("video_stream_encoder_impl") {
   ]
 
   deps = [
+    ":capture_to_send_annex",
     ":frame_cadence_adapter",
     ":frame_dumping_encoder",
     ":video_stream_encoder_interface",
