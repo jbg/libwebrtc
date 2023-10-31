@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8614086_c780bd62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-31T10:58:59Z",
+      "side": 1,
+      "message": "Looks good, but a bit of commentary needed for later code readers.",
+      "revId": "f8ac75bf75974c724dc47e7f4cc3101732f11432",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7736ef1_82b844eb",
+        "filename": "api/create_media_factory.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-31T10:58:59Z",
+      "side": 1,
+      "message": "Can you add the function comment to explain what this function does and when to use it (or not use it)?",
+      "revId": "f8ac75bf75974c724dc47e7f4cc3101732f11432",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "685c77ef_d6cb7c95",
+        "filename": "api/media_factory.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-31T10:58:59Z",
+      "side": 1,
+      "message": "Does this file need to be in api/ at all, given that CreateMediaFactory() doesn\u0027t have to refer to it?",
+      "revId": "f8ac75bf75974c724dc47e7f4cc3101732f11432",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3d8ec04_1fe6e7f8",
+        "filename": "api/media_factory.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-31T10:58:59Z",
+      "side": 1,
+      "message": "https://webrtc.googlesource.com/src/+/HEAD/g3doc/style-guide.md#forward-declarations says we should avoid forward declarations when possible. Add a comment saying why it is good to use them here?",
+      "revId": "f8ac75bf75974c724dc47e7f4cc3101732f11432",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b703030_189e3470",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-31T10:58:59Z",
+      "side": 1,
+      "message": "It\u0027s possible we don\u0027t need this?\n(But a strict reading of https://webrtc.googlesource.com/src/+/HEAD/g3doc/style-guide.md#forward-declarations says we should include it)",
+      "revId": "f8ac75bf75974c724dc47e7f4cc3101732f11432",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2aa4f817_c211dd1f",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-31T10:58:59Z",
+      "side": 1,
+      "message": "Can you move this stuff into the constructor?",
+      "revId": "f8ac75bf75974c724dc47e7f4cc3101732f11432",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0825394e_c8e166e8",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-31T10:58:59Z",
+      "side": 1,
+      "message": "This line seems strange, in that we move stuff from a field we want to perpetuate into a field we want to get rid of.\n\nConnectionContext::Create() consumes some of its dependencies (lots of moves) - PCF::Create is a bit weird in that some of the dependencies are consumed by the CC constructor and some are consumed by the PCF constructor. But call_factory is not consumed by the PCF constructor.",
+      "revId": "f8ac75bf75974c724dc47e7f4cc3101732f11432",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
