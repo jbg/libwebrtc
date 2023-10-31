@@ -13,9 +13,11 @@
 #include <memory>
 #include <utility>
 
+#include "absl/container/inlined_vector.h"
 #include "absl/functional/any_invocable.h"
 #include "api/location.h"
-#include "api/units/time_delta.h"
+#include "rtc_base/ref_counted_object.h"
+#include "rtc_base/synchronization/mutex.h"
 #include "rtc_base/system/rtc_export.h"
 #include "rtc_base/thread_annotations.h"
 
@@ -35,6 +37,46 @@ class RTC_LOCKABLE RTC_EXPORT TaskQueueBase {
     // limited by OS timer precision. See PostDelayedHighPrecisionTask() for
     // more information.
     kHigh,
+  };
+
+  class Voucher {
+   public:
+    static constexpr size_t kAnnexCapacity = 4;
+
+    using Ptr = rtc::scoped_refptr<rtc::FinalRefCountedObject<Voucher>>;
+
+    class Annex {
+     public:
+      using Id = size_t;
+      static Annex::Id GetNextId();
+
+      virtual ~Annex() = default;
+    };
+
+    class ScopedSetter {
+     public:
+      explicit ScopedSetter(Ptr voucher);
+      ~ScopedSetter();
+
+     private:
+      Ptr old_current_;
+    };
+
+    Voucher();
+    ~Voucher();
+
+    static Ptr Current();
+    static Ptr CurrentOrCreateForCurrentTask();
+    Annex* GetAnnex(Annex::Id id);
+    void SetAnnex(Annex::Id id, std::unique_ptr<Annex> annex);
+
+   private:
+    friend class ScopedSetter;
+    static void SetCurrent(Ptr ptr);
+
+    Mutex mu_;
+    absl::InlinedVector<std::unique_ptr<Annex>, kAnnexCapacity> annex_
+        RTC_GUARDED_BY(&mu_);
   };
 
   // Starts destruction of the task queue.
@@ -64,9 +106,7 @@ class RTC_LOCKABLE RTC_EXPORT TaskQueueBase {
   //
   // May be called on any thread or task queue, including this task queue.
   void PostTask(absl::AnyInvocable<void() &&> task,
-                const Location& location = Location::Current()) {
-    PostTaskImpl(std::move(task), PostTaskTraits{}, location);
-  }
+                const Location& location = Location::Current());
 
   // Prefer PostDelayedTask() over PostDelayedHighPrecisionTask() whenever
   // possible.
@@ -187,6 +227,11 @@ class RTC_LOCKABLE RTC_EXPORT TaskQueueBase {
   // Users of the TaskQueue should call Delete instead of directly deleting
   // this object.
   virtual ~TaskQueueBase() = default;
+
+ private:
+  void PostTaskInternal(absl::AnyInvocable<void() &&> task,
+                        const PostTaskTraits& traits,
+                        const Location& location);
 };
 
 struct TaskQueueDeleter {
