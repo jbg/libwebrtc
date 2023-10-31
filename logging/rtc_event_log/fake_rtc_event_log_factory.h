@@ -13,6 +13,7 @@
 
 #include <memory>
 
+#include "api/connection_environment.h"
 #include "api/rtc_event_log/rtc_event_log_factory_interface.h"
 #include "logging/rtc_event_log/fake_rtc_event_log.h"
 
@@ -24,10 +25,7 @@ class FakeRtcEventLogFactory : public RtcEventLogFactoryInterface {
   ~FakeRtcEventLogFactory() override = default;
 
   std::unique_ptr<RtcEventLog> Create(
-      RtcEventLog::EncodingType encoding_type) const override;
-
-  std::unique_ptr<RtcEventLog> CreateRtcEventLog(
-      RtcEventLog::EncodingType encoding_type) override;
+      const ConnectionEnvironment& env) const override;
 
   webrtc::FakeRtcEventLog* last_log_created() { return last_log_created_; }
 

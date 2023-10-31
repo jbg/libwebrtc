@@ -13,6 +13,7 @@
 
 #include <memory>
 
+#include "api/connection_environment.h"
 #include "api/rtc_event_log/rtc_event_log.h"
 
 namespace webrtc {
@@ -25,9 +26,7 @@ class RtcEventLogFactoryInterface {
   virtual ~RtcEventLogFactoryInterface() = default;
 
   virtual std::unique_ptr<RtcEventLog> Create(
-      RtcEventLog::EncodingType encoding_type) const = 0;
-  [[deprecated]] virtual std::unique_ptr<RtcEventLog> CreateRtcEventLog(
-      RtcEventLog::EncodingType encoding_type) = 0;
+      const ConnectionEnvironment& env) const = 0;
 };
 
 }  // namespace webrtc

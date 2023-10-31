@@ -14,6 +14,7 @@
 #include <utility>
 #include <vector>
 
+#include "api/connection_environment_builder.h"
 #include "api/transport/field_trial_based_config.h"
 #include "media/base/media_engine.h"
 #include "media/sctp/sctp_transport_factory.h"
@@ -92,7 +93,11 @@ rtc::scoped_refptr<ConnectionContext> ConnectionContext::Create(
 
 ConnectionContext::ConnectionContext(
     PeerConnectionFactoryDependencies* dependencies)
-    : network_thread_(MaybeStartNetworkThread(dependencies->network_thread,
+    : env_(ConnectionEnvironmentBuilder()
+               .With(std::move(dependencies->task_queue_factory))
+               .With(std::move(dependencies->trials))
+               .Build()),
+      network_thread_(MaybeStartNetworkThread(dependencies->network_thread,
                                               owned_socket_factory_,
                                               owned_network_thread_)),
       worker_thread_(dependencies->worker_thread,
@@ -104,11 +109,10 @@ ConnectionContext::ConnectionContext(
                      }),
       signaling_thread_(MaybeWrapThread(dependencies->signaling_thread,
                                         wraps_current_thread_)),
-      trials_(dependencies->trials ? std::move(dependencies->trials)
-                                   : std::make_unique<FieldTrialBasedConfig>()),
       media_engine_(
           dependencies->media_factory != nullptr
-              ? dependencies->media_factory->CreateMediaEngine(*dependencies)
+              ? dependencies->media_factory->CreateMediaEngine(env_,
+                                                               *dependencies)
               : std::move(dependencies->media_engine)),
       network_monitor_factory_(
           std::move(dependencies->network_monitor_factory)),
@@ -120,7 +124,7 @@ ConnectionContext::ConnectionContext(
       sctp_factory_(
           MaybeCreateSctpFactory(std::move(dependencies->sctp_factory),
                                  network_thread(),
-                                 *trials_.get())),
+                                 env_.field_trials())),
       use_rtx_(true) {
   RTC_DCHECK_RUN_ON(signaling_thread_);
   RTC_DCHECK(!(default_network_manager_ && network_monitor_factory_))
@@ -163,7 +167,7 @@ ConnectionContext::ConnectionContext(
     // If network_monitor_factory_ is non-null, it will be used to create a
     // network monitor while on the network thread.
     default_network_manager_ = std::make_unique<rtc::BasicNetworkManager>(
-        network_monitor_factory_.get(), socket_factory, &field_trials());
+        network_monitor_factory_.get(), socket_factory, &env_.field_trials());
   }
   if (!default_socket_factory_) {
     default_socket_factory_ =

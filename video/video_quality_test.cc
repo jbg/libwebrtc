@@ -22,6 +22,7 @@
 #include <string>
 #include <vector>
 
+#include "api/connection_environment_builder.h"
 #include "api/fec_controller_override.h"
 #include "api/rtc_event_log_output_file.h"
 #include "api/task_queue/default_task_queue_factory.h"
@@ -375,7 +376,6 @@ VideoQualityTest::VideoQualityTest(
     std::unique_ptr<InjectionComponents> injection_components)
     : clock_(Clock::GetRealTimeClock()),
       task_queue_factory_(CreateDefaultTaskQueueFactory()),
-      rtc_event_log_factory_(task_queue_factory_.get()),
       video_decoder_factory_([this](const SdpVideoFormat& format) {
         return this->CreateVideoDecoder(format);
       }),
@@ -1221,10 +1221,10 @@ void VideoQualityTest::RunWithAnalyzer(const Params& params) {
   }
 
   if (!params.logging.rtc_event_log_name.empty()) {
-    send_event_log_ = rtc_event_log_factory_.CreateRtcEventLog(
-        RtcEventLog::EncodingType::NewFormat);
-    recv_event_log_ = rtc_event_log_factory_.CreateRtcEventLog(
-        RtcEventLog::EncodingType::NewFormat);
+    ConnectionEnvironment env =
+        ConnectionEnvironmentBuilder().With(task_queue_factory_.get()).Build();
+    send_event_log_ = rtc_event_log_factory_.Create(env);
+    recv_event_log_ = rtc_event_log_factory_.Create(env);
     std::unique_ptr<RtcEventLogOutputFile> send_output(
         std::make_unique<RtcEventLogOutputFile>(
             params.logging.rtc_event_log_name + "_send",
@@ -1245,8 +1245,10 @@ void VideoQualityTest::RunWithAnalyzer(const Params& params) {
   }
 
   SendTask(task_queue(), [this, &params, &send_transport, &recv_transport]() {
-    CallConfig send_call_config(send_event_log_.get());
-    CallConfig recv_call_config(recv_event_log_.get());
+    CallConfig send_call_config(
+        ConnectionEnvironmentBuilder().With(send_event_log_.get()).Build());
+    CallConfig recv_call_config(
+        ConnectionEnvironmentBuilder().With(recv_event_log_.get()).Build());
     send_call_config.bitrate_config = params.call.call_bitrate_config;
     recv_call_config.bitrate_config = params.call.call_bitrate_config;
     if (params_.audio.enabled)
@@ -1444,10 +1446,10 @@ void VideoQualityTest::RunWithRenderers(const Params& params) {
   std::vector<std::unique_ptr<test::VideoRenderer>> loopback_renderers;
 
   if (!params.logging.rtc_event_log_name.empty()) {
-    send_event_log_ = rtc_event_log_factory_.CreateRtcEventLog(
-        RtcEventLog::EncodingType::NewFormat);
-    recv_event_log_ = rtc_event_log_factory_.CreateRtcEventLog(
-        RtcEventLog::EncodingType::NewFormat);
+    ConnectionEnvironment env =
+        ConnectionEnvironmentBuilder().With(task_queue_factory_.get()).Build();
+    send_event_log_ = rtc_event_log_factory_.Create(env);
+    recv_event_log_ = rtc_event_log_factory_.Create(env);
     std::unique_ptr<RtcEventLogOutputFile> send_output(
         std::make_unique<RtcEventLogOutputFile>(
             params.logging.rtc_event_log_name + "_send",
@@ -1473,9 +1475,11 @@ void VideoQualityTest::RunWithRenderers(const Params& params) {
 
     // TODO(ivica): Remove bitrate_config and use the default CallConfig(), to
     // match the full stack tests.
-    CallConfig send_call_config(send_event_log_.get());
+    CallConfig send_call_config(
+        ConnectionEnvironmentBuilder().With(send_event_log_.get()).Build());
     send_call_config.bitrate_config = params_.call.call_bitrate_config;
-    CallConfig recv_call_config(recv_event_log_.get());
+    CallConfig recv_call_config(
+        ConnectionEnvironmentBuilder().With(recv_event_log_.get()).Build());
 
     if (params_.audio.enabled)
       InitializeAudioDevice(&send_call_config, &recv_call_config,
