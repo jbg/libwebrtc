@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a54d6a20_7b02902a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-31T23:27:59Z",
+      "side": 1,
+      "message": "Where is the metric collected?",
+      "revId": "ce1ee19ed9b2a000f7540827e6b8e4f1509d4283",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b405fb89_6c976ca4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-31T23:27:59Z",
+      "side": 1,
+      "message": "Makes it hard to track what you\u0027re trying to achieve...",
+      "revId": "ce1ee19ed9b2a000f7540827e6b8e4f1509d4283",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e51a5857_6597d1e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-31T23:27:59Z",
+      "side": 1,
+      "message": "Is there any significant overhead to a) checking whether or not a voucher is attached (has to be done on all task creations, I think), or b) processing a voucher (has to be done multiple times for each frame, if I read this correctly)?\n\nI see a mutexlock in there - is there a chance that contention for the lock will happen?",
+      "revId": "ce1ee19ed9b2a000f7540827e6b8e4f1509d4283",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efa0e9f0_ad81d16e",
+        "filename": "rtc_base/voucher.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-31T23:27:59Z",
+      "side": 1,
+      "message": "nit: an instates -\u003e and instantiates",
+      "revId": "ce1ee19ed9b2a000f7540827e6b8e4f1509d4283",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e166031_8b7a535e",
+        "filename": "video/capture_to_send_annex.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-10-31T23:27:59Z",
+      "side": 1,
+      "message": "Would like to call the class MeasureCaptureToSendTimeAnnex",
+      "revId": "ce1ee19ed9b2a000f7540827e6b8e4f1509d4283",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
