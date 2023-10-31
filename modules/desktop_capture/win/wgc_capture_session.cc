@@ -75,7 +75,8 @@ enum class GetFrameResult {
   kGetContentSizeFailed = 9,
   kResizeMappedTextureFailed = 10,
   kRecreateFramePoolFailed = 11,
-  kMaxValue = kRecreateFramePoolFailed
+  kTryGetNexFrameFailed = 12,
+  kMaxValue = kTryGetNexFrameFailed
 };
 
 void RecordStartCaptureResult(StartCaptureResult error) {
@@ -332,10 +333,16 @@ HRESULT WgcCaptureSession::ProcessFrame() {
   }
 
   if (!capture_frame) {
-    // Avoid logging errors until at least one valid frame has been captured.
-    if (queue_.current_frame()) {
-      RTC_DLOG(LS_WARNING) << "Frame pool was empty => kFrameDropped.";
+    if (!queue_.current_frame()) {
+      // We failed to get a new frame from the frame pool and the queue is now
+      // empty.
+      RTC_DLOG(LS_ERROR) << "Frame pool was empty => kFrameDropped.";
       RecordGetFrameResult(GetFrameResult::kFrameDropped);
+    } else {
+      // We failed to get a new frame from the frame pool but there is still
+      // one old frame available in the queue.
+      RTC_DLOG(LS_WARNING) << "Frame pool was empty => kTryGetNexFrameFailed.";
+      RecordGetFrameResult(GetFrameResult::kTryGetNexFrameFailed);
     }
     return E_FAIL;
   }
