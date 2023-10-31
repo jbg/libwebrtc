@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6da8d0b9_e4d123c5",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-10-31T13:31:31Z",
+      "side": 1,
+      "message": "Should be atomic\u003cbool\u003e I think.",
+      "range": {
+        "startLine": 279,
+        "startChar": 7,
+        "endLine": 279,
+        "endChar": 18
+      },
+      "revId": "55a8dd80cd3925cef76180bec0c78a8560403e67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54f0bfec_40fd8b56",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-10-31T13:31:31Z",
+      "side": 1,
+      "message": ".load(std::memory_order_relaxed)",
+      "range": {
+        "startLine": 661,
+        "startChar": 6,
+        "endLine": 661,
+        "endChar": 35
+      },
+      "revId": "55a8dd80cd3925cef76180bec0c78a8560403e67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d591e71_0c6d96ef",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-10-31T13:31:31Z",
+      "side": 1,
+      "message": ".load(std::memory_order_relaxed)",
+      "range": {
+        "startLine": 671,
+        "startChar": 8,
+        "endLine": 671,
+        "endChar": 37
+      },
+      "revId": "55a8dd80cd3925cef76180bec0c78a8560403e67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c0f72f1_07d72bf6",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 741,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-10-31T13:31:31Z",
+      "side": 1,
+      "message": ".store(true, std::memory_order_relaxed)",
+      "range": {
+        "startLine": 741,
+        "startChar": 6,
+        "endLine": 741,
+        "endChar": 35
+      },
+      "revId": "55a8dd80cd3925cef76180bec0c78a8560403e67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7e34c70_f8c7d8f6",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-10-31T13:31:31Z",
+      "side": 1,
+      "message": ".store(false, std::memory_order_relaxed)",
+      "range": {
+        "startLine": 750,
+        "startChar": 6,
+        "endLine": 750,
+        "endChar": 35
+      },
+      "revId": "55a8dd80cd3925cef76180bec0c78a8560403e67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
