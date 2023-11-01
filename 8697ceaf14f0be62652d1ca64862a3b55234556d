@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4c4e951_ce7b02ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-11-01T22:08:42Z",
+      "side": 1,
+      "message": "A few lines (this, the following, line 19 and 23 it looks like) should be broken up to max 72 characters per line.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 121
+      },
+      "revId": "8697ceaf14f0be62652d1ca64862a3b55234556d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4e0e3ca_34703bd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-11-01T22:08:42Z",
+      "side": 1,
+      "message": "LGTM with enum renamed.",
+      "revId": "8697ceaf14f0be62652d1ca64862a3b55234556d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8ae5697_616470cb",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-11-01T22:08:42Z",
+      "side": 1,
+      "message": "Dropped a \"T\" from the end of \"Next\" everywhere this was referenced (including commit description) it looks like.",
+      "range": {
+        "startLine": 78,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 23
+      },
+      "revId": "8697ceaf14f0be62652d1ca64862a3b55234556d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52b69672_11d35fc7",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-11-01T22:08:42Z",
+      "side": 1,
+      "message": "Looks like we had last changed this in: https://webrtc-review.googlesource.com/c/src/+/293582\n\nI think probably because we just felt it wasn\u0027t needed with our own frame? Note that this will increase memory usage.",
+      "range": {
+        "startLine": 60,
+        "startChar": 2,
+        "endLine": 60,
+        "endChar": 39
+      },
+      "revId": "8697ceaf14f0be62652d1ca64862a3b55234556d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
