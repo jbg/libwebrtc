@@ -159,6 +159,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67463be3_9f27cee6",
+        "filename": "rtc_base/voucher.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-11-01T12:02:51Z",
+      "side": 1,
+      "message": "Actually.. it is 😊",
+      "parentUuid": "1e7e1c74_6462c3b7",
+      "revId": "ce1ee19ed9b2a000f7540827e6b8e4f1509d4283",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e166031_8b7a535e",

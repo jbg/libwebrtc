@@ -16,6 +16,24 @@
       "message": "Apart from the remaining spelling error, looks good now!\n\nHope you\u0027re right on overhead + contention. Can\u0027t see why you should be wrong... the trace shows the annex jumping between half a dozen threads, so obviously it\u0027s not all local storage when in use...",
       "revId": "0283b837197e9e80b661e0b8a0dfd60e97a56285",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35c931f1_f7e2f4e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-11-01T12:02:51Z",
+      "side": 1,
+      "message": "In the trace at https://screenshot.googleplex.com/BYStjGUSrH5Et4u (internal) the Voucher is given birth in the invocation on WebRTC_W_and_N just before the encode, ref bumped \u0026 dropped in the call over to Encode, ref bumped \u0026 dropped in the call back to W_and_N, and the reference kept once for every packet sent in the batch to the network process. The voucher finally gets destroyed at the end of the network Mojo, at which point the histogram data is submitted.",
+      "parentUuid": "0e26d3b4_4f8f6cbf",
+      "revId": "0283b837197e9e80b661e0b8a0dfd60e97a56285",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
