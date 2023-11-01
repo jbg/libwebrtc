@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46988b71_4adfd00d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-11-01T10:03:06Z",
+      "side": 1,
+      "message": "The UMA WebRTC.Video.CaptureToSendTimeMs. Updated CL description.",
+      "parentUuid": "a54d6a20_7b02902a",
+      "revId": "ce1ee19ed9b2a000f7540827e6b8e4f1509d4283",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b405fb89_6c976ca4",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-10-31T23:27:59Z",
       "side": 1,
       "message": "Makes it hard to track what you\u0027re trying to achieve...",
+      "revId": "ce1ee19ed9b2a000f7540827e6b8e4f1509d4283",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "618b3d8b_ec39e48c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-11-01T10:03:06Z",
+      "side": 1,
+      "message": "Tried to phrase it differently.",
+      "parentUuid": "b405fb89_6c976ca4",
       "revId": "ce1ee19ed9b2a000f7540827e6b8e4f1509d4283",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -52,6 +88,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3db3e018_bdc05b00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-11-01T10:03:06Z",
+      "side": 1,
+      "message": "There\u0027s not a lot of overhead, it\u0027s a thread-local storage lookup (see voucher.cc), bumping a refcount at PostTask time, and Releasing it on task completion. I think the processing should be negligible compared to task processing.\n\nThe mutexlock has zero chance of contending at the moment (the attachment is added in isolation) but could theoretically contend if a voucher is current in \u003e1 thread and attachments are added/accessed from several threads at once.",
+      "parentUuid": "e51a5857_6597d1e1",
+      "revId": "ce1ee19ed9b2a000f7540827e6b8e4f1509d4283",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efa0e9f0_ad81d16e",
@@ -69,6 +123,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec9e76fe_759afac7",
+        "filename": "rtc_base/voucher.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-11-01T10:03:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efa0e9f0_ad81d16e",
+      "revId": "ce1ee19ed9b2a000f7540827e6b8e4f1509d4283",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e166031_8b7a535e",
@@ -82,6 +154,24 @@
       "writtenOn": "2023-10-31T23:27:59Z",
       "side": 1,
       "message": "Would like to call the class MeasureCaptureToSendTimeAnnex",
+      "revId": "ce1ee19ed9b2a000f7540827e6b8e4f1509d4283",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f2b6814_125a43cc",
+        "filename": "video/capture_to_send_annex.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-11-01T10:03:06Z",
+      "side": 1,
+      "message": "I\u0027ve renamed it CaptureProcessingDurationMeasurement and placed it into the VideoStreamEncoder file. I realized no other code needs to know. All good?",
+      "parentUuid": "3e166031_8b7a535e",
       "revId": "ce1ee19ed9b2a000f7540827e6b8e4f1509d4283",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
