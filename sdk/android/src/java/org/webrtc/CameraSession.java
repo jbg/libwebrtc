@@ -12,8 +12,11 @@ package org.webrtc;
 
 import android.content.Context;
 import android.graphics.Matrix;
-import android.view.WindowManager;
+import android.hardware.display.DisplayManager;
+import android.os.Build;
+import android.view.Display;
 import android.view.Surface;
+import android.view.WindowManager;
 
 interface CameraSession {
   enum FailureType { ERROR, DISCONNECTED }
@@ -40,8 +43,20 @@ interface CameraSession {
   void stop();
 
   static int getDeviceOrientation(Context context) {
-    final WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-    switch (wm.getDefaultDisplay().getRotation()) {
+    int rotation;
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+      DisplayManager displayManager =
+          (DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE);
+      Display display = displayManager.getDisplay(Display.DEFAULT_DISPLAY);
+      Context contextWindowContext =
+          context.createWindowContext(display, WindowManager.LayoutParams.TYPE_APPLICATION, null);
+      rotation = contextWindowContext.getDisplay().getRotation();
+    } else {
+      WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+      rotation = wm.getDefaultDisplay().getRotation();
+    }
+
+    switch (rotation) {
       case Surface.ROTATION_90:
         return 90;
       case Surface.ROTATION_180:
