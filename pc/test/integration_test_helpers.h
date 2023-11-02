@@ -789,9 +789,11 @@ class PeerConnectionIntegrationWrapper : public webrtc::PeerConnectionObserver,
     webrtc::SetMediaEngineDefaults(&media_deps);
 
     if (reset_encoder_factory) {
+      RTC_CHECK_NOTREACHED();
       media_deps.video_encoder_factory.reset();
     }
     if (reset_decoder_factory) {
+      RTC_CHECK_NOTREACHED();
       media_deps.video_decoder_factory.reset();
     }
 
