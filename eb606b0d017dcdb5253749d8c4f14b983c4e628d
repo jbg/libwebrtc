@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd88f73a_5f81aa31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-11-02T07:45:28Z",
+      "side": 1,
+      "message": "Avoiding a large number of SSRCs that we \"know\" are no longer used. This impacts memory and probably also performance for the linear list lookup during each unprotect (it looks like 1% but I am not sure how realistic my benchmark is).\n\nI don\u0027t expect the remote side to explicitly remove the SSRCs from the SDP and then keep on reusing them (but guess how I found this...) with the old ROC. That would be SSRC reuse and bad for the reasons described in https://www.rfc-editor.org/rfc/rfc3711#section-9.1\nBut this is guarded by a field trial so I can ask folks to test and then turn the field trial into a killswitch.",
+      "parentUuid": "fd2b9456_910fd35f",
+      "revId": "eb606b0d017dcdb5253749d8c4f14b983c4e628d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa1013ef_f5c0f921",
         "filename": "pc/srtp_session.cc",
         "patchSetId": 10
@@ -31,6 +49,24 @@
       "writtenOn": "2023-11-02T05:18:08Z",
       "side": 1,
       "message": "ntohl converts from network to host order, FWIW...",
+      "revId": "eb606b0d017dcdb5253749d8c4f14b983c4e628d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef900062_815df69b",
+        "filename": "pc/srtp_session.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-11-02T07:45:28Z",
+      "side": 1,
+      "message": "Duh, thank you for catching this!",
+      "parentUuid": "fa1013ef_f5c0f921",
       "revId": "eb606b0d017dcdb5253749d8c4f14b983c4e628d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -48,6 +84,24 @@
       "writtenOn": "2023-11-02T05:18:08Z",
       "side": 1,
       "message": "but this typically won\u0027t work as you\u0027ve discarded the ROC too",
+      "revId": "eb606b0d017dcdb5253749d8c4f14b983c4e628d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c67675bd_252b2b84",
+        "filename": "pc/srtp_session_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-11-02T07:45:28Z",
+      "side": 1,
+      "message": "Yes. In the unit test case it works because there is no roll-over so ROC is still 0.",
+      "parentUuid": "5d3aac7e_89ad6f2f",
       "revId": "eb606b0d017dcdb5253749d8c4f14b983c4e628d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
