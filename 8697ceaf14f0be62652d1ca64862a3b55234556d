@@ -175,6 +175,30 @@
       },
       "revId": "8697ceaf14f0be62652d1ca64862a3b55234556d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8525b1a_203cb0f0",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-11-02T09:17:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f9b53ca_d79db1af",
+      "range": {
+        "startLine": 60,
+        "startChar": 2,
+        "endLine": 60,
+        "endChar": 39
+      },
+      "revId": "8697ceaf14f0be62652d1ca64862a3b55234556d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
