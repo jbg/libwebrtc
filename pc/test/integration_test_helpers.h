@@ -786,11 +786,13 @@ class PeerConnectionIntegrationWrapper : public webrtc::PeerConnectionObserver,
       EnableMediaWithDefaults(pc_factory_dependencies);
     }
 
-    if (reset_encoder_factory) {
-      pc_factory_dependencies.video_encoder_factory.reset();
+    if (reset_decoder_factory) {
+      RTC_CHECK_NOTREACHED();
+      pc_factory_dependencies.video_decoder_factory.reset();
     }
     if (reset_decoder_factory) {
-      pc_factory_dependencies.video_decoder_factory.reset();
+      RTC_CHECK_NOTREACHED();
+      pc_factory_dependencies.video_encoder_factory.reset();
     }
 
     if (!pc_factory_dependencies.audio_processing) {
