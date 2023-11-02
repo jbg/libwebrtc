@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "92485812_5abf9504",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-11-02T09:16:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4c4e951_ce7b02ae",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 121
+      },
+      "revId": "8697ceaf14f0be62652d1ca64862a3b55234556d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "b4e0e3ca_34703bd2",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
@@ -37,6 +61,24 @@
       "writtenOn": "2023-11-01T22:08:42Z",
       "side": 1,
       "message": "LGTM with enum renamed.",
+      "revId": "8697ceaf14f0be62652d1ca64862a3b55234556d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44b83b2e_6e83e0d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-11-02T09:16:17Z",
+      "side": 1,
+      "message": "Thanks. I think you need to mark it with +1 as well :-) And please land if OK.\n\nPS `kTryGetNextFrameFailed` existed already and I instead added `kFramePoolEmpty`\nsince that is exactly what the manual for `TryGetNextFrame` states:\n\n\"The next captured frame in the frame pool; if the pool is empty, this method returns null.\"",
+      "parentUuid": "b4e0e3ca_34703bd2",
       "revId": "8697ceaf14f0be62652d1ca64862a3b55234556d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -64,6 +106,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6b2b332_021cbdf9",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-11-02T09:16:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8ae5697_616470cb",
+      "range": {
+        "startLine": 78,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 23
+      },
+      "revId": "8697ceaf14f0be62652d1ca64862a3b55234556d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52b69672_11d35fc7",
@@ -77,6 +143,30 @@
       "writtenOn": "2023-11-01T22:08:42Z",
       "side": 1,
       "message": "Looks like we had last changed this in: https://webrtc-review.googlesource.com/c/src/+/293582\n\nI think probably because we just felt it wasn\u0027t needed with our own frame? Note that this will increase memory usage.",
+      "range": {
+        "startLine": 60,
+        "startChar": 2,
+        "endLine": 60,
+        "endChar": 39
+      },
+      "revId": "8697ceaf14f0be62652d1ca64862a3b55234556d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f9b53ca_d79db1af",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-11-02T09:16:17Z",
+      "side": 1,
+      "message": "You are correct but all I can say is that it is very easy to trigger kTryGetNexFrameFailed as is. In the change you refer to we also went from using the\nOnFrameArrived and added the external queue. I guess we assumed that we by this\nchange reduced the latency and at the same time avoided dropped frames. But it\ncame with the cost of TryGetNexFrame now instead generates NULL at a high rate.\n\nLet\u0027s hope that 2 is a good compromise. I understand that it will come with\na cost in memory but afaik the current situation is not OK.",
+      "parentUuid": "52b69672_11d35fc7",
       "range": {
         "startLine": 60,
         "startChar": 2,
