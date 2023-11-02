@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd2b9456_910fd35f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 22311
+      },
+      "writtenOn": "2023-11-02T05:18:08Z",
+      "side": 1,
+      "message": "what\u0027s the goal here? If the sender ever starts sending again with this SSRC with the stored state, the receiver won\u0027t be able to decrypt as their ROC will be out of sync.",
+      "revId": "eb606b0d017dcdb5253749d8c4f14b983c4e628d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa1013ef_f5c0f921",
+        "filename": "pc/srtp_session.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 22311
+      },
+      "writtenOn": "2023-11-02T05:18:08Z",
+      "side": 1,
+      "message": "ntohl converts from network to host order, FWIW...",
+      "revId": "eb606b0d017dcdb5253749d8c4f14b983c4e628d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d3aac7e_89ad6f2f",
+        "filename": "pc/srtp_session_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 22311
+      },
+      "writtenOn": "2023-11-02T05:18:08Z",
+      "side": 1,
+      "message": "but this typically won\u0027t work as you\u0027ve discarded the ROC too",
+      "revId": "eb606b0d017dcdb5253749d8c4f14b983c4e628d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
