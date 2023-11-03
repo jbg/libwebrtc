@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64345aa5_04d78083",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-03T15:57:50Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "5178d6dbb16f784c8904f1a0b01ad44f6630bc3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ca7ada1_9d9243cf",
@@ -14,6 +31,30 @@
       "writtenOn": "2023-11-03T15:53:43Z",
       "side": 1,
       "message": "A bit unsure if this would capture it by reference, because that wouldn\u0027t be what you want.",
+      "range": {
+        "startLine": 231,
+        "startChar": 31,
+        "endLine": 231,
+        "endChar": 32
+      },
+      "revId": "5178d6dbb16f784c8904f1a0b01ad44f6630bc3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7842dae6_99a65cd9",
+        "filename": "pc/rtp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-03T15:57:50Z",
+      "side": 1,
+      "message": "It\u0027s a reference coming in; for this usage, the content of the packet doesn\u0027t matter at all (all we\u0027re doing is counting it) - it compiles and passes tests :-)",
+      "parentUuid": "6ca7ada1_9d9243cf",
       "range": {
         "startLine": 231,
         "startChar": 31,
