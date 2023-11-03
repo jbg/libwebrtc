@@ -63,10 +63,10 @@ struct MediaEngineDependencies {
 // CreateMediaEngine may be called on any thread, though the engine is
 // only expected to be used on one thread, internally called the "worker
 // thread". This is the thread Init must be called on.
-// TODO(bugs.webrtc.org/15574): Deprecate this helper in favor of creating
-// media engine with `PeerConnectionFactoryDependencies::media_factory`.
-RTC_EXPORT std::unique_ptr<MediaEngineInterface> CreateMediaEngine(
-    MediaEngineDependencies dependencies);
+// TODO(bugs.webrtc.org/15574): Deprecated in favor of creating media engine
+// with `PeerConnectionFactoryDependencies::media_factory`.
+[[deprecated]] RTC_EXPORT std::unique_ptr<MediaEngineInterface>
+CreateMediaEngine(MediaEngineDependencies dependencies);
 
 // Verify that extension IDs are within 1-byte extension range and are not
 // overlapping, and that they form a legal change from previously registerd
