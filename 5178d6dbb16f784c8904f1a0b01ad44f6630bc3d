@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ca7ada1_9d9243cf",
+        "filename": "pc/rtp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2023-11-03T15:53:43Z",
+      "side": 1,
+      "message": "A bit unsure if this would capture it by reference, because that wouldn\u0027t be what you want.",
+      "range": {
+        "startLine": 231,
+        "startChar": 31,
+        "endLine": 231,
+        "endChar": 32
+      },
+      "revId": "5178d6dbb16f784c8904f1a0b01ad44f6630bc3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
