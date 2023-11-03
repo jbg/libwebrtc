@@ -16,6 +16,24 @@
       "message": "PTAL 😊",
       "revId": "d5fb09c420633df3734ed06fc2c8f6b65e67d2f4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbcae3a0_9bdf6d61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2023-11-03T16:46:03Z",
+      "side": 1,
+      "message": "Sorry for the delay; was OOO yesterday.",
+      "parentUuid": "b9018799_60ea78d4",
+      "revId": "d5fb09c420633df3734ed06fc2c8f6b65e67d2f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
