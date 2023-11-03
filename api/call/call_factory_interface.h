@@ -34,7 +34,8 @@ class CallFactoryInterface {
   virtual std::unique_ptr<Call> CreateCall(const CallConfig& config) = 0;
 };
 
-RTC_EXPORT std::unique_ptr<CallFactoryInterface> CreateCallFactory();
+[[deprecated]] RTC_EXPORT std::unique_ptr<CallFactoryInterface>
+CreateCallFactory();
 
 }  // namespace webrtc
 
