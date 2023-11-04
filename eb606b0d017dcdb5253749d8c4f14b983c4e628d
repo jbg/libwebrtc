@@ -36,6 +36,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d04a92d7_817dbbe8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 22311
+      },
+      "writtenOn": "2023-11-04T19:05:48Z",
+      "side": 1,
+      "message": "SGTM",
+      "parentUuid": "fd88f73a_5f81aa31",
+      "revId": "eb606b0d017dcdb5253749d8c4f14b983c4e628d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa1013ef_f5c0f921",
@@ -71,6 +89,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32abeb4c_010f48ca",
+        "filename": "pc/srtp_session.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 22311
+      },
+      "writtenOn": "2023-11-04T19:05:48Z",
+      "side": 1,
+      "message": "The methods do the same thing, of course...",
+      "parentUuid": "ef900062_815df69b",
+      "revId": "eb606b0d017dcdb5253749d8c4f14b983c4e628d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d3aac7e_89ad6f2f",
@@ -102,6 +138,24 @@
       "side": 1,
       "message": "Yes. In the unit test case it works because there is no roll-over so ROC is still 0.",
       "parentUuid": "5d3aac7e_89ad6f2f",
+      "revId": "eb606b0d017dcdb5253749d8c4f14b983c4e628d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9de431d_db95eb95",
+        "filename": "pc/srtp_session_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 22311
+      },
+      "writtenOn": "2023-11-04T19:05:48Z",
+      "side": 1,
+      "message": "Yep, just wanted to point this out.",
+      "parentUuid": "c67675bd_252b2b84",
       "revId": "eb606b0d017dcdb5253749d8c4f14b983c4e628d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
