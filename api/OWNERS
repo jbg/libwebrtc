@@ -12,3 +12,6 @@ per-file peer_connection*=hbos@webrtc.org
 per-file DEPS=mbonadei@webrtc.org
 
 per-file uma_metrics.h=kron@webrtc.org
+
+per-file connection_environment.h=set noparent
+per-file connection_environment.h=danilchap@webrtc.org

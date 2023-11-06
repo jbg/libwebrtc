@@ -35,6 +35,36 @@ rtc_source_set("callfactory_api") {
   ]
 }
 
+rtc_source_set("connection_environment") {
+  visibility = [ "*" ]
+  sources = [ "connection_environment.h" ]
+  deps = [
+    ":refcountedbase",
+    ":scoped_refptr",
+    "../rtc_base/system:rtc_export",
+  ]
+  absl_deps = [ "//third_party/abseil-cpp/absl/base:nullability" ]
+}
+
+rtc_source_set("connection_environment_builder") {
+  visibility = [ "*" ]
+  poisonous = [ "connection_environment_builder" ]
+  sources = [
+    "connection_environment_builder.cc",
+    "connection_environment_builder.h",
+  ]
+  deps = [
+    ":connection_environment",
+    ":make_ref_counted",
+    "../rtc_base/system:rtc_export",
+    "../system_wrappers",
+    "rtc_event_log",
+    "task_queue:default_task_queue_factory",
+    "transport:field_trial_based_config",
+  ]
+  absl_deps = [ "//third_party/abseil-cpp/absl/functional:any_invocable" ]
+}
+
 rtc_source_set("enable_media") {
   visibility = [ "*" ]
   sources = [
@@ -54,7 +84,7 @@ rtc_source_set("enable_media_with_defaults") {
   visibility = [ "*" ]
   allow_poison = [
     "audio_codecs",
-    "default_task_queue",
+    "connection_environment_builder",
     "software_video_codecs",
   ]
   sources = [
@@ -77,7 +107,7 @@ rtc_source_set("enable_media_with_defaults") {
 if (!build_with_chromium) {
   rtc_library("create_peerconnection_factory") {
     visibility = [ "*" ]
-    allow_poison = [ "default_task_queue" ]
+    allow_poison = [ "connection_environment_builder" ]
     sources = [
       "create_peerconnection_factory.cc",
       "create_peerconnection_factory.h",
@@ -1459,6 +1489,7 @@ if (rtc_include_tests) {
 
     deps = [
       ":callfactory_api",
+      ":connection_environment_builder",
       ":enable_media_with_defaults",
       ":libjingle_peerconnection_api",
       ":time_controller",
