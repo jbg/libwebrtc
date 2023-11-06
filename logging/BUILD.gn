@@ -450,11 +450,13 @@ if (rtc_enable_protobuf) {
       ":ice_log",
       ":rtc_event_log_api",
       ":rtc_event_log_impl_encoder",
+      "../api:connection_environment",
       "../api:libjingle_logging_api",
       "../api:sequence_checker",
       "../api/rtc_event_log",
       "../api/task_queue",
       "../api/units:time_delta",
+      "../api/units:timestamp",
       "../rtc_base:checks",
       "../rtc_base:logging",
       "../rtc_base:macromagic",
@@ -464,6 +466,7 @@ if (rtc_enable_protobuf) {
       "../rtc_base:safe_minmax",
       "../rtc_base:timeutils",
       "../rtc_base/system:no_unique_address",
+      "../system_wrappers",
     ]
     absl_deps = [
       "//third_party/abseil-cpp/absl/strings",
@@ -482,6 +485,7 @@ rtc_library("fake_rtc_event_log") {
   ]
 
   deps = [
+    "../api:connection_environment",
     "../api/rtc_event_log",
     "../rtc_base:macromagic",
     "../rtc_base/synchronization:mutex",
@@ -600,6 +604,7 @@ if (rtc_enable_protobuf) {
         ":rtc_event_video",
         ":rtc_stream_config",
         "../api:array_view",
+        "../api:connection_environment_builder",
         "../api:network_state_predictor_api",
         "../api:rtc_event_log_output_file",
         "../api:rtp_headers",
@@ -621,6 +626,7 @@ if (rtc_enable_protobuf) {
         "../rtc_base:timeutils",
         "../system_wrappers",
         "../system_wrappers:field_trial",
+        "../test:explicit_key_value_config",
         "../test:field_trial",
         "../test:fileutils",
         "../test:test_support",

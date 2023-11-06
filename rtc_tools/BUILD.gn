@@ -191,16 +191,7 @@ if (!is_component_build) {
     ]
 
     deps = [
-      "..//api/video_codecs:video_decoder_factory_template",
-      "..//api/video_codecs:video_decoder_factory_template_dav1d_adapter",
-      "..//api/video_codecs:video_decoder_factory_template_libvpx_vp8_adapter",
-      "..//api/video_codecs:video_decoder_factory_template_libvpx_vp9_adapter",
-      "..//api/video_codecs:video_decoder_factory_template_open_h264_adapter",
-      "..//api/video_codecs:video_encoder_factory_template",
-      "..//api/video_codecs:video_encoder_factory_template_libaom_av1_adapter",
-      "..//api/video_codecs:video_encoder_factory_template_libvpx_vp8_adapter",
-      "..//api/video_codecs:video_encoder_factory_template_libvpx_vp9_adapter",
-      "..//api/video_codecs:video_encoder_factory_template_open_h264_adapter",
+      "../api:connection_environment_builder",
       "../api:create_frame_generator",
       "../api:rtp_parameters",
       "../api:transport_api",
@@ -209,6 +200,16 @@ if (!is_component_build) {
       "../api/task_queue:task_queue",
       "../api/video:builtin_video_bitrate_allocator_factory",
       "../api/video_codecs:video_codecs_api",
+      "../api/video_codecs:video_decoder_factory_template",
+      "../api/video_codecs:video_decoder_factory_template_dav1d_adapter",
+      "../api/video_codecs:video_decoder_factory_template_libvpx_vp8_adapter",
+      "../api/video_codecs:video_decoder_factory_template_libvpx_vp9_adapter",
+      "../api/video_codecs:video_decoder_factory_template_open_h264_adapter",
+      "../api/video_codecs:video_encoder_factory_template",
+      "../api/video_codecs:video_encoder_factory_template_libaom_av1_adapter",
+      "../api/video_codecs:video_encoder_factory_template_libvpx_vp8_adapter",
+      "../api/video_codecs:video_encoder_factory_template_libvpx_vp9_adapter",
+      "../api/video_codecs:video_encoder_factory_template_open_h264_adapter",
       "../call",
       "../call:call_interfaces",
       "../call:fake_network",
@@ -255,6 +256,7 @@ if (!is_component_build) {
     testonly = true
     sources = [ "video_replay.cc" ]
     deps = [
+      "../api:connection_environment_builder",
       "../api:field_trials",
       "../api:rtp_parameters",
       "../api/rtc_event_log",
