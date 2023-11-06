@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e703ebcd_c490df11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-06T14:34:21Z",
+      "side": 1,
+      "message": "no code changes, just marking bunch of symbols deprecated now that they are not used in WebRTC and chromium.",
+      "revId": "edf1f384b2a383053d2baff9b5777310118da673",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
