@@ -1566,8 +1566,8 @@ bool AudioDeviceLinuxALSA::RecThreadProcess() {
 
       // store the recorded buffer (no action will be taken if the
       // #recorded samples is not a full buffer)
-      _ptrAudioBuffer->SetRecordedBuffer(_recordingBuffer,
-                                         _recordingFramesIn10MS);
+      _ptrAudioBuffer->SetRecordedBuffer(
+          _recordingBuffer, _recordingFramesIn10MS, rtc::TimeNanos());
 
       // calculate delay
       _playoutDelay = 0;
