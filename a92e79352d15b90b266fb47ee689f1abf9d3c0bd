@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "352fcb82_1c4db872",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-11-06T06:48:49Z",
+      "side": 1,
+      "message": "The first step proposed in the doc. We still remain at \u003c15 extensions (but I wonder if we should have a test that we do as trip-wire)",
+      "revId": "a92e79352d15b90b266fb47ee689f1abf9d3c0bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
