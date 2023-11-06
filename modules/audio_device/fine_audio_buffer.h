@@ -17,6 +17,7 @@
 #include "absl/types/optional.h"
 #include "api/array_view.h"
 #include "rtc_base/buffer.h"
+#include "rtc_base/time_utils.h"
 
 namespace webrtc {
 
@@ -66,7 +67,7 @@ class FineAudioBuffer {
   // cache. Call #3 restarts the scheme above.
   void DeliverRecordedData(rtc::ArrayView<const int16_t> audio_buffer,
                            int record_delay_ms) {
-    DeliverRecordedData(audio_buffer, record_delay_ms, absl::nullopt);
+    DeliverRecordedData(audio_buffer, record_delay_ms, rtc::TimeNanos());
   }
   void DeliverRecordedData(rtc::ArrayView<const int16_t> audio_buffer,
                            int record_delay_ms,
