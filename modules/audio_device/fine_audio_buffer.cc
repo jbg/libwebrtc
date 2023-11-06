@@ -121,7 +121,11 @@ void FineAudioBuffer::DeliverRecordedData(
   while (record_buffer_.size() >= num_elements_10ms) {
     audio_device_buffer_->SetRecordedBuffer(record_buffer_.data(),
                                             record_samples_per_channel_10ms_,
+<<<<<<< PATCH SET (7f8a83 Add capture timestamp to SetRecordedBuffer())
+                                            rtc::TimeNanos());
+=======
                                             capture_time_ns);
+>>>>>>> BASE      (9384bb Document how codec comparisons happen)
     audio_device_buffer_->SetVQEData(playout_delay_ms_, record_delay_ms);
     audio_device_buffer_->DeliverRecordedData();
     memmove(record_buffer_.data(), record_buffer_.data() + num_elements_10ms,

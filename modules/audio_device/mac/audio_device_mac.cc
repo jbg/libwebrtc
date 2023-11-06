@@ -2471,7 +2471,8 @@ bool AudioDeviceMac::CaptureWorkerThread() {
 
     // store the recorded buffer (no action will be taken if the
     // #recorded samples is not a full buffer)
-    _ptrAudioBuffer->SetRecordedBuffer((int8_t*)&recordBuffer, (uint32_t)size);
+    _ptrAudioBuffer->SetRecordedBuffer((int8_t*)&recordBuffer, (uint32_t)size,
+                                       rtc::TimeNanos());
     _ptrAudioBuffer->SetVQEData(msecOnPlaySide, msecOnRecordSide);
     _ptrAudioBuffer->SetTypingStatus(KeyPressed());
 
