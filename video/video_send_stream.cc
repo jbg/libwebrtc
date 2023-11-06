@@ -133,37 +133,37 @@ std::unique_ptr<VideoStreamEncoder> CreateVideoStreamEncoder(
 namespace internal {
 
 VideoSendStream::VideoSendStream(
-    Clock* clock,
+    const ConnectionEnvironment& env,
     int num_cpu_cores,
-    TaskQueueFactory* task_queue_factory,
     TaskQueueBase* network_queue,
     RtcpRttStats* call_stats,
     RtpTransportControllerSendInterface* transport,
     BitrateAllocatorInterface* bitrate_allocator,
     SendDelayStats* send_delay_stats,
-    RtcEventLog* event_log,
     VideoSendStream::Config config,
     VideoEncoderConfig encoder_config,
     const std::map<uint32_t, RtpState>& suspended_ssrcs,
     const std::map<uint32_t, RtpPayloadState>& suspended_payload_states,
-    std::unique_ptr<FecController> fec_controller,
-    const FieldTrialsView& field_trials)
+    std::unique_ptr<FecController> fec_controller)
     : transport_(transport),
-      stats_proxy_(clock, config, encoder_config.content_type, field_trials),
+      stats_proxy_(&env.clock(),
+                   config,
+                   encoder_config.content_type,
+                   env.field_trials()),
       send_packet_observer_(&stats_proxy_, send_delay_stats),
       config_(std::move(config)),
       content_type_(encoder_config.content_type),
       video_stream_encoder_(CreateVideoStreamEncoder(
-          clock,
+          &env.clock(),
           num_cpu_cores,
-          task_queue_factory,
+          &env.task_queue_factory(),
           &stats_proxy_,
           config_.encoder_settings,
-          GetBitrateAllocationCallbackType(config_, field_trials),
-          field_trials,
+          GetBitrateAllocationCallbackType(config_, env.field_trials()),
+          env.field_trials(),
           config_.encoder_selector)),
       encoder_feedback_(
-          clock,
+          &env.clock(),
           config_.rtp.ssrcs,
           video_stream_encoder_.get(),
           [this](uint32_t ssrc, const std::vector<uint16_t>& seq_nums) {
@@ -179,11 +179,11 @@ VideoSendStream::VideoSendStream(
                           &encoder_feedback_,
                           &stats_proxy_,
                           &send_packet_observer_),
-          event_log,
+          &env.event_log(),
           std::move(fec_controller),
           CreateFrameEncryptionConfig(&config_),
           config_.frame_transformer)),
-      send_stream_(clock,
+      send_stream_(env,
                    &stats_proxy_,
                    transport,
                    bitrate_allocator,
@@ -192,8 +192,7 @@ VideoSendStream::VideoSendStream(
                    encoder_config.max_bitrate_bps,
                    encoder_config.bitrate_priority,
                    encoder_config.content_type,
-                   rtp_video_sender_,
-                   field_trials) {
+                   rtp_video_sender_) {
   RTC_DCHECK(config_.encoder_settings.encoder_factory);
   RTC_DCHECK(config_.encoder_settings.bitrate_allocator_factory);
 
