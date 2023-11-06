@@ -318,7 +318,6 @@ rtc_library("libjingle_peerconnection_api") {
     ":array_view",
     ":async_dns_resolver",
     ":audio_options_api",
-    ":callfactory_api",
     ":candidate",
     ":dtls_transport_interface",
     ":fec_controller_api",
@@ -353,6 +352,7 @@ rtc_library("libjingle_peerconnection_api") {
     "../rtc_base:ssl",
     "../rtc_base:stringutils",
     "adaptation:resource_adaptation_api",
+    "audio:audio_frame_processor",
     "audio:audio_mixer_api",
     "audio_codecs:audio_codecs_api",
     "crypto:frame_decryptor_interface",
@@ -378,8 +378,9 @@ rtc_library("libjingle_peerconnection_api") {
     # Basically, don't add stuff here. You might break sensitive downstream
     # targets like pnacl. API should not depend on anything outside of this
     # file, really. All these should arguably go away in time.
-    "../media:rtc_media_base",
     "../media:rtc_media_config",
+    "../modules/audio_device:audio_device_api",
+    "../modules/audio_processing:api",
     "../modules/audio_processing:audio_processing_statistics",
     "../rtc_base:checks",
     "../rtc_base:ip_address",
