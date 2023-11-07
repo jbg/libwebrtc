@@ -230,39 +230,27 @@ class MediaSessionDescriptionFactory {
       const TransportDescription& transport_desc,
       SessionDescription* answer_desc) const;
 
-  // Helpers for adding media contents to the SessionDescription. Returns true
-  // it succeeds or the media content is not needed, or false if there is any
-  // error.
+  // Helpers for adding media contents to the SessionDescription.
   webrtc::RTCErrorOr<AudioCodecs> GetNegotiatedAudioCodecsForOffer(
       const MediaDescriptionOptions& media_description_options,
       const MediaSessionOptions& session_options,
       const ContentInfo* current_content,
       const AudioCodecs& audio_codecs,
       const webrtc::FieldTrialsView* field_trials) const;
-  webrtc::RTCError AddAudioContentForOffer(
-      const MediaDescriptionOptions& media_description_options,
-      const MediaSessionOptions& session_options,
-      const ContentInfo* current_content,
-      const SessionDescription* current_description,
-      const RtpHeaderExtensions& audio_rtp_extensions,
-      const AudioCodecs& audio_codecs,
-      StreamParamsVec* current_streams,
-      SessionDescription* desc,
-      IceCredentialsIterator* ice_credentials) const;
-
   webrtc::RTCErrorOr<AudioCodecs> GetNegotiatedVideoCodecsForOffer(
       const MediaDescriptionOptions& media_description_options,
       const MediaSessionOptions& session_options,
       const ContentInfo* current_content,
       const VideoCodecs& video_codecs,
       const webrtc::FieldTrialsView* field_trials) const;
-  webrtc::RTCError AddVideoContentForOffer(
+
+  webrtc::RTCError AddRtpContentForOffer(
       const MediaDescriptionOptions& media_description_options,
       const MediaSessionOptions& session_options,
       const ContentInfo* current_content,
       const SessionDescription* current_description,
-      const RtpHeaderExtensions& video_rtp_extensions,
-      const VideoCodecs& video_codecs,
+      const RtpHeaderExtensions& audio_rtp_extensions,
+      const AudioCodecs& audio_codecs,
       StreamParamsVec* current_streams,
       SessionDescription* desc,
       IceCredentialsIterator* ice_credentials) const;
@@ -291,7 +279,14 @@ class MediaSessionDescriptionFactory {
       const AudioCodecs& audio_codecs,
       const AudioCodecs& supported_audio_codecs,
       const webrtc::FieldTrialsView* field_trials) const;
-  webrtc::RTCError AddAudioContentForAnswer(
+  webrtc::RTCErrorOr<AudioCodecs> GetNegotiatedVideoCodecsForAnswer(
+      const MediaDescriptionOptions& media_description_options,
+      const MediaSessionOptions& session_options,
+      const ContentInfo* current_content,
+      const VideoCodecs& video_codecs,
+      const VideoCodecs& supported_video_codecs,
+      const webrtc::FieldTrialsView* field_trials) const;
+  webrtc::RTCError AddRtpContentForAnswer(
       const MediaDescriptionOptions& media_description_options,
       const MediaSessionOptions& session_options,
       const ContentInfo* offer_content,
@@ -300,27 +295,6 @@ class MediaSessionDescriptionFactory {
       const SessionDescription* current_description,
       const TransportInfo* bundle_transport,
       const AudioCodecs& audio_codecs,
-      const RtpHeaderExtensions& rtp_header_extensions,
-      StreamParamsVec* current_streams,
-      SessionDescription* answer,
-      IceCredentialsIterator* ice_credentials) const;
-
-  webrtc::RTCErrorOr<AudioCodecs> GetNegotiatedVideoCodecsForAnswer(
-      const MediaDescriptionOptions& media_description_options,
-      const MediaSessionOptions& session_options,
-      const ContentInfo* current_content,
-      const VideoCodecs& video_codecs,
-      const VideoCodecs& supported_video_codecs,
-      const webrtc::FieldTrialsView* field_trials) const;
-  webrtc::RTCError AddVideoContentForAnswer(
-      const MediaDescriptionOptions& media_description_options,
-      const MediaSessionOptions& session_options,
-      const ContentInfo* offer_content,
-      const SessionDescription* offer_description,
-      const ContentInfo* current_content,
-      const SessionDescription* current_description,
-      const TransportInfo* bundle_transport,
-      const VideoCodecs& video_codecs,
       const RtpHeaderExtensions& rtp_header_extensions,
       StreamParamsVec* current_streams,
       SessionDescription* answer,
