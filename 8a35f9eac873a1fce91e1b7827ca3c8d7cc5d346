@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81970eb1_6847ac69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-11-07T10:26:38Z",
+      "side": 1,
+      "message": "Probably best to review PS1..4 and then the move in PS5 separately",
+      "revId": "8a35f9eac873a1fce91e1b7827ca3c8d7cc5d346",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
