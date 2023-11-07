@@ -30,6 +30,8 @@ class RTC_EXPORT Voucher {
 
   using Ptr = rtc::scoped_refptr<rtc::FinalRefCountedObject<Voucher>>;
 
+  Voucher();
+
   // Vouchers aggregate attachments, which are application-specific attachments
   // that have logic unrelated to the mechanics of Voucher progression.
   class RTC_EXPORT Attachment {
@@ -62,9 +64,6 @@ class RTC_EXPORT Voucher {
   void SetAttachment(Attachment::Id id, std::unique_ptr<Attachment> attachment);
 
  private:
-  friend class rtc::FinalRefCountedObject<webrtc::Voucher>;
-  Voucher();
-
   friend class ScopedSetter;
   static void SetCurrent(Ptr ptr);
 
