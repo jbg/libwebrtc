@@ -404,7 +404,12 @@ void UDPPort::OnReadPacket(rtc::AsyncPacketSocket* socket,
   }
 
   if (Connection* conn = GetConnection(remote_addr)) {
-    conn->OnReadPacket(data, size, packet_time_us);
+    conn->OnReadPacket(rtc::ReceivedPacket(
+        rtc::reinterpret_array_view<const uint8_t>(
+            rtc::MakeArrayView(data, size)),
+        (packet_time_us >= 0) ? absl::optional<webrtc::Timestamp>(
+                                    webrtc::Timestamp::Micros(packet_time_us))
+                              : absl::nullopt));
   } else {
     Port::OnReadPacket(data, size, remote_addr, PROTO_UDP);
   }
