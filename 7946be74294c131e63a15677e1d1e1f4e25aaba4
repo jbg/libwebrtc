@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81099e67_cc6e884d",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2480,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-11-07T08:33:16Z",
+      "side": 0,
+      "message": "this one is a no-op since for offers the default bandwidth is kAutoBandwidth",
+      "revId": "7946be74294c131e63a15677e1d1e1f4e25aaba4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83e62816_3a15266a",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2827,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-11-07T08:33:16Z",
+      "side": 0,
+      "message": "this encompasses both audio and video. One could use separate filters but ...",
+      "revId": "7946be74294c131e63a15677e1d1e1f4e25aaba4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28d6f08b_10d1c8e7",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2869,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-11-07T08:33:16Z",
+      "side": 0,
+      "message": "same as above,this should be a no-op.",
+      "revId": "7946be74294c131e63a15677e1d1e1f4e25aaba4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

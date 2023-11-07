@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5702756_125c3993",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-11-07T08:33:16Z",
+      "side": 1,
+      "message": "The 76 lines added in the previous CL allowed reducing. Oh and it is more readable!",
+      "revId": "fb00b21adad41c5aeaa1ef4cf364a8fa2c1f0bc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
