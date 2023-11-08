@@ -50,6 +50,24 @@
       "message": "Can you add a short explanation here, for example \"... because the SRTP layer rejects packets with sequence numbers it has seen already\" if this is an accurate explainer",
       "revId": "5821de8f176ba6c5da37f759b4818e64c377e396",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "744535f0_d6267750",
+        "filename": "pc/srtp_transport_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-11-08T09:21:25Z",
+      "side": 1,
+      "message": "Done. You can actually see this when running the test:\n(srtp_session.cc:254): Failed to unprotect SRTP packet, err\u003d9, previous failure count: 0",
+      "parentUuid": "6386a903_410f91f8",
+      "revId": "5821de8f176ba6c5da37f759b4818e64c377e396",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
