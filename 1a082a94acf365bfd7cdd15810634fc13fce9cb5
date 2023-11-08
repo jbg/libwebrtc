@@ -16,6 +16,57 @@
       "message": "Harald, would you mind to take a look at least on the change in received_packet.h",
       "revId": "1a082a94acf365bfd7cdd15810634fc13fce9cb5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f76047cc_a8ef2b45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-08T15:39:01Z",
+      "side": 1,
+      "message": "Looks good. Nice cleanup!",
+      "revId": "1a082a94acf365bfd7cdd15810634fc13fce9cb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ab90fd9_b164bf89",
+        "filename": "p2p/base/connection.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-08T15:39:01Z",
+      "side": 1,
+      "message": "And GetStunMessage should be in terms of ArrayView\u003cuint8_t\u003e too, but that\u0027s a different cleanup.",
+      "revId": "1a082a94acf365bfd7cdd15810634fc13fce9cb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37246fb8_31d2820b",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-08T15:39:01Z",
+      "side": 1,
+      "message": "so this will construct an ArrayView from nullptr, consisting of zero bytes?\nfor clarity, can you write it as \"return ArrayView()\", which will do the same thing?",
+      "revId": "1a082a94acf365bfd7cdd15810634fc13fce9cb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
