@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebe7ee05_ac22de35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-11-08T08:13:39Z",
+      "side": 1,
+      "message": "Harald, would you mind to take a look at least on the change in received_packet.h",
+      "revId": "1a082a94acf365bfd7cdd15810634fc13fce9cb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
