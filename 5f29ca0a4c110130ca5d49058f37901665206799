@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a1fcdba_bc25ef86",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoEncoder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-11-08T15:50:03Z",
+      "side": 1,
+      "message": "Would it be better to catch all exceptions here?",
+      "range": {
+        "startLine": 295,
+        "startChar": 13,
+        "endLine": 295,
+        "endChar": 63
+      },
+      "revId": "5f29ca0a4c110130ca5d49058f37901665206799",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
