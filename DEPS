@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '2b21cf7f671c0e9dd363912f974a58b62b9b0281',
+  'chromium_revision': 'a378a3f9cd1d5cd8f71096b21fd2629192f75a88',
 
   # Fetch the prebuilt binaries for llvm-cov and llvm-profdata. Needed to
   # process the raw profiles produced by instrumented targets (built with
@@ -61,13 +61,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@9f2e0d0687bac15928a848d9b5340226316aa52a',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@b418f400612999abeca3edbfaf0fbc8b8f82cb13',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@04c5f4b01c159819cd49a21cab34242b5eff5e50',
+    'https://chromium.googlesource.com/chromium/src/testing@173cc942e0ab91a421f291fd7db1cf999e802b7d',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@27da5284733ac9b373204cf78546b35f386dc548',
+    'https://chromium.googlesource.com/chromium/src/third_party@fb07f325aa1a09e78455212dcfb5b7522ff94102',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -291,7 +291,7 @@ deps = {
       'condition': 'checkout_android',
   },
   'src/third_party/perfetto':
-    'https://android.googlesource.com/platform/external/perfetto.git@7b24689f350715296eb0fda511c68be6f57361d0',
+    'https://android.googlesource.com/platform/external/perfetto.git@b704a3869ea6c1e8d0a7e0ef6ceacb9126c2cf85',
   'src/third_party/libvpx/source/libvpx':
     'https://chromium.googlesource.com/webm/libvpx.git@0d3ef6ffd22bda0ba1ec1bf9c7a24852e4a1d111',
   'src/third_party/libyuv':
@@ -344,7 +344,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@57e930ef1f8ae453d7793e447874a585023ddec9',
+    'https://chromium.googlesource.com/chromium/src/tools@b21959ad0d1056ddbc88973d85c65b67771e69f3',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
