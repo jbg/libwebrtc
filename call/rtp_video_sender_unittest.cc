@@ -16,6 +16,7 @@
 #include <utility>
 
 #include "absl/functional/any_invocable.h"
+#include "api/environment/environment_builder.h"
 #include "call/rtp_transport_controller_send.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/rtp_rtcp/source/byte_io.h"
@@ -117,38 +118,36 @@ class RtpVideoSenderTestFixture {
       FrameCountObserver* frame_count_observer,
       rtc::scoped_refptr<FrameTransformerInterface> frame_transformer,
       const FieldTrialsView* field_trials = nullptr)
-      : time_controller_(Timestamp::Millis(1000000)),
+      : time_controller_(Timestamp::Seconds(1'000)),
+        env_(EnvironmentBuilder()
+                 .With(time_controller_.GetTaskQueueFactory())
+                 .With(time_controller_.GetClock())
+                 .With(&field_trials_)
+                 .With(field_trials)
+                 .Build()),
         config_(CreateVideoSendStreamConfig(&transport_,
                                             ssrcs,
                                             rtx_ssrcs,
                                             payload_type)),
         bitrate_config_(GetBitrateConfig()),
         transport_controller_(
-            time_controller_.GetClock(),
-            RtpTransportConfig{
-                .bitrate_config = bitrate_config_,
-                .event_log = &event_log_,
-                .task_queue_factory = time_controller_.GetTaskQueueFactory(),
-                .trials = field_trials ? field_trials : &field_trials_,
-            }),
-        stats_proxy_(time_controller_.GetClock(),
+            RtpTransportConfig{.env = env_, .bitrate_config = bitrate_config_}),
+        stats_proxy_(&env_.clock(),
                      config_,
                      VideoEncoderConfig::ContentType::kRealtimeVideo,
-                     field_trials ? *field_trials : field_trials_),
+                     env_.field_trials()),
         retransmission_rate_limiter_(time_controller_.GetClock(),
                                      kRetransmitWindowSizeMs) {
     transport_controller_.EnsureStarted();
     std::map<uint32_t, RtpState> suspended_ssrcs;
     router_ = std::make_unique<RtpVideoSender>(
-        time_controller_.GetClock(), suspended_ssrcs, suspended_payload_states,
-        config_.rtp, config_.rtcp_report_interval_ms, &transport_,
+        env_, suspended_ssrcs, suspended_payload_states, config_.rtp,
+        config_.rtcp_report_interval_ms, &transport_,
         CreateObservers(&encoder_feedback_, &stats_proxy_, &stats_proxy_,
                         &stats_proxy_, frame_count_observer, &stats_proxy_),
-        &transport_controller_, &event_log_, &retransmission_rate_limiter_,
+        &transport_controller_, &retransmission_rate_limiter_,
         std::make_unique<FecControllerDefault>(time_controller_.GetClock()),
-        nullptr, CryptoOptions{}, frame_transformer,
-        field_trials ? *field_trials : field_trials_,
-        time_controller_.GetTaskQueueFactory());
+        nullptr, CryptoOptions{}, frame_transformer);
   }
 
   RtpVideoSenderTestFixture(
@@ -197,7 +196,7 @@ class RtpVideoSenderTestFixture {
   NiceMock<MockTransport> transport_;
   NiceMock<MockRtcpIntraFrameObserver> encoder_feedback_;
   GlobalSimulatedTimeController time_controller_;
-  RtcEventLogNull event_log_;
+  Environment env_;
   VideoSendStream::Config config_;
   BitrateConstraints bitrate_config_;
   RtpTransportControllerSend transport_controller_;

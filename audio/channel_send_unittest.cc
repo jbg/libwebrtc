@@ -14,6 +14,7 @@
 
 #include "api/audio/audio_frame.h"
 #include "api/audio_codecs/builtin_audio_encoder_factory.h"
+#include "api/environment/environment_builder.h"
 #include "api/rtc_event_log/rtc_event_log.h"
 #include "api/scoped_refptr.h"
 #include "api/units/time_delta.h"
@@ -53,14 +54,15 @@ class ChannelSendTest : public ::testing::Test {
  protected:
   ChannelSendTest()
       : time_controller_(Timestamp::Seconds(1)),
-        transport_controller_(
-            time_controller_.GetClock(),
-            RtpTransportConfig{
-                .bitrate_config = GetBitrateConfig(),
-                .event_log = &event_log_,
-                .task_queue_factory = time_controller_.GetTaskQueueFactory(),
-                .trials = &field_trials_,
-            }) {
+        transport_controller_(RtpTransportConfig{
+            .env = EnvironmentBuilder()
+                       .With(&event_log_)
+                       .With(time_controller_.GetTaskQueueFactory())
+                       .With(&field_trials_)
+                       .With(time_controller_.GetClock())
+                       .Build(),
+            .bitrate_config = GetBitrateConfig(),
+        }) {
     channel_ = voe::CreateChannelSend(
         time_controller_.GetClock(), time_controller_.GetTaskQueueFactory(),
         &transport_, nullptr, &event_log_, nullptr, crypto_options_, false,

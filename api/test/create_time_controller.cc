@@ -15,6 +15,7 @@
 
 #include "absl/base/nullability.h"
 #include "api/enable_media_with_defaults.h"
+#include "api/environment/environment_builder.h"
 #include "api/peer_connection_interface.h"
 #include "call/call.h"
 #include "call/rtp_transport_config.h"
@@ -44,11 +45,11 @@ std::unique_ptr<CallFactoryInterface> CreateTimeControllerBasedCallFactory(
     explicit TimeControllerBasedCallFactory(TimeController* time_controller)
         : time_controller_(time_controller) {}
     std::unique_ptr<Call> CreateCall(const CallConfig& config) override {
-      RtpTransportConfig transportConfig = config.ExtractTransportConfig();
-
-      return Call::Create(config, time_controller_->GetClock(),
-                          config.rtp_transport_controller_send_factory->Create(
-                              transportConfig, time_controller_->GetClock()));
+      CallConfig c = config;
+      c.env =
+          EnvironmentBuilder(c.env).With(time_controller_->GetClock()).Build();
+      return Call::Create(c, c.rtp_transport_controller_send_factory->Create(
+                                 config.ExtractTransportConfig()));
     }
 
    private:
@@ -68,14 +69,15 @@ void EnableMediaWithDefaultsAndTimeController(
         : clock_(clock), media_factory_(std::move(media_factory)) {}
 
     std::unique_ptr<Call> CreateCall(const CallConfig& config) override {
-      return Call::Create(config, clock_,
-                          config.rtp_transport_controller_send_factory->Create(
-                              config.ExtractTransportConfig(), clock_));
+      CallConfig c = config;
+      c.env = EnvironmentBuilder(c.env).With(clock_).Build();
+      return Call::Create(c);
     }
 
     std::unique_ptr<cricket::MediaEngineInterface> CreateMediaEngine(
+        const Environment& env,
         PeerConnectionFactoryDependencies& dependencies) override {
-      return media_factory_->CreateMediaEngine(dependencies);
+      return media_factory_->CreateMediaEngine(env, dependencies);
     }
 
    private:
