@@ -110,6 +110,7 @@ if (is_android) {
     allow_poison = [
       "audio_codecs",  # TODO(bugs.webrtc.org/8396): Remove.
       "software_video_codecs",  # TODO(bugs.webrtc.org/7925): Remove.
+      "environment_builder",
     ]
     public_deps = [  # no-presubmit-check TODO(webrtc:8603)
       ":audio_jni",
@@ -820,6 +821,7 @@ if (current_os == "linux" || is_android) {
 
   rtc_library("libjingle_peerconnection_metrics_default_jni") {
     visibility = [ "*" ]
+    allow_poison = [ "environment_builder" ]
     sources = [ "src/jni/android_metrics.cc" ]
     deps = [
       ":base_jni",

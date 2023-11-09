@@ -41,28 +41,20 @@ class MediaFactoryImpl : public MediaFactory {
   }
 
   std::unique_ptr<MediaEngineInterface> CreateMediaEngine(
+      const Environment& env,
       PeerConnectionFactoryDependencies& deps) override {
-    std::unique_ptr<FieldTrialsView> fallback_trials;
-    const FieldTrialsView* trials;
-    if (deps.trials) {
-      trials = deps.trials.get();
-    } else {
-      fallback_trials = std::make_unique<FieldTrialBasedConfig>();
-      trials = fallback_trials.get();
-    }
     auto audio_engine = std::make_unique<WebRtcVoiceEngine>(
-        deps.task_queue_factory.get(), deps.adm.get(),
+        &env.task_queue_factory(), deps.adm.get(),
         std::move(deps.audio_encoder_factory),
         std::move(deps.audio_decoder_factory), std::move(deps.audio_mixer),
         std::move(deps.audio_processing), /*audio_frame_processor=*/nullptr,
         /*owned_audio_frame_processor=*/std::move(deps.audio_frame_processor),
-        *trials);
+        env.field_trials());
     auto video_engine = std::make_unique<WebRtcVideoEngine>(
         std::move(deps.video_encoder_factory),
-        std::move(deps.video_decoder_factory), *trials);
-    return std::make_unique<CompositeMediaEngine>(std::move(fallback_trials),
-                                                  std::move(audio_engine),
-                                                  std::move(video_engine));
+        std::move(deps.video_decoder_factory), env.field_trials());
+    return std::make_unique<CompositeMediaEngine>(
+        nullptr, std::move(audio_engine), std::move(video_engine));
   }
 };
 
