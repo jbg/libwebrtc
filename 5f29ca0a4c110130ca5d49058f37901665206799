@@ -46,6 +46,30 @@
       },
       "revId": "5f29ca0a4c110130ca5d49058f37901665206799",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ddc9f28_0e3df35d",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoEncoder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-11-09T09:35:11Z",
+      "side": 1,
+      "message": "Ok, let\u0027s just add IllegalArgumentException.",
+      "parentUuid": "7659bd6a_0d021e80",
+      "range": {
+        "startLine": 295,
+        "startChar": 13,
+        "endLine": 295,
+        "endChar": 63
+      },
+      "revId": "5f29ca0a4c110130ca5d49058f37901665206799",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
