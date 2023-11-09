@@ -33,6 +33,24 @@
       "message": "Can you provide some more details as to why the change is required? In an app targetting API level 33 I get rotation right with the current code.",
       "revId": "143a35b9310fe837f419545644be8b79bef720bb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15d39cef_f91d802f",
+        "filename": "sdk/android/src/java/org/webrtc/CameraSession.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 22389
+      },
+      "writtenOn": "2023-11-09T12:14:12Z",
+      "side": 1,
+      "message": "I tested with Fenix and \nfinal WindowManager wm \u003d (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);\n    switch (wm.getDefaultDisplay().getRotation()) doesn\u0027t return the correct rotation.I tested with this fixed, and it is working.",
+      "parentUuid": "9f53b29e_6a5cbf2f",
+      "revId": "143a35b9310fe837f419545644be8b79bef720bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
