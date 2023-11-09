@@ -69,6 +69,24 @@
       "parentUuid": "15d39cef_f91d802f",
       "revId": "143a35b9310fe837f419545644be8b79bef720bb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74115900_33d928ca",
+        "filename": "sdk/android/src/java/org/webrtc/CameraSession.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 22389
+      },
+      "writtenOn": "2023-11-09T13:56:47Z",
+      "side": 1,
+      "message": "final WindowManager wm \u003d (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);\nswitch (wm.getDefaultDisplay().getRotation()) \nThis is a method from the Android system. I put logs in, and it returns the wrong value.I checked with the GeckoView sample app and found that this is working like it should, but I didn\u0027t find why. I checked all the places like manifest, activity, and fragment to see if there were differences from the GeckoView sample app.But I didn\u0027t find any. I don\u0027t know why this method returns the wrong value in Fenix.",
+      "parentUuid": "b0c8a544_2050de97",
+      "revId": "143a35b9310fe837f419545644be8b79bef720bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
