@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94d47d56_62eb0323",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15079
+      },
+      "writtenOn": "2023-11-09T11:15:22Z",
+      "side": 1,
+      "message": "Can you provide some more",
+      "revId": "143a35b9310fe837f419545644be8b79bef720bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f53b29e_6a5cbf2f",
+        "filename": "sdk/android/src/java/org/webrtc/CameraSession.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 15079
+      },
+      "writtenOn": "2023-11-09T11:15:22Z",
+      "side": 1,
+      "message": "Can you provide some more details as to why the change is required? In an app targetting API level 33 I get rotation right with the current code.",
+      "revId": "143a35b9310fe837f419545644be8b79bef720bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
