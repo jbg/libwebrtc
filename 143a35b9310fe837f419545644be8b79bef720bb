@@ -51,6 +51,24 @@
       "parentUuid": "9f53b29e_6a5cbf2f",
       "revId": "143a35b9310fe837f419545644be8b79bef720bb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0c8a544_2050de97",
+        "filename": "sdk/android/src/java/org/webrtc/CameraSession.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 15079
+      },
+      "writtenOn": "2023-11-09T13:04:45Z",
+      "side": 1,
+      "message": "Do you know why the patch solcves it? It\u0027s not obvious to me TBH. Maybe abetter approach would be to use OrientationEventListener similarly to how iOS implements, it: detect orientation changes as they happen instead of polling for it every time.",
+      "parentUuid": "15d39cef_f91d802f",
+      "revId": "143a35b9310fe837f419545644be8b79bef720bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
