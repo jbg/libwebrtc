@@ -10,6 +10,7 @@
 
 #include <memory>
 
+#include "api/environment/environment_builder.h"
 #include "api/media_types.h"
 #include "api/task_queue/default_task_queue_factory.h"
 #include "api/task_queue/task_queue_base.h"
@@ -94,7 +95,8 @@ void NetworkStateEndToEndTest::VerifyNewVideoSendStreamsRespectNetworkState(
 
   SendTask(task_queue(), [this, network_to_bring_up, &encoder_factory,
                           transport]() {
-    CreateSenderCall(CallConfig(send_event_log_.get()));
+    CreateSenderCall(
+        CallConfig(EnvironmentBuilder().With(send_event_log_.get()).Build()));
     sender_call_->SignalChannelNetworkState(network_to_bring_up, kNetworkUp);
 
     CreateSendConfig(1, 0, 0, transport);
