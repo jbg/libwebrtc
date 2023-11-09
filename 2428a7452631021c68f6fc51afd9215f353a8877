@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "066cb5d4_eef2c7ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-11-09T08:56:02Z",
+      "side": 1,
+      "message": "Hi José, I\u0027m planning to revert the voucher CLs tomorrow, so this shouldn\u0027t be needed soon.",
+      "revId": "2428a7452631021c68f6fc51afd9215f353a8877",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
