@@ -22,6 +22,30 @@
       },
       "revId": "5f29ca0a4c110130ca5d49058f37901665206799",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7659bd6a_0d021e80",
+        "filename": "sdk/android/src/java/org/webrtc/HardwareVideoEncoder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 10184
+      },
+      "writtenOn": "2023-11-09T09:20:05Z",
+      "side": 1,
+      "message": "I haven\u0027t seen yet other exceptions to be thrown by MediaCodec API.\nIf we decide to catch Exception there, would it make sense to update other catch statements in this file as well as in AndroidVideoDecoder?\nIt seems to me like a tradeoff between the number of crashes in production and the accuracy of MediaCodec usage.\n\n\n...\nThe actual problem is that unhandled Java exceptions cause native abort() invocation without original exception message passed to it:\n```\nCrashed: Thread: SIGABRT  0x0000000000000000\n#00 pc 0x6b518 libc.so (BuildId: 551b461edf655728e54c941e2a097b54)\n#01 pc 0x6899c libc.so (BuildId: 551b461edf655728e54c941e2a097b54)\n#02 pc 0x23ee8 libc.so (BuildId: 551b461edf655728e54c941e2a097b54)\n#03 pc 0x1c96c libc.so (BuildId: 551b461edf655728e54c941e2a097b54)\n#04 pc 0x3eccb0 libjingle_peerconnection_so.so (rtc::webrtc_checks_impl::WriteFatalLog(std::__Cr::basic_string_view\u003cchar, std::__Cr::char_traits\u003cchar\u003e \u003e) [checks.cc:78]) (BuildId: bbb73feb92513afc)\n#05 pc 0x3ed2f4 libjingle_peerconnection_so.so (rtc::webrtc_checks_impl::FatalLog(char const*, int, char const*, rtc::webrtc_checks_impl::CheckArgType const*, ...) [checks.cc:84]) (BuildId: bbb73feb92513afc)\n#06 pc 0x3dc950 libjingle_peerconnection_so.so (jni_generator::CheckException(_JNIEnv*) [checks.h:254]) (BuildId: bbb73feb92513afc)\n#07 pc 0x3dc860 libjingle_peerconnection_so.so (jni_generator::JniJavaCallContextChecked::~JniJavaCallContextChecked() [jni_generator_helper.h:159]) (BuildId: bbb73feb92513afc)\n#08 pc 0x5b9ee0 libjingle_peerconnection_so.so (webrtc::jni::VideoEncoderWrapper::InitEncodeInternal(_JNIEnv*) [VideoEncoder_jni.h:467]) (BuildId: bbb73feb92513afc)\n#09 pc 0x5be2d4 libjingle_peerconnection_so.so (webrtc::(anonymous namespace)::VideoEncoderSoftwareFallbackWrapper::InitEncode(webrtc::VideoCodec const*, webrtc::VideoEncoder::Settings const\u0026) [video_encoder_software_fallback_wrapper.cc:299]) (BuildId: bbb73feb92513afc)\n#10 pc 0x83f144 libjingle_peerconnection_so.so (webrtc::VideoStreamEncoder::ReconfigureEncoder() [video_stream_encoder.cc:1306]) (BuildId: bbb73feb92513afc)\n#11 pc 0x841690 libjingle_peerconnection_so.so (webrtc::VideoStreamEncoder::MaybeEncodeVideoFrame(webrtc::VideoFrame const\u0026, long) [video_stream_encoder.cc:1801]) (BuildId: bbb73feb92513afc)\n#12 pc 0x840f4c libjingle_peerconnection_so.so (webrtc::VideoStreamEncoder::OnFrame(webrtc::Timestamp, int, webrtc::VideoFrame const\u0026) [video_stream_encoder.cc:1568]) (BuildId: bbb73feb92513afc)\n#13 pc 0x83657c libjingle_peerconnection_so.so (void absl::internal_any_invocable::RemoteInvoker\u003cfalse, void, webrtc::(anonymous namespace)::FrameCadenceAdapterImpl::OnFrame(webrtc::VideoFrame const\u0026)::$_0\u0026\u0026\u003e(absl::internal_any_invocable::TypeErasedState*) [frame_cadence_adapter.cc:704]) (BuildId: bbb73feb92513afc)\n#14 pc 0x7607e0 libjingle_peerconnection_so.so (webrtc::(anonymous namespace)::TaskQueueLibevent::OnWakeup(int, short, void*) [any_invocable.h:875]) (BuildId: bbb73feb92513afc)\n#15 pc 0x7621f8 libjingle_peerconnection_so.so (event_base_loop [event.c:381]) (BuildId: bbb73feb92513afc)\n#16 pc 0x760fec libjingle_peerconnection_so.so (void std::__Cr::__function::__policy_invoker\u003cvoid ()\u003e::__call_impl\u003cstd::__Cr::__function::__default_alloc_func\u003cwebrtc::(anonymous namespace)::TaskQueueLibevent::TaskQueueLibevent(std::__Cr::basic_string_view\u003cchar, std::__Cr::char_traits\u003cchar\u003e \u003e, rtc::ThreadPriority)::$_0, void ()\u003e \u003e(std::__Cr::__function::__policy_storage const*) [task_queue_libevent.cc:172]) (BuildId: bbb73feb92513afc)\n#17 pc 0x409c14 libjingle_peerconnection_so.so (void std::__Cr::__function::__policy_invoker\u003cvoid ()\u003e::__call_impl\u003cstd::__Cr::__function::__default_alloc_func\u003crtc::PlatformThread::SpawnThread(std::__Cr::function\u003cvoid ()\u003e, std::__Cr::basic_string_view\u003cchar, std::__Cr::char_traits\u003cchar\u003e \u003e, rtc::ThreadAttributes, bool)::$_0, void ()\u003e \u003e(std::__Cr::__function::__policy_storage const*) [function.h:850]) (BuildId: bbb73feb92513afc)\n#18 pc 0x409afc libjingle_peerconnection_so.so (rtc::(anonymous namespace)::RunPlatformThread(void*) [function.h:850]) (BuildId: bbb73feb92513afc)\n#19 pc 0x681a4 libc.so (BuildId: 551b461edf655728e54c941e2a097b54)\n#20 pc 0x1db80 libc.so (BuildId: 551b461edf655728e54c941e2a097b54)\n\n```\n\nIt makes us impossible to detect and fix the actual cause of crashes in production using Crashlytics.",
+      "parentUuid": "2a1fcdba_bc25ef86",
+      "range": {
+        "startLine": 295,
+        "startChar": 13,
+        "endLine": 295,
+        "endChar": 63
+      },
+      "revId": "5f29ca0a4c110130ca5d49058f37901665206799",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
