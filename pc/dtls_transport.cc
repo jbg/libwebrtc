@@ -22,22 +22,72 @@
 #include "rtc_base/ssl_stream_adapter.h"
 
 namespace webrtc {
+namespace {
+
+absl::optional<DtlsTransportTlsRole> GetDtlsRole(
+    cricket::DtlsTransportInternal* transport) {
+  rtc::SSLRole ssl_role;
+  if (transport->GetDtlsRole(&ssl_role)) {
+    return ssl_role == rtc::SSL_CLIENT ? DtlsTransportTlsRole::kClient
+                                       : DtlsTransportTlsRole::kServer;
+  }
+  return absl::nullopt;
+}
+
+absl::optional<int> GetTlsVersion(cricket::DtlsTransportInternal* transport) {
+  int tls_version = 0;
+  if (transport->GetSslVersionBytes(&tls_version))
+    return tls_version;
+  return absl::nullopt;
+}
+
+absl::optional<int> GetSslCipherSuite(
+    cricket::DtlsTransportInternal* transport) {
+  int ssl_cipher_suite = 0;
+  if (transport->GetSslCipherSuite(&ssl_cipher_suite))
+    return ssl_cipher_suite;
+  return absl::nullopt;
+}
+
+absl::optional<int> GetSrtpCryptoSuite(
+    cricket::DtlsTransportInternal* transport) {
+  int srtp_cipher = 0;
+  if (transport->GetSrtpCryptoSuite(&srtp_cipher))
+    return srtp_cipher;
+  return absl::nullopt;
+}
+
+}  // namespace
 
 // Implementation of DtlsTransportInterface
 DtlsTransport::DtlsTransport(
     std::unique_ptr<cricket::DtlsTransportInternal> internal)
     : owner_thread_(rtc::Thread::Current()),
-      info_(DtlsTransportState::kNew),
       internal_dtls_transport_(std::move(internal)),
       ice_transport_(rtc::make_ref_counted<IceTransportWithPointer>(
-          internal_dtls_transport_->ice_transport())) {
-  RTC_DCHECK(internal_dtls_transport_.get());
+          internal_dtls_transport_->ice_transport())),
+      info_(internal_dtls_transport_->dtls_state(),
+            GetDtlsRole(internal_dtls_transport_.get()),
+            GetTlsVersion(internal_dtls_transport_.get()),
+            GetSslCipherSuite(internal_dtls_transport_.get()),
+            GetSrtpCryptoSuite(internal_dtls_transport_.get()),
+            internal_dtls_transport_->GetRemoteSSLCertChain()) {
   internal_dtls_transport_->SubscribeDtlsTransportState(
       [this](cricket::DtlsTransportInternal* transport,
              DtlsTransportState state) {
         OnInternalDtlsState(transport, state);
       });
-  UpdateInformation();
+  internal_dtls_transport_->SubscribeDtlsRole([this](rtc::SSLRole role) {
+    RTC_DCHECK_RUN_ON(owner_thread_);
+    {
+      MutexLock lock(&lock_);
+      info_.set_role(role == rtc::SSL_CLIENT ? DtlsTransportTlsRole::kClient
+                                             : DtlsTransportTlsRole::kServer);
+    }
+    if (observer_) {
+      observer_->OnStateChange(Information());
+    }
+  });
 }
 
 DtlsTransport::~DtlsTransport() {
@@ -70,17 +120,17 @@ rtc::scoped_refptr<IceTransportInterface> DtlsTransport::ice_transport() {
 void DtlsTransport::Clear() {
   RTC_DCHECK_RUN_ON(owner_thread_);
   RTC_DCHECK(internal());
-  bool must_send_event =
-      (internal()->dtls_state() != DtlsTransportState::kClosed);
+  const DtlsTransportState state = internal()->dtls_state();
+  bool must_send_event = (state != DtlsTransportState::kClosed);
   // The destructor of cricket::DtlsTransportInternal calls back
   // into DtlsTransport, so we can't hold the lock while releasing.
   std::unique_ptr<cricket::DtlsTransportInternal> transport_to_release;
   {
     MutexLock lock(&lock_);
+    info_.set_state(DtlsTransportState::kClosed);
     transport_to_release = std::move(internal_dtls_transport_);
     ice_transport_->Clear();
   }
-  UpdateInformation();
   if (observer_ && must_send_event) {
     observer_->OnStateChange(Information());
   }
@@ -91,57 +141,15 @@ void DtlsTransport::OnInternalDtlsState(
     DtlsTransportState state) {
   RTC_DCHECK_RUN_ON(owner_thread_);
   RTC_DCHECK(transport == internal());
-  RTC_DCHECK(state == internal()->dtls_state());
-  UpdateInformation();
+  RTC_DCHECK_EQ(state, internal()->dtls_state());
+
+  {
+    MutexLock lock(&lock_);
+    info_.set_state(state);
+  }
+
   if (observer_) {
     observer_->OnStateChange(Information());
-  }
-}
-
-void DtlsTransport::UpdateInformation() {
-  RTC_DCHECK_RUN_ON(owner_thread_);
-  MutexLock lock(&lock_);
-  if (internal_dtls_transport_) {
-    if (internal_dtls_transport_->dtls_state() ==
-        DtlsTransportState::kConnected) {
-      bool success = true;
-      rtc::SSLRole internal_role;
-      absl::optional<DtlsTransportTlsRole> role;
-      int ssl_cipher_suite;
-      int tls_version;
-      int srtp_cipher;
-      success &= internal_dtls_transport_->GetDtlsRole(&internal_role);
-      if (success) {
-        switch (internal_role) {
-          case rtc::SSL_CLIENT:
-            role = DtlsTransportTlsRole::kClient;
-            break;
-          case rtc::SSL_SERVER:
-            role = DtlsTransportTlsRole::kServer;
-            break;
-        }
-      }
-      success &= internal_dtls_transport_->GetSslVersionBytes(&tls_version);
-      success &= internal_dtls_transport_->GetSslCipherSuite(&ssl_cipher_suite);
-      success &= internal_dtls_transport_->GetSrtpCryptoSuite(&srtp_cipher);
-      if (success) {
-        info_ = DtlsTransportInformation(
-            internal_dtls_transport_->dtls_state(), role, tls_version,
-            ssl_cipher_suite, srtp_cipher,
-            internal_dtls_transport_->GetRemoteSSLCertChain());
-      } else {
-        RTC_LOG(LS_ERROR) << "DtlsTransport in connected state has incomplete "
-                             "TLS information";
-        info_ = DtlsTransportInformation(
-            internal_dtls_transport_->dtls_state(), role, absl::nullopt,
-            absl::nullopt, absl::nullopt,
-            internal_dtls_transport_->GetRemoteSSLCertChain());
-      }
-    } else {
-      info_ = DtlsTransportInformation(internal_dtls_transport_->dtls_state());
-    }
-  } else {
-    info_ = DtlsTransportInformation(DtlsTransportState::kClosed);
   }
 }
 

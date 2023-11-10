@@ -121,7 +121,8 @@ class FakeDtlsTransport : public DtlsTransportInternal {
       }
       // If the `dtls_role_` is unset, set it to SSL_CLIENT by default.
       if (!dtls_role_) {
-        dtls_role_ = std::move(rtc::SSL_CLIENT);
+        dtls_role_ = rtc::SSL_CLIENT;
+        SendDtlsRole(dtls_role_.value());
       }
       SetDtlsState(webrtc::DtlsTransportState::kConnected);
       ice_transport_->SetDestination(
@@ -159,7 +160,8 @@ class FakeDtlsTransport : public DtlsTransportInternal {
     return true;
   }
   bool SetDtlsRole(rtc::SSLRole role) override {
-    dtls_role_ = std::move(role);
+    dtls_role_ = role;
+    SendDtlsRole(dtls_role_.value());
     return true;
   }
   bool GetDtlsRole(rtc::SSLRole* role) const override {
