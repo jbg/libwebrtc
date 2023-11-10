@@ -206,6 +206,7 @@ bool DtlsTransport::SetDtlsRole(rtc::SSLRole role) {
   }
 
   dtls_role_ = role;
+  SendDtlsRole(dtls_role_.value());
   return true;
 }
 
@@ -238,6 +239,7 @@ webrtc::RTCError DtlsTransport::SetRemoteParameters(
   if (role) {
     if (is_dtls_restart) {
       dtls_role_ = *role;
+      SendDtlsRole(dtls_role_.value());
     } else {
       if (!SetDtlsRole(*role)) {
         return webrtc::RTCError(webrtc::RTCErrorType::INVALID_PARAMETER,

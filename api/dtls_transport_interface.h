@@ -65,16 +65,22 @@ class RTC_EXPORT DtlsTransportInformation {
   // Copy and assign
   DtlsTransportInformation(const DtlsTransportInformation& c);
   DtlsTransportInformation& operator=(const DtlsTransportInformation& c);
+
   // Move
   DtlsTransportInformation(DtlsTransportInformation&& other) = default;
   DtlsTransportInformation& operator=(DtlsTransportInformation&& other) =
       default;
 
   DtlsTransportState state() const { return state_; }
+  void set_state(DtlsTransportState state);
+
   absl::optional<DtlsTransportTlsRole> role() const { return role_; }
+  void set_role(DtlsTransportTlsRole role) { role_ = role; }
+
   absl::optional<int> tls_version() const { return tls_version_; }
   absl::optional<int> ssl_cipher_suite() const { return ssl_cipher_suite_; }
   absl::optional<int> srtp_cipher_suite() const { return srtp_cipher_suite_; }
+
   // The accessor returns a temporary pointer, it does not release ownership.
   const rtc::SSLCertChain* remote_ssl_certificates() const {
     return remote_ssl_certificates_.get();
@@ -113,6 +119,11 @@ class DtlsTransportInterface : public webrtc::RefCountInterface {
   virtual rtc::scoped_refptr<IceTransportInterface> ice_transport() = 0;
   // Returns information on the state of the DtlsTransport.
   // This function can be called from other threads.
+  // TODO(tommi): Stop using (data_channel_integrationtest.cc), deprecate and
+  // then remove this accessor. It forces an implementation to add
+  // synchronization (e.g. locking) just for the purposes of being able to
+  // implement this getter. Instead, a client can rely on the OnStateChange()
+  // callbacks and avoid polling.
   virtual DtlsTransportInformation Information() = 0;
   // Observer management.
   virtual void RegisterObserver(DtlsTransportObserverInterface* observer) = 0;
