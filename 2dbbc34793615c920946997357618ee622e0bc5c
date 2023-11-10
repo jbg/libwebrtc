@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65138c32_4aa4a3ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-10T17:55:07Z",
+      "side": 1,
+      "message": "Especially tell me if the Python looks stupid. It\u0027s been a while since I wrote Python last.",
+      "revId": "2dbbc34793615c920946997357618ee622e0bc5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
