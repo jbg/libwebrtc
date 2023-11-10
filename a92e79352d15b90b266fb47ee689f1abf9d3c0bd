@@ -33,6 +33,299 @@
       "message": "The conservative step first (planning to land after the next branch cut), deprecations way after that.",
       "revId": "a92e79352d15b90b266fb47ee689f1abf9d3c0bd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dd0a56d_9d1de0b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-10T12:23:00Z",
+      "side": 1,
+      "message": "I do not have strong opinion.\nYes, it make sense to enable DD and VLA for scalable video,\nbut using different defaults depending on what video is sent could be confusing.\n\nI\u0027m mostly worried that ability to receive Dependency Descriptor rtp header extension now depends on what video is sent.\n\n(And I have strong opinions and lots of comments about c++ style)",
+      "revId": "a92e79352d15b90b266fb47ee689f1abf9d3c0bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b25fb5dc_b05a0c66",
+        "filename": "pc/rtp_transceiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-10T12:23:00Z",
+      "side": 1,
+      "message": "prefer to specify exact type here (RtpParameters?)\n\nhttps://google.github.io/styleguide/cppguide.html#Type_deduction",
+      "range": {
+        "startLine": 182,
+        "startChar": 2,
+        "endLine": 182,
+        "endChar": 6
+      },
+      "revId": "a92e79352d15b90b266fb47ee689f1abf9d3c0bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0a23305_f19344fb",
+        "filename": "pc/rtp_transceiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-10T12:23:00Z",
+      "side": 1,
+      "message": "it is recommened to check .empty() instead of comparing size to 0:\n`!parameters.encodings.empty() \u0026\u0026 \nparameters.econdings[0].scalability_mode...`\n\nhttps://clang.llvm.org/extra/clang-tidy/checks/readability/container-size-empty.html",
+      "range": {
+        "startLine": 184,
+        "startChar": 39,
+        "endLine": 184,
+        "endChar": 49
+      },
+      "revId": "a92e79352d15b90b266fb47ee689f1abf9d3c0bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8219e62_ef6450f5",
+        "filename": "pc/rtp_transceiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-10T12:23:00Z",
+      "side": 1,
+      "message": "Side notes:\nif encodings \u003d {L1T1, L1T3}, then use_svc would be erroneously false. In practice that doesn\u0027t matter, because in such case uses_simulcast will be true.\n\ntechnically this check should be something like\nuses_svc \u003d absl::c_any_of(parameters.encodings, [](const EncodingType\u0026 encoding) {\n  return encoding.scalability_mode.has_value() \u0026\u0026 *encoding.scalability_mode !\u003d \"L1T1\";\n};",
+      "range": {
+        "startLine": 186,
+        "startChar": 39,
+        "endLine": 186,
+        "endChar": 40
+      },
+      "revId": "a92e79352d15b90b266fb47ee689f1abf9d3c0bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0839c7a7_69296cc7",
+        "filename": "pc/rtp_transceiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-10T12:23:00Z",
+      "side": 1,
+      "message": "use exact type instead of auto:\n`RtpHeaderExtensionCapability`",
+      "range": {
+        "startLine": 190,
+        "startChar": 9,
+        "endLine": 190,
+        "endChar": 13
+      },
+      "revId": "a92e79352d15b90b266fb47ee689f1abf9d3c0bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "555bb406_48e4738a",
+        "filename": "pc/rtp_transceiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-10T12:23:00Z",
+      "side": 1,
+      "message": "ability to receive DependencyDescriptor is helpful even if one sends singlecast, or even if one doesn\u0027t send any video.\nbut, I guess, such application can manually enable these extensions.",
+      "range": {
+        "startLine": 193,
+        "startChar": 49,
+        "endLine": 193,
+        "endChar": 58
+      },
+      "revId": "a92e79352d15b90b266fb47ee689f1abf9d3c0bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5448a1b_10d05383",
+        "filename": "pc/rtp_transceiver_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-10T12:23:00Z",
+      "side": 1,
+      "message": "may may skip repeating RtpHeaderExtensionCapability multiple times:\nstd::vector\u003cRtpHeaderExtensionCapability\u003e extensions \u003d {\n     {RtpExtension::kDependencyDescriptorUri, 1,\n      RtpTransceiverDirection::kStopped},\n      {RtpExtension::kVideoLayersAllocationUri, 2,\n       RtpTransceiverDirection::kStopped}};",
+      "range": {
+        "startLine": 485,
+        "startChar": 0,
+        "endLine": 490,
+        "endChar": 4
+      },
+      "revId": "a92e79352d15b90b266fb47ee689f1abf9d3c0bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6346f53f_54a7f516",
+        "filename": "pc/rtp_transceiver_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-10T12:23:00Z",
+      "side": 1,
+      "message": "result type of `rtc::make_ref_counted\u003cT\u003e` can be guessed,\nbut type of `header_extensions` is not obvious from the context, please use concrete type instead of `auto`.",
+      "range": {
+        "startLine": 501,
+        "startChar": 2,
+        "endLine": 501,
+        "endChar": 6
+      },
+      "revId": "a92e79352d15b90b266fb47ee689f1abf9d3c0bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25b59f47_0184a37e",
+        "filename": "pc/rtp_transceiver_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-10T12:23:00Z",
+      "side": 1,
+      "message": "is order guaranteed?\nif not, then matcher might need to be more complicated:\n```\nEXPECT_THAT(transceiver-\u003eGetHeaderExtensionsToNegotiate(),\n  UnorderedElementsAre(\n    AllOf(Field(\u0026RtpHeaderExtension::direction, RtpTransceiverDirection::kStopped),\n          Field(\u0026RtpHeaderExtension::uri, RtpExtension::kDependencyDescriptorUri)),\n    AllOf(Field(\u0026RtpHeaderExtension::direction, RtpTransceiverDirection::kStopped),\n          Field(\u0026RtpHeaderExtension::uri, RtpExtension::kVideoLayersAllocationUri))));\n```",
+      "range": {
+        "startLine": 503,
+        "startChar": 29,
+        "endLine": 503,
+        "endChar": 32
+      },
+      "revId": "a92e79352d15b90b266fb47ee689f1abf9d3c0bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57b46788_e268cf1c",
+        "filename": "pc/rtp_transceiver_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-10T12:23:00Z",
+      "side": 1,
+      "message": "may be `encodings.resize(2);`",
+      "range": {
+        "startLine": 510,
+        "startChar": 23,
+        "endLine": 510,
+        "endChar": 44
+      },
+      "revId": "a92e79352d15b90b266fb47ee689f1abf9d3c0bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58ce5da0_78557246",
+        "filename": "pc/rtp_transceiver_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-10T12:23:00Z",
+      "side": 1,
+      "message": "drop redundant `.get()` - scoped_refptr has `operator*`",
+      "range": {
+        "startLine": 512,
+        "startChar": 31,
+        "endLine": 512,
+        "endChar": 37
+      },
+      "revId": "a92e79352d15b90b266fb47ee689f1abf9d3c0bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20d63563_bdfad1ec",
+        "filename": "pc/rtp_transceiver_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-10T12:23:00Z",
+      "side": 1,
+      "message": "may be ON_CALL(...).WillByDefault(Return...));\ninstead pf\nEXPECT_CALL(...).WillRepeatedly(Return...));\nhttps://google.github.io/googletest/gmock_cook_book.html#UseOnCall",
+      "range": {
+        "startLine": 512,
+        "startChar": 2,
+        "endLine": 512,
+        "endChar": 13
+      },
+      "revId": "a92e79352d15b90b266fb47ee689f1abf9d3c0bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b15c85b2_d8937454",
+        "filename": "pc/rtp_transceiver_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-10T12:23:00Z",
+      "side": 1,
+      "message": "drop `webrtc::` - this code is already in the webrtc namespace",
+      "range": {
+        "startLine": 534,
+        "startChar": 2,
+        "endLine": 534,
+        "endChar": 10
+      },
+      "revId": "a92e79352d15b90b266fb47ee689f1abf9d3c0bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
