@@ -16,6 +16,9 @@
 #include "absl/strings/match.h"
 #include "api/async_resolver_factory.h"
 #include "api/call/call_factory_interface.h"
+#include "api/environment/create_environment.h"
+#include "api/environment/environment.h"
+#include "api/environment/environment_factory.h"
 #include "api/fec_controller.h"
 #include "api/ice_transport_interface.h"
 #include "api/network_state_predictor.h"
@@ -78,7 +81,10 @@ CreateModularPeerConnectionFactory(
 // Static
 rtc::scoped_refptr<PeerConnectionFactory> PeerConnectionFactory::Create(
     PeerConnectionFactoryDependencies dependencies) {
-  auto context = ConnectionContext::Create(&dependencies);
+  auto context = ConnectionContext::Create(
+      CreateEnvironment(std::move(dependencies.task_queue_factory),
+                        std::move(std::move(dependencies.trials))),
+      &dependencies);
   if (!context) {
     return nullptr;
   }
@@ -89,7 +95,6 @@ PeerConnectionFactory::PeerConnectionFactory(
     rtc::scoped_refptr<ConnectionContext> context,
     PeerConnectionFactoryDependencies* dependencies)
     : context_(context),
-      task_queue_factory_(std::move(dependencies->task_queue_factory)),
       event_log_factory_(std::move(dependencies->event_log_factory)),
       fec_controller_factory_(std::move(dependencies->fec_controller_factory)),
       network_state_predictor_factory_(
@@ -105,8 +110,12 @@ PeerConnectionFactory::PeerConnectionFactory(
 
 PeerConnectionFactory::PeerConnectionFactory(
     PeerConnectionFactoryDependencies dependencies)
-    : PeerConnectionFactory(ConnectionContext::Create(&dependencies),
-                            &dependencies) {}
+    : PeerConnectionFactory(
+          ConnectionContext::Create(
+              CreateEnvironment(std::move(dependencies.task_queue_factory),
+                                std::move(dependencies.trials)),
+              &dependencies),
+          &dependencies) {}
 
 PeerConnectionFactory::~PeerConnectionFactory() {
   RTC_DCHECK_RUN_ON(signaling_thread());
@@ -232,19 +241,25 @@ PeerConnectionFactory::CreatePeerConnectionOrError(
   dependencies.allocator->SetNetworkIgnoreMask(options().network_ignore_mask);
   dependencies.allocator->SetVpnList(configuration.vpn_list);
 
-  std::unique_ptr<RtcEventLog> event_log =
-      worker_thread()->BlockingCall([this] { return CreateRtcEventLog_w(); });
+  EnvironmentFactory environment_factory(context_->env());
+  environment_factory.With(std::move(dependencies.trials));
 
-  const FieldTrialsView* trials =
-      dependencies.trials ? dependencies.trials.get() : &field_trials();
-  std::unique_ptr<Call> call =
-      worker_thread()->BlockingCall([this, &event_log, trials, &configuration] {
-        return CreateCall_w(event_log.get(), *trials, configuration);
-      });
+  if (event_log_factory_) {
+    worker_thread()->BlockingCall([&] {
+      RTC_DCHECK_RUN_ON(worker_thread());
+      Environment env_for_rtc_event_log = environment_factory.Create();
+      environment_factory.With(
+          event_log_factory_->Create(env_for_rtc_event_log));
+    });
+  }
 
-  auto result = PeerConnection::Create(context_, options_, std::move(event_log),
-                                       std::move(call), configuration,
-                                       std::move(dependencies));
+  Environment env = environment_factory.Create();
+
+  std::unique_ptr<Call> call = worker_thread()->BlockingCall(
+      [this, env, &configuration] { return CreateCall_w(env, configuration); });
+
+  auto result = PeerConnection::Create(context_, env, options_, std::move(call),
+                                       configuration, std::move(dependencies));
   if (!result.ok()) {
     return result.MoveError();
   }
@@ -285,23 +300,12 @@ rtc::scoped_refptr<AudioTrackInterface> PeerConnectionFactory::CreateAudioTrack(
   return AudioTrackProxy::Create(signaling_thread(), track);
 }
 
-std::unique_ptr<RtcEventLog> PeerConnectionFactory::CreateRtcEventLog_w() {
-  RTC_DCHECK_RUN_ON(worker_thread());
-
-  auto encoding_type = RtcEventLog::EncodingType::NewFormat;
-  if (field_trials().IsDisabled("WebRTC-RtcEventLogNewFormat"))
-    encoding_type = RtcEventLog::EncodingType::Legacy;
-  return event_log_factory_ ? event_log_factory_->Create(encoding_type)
-                            : std::make_unique<RtcEventLogNull>();
-}
-
 std::unique_ptr<Call> PeerConnectionFactory::CreateCall_w(
-    RtcEventLog* event_log,
-    const FieldTrialsView& field_trials,
+    Environment env,
     const PeerConnectionInterface::RTCConfiguration& configuration) {
   RTC_DCHECK_RUN_ON(worker_thread());
 
-  CallConfig call_config(event_log, network_thread());
+  CallConfig call_config(env, network_thread());
   if (!media_engine() || !context_->call_factory()) {
     return nullptr;
   }
@@ -314,7 +318,7 @@ std::unique_ptr<Call> PeerConnectionFactory::CreateCall_w(
   FieldTrialParameter<DataRate> max_bandwidth("max",
                                               DataRate::KilobitsPerSec(2000));
   ParseFieldTrial({&min_bandwidth, &start_bandwidth, &max_bandwidth},
-                  field_trials.Lookup("WebRTC-PcFactoryDefaultBitrates"));
+                  env.field_trials().Lookup("WebRTC-PcFactoryDefaultBitrates"));
 
   call_config.bitrate_config.min_bitrate_bps =
       rtc::saturated_cast<int>(min_bandwidth->bps());
@@ -324,12 +328,11 @@ std::unique_ptr<Call> PeerConnectionFactory::CreateCall_w(
       rtc::saturated_cast<int>(max_bandwidth->bps());
 
   call_config.fec_controller_factory = fec_controller_factory_.get();
-  call_config.task_queue_factory = task_queue_factory_.get();
   call_config.network_state_predictor_factory =
       network_state_predictor_factory_.get();
   call_config.neteq_factory = neteq_factory_.get();
 
-  if (IsTrialEnabled("WebRTC-Bwe-InjectedCongestionController")) {
+  if (env.field_trials().IsEnabled("WebRTC-Bwe-InjectedCongestionController")) {
     RTC_LOG(LS_INFO) << "Using injected network controller factory";
     call_config.network_controller_factory =
         injected_network_controller_factory_.get();
@@ -337,16 +340,11 @@ std::unique_ptr<Call> PeerConnectionFactory::CreateCall_w(
     RTC_LOG(LS_INFO) << "Using default network controller factory";
   }
 
-  call_config.trials = &field_trials;
   call_config.rtp_transport_controller_send_factory =
       transport_controller_send_factory_.get();
   call_config.metronome = metronome_.get();
   call_config.pacer_burst_interval = configuration.pacer_burst_interval;
   return context_->call_factory()->CreateCall(call_config);
-}
-
-bool PeerConnectionFactory::IsTrialEnabled(absl::string_view key) const {
-  return absl::StartsWith(field_trials().Lookup(key), "Enabled");
 }
 
 }  // namespace webrtc
