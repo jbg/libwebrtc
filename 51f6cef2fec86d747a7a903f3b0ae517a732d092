@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a21d7879_3f321138",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-11-10T15:41:05Z",
+      "side": 1,
+      "message": "Updated for better style! This is basically syntactic sugar but also meant to encourage more use of both extensions.",
+      "revId": "51f6cef2fec86d747a7a903f3b0ae517a732d092",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
