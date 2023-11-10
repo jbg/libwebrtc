@@ -59,7 +59,6 @@ class Call {
   static std::unique_ptr<Call> Create(const CallConfig& config);
   static std::unique_ptr<Call> Create(
       const CallConfig& config,
-      Clock* clock,
       std::unique_ptr<RtpTransportControllerSendInterface>
           transportControllerSend);
 
@@ -147,7 +146,7 @@ class Call {
   virtual TaskQueueBase* network_thread() const = 0;
   virtual TaskQueueBase* worker_thread() const = 0;
 
-  virtual ~Call() {}
+  virtual ~Call() = default;
 };
 
 }  // namespace webrtc

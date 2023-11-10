@@ -17,6 +17,7 @@
 
 #include "absl/strings/string_view.h"
 #include "absl/types/optional.h"
+#include "api/environment/create_environment.h"
 #include "api/peer_connection_interface.h"
 #include "api/rtp_parameters.h"
 #include "media/base/media_engine.h"
@@ -44,7 +45,8 @@ class RtpTransceiverTest : public testing::Test {
  public:
   RtpTransceiverTest()
       : dependencies_(MakeDependencies()),
-        context_(ConnectionContext::Create(&dependencies_)) {}
+        context_(
+            ConnectionContext::Create(CreateEnvironment(), &dependencies_)) {}
 
  protected:
   cricket::MediaEngineInterface* media_engine() {
