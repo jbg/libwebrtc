@@ -16,6 +16,121 @@
       "message": "Especially tell me if the Python looks stupid. It\u0027s been a while since I wrote Python last.",
       "revId": "2dbbc34793615c920946997357618ee622e0bc5c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "891ab2fb_0c58a2aa",
+        "filename": "tools_webrtc/remove_extra_namespace.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-11-11T10:24:38Z",
+      "side": 1,
+      "message": "2023",
+      "range": {
+        "startLine": 3,
+        "startChar": 16,
+        "endLine": 3,
+        "endChar": 20
+      },
+      "revId": "2dbbc34793615c920946997357618ee622e0bc5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf55e29e_a0cfe86e",
+        "filename": "tools_webrtc/remove_extra_namespace.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-11-11T10:24:38Z",
+      "side": 1,
+      "message": "Nit: since this list has only a few elements, so it is not a big issue.\n\nAn alternative to insert(0, ...) which has to move all the elements in the list is:\n\nnamespaces \u003d [] \nnamespace.append() to add to the stack\nnamespace.pop() pop the last added element\nnamespace[-1] to access the last added element (previous check len() \u003e 0).",
+      "range": {
+        "startLine": 33,
+        "startChar": 16,
+        "endLine": 33,
+        "endChar": 52
+      },
+      "revId": "2dbbc34793615c920946997357618ee622e0bc5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b14ab389_4942ae56",
+        "filename": "tools_webrtc/remove_extra_namespace.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-11-11T10:24:38Z",
+      "side": 1,
+      "message": "remove?",
+      "range": {
+        "startLine": 54,
+        "startChar": 20,
+        "endLine": 54,
+        "endChar": 31
+      },
+      "revId": "2dbbc34793615c920946997357618ee622e0bc5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "685281fb_eec8af54",
+        "filename": "tools_webrtc/remove_extra_namespace.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-11-11T10:24:38Z",
+      "side": 1,
+      "message": "nit: do we need a space here, before the \"is\"?",
+      "range": {
+        "startLine": 75,
+        "startChar": 25,
+        "endLine": 75,
+        "endChar": 26
+      },
+      "revId": "2dbbc34793615c920946997357618ee622e0bc5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23b921bb_14379134",
+        "filename": "tools_webrtc/remove_extra_namespace.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-11-11T10:24:38Z",
+      "side": 1,
+      "message": "Maybe something like https://source.chromium.org/chromium/chromium/tools/depot_tools/+/main:git_mark_merge_base.py;l\u003d23-25;drc\u003d124bb8e53ca9508b59c0ed6321c1ea43f8321296 to avoid duplication and add the docs only at the top of the file?",
+      "range": {
+        "startLine": 79,
+        "startChar": 36,
+        "endLine": 79,
+        "endChar": 61
+      },
+      "revId": "2dbbc34793615c920946997357618ee622e0bc5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
