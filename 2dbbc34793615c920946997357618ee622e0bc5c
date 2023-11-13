@@ -275,6 +275,30 @@
       },
       "revId": "2dbbc34793615c920946997357618ee622e0bc5c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84520e1d_ab0b4917",
+        "filename": "tools_webrtc/remove_extra_namespace.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-13T09:35:02Z",
+      "side": 1,
+      "message": "Thanks!\nThat\u0027s Python for you - always trying to be \"helpful\"....",
+      "parentUuid": "d9ce6289_0e379fd5",
+      "range": {
+        "startLine": 79,
+        "startChar": 36,
+        "endLine": 79,
+        "endChar": 61
+      },
+      "revId": "2dbbc34793615c920946997357618ee622e0bc5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
