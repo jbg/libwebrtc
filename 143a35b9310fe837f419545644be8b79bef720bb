@@ -87,6 +87,24 @@
       "parentUuid": "b0c8a544_2050de97",
       "revId": "143a35b9310fe837f419545644be8b79bef720bb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b8c715f_c6ef410f",
+        "filename": "sdk/android/src/java/org/webrtc/CameraSession.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 15079
+      },
+      "writtenOn": "2023-11-13T11:52:05Z",
+      "side": 1,
+      "message": "So, if we don\u0027t know why it works, maybe it\u0027s work it to use an orientation listener instead?",
+      "parentUuid": "74115900_33d928ca",
+      "revId": "143a35b9310fe837f419545644be8b79bef720bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
