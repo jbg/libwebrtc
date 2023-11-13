@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fab8c3cf_9a24a58d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-13T09:16:49Z",
+      "side": 1,
+      "message": "Thanks for the review! Python still does strange things.",
+      "revId": "8af95a08f78eac2ba3e0f8ce89fd79645c7d0818",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

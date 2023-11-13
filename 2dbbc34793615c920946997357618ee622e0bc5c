@@ -64,6 +64,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d7c94dd_2bbd555a",
+        "filename": "tools_webrtc/remove_extra_namespace.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-13T09:16:49Z",
+      "side": 1,
+      "message": "Yes, I thought of using append() instead of insert() - but the most frequent use will be lookup, so my thinking is that it is cleaner to keep the innermost element first than to have it last. We have to do the check against empty list anyway.",
+      "parentUuid": "bf55e29e_a0cfe86e",
+      "range": {
+        "startLine": 33,
+        "startChar": 16,
+        "endLine": 33,
+        "endChar": 52
+      },
+      "revId": "2dbbc34793615c920946997357618ee622e0bc5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b14ab389_4942ae56",
@@ -77,6 +101,30 @@
       "writtenOn": "2023-11-11T10:24:38Z",
       "side": 1,
       "message": "remove?",
+      "range": {
+        "startLine": 54,
+        "startChar": 20,
+        "endLine": 54,
+        "endChar": 31
+      },
+      "revId": "2dbbc34793615c920946997357618ee622e0bc5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02ee324e_624c28d1",
+        "filename": "tools_webrtc/remove_extra_namespace.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-13T09:16:49Z",
+      "side": 1,
+      "message": "Yah, this is debug. Just printing the change count should be enough. Done.",
+      "parentUuid": "b14ab389_4942ae56",
       "range": {
         "startLine": 54,
         "startChar": 20,
@@ -110,6 +158,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71106924_623f2831",
+        "filename": "tools_webrtc/remove_extra_namespace.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-13T09:16:49Z",
+      "side": 1,
+      "message": "turns out that Python\u0027s \"print\" with multiple arguments inserts spaces between the arguments. Makes my typing slower when being used to RTC_LOG!",
+      "parentUuid": "685281fb_eec8af54",
+      "range": {
+        "startLine": 75,
+        "startChar": 25,
+        "endLine": 75,
+        "endChar": 26
+      },
+      "revId": "2dbbc34793615c920946997357618ee622e0bc5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23b921bb_14379134",
@@ -123,6 +195,30 @@
       "writtenOn": "2023-11-11T10:24:38Z",
       "side": 1,
       "message": "Maybe something like https://source.chromium.org/chromium/chromium/tools/depot_tools/+/main:git_mark_merge_base.py;l\u003d23-25;drc\u003d124bb8e53ca9508b59c0ed6321c1ea43f8321296 to avoid duplication and add the docs only at the top of the file?",
+      "range": {
+        "startLine": 79,
+        "startChar": 36,
+        "endLine": 79,
+        "endChar": 61
+      },
+      "revId": "2dbbc34793615c920946997357618ee622e0bc5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb42d4e8_ed2a0dc6",
+        "filename": "tools_webrtc/remove_extra_namespace.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-13T09:16:49Z",
+      "side": 1,
+      "message": "Trying that, but somehow the epilog loses the linebreaks in the docstring. Can\u0027t find out how to fix that.",
+      "parentUuid": "23b921bb_14379134",
       "range": {
         "startLine": 79,
         "startChar": 36,
