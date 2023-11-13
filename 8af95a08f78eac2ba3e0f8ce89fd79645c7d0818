@@ -50,6 +50,24 @@
       "message": "FYI: This was the only manual fix needed in order to make it all compile - calling a webrtc:: function from a member function of the same name within a class in the webrtc:: namespace.",
       "revId": "8af95a08f78eac2ba3e0f8ce89fd79645c7d0818",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14d7a7dd_923aa33c",
+        "filename": "pc/rtc_stats_traversal_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-11-13T09:42:01Z",
+      "side": 1,
+      "message": "Thanks for calling this out.\n\nYes, getting into the details of how C++ namespace resolution works. 😊",
+      "parentUuid": "e6608140_fc990197",
+      "revId": "8af95a08f78eac2ba3e0f8ce89fd79645c7d0818",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
