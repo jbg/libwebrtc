@@ -82,6 +82,7 @@
 #include "rtc_base/logging.h"
 #include "rtc_base/net_helper.h"
 #include "rtc_base/rate_tracker.h"
+#include "rtc_base/thread.h"
 
 namespace cricket {
 using ::webrtc::SafeTask;
