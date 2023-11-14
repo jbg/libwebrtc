@@ -21,6 +21,7 @@
 #include "api/create_peerconnection_factory.h"
 #include "api/data_channel_interface.h"
 #include "api/enable_media.h"
+#include "api/environment/create_environment.h"
 #include "api/jsep.h"
 #include "api/media_stream_interface.h"
 #include "api/task_queue/default_task_queue_factory.h"
@@ -268,8 +269,6 @@ CreatePeerConnectionFactoryWithRtxDisabled() {
   pcf_dependencies.signaling_thread = rtc::Thread::Current();
   pcf_dependencies.worker_thread = rtc::Thread::Current();
   pcf_dependencies.network_thread = rtc::Thread::Current();
-  pcf_dependencies.task_queue_factory = CreateDefaultTaskQueueFactory();
-  pcf_dependencies.trials = std::make_unique<FieldTrialBasedConfig>();
 
   pcf_dependencies.adm = FakeAudioCaptureModule::Create();
   pcf_dependencies.audio_encoder_factory = CreateBuiltinAudioEncoderFactory();
@@ -285,7 +284,7 @@ CreatePeerConnectionFactoryWithRtxDisabled() {
   EnableMedia(pcf_dependencies);
 
   rtc::scoped_refptr<ConnectionContext> context =
-      ConnectionContext::Create(&pcf_dependencies);
+      ConnectionContext::Create(CreateEnvironment(), &pcf_dependencies);
   context->set_use_rtx(false);
   return rtc::make_ref_counted<PeerConnectionFactory>(context,
                                                       &pcf_dependencies);
@@ -671,6 +670,7 @@ TEST(PeerConnectionFactoryDependenciesTest, UsesNetworkManager) {
 
   PeerConnectionFactoryDependencies pcf_dependencies;
   pcf_dependencies.network_manager = std::move(mock_network_manager);
+  pcf_dependencies.task_queue_factory = CreateDefaultTaskQueueFactory();
 
   rtc::scoped_refptr<PeerConnectionFactoryInterface> pcf =
       CreateModularPeerConnectionFactory(std::move(pcf_dependencies));
@@ -700,6 +700,7 @@ TEST(PeerConnectionFactoryDependenciesTest, UsesPacketSocketFactory) {
 
   PeerConnectionFactoryDependencies pcf_dependencies;
   pcf_dependencies.packet_socket_factory = std::move(mock_socket_factory);
+  pcf_dependencies.task_queue_factory = CreateDefaultTaskQueueFactory();
 
   rtc::scoped_refptr<PeerConnectionFactoryInterface> pcf =
       CreateModularPeerConnectionFactory(std::move(pcf_dependencies));

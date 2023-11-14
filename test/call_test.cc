@@ -15,6 +15,7 @@
 
 #include "api/audio_codecs/builtin_audio_decoder_factory.h"
 #include "api/audio_codecs/builtin_audio_encoder_factory.h"
+#include "api/environment/create_environment.h"
 #include "api/task_queue/default_task_queue_factory.h"
 #include "api/task_queue/task_queue_base.h"
 #include "api/test/create_frame_generator.h"
@@ -97,7 +98,7 @@ void CallTest::RunBaseTest(BaseTest* test) {
     num_audio_streams_ = test->GetNumAudioStreams();
     num_flexfec_streams_ = test->GetNumFlexfecStreams();
     RTC_DCHECK(num_video_streams_ > 0 || num_audio_streams_ > 0);
-    CallConfig send_config(send_event_log_.get());
+    CallConfig send_config(CreateEnvironment(send_event_log_.get()));
     test->ModifySenderBitrateConfig(&send_config.bitrate_config);
     if (num_audio_streams_ > 0) {
       CreateFakeAudioDevices(test->CreateCapturer(), test->CreateRenderer());
@@ -117,7 +118,7 @@ void CallTest::RunBaseTest(BaseTest* test) {
     }
     CreateSenderCall(send_config);
     if (test->ShouldCreateReceivers()) {
-      CallConfig recv_config(recv_event_log_.get());
+      CallConfig recv_config(CreateEnvironment(recv_event_log_.get()));
       test->ModifyReceiverBitrateConfig(&recv_config.bitrate_config);
       if (num_audio_streams_ > 0) {
         AudioState::Config audio_state_config;
@@ -207,8 +208,8 @@ void CallTest::RunBaseTest(BaseTest* test) {
 }
 
 void CallTest::CreateCalls() {
-  CreateCalls(CallConfig(send_event_log_.get()),
-              CallConfig(recv_event_log_.get()));
+  CreateCalls(CallConfig(CreateEnvironment(send_event_log_.get())),
+              CallConfig(CreateEnvironment(recv_event_log_.get())));
 }
 
 void CallTest::CreateCalls(const CallConfig& sender_config,
@@ -218,23 +219,27 @@ void CallTest::CreateCalls(const CallConfig& sender_config,
 }
 
 void CallTest::CreateSenderCall() {
-  CreateSenderCall(CallConfig(send_event_log_.get()));
+  CreateSenderCall(CallConfig(CreateEnvironment(send_event_log_.get())));
 }
 
 void CallTest::CreateSenderCall(const CallConfig& config) {
   auto sender_config = config;
-  sender_config.task_queue_factory = task_queue_factory_.get();
+  sender_config.env = EnvironmentFactory(config.env)
+                          .With(task_queue_factory_.get())
+                          .With(&field_trials_)
+                          .Create();
   sender_config.network_state_predictor_factory =
       network_state_predictor_factory_.get();
   sender_config.network_controller_factory = network_controller_factory_.get();
-  sender_config.trials = &field_trials_;
   sender_call_ = Call::Create(sender_config);
 }
 
 void CallTest::CreateReceiverCall(const CallConfig& config) {
-  auto receiver_config = config;
-  receiver_config.task_queue_factory = task_queue_factory_.get();
-  receiver_config.trials = &field_trials_;
+  CallConfig receiver_config = config;
+  receiver_config.env = EnvironmentFactory(config.env)
+                            .With(task_queue_factory_.get())
+                            .With(&field_trials_)
+                            .Create();
   receiver_call_ = Call::Create(receiver_config);
 }
 
