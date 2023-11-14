@@ -16,6 +16,7 @@
 
 #include "absl/flags/flag.h"
 #include "absl/flags/parse.h"
+#include "api/environment/create_environment.h"
 #include "api/field_trials.h"
 #include "api/media_types.h"
 #include "api/rtc_event_log/rtc_event_log.h"
@@ -494,10 +495,8 @@ class RtpReplayer final {
             "worker_thread", TaskQueueFactory::Priority::NORMAL));
     rtc::Event event;
     worker_thread_->PostTask([&]() {
-      CallConfig call_config(&event_log_);
-      call_config.trials = field_trials_.get();
-      call_config.task_queue_factory = task_queue_factory;
-      call_ = Call::Create(call_config);
+      call_ = Call::Create(CallConfig(CreateEnvironment(
+          field_trials_.get(), task_queue_factory, &event_log_)));
 
       // Creation of the streams must happen inside a task queue because it is
       // resued as a worker thread.
