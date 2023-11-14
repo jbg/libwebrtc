@@ -33,6 +33,24 @@
       "message": "Should you add the static_assert thing that says \"this type is not virtual\", so that compile_all_headers will complain when methods are added?\n(see other mock files)",
       "revId": "fad2185c613ac20f2d5f97736c0fe3bdb6435bc3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f786f6fb_f5cd462a",
+        "filename": "api/test/mock_transformable_frame.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-11-14T13:57:35Z",
+      "side": 1,
+      "message": "Done, thanks!",
+      "parentUuid": "427516ea_37e152e4",
+      "revId": "fad2185c613ac20f2d5f97736c0fe3bdb6435bc3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
