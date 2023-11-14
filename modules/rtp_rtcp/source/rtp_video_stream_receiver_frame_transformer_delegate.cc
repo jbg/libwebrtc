@@ -15,9 +15,11 @@
 #include <vector>
 
 #include "absl/memory/memory.h"
+#include "api/task_queue/pending_task_safety_flag.h"
 #include "modules/rtp_rtcp/source/rtp_descriptor_authentication.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/thread.h"
+#include "rtc_base/trace_event.h"
 
 namespace webrtc {
 
@@ -96,12 +98,14 @@ RtpVideoStreamReceiverFrameTransformerDelegate::
         Clock* clock,
         rtc::scoped_refptr<FrameTransformerInterface> frame_transformer,
         rtc::Thread* network_thread,
-        uint32_t ssrc)
+        uint32_t ssrc,
+        Metronome* metronome)
     : receiver_(receiver),
       frame_transformer_(std::move(frame_transformer)),
       network_thread_(network_thread),
       ssrc_(ssrc),
-      clock_(clock) {}
+      clock_(clock),
+      metronome_(metronome) {}
 
 void RtpVideoStreamReceiverFrameTransformerDelegate::Init() {
   RTC_DCHECK_RUN_ON(&network_sequence_checker_);
@@ -119,13 +123,43 @@ void RtpVideoStreamReceiverFrameTransformerDelegate::Reset() {
 void RtpVideoStreamReceiverFrameTransformerDelegate::TransformFrame(
     std::unique_ptr<RtpFrameObject> frame) {
   RTC_DCHECK_RUN_ON(&network_sequence_checker_);
-  frame_transformer_->Transform(
-      std::make_unique<TransformableVideoReceiverFrame>(std::move(frame), ssrc_,
-                                                        receiver_));
+  TRACE_EVENT0(
+      "webrtc",
+      "RtpVideoStreamReceiverFrameTransformerDelegate::TransformFrame");
+
+  if (frame_transformer_->AllowsBatching() && metronome_) {
+    queued_frames_.emplace_back(std::move(frame));
+    if (!tick_scheduled_) {
+      metronome_->RequestCallOnNextTick(
+          SafeTask(safety_.flag(), [this] { InvokeQueuedTransforms(); }));
+      tick_scheduled_ = true;
+    }
+  } else {
+    frame_transformer_->Transform(
+        std::make_unique<TransformableVideoReceiverFrame>(std::move(frame),
+                                                          ssrc_, receiver_));
+  }
+}
+
+void RtpVideoStreamReceiverFrameTransformerDelegate::InvokeQueuedTransforms() {
+  RTC_DCHECK_RUN_ON(&network_sequence_checker_);
+  TRACE_EVENT0(
+      "webrtc",
+      "RtpVideoStreamReceiverFrameTransformerDelegate::InvokeQueuedTransforms");
+  tick_scheduled_ = false;
+  for (std::unique_ptr<RtpFrameObject>& frame : queued_frames_) {
+    frame_transformer_->Transform(
+        std::make_unique<TransformableVideoReceiverFrame>(std::move(frame),
+                                                          ssrc_, receiver_));
+  }
+  queued_frames_.clear();
 }
 
 void RtpVideoStreamReceiverFrameTransformerDelegate::OnTransformedFrame(
     std::unique_ptr<TransformableFrameInterface> frame) {
+  TRACE_EVENT0(
+      "webrtc",
+      "RtpVideoStreamReceiverFrameTransformerDelegate::OnTransformedFrame");
   rtc::scoped_refptr<RtpVideoStreamReceiverFrameTransformerDelegate> delegate(
       this);
   network_thread_->PostTask(

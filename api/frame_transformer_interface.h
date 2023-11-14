@@ -114,6 +114,10 @@ class FrameTransformerInterface : public rtc::RefCountInterface {
   virtual void UnregisterTransformedFrameCallback() {}
   virtual void UnregisterTransformedFrameSinkCallback(uint32_t ssrc) {}
 
+  // Returns true if the implementation can tolerate having its Transform()
+  // calls being delayed and aligned to some metronome, to save power.
+  virtual bool AllowsBatching() { return false; }
+
  protected:
   ~FrameTransformerInterface() override = default;
 };
