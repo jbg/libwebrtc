@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e2cc1ee_b6aa71c8",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2456,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-11-15T08:23:29Z",
+      "side": 0,
+      "message": "this is a no-op since kAutoBandwidth is the default.",
+      "revId": "59eced624469c3fc56b7474d17be35e92c6a1cb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
