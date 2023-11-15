@@ -16,6 +16,69 @@
       "message": "Please?",
       "revId": "b556bea7c83545eb9053e390737204f9a18f8559",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2403d6b_2fc77a67",
+        "filename": "rtc_base/byte_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-15T13:25:45Z",
+      "side": 1,
+      "message": "consider adding \u0027ABSL_ATTRIBUTE_LIFETIME_BOUND\u0027 annotation for a bit extra protection and consistency with  BitstreamReader\n\nhttps://webrtc.googlesource.com/src/+/refs/heads/main/rtc_base/bitstream_reader.h#33\nhttp://go/totw/220",
+      "range": {
+        "startLine": 126,
+        "startChar": 19,
+        "endLine": 126,
+        "endChar": 48
+      },
+      "revId": "b556bea7c83545eb9053e390737204f9a18f8559",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b9a8be2_94c356d1",
+        "filename": "rtc_base/byte_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-15T13:25:45Z",
+      "side": 1,
+      "message": "single parameter constructor should be explicit",
+      "revId": "b556bea7c83545eb9053e390737204f9a18f8559",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5640713e_70f291ef",
+        "filename": "rtc_base/byte_buffer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-15T13:25:45Z",
+      "side": 1,
+      "message": "or it can be plain c-array:\nconst uint8_t buf[] \u003d {\"a\", \"b\", \"c\"};\nArrayView\u003cconst uint8_t\u003e view(buf);\n\nByteBufferReader read_buffer(buf);",
+      "range": {
+        "startLine": 254,
+        "startChar": 2,
+        "endLine": 255,
+        "endChar": 27
+      },
+      "revId": "b556bea7c83545eb9053e390737204f9a18f8559",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
