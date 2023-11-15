@@ -16,6 +16,23 @@
       "message": "Redoing it was easier than rebasing.\nI recommend reviewing the patchsets indivudually, the side-by-side diff is a bit confusing",
       "revId": "919e62ef090ca0a4e2371e61ac10f71ec3f7a845",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c210b45_8ba2a02d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-11-15T13:13:21Z",
+      "side": 1,
+      "message": "Now the TODO is gone :-)",
+      "revId": "919e62ef090ca0a4e2371e61ac10f71ec3f7a845",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
