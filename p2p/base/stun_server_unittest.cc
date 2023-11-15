@@ -57,7 +57,7 @@ class StunServerTest : public ::testing::Test {
     std::unique_ptr<rtc::TestClient::Packet> packet =
         client_->NextPacket(rtc::TestClient::kTimeoutMs);
     if (packet) {
-      rtc::ByteBufferReader buf(packet->buf, packet->size);
+      rtc::ByteBufferReader buf(packet->buf);
       msg = new StunMessage();
       msg->Read(&buf);
     }
