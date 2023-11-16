@@ -16,6 +16,24 @@
       "message": "ok, seems ready now.",
       "revId": "c4fee82cca4c5dcbbc90249178732edf35166980",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a2fcbc8_95de2ab2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-11-16T12:06:12Z",
+      "side": 1,
+      "message": "FYI socket_unittest and nat_unittest are changed to use ensure sockets are used on the \"correct\" thread. Notice that nat_unittest creat multiple threads and attach the socket server on different threads.",
+      "parentUuid": "22d93e17_deafc0e6",
+      "revId": "c4fee82cca4c5dcbbc90249178732edf35166980",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
