@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9230bfe3_84738d70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-16T07:52:40Z",
+      "side": 1,
+      "message": "Death to pointer/length! :-)",
+      "revId": "02c31e68249182c92c0cbcbeab25ff82ef887924",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f4a927c_ca8d0f64",
@@ -48,6 +65,23 @@
       "writtenOn": "2023-11-15T14:46:39Z",
       "side": 1,
       "message": "side thought: this constructor probably can be removed because rtc::Buffer is implicitly convertible into rtc::ArrayView",
+      "revId": "02c31e68249182c92c0cbcbeab25ff82ef887924",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0733f9c5_dc79e0d2",
+        "filename": "rtc_base/byte_buffer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-16T07:52:40Z",
+      "side": 1,
+      "message": "with all the uint8_t around, why is this still a char*?",
       "revId": "02c31e68249182c92c0cbcbeab25ff82ef887924",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
