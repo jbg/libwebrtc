@@ -94,8 +94,18 @@ void ChannelReceiveFrameTransformerDelegate::Transform(
     const RTPHeader& header,
     uint32_t ssrc) {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
+<<<<<<< HEAD   (080b86 [M120] JsepTransportController: Remove raw pointers to descr)
   frame_transformer_->Transform(
       std::make_unique<TransformableIncomingAudioFrame>(packet, header, ssrc));
+=======
+  if (short_circuit_) {
+    receive_frame_callback_(packet, header);
+  } else {
+    frame_transformer_->Transform(
+        std::make_unique<TransformableIncomingAudioFrame>(packet, header, ssrc,
+                                                          codec_mime_type));
+  }
+>>>>>>> CHANGE (6e9560 Support shortcircuiting encoded transforms)
 }
 
 void ChannelReceiveFrameTransformerDelegate::OnTransformedFrame(
@@ -105,6 +115,14 @@ void ChannelReceiveFrameTransformerDelegate::OnTransformedFrame(
       [delegate = std::move(delegate), frame = std::move(frame)]() mutable {
         delegate->ReceiveFrame(std::move(frame));
       });
+}
+
+void ChannelReceiveFrameTransformerDelegate::StartShortCircuiting() {
+  rtc::scoped_refptr<ChannelReceiveFrameTransformerDelegate> delegate(this);
+  channel_receive_thread_->PostTask([delegate = std::move(delegate)]() mutable {
+    RTC_DCHECK_RUN_ON(&delegate->sequence_checker_);
+    delegate->short_circuit_ = true;
+  });
 }
 
 void ChannelReceiveFrameTransformerDelegate::ReceiveFrame(
