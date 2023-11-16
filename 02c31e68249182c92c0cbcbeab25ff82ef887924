@@ -54,6 +54,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4189fa2e_2f712112",
+        "filename": "rtc_base/byte_buffer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-11-16T12:03:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f4a927c_ca8d0f64",
+      "revId": "02c31e68249182c92c0cbcbeab25ff82ef887924",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d52e30a8_25243b10",
         "filename": "rtc_base/byte_buffer.h",
         "patchSetId": 4
@@ -82,6 +100,24 @@
       "writtenOn": "2023-11-16T07:52:40Z",
       "side": 1,
       "message": "with all the uint8_t around, why is this still a char*?",
+      "revId": "02c31e68249182c92c0cbcbeab25ff82ef887924",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bfdc457_836dcc25",
+        "filename": "rtc_base/byte_buffer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-11-16T12:03:33Z",
+      "side": 1,
+      "message": "I am not trying to fix this class. I am merely trying to make it more useful for tests using it in https://webrtc-review.googlesource.com/c/src/+/327324.\nThere is no special point in keeping char* except for the method ByteBufferReader::ReadString.",
+      "parentUuid": "0733f9c5_dc79e0d2",
       "revId": "02c31e68249182c92c0cbcbeab25ff82ef887924",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
