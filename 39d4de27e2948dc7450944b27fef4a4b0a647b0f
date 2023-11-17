@@ -16,6 +16,24 @@
       "message": "Nice idea !\nMaybe we should drop iOS 14 and add iOS 17, this would allow to drop xcode 13.",
       "revId": "39d4de27e2948dc7450944b27fef4a4b0a647b0f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7358a20d_1a467d43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6193
+      },
+      "writtenOn": "2023-11-17T14:34:44Z",
+      "side": 1,
+      "message": "Can look into that separately, just want to stabilize things over the weekend.",
+      "parentUuid": "3e891b96_a8d8dfda",
+      "revId": "39d4de27e2948dc7450944b27fef4a4b0a647b0f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
