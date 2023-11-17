@@ -72,6 +72,22 @@
       },
     },
   },
+  'xcode_ios_cache_13c100': {
+    'swarming': {
+      'named_caches': [{
+        'name': 'xcode_ios_13c100',
+        'path': 'Xcode.app'
+      }]
+    }
+  },
+  'xcode_ios_cache_14c18': {
+    'swarming': {
+      'named_caches': [{
+        'name': 'xcode_ios_14c18',
+        'path': 'Xcode.app'
+      }]
+    }
+  },
   'ios_runtime_cache_14_5': {
     'swarming': {
       'named_caches': [{
