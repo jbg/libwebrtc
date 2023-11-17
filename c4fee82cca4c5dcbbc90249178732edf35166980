@@ -34,6 +34,74 @@
       "parentUuid": "22d93e17_deafc0e6",
       "revId": "c4fee82cca4c5dcbbc90249178732edf35166980",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3aa95f5f_8a26ed9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-17T06:34:43Z",
+      "side": 1,
+      "message": "A few points I don\u0027t understand here.",
+      "revId": "c4fee82cca4c5dcbbc90249178732edf35166980",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df5c0cc0_dd179c1e",
+        "filename": "rtc_base/nat_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-17T06:34:43Z",
+      "side": 1,
+      "message": "This is a hidden BlockingCall(). Can you use BlockingCall() instead?",
+      "revId": "c4fee82cca4c5dcbbc90249178732edf35166980",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3e98783_62494261",
+        "filename": "rtc_base/nat_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-17T06:34:43Z",
+      "side": 1,
+      "message": "The changes in this file seem to be mostly that you run a lot of functions on th_int rather than on the main thread. Is this cleanup, or is there a reason why this is now necessary?",
+      "revId": "c4fee82cca4c5dcbbc90249178732edf35166980",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41bb9354_eaed17fd",
+        "filename": "rtc_base/test_client.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-17T06:34:43Z",
+      "side": 1,
+      "message": "This seems a bit bizarre - you make an ownership-claiming pointer to something that was passed to you as a const reference. Is there a copy call in there that I\u0027m not seeing?",
+      "revId": "c4fee82cca4c5dcbbc90249178732edf35166980",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
