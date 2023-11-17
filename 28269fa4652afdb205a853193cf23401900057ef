@@ -63,6 +63,30 @@
       },
       "revId": "28269fa4652afdb205a853193cf23401900057ef",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c081452b_2c0cddac",
+        "filename": "modules/video_coding/codecs/test/video_codec_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2023-11-17T08:54:09Z",
+      "side": 1,
+      "message": "Ah, right. Internally, this would be supported.",
+      "parentUuid": "cb5db88c_17866218",
+      "range": {
+        "startLine": 52,
+        "startChar": 22,
+        "endLine": 52,
+        "endChar": 33
+      },
+      "revId": "28269fa4652afdb205a853193cf23401900057ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
