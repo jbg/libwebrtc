@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1965d134_e4fbdc37",
+        "filename": "rtc_base/nat_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-11-17T09:21:09Z",
+      "side": 1,
+      "message": "ah, much better idea - thanks. Hope the explanations are more understandable now.",
+      "parentUuid": "df5c0cc0_dd179c1e",
+      "revId": "c4fee82cca4c5dcbbc90249178732edf35166980",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b3e98783_62494261",
         "filename": "rtc_base/nat_unittest.cc",
         "patchSetId": 5
@@ -89,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "abdaf714_05680c03",
+        "filename": "rtc_base/nat_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-11-17T09:21:09Z",
+      "side": 1,
+      "message": "So it is a \"bug\" in the current code. When I start to use AsyncUDPSocket::NotifyPacketReceived I hit a DCHECK  in NotifyPacketReceived that  ensure NotifyReceivedPacket is called on the same thread as RegisterReceivedPacketCallback on the \"network thread\". This test is kind of complicated because it uses 3 threads. One main thread, and thr_int and thr_ext for two separate socket servers. \nSo this change is needed to ensure each client socket only access the socket on one thread. \nI have not tried to rewrite the test, only try to ensure each TestClient lives on the correct thread.",
+      "parentUuid": "b3e98783_62494261",
+      "revId": "c4fee82cca4c5dcbbc90249178732edf35166980",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "41bb9354_eaed17fd",
         "filename": "rtc_base/test_client.cc",
         "patchSetId": 5
@@ -100,6 +136,24 @@
       "writtenOn": "2023-11-17T06:34:43Z",
       "side": 1,
       "message": "This seems a bit bizarre - you make an ownership-claiming pointer to something that was passed to you as a const reference. Is there a copy call in there that I\u0027m not seeing?",
+      "revId": "c4fee82cca4c5dcbbc90249178732edf35166980",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53eafe49_cee5d481",
+        "filename": "rtc_base/test_client.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-11-17T09:21:09Z",
+      "side": 1,
+      "message": "yes, it is two different types, TestClient::Packet do make a copy of packet.payload(). Same as it used to take a copy of *buf.",
+      "parentUuid": "41bb9354_eaed17fd",
       "revId": "c4fee82cca4c5dcbbc90249178732edf35166980",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
