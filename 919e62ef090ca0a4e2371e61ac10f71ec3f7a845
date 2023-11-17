@@ -33,6 +33,23 @@
       "message": "Now the TODO is gone :-)",
       "revId": "919e62ef090ca0a4e2371e61ac10f71ec3f7a845",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efab0dc6_d28bcf6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2023-11-17T09:36:14Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "919e62ef090ca0a4e2371e61ac10f71ec3f7a845",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
