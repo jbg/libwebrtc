@@ -16,6 +16,41 @@
       "message": "I take it the caller of the function will be in Chrome?\nCode looks good to me.",
       "revId": "49e973bac47e7bb2e89aaf63d9e42d47396a4294",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1beff9d_23bcd3a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-11-17T12:58:04Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "49e973bac47e7bb2e89aaf63d9e42d47396a4294",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f20dc54_f592ea70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2023-11-17T12:58:04Z",
+      "side": 1,
+      "message": "Yep, something like crrev.com/c/5040731, calling it in a event scheduled for after the ontrack event etc runs - I\u0027m working on tests for it.",
+      "parentUuid": "1024e416_b3d23836",
+      "revId": "49e973bac47e7bb2e89aaf63d9e42d47396a4294",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
