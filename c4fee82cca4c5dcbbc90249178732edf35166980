@@ -88,6 +88,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4efe28bb_bb6cdece",
+        "filename": "rtc_base/nat_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-17T09:30:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1965d134_e4fbdc37",
+      "revId": "c4fee82cca4c5dcbbc90249178732edf35166980",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3e98783_62494261",
@@ -123,6 +141,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a72e21d_1fd5148c",
+        "filename": "rtc_base/nat_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-17T09:30:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "abdaf714_05680c03",
+      "revId": "c4fee82cca4c5dcbbc90249178732edf35166980",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41bb9354_eaed17fd",
@@ -154,6 +190,24 @@
       "side": 1,
       "message": "yes, it is two different types, TestClient::Packet do make a copy of packet.payload(). Same as it used to take a copy of *buf.",
       "parentUuid": "41bb9354_eaed17fd",
+      "revId": "c4fee82cca4c5dcbbc90249178732edf35166980",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfabec52_538138e5",
+        "filename": "rtc_base/test_client.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-17T09:30:17Z",
+      "side": 1,
+      "message": "My bad reading ... it\u0027s make_unique, not WrapUnique ... that implies a copy, of course.",
+      "parentUuid": "53eafe49_cee5d481",
       "revId": "c4fee82cca4c5dcbbc90249178732edf35166980",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
