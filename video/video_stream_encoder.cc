@@ -647,7 +647,6 @@ VideoStreamEncoder::VideoStreamEncoder(
     : field_trials_(field_trials),
       worker_queue_(TaskQueueBase::Current()),
       number_of_cores_(number_of_cores),
-      sink_(nullptr),
       settings_(settings),
       allocation_cb_type_(allocation_cb_type),
       rate_control_settings_(
@@ -661,39 +660,12 @@ VideoStreamEncoder::VideoStreamEncoder(
                             ? encoder_selector_from_constructor_
                             : encoder_selector_from_factory_.get()),
       encoder_stats_observer_(encoder_stats_observer),
-      cadence_callback_(*this),
       frame_cadence_adapter_(std::move(frame_cadence_adapter)),
-      encoder_initialized_(false),
-      max_framerate_(-1),
-      pending_encoder_reconfiguration_(false),
-      pending_encoder_creation_(false),
-      crop_width_(0),
-      crop_height_(0),
-      encoder_target_bitrate_bps_(absl::nullopt),
-      max_data_payload_length_(0),
-      encoder_paused_and_dropped_frame_(false),
-      was_encode_called_since_last_initialization_(false),
-      encoder_failed_(false),
       clock_(clock),
-      last_captured_timestamp_(0),
       delta_ntp_internal_ms_(clock_->CurrentNtpInMilliseconds() -
                              clock_->TimeInMilliseconds()),
       last_frame_log_ms_(clock_->TimeInMilliseconds()),
-      captured_frame_count_(0),
-      dropped_frame_cwnd_pushback_count_(0),
-      dropped_frame_encoder_block_count_(0),
-      pending_frame_post_time_us_(0),
-      accumulated_update_rect_{0, 0, 0, 0},
-      accumulated_update_rect_is_valid_(true),
-      animation_start_time_(Timestamp::PlusInfinity()),
-      cap_resolution_due_to_video_content_(false),
-      expect_resize_state_(ExpectResizeState::kNoResize),
-      fec_controller_override_(nullptr),
-      force_disable_frame_dropper_(false),
-      pending_frame_drops_(0),
-      cwnd_frame_counter_(0),
       next_frame_types_(1, VideoFrameType::kVideoFrameDelta),
-      frame_encode_metadata_writer_(this),
       automatic_animation_detection_experiment_(
           ParseAutomatincAnimationDetectionFieldTrial()),
       input_state_provider_(encoder_stats_observer),
@@ -704,7 +676,6 @@ VideoStreamEncoder::VideoStreamEncoder(
       degradation_preference_manager_(
           std::make_unique<DegradationPreferenceManager>(
               video_stream_adapter_.get())),
-      adaptation_constraints_(),
       stream_resource_manager_(&input_state_provider_,
                                encoder_stats_observer,
                                clock_,
@@ -712,8 +683,6 @@ VideoStreamEncoder::VideoStreamEncoder(
                                std::move(overuse_detector),
                                degradation_preference_manager_.get(),
                                field_trials),
-      video_source_sink_controller_(/*sink=*/frame_cadence_adapter_.get(),
-                                    /*source=*/nullptr),
       default_limits_allowed_(
           !field_trials.IsEnabled("WebRTC-DefaultBitrateLimitsKillSwitch")),
       qp_parsing_allowed_(
@@ -1538,8 +1507,8 @@ void VideoStreamEncoder::OnFrame(Timestamp post_time,
                         << incoming_frame.ntp_time_ms()
                         << " <= " << last_captured_timestamp_
                         << ") for incoming frame. Dropping.";
-    accumulated_update_rect_.Union(incoming_frame.update_rect());
-    accumulated_update_rect_is_valid_ &= incoming_frame.has_update_rect();
+    DropFrame(incoming_frame,
+              VideoStreamEncoderObserver::DropReason::kBadTimestamp);
     return;
   }
 
@@ -1565,18 +1534,16 @@ void VideoStreamEncoder::OnFrame(Timestamp post_time,
       // Frame drop by congestion window pushback. Do not encode this
       // frame.
       ++dropped_frame_cwnd_pushback_count_;
-      encoder_stats_observer_->OnFrameDropped(
-          VideoStreamEncoderObserver::DropReason::kCongestionWindow);
     } else {
       // There is a newer frame in flight. Do not encode this frame.
       RTC_LOG(LS_VERBOSE)
           << "Incoming frame dropped due to that the encoder is blocked.";
       ++dropped_frame_encoder_block_count_;
-      encoder_stats_observer_->OnFrameDropped(
-          VideoStreamEncoderObserver::DropReason::kEncoderQueue);
     }
-    accumulated_update_rect_.Union(incoming_frame.update_rect());
-    accumulated_update_rect_is_valid_ &= incoming_frame.has_update_rect();
+    DropFrame(incoming_frame,
+              cwnd_frame_drop
+                  ? VideoStreamEncoderObserver::DropReason::kCongestionWindow
+                  : VideoStreamEncoderObserver::DropReason::kEncoderQueue);
   }
   if (log_stats) {
     RTC_LOG(LS_INFO) << "Number of frames: captured " << captured_frame_count_
@@ -1813,10 +1780,8 @@ void VideoStreamEncoder::MaybeEncodeVideoFrame(const VideoFrame& video_frame,
   // Because pending frame will be dropped in any case, we need to
   // remember its updated region.
   if (pending_frame_) {
-    encoder_stats_observer_->OnFrameDropped(
-        VideoStreamEncoderObserver::DropReason::kEncoderQueue);
-    accumulated_update_rect_.Union(pending_frame_->update_rect());
-    accumulated_update_rect_is_valid_ &= pending_frame_->has_update_rect();
+    DropFrame(*pending_frame_,
+              VideoStreamEncoderObserver::DropReason::kEncoderQueue);
   }
 
   if (DropDueToSize(video_frame.size())) {
@@ -1830,10 +1795,8 @@ void VideoStreamEncoder::MaybeEncodeVideoFrame(const VideoFrame& video_frame,
     } else {
       // Ensure that any previously stored frame is dropped.
       pending_frame_.reset();
-      accumulated_update_rect_.Union(video_frame.update_rect());
-      accumulated_update_rect_is_valid_ &= video_frame.has_update_rect();
-      encoder_stats_observer_->OnFrameDropped(
-          VideoStreamEncoderObserver::DropReason::kEncoderQueue);
+      DropFrame(video_frame,
+                VideoStreamEncoderObserver::DropReason::kEncoderQueue);
     }
     return;
   }
@@ -1851,10 +1814,8 @@ void VideoStreamEncoder::MaybeEncodeVideoFrame(const VideoFrame& video_frame,
       // Ensure that any previously stored frame is dropped.
       pending_frame_.reset();
       TraceFrameDropStart();
-      accumulated_update_rect_.Union(video_frame.update_rect());
-      accumulated_update_rect_is_valid_ &= video_frame.has_update_rect();
-      encoder_stats_observer_->OnFrameDropped(
-          VideoStreamEncoderObserver::DropReason::kEncoderQueue);
+      DropFrame(video_frame,
+                VideoStreamEncoderObserver::DropReason::kEncoderQueue);
     }
     return;
   }
@@ -1878,8 +1839,7 @@ void VideoStreamEncoder::MaybeEncodeVideoFrame(const VideoFrame& video_frame,
         << ", input frame rate " << framerate_fps;
     OnDroppedFrame(
         EncodedImageCallback::DropReason::kDroppedByMediaOptimizations);
-    accumulated_update_rect_.Union(video_frame.update_rect());
-    accumulated_update_rect_is_valid_ &= video_frame.has_update_rect();
+    AccumulateUpdateRect(video_frame);
     return;
   }
 
@@ -2613,6 +2573,20 @@ void VideoStreamEncoder::RemoveRestrictionsListenerForTesting(
     event.Set();
   });
   event.Wait(rtc::Event::kForever);
+}
+
+// RTC_RUN_ON(&encoder_queue_)
+void VideoStreamEncoder::DropFrame(
+    const VideoFrame& frame,
+    VideoStreamEncoderObserver::DropReason reason) {
+  AccumulateUpdateRect(frame);
+  encoder_stats_observer_->OnFrameDropped(reason);
+}
+
+// RTC_RUN_ON(&encoder_queue_)
+void VideoStreamEncoder::AccumulateUpdateRect(const VideoFrame& frame) {
+  accumulated_update_rect_.Union(frame.update_rect());
+  accumulated_update_rect_is_valid_ &= frame.has_update_rect();
 }
 
 }  // namespace webrtc
