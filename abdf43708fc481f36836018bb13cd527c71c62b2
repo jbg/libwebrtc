@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae893ae3_997af57a",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1842,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-11-20T10:54:21Z",
+      "side": 1,
+      "message": "Can your DropFrame() be called here instead?\n\nThe only difference between OnDroppedFrame() and DropFrame() is that the former forwards the event to |sink_| and |stream_resource_manager_| (this one will always be on the EncoderQueue).\n\nDo we probably need to also forward event from the DropFrame()?\n\nBTW, it seems that |sink_-\u003eOnFrameDropped()| does nothing, while |stream_resource_manager_-\u003eOnFrameDropped()| will affect quality adaptation.",
+      "range": {
+        "startLine": 1840,
+        "startChar": 3,
+        "endLine": 1842,
+        "endChar": 38
+      },
+      "revId": "abdf43708fc481f36836018bb13cd527c71c62b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "828e3110_8b46f6eb",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2579,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-11-20T10:54:21Z",
+      "side": 1,
+      "message": "nit: OnFrameDroppedInternally seems like a better name. It sounds like it actually does something to drop frame, but it instead it reacts to the event.\n\nSince it clashes with OnDroppedFrame, we need to distinguish it as something originated in VSE vs. something happening before in the pipeline.",
+      "range": {
+        "startLine": 2579,
+        "startChar": 25,
+        "endLine": 2579,
+        "endChar": 34
+      },
+      "revId": "abdf43708fc481f36836018bb13cd527c71c62b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
