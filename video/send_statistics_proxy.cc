@@ -1097,6 +1097,9 @@ void SendStatisticsProxy::OnFrameDropped(DropReason reason) {
     case DropReason::kSource:
       ++stats_.frames_dropped_by_capturer;
       break;
+    case DropReason::kBadTimestamp:
+      ++stats_.frames_dropped_by_bad_timestamp;
+      break;
     case DropReason::kEncoderQueue:
       ++stats_.frames_dropped_by_encoder_queue;
       break;
