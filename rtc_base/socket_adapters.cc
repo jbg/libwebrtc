@@ -520,7 +520,8 @@ void AsyncSocksProxySocket::OnConnectEvent(Socket* socket) {
 void AsyncSocksProxySocket::ProcessInput(char* data, size_t* len) {
   RTC_DCHECK(state_ < SS_TUNNEL);
 
-  ByteBufferReader response(data, *len);
+  ByteBufferReader response(
+      rtc::ArrayView<const uint8_t>(reinterpret_cast<uint8_t*>(data), *len));
 
   if (state_ == SS_HELLO) {
     uint8_t ver, method;
