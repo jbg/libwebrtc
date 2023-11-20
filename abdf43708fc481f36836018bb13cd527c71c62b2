@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "93422430_7bb5da77",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1842,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-11-20T11:31:12Z",
+      "side": 1,
+      "message": "|sink_-\u003eOnFrameDropped()| is implemented by VideoSendStream which has an action happening. Agree it seems to me that this drop should be forwarded to stats collection as well. @hbos@webrtc.org WDYT?",
+      "parentUuid": "ae893ae3_997af57a",
+      "range": {
+        "startLine": 1840,
+        "startChar": 3,
+        "endLine": 1842,
+        "endChar": 38
+      },
+      "revId": "abdf43708fc481f36836018bb13cd527c71c62b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "828e3110_8b46f6eb",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-20T10:54:21Z",
       "side": 1,
       "message": "nit: OnFrameDroppedInternally seems like a better name. It sounds like it actually does something to drop frame, but it instead it reacts to the event.\n\nSince it clashes with OnDroppedFrame, we need to distinguish it as something originated in VSE vs. something happening before in the pipeline.",
+      "range": {
+        "startLine": 2579,
+        "startChar": 25,
+        "endLine": 2579,
+        "endChar": 34
+      },
+      "revId": "abdf43708fc481f36836018bb13cd527c71c62b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57a627da_1cd73bc0",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2579,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-11-20T11:31:12Z",
+      "side": 1,
+      "message": "Makes sense, renamed to ProcessDroppedFrame.",
+      "parentUuid": "828e3110_8b46f6eb",
       "range": {
         "startLine": 2579,
         "startChar": 25,
