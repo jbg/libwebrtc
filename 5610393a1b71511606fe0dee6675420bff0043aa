@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49f96ede_4d48865f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-11-20T13:15:00Z",
+      "side": 1,
+      "message": "Can you update the CL description to talk about the behavior changes / frame drops rather than clean up? When I initially read the title I thought this was a no-op refactor CL\n\nThe clean up to colon list can be mentioned in the body rather than title.",
+      "revId": "5610393a1b71511606fe0dee6675420bff0043aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

@@ -72,6 +72,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "68666e7b_35fb5066",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1842,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-11-20T13:15:00Z",
+      "side": 1,
+      "message": "Personally, I find it confusing if we handle different frame drops differently.\n\nWould it make more sense to forward all frame drops, and then let the stream_resource_manager_ decide which frame drop reasons to care about or not?\n\nBut on second though, why does the frame drop reason matter? Why aren\u0027t we forwarding all drops?",
+      "parentUuid": "4a79f80e_3875c8e5",
+      "range": {
+        "startLine": 1840,
+        "startChar": 3,
+        "endLine": 1842,
+        "endChar": 38
+      },
+      "revId": "abdf43708fc481f36836018bb13cd527c71c62b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "828e3110_8b46f6eb",
