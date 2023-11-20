@@ -48,6 +48,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a79f80e_3875c8e5",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1842,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-11-20T11:47:00Z",
+      "side": 1,
+      "message": "You are right the |sink_| has an action: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/video/video_send_stream_impl.cc;l\u003d568;drc\u003d445f8cfdbb63b29ce44f728f6b5015cf18df5534\n\nIt\u0027s used to figure out if the encoder is hanging. Maybe we shouldn\u0027t trigger it each time we drop a frame due to kEncoderQueue.\n\n\nHow about we still merge things, but call the sink_ and stream_resource_manager_ only for |VideoStreamEncoderObserver::DropReason::kMediaOptimization| and |VideoStreamEncoderObserver::DropReason::kEncoder| reasons? Then we can merge the two functions.",
+      "parentUuid": "93422430_7bb5da77",
+      "range": {
+        "startLine": 1840,
+        "startChar": 3,
+        "endLine": 1842,
+        "endChar": 38
+      },
+      "revId": "abdf43708fc481f36836018bb13cd527c71c62b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "828e3110_8b46f6eb",
