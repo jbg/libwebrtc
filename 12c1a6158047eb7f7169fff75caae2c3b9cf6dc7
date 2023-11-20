@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0a26f3b_c32c973b",
+        "filename": "rtc_base/byte_buffer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-11-20T08:04:49Z",
+      "side": 1,
+      "message": "no need for reinterpret",
+      "range": {
+        "startLine": 49,
+        "startChar": 19,
+        "endLine": 49,
+        "endChar": 35
+      },
+      "revId": "12c1a6158047eb7f7169fff75caae2c3b9cf6dc7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8ebd648_b472a3ec",
+        "filename": "rtc_base/byte_buffer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-11-20T08:04:49Z",
+      "side": 1,
+      "message": "not implememted and missing a test?",
+      "range": {
+        "startLine": 157,
+        "startChar": 7,
+        "endLine": 157,
+        "endChar": 16
+      },
+      "revId": "12c1a6158047eb7f7169fff75caae2c3b9cf6dc7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f423dd92_1be074e4",
+        "filename": "rtc_base/byte_buffer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-11-20T08:04:49Z",
+      "side": 1,
+      "message": "Do you need this method if you implement ReadBytes(rtc::ArrayView\u003cuint8_t\u003e val);",
+      "range": {
+        "startLine": 174,
+        "startChar": 17,
+        "endLine": 174,
+        "endChar": 24
+      },
+      "revId": "12c1a6158047eb7f7169fff75caae2c3b9cf6dc7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
