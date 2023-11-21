@@ -35,8 +35,8 @@ class StunServerTest : public ::testing::Test {
  public:
   StunServerTest() : ss_(new rtc::VirtualSocketServer()) {
     ss_->SetMessageQueue(&main_thread);
-    server_.reset(
-        new StunServer(rtc::AsyncUDPSocket::Create(ss_.get(), server_addr)));
+    server_.reset(new StunServer(
+        rtc::AsyncUDPSocket::Create(ss_.get(), server_addr), main_thread));
     client_.reset(new rtc::TestClient(
         absl::WrapUnique(rtc::AsyncUDPSocket::Create(ss_.get(), client_addr))));
   }
