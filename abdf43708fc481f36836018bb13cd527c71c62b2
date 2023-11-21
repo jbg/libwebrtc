@@ -96,6 +96,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "62814b28_c2326aa5",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1842,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-11-21T08:03:51Z",
+      "side": 1,
+      "message": "\u003e Personally, I find it confusing if we handle different frame drops differently.\n\nI kind of agree, but this is the state of reality. At least we\u0027re calling the same function everywhere in VSE now.\n\nPTAL on the new PS.",
+      "parentUuid": "68666e7b_35fb5066",
+      "range": {
+        "startLine": 1840,
+        "startChar": 3,
+        "endLine": 1842,
+        "endChar": 38
+      },
+      "revId": "abdf43708fc481f36836018bb13cd527c71c62b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "828e3110_8b46f6eb",
