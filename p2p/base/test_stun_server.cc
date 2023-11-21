@@ -16,11 +16,12 @@
 namespace cricket {
 
 TestStunServer* TestStunServer::Create(rtc::SocketServer* ss,
-                                       const rtc::SocketAddress& addr) {
+                                       const rtc::SocketAddress& addr,
+                                       webrtc::TaskQueueBase& network_thread) {
   rtc::Socket* socket = ss->CreateSocket(addr.family(), SOCK_DGRAM);
   rtc::AsyncUDPSocket* udp_socket = rtc::AsyncUDPSocket::Create(socket, addr);
 
-  return new TestStunServer(udp_socket);
+  return new TestStunServer(udp_socket, network_thread);
 }
 
 void TestStunServer::OnBindingRequest(StunMessage* msg,

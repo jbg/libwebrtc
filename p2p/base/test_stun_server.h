@@ -23,7 +23,8 @@ namespace cricket {
 class TestStunServer : StunServer {
  public:
   static TestStunServer* Create(rtc::SocketServer* ss,
-                                const rtc::SocketAddress& addr);
+                                const rtc::SocketAddress& addr,
+                                webrtc::TaskQueueBase& network_thread);
 
   // Set a fake STUN address to return to the client.
   void set_fake_stun_addr(const rtc::SocketAddress& addr) {
@@ -31,7 +32,9 @@ class TestStunServer : StunServer {
   }
 
  private:
-  explicit TestStunServer(rtc::AsyncUDPSocket* socket) : StunServer(socket) {}
+  explicit TestStunServer(rtc::AsyncUDPSocket* socket,
+                          webrtc::TaskQueueBase& network_thread)
+      : StunServer(socket, network_thread) {}
 
   void OnBindingRequest(StunMessage* msg,
                         const rtc::SocketAddress& remote_addr) override;
