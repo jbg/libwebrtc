@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ce3a2c5_0fd15cc0",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2200,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-11-21T10:35:35Z",
+      "side": 1,
+      "message": "This can\u0027t be renamed, since it\u0027s part of the EncodedImageCallback interface. kEncoder reason is called then the encoder wrapper notices, that the encoder has dropped frame internally: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/video/frame_encode_metadata_writer.cc;l\u003d241-242;drc\u003dd4a7d3fb6f5100019d6153d5cf00c60f06b1d0a2\n\nMaybe this part should be implemented in a separate interface in the first place, but it is what it is.",
+      "parentUuid": "4e7ede70_404ef0d5",
+      "revId": "1024faa3f35404e0ba0560c6968620382bfeea16",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "89d2fa04_c4a204ac",
