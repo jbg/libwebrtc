@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c827eac_9a6010a2",
+        "filename": "p2p/base/stun_server.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 8527
+      },
+      "writtenOn": "2023-11-21T17:55:51Z",
+      "side": 1,
+      "message": "how about making this a blocking call instead ?\nthe very rare case where the post task is not complete is hard to debug.",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 19
+      },
+      "revId": "b17aee78a82eac24584a7f508c2c92d25e3c4734",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1e0541b_6319f970",
+        "filename": "p2p/base/stun_server.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 8527
+      },
+      "writtenOn": "2023-11-21T17:55:51Z",
+      "side": 1,
+      "message": "as above.",
+      "range": {
+        "startLine": 48,
+        "startChar": 30,
+        "endLine": 48,
+        "endChar": 37
+      },
+      "revId": "b17aee78a82eac24584a7f508c2c92d25e3c4734",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
