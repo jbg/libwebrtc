@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d62fe94b_bc1f124f",
+        "filename": "api/transport/stun.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-21T09:19:20Z",
+      "side": 1,
+      "message": "I wanted to avoid the pointer/length as much as possible, since there\u0027s a bug open to avoid that.\nI wasn\u0027t able to invoke the ArrayView constructor without mentioning it explicitly (tried a couple of alternatives). Might be a syntax for it (I had surprising successes elsewhere), but wasn\u0027t able to find it in this case.",
+      "parentUuid": "d6d36b98_069f6ab8",
+      "range": {
+        "startLine": 917,
+        "startChar": 29,
+        "endLine": 917,
+        "endChar": 38
+      },
+      "revId": "75c5a3430598150ba011fb3659b05a80fcf222b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "561eda20_4caddc0b",
         "filename": "api/transport/stun.cc",
         "patchSetId": 1
@@ -66,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9bb89925_22fc2e25",
+        "filename": "api/transport/stun.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-21T09:19:20Z",
+      "side": 1,
+      "message": "I tried, but bytes_ is a member variable, and its type is char*, so the CL would balloon if I did that. Left it for a refactoring that focuses on Stun.",
+      "parentUuid": "561eda20_4caddc0b",
+      "range": {
+        "startLine": 1159,
+        "startChar": 2,
+        "endLine": 1159,
+        "endChar": 8
+      },
+      "revId": "75c5a3430598150ba011fb3659b05a80fcf222b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b846afd1_0f23152a",
         "filename": "p2p/base/stun_dictionary.cc",
         "patchSetId": 1
@@ -77,6 +125,30 @@
       "writtenOn": "2023-11-21T08:39:01Z",
       "side": 1,
       "message": "dito - shouldnt it be enough to reinterpret_cast\u003cconst uint8_t*\u003e(delta.bytes()), delta.length()",
+      "range": {
+        "startLine": 84,
+        "startChar": 6,
+        "endLine": 84,
+        "endChar": 22
+      },
+      "revId": "75c5a3430598150ba011fb3659b05a80fcf222b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98296fe3_de9f4082",
+        "filename": "p2p/base/stun_dictionary.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-21T09:19:20Z",
+      "side": 1,
+      "message": "No, the compiler was unable to locate the path here too.",
+      "parentUuid": "b846afd1_0f23152a",
       "range": {
         "startLine": 84,
         "startChar": 6,

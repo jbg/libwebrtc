@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4858a258_bc4a992d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-21T09:19:20Z",
+      "side": 1,
+      "message": "Seems the compiler is not smart enough to convert two arguments into a single argument using rtc::ArrayBuffer constructor when there\u0027s a two-argument variant of the function which is private.",
+      "revId": "030bbf9c63f35501897f973a858d46951b1f8edc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
