@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
     return 1;
   }
 
-  StunServer* server = new StunServer(server_socket);
+  StunServer* server = new StunServer(server_socket, *pthMain);
 
   std::cout << "Listening at " << server_addr.ToString() << std::endl;
 

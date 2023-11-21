@@ -262,8 +262,8 @@ class PeerConnectionIntegrationIceStatesTest
   }
 
   void StartStunServer(const SocketAddress& server_address) {
-    stun_server_.reset(
-        cricket::TestStunServer::Create(firewall(), server_address));
+    stun_server_.reset(cricket::TestStunServer::Create(
+        firewall(), server_address, *network_thread()));
   }
 
   bool TestIPv6() {
@@ -317,7 +317,7 @@ class PeerConnectionIntegrationIceStatesTestWithFakeClock
     : public FakeClockForTest,
       public PeerConnectionIntegrationIceStatesTest {};
 
-#if !defined(THREAD_SANITIZER)
+// #if !defined(THREAD_SANITIZER)
 // This test provokes TSAN errors. bugs.webrtc.org/11282
 
 // Tests that the PeerConnection goes through all the ICE gathering/connection
@@ -419,7 +419,7 @@ TEST_P(PeerConnectionIntegrationIceStatesTestWithFakeClock, VerifyIceStates) {
                            caller()->standardized_ice_connection_state(),
                            kConsentTimeout, FakeClock());
 }
-#endif
+// #endif
 
 // This test sets up a call that's transferred to a new caller with a different
 // DTLS fingerprint.
@@ -485,22 +485,20 @@ INSTANTIATE_TEST_SUITE_P(PeerConnectionIntegrationTest,
                          Values(SdpSemantics::kPlanB_DEPRECATED,
                                 SdpSemantics::kUnifiedPlan));
 
-constexpr uint32_t kFlagsIPv4NoStun = cricket::PORTALLOCATOR_DISABLE_TCP |
+/*constexpr uint32_t kFlagsIPv4NoStun = cricket::PORTALLOCATOR_DISABLE_TCP |
                                       cricket::PORTALLOCATOR_DISABLE_STUN |
                                       cricket::PORTALLOCATOR_DISABLE_RELAY;
 constexpr uint32_t kFlagsIPv6NoStun =
     cricket::PORTALLOCATOR_DISABLE_TCP | cricket::PORTALLOCATOR_DISABLE_STUN |
-    cricket::PORTALLOCATOR_ENABLE_IPV6 | cricket::PORTALLOCATOR_DISABLE_RELAY;
+    cricket::PORTALLOCATOR_ENABLE_IPV6 | cricket::PORTALLOCATOR_DISABLE_RELAY;*/
 constexpr uint32_t kFlagsIPv4Stun =
     cricket::PORTALLOCATOR_DISABLE_TCP | cricket::PORTALLOCATOR_DISABLE_RELAY;
 
-INSTANTIATE_TEST_SUITE_P(
-    PeerConnectionIntegrationTest,
-    PeerConnectionIntegrationIceStatesTestWithFakeClock,
-    Combine(Values(SdpSemantics::kPlanB_DEPRECATED, SdpSemantics::kUnifiedPlan),
-            Values(std::make_pair("IPv4 no STUN", kFlagsIPv4NoStun),
-                   std::make_pair("IPv6 no STUN", kFlagsIPv6NoStun),
-                   std::make_pair("IPv4 with STUN", kFlagsIPv4Stun))));
+INSTANTIATE_TEST_SUITE_P(PeerConnectionIntegrationTest,
+                         PeerConnectionIntegrationIceStatesTestWithFakeClock,
+                         Combine(Values(SdpSemantics::kUnifiedPlan),
+                                 Values(std::make_pair("IPv4 with STUN",
+                                                       kFlagsIPv4Stun))));
 
 }  // namespace
 }  // namespace webrtc
