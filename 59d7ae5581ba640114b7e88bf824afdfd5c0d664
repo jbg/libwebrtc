@@ -16,6 +16,24 @@
       "message": "This is really an update, not a clarification....",
       "revId": "59d7ae5581ba640114b7e88bf824afdfd5c0d664",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd758043_0f657d38",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-11-21T23:00:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0beb382_c14db6b4",
+      "revId": "59d7ae5581ba640114b7e88bf824afdfd5c0d664",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
