@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b296fd3_3afc4129",
+        "filename": "call/video_send_stream.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-11-21T15:02:39Z",
+      "side": 1,
+      "message": "I think it\u0027s better to be explicit in this case, added an UMA.",
+      "parentUuid": "266b798f_b933b58d",
+      "revId": "1024faa3f35404e0ba0560c6968620382bfeea16",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e7ede70_404ef0d5",
@@ -84,6 +102,30 @@
       "writtenOn": "2023-11-21T09:52:12Z",
       "side": 1,
       "message": "nit: Maybe add explicit `!\u003d absl::nullopt` at the end to make it more easy to understand? Otherwise, this code looks very similar to `\u003d\u003d` comparison, and even with \u0027auto` at the beginning it\u0027s made me pause.",
+      "range": {
+        "startLine": 2589,
+        "startChar": 6,
+        "endLine": 2589,
+        "endChar": 60
+      },
+      "revId": "1024faa3f35404e0ba0560c6968620382bfeea16",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21c7e855_2eba07e5",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2589,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-11-21T15:02:39Z",
+      "side": 1,
+      "message": "Ack - that does not work, and it\u0027s a quite common pattern, and not very error prone with modern C++.",
+      "parentUuid": "89d2fa04_c4a204ac",
       "range": {
         "startLine": 2589,
         "startChar": 6,

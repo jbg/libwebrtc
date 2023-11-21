@@ -146,6 +146,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "35dd8207_327923b7",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1842,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-11-21T15:02:39Z",
+      "side": 1,
+      "message": "Several people over the last ten years have been involved in this file. I fear the answer is simply because they lead to different logic, plastered on over time. At this point I feel it\u0027s not worth taking a regression in something because we don\u0027t understand or miss some aspect while refactoring. However, the previously duplicated frame drop pattern in this file bugged me for the 100th time which is why I wrote this CL.",
+      "parentUuid": "71b87e00_9dca40a9",
+      "range": {
+        "startLine": 1840,
+        "startChar": 3,
+        "endLine": 1842,
+        "endChar": 38
+      },
+      "revId": "abdf43708fc481f36836018bb13cd527c71c62b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "828e3110_8b46f6eb",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 1
