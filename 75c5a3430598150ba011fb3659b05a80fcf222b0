@@ -16,6 +16,75 @@
       "message": "Procrastination strikes again.",
       "revId": "75c5a3430598150ba011fb3659b05a80fcf222b0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6d36b98_069f6ab8",
+        "filename": "api/transport/stun.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-11-21T08:39:01Z",
+      "side": 1,
+      "message": "Why is this necessary? Is there no implicit conversion between const uint* , size to rtc::ArrayView? If not, would it make sense to a ReadBytes(const uint*, size) and ByteBufferReader(const uint*, size)",
+      "range": {
+        "startLine": 917,
+        "startChar": 29,
+        "endLine": 917,
+        "endChar": 38
+      },
+      "revId": "75c5a3430598150ba011fb3659b05a80fcf222b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "561eda20_4caddc0b",
+        "filename": "api/transport/stun.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-11-21T08:39:01Z",
+      "side": 1,
+      "message": "can this be changed to uint_8 instead? SetByte seems to use  uint8_t.",
+      "range": {
+        "startLine": 1159,
+        "startChar": 2,
+        "endLine": 1159,
+        "endChar": 8
+      },
+      "revId": "75c5a3430598150ba011fb3659b05a80fcf222b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b846afd1_0f23152a",
+        "filename": "p2p/base/stun_dictionary.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-11-21T08:39:01Z",
+      "side": 1,
+      "message": "dito - shouldnt it be enough to reinterpret_cast\u003cconst uint8_t*\u003e(delta.bytes()), delta.length()",
+      "range": {
+        "startLine": 84,
+        "startChar": 6,
+        "endLine": 84,
+        "endChar": 22
+      },
+      "revId": "75c5a3430598150ba011fb3659b05a80fcf222b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
