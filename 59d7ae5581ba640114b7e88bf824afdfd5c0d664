@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0beb382_c14db6b4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-21T22:14:50Z",
+      "side": 1,
+      "message": "This is really an update, not a clarification....",
+      "revId": "59d7ae5581ba640114b7e88bf824afdfd5c0d664",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
