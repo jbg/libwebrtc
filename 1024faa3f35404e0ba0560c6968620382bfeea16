@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89d2fa04_c4a204ac",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2589,
+      "author": {
+        "id": 9944
+      },
+      "writtenOn": "2023-11-21T09:52:12Z",
+      "side": 1,
+      "message": "nit: Maybe add explicit `!\u003d absl::nullopt` at the end to make it more easy to understand? Otherwise, this code looks very similar to `\u003d\u003d` comparison, and even with \u0027auto` at the beginning it\u0027s made me pause.",
+      "range": {
+        "startLine": 2589,
+        "startChar": 6,
+        "endLine": 2589,
+        "endChar": 60
+      },
+      "revId": "1024faa3f35404e0ba0560c6968620382bfeea16",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
