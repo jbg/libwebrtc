@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "266b798f_b933b58d",
+        "filename": "call/video_send_stream.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-11-21T10:29:41Z",
+      "side": 1,
+      "message": "We\u0027re not doing anything with this. I think we should either add a UMA like we do for the other drop reasons, or not introduce a new enum if the drop can be accounted for as one of the existing enums?",
+      "revId": "1024faa3f35404e0ba0560c6968620382bfeea16",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e7ede70_404ef0d5",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2200,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-11-21T10:29:41Z",
+      "side": 1,
+      "message": "Since this is not a generic dropped frame handler, but a special dropped frame (kMediaOptimization / kEncoder), can we rename this method to make that more clear?\n\nI can\u0027t think of a good name. `OnFrameDroppedDueToOptimization`? In which case `MaybeConvertDropReason` might be renamed `MaybeCovertToOptimizationDropReason`?\n\nFeel free to think of better names.",
+      "revId": "1024faa3f35404e0ba0560c6968620382bfeea16",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "89d2fa04_c4a204ac",

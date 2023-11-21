@@ -120,6 +120,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "71b87e00_9dca40a9",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1842,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-11-21T10:29:41Z",
+      "side": 1,
+      "message": "I buy the \"this is the state of reality\" argument and won\u0027t block on this, but out of curiosity, do we know WHY we don\u0027t report all frame drops equally? (Wondering if this is a bug or feature, but I guess there must be a reason for it?)",
+      "parentUuid": "62814b28_c2326aa5",
+      "range": {
+        "startLine": 1840,
+        "startChar": 3,
+        "endLine": 1842,
+        "endChar": 38
+      },
+      "revId": "abdf43708fc481f36836018bb13cd527c71c62b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "828e3110_8b46f6eb",
