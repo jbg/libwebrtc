@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f27f2d93_7bb0cd64",
+        "filename": "api/transport/stun.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-21T09:43:11Z",
+      "side": 1,
+      "message": "rtc::MakeArrayView\nis a slightly more concise way to convert pointer + size into ArrayView:\nrtc::MakeArrayView(reinterpret_cast\u003cuint8_t*\u003e(\u0026v4addr), sizeof(v4addr))\n\n(it can be possible to write ArrayView(ptr, size) and pick right constructor automatically, but that would require to write CTAD rules for the ArrayView: http://go/totw/184, I\u0027m not sure it is worth it if we plan to replace ArrayView with std::span when WebRTC switch to c++20)",
+      "parentUuid": "d62fe94b_bc1f124f",
+      "range": {
+        "startLine": 917,
+        "startChar": 29,
+        "endLine": 917,
+        "endChar": 38
+      },
+      "revId": "75c5a3430598150ba011fb3659b05a80fcf222b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "561eda20_4caddc0b",
         "filename": "api/transport/stun.cc",
         "patchSetId": 1
