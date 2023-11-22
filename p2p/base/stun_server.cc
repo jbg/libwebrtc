@@ -14,42 +14,65 @@
 #include <utility>
 
 #include "absl/strings/string_view.h"
+#include "api/sequence_checker.h"
+#include "rtc_base/async_packet_socket.h"
 #include "rtc_base/byte_buffer.h"
 #include "rtc_base/logging.h"
+#include "rtc_base/network/received_packet.h"
 
 namespace cricket {
 
-StunServer::StunServer(rtc::AsyncUDPSocket* socket) : socket_(socket) {
-  socket_->SignalReadPacket.connect(this, &StunServer::OnPacket);
+StunServer::StunServer(rtc::AsyncUDPSocket* socket, rtc::Thread& network_thread)
+    : network_thread_(network_thread), socket_(socket) {
+  auto closure = [&]() {
+    socket_->RegisterReceivedPacketCallback(
+        [&](rtc::AsyncPacketSocket* socket, const rtc::ReceivedPacket& packet) {
+          OnPacket(socket, packet);
+        });
+  };
+  if (network_thread_.IsCurrent()) {
+    closure();
+  } else {
+    network_thread_.BlockingCall(
+        [closure = std::move(closure)]() { closure(); });
+  }
 }
 
 StunServer::~StunServer() {
-  socket_->SignalReadPacket.disconnect(this);
+  auto closure = [socket = std::move(socket_)]() {
+    socket->DeregisterReceivedPacketCallback();
+  };
+  if (network_thread_.IsCurrent()) {
+    closure();
+  } else {
+    network_thread_.BlockingCall(
+        [closure = std::move(closure)]() { closure(); });
+  }
 }
 
 void StunServer::OnPacket(rtc::AsyncPacketSocket* socket,
-                          const char* buf,
-                          size_t size,
-                          const rtc::SocketAddress& remote_addr,
-                          const int64_t& /* packet_time_us */) {
+                          const rtc::ReceivedPacket& packet) {
+  RTC_DCHECK_RUN_ON(&network_thread_);
   // Parse the STUN message; eat any messages that fail to parse.
-  rtc::ByteBufferReader bbuf(buf, size);
+  rtc::ByteBufferReader bbuf(packet.payload());
   StunMessage msg;
   if (!msg.Read(&bbuf)) {
     return;
   }
 
-  // TODO(?): If unknown non-optional (<= 0x7fff) attributes are found, send a
+  // TODO(?): If unknown non-optional (<= 0x7fff) attributes are found,
+  // send a
   //          420 "Unknown Attribute" response.
 
   // Send the message to the appropriate handler function.
   switch (msg.type()) {
     case STUN_BINDING_REQUEST:
-      OnBindingRequest(&msg, remote_addr);
+      OnBindingRequest(&msg, packet.source_address());
       break;
 
     default:
-      SendErrorResponse(msg, remote_addr, 600, "Operation Not Supported");
+      SendErrorResponse(msg, packet.source_address(), 600,
+                        "Operation Not Supported");
   }
 }
 

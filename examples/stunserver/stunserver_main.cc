@@ -29,7 +29,8 @@ int main(int argc, char* argv[]) {
     return 1;
   }
 
-  rtc::Thread* pthMain = rtc::Thread::Current();
+  rtc::Thread* pthMain = rtc::ThreadManager::Instance()->WrapCurrentThread();
+  RTC_DCHECK(pthMain);
 
   rtc::AsyncUDPSocket* server_socket =
       rtc::AsyncUDPSocket::Create(pthMain->socketserver(), server_addr);
@@ -38,7 +39,7 @@ int main(int argc, char* argv[]) {
     return 1;
   }
 
-  StunServer* server = new StunServer(server_socket);
+  StunServer* server = new StunServer(server_socket, *pthMain);
 
   std::cout << "Listening at " << server_addr.ToString() << std::endl;
 

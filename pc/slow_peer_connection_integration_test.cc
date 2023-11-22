@@ -262,8 +262,8 @@ class PeerConnectionIntegrationIceStatesTest
   }
 
   void StartStunServer(const SocketAddress& server_address) {
-    stun_server_.reset(
-        cricket::TestStunServer::Create(firewall(), server_address));
+    stun_server_.reset(cricket::TestStunServer::Create(
+        firewall(), server_address, *network_thread()));
   }
 
   bool TestIPv6() {
