@@ -43,6 +43,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e7abcb17_227251c2",
+        "filename": "api/transport/stun.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-22T10:21:29Z",
+      "side": 1,
+      "message": "With MakeArrayView, it seems to be, yes.",
+      "parentUuid": "bbd9d61f_be0eba12",
+      "range": {
+        "startLine": 44,
+        "startChar": 25,
+        "endLine": 44,
+        "endChar": 27
+      },
+      "revId": "e6ea8ad73963d42f8255cdda7af23d9b3363acf8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7f5e106f_14db3efd",
         "filename": "rtc_base/byte_buffer.cc",
         "patchSetId": 6
@@ -54,6 +78,30 @@
       "writtenOn": "2023-11-22T10:01:44Z",
       "side": 1,
       "message": "prefer \nif (val.empty())\nhttps://clang.llvm.org/extra/clang-tidy/checks/readability/container-size-empty.html",
+      "range": {
+        "startLine": 144,
+        "startChar": 2,
+        "endLine": 144,
+        "endChar": 24
+      },
+      "revId": "e6ea8ad73963d42f8255cdda7af23d9b3363acf8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d6ee2bd_b93f5db3",
+        "filename": "rtc_base/byte_buffer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-22T10:21:29Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "7f5e106f_14db3efd",
       "range": {
         "startLine": 144,
         "startChar": 2,
@@ -87,6 +135,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f697116_2e8d885b",
+        "filename": "rtc_base/byte_buffer_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-22T10:21:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61bad77a_ea74412d",
+      "range": {
+        "startLine": 157,
+        "startChar": 34,
+        "endLine": 157,
+        "endChar": 67
+      },
+      "revId": "e6ea8ad73963d42f8255cdda7af23d9b3363acf8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2876d346_0c7400a7",
@@ -100,6 +172,24 @@
       "writtenOn": "2023-11-22T10:01:44Z",
       "side": 1,
       "message": "ditto",
+      "revId": "e6ea8ad73963d42f8255cdda7af23d9b3363acf8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd87ba62_690763a3",
+        "filename": "rtc_base/byte_buffer_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-22T10:21:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2876d346_0c7400a7",
       "revId": "e6ea8ad73963d42f8255cdda7af23d9b3363acf8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
