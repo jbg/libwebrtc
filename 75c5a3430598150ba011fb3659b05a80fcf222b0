@@ -89,6 +89,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6020fca_d2021d25",
+        "filename": "api/transport/stun.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-22T09:05:50Z",
+      "side": 1,
+      "message": "Approximately 4 characters shorter :-) Done.",
+      "parentUuid": "f27f2d93_7bb0cd64",
+      "range": {
+        "startLine": 917,
+        "startChar": 29,
+        "endLine": 917,
+        "endChar": 38
+      },
+      "revId": "75c5a3430598150ba011fb3659b05a80fcf222b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "561eda20_4caddc0b",
@@ -136,6 +160,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a2ebd6b_5a8aaa6e",
+        "filename": "api/transport/stun.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-22T09:05:50Z",
+      "side": 1,
+      "message": "That CL is now written.",
+      "parentUuid": "9bb89925_22fc2e25",
+      "range": {
+        "startLine": 1159,
+        "startChar": 2,
+        "endLine": 1159,
+        "endChar": 8
+      },
+      "revId": "75c5a3430598150ba011fb3659b05a80fcf222b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b846afd1_0f23152a",
@@ -173,6 +221,30 @@
       "side": 1,
       "message": "No, the compiler was unable to locate the path here too.",
       "parentUuid": "b846afd1_0f23152a",
+      "range": {
+        "startLine": 84,
+        "startChar": 6,
+        "endLine": 84,
+        "endChar": 22
+      },
+      "revId": "75c5a3430598150ba011fb3659b05a80fcf222b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95af89fc_e6916489",
+        "filename": "p2p/base/stun_dictionary.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-22T09:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98296fe3_de9f4082",
       "range": {
         "startLine": 84,
         "startChar": 6,
