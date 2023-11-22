@@ -16,6 +16,24 @@
       "message": "I think we should do an update of all the TODOs in the codebase. Maybe next week I can send something.",
       "revId": "4cc904d89607d22b607442bf4718f04756f3fccc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b95d6b8_bf3a4af7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-22T08:20:50Z",
+      "side": 1,
+      "message": "old style is still allowed, afaik migrating existing TODOs to the new style is not encouraged.\n(not discouraged either)",
+      "parentUuid": "8e4265d8_3771e426",
+      "revId": "4cc904d89607d22b607442bf4718f04756f3fccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ],
   "submitRequirementResults": [
