@@ -23,7 +23,8 @@ namespace cricket {
 class TestStunServer : StunServer {
  public:
   static TestStunServer* Create(rtc::SocketServer* ss,
-                                const rtc::SocketAddress& addr);
+                                const rtc::SocketAddress& addr,
+                                rtc::Thread& network_thread);
 
   // Set a fake STUN address to return to the client.
   void set_fake_stun_addr(const rtc::SocketAddress& addr) {
@@ -31,13 +32,15 @@ class TestStunServer : StunServer {
   }
 
  private:
-  explicit TestStunServer(rtc::AsyncUDPSocket* socket) : StunServer(socket) {}
+  TestStunServer(rtc::AsyncUDPSocket* socket, rtc::Thread& network_thread)
+      : StunServer(socket), network_thread_(network_thread) {}
 
   void OnBindingRequest(StunMessage* msg,
                         const rtc::SocketAddress& remote_addr) override;
 
  private:
   rtc::SocketAddress fake_stun_addr_;
+  rtc::Thread& network_thread_;
 };
 
 }  // namespace cricket
