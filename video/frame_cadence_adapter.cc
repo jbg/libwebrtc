@@ -131,6 +131,8 @@ class ZeroHertzAdapterMode : public AdapterMode {
   // Callback::RequestRefreshFrame.
   void ProcessKeyFrameRequest();
 
+  void OnVideoSourceRestrictionsUpdated(absl::optional<double> max_frame_rate);
+
  private:
   // The tracking state of each spatial layer. Used for determining when to
   // stop repeating frames.
@@ -242,6 +244,8 @@ class FrameCadenceAdapterImpl : public FrameCadenceAdapterInterface {
                                      bool quality_converged) override;
   void UpdateLayerStatus(size_t spatial_index, bool enabled) override;
   void ProcessKeyFrameRequest() override;
+  void OnVideoSourceRestrictionsUpdated(
+      absl::optional<double> max_frame_rate) override;
 
   // VideoFrameSink overrides.
   void OnFrame(const VideoFrame& frame) override;
@@ -410,6 +414,15 @@ void ZeroHertzAdapterMode::OnDiscardedFrame() {
 absl::optional<uint32_t> ZeroHertzAdapterMode::GetInputFrameRateFps() {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
   return max_fps_;
+}
+
+void ZeroHertzAdapterMode::OnVideoSourceRestrictionsUpdated(
+    absl::optional<double> max_frame_rate) {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
+  TRACE_EVENT_INSTANT0("webrtc", __func__);
+  RTC_LOG(LS_INFO) << __func__
+                   << "(max_frame_rate=" << max_frame_rate.value_or(-1) << ") ["
+                   << this << "]";
 }
 
 void ZeroHertzAdapterMode::ProcessKeyFrameRequest() {
@@ -651,6 +664,13 @@ void FrameCadenceAdapterImpl::ProcessKeyFrameRequest() {
   RTC_DCHECK_RUN_ON(queue_);
   if (zero_hertz_adapter_)
     zero_hertz_adapter_->ProcessKeyFrameRequest();
+}
+
+void FrameCadenceAdapterImpl::OnVideoSourceRestrictionsUpdated(
+    absl::optional<double> max_frame_rate) {
+  RTC_DCHECK_RUN_ON(queue_);
+  if (zero_hertz_adapter_)
+    zero_hertz_adapter_->OnVideoSourceRestrictionsUpdated(max_frame_rate);
 }
 
 void FrameCadenceAdapterImpl::OnFrame(const VideoFrame& frame) {
