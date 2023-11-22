@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a325a3d_b4fbb653",
+        "filename": "p2p/base/stun_server.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-11-22T08:15:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c827eac_9a6010a2",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 19
+      },
+      "revId": "b17aee78a82eac24584a7f508c2c92d25e3c4734",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1e0541b_6319f970",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-21T17:55:51Z",
       "side": 1,
       "message": "as above.",
+      "range": {
+        "startLine": 48,
+        "startChar": 30,
+        "endLine": 48,
+        "endChar": 37
+      },
+      "revId": "b17aee78a82eac24584a7f508c2c92d25e3c4734",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "190c704f_1986137b",
+        "filename": "p2p/base/stun_server.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-11-22T08:15:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1e0541b_6319f970",
       "range": {
         "startLine": 48,
         "startChar": 30,
