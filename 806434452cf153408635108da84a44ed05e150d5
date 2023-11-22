@@ -67,6 +67,24 @@
       "message": "Hm. Don\u0027t like this - BlockingCall in constructor / destructor is usually a Bad Idea. Would it be possible / reasonable to always create the StunServer on the network thread - perhaps even a CreateStunServer() function that took the network thread as an argument and did a BlockingCall to create it there?",
       "revId": "806434452cf153408635108da84a44ed05e150d5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31fad1c7_bfda5281",
+        "filename": "p2p/base/stun_server.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-11-22T13:11:02Z",
+      "side": 1,
+      "message": "ok, with more work. \nI changed TestStunServer::Create to ensure StunServer is created on the network thread. \nIt also sets a deleter that ensure StunServer is  Deleted on the network thread.",
+      "parentUuid": "1f9d4eb5_60bc1912",
+      "revId": "806434452cf153408635108da84a44ed05e150d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
