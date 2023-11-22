@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0245b14_16d46ce3",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-11-22T07:27:31Z",
+      "side": 1,
+      "message": "This looks wrong. frame_cadence_adapter_ is null here. Its a uniqe ptr. Would feel better to keep it in the ctor.",
+      "range": {
+        "startLine": 455,
+        "startChar": 45,
+        "endLine": 455,
+        "endChar": 67
+      },
+      "revId": "f0ba3704e9420a6d41d71761f7ec9e02be0e47b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
