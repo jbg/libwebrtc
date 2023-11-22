@@ -34,6 +34,24 @@
       "parentUuid": "8e4265d8_3771e426",
       "revId": "4cc904d89607d22b607442bf4718f04756f3fccc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfff7de3_561fe4fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-11-22T08:27:08Z",
+      "side": 1,
+      "message": "I am not sure migrating is good (pollutes the git history, but we might use https://webrtc.googlesource.com/src/+/refs/heads/main/.git-blame-ignore-revs) but on the other hand, having 2 styles is not great (consistency vs new format).",
+      "parentUuid": "1b95d6b8_bf3a4af7",
+      "revId": "4cc904d89607d22b607442bf4718f04756f3fccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ],
   "submitRequirementResults": [
