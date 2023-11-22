@@ -33,6 +33,40 @@
       "message": "Adding Harald for rtc_base and as much of p2p as you want.",
       "revId": "806434452cf153408635108da84a44ed05e150d5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2c79597_ca733749",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-22T10:44:39Z",
+      "side": 1,
+      "message": "Hm.\nI think this exposes a previous issue that there\u0027s a lack of thinking about which thread the main body of the stunserver actually lives on.\nIf it\u0027s a network thread object only, life becomes easier. Can we make it so?",
+      "revId": "806434452cf153408635108da84a44ed05e150d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f9d4eb5_60bc1912",
+        "filename": "p2p/base/stun_server.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-22T10:44:39Z",
+      "side": 1,
+      "message": "Hm. Don\u0027t like this - BlockingCall in constructor / destructor is usually a Bad Idea. Would it be possible / reasonable to always create the StunServer on the network thread - perhaps even a CreateStunServer() function that took the network thread as an argument and did a BlockingCall to create it there?",
+      "revId": "806434452cf153408635108da84a44ed05e150d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
