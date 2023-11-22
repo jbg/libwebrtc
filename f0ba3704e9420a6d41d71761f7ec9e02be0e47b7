@@ -46,6 +46,30 @@
       },
       "revId": "f0ba3704e9420a6d41d71761f7ec9e02be0e47b7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b0ad041_f4018ceb",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-11-22T16:50:47Z",
+      "side": 1,
+      "message": "Attributes are initialized in declaration order AFAIK... am I wrong?\n\nSee https://en.cppreference.com/w/cpp/language/constructor\n\n\"3) Then, non-static data member are initialized in order of declaration in the class definition.\n4) Finally, the body of the constructor is executed.\n(Note: if initialization order was controlled by the appearance in the member initializer lists of different constructors, then the destructor wouldn\u0027t be able to ensure that the order of destruction is the reverse of the order of construction.)\n\n\"",
+      "parentUuid": "a1997fac_a9c0d786",
+      "range": {
+        "startLine": 455,
+        "startChar": 45,
+        "endLine": 455,
+        "endChar": 67
+      },
+      "revId": "f0ba3704e9420a6d41d71761f7ec9e02be0e47b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
