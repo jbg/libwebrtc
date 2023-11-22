@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "369b31ec_e6fa2452",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-22T20:46:48Z",
+      "side": 1,
+      "message": "I like this solution much better!",
+      "revId": "84c252468f8f135ca8e2d63d2a183ce093605244",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "680ed127_ba4b860f",
+        "filename": "p2p/base/test_stun_server.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-22T20:46:48Z",
+      "side": 1,
+      "message": "That\u0027s an interesting approach to guaranteeing deletion on the network thread!",
+      "revId": "84c252468f8f135ca8e2d63d2a183ce093605244",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
