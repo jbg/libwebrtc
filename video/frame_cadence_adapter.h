@@ -115,6 +115,9 @@ class FrameCadenceAdapterInterface
   // Conditionally requests a refresh frame via
   // Callback::RequestRefreshFrame.
   virtual void ProcessKeyFrameRequest() = 0;
+
+  virtual void OnVideoSourceRestrictionsUpdated(
+      absl::optional<double> max_frame_rate) = 0;
 };
 
 }  // namespace webrtc
