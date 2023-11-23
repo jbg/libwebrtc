@@ -70,6 +70,30 @@
       },
       "revId": "f0ba3704e9420a6d41d71761f7ec9e02be0e47b7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe5649a9_ac20ebc0",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-11-23T10:28:15Z",
+      "side": 1,
+      "message": "Yeah, `frame_cadence_adapter_` is unique_ptr, but it\u0027s still initialized in the colon list.\n\nSince it\u0027s a little confusing, it might be better to move the |video_source_sink_controller_| back into the colon list. Then it\u0027s much more clear that frame_cadence_adapter_ will be not null at the time.",
+      "parentUuid": "9b0ad041_f4018ceb",
+      "range": {
+        "startLine": 455,
+        "startChar": 45,
+        "endLine": 455,
+        "endChar": 67
+      },
+      "revId": "f0ba3704e9420a6d41d71761f7ec9e02be0e47b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
