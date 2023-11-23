@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed3db3d4_c86f5563",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-11-23T11:03:59Z",
+      "side": 1,
+      "message": "lgtm % iliyas suggestion.",
+      "revId": "f0ba3704e9420a6d41d71761f7ec9e02be0e47b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0245b14_16d46ce3",
