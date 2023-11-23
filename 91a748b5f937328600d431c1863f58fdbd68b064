@@ -67,6 +67,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8cab40bb_b32b01fd",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-11-23T15:07:02Z",
+      "side": 1,
+      "message": "Just to be safe, please check that max_frame_rate is larger than zero.",
+      "range": {
+        "startLine": 431,
+        "startChar": 54,
+        "endLine": 431,
+        "endChar": 69
+      },
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa9543ca_05bea9b9",
         "filename": "video/frame_cadence_adapter.cc",
         "patchSetId": 7
@@ -154,6 +177,29 @@
         "startChar": 2,
         "endLine": 436,
         "endChar": 9
+      },
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45f6be74_f06c3b9b",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-11-23T15:07:02Z",
+      "side": 1,
+      "message": "Drive-by fix.\n\nHere we use `true` to check the repeat delay for existing task. But on L480 we use `false` as an actual parameter. Is it not a mistake? \n\nMarkus WDYT?",
+      "range": {
+        "startLine": 466,
+        "startChar": 68,
+        "endLine": 466,
+        "endChar": 72
       },
       "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
