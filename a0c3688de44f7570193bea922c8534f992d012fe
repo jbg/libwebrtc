@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d3ee675_78c65734",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-11-23T11:08:22Z",
+      "side": 1,
+      "message": "sprang@, ptal re the change in call/video_send_stream.h",
+      "revId": "a0c3688de44f7570193bea922c8534f992d012fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
