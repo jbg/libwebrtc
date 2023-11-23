@@ -16,6 +16,23 @@
       "message": "Can RTCEventLog be destroyed on any thread?\nIt seems like it will be destroyed on the signaling thread (by destroying the std::unique_ptr to it in PeerConnection\u0027s destructor), while now-deleted commentary says that it has to be deleted on the worker thread.",
       "revId": "aa53c084d78cdb00df9b98efe3436227a1a8882d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7c379cc_bd0c1dea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-23T08:43:21Z",
+      "side": 1,
+      "message": "perkj@ had an interesting solution to the \"destruction has to happen on a different thread\" problem - making the owning std::unique_ptr have a deleter that jumped to the right thread and did the delete there. Will do a fairly non-obvious blocking call in the destructor of the class containing the owning pointer, but will solve the issue.\n\nhttps://webrtc-review.googlesource.com/c/src/+/328120 was the CL.",
+      "revId": "aa53c084d78cdb00df9b98efe3436227a1a8882d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
