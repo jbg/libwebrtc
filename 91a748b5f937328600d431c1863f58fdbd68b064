@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21527f38_f2a3f25c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-11-23T13:48:47Z",
+      "side": 1,
+      "message": "Please add a unit test in this CL.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 3
+      },
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa9543ca_05bea9b9",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-11-23T13:48:47Z",
+      "side": 1,
+      "message": "Is this what happens when things get framerate adapted, and then the shift back to be unadapted?",
+      "range": {
+        "startLine": 434,
+        "startChar": 30,
+        "endLine": 434,
+        "endChar": 43
+      },
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4ba2c34_9005c07b",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-11-23T13:48:47Z",
+      "side": 1,
+      "message": "Can we remove this log? I don\u0027t see a big benefit once initial debugging is complete.",
+      "range": {
+        "startLine": 436,
+        "startChar": 2,
+        "endLine": 436,
+        "endChar": 9
+      },
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68505573_24531b83",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-11-23T13:48:47Z",
+      "side": 1,
+      "message": "If 0hz mode is toggled on-off-on, the restriction is forgotten currently. Should be fixed since toggling is used now.",
+      "range": {
+        "startLine": 685,
+        "startChar": 6,
+        "endLine": 685,
+        "endChar": 25
+      },
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
