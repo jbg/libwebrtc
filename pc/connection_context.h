@@ -15,6 +15,7 @@
 #include <string>
 
 #include "api/call/call_factory_interface.h"
+#include "api/environment/environment.h"
 #include "api/field_trials_view.h"
 #include "api/media_stream_interface.h"
 #include "api/peer_connection_interface.h"
@@ -54,11 +55,18 @@ class ConnectionContext final
   // The Dependencies class allows simple management of all new dependencies
   // being added to the ConnectionContext.
   static rtc::scoped_refptr<ConnectionContext> Create(
+      const Environment& env,
       PeerConnectionFactoryDependencies* dependencies);
 
   // This class is not copyable or movable.
   ConnectionContext(const ConnectionContext&) = delete;
   ConnectionContext& operator=(const ConnectionContext&) = delete;
+
+  // Environment associated with the PeerConnectionFactory.
+  // Note: that environments are different for different PeerConnections
+  // (but they are not supposed change after creating the PeerConnection).
+  // In particular field trials can be different.
+  const Environment& env() { return env_; }
 
   // Functions called from PeerConnection and friends
   SctpTransportFactoryInterface* sctp_transport_factory() const {
@@ -75,12 +83,6 @@ class ConnectionContext final
   const rtc::Thread* worker_thread() const { return worker_thread_.get(); }
   rtc::Thread* network_thread() { return network_thread_; }
   const rtc::Thread* network_thread() const { return network_thread_; }
-
-  // Field trials associated with the PeerConnectionFactory.
-  // Note: that there can be different field trials for different
-  // PeerConnections (but they are not supposed change after creating the
-  // PeerConnection).
-  const FieldTrialsView& field_trials() const { return *trials_.get(); }
 
   // Accessors only used from the PeerConnectionFactory class
   rtc::NetworkManager* default_network_manager() {
@@ -106,12 +108,14 @@ class ConnectionContext final
   void set_use_rtx(bool use_rtx) { use_rtx_ = use_rtx; }
 
  protected:
-  explicit ConnectionContext(PeerConnectionFactoryDependencies* dependencies);
+  explicit ConnectionContext(const Environment& env,
+                             PeerConnectionFactoryDependencies* dependencies);
 
   friend class rtc::RefCountedNonVirtual<ConnectionContext>;
   ~ConnectionContext();
 
  private:
+  const Environment env_;
   // The following three variables are used to communicate between the
   // constructor and the destructor, and are never exposed externally.
   bool wraps_current_thread_;
@@ -121,9 +125,6 @@ class ConnectionContext final
   rtc::Thread* const network_thread_;
   AlwaysValidPointer<rtc::Thread> const worker_thread_;
   rtc::Thread* const signaling_thread_;
-
-  // Accessed both on signaling thread and worker thread.
-  std::unique_ptr<FieldTrialsView> const trials_;
 
   // This object is const over the lifetime of the ConnectionContext, and is
   // only altered in the destructor.

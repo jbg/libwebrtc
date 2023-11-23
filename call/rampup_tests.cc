@@ -14,6 +14,7 @@
 
 #include "absl/flags/flag.h"
 #include "absl/strings/string_view.h"
+#include "api/environment/create_environment.h"
 #include "api/rtc_event_log/rtc_event_log_factory.h"
 #include "api/rtc_event_log_output_file.h"
 #include "api/task_queue/default_task_queue_factory.h"
@@ -29,6 +30,7 @@
 #include "rtc_base/task_queue_for_test.h"
 #include "rtc_base/time_utils.h"
 #include "test/encoder_settings.h"
+#include "test/explicit_key_value_config.h"
 #include "test/gtest.h"
 #include "test/video_test_constants.h"
 
@@ -40,6 +42,7 @@ ABSL_FLAG(std::string,
 namespace webrtc {
 namespace {
 
+using ::webrtc::test::ExplicitKeyValueConfig;
 using ::webrtc::test::GetGlobalMetricsLogger;
 using ::webrtc::test::ImprovementDirection;
 using ::webrtc::test::Unit;
@@ -565,15 +568,14 @@ void RampUpDownUpTester::EvolveTestState(int bitrate_bps, bool suspended) {
 
 class RampUpTest : public test::CallTest {
  public:
-  RampUpTest()
-      : task_queue_factory_(CreateDefaultTaskQueueFactory()),
-        rtc_event_log_factory_(task_queue_factory_.get()) {
+  RampUpTest() {
     std::string dump_name(absl::GetFlag(FLAGS_ramp_dump_name));
     if (!dump_name.empty()) {
-      send_event_log_ = rtc_event_log_factory_.CreateRtcEventLog(
-          RtcEventLog::EncodingType::Legacy);
-      recv_event_log_ = rtc_event_log_factory_.CreateRtcEventLog(
-          RtcEventLog::EncodingType::Legacy);
+      Environment env =
+          CreateEnvironment(std::make_unique<ExplicitKeyValueConfig>(
+              "WebRTC-RtcEventLogNewFormat/Disabled"));
+      send_event_log_ = rtc_event_log_factory_.Create(env);
+      recv_event_log_ = rtc_event_log_factory_.Create(env);
       bool event_log_started =
           send_event_log_->StartLogging(
               std::make_unique<RtcEventLogOutputFile>(
@@ -588,7 +590,6 @@ class RampUpTest : public test::CallTest {
   }
 
  private:
-  const std::unique_ptr<TaskQueueFactory> task_queue_factory_;
   RtcEventLogFactory rtc_event_log_factory_;
 };
 
