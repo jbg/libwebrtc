@@ -33,6 +33,59 @@
       "message": "perkj@ had an interesting solution to the \"destruction has to happen on a different thread\" problem - making the owning std::unique_ptr have a deleter that jumped to the right thread and did the delete there. Will do a fairly non-obvious blocking call in the destructor of the class containing the owning pointer, but will solve the issue.\n\nhttps://webrtc-review.googlesource.com/c/src/+/328120 was the CL.",
       "revId": "aa53c084d78cdb00df9b98efe3436227a1a8882d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fb848a1_5100daf3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-23T10:53:47Z",
+      "side": 1,
+      "message": "If RtcEventLog indeed need to be destroyed on specific thread, then that might be a good solution.\nBut currently I think RtcEventLog already handles synchronization in it\u0027s destructor - to me that looks a better solution than expanding destructor with unique_ptr deleter.",
+      "parentUuid": "f7c379cc_bd0c1dea",
+      "revId": "aa53c084d78cdb00df9b98efe3436227a1a8882d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82b7ba7f_eae7af0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-23T10:53:47Z",
+      "side": 1,
+      "message": "+Björn to comment on thread safety promises of the RtcEventLog",
+      "revId": "aa53c084d78cdb00df9b98efe3436227a1a8882d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f82e89b_c1eb680a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-23T10:53:47Z",
+      "side": 1,
+      "message": "That\u0027s the question I try to understand, can you suggest how to find more information?\n\ncomment say it has to be deleted on the worker thread, but gives no hint why.\nAll tests pass when it is not deleted on the worker thread.\nI\u0027ve check RtcEventLogImpl - destructor doesn\u0027t seem to rely on beeing executed on a specific sequence.\n\noverall the implementation of the RtcEventLogImpl looks thread safe (so I\u0027m not even sure why Start and Stop are done one the worker thread, but do not want to touch that part)",
+      "parentUuid": "2e91cffc_a7f85c29",
+      "revId": "aa53c084d78cdb00df9b98efe3436227a1a8882d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
