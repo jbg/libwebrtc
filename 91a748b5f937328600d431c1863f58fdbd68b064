@@ -26,6 +26,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a190df53_89fe4cc6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-11-23T14:01:26Z",
+      "side": 1,
+      "message": "Will do my best to come up with something.",
+      "parentUuid": "21527f38_f2a3f25c",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 3
+      },
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "533d6dfb_ebd01870",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-11-23T14:01:26Z",
+      "side": 1,
+      "message": "Only added comments at this stage. Pending feedback from hbos@ and ilnik@ as well.",
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa9543ca_05bea9b9",
         "filename": "video/frame_cadence_adapter.cc",
         "patchSetId": 7
@@ -37,6 +78,30 @@
       "writtenOn": "2023-11-23T13:48:47Z",
       "side": 1,
       "message": "Is this what happens when things get framerate adapted, and then the shift back to be unadapted?",
+      "range": {
+        "startLine": 434,
+        "startChar": 30,
+        "endLine": 434,
+        "endChar": 43
+      },
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb1d289b_4b71daad",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-11-23T14:01:26Z",
+      "side": 1,
+      "message": "So far, I\u0027ve only seen this being triggered when the call is closed.",
+      "parentUuid": "fa9543ca_05bea9b9",
       "range": {
         "startLine": 434,
         "startChar": 30,
@@ -72,6 +137,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e4de624d_91c2d1af",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-11-23T14:01:26Z",
+      "side": 1,
+      "message": "Of course. I kind of like it but I will remove it.",
+      "parentUuid": "e4ba2c34_9005c07b",
+      "range": {
+        "startLine": 436,
+        "startChar": 2,
+        "endLine": 436,
+        "endChar": 9
+      },
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68505573_24531b83",
         "filename": "video/frame_cadence_adapter.cc",
         "patchSetId": 7
@@ -83,6 +172,30 @@
       "writtenOn": "2023-11-23T13:48:47Z",
       "side": 1,
       "message": "If 0hz mode is toggled on-off-on, the restriction is forgotten currently. Should be fixed since toggling is used now.",
+      "range": {
+        "startLine": 685,
+        "startChar": 6,
+        "endLine": 685,
+        "endChar": 25
+      },
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e157bb86_5c1f6393",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-11-23T14:01:26Z",
+      "side": 1,
+      "message": "Good comment. Will improve.",
+      "parentUuid": "68505573_24531b83",
       "range": {
         "startLine": 685,
         "startChar": 6,
