@@ -16,6 +16,69 @@
       "message": "a slice of the https://webrtc-review.googlesource.com/c/src/+/323003",
       "revId": "54cd7eafdb736092dfa3bb8dc659a27c81d42e72",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7554a9c_569fbac7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-11-24T17:09:04Z",
+      "side": 1,
+      "message": "LGTM, with two questions below",
+      "revId": "54cd7eafdb736092dfa3bb8dc659a27c81d42e72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c405b96_def7ffcd",
+        "filename": "api/rtc_event_log/rtc_event_log_factory.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-11-24T17:09:04Z",
+      "side": 1,
+      "message": "What are the considerations/advantages of reading the encoding format from a field trial as opposed to passing the EncodingType? It seems to make the unit test a bit more complicated.",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 66
+      },
+      "revId": "54cd7eafdb736092dfa3bb8dc659a27c81d42e72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32e2d4f4_7f35fc2d",
+        "filename": "logging/rtc_event_log/fake_rtc_event_log_factory.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-11-24T17:09:04Z",
+      "side": 1,
+      "message": "In general, I think\u0027s a bit weird to change the access specifier in overridden methods. Might be ok here, but would it be sufficient to add deprecation annotations in the base class instead?",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 9
+      },
+      "revId": "54cd7eafdb736092dfa3bb8dc659a27c81d42e72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
