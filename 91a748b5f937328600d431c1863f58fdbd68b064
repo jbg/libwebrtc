@@ -367,6 +367,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b03afa18_6f42c581",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-11-24T10:18:54Z",
+      "side": 1,
+      "message": "It\u0027s different because non 0-hz directly posts tasks to the VSE here: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/video/frame_cadence_adapter.cc;l\u003d77;drc\u003d84c016a02404dc0540ba3688d688d1ae950938ad\n\nWhile 0hz goes through the adapter, which posts tasks here: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/video/frame_cadence_adapter.cc;l\u003d571;drc\u003d84c016a02404dc0540ba3688d688d1ae950938ad\n\nThe second one never instructs the VSE about queue overload.",
+      "parentUuid": "e90ead41_80f79e24",
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68505573_24531b83",
         "filename": "video/frame_cadence_adapter.cc",
         "patchSetId": 7
