@@ -86,6 +86,47 @@
       "parentUuid": "2e91cffc_a7f85c29",
       "revId": "aa53c084d78cdb00df9b98efe3436227a1a8882d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "132d33a7_a76547f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-11-24T17:41:38Z",
+      "side": 1,
+      "message": "I think the threading requirements might have been relaxed and the comments are outdated, but I\u0027ll need to look at this a bit more. Iirc, there used to be CHECKs that Start and Stop execute on the same thread/sequence, and since the destructor also stops the logs, that had to run on the same thread too.",
+      "parentUuid": "0f82e89b_c1eb680a",
+      "revId": "aa53c084d78cdb00df9b98efe3436227a1a8882d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37f926d2_2a3a28fc",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2256,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-11-24T17:41:38Z",
+      "side": 1,
+      "message": "Should we absl::Nonnull/CHECK in the constructor to ensure that the object is valid?",
+      "range": {
+        "startLine": 2256,
+        "startChar": 0,
+        "endLine": 2256,
+        "endChar": 71
+      },
+      "revId": "aa53c084d78cdb00df9b98efe3436227a1a8882d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

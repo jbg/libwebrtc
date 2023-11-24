@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4000994b_b78a3d5f",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1935,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2023-11-24T17:41:38Z",
+      "side": 0,
+      "message": "I think this ensures that the contents are flushed to disk as soon as the PeerConnection is closed. Does resetting cause any problems?",
+      "range": {
+        "startLine": 1935,
+        "startChar": 0,
+        "endLine": 1935,
+        "endChar": 23
+      },
+      "revId": "7dd6ea234d9e59a1944d6e83adb64f383c1d3599",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
