@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4023921b_8dbdab50",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-11-24T09:22:22Z",
+      "side": 1,
+      "message": "tip: `.value_or(0) \u003e 0`",
+      "parentUuid": "e56bb3cc_fdee2cec",
+      "range": {
+        "startLine": 431,
+        "startChar": 54,
+        "endLine": 431,
+        "endChar": 69
+      },
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "305e532a_d3090b69",
         "filename": "video/frame_cadence_adapter.cc",
         "patchSetId": 7
@@ -125,6 +149,30 @@
       "writtenOn": "2023-11-23T15:49:24Z",
       "side": 1,
       "message": "Pass-by comment: Should this be RTC_DCHECK_GE?",
+      "range": {
+        "startLine": 432,
+        "startChar": 4,
+        "endLine": 432,
+        "endChar": 58
+      },
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "612ff430_1f1d3bd1",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-11-24T09:22:22Z",
+      "side": 1,
+      "message": "`frame_delay_` is a fixed value based on an API call, while the max frame rate is a combination of an estimated \"current fps\" and an adaptation algorithm reducing this value, but in theory max_frame_rate could be the same as \"current fps\". Because \"current fps\" is an estimate, it could be slightly higher than our max fps, simply due to timing of things. (E.g. a few frames come in back-to-back and our estimate momentarily thinks our fps is 31 or more)\n\nSo while triggering this DCHECK is highly unlikely, it seems brittle to crash here, and we don\u0027t need to make assumptions about what values adaptation algorithm spits out.\n\nSo instead of crashing, if `restricted_frame_delay_` is higher than `frame_delay_`, simply consider this unrestricted (set to `absl::nullopt`).",
+      "parentUuid": "305e532a_d3090b69",
       "range": {
         "startLine": 432,
         "startChar": 4,
@@ -184,6 +232,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4bd115d6_aad03fe1",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-11-24T09:22:22Z",
+      "side": 1,
+      "message": "Correct Markus, when we go from being adapted to not being adapted, the new restriction will set `max_frame_rate` to `absl::nullopt`. If you don\u0027t see that happening Henrik A, it sounds like the CPU encode threshold is never low enough to trigger \"Adapt Up\".\n\nDoes not adapting up make sense in your setup?",
+      "parentUuid": "cb1d289b_4b71daad",
+      "range": {
+        "startLine": 434,
+        "startChar": 30,
+        "endLine": 434,
+        "endChar": 43
+      },
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e4ba2c34_9005c07b",
         "filename": "video/frame_cadence_adapter.cc",
         "patchSetId": 7
@@ -231,6 +303,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a60b61f_0745a569",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-11-24T09:22:22Z",
+      "side": 1,
+      "message": "I believe there are existing logging in other places every time the adaptation updates restrictions and that this would mostly repeat old information.",
+      "parentUuid": "e4de624d_91c2d1af",
+      "range": {
+        "startLine": 436,
+        "startChar": 2,
+        "endLine": 436,
+        "endChar": 9
+      },
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "45f6be74_f06c3b9b",
         "filename": "video/frame_cadence_adapter.cc",
         "patchSetId": 7
@@ -248,6 +344,23 @@
         "endLine": 466,
         "endChar": 72
       },
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e90ead41_80f79e24",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-11-24T09:22:22Z",
+      "side": 1,
+      "message": "The max fps is an integer, so we will necessarily never limit fps below 1 fps (same as `kZeroHertzIdleRepeatRatePeriod`).\n\nBut the recent comment from Hiroh seemed to illustrate an encode time of 3 seconds is possible on CrOS today (mind blown). This tells me that we definitely also need to drop frames in the encoder queue - regardless of restrictions.\n\nBut that\u0027s a different CL! (And I don\u0027t know why that is different under 0 Hz than non-0 Hz)",
       "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
