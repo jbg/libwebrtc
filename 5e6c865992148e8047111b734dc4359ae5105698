@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4939f4e6_9b39cace",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-11-24T07:42:44Z",
+      "side": 1,
+      "message": "Please",
+      "revId": "5e6c865992148e8047111b734dc4359ae5105698",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "915bf197_6fcb8610",
+        "filename": "rtc_base/async_tcp_socket.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-11-24T07:42:44Z",
+      "side": 1,
+      "message": "Moved here from the individual implementations of ProcessInput.",
+      "range": {
+        "startLine": 222,
+        "startChar": 6,
+        "endLine": 222,
+        "endChar": 13
+      },
+      "revId": "5e6c865992148e8047111b734dc4359ae5105698",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
