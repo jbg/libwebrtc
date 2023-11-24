@@ -348,6 +348,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07013df4_2c1187d9",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-11-24T14:04:42Z",
+      "side": 1,
+      "message": "The if line on L.456 ensures that the current repeat is an idle one, so the correct parameter to use here is indeed true.",
+      "parentUuid": "45f6be74_f06c3b9b",
+      "range": {
+        "startLine": 466,
+        "startChar": 68,
+        "endLine": 466,
+        "endChar": 72
+      },
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e90ead41_80f79e24",
@@ -379,6 +403,24 @@
       "side": 1,
       "message": "It\u0027s different because non 0-hz directly posts tasks to the VSE here: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/video/frame_cadence_adapter.cc;l\u003d77;drc\u003d84c016a02404dc0540ba3688d688d1ae950938ad\n\nWhile 0hz goes through the adapter, which posts tasks here: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/video/frame_cadence_adapter.cc;l\u003d571;drc\u003d84c016a02404dc0540ba3688d688d1ae950938ad\n\nThe second one never instructs the VSE about queue overload.",
       "parentUuid": "e90ead41_80f79e24",
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edb13948_a7b74034",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-11-24T14:04:42Z",
+      "side": 1,
+      "message": "Queue overload for 0hz is requested to be added in b/312425217, so it\u0027ll be fixed soon.",
+      "parentUuid": "b03afa18_6f42c581",
       "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
