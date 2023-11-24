@@ -330,6 +330,14 @@ void DegradedCall::OnUpdateSyncGroup(AudioReceiveStreamInterface& stream,
   call_->OnUpdateSyncGroup(stream, sync_group);
 }
 
+uint32_t DegradedCall::SsrcForAudioRtcp() {
+  return call_->SsrcForAudioRtcp();
+}
+
+uint32_t DegradedCall::SsrcForVideoRtcp() {
+  return call_->SsrcForVideoRtcp();
+}
+
 void DegradedCall::OnSentPacket(const rtc::SentPacket& sent_packet) {
   if (!send_configs_.empty()) {
     // If we have a degraded send-transport, we have already notified call
