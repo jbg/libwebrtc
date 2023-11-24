@@ -20,24 +20,55 @@
 #ifndef MEDIA_ENGINE_FAKE_WEBRTC_CALL_H_
 #define MEDIA_ENGINE_FAKE_WEBRTC_CALL_H_
 
+#include <cstddef>
+#include <cstdint>
 #include <map>
 #include <memory>
+#include <optional>
+#include <set>
 #include <string>
 #include <utility>
 #include <vector>
 
 #include "absl/strings/string_view.h"
-#include "api/transport/field_trial_based_config.h"
+#include "api/adaptation/resource.h"
+#include "api/audio/audio_frame.h"
+#include "api/audio_codecs/audio_format.h"
+#include "api/crypto/frame_decryptor_interface.h"
+#include "api/field_trials_view.h"
+#include "api/frame_transformer_interface.h"
+#include "api/media_types.h"
+#include "api/rtp_headers.h"
+#include "api/rtp_parameters.h"
+#include "api/rtp_sender_interface.h"
+#include "api/scoped_refptr.h"
+#include "api/task_queue/task_queue_base.h"
+#include "api/transport/bitrate_settings.h"
+#include "api/transport/rtp/rtp_source.h"
+#include "api/units/time_delta.h"
+#include "api/units/timestamp.h"
 #include "api/video/video_frame.h"
+#include "api/video/video_sink_interface.h"
+#include "api/video/video_source_interface.h"
+#include "api/video_codecs/video_codec.h"
 #include "call/audio_receive_stream.h"
 #include "call/audio_send_stream.h"
 #include "call/call.h"
 #include "call/flexfec_receive_stream.h"
+#include "call/packet_receiver.h"
+#include "call/receive_stream.h"
+#include "call/rtp_config.h"
+#include "call/rtp_packet_sink_interface.h"
+#include "call/rtp_transport_controller_send_interface.h"
 #include "call/test/mock_rtp_transport_controller_send.h"
 #include "call/video_receive_stream.h"
 #include "call/video_send_stream.h"
+#include "modules/rtp_rtcp/include/receive_statistics.h"
 #include "modules/rtp_rtcp/source/rtp_packet_received.h"
 #include "rtc_base/buffer.h"
+#include "rtc_base/copy_on_write_buffer.h"
+#include "rtc_base/network/sent_packet.h"
+#include "test/gmock.h"
 #include "test/scoped_key_value_config.h"
 
 namespace cricket {
@@ -479,6 +510,8 @@ class FakeCall final : public webrtc::Call, public webrtc::PacketReceiver {
                           uint32_t local_ssrc) override;
   void OnUpdateSyncGroup(webrtc::AudioReceiveStreamInterface& stream,
                          absl::string_view sync_group) override;
+  uint32_t SsrcForAudioRtcp() override;
+  uint32_t SsrcForVideoRtcp() override;
   void OnSentPacket(const rtc::SentPacket& sent_packet) override;
 
   webrtc::TaskQueueBase* const network_thread_;
@@ -503,6 +536,14 @@ class FakeCall final : public webrtc::Call, public webrtc::PacketReceiver {
 
   int num_created_send_streams_;
   int num_created_receive_streams_;
+
+  std::set<uint32_t> video_ssrcs_in_use_;
+  std::set<uint32_t> audio_ssrcs_in_use_;
+  // SSRC IDs set via SetLocalSsrc and returned in SsrcFor*Rtcp()
+  // Set different from normal "init" values to be able to see easily
+  // if a fake is being used.
+  uint32_t ssrc_for_video_rtcp_ = 33;
+  uint32_t ssrc_for_audio_rtcp_ = 44;
 
   // The field trials that are in use, either supplied by caller
   // or pointer to &fallback_trials_.

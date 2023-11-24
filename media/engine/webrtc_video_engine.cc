@@ -1480,9 +1480,10 @@ bool WebRtcVideoSendChannel::AddSendStream(const StreamParams& sp) {
   RTC_DCHECK(ssrc != 0);
   send_streams_[ssrc] = stream;
 
-    if (ssrc_list_changed_callback_) {
-      ssrc_list_changed_callback_(send_ssrcs_);
-    }
+  if (ssrc_list_changed_callback_) {
+    RTC_LOG(LS_ERROR) << "DEBUG: Calling video ssrc_list_changed_callback_";
+    ssrc_list_changed_callback_(send_ssrcs_);
+  }
 
   if (sending_) {
     stream->SetSend(true);
@@ -1507,12 +1508,14 @@ bool WebRtcVideoSendChannel::RemoveSendStream(uint32_t ssrc) {
   removed_stream = it->second;
   send_streams_.erase(it);
 
+  delete removed_stream;
+
   // Switch receiver report SSRCs, in case the one in use is no longer valid.
   if (ssrc_list_changed_callback_) {
+    RTC_LOG(LS_ERROR)
+        << "DEBUG: Calling video ssrc_list_changed_callback_ (delete)";
     ssrc_list_changed_callback_(send_ssrcs_);
   }
-
-  delete removed_stream;
 
   return true;
 }
@@ -2508,7 +2511,7 @@ void WebRtcVideoSendChannel::WebRtcVideoSendStream::RecreateWebRtcStream() {
   if (stream_ != NULL) {
     call_->DestroyVideoSendStream(stream_);
   }
-
+  RTC_LOG(LS_ERROR) << "DEBUG: RecreateWebRtcStream()";
   RTC_CHECK(parameters_.codec_settings);
   RTC_DCHECK_EQ((parameters_.encoder_config.content_type ==
                  webrtc::VideoEncoderConfig::ContentType::kScreen),
@@ -2778,6 +2781,12 @@ bool WebRtcVideoReceiveChannel::SetReceiverParameters(
 
 void WebRtcVideoReceiveChannel::SetReceiverReportSsrc(uint32_t ssrc) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
+  // TESTING - that new method and old method give same result
+  /*  RTC_CHECK(ssrc == call_->SsrcForVideoRtcp())
+      << "Old method: " << ssrc << ", new method: " <<
+     call_->SsrcForVideoRtcp();
+  */
+  /* TEST */ ssrc = call_->SsrcForVideoRtcp();
   if (ssrc == rtcp_receiver_report_ssrc_)
     return;
 
