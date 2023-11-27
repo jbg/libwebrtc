@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "70b3193a_9c26e3b8",
+        "filename": "api/rtc_event_log/rtc_event_log_factory.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-27T10:45:15Z",
+      "side": 1,
+      "message": "Additional optional might be to bypass RtcEvengLogFactory in the unittests (are they suppose to test RtcEventLogImpl or the RtcEvengLogFactory?)",
+      "parentUuid": "4323e290_2f3a3d7f",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 66
+      },
+      "revId": "54cd7eafdb736092dfa3bb8dc659a27c81d42e72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32e2d4f4_7f35fc2d",
         "filename": "logging/rtc_event_log/fake_rtc_event_log_factory.h",
         "patchSetId": 2
