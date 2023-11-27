@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dafc7650_e76fdbbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-11-27T14:54:01Z",
+      "side": 1,
+      "message": "Tried to take all feedback into consideration but I had to reply with a new question on some comments. My plan was to sort out all comments before I try to lock down the new feature with unittests.\n\nPTAL",
+      "revId": "bcf43739b3ea9e9fa00cd28c85d5150f08cdad9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

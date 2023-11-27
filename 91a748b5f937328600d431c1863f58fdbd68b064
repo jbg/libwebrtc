@@ -136,6 +136,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f31288c9_79399f5e",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-11-27T14:54:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4023921b_8dbdab50",
+      "range": {
+        "startLine": 431,
+        "startChar": 54,
+        "endLine": 431,
+        "endChar": 69
+      },
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "305e532a_d3090b69",
@@ -173,6 +197,30 @@
       "side": 1,
       "message": "`frame_delay_` is a fixed value based on an API call, while the max frame rate is a combination of an estimated \"current fps\" and an adaptation algorithm reducing this value, but in theory max_frame_rate could be the same as \"current fps\". Because \"current fps\" is an estimate, it could be slightly higher than our max fps, simply due to timing of things. (E.g. a few frames come in back-to-back and our estimate momentarily thinks our fps is 31 or more)\n\nSo while triggering this DCHECK is highly unlikely, it seems brittle to crash here, and we don\u0027t need to make assumptions about what values adaptation algorithm spits out.\n\nSo instead of crashing, if `restricted_frame_delay_` is higher than `frame_delay_`, simply consider this unrestricted (set to `absl::nullopt`).",
       "parentUuid": "305e532a_d3090b69",
+      "range": {
+        "startLine": 432,
+        "startChar": 4,
+        "endLine": 432,
+        "endChar": 58
+      },
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc454d2f_0fe5abca",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-11-27T14:54:01Z",
+      "side": 1,
+      "message": "Followed hbos@ proposal.",
+      "parentUuid": "612ff430_1f1d3bd1",
       "range": {
         "startLine": 432,
         "startChar": 4,
@@ -254,6 +302,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10a7fb25_2899c957",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-11-27T14:54:01Z",
+      "side": 1,
+      "message": "Check by first sharing a 4K window and then reduce the size. Adaptation logs then look like https://paste.googleplex.com/5999920440410112. Hence we go from being restricted to non restricted and the current code follows this pattern now.",
+      "parentUuid": "4bd115d6_aad03fe1",
+      "range": {
+        "startLine": 434,
+        "startChar": 30,
+        "endLine": 434,
+        "endChar": 43
+      },
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4ba2c34_9005c07b",
@@ -315,6 +387,30 @@
       "side": 1,
       "message": "I believe there are existing logging in other places every time the adaptation updates restrictions and that this would mostly repeat old information.",
       "parentUuid": "e4de624d_91c2d1af",
+      "range": {
+        "startLine": 436,
+        "startChar": 2,
+        "endLine": 436,
+        "endChar": 9
+      },
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4c84d69_eac935ce",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-11-27T14:54:01Z",
+      "side": 1,
+      "message": "I will remove it but would just like to keep it until new unittests are in place since I can\u0027t rely on external logs while adding these/",
+      "parentUuid": "8a60b61f_0745a569",
       "range": {
         "startLine": 436,
         "startChar": 2,
@@ -425,6 +521,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94006264_ffc47ff6",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-11-27T14:54:01Z",
+      "side": 1,
+      "message": "As stated earlier. Will focus on theses changes in a separate CL.",
+      "parentUuid": "edb13948_a7b74034",
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68505573_24531b83",
@@ -486,6 +600,30 @@
       "side": 1,
       "message": "That\u0027s a good edge case to test in unittest!",
       "parentUuid": "e157bb86_5c1f6393",
+      "range": {
+        "startLine": 685,
+        "startChar": 6,
+        "endLine": 685,
+        "endChar": 25
+      },
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de3dd6ff_e2b893cf",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-11-27T14:54:01Z",
+      "side": 1,
+      "message": "But when I think about it. Do we really want to maintain it in the on-off-on case and if so why. Let\u0027s assume we are in passthrough for a long time. Then why should the second 0hz adapter know about the initial one being restricted?",
+      "parentUuid": "3376bf8e_ae2bf7da",
       "range": {
         "startLine": 685,
         "startChar": 6,
