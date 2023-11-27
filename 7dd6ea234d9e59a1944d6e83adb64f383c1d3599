@@ -22,6 +22,30 @@
       },
       "revId": "7dd6ea234d9e59a1944d6e83adb64f383c1d3599",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6b4e609_69c14173",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1935,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-27T12:00:12Z",
+      "side": 0,
+      "message": "I think my change breaks such behavior, let me add test for it.\n\nResetting here blocks moving ownership of the rtc event log into Environment.\nKeeping ownership in the PeerConnection (i.s passing raw RtcEventLog pointer to the Environment) risks introducing use after free bugs for the event log.",
+      "parentUuid": "4000994b_b78a3d5f",
+      "range": {
+        "startLine": 1935,
+        "startChar": 0,
+        "endLine": 1935,
+        "endChar": 23
+      },
+      "revId": "7dd6ea234d9e59a1944d6e83adb64f383c1d3599",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

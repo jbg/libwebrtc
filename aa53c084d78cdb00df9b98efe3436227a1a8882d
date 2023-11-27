@@ -144,6 +144,30 @@
       },
       "revId": "aa53c084d78cdb00df9b98efe3436227a1a8882d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b48fd782_cd5447b7",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2256,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-27T12:00:12Z",
+      "side": 1,
+      "message": "added CHECK.\nonce event_log is moved into the Environment, I\u0027ll remove that check because Environment guarantees it is never null.",
+      "parentUuid": "37f926d2_2a3a28fc",
+      "range": {
+        "startLine": 2256,
+        "startChar": 0,
+        "endLine": 2256,
+        "endChar": 71
+      },
+      "revId": "aa53c084d78cdb00df9b98efe3436227a1a8882d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
