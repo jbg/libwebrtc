@@ -656,6 +656,30 @@
       },
       "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f56658c8_6b637a8f",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-11-27T15:36:30Z",
+      "side": 1,
+      "message": "There are features that starts on, then runs for a while with the feature off, then on again.",
+      "parentUuid": "c24674f2_7f195748",
+      "range": {
+        "startLine": 685,
+        "startChar": 6,
+        "endLine": 685,
+        "endChar": 25
+      },
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
