@@ -632,6 +632,30 @@
       },
       "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c24674f2_7f195748",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-11-27T15:17:36Z",
+      "side": 1,
+      "message": "I understand if we want to maintain the restriction for On (max\u003d30 fps) -\u003e On (max\u003d20 fps). But not for On -\u003e Off -\u003e On.",
+      "parentUuid": "de3dd6ff_e2b893cf",
+      "range": {
+        "startLine": 685,
+        "startChar": 6,
+        "endLine": 685,
+        "endChar": 25
+      },
+      "revId": "91a748b5f937328600d431c1863f58fdbd68b064",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
