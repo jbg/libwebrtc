@@ -13,6 +13,7 @@
 #include <utility>
 #include <vector>
 
+#include "api/environment/environment_factory.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
 #include "test/time_controller/simulated_time_controller.h"
@@ -105,9 +106,10 @@ class RtcEventLogImplTest : public ::testing::Test {
   std::unique_ptr<FakeOutput> output_ =
       std::make_unique<FakeOutput>(written_data_);
   FakeOutput* output_ptr_ = output_.get();
-  RtcEventLogImpl event_log_{std::move(encoder_),
-                             time_controller_.GetTaskQueueFactory(),
-                             kMaxEventsInHistory, kMaxEventsInConfigHistory};
+  RtcEventLogImpl event_log_{
+      CreateEnvironment(time_controller_.GetTaskQueueFactory(),
+                        time_controller_.GetClock()),
+      std::move(encoder_), kMaxEventsInHistory, kMaxEventsInConfigHistory};
 };
 
 TEST_F(RtcEventLogImplTest, WritesHeaderAndEventsAndTrailer) {
