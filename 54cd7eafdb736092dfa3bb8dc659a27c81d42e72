@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4323e290_2f3a3d7f",
+        "filename": "api/rtc_event_log/rtc_event_log_factory.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-27T10:40:12Z",
+      "side": 1,
+      "message": "I think that make api a bit cleaner, but I do not have a strong opinion.\nHere are small advantages I can think about:\n\nThis way field trials related to rtc event log are gathered together in the rtc event log specific code, would allow to make PeerConnection construction code cleaner.\n\nI would like to pass Environment regardless (there are more field trials RtcEventLog currently using through global field trials string\nPassing both field trials and a parameter that is derived just from the field trials feels redundant.\n\nUnit test become a bit more complicated, but make it visible how encoding type is controlled.\n\nOther tests that needs to create RtcEventLog have clearer default value (whatever that is derived from the default environment)\n\nso, which api would you prefer?\n`Create(const Environment\u0026 env, RtcEventLog::EncodingType encoding_type)`\nor\n`Create(const Environment\u0026 env)`\n\n(or, may be, both - where first one would likely be used just by the unittests)",
+      "parentUuid": "2c405b96_def7ffcd",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 66
+      },
+      "revId": "54cd7eafdb736092dfa3bb8dc659a27c81d42e72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32e2d4f4_7f35fc2d",
         "filename": "logging/rtc_event_log/fake_rtc_event_log_factory.h",
         "patchSetId": 2
@@ -71,6 +95,30 @@
       "writtenOn": "2023-11-24T17:09:04Z",
       "side": 1,
       "message": "In general, I think\u0027s a bit weird to change the access specifier in overridden methods. Might be ok here, but would it be sufficient to add deprecation annotations in the base class instead?",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 9
+      },
+      "revId": "54cd7eafdb736092dfa3bb8dc659a27c81d42e72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "408e36ed_e16ae52f",
+        "filename": "logging/rtc_event_log/fake_rtc_event_log_factory.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-27T10:40:12Z",
+      "side": 1,
+      "message": "yes, it is a bit weird. Undoing.\n(using tricks like that to find places where older interface is used, but that is a bad protection against such usage)\n\nDeprecated would be better, but I\u0027m not ready to deprecate it yet, while it is still used by PeerConnectionFactory.",
+      "parentUuid": "32e2d4f4_7f35fc2d",
       "range": {
         "startLine": 33,
         "startChar": 0,
