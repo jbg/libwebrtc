@@ -1958,7 +1958,6 @@ void P2PTransportChannel::UpdateTransportState() {
         break;
     }
     state_ = state;
-    SignalStateChanged(this);
   }
 
   if (standardized_state_ != current_standardized_state) {
