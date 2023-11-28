@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66e29515_422046c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-11-28T12:49:05Z",
+      "side": 1,
+      "message": "Landed the latest changes. Renamed and restored the 0Hz adapter ctor.",
+      "revId": "58147bbe9d87cb78f4f42d3aeece77c849aec301",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
