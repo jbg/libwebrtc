@@ -16,6 +16,29 @@
       "message": "Landed the latest changes. Renamed and restored the 0Hz adapter ctor.",
       "revId": "58147bbe9d87cb78f4f42d3aeece77c849aec301",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a8e7833_e5ffffcb",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-11-28T13:29:02Z",
+      "side": 1,
+      "message": "Why have you removed `RTC_GUARDED_BY(queue_)`?\nIt seems to still be used exclusively on the queue_",
+      "range": {
+        "startLine": 305,
+        "startChar": 46,
+        "endLine": 305,
+        "endChar": 66
+      },
+      "revId": "58147bbe9d87cb78f4f42d3aeece77c849aec301",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
