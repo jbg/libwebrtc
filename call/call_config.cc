@@ -16,33 +16,20 @@ namespace webrtc {
 
 CallConfig::CallConfig(const Environment& env,
                        TaskQueueBase* network_task_queue)
-    : env(env),
-      event_log(&env.event_log()),
-      task_queue_factory(&env.task_queue_factory()),
-      trials(&env.field_trials()),
-      network_task_queue_(network_task_queue) {}
-
-CallConfig::CallConfig(RtcEventLog* event_log,
-                       TaskQueueBase* network_task_queue /* = nullptr*/)
-    : event_log(event_log), network_task_queue_(network_task_queue) {
-  RTC_DCHECK(event_log);
-}
+    : env(env), network_task_queue_(network_task_queue) {}
 
 CallConfig::CallConfig(const CallConfig& config) = default;
 
+CallConfig::~CallConfig() = default;
+
 RtpTransportConfig CallConfig::ExtractTransportConfig() const {
-  RtpTransportConfig transportConfig;
+  RtpTransportConfig transportConfig = {.env = env};
   transportConfig.bitrate_config = bitrate_config;
-  transportConfig.event_log = event_log;
   transportConfig.network_controller_factory = network_controller_factory;
   transportConfig.network_state_predictor_factory =
       network_state_predictor_factory;
-  transportConfig.task_queue_factory = task_queue_factory;
-  transportConfig.trials = trials;
-
   return transportConfig;
 }
 
-CallConfig::~CallConfig() = default;
 
 }  // namespace webrtc
