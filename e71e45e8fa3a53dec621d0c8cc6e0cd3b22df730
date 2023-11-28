@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f20cd8c_73968709",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-28T07:05:42Z",
+      "side": 1,
+      "message": "Time to get approval for this one. Still a few days away from its submit date.",
+      "revId": "e71e45e8fa3a53dec621d0c8cc6e0cd3b22df730",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
