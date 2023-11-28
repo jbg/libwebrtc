@@ -783,6 +783,10 @@ class MockFrameCadenceAdapter : public FrameCadenceAdapterInterface {
               UpdateLayerStatus,
               (size_t spatial_index, bool enabled),
               (override));
+  MOCK_METHOD(void,
+              UpdateVideoSourceRestrictions,
+              (absl::optional<double>),
+              (override));
   MOCK_METHOD(void, ProcessKeyFrameRequest, (), (override));
 };
 
