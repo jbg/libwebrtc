@@ -397,10 +397,7 @@ TEST_P(PeerConnectionIntegrationIceStatesTestWithFakeClock, VerifyIceStates) {
   // Let ICE re-establish by removing the firewall rules.
   firewall()->ClearRules();
   RTC_LOG(LS_INFO) << "Firewall rules cleared";
-  ASSERT_EQ_SIMULATED_WAIT(PeerConnectionInterface::kIceConnectionCompleted,
-                           caller()->ice_connection_state(), kDefaultTimeout,
-                           FakeClock());
-  ASSERT_EQ_SIMULATED_WAIT(PeerConnectionInterface::kIceConnectionCompleted,
+  ASSERT_EQ_SIMULATED_WAIT(PeerConnectionInterface::kIceConnectionConnected,
                            caller()->standardized_ice_connection_state(),
                            kDefaultTimeout, FakeClock());
 

@@ -1957,10 +1957,12 @@ TEST_P(PeerConnectionIntegrationTest, MediaContinuesFlowingAfterIceRestart) {
   caller()->SetOfferAnswerOptions(IceRestartOfferAnswerOptions());
   caller()->CreateAndSetAndSignalOffer();
   ASSERT_TRUE_WAIT(SignalingStateStable(), kDefaultTimeout);
-  EXPECT_EQ_WAIT(PeerConnectionInterface::kIceConnectionCompleted,
-                 caller()->ice_connection_state(), kMaxWaitForFramesMs);
   EXPECT_EQ_WAIT(PeerConnectionInterface::kIceConnectionConnected,
-                 callee()->ice_connection_state(), kMaxWaitForFramesMs);
+                 caller()->standardized_ice_connection_state(),
+                 kMaxWaitForFramesMs);
+  EXPECT_EQ_WAIT(PeerConnectionInterface::kIceConnectionConnected,
+                 callee()->standardized_ice_connection_state(),
+                 kMaxWaitForFramesMs);
 
   // Grab the ufrags/candidates again.
   audio_candidates_caller = caller()->pc()->local_description()->candidates(0);
@@ -1984,7 +1986,8 @@ TEST_P(PeerConnectionIntegrationTest, MediaContinuesFlowingAfterIceRestart) {
   ASSERT_NE(callee_candidate_pre_restart, callee_candidate_post_restart);
   ASSERT_NE(caller_ufrag_pre_restart, caller_ufrag_post_restart);
   ASSERT_NE(callee_ufrag_pre_restart, callee_ufrag_post_restart);
-  EXPECT_GT(caller()->ice_candidate_pair_change_history().size(), 1u);
+  EXPECT_TRUE_WAIT(caller()->ice_candidate_pair_change_history().size() > 1u,
+                   kMaxWaitForFramesMs);
 
   // Ensure that additional frames are received after the ICE restart.
   MediaExpectations media_expectations;

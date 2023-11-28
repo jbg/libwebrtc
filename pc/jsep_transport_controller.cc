@@ -451,8 +451,6 @@ JsepTransportController::CreateDtlsTransport(
       });
   dtls->ice_transport()->SignalRoleConflict.connect(
       this, &JsepTransportController::OnTransportRoleConflict_n);
-  dtls->ice_transport()->SignalStateChanged.connect(
-      this, &JsepTransportController::OnTransportStateChanged_n);
   dtls->ice_transport()->SignalIceTransportStateChanged.connect(
       this, &JsepTransportController::OnTransportStateChanged_n);
   dtls->ice_transport()->SignalCandidatePairChanged.connect(

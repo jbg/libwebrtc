@@ -3481,7 +3481,7 @@ class P2PTransportChannelPingTest : public ::testing::Test,
         this, &P2PTransportChannelPingTest::OnNetworkRouteChanged);
     ch->SignalReadyToSend.connect(this,
                                   &P2PTransportChannelPingTest::OnReadyToSend);
-    ch->SignalStateChanged.connect(
+    ch->SignalIceTransportStateChanged.connect(
         this, &P2PTransportChannelPingTest::OnChannelStateChanged);
     ch->SignalCandidatePairChanged.connect(
         this, &P2PTransportChannelPingTest::OnCandidatePairChanged);
