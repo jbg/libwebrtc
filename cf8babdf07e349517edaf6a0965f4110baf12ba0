@@ -33,6 +33,57 @@
       "message": "+Harald for api/ approval",
       "revId": "cf8babdf07e349517edaf6a0965f4110baf12ba0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a386c03_3a4ec4f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-29T12:08:44Z",
+      "side": 1,
+      "message": "This will work, but a non-static method that touches nothing in its class seems odd.\n\n+1 anyway, but take a second look.",
+      "revId": "cf8babdf07e349517edaf6a0965f4110baf12ba0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6819ea34_60a24dc2",
+        "filename": "api/rtc_event_log/rtc_event_log_factory.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-29T12:08:44Z",
+      "side": 1,
+      "message": "Given that the create function doesn\u0027t touch anything from the class, should it be a static method?\n\nAlternatively, should the env parameter be sent to the factory\u0027s constructor rather than to the Create method?",
+      "revId": "cf8babdf07e349517edaf6a0965f4110baf12ba0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bbba108_8a79ef72",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-29T12:08:44Z",
+      "side": 1,
+      "message": "nit: switch -\u003e switches",
+      "revId": "cf8babdf07e349517edaf6a0965f4110baf12ba0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
