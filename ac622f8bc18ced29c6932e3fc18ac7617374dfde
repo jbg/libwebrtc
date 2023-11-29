@@ -22,6 +22,30 @@
       },
       "revId": "ac622f8bc18ced29c6932e3fc18ac7617374dfde",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aab69e84_a3120209",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 914,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-11-29T12:21:15Z",
+      "side": 1,
+      "message": "That\u0027s true. At this level we don\u0027t know which exactly frame caused failure if underlaying decoder is async. It was like this before this change.",
+      "parentUuid": "c80d9884_bec76f14",
+      "range": {
+        "startLine": 914,
+        "startChar": 0,
+        "endLine": 914,
+        "endChar": 65
+      },
+      "revId": "ac622f8bc18ced29c6932e3fc18ac7617374dfde",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
