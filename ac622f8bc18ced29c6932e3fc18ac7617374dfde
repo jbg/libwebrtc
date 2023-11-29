@@ -70,6 +70,30 @@
       },
       "revId": "ac622f8bc18ced29c6932e3fc18ac7617374dfde",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8702ada4_17c3f5cb",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 914,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2023-11-29T13:06:39Z",
+      "side": 1,
+      "message": "Added:\n\n// Asynchronous decoders may delay error reporting, potentially resulting in\n// error reports reflecting issues that occurred several frames back.",
+      "parentUuid": "db1fa56c_ad2934e8",
+      "range": {
+        "startLine": 914,
+        "startChar": 0,
+        "endLine": 914,
+        "endChar": 65
+      },
+      "revId": "ac622f8bc18ced29c6932e3fc18ac7617374dfde",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
