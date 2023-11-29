@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2229f42f_d7cf38a4",
+        "filename": "test/scenario/call_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-11-29T17:51:51Z",
+      "side": 1,
+      "message": "GetTaskQueueFactory() ?",
+      "range": {
+        "startLine": 213,
+        "startChar": 47,
+        "endLine": 213,
+        "endChar": 69
+      },
+      "revId": "ddf88f69772b72a175ef24e54ef97b6e8824202a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ff8f5af_e4e72c0c",
+        "filename": "test/scenario/call_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-11-29T17:51:51Z",
+      "side": 1,
+      "message": "Or change this to use env task queue factory?",
+      "range": {
+        "startLine": 217,
+        "startChar": 35,
+        "endLine": 217,
+        "endChar": 54
+      },
+      "revId": "ddf88f69772b72a175ef24e54ef97b6e8824202a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
