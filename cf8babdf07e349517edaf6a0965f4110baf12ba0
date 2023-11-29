@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89cd9fd5_7001cdfc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-29T12:28:10Z",
+      "side": 1,
+      "message": "Do you mind giving formal +1 for owner approval?\n\nMay be later std::unique_ptr\u003cRtcEventLogFactoryInterface\u003e\ncan be replaces with absl::AnyInvocable\u003cstd::unique_ptr\u003cRtcEventLog\u003e(const Environment\u0026)\u003e\nbut that would be an api change with unclear [to me] benefits.",
+      "parentUuid": "2a386c03_3a4ec4f8",
+      "revId": "cf8babdf07e349517edaf6a0965f4110baf12ba0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6819ea34_60a24dc2",
@@ -69,6 +87,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "465a3dc3_91b306f6",
+        "filename": "api/rtc_event_log/rtc_event_log_factory.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-29T12:28:10Z",
+      "side": 1,
+      "message": "RtcEventLogFactory implements RtcEventLogFactoryInterface,\nand is used through the interface.\n\nso no, Create shouldn\u0027t be a static.\n\nEnvironment can\u0027t be passed as factory constructor because factory is per peer_connection_factory, but Environment is per peer_connection.\n\n(one of the reason it is implemented that way is that WebRTC user that doesn\u0027t need RtcEventLog injects nullptr factory and avoid binary size costs like proto dependencies)",
+      "parentUuid": "6819ea34_60a24dc2",
+      "revId": "cf8babdf07e349517edaf6a0965f4110baf12ba0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1bbba108_8a79ef72",
@@ -82,6 +118,24 @@
       "writtenOn": "2023-11-29T12:08:44Z",
       "side": 1,
       "message": "nit: switch -\u003e switches",
+      "revId": "cf8babdf07e349517edaf6a0965f4110baf12ba0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89c671c7_8c876704",
+        "filename": "logging/rtc_event_log/rtc_event_log_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-29T12:28:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bbba108_8a79ef72",
       "revId": "cf8babdf07e349517edaf6a0965f4110baf12ba0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
