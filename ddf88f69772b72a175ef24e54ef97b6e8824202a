@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a31dc1c_f645ac3b",
+        "filename": "test/scenario/call_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-29T18:06:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2229f42f_d7cf38a4",
+      "range": {
+        "startLine": 213,
+        "startChar": 47,
+        "endLine": 213,
+        "endChar": 69
+      },
+      "revId": "ddf88f69772b72a175ef24e54ef97b6e8824202a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ff8f5af_e4e72c0c",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-29T17:51:51Z",
       "side": 1,
       "message": "Or change this to use env task queue factory?",
+      "range": {
+        "startLine": 217,
+        "startChar": 35,
+        "endLine": 217,
+        "endChar": 54
+      },
+      "revId": "ddf88f69772b72a175ef24e54ef97b6e8824202a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "298a753e_4e4fb4bf",
+        "filename": "test/scenario/call_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-29T18:06:55Z",
+      "side": 1,
+      "message": "changed here instead.\n(Injecting into Environment without ownership is discouraged).",
+      "parentUuid": "3ff8f5af_e4e72c0c",
       "range": {
         "startLine": 217,
         "startChar": 35,
