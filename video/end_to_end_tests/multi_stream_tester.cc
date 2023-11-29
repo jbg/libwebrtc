@@ -14,6 +14,8 @@
 #include <utility>
 #include <vector>
 
+#include "absl/memory/memory.h"
+#include "api/environment/environment_factory.h"
 #include "api/rtc_event_log/rtc_event_log.h"
 #include "api/task_queue/default_task_queue_factory.h"
 #include "api/task_queue/task_queue_base.h"
@@ -42,17 +44,14 @@ MultiStreamTester::MultiStreamTester() {
 MultiStreamTester::~MultiStreamTester() = default;
 
 void MultiStreamTester::RunTest() {
-  webrtc::RtcEventLogNull event_log;
   auto task_queue_factory = CreateDefaultTaskQueueFactory();
   // Use high prioirity since this task_queue used for fake network delivering
   // at correct time. Those test tasks should be prefered over code under test
   // to make test more stable.
   auto task_queue = task_queue_factory->CreateTaskQueue(
       "TaskQueue", TaskQueueFactory::Priority::HIGH);
-  CallConfig config(&event_log);
   test::ScopedKeyValueConfig field_trials;
-  config.trials = &field_trials;
-  config.task_queue_factory = task_queue_factory.get();
+  CallConfig config(CreateEnvironment(task_queue_factory.get(), &field_trials));
   std::unique_ptr<Call> sender_call;
   std::unique_ptr<Call> receiver_call;
   std::unique_ptr<test::DirectTransport> sender_transport;

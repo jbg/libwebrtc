@@ -452,9 +452,11 @@ if (rtc_enable_protobuf) {
       ":rtc_event_log_impl_encoder",
       "../api:libjingle_logging_api",
       "../api:sequence_checker",
+      "../api/environment",
       "../api/rtc_event_log",
       "../api/task_queue",
       "../api/units:time_delta",
+      "../api/units:timestamp",
       "../rtc_base:checks",
       "../rtc_base:logging",
       "../rtc_base:macromagic",
@@ -464,6 +466,7 @@ if (rtc_enable_protobuf) {
       "../rtc_base:safe_minmax",
       "../rtc_base:timeutils",
       "../rtc_base/system:no_unique_address",
+      "../system_wrappers",
     ]
     absl_deps = [
       "//third_party/abseil-cpp/absl/strings",

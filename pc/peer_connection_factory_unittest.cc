@@ -269,7 +269,6 @@ CreatePeerConnectionFactoryWithRtxDisabled() {
   pcf_dependencies.signaling_thread = rtc::Thread::Current();
   pcf_dependencies.worker_thread = rtc::Thread::Current();
   pcf_dependencies.network_thread = rtc::Thread::Current();
-  pcf_dependencies.task_queue_factory = CreateDefaultTaskQueueFactory();
 
   pcf_dependencies.adm = FakeAudioCaptureModule::Create();
   pcf_dependencies.audio_encoder_factory = CreateBuiltinAudioEncoderFactory();
@@ -671,6 +670,7 @@ TEST(PeerConnectionFactoryDependenciesTest, UsesNetworkManager) {
 
   PeerConnectionFactoryDependencies pcf_dependencies;
   pcf_dependencies.network_manager = std::move(mock_network_manager);
+  pcf_dependencies.task_queue_factory = CreateDefaultTaskQueueFactory();
 
   rtc::scoped_refptr<PeerConnectionFactoryInterface> pcf =
       CreateModularPeerConnectionFactory(std::move(pcf_dependencies));
@@ -700,6 +700,7 @@ TEST(PeerConnectionFactoryDependenciesTest, UsesPacketSocketFactory) {
 
   PeerConnectionFactoryDependencies pcf_dependencies;
   pcf_dependencies.packet_socket_factory = std::move(mock_socket_factory);
+  pcf_dependencies.task_queue_factory = CreateDefaultTaskQueueFactory();
 
   rtc::scoped_refptr<PeerConnectionFactoryInterface> pcf =
       CreateModularPeerConnectionFactory(std::move(pcf_dependencies));
