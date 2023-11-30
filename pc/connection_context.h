@@ -60,6 +60,12 @@ class ConnectionContext final
   ConnectionContext(const ConnectionContext&) = delete;
   ConnectionContext& operator=(const ConnectionContext&) = delete;
 
+  // Environment associated with the PeerConnectionFactory.
+  // Note: that environments are different for different PeerConnections
+  // (but they are not supposed change after creating the PeerConnection).
+  // In particular field trials can be different.
+  const Environment& env() { return env_; }
+
   // Functions called from PeerConnection and friends
   SctpTransportFactoryInterface* sctp_transport_factory() const {
     return sctp_factory_.get();

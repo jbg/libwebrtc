@@ -80,12 +80,9 @@ CreateModularPeerConnectionFactory(
 // Static
 rtc::scoped_refptr<PeerConnectionFactory> PeerConnectionFactory::Create(
     PeerConnectionFactoryDependencies dependencies) {
-  // TODO(bugs.webrtc.org/15656): Move task_queue_factory into environment with
-  // ownership when MediaFactory::CreateMedia would use it from the
-  // Environment instead of the PeerConnectionFactoryDependencies.
   auto context = ConnectionContext::Create(
       CreateEnvironment(std::move(dependencies.trials),
-                        dependencies.task_queue_factory.get()),
+                        std::move(dependencies.task_queue_factory)),
       &dependencies);
   if (!context) {
     return nullptr;
@@ -97,7 +94,6 @@ PeerConnectionFactory::PeerConnectionFactory(
     rtc::scoped_refptr<ConnectionContext> context,
     PeerConnectionFactoryDependencies* dependencies)
     : context_(context),
-      task_queue_factory_(std::move(dependencies->task_queue_factory)),
       event_log_factory_(std::move(dependencies->event_log_factory)),
       fec_controller_factory_(std::move(dependencies->fec_controller_factory)),
       network_state_predictor_factory_(
@@ -111,15 +107,12 @@ PeerConnectionFactory::PeerConnectionFactory(
               : std::make_unique<RtpTransportControllerSendFactory>()),
       metronome_(std::move(dependencies->metronome)) {}
 
-// TODO(bugs.webrtc.org/15656): Move task_queue_factory into environment with
-// ownership when MediaFactory::CreateMedia would use it from the
-// Environment instead of the PeerConnectionFactoryDependencies.
 PeerConnectionFactory::PeerConnectionFactory(
     PeerConnectionFactoryDependencies dependencies)
     : PeerConnectionFactory(
           ConnectionContext::Create(
               CreateEnvironment(std::move(dependencies.trials),
-                                dependencies.task_queue_factory.get()),
+                                std::move(dependencies.task_queue_factory)),
               &dependencies),
           &dependencies) {}
 
@@ -342,7 +335,7 @@ std::unique_ptr<Call> PeerConnectionFactory::CreateCall_w(
       network_state_predictor_factory_.get();
   call_config.neteq_factory = neteq_factory_.get();
 
-  if (IsTrialEnabled("WebRTC-Bwe-InjectedCongestionController")) {
+  if (env.field_trials().IsEnabled("WebRTC-Bwe-InjectedCongestionController")) {
     RTC_LOG(LS_INFO) << "Using injected network controller factory";
     call_config.network_controller_factory =
         injected_network_controller_factory_.get();
@@ -354,10 +347,6 @@ std::unique_ptr<Call> PeerConnectionFactory::CreateCall_w(
       transport_controller_send_factory_.get();
   call_config.metronome = metronome_.get();
   return context_->call_factory()->CreateCall(call_config);
-}
-
-bool PeerConnectionFactory::IsTrialEnabled(absl::string_view key) const {
-  return absl::StartsWith(field_trials().Lookup(key), "Enabled");
 }
 
 }  // namespace webrtc
