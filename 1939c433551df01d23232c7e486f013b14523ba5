@@ -16,6 +16,24 @@
       "message": "David, you\u0027ll need to use the RTC_OBJC_TYPE macro for the RTC type, for example in RTCPeerConnectionFactory.mm:308:\n\n  webrtc::RtpCapabilities capabilities \u003d _nativeFactory-\u003eGetRtpSenderCapabilities(      [RTC_OBJC_TYPE(RTCRtpReceiver) nativeMediaTypeForMediaType:mediaType]);",
       "revId": "1939c433551df01d23232c7e486f013b14523ba5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92dbb968_a77f8eae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15079
+      },
+      "writtenOn": "2023-11-30T15:18:36Z",
+      "side": 1,
+      "message": "Thanks for the feedback! How would have this been noticed in an automated way? Is there a way to test for it?",
+      "parentUuid": "401eb2ee_8ab61109",
+      "revId": "1939c433551df01d23232c7e486f013b14523ba5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
