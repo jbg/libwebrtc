@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52e3dd1f_26a221cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-30T15:15:41Z",
+      "side": 1,
+      "message": "Deleting is good!",
+      "revId": "d7013e41bc161e5c04c74d89bbdd284e049a8715",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7069c99c_e70a9c7c",
+        "filename": "net/dcsctp/rx/reassembly_queue.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-11-30T15:15:41Z",
+      "side": 1,
+      "message": "Please update the comment, since the condition no longer checks for queued_bytes_ \u003e 0.",
+      "revId": "d7013e41bc161e5c04c74d89bbdd284e049a8715",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
