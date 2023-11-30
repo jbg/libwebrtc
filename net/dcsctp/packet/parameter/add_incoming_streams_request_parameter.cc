@@ -36,8 +36,6 @@ namespace dcsctp {
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 //  |      Number of new streams    |         Reserved              |
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-constexpr int AddIncomingStreamsRequestParameter::kType;
-
 absl::optional<AddIncomingStreamsRequestParameter>
 AddIncomingStreamsRequestParameter::Parse(rtc::ArrayView<const uint8_t> data) {
   absl::optional<BoundedByteReader<kHeaderSize>> reader = ParseTLV(data);

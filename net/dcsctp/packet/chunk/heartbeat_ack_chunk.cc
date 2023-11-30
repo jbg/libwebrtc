@@ -34,8 +34,6 @@ namespace dcsctp {
 //  /            Heartbeat Information TLV (Variable-Length)        /
 //  \                                                               \
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-constexpr int HeartbeatAckChunk::kType;
-
 absl::optional<HeartbeatAckChunk> HeartbeatAckChunk::Parse(
     rtc::ArrayView<const uint8_t> data) {
   absl::optional<BoundedByteReader<kHeaderSize>> reader = ParseTLV(data);

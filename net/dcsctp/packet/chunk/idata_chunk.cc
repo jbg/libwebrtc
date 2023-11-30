@@ -43,8 +43,6 @@ namespace dcsctp {
 //  /                           User Data                           /
 //  \                                                               \
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-constexpr int IDataChunk::kType;
-
 absl::optional<IDataChunk> IDataChunk::Parse(
     rtc::ArrayView<const uint8_t> data) {
   absl::optional<BoundedByteReader<kHeaderSize>> reader = ParseTLV(data);

@@ -24,8 +24,6 @@ namespace dcsctp {
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 //  |         Type = 0x8001         |          Length = 4           |
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-constexpr int ZeroChecksumAcceptableChunkParameter::kType;
-
 absl::optional<ZeroChecksumAcceptableChunkParameter>
 ZeroChecksumAcceptableChunkParameter::Parse(
     rtc::ArrayView<const uint8_t> data) {

@@ -40,8 +40,6 @@ namespace dcsctp {
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 //  |  Stream Number N-1 (optional) |    Stream Number N (optional) |
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-constexpr int IncomingSSNResetRequestParameter::kType;
-
 absl::optional<IncomingSSNResetRequestParameter>
 IncomingSSNResetRequestParameter::Parse(rtc::ArrayView<const uint8_t> data) {
   absl::optional<BoundedByteReader<kHeaderSize>> reader = ParseTLV(data);

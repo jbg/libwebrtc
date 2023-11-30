@@ -23,8 +23,6 @@ namespace dcsctp {
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 //  |     Cause Code=7              |      Cause Length=4           |
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-constexpr int InvalidMandatoryParameterCause::kType;
-
 absl::optional<InvalidMandatoryParameterCause>
 InvalidMandatoryParameterCause::Parse(rtc::ArrayView<const uint8_t> data) {
   if (!ParseTLV(data).has_value()) {

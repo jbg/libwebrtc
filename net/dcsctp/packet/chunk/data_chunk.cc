@@ -41,8 +41,6 @@ namespace dcsctp {
 //  /                 User Data (seq n of Stream S)                 /
 //  \                                                               \
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-constexpr int DataChunk::kType;
-
 absl::optional<DataChunk> DataChunk::Parse(rtc::ArrayView<const uint8_t> data) {
   absl::optional<BoundedByteReader<kHeaderSize>> reader = ParseTLV(data);
   if (!reader.has_value()) {

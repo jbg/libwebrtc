@@ -25,8 +25,6 @@ namespace dcsctp {
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 //  |   Type = 8    |Chunk  Flags   |      Length = 4               |
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-constexpr int ShutdownAckChunk::kType;
-
 absl::optional<ShutdownAckChunk> ShutdownAckChunk::Parse(
     rtc::ArrayView<const uint8_t> data) {
   if (!ParseTLV(data).has_value()) {

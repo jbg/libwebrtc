@@ -9,34 +9,9 @@
  */
 #include "net/dcsctp/socket/callback_deferrer.h"
 
-#include "api/make_ref_counted.h"
+#include "absl/functional/any_invocable.h"
 
 namespace dcsctp {
-namespace {
-// A wrapper around the move-only DcSctpMessage, to let it be captured in a
-// lambda.
-class MessageDeliverer {
- public:
-  explicit MessageDeliverer(DcSctpMessage&& message)
-      : state_(rtc::make_ref_counted<State>(std::move(message))) {}
-
-  void Deliver(DcSctpSocketCallbacks& c) {
-    // Really ensure that it's only called once.
-    RTC_DCHECK(!state_->has_delivered);
-    state_->has_delivered = true;
-    c.OnMessageReceived(std::move(state_->message));
-  }
-
- private:
-  struct State : public webrtc::RefCountInterface {
-    explicit State(DcSctpMessage&& m)
-        : has_delivered(false), message(std::move(m)) {}
-    bool has_delivered;
-    DcSctpMessage message;
-  };
-  rtc::scoped_refptr<State> state_;
-};
-}  // namespace
 
 void CallbackDeferrer::Prepare() {
   RTC_DCHECK(!prepared_);
@@ -48,7 +23,7 @@ void CallbackDeferrer::TriggerDeferred() {
   // callback, and that might result in adding new callbacks to this instance,
   // and the vector can't be modified while iterated on.
   RTC_DCHECK(prepared_);
-  std::vector<std::function<void(DcSctpSocketCallbacks & cb)>> deferred;
+  std::vector<absl::AnyInvocable<void(DcSctpSocketCallbacks & cb)>> deferred;
   deferred.swap(deferred_);
   prepared_ = false;
 
@@ -84,8 +59,9 @@ uint32_t CallbackDeferrer::GetRandomInt(uint32_t low, uint32_t high) {
 void CallbackDeferrer::OnMessageReceived(DcSctpMessage message) {
   RTC_DCHECK(prepared_);
   deferred_.emplace_back(
-      [deliverer = MessageDeliverer(std::move(message))](
-          DcSctpSocketCallbacks& cb) mutable { deliverer.Deliver(cb); });
+      [msg = std::move(message)](DcSctpSocketCallbacks& cb) mutable {
+        cb.OnMessageReceived(std::move(msg));
+      });
 }
 
 void CallbackDeferrer::OnError(ErrorKind error, absl::string_view message) {

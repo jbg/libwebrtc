@@ -24,8 +24,6 @@ namespace dcsctp {
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 //  |    Parameter Type = 49152     |  Parameter Length = 4         |
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-constexpr int ForwardTsnSupportedParameter::kType;
-
 absl::optional<ForwardTsnSupportedParameter>
 ForwardTsnSupportedParameter::Parse(rtc::ArrayView<const uint8_t> data) {
   if (!ParseTLV(data).has_value()) {

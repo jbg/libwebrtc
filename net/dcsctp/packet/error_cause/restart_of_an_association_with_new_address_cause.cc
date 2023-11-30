@@ -32,8 +32,6 @@ namespace dcsctp {
 //  /                       New Address TLVs                        /
 //  \                                                               \
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-constexpr int RestartOfAnAssociationWithNewAddressesCause::kType;
-
 absl::optional<RestartOfAnAssociationWithNewAddressesCause>
 RestartOfAnAssociationWithNewAddressesCause::Parse(
     rtc::ArrayView<const uint8_t> data) {

@@ -32,8 +32,6 @@ namespace dcsctp {
 //  /                     Cookie                                    /
 //  \                                                               \
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-constexpr int CookieEchoChunk::kType;
-
 absl::optional<CookieEchoChunk> CookieEchoChunk::Parse(
     rtc::ArrayView<const uint8_t> data) {
   absl::optional<BoundedByteReader<kHeaderSize>> reader = ParseTLV(data);

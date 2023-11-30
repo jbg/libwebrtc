@@ -23,8 +23,6 @@ namespace dcsctp {
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 //  |     Cause Code=4              |      Cause Length=4           |
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-constexpr int OutOfResourceErrorCause::kType;
-
 absl::optional<OutOfResourceErrorCause> OutOfResourceErrorCause::Parse(
     rtc::ArrayView<const uint8_t> data) {
   if (!ParseTLV(data).has_value()) {

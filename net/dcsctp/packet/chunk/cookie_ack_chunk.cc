@@ -25,8 +25,6 @@ namespace dcsctp {
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 //  |   Type = 11   |Chunk  Flags   |     Length = 4                |
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-constexpr int CookieAckChunk::kType;
-
 absl::optional<CookieAckChunk> CookieAckChunk::Parse(
     rtc::ArrayView<const uint8_t> data) {
   if (!ParseTLV(data).has_value()) {

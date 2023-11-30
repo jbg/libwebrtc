@@ -34,8 +34,6 @@ namespace dcsctp {
 //  /                    Additional Information                     /
 //  \                                                               \
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-constexpr int ProtocolViolationCause::kType;
-
 absl::optional<ProtocolViolationCause> ProtocolViolationCause::Parse(
     rtc::ArrayView<const uint8_t> data) {
   absl::optional<BoundedByteReader<kHeaderSize>> reader = ParseTLV(data);

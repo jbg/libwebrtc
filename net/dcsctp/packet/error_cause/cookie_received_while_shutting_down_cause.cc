@@ -23,8 +23,6 @@ namespace dcsctp {
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 //  |     Cause Code=10              |      Cause Length=4          |
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-constexpr int CookieReceivedWhileShuttingDownCause::kType;
-
 absl::optional<CookieReceivedWhileShuttingDownCause>
 CookieReceivedWhileShuttingDownCause::Parse(
     rtc::ArrayView<const uint8_t> data) {

@@ -17,10 +17,9 @@
 #include <utility>
 #include <vector>
 
+#include "absl/functional/any_invocable.h"
 #include "absl/strings/string_view.h"
 #include "api/array_view.h"
-#include "api/ref_counted_base.h"
-#include "api/scoped_refptr.h"
 #include "api/task_queue/task_queue_base.h"
 #include "net/dcsctp/public/dcsctp_message.h"
 #include "net/dcsctp/public/dcsctp_socket.h"
@@ -94,7 +93,7 @@ class CallbackDeferrer : public DcSctpSocketCallbacks {
 
   DcSctpSocketCallbacks& underlying_;
   bool prepared_ = false;
-  std::vector<std::function<void(DcSctpSocketCallbacks& cb)>> deferred_;
+  std::vector<absl::AnyInvocable<void(DcSctpSocketCallbacks& cb)>> deferred_;
 };
 }  // namespace dcsctp
 

@@ -31,8 +31,6 @@ namespace dcsctp {
 //  /                  Unrecognized Chunk                           /
 //  \                                                               \
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-constexpr int UnrecognizedChunkTypeCause::kType;
-
 absl::optional<UnrecognizedChunkTypeCause> UnrecognizedChunkTypeCause::Parse(
     rtc::ArrayView<const uint8_t> data) {
   absl::optional<BoundedByteReader<kHeaderSize>> reader = ParseTLV(data);

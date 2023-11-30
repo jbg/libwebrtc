@@ -32,8 +32,6 @@ namespace dcsctp {
 //  /                  TSN value                                    /
 //  \                                                               \
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-constexpr int NoUserDataCause::kType;
-
 absl::optional<NoUserDataCause> NoUserDataCause::Parse(
     rtc::ArrayView<const uint8_t> data) {
   absl::optional<BoundedByteReader<kHeaderSize>> reader = ParseTLV(data);

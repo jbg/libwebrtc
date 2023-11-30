@@ -137,9 +137,6 @@ rtc_library("dcsctp_socket") {
     ":stream_reset_handler",
     ":transmission_control_block",
     "../../../api:array_view",
-    "../../../api:make_ref_counted",
-    "../../../api:refcountedbase",
-    "../../../api:scoped_refptr",
     "../../../api:sequence_checker",
     "../../../api/task_queue:task_queue",
     "../../../rtc_base:checks",
@@ -174,6 +171,7 @@ rtc_library("dcsctp_socket") {
     "state_cookie.h",
   ]
   absl_deps = [
+    "//third_party/abseil-cpp/absl/functional:any_invocable",
     "//third_party/abseil-cpp/absl/functional:bind_front",
     "//third_party/abseil-cpp/absl/memory",
     "//third_party/abseil-cpp/absl/strings",

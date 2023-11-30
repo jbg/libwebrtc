@@ -38,8 +38,6 @@ namespace dcsctp {
 //  /             Re-configuration Parameter (optional)             /
 //  \                                                               \
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-constexpr int ReConfigChunk::kType;
-
 absl::optional<ReConfigChunk> ReConfigChunk::Parse(
     rtc::ArrayView<const uint8_t> data) {
   absl::optional<BoundedByteReader<kHeaderSize>> reader = ParseTLV(data);

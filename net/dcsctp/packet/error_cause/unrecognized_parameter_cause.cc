@@ -30,8 +30,6 @@ namespace dcsctp {
 //  /                  Unrecognized Parameters                      /
 //  \                                                               \
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-constexpr int UnrecognizedParametersCause::kType;
-
 absl::optional<UnrecognizedParametersCause> UnrecognizedParametersCause::Parse(
     rtc::ArrayView<const uint8_t> data) {
   absl::optional<BoundedByteReader<kHeaderSize>> reader = ParseTLV(data);

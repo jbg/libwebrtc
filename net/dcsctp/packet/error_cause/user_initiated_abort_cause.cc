@@ -34,8 +34,6 @@ namespace dcsctp {
 //  /                    Upper Layer Abort Reason                   /
 //  \                                                               \
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-constexpr int UserInitiatedAbortCause::kType;
-
 absl::optional<UserInitiatedAbortCause> UserInitiatedAbortCause::Parse(
     rtc::ArrayView<const uint8_t> data) {
   absl::optional<BoundedByteReader<kHeaderSize>> reader = ParseTLV(data);

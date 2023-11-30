@@ -34,8 +34,6 @@ namespace dcsctp {
 //  /                   zero or more Error Causes                   /
 //  \                                                               \
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-constexpr int AbortChunk::kType;
-
 absl::optional<AbortChunk> AbortChunk::Parse(
     rtc::ArrayView<const uint8_t> data) {
   absl::optional<BoundedByteReader<kHeaderSize>> reader = ParseTLV(data);

@@ -30,8 +30,6 @@ namespace dcsctp {
 //  /                  Unresolvable Address                         /
 //  \                                                               \
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-constexpr int UnresolvableAddressCause::kType;
-
 absl::optional<UnresolvableAddressCause> UnresolvableAddressCause::Parse(
     rtc::ArrayView<const uint8_t> data) {
   absl::optional<BoundedByteReader<kHeaderSize>> reader = ParseTLV(data);

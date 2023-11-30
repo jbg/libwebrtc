@@ -26,8 +26,6 @@ namespace dcsctp {
 
 // https://tools.ietf.org/html/rfc4960#section-3.3.3.1
 
-constexpr int StateCookieParameter::kType;
-
 absl::optional<StateCookieParameter> StateCookieParameter::Parse(
     rtc::ArrayView<const uint8_t> data) {
   absl::optional<BoundedByteReader<kHeaderSize>> reader = ParseTLV(data);

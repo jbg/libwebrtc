@@ -44,8 +44,6 @@ namespace dcsctp {
 //  /              Optional/Variable-Length Parameters              /
 //  \                                                               \
 //  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-constexpr int InitChunk::kType;
-
 absl::optional<InitChunk> InitChunk::Parse(rtc::ArrayView<const uint8_t> data) {
   absl::optional<BoundedByteReader<kHeaderSize>> reader = ParseTLV(data);
   if (!reader.has_value()) {
