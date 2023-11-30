@@ -16,6 +16,24 @@
       "message": "I assume that PeerConnectionFactory is also on the list to take an env argument at some point?",
       "revId": "01727006d405af4576f369c5e0d5767969ad3044",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b6c0c54_375e8670",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-11-30T10:55:43Z",
+      "side": 1,
+      "message": "No, not on my list:\nPeerConnectionFactory is the primary class that creates the Environment from the PeerConnectionFactoryDependencies and PeerConnectionDependencies.\n\nIt might be beneficial to move Environment into these classes, but I do not have such plans.\n\nMy plan is to continue in another direction: propagate Environment deeper into WebRTC classes to the point where global field trial string can be removed.",
+      "parentUuid": "96e23aec_fef4ab9c",
+      "revId": "01727006d405af4576f369c5e0d5767969ad3044",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
