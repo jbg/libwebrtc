@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83db08b7_3d63e4d3",
+        "filename": "video/frame_cadence_adapter.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-12-01T15:08:00Z",
+      "side": 1,
+      "message": "nit: `max_frame_rate` rather than |max_frame_rate| in comments\n\nWith backticks: `",
+      "revId": "cd0131eaff7a4759e9bba1d12490e719601f079e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "623954c3_77c62158",
+        "filename": "video/frame_cadence_adapter.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-12-01T15:08:00Z",
+      "side": 1,
+      "message": "I know I told you to add this TODO but feel free to delete it, after we talked about this some more I suspect it is a very edge case and my more recent understanding is that if we prevent the queue from being overloaded (e.g. drop frames if we can\u0027t keep up) then waiting for non-static content before changing resolution might not be a problem after all.\n\nAlternatively, if it still makes sense to track, then TODO with a crbug rather than your LDAP.",
+      "revId": "cd0131eaff7a4759e9bba1d12490e719601f079e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa22c01d_fd0c1ab6",
+        "filename": "video/frame_cadence_adapter_unittest.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-12-01T15:08:00Z",
+      "side": 1,
+      "message": "OMG! WebRTC finally has fake time that trigger PostDelayedTask as-if time advanced, I didn\u0027t know but I love it!",
+      "revId": "cd0131eaff7a4759e9bba1d12490e719601f079e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf6b2640_c090ba0f",
+        "filename": "video/frame_cadence_adapter_unittest.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 847,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-12-01T15:08:00Z",
+      "side": 1,
+      "message": "nit: here and in other tests there is a typo: r/shud/should",
+      "range": {
+        "startLine": 847,
+        "startChar": 64,
+        "endLine": 847,
+        "endChar": 69
+      },
+      "revId": "cd0131eaff7a4759e9bba1d12490e719601f079e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
