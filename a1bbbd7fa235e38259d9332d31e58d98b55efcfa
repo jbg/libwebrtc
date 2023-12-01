@@ -16,6 +16,75 @@
       "message": "Now added the required unittests, locking down the new behavior, as well.",
       "revId": "a1bbbd7fa235e38259d9332d31e58d98b55efcfa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd388dac_95392cc4",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-12-01T10:36:33Z",
+      "side": 1,
+      "message": "To make this all safe regardless of which one is bigger, use max here:\n\n\n    max(frame_delay_, restricted_frame_delay_.value_or(frame_delay_));",
+      "range": {
+        "startLine": 612,
+        "startChar": 26,
+        "endLine": 612,
+        "endChar": 73
+      },
+      "revId": "a1bbbd7fa235e38259d9332d31e58d98b55efcfa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04c4336d_3bab8d68",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-12-01T10:36:33Z",
+      "side": 1,
+      "message": "Why only if the new max is higher?\nThere\u0027s no such check in the UpdateVideoSourceRestrictions()",
+      "range": {
+        "startLine": 795,
+        "startChar": 69,
+        "endLine": 796,
+        "endChar": 24
+      },
+      "revId": "a1bbbd7fa235e38259d9332d31e58d98b55efcfa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2047cfde_ed6a4b52",
+        "filename": "video/frame_cadence_adapter_unittest.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2023-12-01T10:36:33Z",
+      "side": 1,
+      "message": "Did you forget to delete the debug logging?",
+      "range": {
+        "startLine": 253,
+        "startChar": 4,
+        "endLine": 253,
+        "endChar": 43
+      },
+      "revId": "a1bbbd7fa235e38259d9332d31e58d98b55efcfa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
