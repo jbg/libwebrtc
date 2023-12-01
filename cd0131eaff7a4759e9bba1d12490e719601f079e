@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de0c8d72_254f29d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-12-01T15:11:34Z",
+      "side": 1,
+      "message": "I\u0027ll stay out until all open comment threads are depleted.",
+      "revId": "cd0131eaff7a4759e9bba1d12490e719601f079e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83db08b7_3d63e4d3",

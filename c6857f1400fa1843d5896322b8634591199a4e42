@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1aff7d1c_bae0873a",
+        "filename": "video/video_stream_encoder_unittest.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-12-01T15:11:34Z",
+      "side": 1,
+      "message": "Please also add a unit test that the VSE forwards restrictions to FCA.",
+      "range": {
+        "startLine": 786,
+        "startChar": 2,
+        "endLine": 786,
+        "endChar": 13
+      },
+      "revId": "c6857f1400fa1843d5896322b8634591199a4e42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
