@@ -89,6 +89,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de28aa15_2fd495cc",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-12-01T11:49:51Z",
+      "side": 1,
+      "message": "Will fix. Sorry.",
+      "parentUuid": "ab07419c_edb6818e",
+      "range": {
+        "startLine": 612,
+        "startChar": 26,
+        "endLine": 612,
+        "endChar": 73
+      },
+      "revId": "a1bbbd7fa235e38259d9332d31e58d98b55efcfa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04c4336d_3bab8d68",
@@ -150,6 +174,30 @@
       "side": 1,
       "message": "Since you\u0027ve changed to max(frame_delay, restricted_frame_delay) above, it all checks out now: the zero_hertz_adapter_ is always notified about the latest restriction. It might be more or less than the constraint, but it doesn\u0027t matter.\n\nIt\u0027s a simpler API contract: always inform the adapter about the restriction. If you start spreading logic here and there, it will get tricky in the future.\n\nI would prefer if you\u0027ve reverted this check here. But I won\u0027t block on this. I can see your reasoning, even though I don\u0027t 100% agree with it.",
       "parentUuid": "10d29fa2_ec41ce3f",
+      "range": {
+        "startLine": 795,
+        "startChar": 69,
+        "endLine": 796,
+        "endChar": 24
+      },
+      "revId": "a1bbbd7fa235e38259d9332d31e58d98b55efcfa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c4499c7_d846cb1c",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-12-01T11:49:51Z",
+      "side": 1,
+      "message": "Got it. Will think again.",
+      "parentUuid": "4b4a09f3_0f3df8d4",
       "range": {
         "startLine": 795,
         "startChar": 69,
