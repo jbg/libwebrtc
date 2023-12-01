@@ -34,6 +34,24 @@
       "parentUuid": "401eb2ee_8ab61109",
       "revId": "1939c433551df01d23232c7e486f013b14523ba5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f189f56_282d46e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2023-12-01T05:58:41Z",
+      "side": 1,
+      "message": "Use `rtc_objc_prefix` in GN to set the prefix and ensure all files compile correctly. It is expanded to `RTC_OBJC_TYPE_PREFIX` in the code. Unfortunately, there are no public bots running with this flag set.",
+      "parentUuid": "92dbb968_a77f8eae",
+      "revId": "1939c433551df01d23232c7e486f013b14523ba5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
