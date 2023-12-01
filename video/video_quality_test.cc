@@ -22,6 +22,7 @@
 #include <string>
 #include <vector>
 
+#include "api/environment/environment_factory.h"
 #include "api/fec_controller_override.h"
 #include "api/rtc_event_log_output_file.h"
 #include "api/task_queue/default_task_queue_factory.h"

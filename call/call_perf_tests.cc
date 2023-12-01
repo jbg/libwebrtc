@@ -16,6 +16,7 @@
 #include "absl/flags/flag.h"
 #include "absl/strings/string_view.h"
 #include "api/audio_codecs/builtin_audio_encoder_factory.h"
+#include "api/environment/environment_factory.h"
 #include "api/numerics/samples_stats_counter.h"
 #include "api/rtc_event_log/rtc_event_log.h"
 #include "api/task_queue/pending_task_safety_flag.h"

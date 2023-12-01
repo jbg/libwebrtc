@@ -14,6 +14,7 @@
 
 #include "absl/flags/flag.h"
 #include "absl/strings/string_view.h"
+#include "api/environment/environment_factory.h"
 #include "api/rtc_event_log/rtc_event_log_factory.h"
 #include "api/rtc_event_log_output_file.h"
 #include "api/task_queue/task_queue_base.h"
@@ -27,6 +28,7 @@
 #include "rtc_base/task_queue_for_test.h"
 #include "rtc_base/time_utils.h"
 #include "test/encoder_settings.h"
+#include "test/explicit_key_value_config.h"
 #include "test/gtest.h"
 #include "test/video_test_constants.h"
 
@@ -38,6 +40,7 @@ ABSL_FLAG(std::string,
 namespace webrtc {
 namespace {
 
+using ::webrtc::test::ExplicitKeyValueConfig;
 using ::webrtc::test::GetGlobalMetricsLogger;
 using ::webrtc::test::ImprovementDirection;
 using ::webrtc::test::Unit;

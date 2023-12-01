@@ -10,6 +10,7 @@
 
 #include <memory>
 
+#include "api/environment/environment_factory.h"
 #include "api/media_types.h"
 #include "api/task_queue/default_task_queue_factory.h"
 #include "api/task_queue/task_queue_base.h"
