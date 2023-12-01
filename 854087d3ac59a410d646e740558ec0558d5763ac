@@ -16,6 +16,23 @@
       "message": "Changed according to comments from Ilya.",
       "revId": "854087d3ac59a410d646e740558ec0558d5763ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8643be0e_6631ebf6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-12-01T12:44:10Z",
+      "side": 1,
+      "message": "Pending final OK from handellm@ who asked for the unittest to be added.",
+      "revId": "854087d3ac59a410d646e740558ec0558d5763ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
