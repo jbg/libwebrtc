@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0f9e76b_c6f1e1d3",
+        "filename": "net/dcsctp/packet/chunk/cookie_ack_chunk.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2023-12-01T12:59:29Z",
+      "side": 1,
+      "message": "Nit: Did you intend for these diagrams to be grouped together with the function? Same comment below.",
+      "revId": "4be06d7a83b2b063a5958f9dc27baaa27da42a6c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d1cbb60_8f9ad9cd",
+        "filename": "net/dcsctp/socket/callback_deferrer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2023-12-01T12:59:29Z",
+      "side": 1,
+      "message": "Weird that the formatter thinks there should be a space here",
+      "range": {
+        "startLine": 26,
+        "startChar": 59,
+        "endLine": 26,
+        "endChar": 60
+      },
+      "revId": "4be06d7a83b2b063a5958f9dc27baaa27da42a6c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
