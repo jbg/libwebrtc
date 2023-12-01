@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4529cae_96064ae1",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-12-01T10:52:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd388dac_95392cc4",
+      "range": {
+        "startLine": 612,
+        "startChar": 26,
+        "endLine": 612,
+        "endChar": 73
+      },
+      "revId": "a1bbbd7fa235e38259d9332d31e58d98b55efcfa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04c4336d_3bab8d68",
@@ -66,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10d29fa2_ec41ce3f",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-12-01T10:52:31Z",
+      "side": 1,
+      "message": "Correct. Calls to UpdateVideoSourceRestrictions() only stores the latest restriction. But this part fixes the corner case where a client is restricted to let\u0027s say 10 fps and then changes the constraints for the FCA and instead sets it to 5 fps. In that case, it feels wrong to create a new adapter and claim that it should use a restrcted rate of 10 fps when the new max rate is already lower.",
+      "parentUuid": "04c4336d_3bab8d68",
+      "range": {
+        "startLine": 795,
+        "startChar": 69,
+        "endLine": 796,
+        "endChar": 24
+      },
+      "revId": "a1bbbd7fa235e38259d9332d31e58d98b55efcfa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2047cfde_ed6a4b52",
         "filename": "video/frame_cadence_adapter_unittest.cc",
         "patchSetId": 15
@@ -77,6 +125,30 @@
       "writtenOn": "2023-12-01T10:36:33Z",
       "side": 1,
       "message": "Did you forget to delete the debug logging?",
+      "range": {
+        "startLine": 253,
+        "startChar": 4,
+        "endLine": 253,
+        "endChar": 43
+      },
+      "revId": "a1bbbd7fa235e38259d9332d31e58d98b55efcfa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e38730dc_200bbcd6",
+        "filename": "video/frame_cadence_adapter_unittest.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2023-12-01T10:52:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2047cfde_ed6a4b52",
       "range": {
         "startLine": 253,
         "startChar": 4,
