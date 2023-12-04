@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83073797_50942d00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-12-04T09:25:26Z",
+      "side": 1,
+      "message": "Nice! LGTM % nit.",
+      "revId": "d84f2b5f20a160b466340aff6de68fbc30bc13bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e209a4ea_bea31ba6",
+        "filename": "video/frame_cadence_adapter.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2023-12-04T09:25:26Z",
+      "side": 1,
+      "message": "nit: use braces for all control flow statements, https://google.github.io/styleguide/cppguide.html#Formatting_Looping_Branching",
+      "range": {
+        "startLine": 693,
+        "startChar": 26,
+        "endLine": 694,
+        "endChar": 71
+      },
+      "revId": "d84f2b5f20a160b466340aff6de68fbc30bc13bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
