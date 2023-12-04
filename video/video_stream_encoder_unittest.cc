@@ -783,6 +783,10 @@ class MockFrameCadenceAdapter : public FrameCadenceAdapterInterface {
               UpdateLayerStatus,
               (size_t spatial_index, bool enabled),
               (override));
+  MOCK_METHOD(void,
+              UpdateVideoSourceRestrictions,
+              (absl::optional<double>),
+              (override));
   MOCK_METHOD(void, ProcessKeyFrameRequest, (), (override));
 };
 
@@ -9578,6 +9582,62 @@ TEST(VideoStreamEncoderFrameCadenceTest,
       TimeDelta::Seconds(1) *
       FrameCadenceAdapterInterface::kOnDiscardedFrameRefreshFramePeriod /
       kMaxFps);
+}
+
+class VideoStreamEncoderFrameCadenceRestrictionTest : public ::testing::Test {
+ public:
+  VideoStreamEncoderFrameCadenceRestrictionTest()
+      : adapter_ptr_(adapter_.get()),
+        fake_resource_(FakeResource::Create("FakeResource")),
+        video_stream_encoder_(
+            factory_.Create(std::move(adapter_), &encoder_queue_)) {}
+
+  ~VideoStreamEncoderFrameCadenceRestrictionTest() {
+    factory_.DepleteTaskQueues();
+  }
+
+  void UpdateVideoSourceRestrictions(VideoSourceRestrictions restrictions) {
+    encoder_queue_->PostTask([this, restrictions] {
+      RTC_DCHECK_RUN_ON(encoder_queue_);
+      video_stream_encoder_->OnVideoSourceRestrictionsUpdated(
+          restrictions, VideoAdaptationCounters(), fake_resource_,
+          VideoSourceRestrictions());
+    });
+  }
+
+ protected:
+  SimpleVideoStreamEncoderFactory factory_;
+  std::unique_ptr<NiceMock<MockFrameCadenceAdapter>> adapter_{
+      std::make_unique<NiceMock<MockFrameCadenceAdapter>>()};
+  NiceMock<MockFrameCadenceAdapter>* adapter_ptr_;
+  TaskQueueBase* encoder_queue_{nullptr};
+  rtc::scoped_refptr<FakeResource> fake_resource_;
+  VideoSourceRestrictions restrictions_;
+  std::unique_ptr<SimpleVideoStreamEncoderFactory::AdaptedVideoStreamEncoder>
+      video_stream_encoder_;
+};
+
+TEST_F(VideoStreamEncoderFrameCadenceRestrictionTest,
+       UpdatesVideoSourceRestrictionsUnRestricted) {
+  UpdateVideoSourceRestrictions(VideoSourceRestrictions());
+  EXPECT_CALL(*adapter_ptr_, UpdateVideoSourceRestrictions(Eq(absl::nullopt)));
+}
+
+TEST_F(VideoStreamEncoderFrameCadenceRestrictionTest,
+       UpdatesVideoSourceRestrictionsWithMaxFrameRateRestriction) {
+  restrictions_.set_max_frame_rate(20);
+  UpdateVideoSourceRestrictions(restrictions_);
+  EXPECT_CALL(*adapter_ptr_, UpdateVideoSourceRestrictions(Optional(20)));
+}
+
+TEST_F(VideoStreamEncoderFrameCadenceRestrictionTest,
+       UpdatesVideoSourceRestrictionsWithoutMaxFrameRateRestriction) {
+  // The FrameCadenceAdapter is only informed about restrictions in max frame
+  // rate.
+  restrictions_.set_max_pixels_per_frame(99);
+  restrictions_.set_target_pixels_per_frame(101);
+  UpdateVideoSourceRestrictions(restrictions_);
+  EXPECT_CALL(*adapter_ptr_, UpdateVideoSourceRestrictions(Eq(absl::nullopt)));
 }
 
 }  // namespace webrtc

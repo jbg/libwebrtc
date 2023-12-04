@@ -39,6 +39,7 @@
 #include "modules/video_coding/utility/frame_dropper.h"
 #include "modules/video_coding/utility/qp_parser.h"
 #include "rtc_base/experiments/rate_control_settings.h"
+#include "rtc_base/gtest_prod_util.h"
 #include "rtc_base/numerics/exp_filter.h"
 #include "rtc_base/race_checker.h"
 #include "rtc_base/rate_statistics.h"
@@ -132,6 +133,8 @@ class VideoStreamEncoder : public VideoStreamEncoderInterface,
                                double cwnd_reduce_ratio);
 
  protected:
+  friend class VideoStreamEncoderFrameCadenceRestrictionTest;
+
   // Used for testing. For example the `ScalingObserverInterface` methods must
   // be called on `encoder_queue_`.
   TaskQueueBase* encoder_queue() { return encoder_queue_.Get(); }
