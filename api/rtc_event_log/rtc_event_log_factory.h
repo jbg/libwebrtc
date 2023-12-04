@@ -17,7 +17,6 @@
 #include "api/environment/environment.h"
 #include "api/rtc_event_log/rtc_event_log.h"
 #include "api/rtc_event_log/rtc_event_log_factory_interface.h"
-#include "api/task_queue/task_queue_factory.h"
 #include "rtc_base/system/rtc_export.h"
 
 namespace webrtc {
@@ -26,10 +25,6 @@ class RTC_EXPORT RtcEventLogFactory : public RtcEventLogFactoryInterface {
  public:
   RtcEventLogFactory() = default;
 
-  // TODO(bugs.webrtc.org/15656): deprecate and delete constructor taking
-  // task queue factory in favor of using task queue factory provided through
-  // the Environment parameter in Create function.
-  explicit RtcEventLogFactory(TaskQueueFactory* task_queue_factory) {}
   ~RtcEventLogFactory() override = default;
 
   absl::Nonnull<std::unique_ptr<RtcEventLog>> Create(
