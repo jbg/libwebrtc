@@ -10,7 +10,7 @@
 #include "net/dcsctp/tx/outstanding_data.h"
 
 #include <algorithm>
-#include <set>
+#include <map>
 #include <utility>
 #include <vector>
 
@@ -80,13 +80,13 @@ bool OutstandingData::IsConsistent() const {
   size_t actual_outstanding_bytes = 0;
   size_t actual_outstanding_items = 0;
 
-  std::set<UnwrappedTSN> combined_to_be_retransmitted;
+  webrtc::flat_set<UnwrappedTSN> combined_to_be_retransmitted;
   combined_to_be_retransmitted.insert(to_be_retransmitted_.begin(),
                                       to_be_retransmitted_.end());
   combined_to_be_retransmitted.insert(to_be_fast_retransmitted_.begin(),
                                       to_be_fast_retransmitted_.end());
 
-  std::set<UnwrappedTSN> actual_combined_to_be_retransmitted;
+  webrtc::flat_set<UnwrappedTSN> actual_combined_to_be_retransmitted;
   UnwrappedTSN tsn = last_cumulative_tsn_ack_;
   for (const Item& item : outstanding_data_) {
     tsn.Increment();
@@ -327,7 +327,7 @@ void OutstandingData::AbandonAllFor(const Item& item) {
 }
 
 std::vector<std::pair<TSN, Data>> OutstandingData::ExtractChunksThatCanFit(
-    std::set<UnwrappedTSN>& chunks,
+    webrtc::flat_set<UnwrappedTSN>& chunks,
     size_t max_size) {
   std::vector<std::pair<TSN, Data>> result;
 

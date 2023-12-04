@@ -11,8 +11,6 @@
 #define NET_DCSCTP_TX_OUTSTANDING_DATA_H_
 
 #include <deque>
-#include <map>
-#include <set>
 #include <utility>
 #include <vector>
 
@@ -338,7 +336,7 @@ class OutstandingData {
   void AbandonAllFor(const OutstandingData::Item& item);
 
   std::vector<std::pair<TSN, Data>> ExtractChunksThatCanFit(
-      std::set<UnwrappedTSN>& chunks,
+      webrtc::flat_set<UnwrappedTSN>& chunks,
       size_t max_size);
 
   bool IsConsistent() const;
@@ -360,9 +358,9 @@ class OutstandingData {
   // nacked).
   size_t outstanding_items_ = 0;
   // Data chunks that are eligible for fast retransmission.
-  std::set<UnwrappedTSN> to_be_fast_retransmitted_;
+  webrtc::flat_set<UnwrappedTSN> to_be_fast_retransmitted_;
   // Data chunks that are to be retransmitted.
-  std::set<UnwrappedTSN> to_be_retransmitted_;
+  webrtc::flat_set<UnwrappedTSN> to_be_retransmitted_;
   // Wben a stream reset has begun, the "next TSN to assign" is added to this
   // set, and removed when the cum-ack TSN reaches it. This is used to limit a
   // FORWARD-TSN to reset streams past a "stream reset last assigned TSN".
