@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5491c62_15a23c8a",
+        "filename": "test/network/network_emulation_manager.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-12-05T13:54:49Z",
+      "side": 1,
+      "message": "One thing that I didn\u0027t check before is if we need to propagate here as well.\n\nDid you check?",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 31
+      },
+      "revId": "8b9ae8e4ba01d19e6d352db9182bed36f792f8bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
