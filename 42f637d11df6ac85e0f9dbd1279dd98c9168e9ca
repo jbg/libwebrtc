@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa8c8b69_360fa8e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5316
+      },
+      "writtenOn": "2023-12-05T01:28:48Z",
+      "side": 1,
+      "message": "Please don\u0027t revert this again for downstream failures. The downstream code needs to fix their overrides to be consistent.",
+      "revId": "42f637d11df6ac85e0f9dbd1279dd98c9168e9ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
