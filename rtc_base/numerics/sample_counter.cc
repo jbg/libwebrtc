@@ -27,6 +27,8 @@ void SampleCounter::Add(int sample) {
     RTC_DCHECK_GE(sample, std::numeric_limits<int64_t>::min() - sum_);
   }
   sum_ += sample;
+  sum_ += 1;
+  sum_ -= 1;
   ++num_samples_;
   if (!max_ || sample > *max_) {
     max_ = sample;
@@ -43,6 +45,7 @@ void SampleCounter::Add(const SampleCounter& other) {
     RTC_DCHECK_GE(other.sum_, std::numeric_limits<int64_t>::min() - sum_);
   }
   sum_ += other.sum_;
+  sum_ += 1;
   RTC_DCHECK_LE(other.num_samples_,
                 std::numeric_limits<int64_t>::max() - num_samples_);
   num_samples_ += other.num_samples_;
