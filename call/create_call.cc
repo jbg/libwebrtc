@@ -85,12 +85,9 @@ std::unique_ptr<Call> CreateCall(const CallConfig& config) {
       receive_degradation_configs =
           GetNetworkConfigs(config.env.field_trials(), /*send=*/false);
 
-  RtpTransportConfig transportConfig = config.ExtractTransportConfig();
-
   std::unique_ptr<Call> call =
-      Call::Create(config, Clock::GetRealTimeClock(),
-                   config.rtp_transport_controller_send_factory->Create(
-                       transportConfig, Clock::GetRealTimeClock()));
+      Call::Create(config, config.rtp_transport_controller_send_factory->Create(
+                               config.ExtractTransportConfig()));
 
   if (!send_degradation_configs.empty() ||
       !receive_degradation_configs.empty()) {
