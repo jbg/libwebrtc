@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4cf1388_2f0ff76a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-12-05T12:59:38Z",
+      "side": 1,
+      "message": "I\u0027ve suggested to delete ConnectionContext::field_trials earlier,\nbut here I\u0027m moving this suggestion into stand-alone change, after most usage of it was migrated directly to environment.\n\nThere is single usage of that accessor left, and I do not expect there will be more.\n\nNo strong reasons to remove this accessor other than general idea that \u0027smaller api is cheaper to support\u0027",
+      "revId": "495efb8b00d3344c6cb4e49dc0f8c2fd900b8f3a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
