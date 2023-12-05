@@ -16,6 +16,24 @@
       "message": "Unfortunately the way the rolls are done makes a simple update pretty impossible. We can\u0027t change the downstream until the upstream change has landed, and the bots will refuse the update until the downstream is updated.\n\nI think we\u0027ll have to do this in a multi-step dance:\n\n- Add a new interface function \"functionWithOldSignature\"\n- Roll into downstream\n- Change downstream to call \"functionWithOldSignature\"\n- Change the old interface function to a new signature (this CL)\n- Change downstream to call the new interface function\n- Remove \"FunctionWithOldSignature\"\n\nAdding mirko, our roll-and-update expert, to see if he sees simpler ways forward (can we land this, force-commit and break the build, and then fix downstream?)\n\nAll because C++ is unable to discriminate on return type...",
       "revId": "6ebdd911163f22e39d41dd8808232ea50a6025ea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b3b0671_59d4baf9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5316
+      },
+      "writtenOn": "2023-12-05T08:47:19Z",
+      "side": 1,
+      "message": "In this context, where is \"downstream\"?\n\nSometimes it makes sense to do this. But if we can just manually roll downstream with the fix, that\u0027d be much simpler.",
+      "parentUuid": "be90b484_5002e077",
+      "revId": "6ebdd911163f22e39d41dd8808232ea50a6025ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
