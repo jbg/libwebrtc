@@ -13,7 +13,6 @@
 
 #include <memory>
 
-#include "api/call/call_factory_interface.h"
 #include "api/sequence_checker.h"
 #include "call/call.h"
 #include "call/call_config.h"
@@ -21,14 +20,16 @@
 
 namespace webrtc {
 
-class CallFactory : public CallFactoryInterface {
+// TODO(bugs.webrtc.org/15574): Delete CallFactory in favor of a free function
+// to create `Call`.
+class CallFactory {
  public:
   CallFactory();
-  ~CallFactory() override = default;
+  ~CallFactory() = default;
+
+  std::unique_ptr<Call> CreateCall(const CallConfig& config);
 
  private:
-  std::unique_ptr<Call> CreateCall(const CallConfig& config) override;
-
   RTC_NO_UNIQUE_ADDRESS SequenceChecker call_thread_;
 };
 

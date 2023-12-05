@@ -295,7 +295,6 @@ rtc_library("call") {
     ":version",
     ":video_stream_api",
     "../api:array_view",
-    "../api:callfactory_api",
     "../api:fec_controller_api",
     "../api:field_trials_view",
     "../api:rtp_headers",

@@ -107,8 +107,4 @@ std::unique_ptr<Call> CallFactory::CreateCall(const CallConfig& config) {
   return call;
 }
 
-std::unique_ptr<CallFactoryInterface> CreateCallFactory() {
-  return std::make_unique<CallFactory>();
-}
-
 }  // namespace webrtc
