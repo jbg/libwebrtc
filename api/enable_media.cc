@@ -37,8 +37,7 @@ class MediaFactoryImpl : public MediaFactory {
   ~MediaFactoryImpl() override = default;
 
   std::unique_ptr<Call> CreateCall(const CallConfig& config) override {
-    CallFactory call_factory;
-    return static_cast<CallFactoryInterface&>(call_factory).CreateCall(config);
+    return CallFactory().CreateCall(config);
   }
 
   std::unique_ptr<MediaEngineInterface> CreateMediaEngine(
