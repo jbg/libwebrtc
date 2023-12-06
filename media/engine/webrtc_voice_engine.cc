@@ -712,11 +712,10 @@ std::vector<AudioCodec> WebRtcVoiceEngine::CollectCodecs(
   std::vector<AudioCodec> out;
 
   // Only generate CN payload types for these clockrates:
-  std::map<int, bool, std::greater<int>> generate_cn = {
-      {8000, false}, {16000, false}, {32000, false}};
+  std::map<int, bool, std::greater<int>> generate_cn = {{8000, false}};
   // Only generate telephone-event payload types for these clockrates:
-  std::map<int, bool, std::greater<int>> generate_dtmf = {
-      {8000, false}, {16000, false}, {32000, false}, {48000, false}};
+  std::map<int, bool, std::greater<int>> generate_dtmf = {{8000, false},
+                                                          {48000, false}};
 
   auto map_format = [&mapper](const webrtc::SdpAudioFormat& format,
                               std::vector<AudioCodec>* out) {
@@ -761,9 +760,9 @@ std::vector<AudioCodec> WebRtcVoiceEngine::CollectCodecs(
       out.push_back(codec);
 
       if (codec.name == kOpusCodecName) {
-        std::string redFmtp =
+        std::string red_fmtp =
             rtc::ToString(codec.id) + "/" + rtc::ToString(codec.id);
-        map_format({kRedCodecName, 48000, 2, {{"", redFmtp}}}, &out);
+        map_format({kRedCodecName, 48000, 2, {{"", red_fmtp}}}, &out);
       }
     }
   }

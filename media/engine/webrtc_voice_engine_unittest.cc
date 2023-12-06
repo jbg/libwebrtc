@@ -3941,7 +3941,7 @@ TEST(WebRtcVoiceEngineTest, CollectRecvCodecs) {
         mock_decoder_factory, nullptr, apm, nullptr, field_trials);
     engine.Init();
     auto codecs = engine.recv_codecs();
-    EXPECT_EQ(11u, codecs.size());
+    EXPECT_EQ(8u, codecs.size());
 
     // Rather than just ASSERTing that there are enough codecs, ensure that we
     // can check the actual values safely, to provide better test results.
@@ -3980,11 +3980,8 @@ TEST(WebRtcVoiceEngineTest, CollectRecvCodecs) {
     // unsigned and, thus, failed for -1.
     const int num_specs = static_cast<int>(specs.size());
     EXPECT_GE(find_codec({"cn", 8000, 1}), num_specs);
-    EXPECT_GE(find_codec({"cn", 16000, 1}), num_specs);
-    EXPECT_EQ(find_codec({"cn", 32000, 1}), -1);
+    EXPECT_EQ(find_codec({"cn", 48000, 1}), -1);
     EXPECT_GE(find_codec({"telephone-event", 8000, 1}), num_specs);
-    EXPECT_GE(find_codec({"telephone-event", 16000, 1}), num_specs);
-    EXPECT_GE(find_codec({"telephone-event", 32000, 1}), num_specs);
     EXPECT_GE(find_codec({"telephone-event", 48000, 1}), num_specs);
   }
 }
