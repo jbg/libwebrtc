@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f92ee51c_77420be7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-12-06T15:36:44Z",
+      "side": 1,
+      "message": "(Waiting to run CQ until the Chromium CL has landed)",
+      "revId": "77783fc74d1617723617aa86ec16176ff4412193",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
