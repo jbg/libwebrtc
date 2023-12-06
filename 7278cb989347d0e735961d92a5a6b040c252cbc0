@@ -16,6 +16,24 @@
       "message": "Hey cool stuff! I have some questions before I start reviewing.\n\n1. Is HEVC support HW only?\n2. Is it possible to have an encoder but not a decoder or vice versa? Otherwise I wonder what happens if you have a \"sendrecv\" transciever (m\u003d section).\n3. When HEVC is compiled, does HEVC show up in `RTCRtpSender.getCapabilities(\u0027video\u0027).codecs` and `RTCRtpReceiver.getCapabilities(\u0027video\u0027).codecs` and can be set using `setCodecPreferences` or is this only available via SDP munging? E.g. would this test page work with HEVC? https://jsfiddle.net/henbos/c2zqb1yw/",
       "revId": "7278cb989347d0e735961d92a5a6b040c252cbc0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31ffc435_cecb9317",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-12-06T14:01:40Z",
+      "side": 1,
+      "message": "(Re-opening comment thread)",
+      "parentUuid": "bf029f25_321b5fe9",
+      "revId": "7278cb989347d0e735961d92a5a6b040c252cbc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
