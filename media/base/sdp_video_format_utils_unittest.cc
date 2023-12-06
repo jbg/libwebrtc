@@ -72,6 +72,34 @@ TEST(SdpVideoFormatUtilsTest,
   EXPECT_EQ("42e01f", answer_params["profile-level-id"]);
 }
 
+#ifdef RTC_ENABLE_H265
+// Answer should not include explicit PTL info if neither local nor remote set
+// any of them.
+TEST(SdpVideoFormatUtilsTest, H265GenerateProfileTierLevelEmpty) {
+  SdpVideoFormat::Parameters answer_params;
+  H265GenerateProfileTierLevelForAnswer(SdpVideoFormat::Parameters(),
+                                        SdpVideoFormat::Parameters(),
+                                        &answer_params);
+  EXPECT_TRUE(answer_params.empty());
+}
+
+// Answer must use the minimum level as supported by both local and remote.
+TEST(SdpVideoFormatUtilsTest, H265GenerateProfileTierLevelNoEmpty) {
+  SdpVideoFormat::Parameters local_params;
+  local_params["profile-id"] = "1";
+  local_params["tier-flag"] = "0";
+  local_params["level-id"] = "93";
+  SdpVideoFormat::Parameters remote_params;
+  remote_params["profile-id"] = "1";
+  remote_params["tier-flag"] = "0";
+  remote_params["level-id"] = "120";
+  SdpVideoFormat::Parameters answer_params;
+  H265GenerateProfileTierLevelForAnswer(local_params, remote_params,
+                                        &answer_params);
+  EXPECT_EQ("93", answer_params["level-id"]);
+}
+#endif
+
 TEST(SdpVideoFormatUtilsTest, MaxFrameRateIsMissingOrInvalid) {
   SdpVideoFormat::Parameters params;
   absl::optional<int> empty = ParseSdpForVPxMaxFrameRate(params);
