@@ -352,7 +352,11 @@ class Call final : public webrtc::Call,
   const int num_cpu_cores_;
   const std::unique_ptr<CallStats> call_stats_;
   const std::unique_ptr<BitrateAllocator> bitrate_allocator_;
-  const CallConfig config_ RTC_GUARDED_BY(worker_thread_);
+  const rtc::scoped_refptr<webrtc::AudioState> audio_state_
+      RTC_GUARDED_BY(worker_thread_);
+  NetEqFactory* const neteq_factory_ RTC_PT_GUARDED_BY(worker_thread_);
+  FecControllerFactoryInterface* const fec_controller_factory_
+      RTC_PT_GUARDED_BY(worker_thread_);
 
   NetworkState audio_network_state_ RTC_GUARDED_BY(worker_thread_);
   NetworkState video_network_state_ RTC_GUARDED_BY(worker_thread_);
@@ -470,10 +474,10 @@ std::unique_ptr<Call> Call::Create(const CallConfig& config) {
   std::unique_ptr<RtpTransportControllerSendInterface> transport_send;
   if (config.rtp_transport_controller_send_factory != nullptr) {
     transport_send = config.rtp_transport_controller_send_factory->Create(
-        config.ExtractTransportConfig(), &config.env.clock());
+        config.ExtractTransportConfig());
   } else {
     transport_send = RtpTransportControllerSendFactory().Create(
-        config.ExtractTransportConfig(), &config.env.clock());
+        config.ExtractTransportConfig());
   }
 
   return std::make_unique<internal::Call>(config, std::move(transport_send));
@@ -659,7 +663,9 @@ Call::Call(const CallConfig& config,
       num_cpu_cores_(CpuInfo::DetectNumberOfCores()),
       call_stats_(new CallStats(&env_.clock(), worker_thread_)),
       bitrate_allocator_(new BitrateAllocator(this)),
-      config_(config),
+      audio_state_(config.audio_state),
+      neteq_factory_(config.neteq_factory),
+      fec_controller_factory_(config.fec_controller_factory),
       audio_network_state_(kNetworkDown),
       video_network_state_(kNetworkDown),
       aggregate_network_up_(false),
@@ -757,9 +763,9 @@ webrtc::AudioSendStream* Call::CreateAudioSendStream(
   }
 
   AudioSendStream* send_stream = new AudioSendStream(
-      &env_.clock(), config, config_.audio_state, &env_.task_queue_factory(),
+      &env_.clock(), config, audio_state_, &env_.task_queue_factory(),
       transport_send_.get(), bitrate_allocator_.get(), &env_.event_log(),
-      call_stats_->AsRtcpRttStats(), suspended_rtp_state, trials());
+      call_stats_->AsRtcpRttStats(), suspended_rtp_state, env_.field_trials());
   RTC_DCHECK(audio_send_ssrcs_.find(config.rtp.ssrc) ==
              audio_send_ssrcs_.end());
   audio_send_ssrcs_[config.rtp.ssrc] = send_stream;
@@ -814,8 +820,8 @@ webrtc::AudioReceiveStreamInterface* Call::CreateAudioReceiveStream(
       CreateRtcLogStreamConfig(config)));
 
   AudioReceiveStreamImpl* receive_stream = new AudioReceiveStreamImpl(
-      &env_.clock(), transport_send_->packet_router(), config_.neteq_factory,
-      config, config_.audio_state, &env_.event_log());
+      &env_.clock(), transport_send_->packet_router(), neteq_factory_, config,
+      audio_state_, &env_.event_log());
   audio_receive_streams_.insert(receive_stream);
 
   // TODO(bugs.webrtc.org/11993): Make the registration on the network thread
@@ -887,12 +893,11 @@ webrtc::VideoSendStream* Call::CreateVideoSendStream(
   std::vector<uint32_t> ssrcs = config.rtp.ssrcs;
 
   VideoSendStream* send_stream = new VideoSendStream(
-      &env_.clock(), num_cpu_cores_, &env_.task_queue_factory(),
-      network_thread_, call_stats_->AsRtcpRttStats(), transport_send_.get(),
-      bitrate_allocator_.get(), video_send_delay_stats_.get(),
-      &env_.event_log(), std::move(config), std::move(encoder_config),
-      suspended_video_send_ssrcs_, suspended_video_payload_states_,
-      std::move(fec_controller), env_.field_trials());
+      env_, num_cpu_cores_, network_thread_, call_stats_->AsRtcpRttStats(),
+      transport_send_.get(), bitrate_allocator_.get(),
+      video_send_delay_stats_.get(), std::move(config),
+      std::move(encoder_config), suspended_video_send_ssrcs_,
+      suspended_video_payload_states_, std::move(fec_controller));
 
   for (uint32_t ssrc : ssrcs) {
     RTC_DCHECK(video_send_ssrcs_.find(ssrc) == video_send_ssrcs_.end());
@@ -915,12 +920,12 @@ webrtc::VideoSendStream* Call::CreateVideoSendStream(
     webrtc::VideoSendStream::Config config,
     VideoEncoderConfig encoder_config) {
   RTC_DCHECK_RUN_ON(worker_thread_);
-  if (config_.fec_controller_factory) {
+  if (fec_controller_factory_ != nullptr) {
     RTC_LOG(LS_INFO) << "External FEC Controller will be used.";
   }
   std::unique_ptr<FecController> fec_controller =
-      config_.fec_controller_factory
-          ? config_.fec_controller_factory->CreateFecController()
+      fec_controller_factory_ != nullptr
+          ? fec_controller_factory_->CreateFecController()
           : std::make_unique<FecControllerDefault>(&env_.clock());
   return CreateVideoSendStream(std::move(config), std::move(encoder_config),
                                std::move(fec_controller));
@@ -989,7 +994,7 @@ webrtc::VideoReceiveStreamInterface* Call::CreateVideoReceiveStream(
       &env_.task_queue_factory(), this, num_cpu_cores_,
       transport_send_->packet_router(), std::move(configuration),
       call_stats_.get(), &env_.clock(),
-      std::make_unique<VCMTiming>(&env_.clock(), trials()),
+      std::make_unique<VCMTiming>(&env_.clock(), env_.field_trials()),
       &nack_periodic_processor_, decode_sync_.get(), &env_.event_log());
   // TODO(bugs.webrtc.org/11993): Set this up asynchronously on the network
   // thread.

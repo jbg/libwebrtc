@@ -51,8 +51,7 @@ void SetMandatoryEntities(InjectableComponents* components,
   // Setup required peer connection factory dependencies.
   if (components->pcf_dependencies->event_log_factory == nullptr) {
     components->pcf_dependencies->event_log_factory =
-        std::make_unique<RtcEventLogFactory>(
-            time_controller.GetTaskQueueFactory());
+        std::make_unique<RtcEventLogFactory>();
   }
   if (!components->pcf_dependencies->trials) {
     components->pcf_dependencies->trials =
