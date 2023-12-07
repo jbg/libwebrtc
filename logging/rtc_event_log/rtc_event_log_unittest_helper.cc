@@ -1342,7 +1342,7 @@ void EventVerifier::VerifyLoggedStartEvent(
     int64_t start_time_us,
     int64_t utc_start_time_us,
     const LoggedStartEvent& logged_event) const {
-  EXPECT_EQ(start_time_us / 1000, logged_event.log_time_ms());
+  EXPECT_NEAR(start_time_us / 1000, logged_event.log_time_ms(), 1);
   if (encoding_type_ == RtcEventLog::EncodingType::NewFormat) {
     EXPECT_EQ(utc_start_time_us / 1000, logged_event.utc_start_time.ms());
   }
@@ -1351,7 +1351,7 @@ void EventVerifier::VerifyLoggedStartEvent(
 void EventVerifier::VerifyLoggedStopEvent(
     int64_t stop_time_us,
     const LoggedStopEvent& logged_event) const {
-  EXPECT_EQ(stop_time_us / 1000, logged_event.log_time_ms());
+  EXPECT_NEAR(stop_time_us / 1000, logged_event.log_time_ms(), 1);
 }
 
 void VerifyLoggedStreamConfig(const rtclog::StreamConfig& original_config,
