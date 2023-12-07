@@ -37,6 +37,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a0dee723_cad7e6e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-12-07T12:32:54Z",
+      "side": 1,
+      "message": "still taking name opinions ;-)",
+      "revId": "356cd745c4f427cde178fc3097c7dfab3e353ee0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "8a46afb3_75c67eaf",
         "filename": "api/rtp_parameters.h",
         "patchSetId": 1
@@ -48,6 +65,24 @@
       "writtenOn": "2023-12-07T12:25:46Z",
       "side": 1,
       "message": "Wondering about the placement of this alias - since it mainly concerns SDP - but there\u0027s no api/sdp_parameters.h file, so rtp_parameters seems as good a place as any.",
+      "revId": "356cd745c4f427cde178fc3097c7dfab3e353ee0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92fbac5a_aeb20484",
+        "filename": "api/rtp_parameters.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-12-07T12:32:54Z",
+      "side": 1,
+      "message": "Yeah... which might have been the reason we had two (or three) aliases but then passed around the raw type as well.",
+      "parentUuid": "8a46afb3_75c67eaf",
       "revId": "356cd745c4f427cde178fc3097c7dfab3e353ee0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
