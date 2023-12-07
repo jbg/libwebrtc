@@ -733,7 +733,8 @@ void NegotiatePacketization(const Codec& local_codec,
 // the codecs themselves and their associated codecs must match.
 absl::optional<Codec> FindMatchingCodec(const std::vector<Codec>& codecs1,
                                         const std::vector<Codec>& codecs2,
-                                        const Codec& codec_to_match) {
+                                        const Codec& codec_to_match,
+                                        bool ignore_packetization = true) {
   // `codec_to_match` should be a member of `codecs1`, in order to look up
   // RED/RTX codecs' associated codecs correctly. If not, that's a programming
   // error.
@@ -741,7 +742,9 @@ absl::optional<Codec> FindMatchingCodec(const std::vector<Codec>& codecs1,
     return &codec == &codec_to_match;
   }));
   for (const Codec& potential_match : codecs2) {
-    if (potential_match.Matches(codec_to_match)) {
+    if (ignore_packetization
+            ? potential_match.MatchesWithoutPacketization(codec_to_match)
+            : potential_match.Matches(codec_to_match)) {
       if (codec_to_match.GetResiliencyType() == Codec::ResiliencyType::kRtx) {
         int apt_value_1 = 0;
         int apt_value_2 = 0;
@@ -950,8 +953,8 @@ void MergeCodecs(const std::vector<Codec>& reference_codecs,
   for (const Codec& reference_codec : reference_codecs) {
     if (reference_codec.GetResiliencyType() != Codec::ResiliencyType::kRtx &&
         reference_codec.GetResiliencyType() != Codec::ResiliencyType::kRed &&
-        !FindMatchingCodec(reference_codecs, *offered_codecs,
-                           reference_codec)) {
+        !FindMatchingCodec(reference_codecs, *offered_codecs, reference_codec,
+                           /*ignore_packetization=*/false)) {
       Codec codec = reference_codec;
       used_pltypes->FindAndSetIdUsed(&codec);
       offered_codecs->push_back(codec);
@@ -961,8 +964,8 @@ void MergeCodecs(const std::vector<Codec>& reference_codecs,
   // Add all new RTX or RED codecs.
   for (const Codec& reference_codec : reference_codecs) {
     if (reference_codec.GetResiliencyType() == Codec::ResiliencyType::kRtx &&
-        !FindMatchingCodec(reference_codecs, *offered_codecs,
-                           reference_codec)) {
+        !FindMatchingCodec(reference_codecs, *offered_codecs, reference_codec,
+                           /*ignore_packetization=*/false)) {
       Codec rtx_codec = reference_codec;
       const Codec* associated_codec =
           GetAssociatedCodecForRtx(reference_codecs, rtx_codec);
@@ -972,7 +975,8 @@ void MergeCodecs(const std::vector<Codec>& reference_codecs,
       // Find a codec in the offered list that matches the reference codec.
       // Its payload type may be different than the reference codec.
       absl::optional<Codec> matching_codec = FindMatchingCodec(
-          reference_codecs, *offered_codecs, *associated_codec);
+          reference_codecs, *offered_codecs, *associated_codec,
+          /*ignore_packetization=*/false);
       if (!matching_codec) {
         RTC_LOG(LS_WARNING)
             << "Couldn't find matching " << associated_codec->name << " codec.";
@@ -986,13 +990,15 @@ void MergeCodecs(const std::vector<Codec>& reference_codecs,
     } else if (reference_codec.GetResiliencyType() ==
                    Codec::ResiliencyType::kRed &&
                !FindMatchingCodec(reference_codecs, *offered_codecs,
-                                  reference_codec)) {
+                                  reference_codec,
+                                  /*ignore_packetization=*/false)) {
       Codec red_codec = reference_codec;
       const Codec* associated_codec =
           GetAssociatedCodecForRed(reference_codecs, red_codec);
       if (associated_codec) {
         absl::optional<Codec> matching_codec = FindMatchingCodec(
-            reference_codecs, *offered_codecs, *associated_codec);
+            reference_codecs, *offered_codecs, *associated_codec,
+            /*ignore_packetization=*/false);
         if (!matching_codec) {
           RTC_LOG(LS_WARNING) << "Couldn't find matching "
                               << associated_codec->name << " codec.";
