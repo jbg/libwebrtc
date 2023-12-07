@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45b7a717_8ea88274",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2023-12-07T12:20:40Z",
+      "side": 1,
+      "message": "this is a simple step,\nno rush as I do not have clear plan for the next step:\n\nnext step I\u0027m thinking about is to extend VideoDecoderFactory::CreateVideoDecoder to\nvirtual std::unique_ptr\u003cVideoDecoder\u003e CreateVideoDecoder(\n      const Environment\u0026 env,\n      const SdpVideoFormat\u0026 format) \n      \nBut that would require multiple iterations, specially since that interface is used through jni.",
+      "revId": "88718aa9e2f407da46102b0ea09927432af7bb75",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
