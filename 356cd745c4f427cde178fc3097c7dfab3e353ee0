@@ -16,6 +16,40 @@
       "message": "Essentialy this moves CodecParameterMap from cricket::Codec to rtp_parameters, uses it in the SdpAudioFormat/SdpVideoFormat (which should be merged too?) and then does a large-scale replace.\n\nWhile we are at it, should we change the name?",
       "revId": "356cd745c4f427cde178fc3097c7dfab3e353ee0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b4df1be_522f8a1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-12-07T12:25:46Z",
+      "side": 1,
+      "message": "Makes sense.\n\nAlso makes it easier to turn it into a real type if that turns out to be desirable :-)",
+      "revId": "356cd745c4f427cde178fc3097c7dfab3e353ee0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a46afb3_75c67eaf",
+        "filename": "api/rtp_parameters.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-12-07T12:25:46Z",
+      "side": 1,
+      "message": "Wondering about the placement of this alias - since it mainly concerns SDP - but there\u0027s no api/sdp_parameters.h file, so rtp_parameters seems as good a place as any.",
+      "revId": "356cd745c4f427cde178fc3097c7dfab3e353ee0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
