@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "036f8e48_aeac3cd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2023-12-07T21:59:22Z",
+      "side": 1,
+      "message": "It\u0027s a bit hard to think through all the ramifications of this... but it\u0027s definitely confusing how we sometimes match codecs with different packetization and sometimes don\u0027t. \n\nMaybe we just wait until we have a different way of representing this in SDP? Since we already have a viable workaround for the time being.\n\nOr, we could always allow codecs with different packetization to match (meaning they\u0027ll always be treated as duplicate codecs), but handle duplicates generally in a better way, removing their payload types from the set (https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/pc/media_session.cc;l\u003d956;drc\u003d8e78783dc1f7007bad46d657c9f332614e240fd8) instead of just ignoring them.",
+      "revId": "6f83e00fbdf300785dec844b117b3ccfc0778020",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8829eb66_f08b4ad4",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2023-12-07T21:59:22Z",
+      "side": 1,
+      "message": "Is this going to be a problem? If we offer both default and raw packetization codecs, and both are also locally supported, then it seems like the raw packetization codec will match the default packetization (if it appears first) and then be set back to default by this function",
+      "revId": "6f83e00fbdf300785dec844b117b3ccfc0778020",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "954c0cf5_f3552cd1",
+        "filename": "pc/media_session_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 4402,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2023-12-07T21:59:22Z",
+      "side": 1,
+      "message": "So the issue here was that the raw codecs were negotiated away since they didn\u0027t match the built-in supported codecs? Could we instead add raw variants to the set of supported codecs to address this? Or... is it not possible to add something to the set of supported codecs without also offering it by default (which we don\u0027t want)? If it were possible to change that, I think that would be the ideal solution.",
+      "revId": "6f83e00fbdf300785dec844b117b3ccfc0778020",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
