@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ff7530e_e54a427a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-12-07T00:44:41Z",
+      "side": 1,
+      "message": "\u003e Is HEVC support HW only?\n\nYes. If RTC team thinks it is allowed, in libWebRTC we\u0027ll add MediaCodec-based enc/dec for Android, and VT-based enc/dec for MacOS/iOS. Other HW enc/dec impl(CrOS/Win/Linux) will be only in blink.\n\n\u003e Is it possible to have an encoder but not a decoder or vice versa? Otherwise I wonder what happens if you have a \"sendrecv\" transciever (m\u003d section).\n\nHaving a decoder but no encoder is possible on a platform; but not reasonable to have an encoder without a decoder. (Dec is part of Enc process, so if IHV implements encoder, there is no reason they don\u0027t expose Dec to user).\n\n\u003e When HEVC is compiled, does HEVC show up in RTCRtpSender.getCapabilities(\u0027video\u0027).codecs and RTCRtpReceiver.getCapabilities(\u0027video\u0027).codecs and can be set using setCodecPreferences or is this only available via SDP munging? E.g. would this test page work with HEVC? https://jsfiddle.net/henbos/c2zqb1yw/\n\nCurrent status: When you disable encoder and enable decoder, HEVC shows up in RTCRtpReceiver.getCapabilities(), and is not in RTCRtpSender.getCapabilities(); reversely, if you enable encoder and disable decoder, it appears in sender\u0027s capabilities and disappear in receiver\u0027s capabilities.\nI didn\u0027t mungle SDP for the test. Your test page works for SDP negotiation but since depacketizer CL is still under review, and jitter-buffer CL is pending submission, it will not stream e2e with your page.",
+      "parentUuid": "31ffc435_cecb9317",
+      "revId": "7278cb989347d0e735961d92a5a6b040c252cbc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "259fb19e_387f020b",
         "filename": "media/base/sdp_video_format_utils_unittest.cc",
         "patchSetId": 3
@@ -66,6 +84,24 @@
       "writtenOn": "2023-12-06T15:48:09Z",
       "side": 1,
       "message": "Make \"93\" a constant and call it \"locally_supported_level_id\" or something like that - you refer to it in 2 places.",
+      "revId": "7278cb989347d0e735961d92a5a6b040c252cbc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d5a4c8e_91f2e6a3",
+        "filename": "media/base/sdp_video_format_utils_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-12-07T00:44:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "259fb19e_387f020b",
       "revId": "7278cb989347d0e735961d92a5a6b040c252cbc0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -87,6 +123,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8793f129_aeb18250",
+        "filename": "media/engine/internal_decoder_factory_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-12-07T00:44:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9d979bd_62d597f3",
+      "revId": "7278cb989347d0e735961d92a5a6b040c252cbc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eab817f5_9444e3ab",
@@ -100,6 +154,24 @@
       "writtenOn": "2023-12-06T15:48:09Z",
       "side": 1,
       "message": "Call the test H265IsNotEnabled",
+      "revId": "7278cb989347d0e735961d92a5a6b040c252cbc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c892285_5f68c86d",
+        "filename": "media/engine/internal_decoder_factory_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-12-07T00:44:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eab817f5_9444e3ab",
       "revId": "7278cb989347d0e735961d92a5a6b040c252cbc0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -121,6 +193,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1da1fdf9_cdd63f93",
+        "filename": "media/engine/internal_encoder_factory_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-12-07T00:44:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a7748cf_11124d65",
+      "revId": "7278cb989347d0e735961d92a5a6b040c252cbc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45cd6104_13e4e684",
@@ -134,6 +224,24 @@
       "writtenOn": "2023-12-06T15:48:09Z",
       "side": 1,
       "message": "Better call it something like TxModeIsDifferentDropsCodecs (or whatever this is actually checking). is the tx mode default (srst) in this case?",
+      "revId": "7278cb989347d0e735961d92a5a6b040c252cbc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0506ba3f_effd247d",
+        "filename": "pc/media_session_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4365,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-12-07T00:44:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45cd6104_13e4e684",
       "revId": "7278cb989347d0e735961d92a5a6b040c252cbc0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
