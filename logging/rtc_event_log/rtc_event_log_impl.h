@@ -18,11 +18,14 @@
 #include <string>
 
 #include "absl/strings/string_view.h"
+#include "api/environment/environment.h"
 #include "api/rtc_event_log/rtc_event.h"
 #include "api/rtc_event_log/rtc_event_log.h"
 #include "api/rtc_event_log_output.h"
 #include "api/sequence_checker.h"
 #include "api/task_queue/task_queue_factory.h"
+#include "api/units/time_delta.h"
+#include "api/units/timestamp.h"
 #include "logging/rtc_event_log/encoder/rtc_event_log_encoder.h"
 #include "rtc_base/system/no_unique_address.h"
 #include "rtc_base/task_queue.h"
@@ -40,8 +43,8 @@ class RtcEventLogImpl final : public RtcEventLog {
   static constexpr size_t kMaxEventsInConfigHistory = 1000;
 
   RtcEventLogImpl(
+      const Environment& env,
       std::unique_ptr<RtcEventLogEncoder> encoder,
-      TaskQueueFactory* task_queue_factory,
       size_t max_events_in_history = kMaxEventsInHistory,
       size_t max_config_events_in_history = kMaxEventsInConfigHistory);
   RtcEventLogImpl(const RtcEventLogImpl&) = delete;
@@ -89,6 +92,8 @@ class RtcEventLogImpl final : public RtcEventLog {
   bool ShouldOutputImmediately() RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_);
   void ScheduleOutput() RTC_RUN_ON(task_queue_);
 
+  const Environment env_;
+
   // Max size of event history.
   const size_t max_events_in_history_;
 
@@ -106,8 +111,8 @@ class RtcEventLogImpl final : public RtcEventLog {
       RTC_GUARDED_BY(task_queue_);
   std::unique_ptr<RtcEventLogOutput> event_output_ RTC_GUARDED_BY(task_queue_);
 
-  int64_t output_period_ms_ RTC_GUARDED_BY(task_queue_);
-  int64_t last_output_ms_ RTC_GUARDED_BY(task_queue_);
+  TimeDelta output_period_ RTC_GUARDED_BY(task_queue_);
+  Timestamp last_output_ RTC_GUARDED_BY(task_queue_);
 
   RTC_NO_UNIQUE_ADDRESS SequenceChecker logging_state_checker_;
   bool logging_state_started_ RTC_GUARDED_BY(mutex_) = false;
@@ -118,7 +123,7 @@ class RtcEventLogImpl final : public RtcEventLog {
   // log and its members outlive `task_queue_`. Keep the `task_queue_`
   // last to ensure it destructs first, or else tasks living on the queue might
   // access other members after they've been torn down.
-  std::unique_ptr<rtc::TaskQueue> task_queue_;
+  std::unique_ptr<TaskQueueBase, TaskQueueDeleter> task_queue_;
 
   Mutex mutex_;
 };

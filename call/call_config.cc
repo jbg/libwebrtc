@@ -22,19 +22,16 @@ CallConfig::CallConfig(const Environment& env,
 
 CallConfig::CallConfig(const CallConfig& config) = default;
 
+CallConfig::~CallConfig() = default;
+
 RtpTransportConfig CallConfig::ExtractTransportConfig() const {
-  RtpTransportConfig transportConfig;
+  RtpTransportConfig transportConfig = {.env = env};
   transportConfig.bitrate_config = bitrate_config;
-  transportConfig.event_log = &env.event_log();
   transportConfig.network_controller_factory = network_controller_factory;
   transportConfig.network_state_predictor_factory =
       network_state_predictor_factory;
-  transportConfig.task_queue_factory = &env.task_queue_factory();
-  transportConfig.trials = &env.field_trials();
-
   return transportConfig;
 }
 
-CallConfig::~CallConfig() = default;
 
 }  // namespace webrtc
