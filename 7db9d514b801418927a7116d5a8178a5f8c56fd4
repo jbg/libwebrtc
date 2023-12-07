@@ -16,6 +16,23 @@
       "message": "I found more ISAC leftovers ;-)",
       "revId": "7db9d514b801418927a7116d5a8178a5f8c56fd4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f7b9384_3d6e2b31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2023-12-07T08:20:30Z",
+      "side": 1,
+      "message": "I think there may be external codecs using 16khz.",
+      "revId": "7db9d514b801418927a7116d5a8178a5f8c56fd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
