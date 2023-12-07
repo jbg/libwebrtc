@@ -47,6 +47,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25af0a8c_d320c078",
+        "filename": "pc/media_session_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4388,
+      "author": {
+        "id": 18169
+      },
+      "writtenOn": "2023-12-07T10:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7ad53d6_e042814d",
+      "range": {
+        "startLine": 4388,
+        "startChar": 2,
+        "endLine": 4388,
+        "endChar": 6
+      },
+      "revId": "3381dcdf3d27b94931e620c7838cf7438150e211",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0129fdb8_ee22dc4b",
@@ -93,6 +117,54 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e30adf96_254ca62f",
+        "filename": "pc/media_session_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4389,
+      "author": {
+        "id": 18169
+      },
+      "writtenOn": "2023-12-07T10:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0129fdb8_ee22dc4b",
+      "range": {
+        "startLine": 4389,
+        "startChar": 36,
+        "endLine": 4389,
+        "endChar": 52
+      },
+      "revId": "3381dcdf3d27b94931e620c7838cf7438150e211",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "085397bb_00b33879",
+        "filename": "pc/media_session_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4389,
+      "author": {
+        "id": 18169
+      },
+      "writtenOn": "2023-12-07T10:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e9b0538_e61aff4f",
+      "range": {
+        "startLine": 4389,
+        "startChar": 2,
+        "endLine": 4389,
+        "endChar": 13
+      },
+      "revId": "3381dcdf3d27b94931e620c7838cf7438150e211",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8136c48b_9e2b2352",
@@ -106,6 +178,30 @@
       "writtenOn": "2023-12-07T10:24:18Z",
       "side": 1,
       "message": "Ditto",
+      "range": {
+        "startLine": 4392,
+        "startChar": 0,
+        "endLine": 4393,
+        "endChar": 54
+      },
+      "revId": "3381dcdf3d27b94931e620c7838cf7438150e211",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92cda0bd_5714cf6b",
+        "filename": "pc/media_session_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4393,
+      "author": {
+        "id": 18169
+      },
+      "writtenOn": "2023-12-07T10:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8136c48b_9e2b2352",
       "range": {
         "startLine": 4392,
         "startChar": 0,
@@ -152,6 +248,30 @@
       "writtenOn": "2023-12-07T10:24:18Z",
       "side": 1,
       "message": "EXPECT_THAT",
+      "range": {
+        "startLine": 4402,
+        "startChar": 2,
+        "endLine": 4402,
+        "endChar": 13
+      },
+      "revId": "3381dcdf3d27b94931e620c7838cf7438150e211",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d786b23f_3503e393",
+        "filename": "pc/media_session_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4402,
+      "author": {
+        "id": 18169
+      },
+      "writtenOn": "2023-12-07T10:57:10Z",
+      "side": 1,
+      "message": "Now it has to be ASSERT_THAT.",
+      "parentUuid": "1f509fb8_6d219ecd",
       "range": {
         "startLine": 4402,
         "startChar": 2,
