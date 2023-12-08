@@ -36,7 +36,7 @@ absl::Nonnull<std::unique_ptr<RtcEventLog>> RtcEventLogFactory::Create(
           ? RtcEventLog::EncodingType::Legacy
           : RtcEventLog::EncodingType::NewFormat;
   return std::make_unique<RtcEventLogImpl>(
-      RtcEventLogImpl::CreateEncoder(encoding_type), &env.task_queue_factory());
+      env, RtcEventLogImpl::CreateEncoder(encoding_type));
 #endif
 }
 
