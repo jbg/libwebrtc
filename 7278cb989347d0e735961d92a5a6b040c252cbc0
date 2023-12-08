@@ -244,6 +244,24 @@
       "parentUuid": "45cd6104_13e4e684",
       "revId": "7278cb989347d0e735961d92a5a6b040c252cbc0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dac86ab_b7356653",
+        "filename": "pc/media_session_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4365,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-12-08T03:02:35Z",
+      "side": 1,
+      "message": "SRST is the default.\nIt is required by spec that if SRST is the only tx-mode supported by endpoint,UA should not signal tx-mode explicitly in Fmtp line.\nWebRTC endpoints should support only SRST, while non-WebRTC endpoints can optionally support MRST \u0026 MRMT, besides the mandatory SRST.",
+      "parentUuid": "0506ba3f_effd247d",
+      "revId": "7278cb989347d0e735961d92a5a6b040c252cbc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
