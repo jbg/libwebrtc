@@ -489,16 +489,25 @@ bool DxgiDuplicatorController::EnsureFrameCaptured(Context* context,
     }
 
     if (rtc::TimeMillis() - start_ms > timeout_ms) {
+      if (shared_frame != target) {
+        // context(from 'target') updated, but the image copied into
+        // shared_frame
+        context->Reset();
+        Setup(context);
+      }
       RTC_LOG(LS_ERROR) << "Failed to capture " << frames_to_skip
                         << " frames "
                            "within "
                         << timeout_ms << " milliseconds.";
       return false;
     }
-
     // Sleep `ms_per_frame` before attempting to capture the next frame to
     // ensure the video adapter has time to update the screen.
     webrtc::SleepMs(ms_per_frame);
+  }
+  if (shared_frame != target) {
+    context->Reset();
+    Setup(context);
   }
   return true;
 }
