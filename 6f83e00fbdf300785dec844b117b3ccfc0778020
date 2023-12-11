@@ -20,6 +20,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2dca0fe7_6623217f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18169
+      },
+      "writtenOn": "2023-12-11T09:44:51Z",
+      "side": 1,
+      "message": "I tried to implement the approach you described - to allow different packetizations match (as before) but handle duplicates better when it comes to reusing the payload ids.\n\nMy change in MergeCodecs adds the payload ids of the duplicates to the used_pltypes. Before, the payload ids of the duplicates would be ignored because the algorithm would think the codec is already offered (contained in offered_codecs). This led to unwanted payload id reuse.\n\nYou suggest the opposite: \"removing their payload types from the set\". Can you describe your reasoning?",
+      "parentUuid": "036f8e48_aeac3cd6",
+      "revId": "6f83e00fbdf300785dec844b117b3ccfc0778020",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a3e2210_aa36dfef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18169
+      },
+      "writtenOn": "2023-12-11T09:44:51Z",
+      "side": 1,
+      "message": "Splitting from another comment:\n\n\u003e It\u0027s a bit hard to think through all the ramifications of this... Maybe we just wait until we have a different way of representing this in SDP?\n\nI agree that it\u0027s hard. It\u0027s also worrying that the test coverage is probably not the best given that it let the basic e2ee flow regress by https://webrtc-review.googlesource.com/c/src/+/326522.\n\nDo other reviewers agree that https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d15473#c10 can be left unfixed till we rectify the non-standard packetization signaling? Note that workaround has been implemented on JS side - munge SDP to undo any attempts of WebRTC to reuse a payload id that JS has previously \"allocated\" for a raw codec.",
+      "revId": "6f83e00fbdf300785dec844b117b3ccfc0778020",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8829eb66_f08b4ad4",
         "filename": "pc/media_session.cc",
         "patchSetId": 5
