@@ -22,6 +22,30 @@
       },
       "revId": "211daadb6658630346111c9a8ea8f67cba997952",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be3bec52_1fb49e86",
+        "filename": "p2p/base/async_stun_tcp_socket.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-12-11T09:37:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "06329890_a537076c",
+      "range": {
+        "startLine": 118,
+        "startChar": 8,
+        "endLine": 118,
+        "endChar": 25
+      },
+      "revId": "211daadb6658630346111c9a8ea8f67cba997952",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
