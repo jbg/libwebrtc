@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c66ba915_07be304e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2023-12-11T13:29:24Z",
+      "side": 1,
+      "message": "OK sounds good. When we add support to Chrome we can make more web platform tests to make sure the API can handle uni-directional codecs, it\u0027s not clear to be if SDP would accept or reject if transciever is \"sendrecv\" and we negotiate H265 but can only send or can only receive. Some high level API tests similar to those in peer_connection_encodings_integrationtest.cc but on the JavaScript layer, since HW encoding/decoding would only exist with RTCVideoEncoder/Decoder support and can\u0027t be tested in webrtc alone IIUC.\n\nBut for now all of this is behind a flag, so landing this does not immediately impact Chrome tip-of-tree until we decide to enable it, correct?\n\nI\u0027m not an expert on H265 profiles, so I\u0027ll leave that review to my colleagues, but LGTM from me assuming this is currently safely behind flag.",
+      "parentUuid": "1ff7530e_e54a427a",
+      "revId": "7278cb989347d0e735961d92a5a6b040c252cbc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "259fb19e_387f020b",
         "filename": "media/base/sdp_video_format_utils_unittest.cc",
         "patchSetId": 3
