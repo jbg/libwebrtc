@@ -11540,7 +11540,7 @@
         "merge": {
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
-        "name": "audio_decoder_unittests",
+        "name": "audio_decoder_unittests Win 10",
         "resultdb": {
           "result_format": "json"
         },
@@ -11551,13 +11551,32 @@
           }
         },
         "test": "audio_decoder_unittests",
-        "test_id_prefix": "ninja://modules/audio_coding:audio_decoder_unittests/"
+        "test_id_prefix": "ninja://modules/audio_coding:audio_decoder_unittests/",
+        "variant_id": "Win 10"
       },
       {
         "merge": {
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
-        "name": "common_audio_unittests",
+        "name": "audio_decoder_unittests Win 11",
+        "resultdb": {
+          "result_format": "json"
+        },
+        "swarming": {
+          "dimensions": {
+            "cpu": "x86-64",
+            "os": "Windows-11-22000"
+          }
+        },
+        "test": "audio_decoder_unittests",
+        "test_id_prefix": "ninja://modules/audio_coding:audio_decoder_unittests/",
+        "variant_id": "Win 11"
+      },
+      {
+        "merge": {
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "common_audio_unittests Win 10",
         "resultdb": {
           "result_format": "json"
         },
@@ -11568,13 +11587,32 @@
           }
         },
         "test": "common_audio_unittests",
-        "test_id_prefix": "ninja://common_audio:common_audio_unittests/"
+        "test_id_prefix": "ninja://common_audio:common_audio_unittests/",
+        "variant_id": "Win 10"
       },
       {
         "merge": {
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
-        "name": "common_video_unittests",
+        "name": "common_audio_unittests Win 11",
+        "resultdb": {
+          "result_format": "json"
+        },
+        "swarming": {
+          "dimensions": {
+            "cpu": "x86-64",
+            "os": "Windows-11-22000"
+          }
+        },
+        "test": "common_audio_unittests",
+        "test_id_prefix": "ninja://common_audio:common_audio_unittests/",
+        "variant_id": "Win 11"
+      },
+      {
+        "merge": {
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "common_video_unittests Win 10",
         "resultdb": {
           "result_format": "json"
         },
@@ -11585,13 +11623,32 @@
           }
         },
         "test": "common_video_unittests",
-        "test_id_prefix": "ninja://common_video:common_video_unittests/"
+        "test_id_prefix": "ninja://common_video:common_video_unittests/",
+        "variant_id": "Win 10"
       },
       {
         "merge": {
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
-        "name": "dcsctp_unittests",
+        "name": "common_video_unittests Win 11",
+        "resultdb": {
+          "result_format": "json"
+        },
+        "swarming": {
+          "dimensions": {
+            "cpu": "x86-64",
+            "os": "Windows-11-22000"
+          }
+        },
+        "test": "common_video_unittests",
+        "test_id_prefix": "ninja://common_video:common_video_unittests/",
+        "variant_id": "Win 11"
+      },
+      {
+        "merge": {
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "dcsctp_unittests Win 10",
         "resultdb": {
           "result_format": "json"
         },
@@ -11602,13 +11659,32 @@
           }
         },
         "test": "dcsctp_unittests",
-        "test_id_prefix": "ninja://net/dcsctp:dcsctp_unittests/"
+        "test_id_prefix": "ninja://net/dcsctp:dcsctp_unittests/",
+        "variant_id": "Win 10"
       },
       {
         "merge": {
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
-        "name": "modules_tests",
+        "name": "dcsctp_unittests Win 11",
+        "resultdb": {
+          "result_format": "json"
+        },
+        "swarming": {
+          "dimensions": {
+            "cpu": "x86-64",
+            "os": "Windows-11-22000"
+          }
+        },
+        "test": "dcsctp_unittests",
+        "test_id_prefix": "ninja://net/dcsctp:dcsctp_unittests/",
+        "variant_id": "Win 11"
+      },
+      {
+        "merge": {
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "modules_tests Win 10",
         "resultdb": {
           "result_format": "json"
         },
@@ -11620,13 +11696,33 @@
           "shards": 2
         },
         "test": "modules_tests",
-        "test_id_prefix": "ninja://modules:modules_tests/"
+        "test_id_prefix": "ninja://modules:modules_tests/",
+        "variant_id": "Win 10"
       },
       {
         "merge": {
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
-        "name": "modules_unittests",
+        "name": "modules_tests Win 11",
+        "resultdb": {
+          "result_format": "json"
+        },
+        "swarming": {
+          "dimensions": {
+            "cpu": "x86-64",
+            "os": "Windows-11-22000"
+          },
+          "shards": 2
+        },
+        "test": "modules_tests",
+        "test_id_prefix": "ninja://modules:modules_tests/",
+        "variant_id": "Win 11"
+      },
+      {
+        "merge": {
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "modules_unittests Win 10",
         "resultdb": {
           "result_format": "json"
         },
@@ -11638,13 +11734,33 @@
           "shards": 6
         },
         "test": "modules_unittests",
-        "test_id_prefix": "ninja://modules:modules_unittests/"
+        "test_id_prefix": "ninja://modules:modules_unittests/",
+        "variant_id": "Win 10"
       },
       {
         "merge": {
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
-        "name": "peerconnection_unittests",
+        "name": "modules_unittests Win 11",
+        "resultdb": {
+          "result_format": "json"
+        },
+        "swarming": {
+          "dimensions": {
+            "cpu": "x86-64",
+            "os": "Windows-11-22000"
+          },
+          "shards": 6
+        },
+        "test": "modules_unittests",
+        "test_id_prefix": "ninja://modules:modules_unittests/",
+        "variant_id": "Win 11"
+      },
+      {
+        "merge": {
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "peerconnection_unittests Win 10",
         "resultdb": {
           "result_format": "json"
         },
@@ -11656,13 +11772,33 @@
           "shards": 4
         },
         "test": "peerconnection_unittests",
-        "test_id_prefix": "ninja://pc:peerconnection_unittests/"
+        "test_id_prefix": "ninja://pc:peerconnection_unittests/",
+        "variant_id": "Win 10"
       },
       {
         "merge": {
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
-        "name": "rtc_media_unittests",
+        "name": "peerconnection_unittests Win 11",
+        "resultdb": {
+          "result_format": "json"
+        },
+        "swarming": {
+          "dimensions": {
+            "cpu": "x86-64",
+            "os": "Windows-11-22000"
+          },
+          "shards": 4
+        },
+        "test": "peerconnection_unittests",
+        "test_id_prefix": "ninja://pc:peerconnection_unittests/",
+        "variant_id": "Win 11"
+      },
+      {
+        "merge": {
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "rtc_media_unittests Win 10",
         "resultdb": {
           "result_format": "json"
         },
@@ -11673,13 +11809,32 @@
           }
         },
         "test": "rtc_media_unittests",
-        "test_id_prefix": "ninja://media:rtc_media_unittests/"
+        "test_id_prefix": "ninja://media:rtc_media_unittests/",
+        "variant_id": "Win 10"
       },
       {
         "merge": {
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
-        "name": "rtc_pc_unittests",
+        "name": "rtc_media_unittests Win 11",
+        "resultdb": {
+          "result_format": "json"
+        },
+        "swarming": {
+          "dimensions": {
+            "cpu": "x86-64",
+            "os": "Windows-11-22000"
+          }
+        },
+        "test": "rtc_media_unittests",
+        "test_id_prefix": "ninja://media:rtc_media_unittests/",
+        "variant_id": "Win 11"
+      },
+      {
+        "merge": {
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "rtc_pc_unittests Win 10",
         "resultdb": {
           "result_format": "json"
         },
@@ -11690,13 +11845,32 @@
           }
         },
         "test": "rtc_pc_unittests",
-        "test_id_prefix": "ninja://pc:rtc_pc_unittests/"
+        "test_id_prefix": "ninja://pc:rtc_pc_unittests/",
+        "variant_id": "Win 10"
       },
       {
         "merge": {
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
-        "name": "rtc_stats_unittests",
+        "name": "rtc_pc_unittests Win 11",
+        "resultdb": {
+          "result_format": "json"
+        },
+        "swarming": {
+          "dimensions": {
+            "cpu": "x86-64",
+            "os": "Windows-11-22000"
+          }
+        },
+        "test": "rtc_pc_unittests",
+        "test_id_prefix": "ninja://pc:rtc_pc_unittests/",
+        "variant_id": "Win 11"
+      },
+      {
+        "merge": {
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "rtc_stats_unittests Win 10",
         "resultdb": {
           "result_format": "json"
         },
@@ -11707,13 +11881,32 @@
           }
         },
         "test": "rtc_stats_unittests",
-        "test_id_prefix": "ninja://stats:rtc_stats_unittests/"
+        "test_id_prefix": "ninja://stats:rtc_stats_unittests/",
+        "variant_id": "Win 10"
       },
       {
         "merge": {
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
-        "name": "rtc_unittests",
+        "name": "rtc_stats_unittests Win 11",
+        "resultdb": {
+          "result_format": "json"
+        },
+        "swarming": {
+          "dimensions": {
+            "cpu": "x86-64",
+            "os": "Windows-11-22000"
+          }
+        },
+        "test": "rtc_stats_unittests",
+        "test_id_prefix": "ninja://stats:rtc_stats_unittests/",
+        "variant_id": "Win 11"
+      },
+      {
+        "merge": {
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "rtc_unittests Win 10",
         "resultdb": {
           "result_format": "json"
         },
@@ -11725,13 +11918,33 @@
           "shards": 6
         },
         "test": "rtc_unittests",
-        "test_id_prefix": "ninja://:rtc_unittests/"
+        "test_id_prefix": "ninja://:rtc_unittests/",
+        "variant_id": "Win 10"
       },
       {
         "merge": {
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
-        "name": "slow_peer_connection_unittests",
+        "name": "rtc_unittests Win 11",
+        "resultdb": {
+          "result_format": "json"
+        },
+        "swarming": {
+          "dimensions": {
+            "cpu": "x86-64",
+            "os": "Windows-11-22000"
+          },
+          "shards": 6
+        },
+        "test": "rtc_unittests",
+        "test_id_prefix": "ninja://:rtc_unittests/",
+        "variant_id": "Win 11"
+      },
+      {
+        "merge": {
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "slow_peer_connection_unittests Win 10",
         "resultdb": {
           "result_format": "json"
         },
@@ -11742,13 +11955,32 @@
           }
         },
         "test": "slow_peer_connection_unittests",
-        "test_id_prefix": "ninja://pc:slow_peer_connection_unittests/"
+        "test_id_prefix": "ninja://pc:slow_peer_connection_unittests/",
+        "variant_id": "Win 10"
       },
       {
         "merge": {
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
-        "name": "svc_tests",
+        "name": "slow_peer_connection_unittests Win 11",
+        "resultdb": {
+          "result_format": "json"
+        },
+        "swarming": {
+          "dimensions": {
+            "cpu": "x86-64",
+            "os": "Windows-11-22000"
+          }
+        },
+        "test": "slow_peer_connection_unittests",
+        "test_id_prefix": "ninja://pc:slow_peer_connection_unittests/",
+        "variant_id": "Win 11"
+      },
+      {
+        "merge": {
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "svc_tests Win 10",
         "resultdb": {
           "result_format": "json"
         },
@@ -11760,13 +11992,33 @@
           "shards": 4
         },
         "test": "svc_tests",
-        "test_id_prefix": "ninja://pc:svc_tests/"
+        "test_id_prefix": "ninja://pc:svc_tests/",
+        "variant_id": "Win 10"
       },
       {
         "merge": {
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
-        "name": "system_wrappers_unittests",
+        "name": "svc_tests Win 11",
+        "resultdb": {
+          "result_format": "json"
+        },
+        "swarming": {
+          "dimensions": {
+            "cpu": "x86-64",
+            "os": "Windows-11-22000"
+          },
+          "shards": 4
+        },
+        "test": "svc_tests",
+        "test_id_prefix": "ninja://pc:svc_tests/",
+        "variant_id": "Win 11"
+      },
+      {
+        "merge": {
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "system_wrappers_unittests Win 10",
         "resultdb": {
           "result_format": "json"
         },
@@ -11777,13 +12029,32 @@
           }
         },
         "test": "system_wrappers_unittests",
-        "test_id_prefix": "ninja://system_wrappers:system_wrappers_unittests/"
+        "test_id_prefix": "ninja://system_wrappers:system_wrappers_unittests/",
+        "variant_id": "Win 10"
       },
       {
         "merge": {
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
-        "name": "test_support_unittests",
+        "name": "system_wrappers_unittests Win 11",
+        "resultdb": {
+          "result_format": "json"
+        },
+        "swarming": {
+          "dimensions": {
+            "cpu": "x86-64",
+            "os": "Windows-11-22000"
+          }
+        },
+        "test": "system_wrappers_unittests",
+        "test_id_prefix": "ninja://system_wrappers:system_wrappers_unittests/",
+        "variant_id": "Win 11"
+      },
+      {
+        "merge": {
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "test_support_unittests Win 10",
         "resultdb": {
           "result_format": "json"
         },
@@ -11794,13 +12065,32 @@
           }
         },
         "test": "test_support_unittests",
-        "test_id_prefix": "ninja://test:test_support_unittests/"
+        "test_id_prefix": "ninja://test:test_support_unittests/",
+        "variant_id": "Win 10"
       },
       {
         "merge": {
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
-        "name": "tools_unittests",
+        "name": "test_support_unittests Win 11",
+        "resultdb": {
+          "result_format": "json"
+        },
+        "swarming": {
+          "dimensions": {
+            "cpu": "x86-64",
+            "os": "Windows-11-22000"
+          }
+        },
+        "test": "test_support_unittests",
+        "test_id_prefix": "ninja://test:test_support_unittests/",
+        "variant_id": "Win 11"
+      },
+      {
+        "merge": {
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "tools_unittests Win 10",
         "resultdb": {
           "result_format": "json"
         },
@@ -11811,13 +12101,32 @@
           }
         },
         "test": "tools_unittests",
-        "test_id_prefix": "ninja://rtc_tools:tools_unittests/"
+        "test_id_prefix": "ninja://rtc_tools:tools_unittests/",
+        "variant_id": "Win 10"
       },
       {
         "merge": {
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
-        "name": "video_engine_tests",
+        "name": "tools_unittests Win 11",
+        "resultdb": {
+          "result_format": "json"
+        },
+        "swarming": {
+          "dimensions": {
+            "cpu": "x86-64",
+            "os": "Windows-11-22000"
+          }
+        },
+        "test": "tools_unittests",
+        "test_id_prefix": "ninja://rtc_tools:tools_unittests/",
+        "variant_id": "Win 11"
+      },
+      {
+        "merge": {
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "video_engine_tests Win 10",
         "resultdb": {
           "result_format": "json"
         },
@@ -11829,13 +12138,33 @@
           "shards": 4
         },
         "test": "video_engine_tests",
-        "test_id_prefix": "ninja://:video_engine_tests/"
+        "test_id_prefix": "ninja://:video_engine_tests/",
+        "variant_id": "Win 10"
       },
       {
         "merge": {
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
-        "name": "voip_unittests",
+        "name": "video_engine_tests Win 11",
+        "resultdb": {
+          "result_format": "json"
+        },
+        "swarming": {
+          "dimensions": {
+            "cpu": "x86-64",
+            "os": "Windows-11-22000"
+          },
+          "shards": 4
+        },
+        "test": "video_engine_tests",
+        "test_id_prefix": "ninja://:video_engine_tests/",
+        "variant_id": "Win 11"
+      },
+      {
+        "merge": {
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "voip_unittests Win 10",
         "resultdb": {
           "result_format": "json"
         },
@@ -11846,13 +12175,32 @@
           }
         },
         "test": "voip_unittests",
-        "test_id_prefix": "ninja://:voip_unittests/"
+        "test_id_prefix": "ninja://:voip_unittests/",
+        "variant_id": "Win 10"
       },
       {
         "merge": {
           "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
         },
-        "name": "webrtc_nonparallel_tests",
+        "name": "voip_unittests Win 11",
+        "resultdb": {
+          "result_format": "json"
+        },
+        "swarming": {
+          "dimensions": {
+            "cpu": "x86-64",
+            "os": "Windows-11-22000"
+          }
+        },
+        "test": "voip_unittests",
+        "test_id_prefix": "ninja://:voip_unittests/",
+        "variant_id": "Win 11"
+      },
+      {
+        "merge": {
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "webrtc_nonparallel_tests Win 10",
         "resultdb": {
           "result_format": "json"
         },
@@ -11863,7 +12211,26 @@
           }
         },
         "test": "webrtc_nonparallel_tests",
-        "test_id_prefix": "ninja://:webrtc_nonparallel_tests/"
+        "test_id_prefix": "ninja://:webrtc_nonparallel_tests/",
+        "variant_id": "Win 10"
+      },
+      {
+        "merge": {
+          "script": "//testing/merge_scripts/standard_isolated_script_merge.py"
+        },
+        "name": "webrtc_nonparallel_tests Win 11",
+        "resultdb": {
+          "result_format": "json"
+        },
+        "swarming": {
+          "dimensions": {
+            "cpu": "x86-64",
+            "os": "Windows-11-22000"
+          }
+        },
+        "test": "webrtc_nonparallel_tests",
+        "test_id_prefix": "ninja://:webrtc_nonparallel_tests/",
+        "variant_id": "Win 11"
       }
     ]
   },

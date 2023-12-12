@@ -596,9 +596,9 @@
       },
       'win_x64_clang_rel': {
         'os_type': 'win',
-        'mixins': ['win10', 'x86-64', 'resultdb-json-format'],
+        'mixins': ['x86-64', 'resultdb-json-format'],
         'test_suites': {
-          'isolated_scripts': 'desktop_tests',
+          'isolated_scripts': 'win_tests_matrix',
         },
       },
       'win_x86_clang_dbg': {

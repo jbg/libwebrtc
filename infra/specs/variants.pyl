@@ -37,4 +37,12 @@
     'identifier': 'iPhone X 16.2',
     'mixins': ['xcode_14_main', 'ios_runtime_cache_16_2'],
   },
+  'WIN_10': {
+    'identifier': 'Win 10',
+    'mixins': ['win10'],
+  },
+  'WIN_11': {
+    'identifier': 'Win 11',
+    'mixins': ['win11'],
+  },
 }
