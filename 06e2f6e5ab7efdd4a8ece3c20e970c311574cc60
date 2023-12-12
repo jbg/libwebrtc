@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51c41099_cf044f43",
+        "filename": "modules/desktop_capture/win/dxgi_duplicator_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2023-12-12T21:11:37Z",
+      "side": 1,
+      "message": "I think this is not necessary, returning false will cause everything to be reset anyway.",
+      "range": {
+        "startLine": 492,
+        "startChar": 0,
+        "endLine": 497,
+        "endChar": 7
+      },
+      "revId": "06e2f6e5ab7efdd4a8ece3c20e970c311574cc60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a05015c3_5d087044",
+        "filename": "modules/desktop_capture/win/dxgi_duplicator_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2023-12-12T21:11:37Z",
+      "side": 1,
+      "message": "The reset/setup call pair will set the updated_region to the entire screen, I am not very sure if it could fix the flakiness of the captured result.",
+      "range": {
+        "startLine": 508,
+        "startChar": 0,
+        "endLine": 511,
+        "endChar": 3
+      },
+      "revId": "06e2f6e5ab7efdd4a8ece3c20e970c311574cc60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
