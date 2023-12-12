@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ad847ae_2bd015b0",
+        "filename": "net/dcsctp/socket/callback_deferrer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2023-12-12T10:22:02Z",
+      "side": 1,
+      "message": "Have you tried measuring the overhead from an absl::AnyInvocable there instead?",
+      "revId": "c3653877bd7b32f73a83196eebbe84d2e55e9329",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
