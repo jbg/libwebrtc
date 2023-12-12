@@ -267,5 +267,13 @@
         ],
       },
     },
+    'win_tests_matrix': {
+      'desktop_tests': {
+        'variants': [
+          'WIN_10',
+          'WIN_11',
+        ],
+      },
+    },
   },
 }
