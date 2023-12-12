@@ -16,6 +16,23 @@
       "message": "hbos@ / hta@  Could you PTAL?",
       "revId": "0352c6710574add481e5bd359a5ac39389190712",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8e2440c_8286a92a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18005
+      },
+      "writtenOn": "2023-12-12T00:16:12Z",
+      "side": 1,
+      "message": "Thanks for the review. Submitting.",
+      "revId": "0352c6710574add481e5bd359a5ac39389190712",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
