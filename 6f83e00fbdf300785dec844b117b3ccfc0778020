@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a19c30a_41fbf9a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2023-12-12T01:10:32Z",
+      "side": 1,
+      "message": "Sorry, I was thinking \"remove payload types from the set of available ids\", you figured out what I meant.\n\nHave you uploaded that patchset yet? What I\u0027m talking about is reverting most the changes in this CL, and doing this in MergeCodecs:\n\n```\n  for (const Codec\u0026 reference_codec : reference_codecs) {\n    if (reference_codec.GetResiliencyType() !\u003d Codec::ResiliencyType::kRtx \u0026\u0026\n        reference_codec.GetResiliencyType() !\u003d Codec::ResiliencyType::kRed) {\n      Codec codec \u003d reference_codec;\n      used_pltypes-\u003eFindAndSetIdUsed(\u0026codec);\n      if (!FindMatchingCodec(reference_codecs, *offered_codecs, reference_codec,\n                             /*ignore_packetization\u003d*/false)) {\n        offered_codecs-\u003epush_back(codec);\n      }\n    }\n  }\n  ```\n  \nThough I guess we would only want this done when called from MergeCodecsFromDescription, otherwise we\u0027ll be adding extra used payload types when merging from the reference codecs...",
+      "parentUuid": "2dca0fe7_6623217f",
+      "revId": "6f83e00fbdf300785dec844b117b3ccfc0778020",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8829eb66_f08b4ad4",
         "filename": "pc/media_session.cc",
         "patchSetId": 5
@@ -72,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a3c60f50_b8176d3a",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2023-12-12T01:10:32Z",
+      "side": 1,
+      "message": "I think this comment is still applicable, though not something Meet will run into as the client is always the offerer.",
+      "parentUuid": "8829eb66_f08b4ad4",
+      "revId": "6f83e00fbdf300785dec844b117b3ccfc0778020",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "954c0cf5_f3552cd1",
         "filename": "pc/media_session_unittest.cc",
         "patchSetId": 5
@@ -83,6 +119,24 @@
       "writtenOn": "2023-12-07T21:59:22Z",
       "side": 1,
       "message": "So the issue here was that the raw codecs were negotiated away since they didn\u0027t match the built-in supported codecs? Could we instead add raw variants to the set of supported codecs to address this? Or... is it not possible to add something to the set of supported codecs without also offering it by default (which we don\u0027t want)? If it were possible to change that, I think that would be the ideal solution.",
+      "revId": "6f83e00fbdf300785dec844b117b3ccfc0778020",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "788ba7bb_6537cf2e",
+        "filename": "pc/media_session_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 4402,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2023-12-12T01:10:32Z",
+      "side": 1,
+      "message": "Not relevant anymore if we go with the approach described in the other comment",
+      "parentUuid": "954c0cf5_f3552cd1",
       "revId": "6f83e00fbdf300785dec844b117b3ccfc0778020",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
