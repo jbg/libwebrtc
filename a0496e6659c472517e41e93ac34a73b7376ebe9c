@@ -16,6 +16,41 @@
       "message": "No changes to tests?",
       "revId": "a0496e6659c472517e41e93ac34a73b7376ebe9c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a9829e6_94a080bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2023-12-13T12:11:43Z",
+      "side": 1,
+      "message": "Thanks for reviewing!",
+      "revId": "a0496e6659c472517e41e93ac34a73b7376ebe9c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "999457e3_83f5990f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2023-12-13T12:11:43Z",
+      "side": 1,
+      "message": "I thought a lot about it, and can\u0027t find a way to consistently trigger it. It depends a lot on the implementation of std::deque - when it reallocates memory and moves elements. And the issue isn\u0027t caught in normal debug builds - only with sanitizers. So unfortunately nothing this time. I have fuzzer \"testcase\", but that one will likely break on next refactoring. The original bug (restricted view) refers to a clusterfuzz and it will mark itself as FIXED once this bug fixes the clusterfuzz repro, so that\u0027s something.",
+      "parentUuid": "1c6a19fd_ca707ab8",
+      "revId": "a0496e6659c472517e41e93ac34a73b7376ebe9c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
