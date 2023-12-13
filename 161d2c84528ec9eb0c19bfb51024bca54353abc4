@@ -22,6 +22,30 @@
       },
       "revId": "161d2c84528ec9eb0c19bfb51024bca54353abc4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b16eccd_be78d8cb",
+        "filename": "api/video_codecs/sdp_video_format.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-12-13T17:53:45Z",
+      "side": 0,
+      "message": "Ah, I had fixed the Chrome instances in\n  https://chromium-review.googlesource.com/c/chromium/src/+/5100310\nbut not the ones in the repo I don\u0027t have access to (should a bot have caught this?)\nCan you fix the downstream project to use the raw type for the time being?",
+      "parentUuid": "a05fe2ee_eea1bb33",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 28,
+        "endChar": 56
+      },
+      "revId": "161d2c84528ec9eb0c19bfb51024bca54353abc4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
