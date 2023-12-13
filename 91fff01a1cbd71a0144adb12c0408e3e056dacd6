@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48ad2892_daf7072e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2023-12-13T15:00:15Z",
+      "side": 1,
+      "message": "Could you please add a test case in dcsctp_socket_test?",
+      "revId": "91fff01a1cbd71a0144adb12c0408e3e056dacd6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
