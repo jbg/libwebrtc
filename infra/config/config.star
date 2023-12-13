@@ -45,6 +45,8 @@ def os_from_name(name):
     """
     if "ios" in name.lower() or "mac" in name.lower():
         return "Mac"
+    if "win11" in name.lower():
+        return "Windows-11"
     if "win" in name.lower():
         return "Windows"
     return "Linux"
