@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a05fe2ee_eea1bb33",
+        "filename": "api/video_codecs/sdp_video_format.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-12-13T16:26:33Z",
+      "side": 0,
+      "message": "This is a breaking change. I need to roll back this one but can you reland by keeping some backwards compat? Then we can land the cleanup.",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 28,
+        "endChar": 56
+      },
+      "revId": "161d2c84528ec9eb0c19bfb51024bca54353abc4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
