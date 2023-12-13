@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd045aa1_cc58b833",
+        "filename": "rtc_base/async_packet_socket_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-12-13T12:12:38Z",
+      "side": 0,
+      "message": "Seems like this test should be rewritten not deleted?\n(Although benefit is small - if callbacks stop working, lots of other stuff should fail too)",
+      "revId": "a8cd2babcdad2ff6196c111af126265561a5094e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

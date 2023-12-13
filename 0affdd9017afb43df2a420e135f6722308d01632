@@ -33,6 +33,23 @@
       "message": "Still more code that needs cleaning.....",
       "revId": "0affdd9017afb43df2a420e135f6722308d01632",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26dbc3de_d2041345",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-12-13T12:12:38Z",
+      "side": 1,
+      "message": "Good riddance!\nWonder about the deletion of one test, otherwise fine.",
+      "revId": "0affdd9017afb43df2a420e135f6722308d01632",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
