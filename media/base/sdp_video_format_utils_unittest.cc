@@ -27,29 +27,28 @@ const char kVPxFmtpMaxFrameSize[] = "max-fs";
 }  // namespace
 
 TEST(SdpVideoFormatUtilsTest, TestH264GenerateProfileLevelIdForAnswerEmpty) {
-  SdpVideoFormat::Parameters answer_params;
-  H264GenerateProfileLevelIdForAnswer(SdpVideoFormat::Parameters(),
-                                      SdpVideoFormat::Parameters(),
+  CodecParameterMap answer_params;
+  H264GenerateProfileLevelIdForAnswer(CodecParameterMap(), CodecParameterMap(),
                                       &answer_params);
   EXPECT_TRUE(answer_params.empty());
 }
 
 TEST(SdpVideoFormatUtilsTest,
      TestH264GenerateProfileLevelIdForAnswerLevelSymmetryCapped) {
-  SdpVideoFormat::Parameters low_level;
+  CodecParameterMap low_level;
   low_level["profile-level-id"] = "42e015";
-  SdpVideoFormat::Parameters high_level;
+  CodecParameterMap high_level;
   high_level["profile-level-id"] = "42e01f";
 
   // Level asymmetry is not allowed; test that answer level is the lower of the
   // local and remote levels.
-  SdpVideoFormat::Parameters answer_params;
+  CodecParameterMap answer_params;
   H264GenerateProfileLevelIdForAnswer(low_level /* local_supported */,
                                       high_level /* remote_offered */,
                                       &answer_params);
   EXPECT_EQ("42e015", answer_params["profile-level-id"]);
 
-  SdpVideoFormat::Parameters answer_params2;
+  CodecParameterMap answer_params2;
   H264GenerateProfileLevelIdForAnswer(high_level /* local_supported */,
                                       low_level /* remote_offered */,
                                       &answer_params2);
@@ -58,13 +57,13 @@ TEST(SdpVideoFormatUtilsTest,
 
 TEST(SdpVideoFormatUtilsTest,
      TestH264GenerateProfileLevelIdForAnswerConstrainedBaselineLevelAsymmetry) {
-  SdpVideoFormat::Parameters local_params;
+  CodecParameterMap local_params;
   local_params["profile-level-id"] = "42e01f";
   local_params["level-asymmetry-allowed"] = "1";
-  SdpVideoFormat::Parameters remote_params;
+  CodecParameterMap remote_params;
   remote_params["profile-level-id"] = "42e015";
   remote_params["level-asymmetry-allowed"] = "1";
-  SdpVideoFormat::Parameters answer_params;
+  CodecParameterMap answer_params;
   H264GenerateProfileLevelIdForAnswer(local_params, remote_params,
                                       &answer_params);
   // When level asymmetry is allowed, we can answer a higher level than what was
@@ -104,7 +103,7 @@ TEST(SdpVideoFormatUtilsTest, H265GenerateProfileTierLevelNoEmpty) {
 #endif
 
 TEST(SdpVideoFormatUtilsTest, MaxFrameRateIsMissingOrInvalid) {
-  SdpVideoFormat::Parameters params;
+  CodecParameterMap params;
   absl::optional<int> empty = ParseSdpForVPxMaxFrameRate(params);
   EXPECT_FALSE(empty);
   params[kVPxFmtpMaxFrameRate] = "-1";
@@ -116,7 +115,7 @@ TEST(SdpVideoFormatUtilsTest, MaxFrameRateIsMissingOrInvalid) {
 }
 
 TEST(SdpVideoFormatUtilsTest, MaxFrameRateIsSpecified) {
-  SdpVideoFormat::Parameters params;
+  CodecParameterMap params;
   params[kVPxFmtpMaxFrameRate] = "30";
   EXPECT_EQ(ParseSdpForVPxMaxFrameRate(params), 30);
   params[kVPxFmtpMaxFrameRate] = "60";
@@ -124,7 +123,7 @@ TEST(SdpVideoFormatUtilsTest, MaxFrameRateIsSpecified) {
 }
 
 TEST(SdpVideoFormatUtilsTest, MaxFrameSizeIsMissingOrInvalid) {
-  SdpVideoFormat::Parameters params;
+  CodecParameterMap params;
   absl::optional<int> empty = ParseSdpForVPxMaxFrameSize(params);
   EXPECT_FALSE(empty);
   params[kVPxFmtpMaxFrameSize] = "-1";
@@ -136,7 +135,7 @@ TEST(SdpVideoFormatUtilsTest, MaxFrameSizeIsMissingOrInvalid) {
 }
 
 TEST(SdpVideoFormatUtilsTest, MaxFrameSizeIsSpecified) {
-  SdpVideoFormat::Parameters params;
+  CodecParameterMap params;
   params[kVPxFmtpMaxFrameSize] = "8100";  // 1920 x 1080 / (16^2)
   EXPECT_EQ(ParseSdpForVPxMaxFrameSize(params), 1920 * 1080);
   params[kVPxFmtpMaxFrameSize] = "32400";  // 3840 x 2160 / (16^2)
