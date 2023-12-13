@@ -33,8 +33,8 @@
 namespace webrtc {
 
 namespace {
-static const int kDefaultWidth = 1280;
-static const int kDefaultHeight = 720;
+static const int kDefaultWidth = 1920;
+static const int kDefaultHeight = 1080;
 static const int kDefaultFrameRate = 30;
 static const uint32_t kDefaultMinBitrateBps = 60000;
 static const uint32_t kDefaultTargetBitrateBps = 2000000;
