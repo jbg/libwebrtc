@@ -598,6 +598,7 @@ absl::optional<Metrics> DcSctpSocket::GetMetrics() const {
   Metrics metrics = metrics_;
   metrics.cwnd_bytes = tcb_->cwnd();
   metrics.srtt_ms = tcb_->current_srtt().ms();
+  metrics.srtt_us = tcb_->current_srtt().us();
   size_t packet_payload_size =
       options_.mtu - SctpPacket::kHeaderSize - DataChunk::kHeaderSize;
   metrics.unack_data_count =

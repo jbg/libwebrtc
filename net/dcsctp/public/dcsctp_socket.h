@@ -229,6 +229,9 @@ struct Metrics {
   // Smoothed round trip time, corresponding to spinfo_srtt defined in RFC6458.
   int srtt_ms = 0;
 
+  // As above, but with increased precision.
+  int64_t srtt_us = 0;
+
   // Number of data items in the retransmission queue that haven’t been
   // acked/nacked yet and are in-flight. Corresponding to sstat_unackdata
   // defined in RFC6458. This may be an approximation when there are messages in
