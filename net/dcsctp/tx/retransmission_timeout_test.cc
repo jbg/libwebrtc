@@ -23,6 +23,10 @@ constexpr TimeDelta kMaxRto = TimeDelta::Millis(800);
 constexpr TimeDelta kMinRto = TimeDelta::Millis(120);
 constexpr TimeDelta kMinRttVariance = TimeDelta::Millis(220);
 
+MATCHER_P(IsNear, value, "") {
+  return abs(arg.ms() - value.ms()) <= 1;
+}
+
 DcSctpOptions MakeOptions() {
   DcSctpOptions options;
   options.rtt_max = DurationMs(kMaxRtt);
@@ -49,10 +53,10 @@ TEST(RetransmissionTimeoutTest, NegativeValuesDoNotAffectRTO) {
   rto_.ObserveRTT(TimeDelta::Millis(-10));
   EXPECT_EQ(rto_.rto(), kInitialRto);
   rto_.ObserveRTT(TimeDelta::Millis(124));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(372));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(372)));
   // Subsequent negative value
   rto_.ObserveRTT(TimeDelta::Millis(-10));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(372));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(372)));
 }
 
 TEST(RetransmissionTimeoutTest, TooLargeValuesDoNotAffectRTO) {
@@ -61,10 +65,10 @@ TEST(RetransmissionTimeoutTest, TooLargeValuesDoNotAffectRTO) {
   rto_.ObserveRTT(kMaxRtt + TimeDelta::Millis(100));
   EXPECT_EQ(rto_.rto(), kInitialRto);
   rto_.ObserveRTT(TimeDelta::Millis(124));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(372));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(372)));
   // Subsequent too large value
   rto_.ObserveRTT(kMaxRtt + TimeDelta::Millis(100));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(372));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(372)));
 }
 
 TEST(RetransmissionTimeoutTest, WillNeverGoBelowMinimumRto) {
@@ -88,29 +92,29 @@ TEST(RetransmissionTimeoutTest, WillNeverGoAboveMaximumRto) {
 TEST(RetransmissionTimeoutTest, CalculatesRtoForStableRtt) {
   RetransmissionTimeout rto_(MakeOptions());
   rto_.ObserveRTT(TimeDelta::Millis(124));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(372));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(372)));
   rto_.ObserveRTT(TimeDelta::Millis(128));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(344));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(344)));
   rto_.ObserveRTT(TimeDelta::Millis(123));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(344));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(344)));
   rto_.ObserveRTT(TimeDelta::Millis(125));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(344));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(344)));
   rto_.ObserveRTT(TimeDelta::Millis(127));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(344));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(344)));
 }
 
 TEST(RetransmissionTimeoutTest, CalculatesRtoForUnstableRtt) {
   RetransmissionTimeout rto_(MakeOptions());
   rto_.ObserveRTT(TimeDelta::Millis(124));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(372));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(372)));
   rto_.ObserveRTT(TimeDelta::Millis(402));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(622));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(622)));
   rto_.ObserveRTT(TimeDelta::Millis(728));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(800));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(800)));
   rto_.ObserveRTT(TimeDelta::Millis(89));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(800));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(800)));
   rto_.ObserveRTT(TimeDelta::Millis(126));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(800));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(800)));
 }
 
 TEST(RetransmissionTimeoutTest, WillStabilizeAfterAWhile) {
@@ -120,25 +124,25 @@ TEST(RetransmissionTimeoutTest, WillStabilizeAfterAWhile) {
   rto_.ObserveRTT(TimeDelta::Millis(728));
   rto_.ObserveRTT(TimeDelta::Millis(89));
   rto_.ObserveRTT(TimeDelta::Millis(126));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(800));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(800)));
   rto_.ObserveRTT(TimeDelta::Millis(124));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(800));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(800)));
   rto_.ObserveRTT(TimeDelta::Millis(122));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(710));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(710)));
   rto_.ObserveRTT(TimeDelta::Millis(123));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(631));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(631)));
   rto_.ObserveRTT(TimeDelta::Millis(124));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(562));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(562)));
   rto_.ObserveRTT(TimeDelta::Millis(122));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(505));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(505)));
   rto_.ObserveRTT(TimeDelta::Millis(124));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(454));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(454)));
   rto_.ObserveRTT(TimeDelta::Millis(124));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(410));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(410)));
   rto_.ObserveRTT(TimeDelta::Millis(124));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(372));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(372)));
   rto_.ObserveRTT(TimeDelta::Millis(124));
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(367));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(367)));
 }
 
 TEST(RetransmissionTimeoutTest, WillAlwaysStayAboveRTT) {
@@ -152,7 +156,7 @@ TEST(RetransmissionTimeoutTest, WillAlwaysStayAboveRTT) {
   for (int i = 0; i < 1000; ++i) {
     rto_.ObserveRTT(TimeDelta::Millis(124));
   }
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(344));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(344)));
 }
 
 TEST(RetransmissionTimeoutTest, CanSpecifySmallerMinimumRttVariance) {
@@ -164,7 +168,7 @@ TEST(RetransmissionTimeoutTest, CanSpecifySmallerMinimumRttVariance) {
   for (int i = 0; i < 1000; ++i) {
     rto_.ObserveRTT(TimeDelta::Millis(124));
   }
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(244));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(244)));
 }
 
 TEST(RetransmissionTimeoutTest, CanSpecifyLargerMinimumRttVariance) {
@@ -176,7 +180,7 @@ TEST(RetransmissionTimeoutTest, CanSpecifyLargerMinimumRttVariance) {
   for (int i = 0; i < 1000; ++i) {
     rto_.ObserveRTT(TimeDelta::Millis(124));
   }
-  EXPECT_EQ(rto_.rto(), TimeDelta::Millis(444));
+  EXPECT_THAT(rto_.rto(), IsNear(TimeDelta::Millis(444)));
 }
 
 }  // namespace

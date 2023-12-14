@@ -21,9 +21,9 @@ RetransmissionTimeout::RetransmissionTimeout(const DcSctpOptions& options)
     : min_rto_(options.rto_min.ToTimeDelta()),
       max_rto_(options.rto_max.ToTimeDelta()),
       max_rtt_(options.rtt_max.ToTimeDelta()),
-      min_rtt_variance_(*options.min_rtt_variance),
-      scaled_srtt_(*options.rto_initial << kRttShift),
-      rto_(*options.rto_initial) {}
+      min_rtt_variance_(options.min_rtt_variance.ToTimeDelta() / 4),
+      srtt_(options.rto_initial.ToTimeDelta()),
+      rto_(options.rto_initial.ToTimeDelta()) {}
 
 void RetransmissionTimeout::ObserveRTT(webrtc::TimeDelta measured_rtt) {
   // Unrealistic values will be skipped. If a wrongly measured (or otherwise
@@ -33,32 +33,29 @@ void RetransmissionTimeout::ObserveRTT(webrtc::TimeDelta measured_rtt) {
     return;
   }
 
-  const int64_t rtt = measured_rtt.ms();
-
-  // From https://tools.ietf.org/html/rfc4960#section-6.3.1, but avoiding
-  // floating point math by implementing algorithm from "V. Jacobson: Congestion
-  // avoidance and control", but adapted for SCTP.
+  // From https://tools.ietf.org/html/rfc4960#section-6.3.1
   if (first_measurement_) {
-    scaled_srtt_ = rtt << kRttShift;
-    scaled_rtt_var_ = (rtt / 2) << kRttVarShift;
     first_measurement_ = false;
+    srtt_ = measured_rtt;
+    rtt_var_ = measured_rtt / 2;
   } else {
-    int64_t rtt_diff = rtt - (scaled_srtt_ >> kRttShift);
-    scaled_srtt_ += rtt_diff;
-    if (rtt_diff < 0) {
+    static constexpr double kRtoAlpha = 1.0 / 8;
+    static constexpr double kRtoBeta = 1.0 / 4;
+    auto rtt_diff = srtt_ - measured_rtt;
+    if (rtt_diff < webrtc::TimeDelta::Zero()) {
       rtt_diff = -rtt_diff;
     }
-    rtt_diff -= (scaled_rtt_var_ >> kRttVarShift);
-    scaled_rtt_var_ += rtt_diff;
+    rtt_var_ = (1 - kRtoBeta) * rtt_var_ + kRtoBeta * rtt_diff;
+    srtt_ = (1 - kRtoAlpha) * srtt_ + kRtoAlpha * measured_rtt;
   }
 
-  if (scaled_rtt_var_ < min_rtt_variance_) {
-    scaled_rtt_var_ = min_rtt_variance_;
+  if (rtt_var_ < min_rtt_variance_) {
+    rtt_var_ = min_rtt_variance_;
   }
 
-  rto_ = (scaled_srtt_ >> kRttShift) + scaled_rtt_var_;
+  rto_ = srtt_ + 4 * rtt_var_;
 
   // Clamp RTO between min and max.
-  rto_ = std::min(std::max(rto_, min_rto_.ms()), max_rto_.ms());
+  rto_ = std::min(std::max(rto_, min_rto_), max_rto_);
 }
 }  // namespace dcsctp
