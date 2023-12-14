@@ -16,6 +16,23 @@
       "message": "Harald had the nice idea to use `deprecated` but sadly that does not work for types:\n../..\\api/audio_codecs/audio_format.h(28,24): error: \u0027deprecated\u0027 attribute cannot be applied to types\n   28 |   using Parameters \u003d [[deprecated(\"Use webrtc::CodecParameterMap\")]] std::map\u003cstd::string, std::string\u003e;",
       "revId": "fdceac31ef21170e2ea0df61fe2694721fb70096",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1690155_44ebc6b2",
+        "filename": "api/video_codecs/sdp_video_format.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-12-14T07:40:56Z",
+      "side": 1,
+      "message": "according to https://en.cppreference.com/w/cpp/language/attributes/deprecated this should work:\n\nusing Parameters [[deprecated]] \u003d std::map\u003cstd::string, std::string\u003e;",
+      "revId": "fdceac31ef21170e2ea0df61fe2694721fb70096",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
