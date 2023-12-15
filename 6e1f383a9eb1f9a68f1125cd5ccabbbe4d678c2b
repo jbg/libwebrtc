@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1827dc4_873dc550",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-12-15T14:44:17Z",
+      "side": 1,
+      "message": "I assume the reason for doing it this way is because you don\u0027t want Metrics to depend on webrtc::TimeDelta.\nIf not, I\u0027d rather have a new member srtt without suffix that is a webrtc::TimeDelta. End the discussion.\n\nBut go for it.",
+      "revId": "6e1f383a9eb1f9a68f1125cd5ccabbbe4d678c2b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
