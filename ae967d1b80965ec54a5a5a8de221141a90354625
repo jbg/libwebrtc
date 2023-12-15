@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8aaf94cf_994d584b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2023-12-15T14:45:45Z",
+      "side": 1,
+      "message": "I see `[3543/5071] SOLINK ./libjingle_peerconnection_so.so` so LGTM.",
+      "revId": "ae967d1b80965ec54a5a5a8de221141a90354625",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
