@@ -16,6 +16,7 @@
 #include <utility>
 
 #include "api/array_view.h"
+#include "api/transport/field_trial_based_config.h"
 #include "api/units/time_delta.h"
 #include "api/units/timestamp.h"
 #include "api/video/builtin_video_bitrate_allocator_factory.h"
@@ -23,6 +24,7 @@
 #include "api/video/video_bitrate_allocator.h"
 #include "api/video/video_codec_type.h"
 #include "api/video/video_frame.h"
+#include "api/video_codecs/simulcast_stream.h"
 #include "api/video_codecs/video_decoder.h"
 #include "api/video_codecs/video_encoder.h"
 #include "media/base/media_constants.h"
@@ -39,10 +41,12 @@
 #include "rtc_base/task_queue_for_test.h"
 #include "rtc_base/time_utils.h"
 #include "system_wrappers/include/sleep.h"
+#include "test/field_trial.h"
 #include "test/testsupport/file_utils.h"
 #include "test/testsupport/frame_reader.h"
 #include "test/testsupport/video_frame_writer.h"
 #include "third_party/libyuv/include/libyuv/compare.h"
+#include "video/config/simulcast.h"
 
 namespace webrtc {
 namespace test {
@@ -262,7 +266,8 @@ class TesterIvfWriter {
 
   void Write(const EncodedImage& encoded_frame) {
     task_queue_.PostTask([this, encoded_frame] {
-      int spatial_idx = encoded_frame.SimulcastIndex().value_or(0);
+      int spatial_idx = encoded_frame.SpatialIndex().value_or(
+          encoded_frame.SimulcastIndex().value_or(0));
       if (ivf_file_writers_.find(spatial_idx) == ivf_file_writers_.end()) {
         std::string ivf_path =
             base_path_ + "-s" + std::to_string(spatial_idx) + ".ivf";
@@ -344,7 +349,8 @@ class VideoCodecAnalyzer : public VideoCodecTester::VideoCodecStats {
     int64_t encode_finished_us = rtc::TimeMicros();
     task_queue_.PostTask(
         [this, timestamp_rtp = encoded_frame.RtpTimestamp(),
-         spatial_idx = encoded_frame.SpatialIndex().value_or(0),
+         spatial_idx = encoded_frame.SpatialIndex().value_or(
+             encoded_frame.SimulcastIndex().value_or(0)),
          temporal_idx = encoded_frame.TemporalIndex().value_or(0),
          width = encoded_frame._encodedWidth,
          height = encoded_frame._encodedHeight,
@@ -378,17 +384,30 @@ class VideoCodecAnalyzer : public VideoCodecTester::VideoCodecStats {
     int64_t decode_start_us = rtc::TimeMicros();
     task_queue_.PostTask(
         [this, timestamp_rtp = encoded_frame.RtpTimestamp(),
-         spatial_idx = encoded_frame.SpatialIndex().value_or(0),
+         spatial_idx = encoded_frame.SpatialIndex().value_or(
+             encoded_frame.SimulcastIndex().value_or(0)),
+         temporal_idx = encoded_frame.TemporalIndex().value_or(0),
+         width = encoded_frame._encodedWidth,
+         height = encoded_frame._encodedHeight,
+         frame_type = encoded_frame._frameType, qp = encoded_frame.qp_,
          frame_size_bytes = encoded_frame.size(), decode_start_us]() {
-          if (frames_.find(timestamp_rtp) == frames_.end() ||
-              frames_.at(timestamp_rtp).find(spatial_idx) ==
-                  frames_.at(timestamp_rtp).end()) {
+          bool decode_only = frames_.find(timestamp_rtp) == frames_.end();
+          if (decode_only || frames_.at(timestamp_rtp).find(spatial_idx) ==
+                                 frames_.at(timestamp_rtp).end()) {
             Frame frame;
             frame.timestamp_rtp = timestamp_rtp;
-            frame.layer_id = {.spatial_idx = spatial_idx};
-            frame.frame_size = DataSize::Bytes(frame_size_bytes);
-            frames_.emplace(timestamp_rtp,
-                            std::map<int, Frame>{{spatial_idx, frame}});
+            frame.layer_id = {.spatial_idx = spatial_idx,
+                              .temporal_idx = temporal_idx};
+            frame.width = width;
+            frame.height = height;
+            frame.keyframe = frame_type == VideoFrameType::kVideoFrameKey;
+            frame.qp = qp;
+            if (decode_only) {
+              frame.frame_size = DataSize::Bytes(frame_size_bytes);
+              frames_[timestamp_rtp] = {{spatial_idx, frame}};
+            } else {
+              frames_[timestamp_rtp][spatial_idx] = frame;
+            }
           }
 
           Frame& frame = frames_.at(timestamp_rtp).at(spatial_idx);
@@ -485,6 +504,8 @@ class VideoCodecAnalyzer : public VideoCodecTester::VideoCodecStats {
       Frame superframe = subframes.back();
       for (const Frame& frame :
            rtc::ArrayView<Frame>(subframes).subview(0, subframes.size() - 1)) {
+        superframe.decoded |= frame.decoded;
+        superframe.encoded |= frame.encoded;
         superframe.frame_size += frame.frame_size;
         superframe.keyframe |= frame.keyframe;
         superframe.encode_time =
@@ -788,6 +809,16 @@ class Decoder : public DecodedImageCallback {
   }
 
   void Decode(const EncodedImage& encoded_frame) {
+    int spatial_idx = encoded_frame.SpatialIndex().value_or(
+        encoded_frame.SimulcastIndex().value_or(0));
+    {
+      MutexLock lock(&mutex_);
+      RTC_CHECK_EQ(spatial_idx_.value_or(spatial_idx), spatial_idx)
+          << "Spatial index changed from " << *spatial_idx_ << " to "
+          << spatial_idx;
+      spatial_idx_ = spatial_idx;
+    }
+
     Timestamp pts =
         Timestamp::Micros((encoded_frame.RtpTimestamp() / k90kHz).us());
 
@@ -815,10 +846,16 @@ class Decoder : public DecodedImageCallback {
 
  private:
   int Decoded(VideoFrame& decoded_frame) override {
-    analyzer_->FinishDecode(decoded_frame, /*spatial_idx=*/0);
+    int spatial_idx;
+    {
+      MutexLock lock(&mutex_);
+      spatial_idx = *spatial_idx_;
+    }
+
+    analyzer_->FinishDecode(decoded_frame, spatial_idx);
 
     if (y4m_writer_) {
-      y4m_writer_->Write(decoded_frame, /*spatial_idx=*/0);
+      y4m_writer_->Write(decoded_frame, spatial_idx);
     }
 
     return WEBRTC_VIDEO_CODEC_OK;
@@ -831,6 +868,8 @@ class Decoder : public DecodedImageCallback {
   LimitedTaskQueue task_queue_;
   std::unique_ptr<TesterIvfWriter> ivf_writer_;
   std::unique_ptr<TesterY4mWriter> y4m_writer_;
+  absl::optional<int> spatial_idx_ RTC_GUARDED_BY(mutex_);
+  Mutex mutex_;
 };
 
 class Encoder : public EncodedImageCallback {
@@ -929,16 +968,20 @@ class Encoder : public EncodedImageCallback {
   }
 
   void Configure(const EncodingSettings& es) {
-    const LayerSettings& layer_settings = es.layers_settings.rbegin()->second;
-    const DataRate& bitrate = layer_settings.bitrate;
+    const LayerSettings& top_layer_settings =
+        es.layers_settings.rbegin()->second;
+    const int num_spatial_layers =
+        ScalabilityModeToNumSpatialLayers(es.scalability_mode);
+    const int num_temporal_layers =
+        ScalabilityModeToNumTemporalLayers(es.scalability_mode);
 
     VideoCodec vc;
-    vc.width = layer_settings.resolution.width;
-    vc.height = layer_settings.resolution.height;
-    vc.startBitrate = bitrate.kbps();
-    vc.maxBitrate = bitrate.kbps();
+    vc.width = top_layer_settings.resolution.width;
+    vc.height = top_layer_settings.resolution.height;
+    vc.startBitrate = top_layer_settings.bitrate.kbps();
+    vc.maxBitrate = top_layer_settings.bitrate.kbps();
     vc.minBitrate = 0;
-    vc.maxFramerate = layer_settings.framerate.hertz<uint32_t>();
+    vc.maxFramerate = top_layer_settings.framerate.hertz<uint32_t>();
     vc.active = true;
     vc.numberOfSimulcastStreams = 0;
     vc.mode = webrtc::VideoCodecMode::kRealtimeVideo;
@@ -950,10 +993,28 @@ class Encoder : public EncodedImageCallback {
     switch (vc.codecType) {
       case kVideoCodecVP8:
         *(vc.VP8()) = VideoEncoder::GetDefaultVp8Settings();
-        vc.VP8()->SetNumberOfTemporalLayers(
-            ScalabilityModeToNumTemporalLayers(es.scalability_mode));
+        vc.VP8()->SetNumberOfTemporalLayers(num_temporal_layers);
+        vc.SetScalabilityMode(std::vector<ScalabilityMode>{
+            ScalabilityMode::kL1T1, ScalabilityMode::kL1T2,
+            ScalabilityMode::kL1T3}[num_temporal_layers - 1]);
         vc.qpMax = cricket::kDefaultVideoMaxQpVpx;
-        // TODO(webrtc:14852): Configure simulcast.
+        if (num_spatial_layers > 1) {
+          vc.numberOfSimulcastStreams = num_spatial_layers;
+          for (int sidx = 0; sidx < num_spatial_layers; ++sidx) {
+            const LayerSettings& layer_settings = es.layers_settings.at(LayerId{
+                .spatial_idx = sidx, .temporal_idx = num_temporal_layers - 1});
+            SimulcastStream& ss = vc.simulcastStream[sidx];
+            ss.width = layer_settings.resolution.width;
+            ss.height = layer_settings.resolution.height;
+            ss.numberOfTemporalLayers = num_temporal_layers;
+            ss.maxBitrate = layer_settings.bitrate.kbps();
+            ss.targetBitrate = layer_settings.bitrate.kbps();
+            ss.minBitrate = 0;
+            ss.maxFramerate = vc.maxFramerate;
+            ss.qpMax = vc.qpMax;
+            ss.active = true;
+          }
+        }
         break;
       case kVideoCodecVP9:
         *(vc.VP9()) = VideoEncoder::GetDefaultVp9Settings();
@@ -1035,6 +1096,47 @@ class Encoder : public EncodedImageCallback {
   Mutex mutex_;
 };
 
+void ConfigureSimulcast(VideoCodec* vc) {
+  int num_spatial_layers =
+      ScalabilityModeToNumSpatialLayers(*vc->GetScalabilityMode());
+  if (num_spatial_layers == 1) {
+    return;
+  }
+
+  int num_temporal_layers =
+      ScalabilityModeToNumTemporalLayers(*vc->GetScalabilityMode());
+  ScopedFieldTrials field_trials((rtc::StringBuilder()
+                                  << "WebRTC-VP8ConferenceTemporalLayers/"
+                                  << num_temporal_layers << "/")
+                                     .str());
+
+  const std::vector<webrtc::VideoStream> streams = cricket::GetSimulcastConfig(
+      /*min_layer=*/1, num_spatial_layers, vc->width, vc->height,
+      /*bitrate_priority=*/1.0, cricket::kDefaultVideoMaxQpVpx,
+      /*is_screenshare=*/false, /*temporal_layers_supported=*/true,
+      FieldTrialBasedConfig());
+
+  vc->numberOfSimulcastStreams = streams.size();
+  RTC_CHECK_LE(vc->numberOfSimulcastStreams, num_spatial_layers);
+  if (vc->numberOfSimulcastStreams < num_spatial_layers) {
+    vc->SetScalabilityMode(LimitNumSpatialLayers(*vc->GetScalabilityMode(),
+                                                 vc->numberOfSimulcastStreams));
+  }
+
+  for (int i = 0; i < vc->numberOfSimulcastStreams; ++i) {
+    SimulcastStream* ss = &vc->simulcastStream[i];
+    ss->width = streams[i].width;
+    ss->height = streams[i].height;
+    RTC_CHECK_EQ(ss->numberOfTemporalLayers, num_temporal_layers);
+    ss->numberOfTemporalLayers = num_temporal_layers;
+    ss->maxBitrate = streams[i].max_bitrate_bps / 1000;
+    ss->targetBitrate = streams[i].target_bitrate_bps / 1000;
+    ss->minBitrate = streams[i].min_bitrate_bps / 1000;
+    ss->qpMax = streams[i].max_qp;
+    ss->active = true;
+  }
+}
+
 std::tuple<std::vector<DataRate>, ScalabilityMode>
 SplitBitrateAndUpdateScalabilityMode(std::string codec_type,
                                      ScalabilityMode scalability_mode,
@@ -1075,8 +1177,7 @@ SplitBitrateAndUpdateScalabilityMode(std::string codec_type,
       // TODO(webrtc:14852): Configure simulcast.
       *(vc.VP8()) = VideoEncoder::GetDefaultVp8Settings();
       vc.VP8()->SetNumberOfTemporalLayers(num_temporal_layers);
-      vc.simulcastStream[0].width = vc.width;
-      vc.simulcastStream[0].height = vc.height;
+      ConfigureSimulcast(&vc);
       break;
     case kVideoCodecVP9: {
       *(vc.VP9()) = VideoEncoder::GetDefaultVp9Settings();
@@ -1298,10 +1399,19 @@ VideoCodecTester::RunEncodeDecodeTest(
   VideoSource video_source(source_settings);
   std::unique_ptr<VideoCodecAnalyzer> analyzer =
       std::make_unique<VideoCodecAnalyzer>(&video_source);
-  Decoder decoder(decoder_factory, decoder_settings, analyzer.get());
+  const EncodingSettings& frame_settings = encoding_settings.begin()->second;
   Encoder encoder(encoder_factory, encoder_settings, analyzer.get());
-  encoder.Initialize(encoding_settings.begin()->second);
-  decoder.Initialize(encoding_settings.begin()->second.sdp_video_format);
+  encoder.Initialize(frame_settings);
+
+  int num_spatial_layers =
+      ScalabilityModeToNumSpatialLayers(frame_settings.scalability_mode);
+  std::vector<std::unique_ptr<Decoder>> decoders;
+  for (int sidx = 0; sidx < num_spatial_layers; ++sidx) {
+    auto decoder = std::make_unique<Decoder>(decoder_factory, decoder_settings,
+                                             analyzer.get());
+    decoder->Initialize(frame_settings.sdp_video_format);
+    decoders.push_back(std::move(decoder));
+  }
 
   for (const auto& [timestamp_rtp, frame_settings] : encoding_settings) {
     const EncodingSettings::LayerSettings& top_layer =
@@ -1309,13 +1419,17 @@ VideoCodecTester::RunEncodeDecodeTest(
     VideoFrame source_frame = video_source.PullFrame(
         timestamp_rtp, top_layer.resolution, top_layer.framerate);
     encoder.Encode(source_frame, frame_settings,
-                   [&decoder](const EncodedImage& encoded_frame) {
-                     decoder.Decode(encoded_frame);
+                   [&decoders](const EncodedImage& encoded_frame) {
+                     int sidx = encoded_frame.SpatialIndex().value_or(
+                         encoded_frame.SimulcastIndex().value_or(0));
+                     decoders.at(sidx)->Decode(encoded_frame);
                    });
   }
 
   encoder.Flush();
-  decoder.Flush();
+  for (auto& decoder : decoders) {
+    decoder->Flush();
+  }
   analyzer->Flush();
   return std::move(analyzer);
 }
