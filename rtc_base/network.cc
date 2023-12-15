@@ -102,8 +102,10 @@ uint16_t ComputeNetworkCostByType(int type,
   int vpnCost = (is_vpn && add_network_cost_to_vpn) ? kNetworkCostVpn : 0;
   switch (type) {
     case rtc::ADAPTER_TYPE_ETHERNET:
-    case rtc::ADAPTER_TYPE_LOOPBACK:
       return kNetworkCostMin + vpnCost;
+    case rtc::ADAPTER_TYPE_LOOPBACK:
+      // Deprioritize loopback connections so as to use direct ones.
+      return kNetworkCostMax + vpnCost;
     case rtc::ADAPTER_TYPE_WIFI:
       return kNetworkCostLow + vpnCost;
     case rtc::ADAPTER_TYPE_CELLULAR:
