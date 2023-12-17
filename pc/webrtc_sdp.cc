@@ -921,25 +921,27 @@ std::string SdpSerialize(const JsepSessionDescription& jdesc) {
   }
 
   // MediaStream semantics
-  InitAttrLine(kAttributeMsidSemantics, &os);
-  os << kSdpDelimiterColon << " " << kMediaStreamSemantic;
+  if (desc->msid_signaling() != cricket::kMsidSignalingNotUsed) {
+    InitAttrLine(kAttributeMsidSemantics, &os);
+    os << kSdpDelimiterColon << " " << kMediaStreamSemantic;
 
-  // TODO(bugs.webrtc.org/10421): this code only looks at the first audio/video
-  // content. Fixing that might result in much larger SDP and the msid-semantic
-  // line should eventually go away so this is not worth fixing.
-  std::set<std::string> media_stream_ids;
-  const ContentInfo* audio_content = GetFirstAudioContent(desc);
-  if (audio_content)
-    GetMediaStreamIds(audio_content, &media_stream_ids);
+    // TODO(bugs.webrtc.org/10421): this code only looks at the first
+    // audio/video content. Fixing that might result in much larger SDP and the
+    // msid-semantic line should eventually go away so this is not worth fixing.
+    std::set<std::string> media_stream_ids;
+    const ContentInfo* audio_content = GetFirstAudioContent(desc);
+    if (audio_content)
+      GetMediaStreamIds(audio_content, &media_stream_ids);
 
-  const ContentInfo* video_content = GetFirstVideoContent(desc);
-  if (video_content)
-    GetMediaStreamIds(video_content, &media_stream_ids);
+    const ContentInfo* video_content = GetFirstVideoContent(desc);
+    if (video_content)
+      GetMediaStreamIds(video_content, &media_stream_ids);
 
-  for (const std::string& id : media_stream_ids) {
-    os << " " << id;
+    for (const std::string& id : media_stream_ids) {
+      os << " " << id;
+    }
+    AddLine(os.str(), &message);
   }
-  AddLine(os.str(), &message);
 
   // a=ice-lite
   //
