@@ -479,7 +479,9 @@ AsyncSocksProxySocket::AsyncSocksProxySocket(Socket* socket,
       state_(SS_ERROR),
       proxy_(proxy),
       user_(username),
-      pass_(password) {}
+      pass_(password) {
+  RTC_CHECK_NOTREACHED();
+}
 
 AsyncSocksProxySocket::~AsyncSocksProxySocket() = default;
 
