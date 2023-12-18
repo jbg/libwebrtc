@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33d9fa7d_fda51931",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-12-18T09:54:26Z",
+      "side": 1,
+      "message": "Just one little tweak....",
+      "revId": "9e6887a0831737107ac6db009bea44283be71fce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62040c17_a0041c8c",
+        "filename": "net/dcsctp/tx/retransmission_timeout_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-12-18T09:54:26Z",
+      "side": 1,
+      "message": "Hm. ms() uses DivideRoundToNearestValue. It SHOULD be OK for all differences smaller than a single millisecond. But it makes me nervous.\n\nI\u0027d be happier if it was stated as abs(arg.us() - value.us()) \u003c\u003d 1000;\n\nSince it\u0027s a local matcher, calling it IsWithinOneMs is probably overkill.",
+      "revId": "9e6887a0831737107ac6db009bea44283be71fce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
