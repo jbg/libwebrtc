@@ -470,10 +470,10 @@ std::unique_ptr<Call> Call::Create(const CallConfig& config) {
   std::unique_ptr<RtpTransportControllerSendInterface> transport_send;
   if (config.rtp_transport_controller_send_factory != nullptr) {
     transport_send = config.rtp_transport_controller_send_factory->Create(
-        config.ExtractTransportConfig(), &config.env.clock());
+        config.ExtractTransportConfig());
   } else {
     transport_send = RtpTransportControllerSendFactory().Create(
-        config.ExtractTransportConfig(), &config.env.clock());
+        config.ExtractTransportConfig());
   }
 
   return std::make_unique<internal::Call>(config, std::move(transport_send));
@@ -759,7 +759,7 @@ webrtc::AudioSendStream* Call::CreateAudioSendStream(
   AudioSendStream* send_stream = new AudioSendStream(
       &env_.clock(), config, config_.audio_state, &env_.task_queue_factory(),
       transport_send_.get(), bitrate_allocator_.get(), &env_.event_log(),
-      call_stats_->AsRtcpRttStats(), suspended_rtp_state, trials());
+      call_stats_->AsRtcpRttStats(), suspended_rtp_state, env_.field_trials());
   RTC_DCHECK(audio_send_ssrcs_.find(config.rtp.ssrc) ==
              audio_send_ssrcs_.end());
   audio_send_ssrcs_[config.rtp.ssrc] = send_stream;
@@ -887,12 +887,11 @@ webrtc::VideoSendStream* Call::CreateVideoSendStream(
   std::vector<uint32_t> ssrcs = config.rtp.ssrcs;
 
   VideoSendStream* send_stream = new VideoSendStream(
-      &env_.clock(), num_cpu_cores_, &env_.task_queue_factory(),
-      network_thread_, call_stats_->AsRtcpRttStats(), transport_send_.get(),
-      bitrate_allocator_.get(), video_send_delay_stats_.get(),
-      &env_.event_log(), std::move(config), std::move(encoder_config),
-      suspended_video_send_ssrcs_, suspended_video_payload_states_,
-      std::move(fec_controller), env_.field_trials());
+      env_, num_cpu_cores_, network_thread_, call_stats_->AsRtcpRttStats(),
+      transport_send_.get(), bitrate_allocator_.get(),
+      video_send_delay_stats_.get(), std::move(config),
+      std::move(encoder_config), suspended_video_send_ssrcs_,
+      suspended_video_payload_states_, std::move(fec_controller));
 
   for (uint32_t ssrc : ssrcs) {
     RTC_DCHECK(video_send_ssrcs_.find(ssrc) == video_send_ssrcs_.end());
