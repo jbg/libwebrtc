@@ -330,7 +330,7 @@ class P2PTransportChannelTestBase : public ::testing::Test,
     BLOCK_UDP_AND_INCOMING_TCP,   // Firewall, UDP in/out and TCP in blocked
     BLOCK_ALL_BUT_OUTGOING_HTTP,  // Firewall, only TCP out on 80/443
     PROXY_HTTPS,                  // All traffic through HTTPS proxy
-    PROXY_SOCKS,                  // All traffic through SOCKS proxy
+    USED_TO_BE_PROXY_SOCKS,       // All traffic through SOCKS proxy
     NUM_CONFIGS
   };
 
@@ -1179,7 +1179,7 @@ class P2PTransportChannelTest : public P2PTransportChannelTestBase {
       case BLOCK_UDP_AND_INCOMING_TCP:
       case BLOCK_ALL_BUT_OUTGOING_HTTP:
       case PROXY_HTTPS:
-      case PROXY_SOCKS:
+        // case PROXY_SOCKS:
         AddAddress(endpoint, kPublicAddrs[endpoint]);
         // Block all UDP
         fw()->AddRule(false, rtc::FP_UDP, rtc::FD_ANY, kPublicAddrs[endpoint]);
@@ -1202,7 +1202,7 @@ class P2PTransportChannelTest : public P2PTransportChannelTestBase {
           fw()->AddRule(false, rtc::FP_TCP, rtc::FD_ANY,
                         kPublicAddrs[endpoint]);
           SetProxy(endpoint, rtc::PROXY_HTTPS);
-        } else if (config == PROXY_SOCKS) {
+        } else if (config == USED_TO_BE_PROXY_SOCKS) {
           // Block all TCP to/from the endpoint except to the proxy server
           fw()->AddRule(true, rtc::FP_TCP, kPublicAddrs[endpoint],
                         kSocksProxyAddrs[endpoint]);
@@ -1317,7 +1317,7 @@ const P2PTransportChannelMatrixTest::Result*
   P2P_TEST(x, BLOCK_UDP_AND_INCOMING_TCP)  \
   P2P_TEST(x, BLOCK_ALL_BUT_OUTGOING_HTTP) \
   P2P_TEST(x, PROXY_HTTPS)                 \
-  P2P_TEST(x, PROXY_SOCKS)
+  /* P2P_TEST(x, PROXY_SOCKS) */
 
 P2P_TEST_SET(OPEN)
 P2P_TEST_SET(NAT_FULL_CONE)
@@ -1330,7 +1330,7 @@ P2P_TEST_SET(BLOCK_UDP)
 P2P_TEST_SET(BLOCK_UDP_AND_INCOMING_TCP)
 P2P_TEST_SET(BLOCK_ALL_BUT_OUTGOING_HTTP)
 P2P_TEST_SET(PROXY_HTTPS)
-P2P_TEST_SET(PROXY_SOCKS)
+// P2P_TEST_SET(PROXY_SOCKS)
 
 INSTANTIATE_TEST_SUITE_P(
     All,
