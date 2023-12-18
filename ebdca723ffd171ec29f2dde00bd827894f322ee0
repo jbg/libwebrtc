@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6b89791_5b0fa28d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-12-18T09:28:22Z",
+      "side": 1,
+      "message": "Not sure the last part is really worth fixing but...",
+      "revId": "ebdca723ffd171ec29f2dde00bd827894f322ee0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
