@@ -103,6 +103,24 @@
       "parentUuid": "686d9421_984081e0",
       "revId": "ebdca723ffd171ec29f2dde00bd827894f322ee0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56a8c1cd_4e1353dd",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 924,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-12-18T11:25:21Z",
+      "side": 1,
+      "message": "sooner or later we\u0027ll have to stop doing that. Suggest adding a \"TODO(bugs.webrtc.org/10421): Change to MsidSemantic when we think it\u0027s safe to do so, so that we don\u0027t add the lines when it\u0027s not needed\" comment.\n\nlet the dying legacy depart in peace....",
+      "parentUuid": "93070798_35dc8b52",
+      "revId": "ebdca723ffd171ec29f2dde00bd827894f322ee0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
