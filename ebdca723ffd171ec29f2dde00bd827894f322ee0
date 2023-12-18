@@ -52,6 +52,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e226776_025a54eb",
+        "filename": "pc/sdp_offer_answer_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-12-18T11:17:10Z",
+      "side": 1,
+      "message": "Oops, fixed.",
+      "parentUuid": "58a55b4a_e0c2b39e",
+      "revId": "ebdca723ffd171ec29f2dde00bd827894f322ee0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "686d9421_984081e0",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-12-18T09:39:37Z",
       "side": 1,
       "message": "Shouldn\u0027t this be msid_signaling() \u0026 cricket::kMsidSignalingSemantic?",
+      "revId": "ebdca723ffd171ec29f2dde00bd827894f322ee0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93070798_35dc8b52",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 924,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-12-18T11:17:10Z",
+      "side": 1,
+      "message": "I think we want to answer with a\u003dmsid-semantic: if we get an offer with just a\u003dmsid: as well, for the sake of \"the old times\".",
+      "parentUuid": "686d9421_984081e0",
       "revId": "ebdca723ffd171ec29f2dde00bd827894f322ee0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
