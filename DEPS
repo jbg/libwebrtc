@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'ee8d45f9e2147995754f8dd9b7f2ae71aa717047',
+  'chromium_revision': '83502028340306d53b45f78cfd96da9e038ef03e',
 
   # Fetch the prebuilt binaries for llvm-cov and llvm-profdata. Needed to
   # process the raw profiles produced by instrumented targets (built with
@@ -65,9 +65,9 @@ deps = {
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@9864ef62bc780e8147b3c70c65c235bb3d07b890',
+    'https://chromium.googlesource.com/chromium/src/testing@013c3410843ffdcc0585eec592476e2039b7d7fe',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@ec50ec4e7a19f3ca7c9f8f15cc08381f061f37a9',
+    'https://chromium.googlesource.com/chromium/src/third_party@489d86b4ee891a5f7fec362c21b783b1e1c93375',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -189,7 +189,7 @@ deps = {
   'src/third_party/breakpad/breakpad':
     'https://chromium.googlesource.com/breakpad/breakpad.git@f49c2f1a2023da0cb055874fba050563dfea57db',
   'src/third_party/catapult':
-    'https://chromium.googlesource.com/catapult.git@23118cc3c34d629778abac83f10b39810ea1fdfb',
+    'https://chromium.googlesource.com/catapult.git@49c8dd3237b9fceef714e0eaf925b275dd86f0f6',
   'src/third_party/ced/src': {
     'url': 'https://chromium.googlesource.com/external/github.com/google/compact_enc_det.git@ba412eaaacd3186085babcd901679a48863c7dd5',
   },
@@ -302,7 +302,7 @@ deps = {
       'condition': 'checkout_android',
   },
   'src/third_party/perfetto':
-    'https://android.googlesource.com/platform/external/perfetto.git@fa384c4660e10ae4390efd2dbeaa67b0fad58044',
+    'https://android.googlesource.com/platform/external/perfetto.git@6e600a104c0d4e59e2647e63ecf075078b5bc3e2',
   'src/third_party/libvpx/source/libvpx':
     'https://chromium.googlesource.com/webm/libvpx.git@df655cf4fb6c2a23b964544acd015cc715752830',
   'src/third_party/libyuv':
@@ -355,7 +355,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@6a68133c4659c79027d65682a018414595c958cb',
+    'https://chromium.googlesource.com/chromium/src/tools@49bf1ecc422ce4c8b6451ea22f1ba4cd583df0c5',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
