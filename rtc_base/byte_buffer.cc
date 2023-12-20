@@ -140,6 +140,14 @@ bool ByteBufferReader::ReadString(std::string* val, size_t len) {
   }
 }
 
+bool ByteBufferReader::ReadStringView(absl::string_view* val, size_t len) {
+  if (!val || len > Length())
+    return false;
+  *val = absl::string_view(bytes_ + start_, len);
+  start_ += len;
+  return true;
+}
+
 bool ByteBufferReader::ReadBytes(char* val, size_t len) {
   if (len > Length()) {
     return false;
