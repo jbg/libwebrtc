@@ -50,6 +50,23 @@
       "message": "+1 with caveat that I don\u0027t have much context regarding MSID signaling",
       "revId": "ecf414f6e5f0364754128fa42d85fb54cafa007b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61448666_3bd111d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-12-20T12:17:56Z",
+      "side": 1,
+      "message": "hrm... the failure is quite interesting. The test itself is *not* including msid-semantic but the adapter.js session part boilerplate.\nhttps://chromium-review.googlesource.com/c/chromium/src/+/5139143 fixes that.\n\nBut why would that make a difference and just in the case of this particular test?",
+      "revId": "ecf414f6e5f0364754128fa42d85fb54cafa007b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
