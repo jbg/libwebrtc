@@ -50,7 +50,8 @@ class RenderDelayBufferImpl final : public RenderDelayBuffer {
 
   void Reset() override;
   BufferingEvent Insert(const Block& block) override;
-  BufferingEvent PrepareCaptureProcessing() override;
+  BufferingEvent PrepareCaptureProcessing(
+      size_t max_allowed_excess_render_blocks) override;
   void HandleSkippedCaptureProcessing() override;
   bool AlignFromDelay(size_t delay) override;
   void AlignFromExternalDelay() override;
@@ -105,7 +106,7 @@ class RenderDelayBufferImpl final : public RenderDelayBuffer {
   void ApplyTotalDelay(int delay);
   void InsertBlock(const Block& block, int previous_write);
   bool DetectActiveRender(rtc::ArrayView<const float> x) const;
-  bool DetectExcessRenderBlocks();
+  bool DetectExcessRenderBlocks(size_t max_allowed_excess_render_blocks);
   void IncrementWriteIndices();
   void IncrementLowRateReadIndices();
   void IncrementReadIndices();
@@ -248,7 +249,8 @@ void RenderDelayBufferImpl::HandleSkippedCaptureProcessing() {
 
 // Prepares the render buffers for processing another capture block.
 RenderDelayBuffer::BufferingEvent
-RenderDelayBufferImpl::PrepareCaptureProcessing() {
+RenderDelayBufferImpl::PrepareCaptureProcessing(
+    size_t max_allowed_excess_render_blocks) {
   RenderDelayBuffer::BufferingEvent event = BufferingEvent::kNone;
   ++capture_call_counter_;
 
@@ -267,7 +269,7 @@ RenderDelayBufferImpl::PrepareCaptureProcessing() {
     }
   }
 
-  if (DetectExcessRenderBlocks()) {
+  if (DetectExcessRenderBlocks(max_allowed_excess_render_blocks)) {
     // Too many render blocks compared to capture blocks. Risk of delay ending
     // up before the filter used by the delay estimator.
     RTC_LOG_V(delay_log_level_)
@@ -434,7 +436,8 @@ bool RenderDelayBufferImpl::DetectActiveRender(
                         kFftLengthBy2;
 }
 
-bool RenderDelayBufferImpl::DetectExcessRenderBlocks() {
+bool RenderDelayBufferImpl::DetectExcessRenderBlocks(
+    size_t max_allowed_excess_render_blocks) {
   bool excess_render_detected = false;
   const size_t latency_blocks = static_cast<size_t>(BufferLatency());
   // The recently seen minimum latency in blocks. Should be close to 0.
@@ -445,8 +448,8 @@ bool RenderDelayBufferImpl::DetectExcessRenderBlocks() {
       config_.buffering.excess_render_detection_interval_blocks) {
     // If the minimum latency is not lower than the threshold there have been
     // more render than capture frames.
-    excess_render_detected = min_latency_blocks_ >
-                             config_.buffering.max_allowed_excess_render_blocks;
+    excess_render_detected =
+        min_latency_blocks_ > max_allowed_excess_render_blocks;
     // Reset the counter and let the minimum latency be the current latency.
     min_latency_blocks_ = latency_blocks;
     excess_render_detection_counter_ = 0;

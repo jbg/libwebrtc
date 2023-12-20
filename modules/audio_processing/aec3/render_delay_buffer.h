@@ -46,7 +46,8 @@ class RenderDelayBuffer {
 
   // Updates the buffers one step based on the specified buffer delay. Returns
   // an enum indicating whether there was a special event that occurred.
-  virtual BufferingEvent PrepareCaptureProcessing() = 0;
+  virtual BufferingEvent PrepareCaptureProcessing(
+      size_t max_allowed_excess_render_blocks) = 0;
 
   // Called on capture blocks where PrepareCaptureProcessing is not called.
   virtual void HandleSkippedCaptureProcessing() = 0;
