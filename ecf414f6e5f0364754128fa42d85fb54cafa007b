@@ -67,6 +67,24 @@
       "message": "hrm... the failure is quite interesting. The test itself is *not* including msid-semantic but the adapter.js session part boilerplate.\nhttps://chromium-review.googlesource.com/c/chromium/src/+/5139143 fixes that.\n\nBut why would that make a difference and just in the case of this particular test?",
       "revId": "ecf414f6e5f0364754128fa42d85fb54cafa007b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3932a0af_c6e3fc2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2023-12-20T13:07:45Z",
+      "side": 1,
+      "message": "Ok, this is interesting. The chromium CL fixes it because msid lines behave sanely now.\nThe test negotiates simulcast in the first round and then the remote end offers without a\u003dmsid-semantic. This leads to the local answer not including msid lines because of the new O/A logic in this test. That leads to the error in ways I have not fully understood yet. parameters.encodings looks the same in both cases but calling sender.getParameters() after aTask has been queued shows an empty list of encodings (yet the m-line is not rejected).\n\nRemoving setParameters and waiting in the test does not show any RTP being sent so I do not think this test had the right result in passing.\n\nMeta question is if this suggests we need a session-level \"msid-semantic\" attribute...",
+      "parentUuid": "61448666_3bd111d5",
+      "revId": "ecf414f6e5f0364754128fa42d85fb54cafa007b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
