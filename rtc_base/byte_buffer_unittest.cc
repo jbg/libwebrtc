@@ -210,6 +210,19 @@ TEST(ByteBufferTest, TestReadWriteBuffer) {
   buffer.Clear();
 }
 
+TEST(ByteBufferTest, TestReadStringView) {
+  ByteBufferWriter buffer;
+  std::string write_string = "hello string_view!";
+  buffer.WriteString(write_string);
+  ByteBufferReader read_buf(buffer);
+  const absl::string_view tests[] = {"hello", " ", "string_view"};
+  for (const auto& test : tests) {
+    absl::string_view sv;
+    EXPECT_TRUE(read_buf.ReadStringView(&sv, test.length()));
+    EXPECT_EQ(sv.compare(test), 0);
+  }
+}
+
 TEST(ByteBufferTest, TestReadWriteUVarint) {
   ByteBufferWriter write_buffer;
   size_t size = 0;
