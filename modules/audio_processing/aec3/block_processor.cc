@@ -77,6 +77,7 @@ class BlockProcessorImpl final : public BlockProcessor {
   RenderDelayBuffer::BufferingEvent render_event_;
   size_t capture_call_counter_ = 0;
   absl::optional<DelayEstimate> estimated_delay_;
+  size_t max_allowed_excess_render_blocks_;
 };
 
 std::atomic<int> BlockProcessorImpl::instance_count_(0);
@@ -95,7 +96,9 @@ BlockProcessorImpl::BlockProcessorImpl(
       render_buffer_(std::move(render_buffer)),
       delay_controller_(std::move(delay_controller)),
       echo_remover_(std::move(echo_remover)),
-      render_event_(RenderDelayBuffer::BufferingEvent::kNone) {
+      render_event_(RenderDelayBuffer::BufferingEvent::kNone),
+      max_allowed_excess_render_blocks_(
+          config_.buffering.max_allowed_excess_render_blocks) {
   RTC_DCHECK(ValidFullBandRate(sample_rate_hz_));
 }
 
@@ -148,7 +151,8 @@ void BlockProcessorImpl::ProcessCapture(bool echo_path_gain_change,
   // the render buffers for reading the render data corresponding to the current
   // capture block.
   RenderDelayBuffer::BufferingEvent buffer_event =
-      render_buffer_->PrepareCaptureProcessing();
+      render_buffer_->PrepareCaptureProcessing(
+          max_allowed_excess_render_blocks_);
   // Reset the delay controller at render buffer underrun.
   if (buffer_event == RenderDelayBuffer::BufferingEvent::kRenderUnderrun) {
     if (delay_controller_)
@@ -181,7 +185,10 @@ void BlockProcessorImpl::ProcessCapture(bool echo_path_gain_change,
             EchoPathVariability::DelayAdjustment::kNewDetectedDelay;
       }
     }
-
+    max_allowed_excess_render_blocks_ =
+        estimated_delay_.has_value()
+            ? config_.buffering.max_allowed_excess_render_blocks
+            : 2;
     echo_path_variability.clock_drift = delay_controller_->HasClockdrift();
 
   } else {
