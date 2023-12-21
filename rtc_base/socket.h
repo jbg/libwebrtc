@@ -25,6 +25,8 @@
 #include "rtc_base/win32.h"
 #endif
 
+#include "api/units/timestamp.h"
+#include "rtc_base/buffer.h"
 #include "rtc_base/socket_address.h"
 #include "rtc_base/third_party/sigslot/sigslot.h"
 
@@ -80,6 +82,11 @@ inline bool IsBlockingError(int e) {
 // methods match those of normal UNIX sockets very closely.
 class Socket {
  public:
+  struct ReceiveBuffer {
+    webrtc::Timestamp arrival_time = webrtc::Timestamp::MinusInfinity();
+    SocketAddress source_address;
+    rtc::Buffer payload;
+  };
   virtual ~Socket() {}
 
   Socket(const Socket&) = delete;
@@ -103,6 +110,9 @@ class Socket {
                        size_t cb,
                        SocketAddress* paddr,
                        int64_t* timestamp) = 0;
+  // Intended to replace RecvFrom(void* ...).
+  // Default implementation calls RecvFrom(void* ...) with 64Kbyte buffer.
+  virtual int RecvFrom(ReceiveBuffer& buffer);
   virtual int Listen(int backlog) = 0;
   virtual Socket* Accept(SocketAddress* paddr) = 0;
   virtual int Close() = 0;
