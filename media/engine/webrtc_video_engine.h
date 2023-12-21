@@ -406,6 +406,9 @@ class WebRtcVideoSendChannel : public MediaChannelUtil,
     // and whether or not the encoding in `rtp_parameters_` is active.
     void UpdateSendState();
 
+    bool GetVp9LayersFromFieldTrialGroup(size_t* num_spatial_layers,
+                                         size_t* num_temporal_layers);
+
     webrtc::DegradationPreference GetDegradationPreference() const
         RTC_EXCLUSIVE_LOCKS_REQUIRED(&thread_checker_);
 
