@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96910c6e_e130551b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-12-21T06:39:35Z",
+      "side": 1,
+      "message": "Seems to pass all the bots now. Still one dependency, but that doesn\u0027t seem to be bot-blocking (CL sent).",
+      "revId": "0247af676b1d8488e3d373d34c5d8db94c6e244b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
