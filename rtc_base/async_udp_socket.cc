@@ -10,9 +10,10 @@
 
 #include "rtc_base/async_udp_socket.h"
 
-
+#include "api/units/time_delta.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
+#include "rtc_base/network/received_packet.h"
 #include "rtc_base/network/sent_packet.h"
 #include "rtc_base/time_utils.h"
 #include "system_wrappers/include/field_trial.h"
@@ -109,10 +110,7 @@ void AsyncUDPSocket::OnReadEvent(Socket* socket) {
   RTC_DCHECK(socket_.get() == socket);
   RTC_DCHECK_RUN_ON(&sequence_checker_);
 
-  SocketAddress remote_addr;
-  int64_t timestamp = -1;
-  int len = socket_->RecvFrom(buf_, BUF_SIZE, &remote_addr, &timestamp);
-
+  int len = socket_->RecvFrom(packet_buffer_);
   if (len < 0) {
     // An error here typically means we got an ICMP error in response to our
     // send datagram, indicating the remote address was unreachable.
@@ -123,21 +121,25 @@ void AsyncUDPSocket::OnReadEvent(Socket* socket) {
                      << "] receive failed with error " << socket_->GetError();
     return;
   }
-  if (timestamp == -1) {
+
+  if (packet_buffer_.arrival_time.IsInfinite()) {
     // Timestamp from socket is not available.
-    timestamp = TimeMicros();
+    packet_buffer_.arrival_time = webrtc::Timestamp::Micros(rtc::TimeMicros());
   } else {
     if (!socket_time_offset_) {
-      socket_time_offset_ =
-          !IsScmTimeStampExperimentDisabled() ? TimeMicros() - timestamp : 0;
+      socket_time_offset_ = !IsScmTimeStampExperimentDisabled()
+                                ? webrtc::Timestamp::Micros(rtc::TimeMicros()) -
+                                      packet_buffer_.arrival_time
+                                : webrtc::TimeDelta::Micros(0);
     }
-    timestamp += *socket_time_offset_;
+    packet_buffer_.arrival_time += *socket_time_offset_;
   }
 
-  // TODO: Make sure that we got all of the packet.
-  // If we did not, then we should resize our buffer to be large enough.
-  NotifyPacketReceived(
-      rtc::ReceivedPacket::CreateFromLegacy(buf_, len, timestamp, remote_addr));
+  if (!packet_buffer_.payload.empty()) {
+    NotifyPacketReceived(ReceivedPacket(packet_buffer_.payload,
+                                        packet_buffer_.source_address,
+                                        packet_buffer_.arrival_time));
+  }
 }
 
 void AsyncUDPSocket::OnWriteEvent(Socket* socket) {
