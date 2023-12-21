@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "685de132_5077a59c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-12-21T10:54:38Z",
+      "side": 1,
+      "message": "Looks good, nits only.\n\nCan you run the coverage bots so that we can ensure all the new code is exercised by tests?",
+      "revId": "6a502870193a91802cc51d7e79777433917fcc94",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "831ba3fa_65c1669e",
+        "filename": "rtc_base/async_udp_socket.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-12-21T10:54:38Z",
+      "side": 1,
+      "message": "this combination of a negated Disabled and a trinary operator is very hard to read.\ncan you make it like\n\n// Estimate timestamp from first packet arrival time unless disabled\nbool estimate_time_offset \u003d !IsScmTimeStampExperimentDisabled();\nif (estimate_time_offset) {\n  socket_time_offset_ \u003d ...\n} else {\n  socket_time_offset_ \u003d webrtc::TimeDelta::Micros(0);\n}",
+      "revId": "6a502870193a91802cc51d7e79777433917fcc94",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c9b392c_85407bf4",
+        "filename": "rtc_base/async_udp_socket.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-12-21T10:54:38Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be RTC_GUARDED_BY(sequence_checker_) just like the old buffer?",
+      "revId": "6a502870193a91802cc51d7e79777433917fcc94",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7da88ca3_a5708ced",
+        "filename": "rtc_base/async_udp_socket.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-12-21T10:54:38Z",
+      "side": 1,
+      "message": "Delete before submitting, of course :-)",
+      "revId": "6a502870193a91802cc51d7e79777433917fcc94",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e94b2c5c_e570b60e",
+        "filename": "rtc_base/socket.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2023-12-21T10:54:38Z",
+      "side": 1,
+      "message": "If we want to represent \"unset\" here, can we do it with a std::optional?",
+      "revId": "6a502870193a91802cc51d7e79777433917fcc94",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
