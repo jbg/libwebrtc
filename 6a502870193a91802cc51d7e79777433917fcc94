@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c913764_74542bfd",
+        "filename": "rtc_base/async_udp_socket.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-12-21T14:53:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "831ba3fa_65c1669e",
+      "revId": "6a502870193a91802cc51d7e79777433917fcc94",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c9b392c_85407bf4",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-12-21T10:54:38Z",
       "side": 1,
       "message": "Shouldn\u0027t this be RTC_GUARDED_BY(sequence_checker_) just like the old buffer?",
+      "revId": "6a502870193a91802cc51d7e79777433917fcc94",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73418283_79019b64",
+        "filename": "rtc_base/async_udp_socket.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-12-21T14:53:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c9b392c_85407bf4",
       "revId": "6a502870193a91802cc51d7e79777433917fcc94",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -69,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b203a3fa_5aff962c",
+        "filename": "rtc_base/async_udp_socket.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-12-21T14:53:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7da88ca3_a5708ced",
+      "revId": "6a502870193a91802cc51d7e79777433917fcc94",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e94b2c5c_e570b60e",
@@ -82,6 +136,24 @@
       "writtenOn": "2023-12-21T10:54:38Z",
       "side": 1,
       "message": "If we want to represent \"unset\" here, can we do it with a std::optional?",
+      "revId": "6a502870193a91802cc51d7e79777433917fcc94",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b97eaae0_2219d4d7",
+        "filename": "rtc_base/socket.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2023-12-21T14:53:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e94b2c5c_e570b60e",
       "revId": "6a502870193a91802cc51d7e79777433917fcc94",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
