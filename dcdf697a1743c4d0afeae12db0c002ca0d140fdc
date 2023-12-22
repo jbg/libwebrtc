@@ -16,6 +16,40 @@
       "message": "Slightly changed my mind.\nI dont want to cache meta data between calls to RecvFrom.",
       "revId": "dcdf697a1743c4d0afeae12db0c002ca0d140fdc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fac65e6_8db1d7f2",
+        "filename": "rtc_base/async_udp_socket.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-12-22T08:58:48Z",
+      "side": 1,
+      "message": "add check for if (len \u003d\u003d 0) {\n  // spurious wakeup\n  return;\n}\n\nthat you can also remove check that payload is empty below.",
+      "revId": "dcdf697a1743c4d0afeae12db0c002ca0d140fdc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bf8c6a4_50ba3332",
+        "filename": "rtc_base/socket.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2023-12-22T08:58:48Z",
+      "side": 1,
+      "message": "only if len \u003e 0",
+      "revId": "dcdf697a1743c4d0afeae12db0c002ca0d140fdc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
