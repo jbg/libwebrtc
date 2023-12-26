@@ -23,6 +23,10 @@ class MockDcSctpSocket : public DcSctpSocketInterface {
               ReceivePacket,
               (rtc::ArrayView<const uint8_t> data),
               (override));
+  MOCK_METHOD(void,
+              ReceiveManyPackets,
+              (rtc::ArrayView<const rtc::ArrayView<const uint8_t>> data),
+              (override));
 
   MOCK_METHOD(void, HandleTimeout, (TimeoutID timeout_id), (override));
 
