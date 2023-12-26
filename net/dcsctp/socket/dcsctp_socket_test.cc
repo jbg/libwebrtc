@@ -1669,13 +1669,17 @@ TEST_P(DcSctpSocketParametrizedTest,
   a.socket.Send(DcSctpMessage(StreamID(1), PPID(53), {7, 8, 9}), lifetime_0);
 
   // Handle all that was sent until congestion window got full.
+  std::vector<std::vector<uint8_t>> packets_from_a;
+  std::vector<rtc::ArrayView<const uint8_t>> views_from_a;
   for (;;) {
     std::vector<uint8_t> packet_from_a = a.cb.ConsumeSentPacket();
     if (packet_from_a.empty()) {
       break;
     }
-    z->socket.ReceivePacket(std::move(packet_from_a));
+    views_from_a.emplace_back(
+        packets_from_a.emplace_back(std::move(packet_from_a)));
   }
+  z->socket.ReceiveManyPackets(views_from_a);
 
   // Shouldn't be enough to send that large message.
   EXPECT_FALSE(z->cb.ConsumeReceivedMessage().has_value());
@@ -2067,11 +2071,14 @@ TEST_P(DcSctpSocketParametrizedTest, DoesntSendMoreThanMaxBurstPackets) {
                               std::vector<uint8_t>(kLargeMessageSize)),
                 kSendOptions);
 
+  std::vector<std::vector<uint8_t>> packets;
+  std::vector<rtc::ArrayView<const uint8_t>> views;
   for (int i = 0; i < kMaxBurstPackets; ++i) {
     std::vector<uint8_t> packet = a.cb.ConsumeSentPacket();
     EXPECT_THAT(packet, Not(IsEmpty()));
-    z->socket.ReceivePacket(std::move(packet));  // DATA
+    views.emplace_back(packets.emplace_back(std::move(packet)));
   }
+  z->socket.ReceiveManyPackets(views);  // DATA
 
   EXPECT_THAT(a.cb.ConsumeSentPacket(), IsEmpty());
 

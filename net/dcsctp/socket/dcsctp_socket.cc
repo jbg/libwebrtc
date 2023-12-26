@@ -784,10 +784,30 @@ void DcSctpSocket::HandleTimeout(TimeoutID timeout_id) {
   RTC_DCHECK(IsConsistent());
 }
 
+void DcSctpSocket::ReceiveManyPackets(
+    rtc::ArrayView<const rtc::ArrayView<const uint8_t>> packets) {
+  RTC_DCHECK_RUN_ON(&thread_checker_);
+  CallbackDeferrer::ScopedDeferrer deferrer(callbacks_);
+  for (auto packet : packets) {
+    InternalReceive(packet);
+  }
+  if (tcb_ != nullptr) {
+    tcb_->MaybeSendSack();
+  }
+  RTC_DCHECK(IsConsistent());
+}
+
 void DcSctpSocket::ReceivePacket(rtc::ArrayView<const uint8_t> data) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
   CallbackDeferrer::ScopedDeferrer deferrer(callbacks_);
+  InternalReceive(data);
+  if (tcb_ != nullptr) {
+    tcb_->MaybeSendSack();
+  }
+  RTC_DCHECK(IsConsistent());
+}
 
+void DcSctpSocket::InternalReceive(rtc::ArrayView<const uint8_t> data) {
   ++metrics_.rx_packets_count;
 
   if (packet_observer_ != nullptr) {
@@ -829,10 +849,7 @@ void DcSctpSocket::ReceivePacket(rtc::ArrayView<const uint8_t> data) {
 
   if (tcb_ != nullptr) {
     tcb_->data_tracker().ObservePacketEnd();
-    tcb_->MaybeSendSack();
   }
-
-  RTC_DCHECK(IsConsistent());
 }
 
 void DcSctpSocket::DebugPrintOutgoing(rtc::ArrayView<const uint8_t> payload) {
