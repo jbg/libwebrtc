@@ -525,6 +525,10 @@ class DcSctpSocketInterface {
   // To be called when an incoming SCTP packet is to be processed.
   virtual void ReceivePacket(rtc::ArrayView<const uint8_t> data) = 0;
 
+  // To be called when there are many incoming SCTP packets to be processed.
+  virtual void ReceiveManyPackets(
+      rtc::ArrayView<const rtc::ArrayView<const uint8_t>> data) = 0;
+
   // To be called when a timeout has expired. The `timeout_id` is provided
   // when the timeout was initiated.
   virtual void HandleTimeout(TimeoutID timeout_id) = 0;

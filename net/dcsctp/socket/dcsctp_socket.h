@@ -85,6 +85,8 @@ class DcSctpSocket : public DcSctpSocketInterface {
 
   // Implementation of `DcSctpSocketInterface`.
   void ReceivePacket(rtc::ArrayView<const uint8_t> data) override;
+  void ReceiveManyPackets(
+      rtc::ArrayView<const rtc::ArrayView<const uint8_t>> data) override;
   void HandleTimeout(TimeoutID timeout_id) override;
   void Connect() override;
   void RestoreFromState(const DcSctpSocketHandoverState& state) override;
@@ -171,6 +173,8 @@ class DcSctpSocket : public DcSctpSocketInterface {
   // Performs internal processing shared between Send and SendMany.
   SendStatus InternalSend(const DcSctpMessage& message,
                           const SendOptions& send_options);
+  // Performs internal processing shared between Receive and ReceiveMany.
+  void InternalReceive(rtc::ArrayView<const uint8_t> data);
   // Sends a INIT chunk.
   void SendInit();
   // Sends a SHUTDOWN chunk.
