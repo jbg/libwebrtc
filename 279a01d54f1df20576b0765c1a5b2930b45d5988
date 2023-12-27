@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9d62ae3_16ce1b12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2023-12-27T02:14:35Z",
+      "side": 1,
+      "message": "PTAL. Do I need to open an issue for this patch?",
+      "revId": "279a01d54f1df20576b0765c1a5b2930b45d5988",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
