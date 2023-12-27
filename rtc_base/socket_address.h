@@ -158,6 +158,9 @@ class RTC_EXPORT SocketAddress {
   // Determines whether the hostname has been resolved to an IP.
   bool IsUnresolvedIP() const;
 
+  // Returns true if the hostname is actually an IP address.
+  bool HostNameIsIp() const;
+
   // Determines whether this address is identical to the given one.
   bool operator==(const SocketAddress& addr) const;
   inline bool operator!=(const SocketAddress& addr) const {

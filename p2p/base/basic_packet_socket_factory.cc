@@ -153,7 +153,14 @@ AsyncPacketSocket* BasicPacketSocketFactory::CreateClientTcpSocket(
 
     socket = ssl_adapter;
 
-    if (ssl_adapter->StartSSL(remote_address.hostname().c_str()) != 0) {
+    // SocketAddress::hostname() may return an IP address if
+    // the hostname was a literal IP string.
+    // Since SNI is only used for hostnames, we leave it empty
+    // if the hostname is an IP address.
+    // (see RFC 6066, Section 3)
+    std::string hostname =
+        remote_address.HostNameIsIp() ? "" : remote_address.hostname();
+    if (ssl_adapter->StartSSL(hostname) != 0) {
       delete ssl_adapter;
       return NULL;
     }

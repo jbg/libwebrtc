@@ -237,6 +237,10 @@ bool SocketAddress::IsUnresolvedIP() const {
   return IPIsUnspec(ip_) && !literal_ && !hostname_.empty();
 }
 
+bool SocketAddress::HostNameIsIp() const {
+  return literal_;
+}
+
 bool SocketAddress::operator==(const SocketAddress& addr) const {
   return EqualIPs(addr) && EqualPorts(addr);
 }
