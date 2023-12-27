@@ -323,7 +323,15 @@ int OpenSSLAdapter::BeginSSL() {
                          SSL_MODE_ACCEPT_MOVING_WRITE_BUFFER);
 
   // Enable SNI, if a hostname is supplied.
+  // Since SNI is only used for hostnames, we don't set
+  // SSL_set_tlsext_host_name if the hostname is an IP address.
+  // (see RFC 6066, Section 3)
+  bool host_name_is_valid = false;
   if (!ssl_host_name_.empty()) {
+    host_name_is_valid = !IPFromString(ssl_host_name_, nullptr);
+  }
+
+  if (host_name_is_valid) {
     SSL_set_tlsext_host_name(ssl_, ssl_host_name_.c_str());
 
     // Enable session caching, if configured and a hostname is supplied.
