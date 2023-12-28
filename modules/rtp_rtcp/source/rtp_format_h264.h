@@ -82,6 +82,7 @@ class RtpPacketizerH264 : public RtpPacketizer {
     uint8_t header;
   };
 
+  bool ValidateFragments();
   bool GeneratePackets(H264PacketizationMode packetization_mode);
   bool PacketizeFuA(size_t fragment_index);
   size_t PacketizeStapA(size_t fragment_index);
