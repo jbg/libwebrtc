@@ -271,7 +271,9 @@ class DcSctpSocket : public DcSctpSocketInterface {
 
   const std::string log_prefix_;
   const std::unique_ptr<PacketObserver> packet_observer_;
-  RTC_NO_UNIQUE_ADDRESS webrtc::SequenceChecker thread_checker_;
+  // An atomic to try to catch data races. Stores a pointer to a thread_local
+  // for the current accessing thread.
+  mutable std::atomic<void*> current_thread_{nullptr};
   Metrics metrics_;
   DcSctpOptions options_;
 
