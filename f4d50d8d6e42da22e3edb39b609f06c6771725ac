@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fed61eff_f0fbb1af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-01-02T13:24:28Z",
+      "side": 1,
+      "message": "Do file a bug first. It is the only way to get the fix to appear in release notes.",
+      "revId": "f4d50d8d6e42da22e3edb39b609f06c6771725ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2be9342_9c9f4c61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-01-02T13:24:28Z",
+      "side": 1,
+      "message": "Not quite ready. Query about caching may be important.\n\nNo tests?",
+      "revId": "f4d50d8d6e42da22e3edb39b609f06c6771725ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe8a3799_4ec6352f",
+        "filename": "rtc_base/openssl_adapter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-01-02T13:24:28Z",
+      "side": 1,
+      "message": "The concept of \"valid\" is confusing here - both IP addresses and domain names are \"valid\" in some sense.\n\nCall the bool host_name_is_dns_name.",
+      "revId": "f4d50d8d6e42da22e3edb39b609f06c6771725ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "790b24f3_884cdafd",
+        "filename": "rtc_base/openssl_adapter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-01-02T13:24:28Z",
+      "side": 1,
+      "message": "This has the side effect that you don\u0027t attempt session caching when connecting to an IP address. Is this intentional? Does session caching on IP addresses even work?",
+      "revId": "f4d50d8d6e42da22e3edb39b609f06c6771725ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
