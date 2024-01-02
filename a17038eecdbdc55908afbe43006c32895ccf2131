@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07e46924_0c3fe57f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2024-01-02T19:51:52Z",
+      "side": 1,
+      "message": "One more comment, and this change LGTM. I do believe the lack of DxgiFrameContext::Reset call would be problematic. But I cannot really tell if it would fix the flakiness you mentioned in the bug itself.\n\nAlso add Mark as the new owner of this component.\n\nThank you for the fix.",
+      "revId": "a17038eecdbdc55908afbe43006c32895ccf2131",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd7f22aa_4de6cbe5",
+        "filename": "modules/desktop_capture/win/dxgi_duplicator_controller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2024-01-02T19:51:52Z",
+      "side": 1,
+      "message": "Sorry for the late response, I think this Setup call is not necessary. The following DoDuplicateUnlocked call will execute it anyway.\n```suggestion\n  }\n```",
+      "range": {
+        "startLine": 504,
+        "startChar": 0,
+        "endLine": 504,
+        "endChar": 19
+      },
+      "revId": "a17038eecdbdc55908afbe43006c32895ccf2131",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
