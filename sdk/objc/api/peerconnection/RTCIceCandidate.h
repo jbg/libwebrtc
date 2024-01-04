@@ -35,6 +35,21 @@ RTC_OBJC_EXPORT
 /** The URL of the ICE server which this candidate is gathered from. */
 @property(nonatomic, readonly, nullable) NSString *serverUrl;
 
+// MARK: - Extra
+
+@property(nonatomic, readonly, nullable) NSString *foundation;
+// component;
+@property(nonatomic, readonly, nullable) NSNumber *priority;
+@property(nonatomic, readonly, nullable) NSString *address;
+// protocol;
+@property(nonatomic, readonly, nullable) NSNumber *port;
+// type;
+// tcpType;
+@property(nonatomic, readonly, nullable) NSString *relatedAddress;
+@property(nonatomic, readonly, nullable) NSNumber *relatedPort;
+@property(nonatomic, readonly, nullable) NSString *usernameFragment;
+// relayProtocol;
+
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
