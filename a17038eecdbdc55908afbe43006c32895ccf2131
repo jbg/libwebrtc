@@ -63,6 +63,30 @@
       },
       "revId": "a17038eecdbdc55908afbe43006c32895ccf2131",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87b28c82_065aba30",
+        "filename": "modules/desktop_capture/win/dxgi_duplicator_controller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2024-01-04T17:18:58Z",
+      "side": 1,
+      "message": "But Setup(context) does not really do anything magic or is time related, i.e. delaying the Setup(context) call until the next Duplicate call may not have any impacts. Did I miss anything in the middle?\n\nhttps://crsrc.org/c/third_party/webrtc/modules/desktop_capture/win/dxgi_output_duplicator.cc;drc\u003de5f8ff312fe542f39c7d34b4440f18d1500b15f9;l\u003d382",
+      "parentUuid": "7d023b07_9fd4a8b9",
+      "range": {
+        "startLine": 504,
+        "startChar": 0,
+        "endLine": 504,
+        "endChar": 19
+      },
+      "revId": "a17038eecdbdc55908afbe43006c32895ccf2131",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
