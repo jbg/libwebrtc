@@ -87,6 +87,30 @@
       },
       "revId": "a17038eecdbdc55908afbe43006c32895ccf2131",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7dc7bda_ff3b36b3",
+        "filename": "modules/desktop_capture/win/dxgi_duplicator_controller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2024-01-05T21:10:27Z",
+      "side": 1,
+      "message": "I am not deeply familiar with this capturer, but I think it\u0027s worth understanding better why we would need to call Setup() again here after it has already been called in DoDuplicateUnlocked(). \n\nThe other thing I don\u0027t understand about this code is the need for the fallback_frame at all.  It looks like on a target resolution change, this code in DoDuplicate() should have already set the frame size correctly.\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/desktop_capture/win/dxgi_duplicator_controller.cc;drc\u003d67d90538f11c6b232dbfd716075db52aeb34fd15;l\u003d192",
+      "parentUuid": "87b28c82_065aba30",
+      "range": {
+        "startLine": 504,
+        "startChar": 0,
+        "endLine": 504,
+        "endChar": 19
+      },
+      "revId": "a17038eecdbdc55908afbe43006c32895ccf2131",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
