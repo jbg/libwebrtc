@@ -111,6 +111,30 @@
       },
       "revId": "a17038eecdbdc55908afbe43006c32895ccf2131",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e225c2d5_86df3aa3",
+        "filename": "modules/desktop_capture/win/dxgi_duplicator_controller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2024-01-05T21:52:23Z",
+      "side": 1,
+      "message": "The fallback frame is used when user captures only one of multiple monitors. But we still want to capture all the monitors to ensure the hardware won\u0027t return blank images.\n\nhttps://crsrc.org/c/third_party/webrtc/modules/desktop_capture/win/dxgi_duplicator_controller.cc;drc\u003d67d90538f11c6b232dbfd716075db52aeb34fd15;l\u003d427\n\n\n\nTo the root cause of the flickering, I recall the TODO here: https://crsrc.org/c/third_party/webrtc/modules/desktop_capture/win/dxgi_duplicator_controller.cc;drc\u003d67d90538f11c6b232dbfd716075db52aeb34fd15;l\u003d427\n\nSo likely the root cause is still unknown, but the right approach is to reset the updated_region as what the Setup does in https://crsrc.org/c/third_party/webrtc/modules/desktop_capture/win/dxgi_output_duplicator.cc;drc\u003d67d90538f11c6b232dbfd716075db52aeb34fd15;l\u003d385.",
+      "parentUuid": "e7dc7bda_ff3b36b3",
+      "range": {
+        "startLine": 504,
+        "startChar": 0,
+        "endLine": 504,
+        "endChar": 19
+      },
+      "revId": "a17038eecdbdc55908afbe43006c32895ccf2131",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
