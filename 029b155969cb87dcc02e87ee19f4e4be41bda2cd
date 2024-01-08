@@ -33,6 +33,24 @@
       "message": "Sending SACKs more seldom than every second packet (which could happen here) could be problematic. While https://datatracker.ietf.org/doc/html/rfc9260#section-6.2 says \"Specifically, an acknowledgement SHOULD be generated for at least every second packet (not every second DATA chunk) received and SHOULD be generated within 200 ms of the arrival of any unacknowledged DATA chunk\", these are SHOULDs. OTOH, the \"fast retransmission\" algorithm could be negatively affected if SACKS are sent less often.",
       "revId": "029b155969cb87dcc02e87ee19f4e4be41bda2cd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31b22b8b_409d3852",
+        "filename": "net/dcsctp/socket/dcsctp_socket.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 22664
+      },
+      "writtenOn": "2024-01-08T18:31:05Z",
+      "side": 1,
+      "message": "\"In some situations, it might be beneficial for an SCTP transmitter to be more conservative than the algorithms detailed in this document allow\"\n\nI think this wording allows for sending fewer SACKs, as long as there is no delay. This change doesn\u0027t introduce a delay into the process, just only sends a sack if multiple packets arrive at the same time.\n\n\u003e OTOH, the \"fast retransmission\" algorithm could be negatively affected if SACKS are sent less often\n\nAre you saying there may be an implementation bug or that it violates spec in some way? This seems very similar to delayed ack in mechanism, it just sends an ack for N packets (where N is the number you have available) instead of 2.",
+      "parentUuid": "cb6644ca_c2e6a5cf",
+      "revId": "029b155969cb87dcc02e87ee19f4e4be41bda2cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
