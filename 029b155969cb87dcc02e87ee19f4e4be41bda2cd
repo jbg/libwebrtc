@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ff0238b_3e48be1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2024-01-08T13:20:54Z",
+      "side": 1,
+      "message": "Opened a thread for discussion",
+      "revId": "029b155969cb87dcc02e87ee19f4e4be41bda2cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb6644ca_c2e6a5cf",
+        "filename": "net/dcsctp/socket/dcsctp_socket.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2024-01-08T13:20:54Z",
+      "side": 1,
+      "message": "Sending SACKs more seldom than every second packet (which could happen here) could be problematic. While https://datatracker.ietf.org/doc/html/rfc9260#section-6.2 says \"Specifically, an acknowledgement SHOULD be generated for at least every second packet (not every second DATA chunk) received and SHOULD be generated within 200 ms of the arrival of any unacknowledged DATA chunk\", these are SHOULDs. OTOH, the \"fast retransmission\" algorithm could be negatively affected if SACKS are sent less often.",
+      "revId": "029b155969cb87dcc02e87ee19f4e4be41bda2cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
