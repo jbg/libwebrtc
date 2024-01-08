@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afa31afa_975223f6",
+        "filename": "modules/rtp_rtcp/source/rtp_format_h264.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2024-01-08T14:50:28Z",
+      "side": 1,
+      "message": "Done, also in the place where I copied this from",
+      "parentUuid": "429f8f08_5d42fabc",
+      "range": {
+        "startLine": 184,
+        "startChar": 39,
+        "endLine": 184,
+        "endChar": 76
+      },
+      "revId": "87146baa1c228fd281c6307e9144a071a69cca7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1834e43b_ce759feb",
@@ -43,6 +67,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d0542fe_0d9b566f",
+        "filename": "modules/rtp_rtcp/source/rtp_format_h264.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2024-01-08T14:50:28Z",
+      "side": 1,
+      "message": "This checks that each fragment has a size while line 228 checks that there is at least one fragment.\n\nIt can no longer happen since the new constructor code exists early but leaving in a DCHECK seems cheap enough.",
+      "parentUuid": "1834e43b_ce759feb",
+      "revId": "87146baa1c228fd281c6307e9144a071a69cca7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eff74efa_867aa31d",
         "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
         "patchSetId": 9
@@ -54,6 +96,24 @@
       "writtenOn": "2024-01-08T14:12:50Z",
       "side": 1,
       "message": "`rtc::Buffer frame(empty_nal_input)` should work\n\nhttps://webrtc.googlesource.com/src/+/refs/heads/main/rtc_base/buffer.h#115\n\nor actually.... there is no need for rtc::Buffer at all:\n`RtpPacketizerH264` takes rtc::ArrayView as 1st parameter, so passing `empty_nal_input` directly should work:\n\n`RtpPacketizerH264 packetizer(empty_nal_input, limits, ...);`",
+      "revId": "87146baa1c228fd281c6307e9144a071a69cca7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cc234ee_1a15f3b8",
+        "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2024-01-08T14:50:28Z",
+      "side": 1,
+      "message": "Done, much nicer!",
+      "parentUuid": "eff74efa_867aa31d",
       "revId": "87146baa1c228fd281c6307e9144a071a69cca7d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -94,6 +154,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6f8a220d_f3c7391f",
+        "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2024-01-08T14:50:28Z",
+      "side": 1,
+      "message": "True but it does not run into a CHECK anymore after clear-ing the packet so can not generate that input.",
+      "parentUuid": "c7ff2726_6e7f2747",
+      "revId": "87146baa1c228fd281c6307e9144a071a69cca7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "1b4aae5a_a4595773",
         "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
         "patchSetId": 9
@@ -111,6 +189,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0ab5f361_63f1f8c0",
+        "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2024-01-08T14:50:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b4aae5a_a4595773",
+      "revId": "87146baa1c228fd281c6307e9144a071a69cca7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f9c50c79_929cd41f",
         "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
         "patchSetId": 9
@@ -122,6 +218,24 @@
       "writtenOn": "2024-01-08T14:12:50Z",
       "side": 1,
       "message": "or `EXPECT_THAT(packets, SizeIs(2));`\nthough then no need to add variable that is used just once:\n`EXPECT_THAT(FetchAllPackets(\u0026packetizer), SizeIs(2));`",
+      "revId": "87146baa1c228fd281c6307e9144a071a69cca7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7cc8260_85c0699a",
+        "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2024-01-08T14:50:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9c50c79_929cd41f",
       "revId": "87146baa1c228fd281c6307e9144a071a69cca7d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
