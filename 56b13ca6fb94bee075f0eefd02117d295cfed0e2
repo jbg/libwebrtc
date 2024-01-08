@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5541e376_5aa43d94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-01-08T15:07:09Z",
+      "side": 1,
+      "message": "Any fuzzer is better than no fuzzer.\nI suppose you\u0027ll have to contact @jansson to get it to run automagically.",
+      "revId": "56b13ca6fb94bee075f0eefd02117d295cfed0e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

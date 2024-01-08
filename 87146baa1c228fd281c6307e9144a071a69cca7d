@@ -85,6 +85,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "71aecd3f_1fe4fa6b",
+        "filename": "modules/rtp_rtcp/source/rtp_format_h264.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-01-08T15:07:09Z",
+      "side": 1,
+      "message": "in rtc::ArrayView of variable size, empty() returns \"size_ \u003d\u003d 0\".\nso the two lines are checking exactly the same thing.",
+      "parentUuid": "9d0542fe_0d9b566f",
+      "revId": "87146baa1c228fd281c6307e9144a071a69cca7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eff74efa_867aa31d",
         "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
         "patchSetId": 9
