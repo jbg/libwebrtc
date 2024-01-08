@@ -135,6 +135,30 @@
       },
       "revId": "a17038eecdbdc55908afbe43006c32895ccf2131",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a877ff77_b085b96b",
+        "filename": "modules/desktop_capture/win/dxgi_duplicator_controller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 17664
+      },
+      "writtenOn": "2024-01-08T03:39:20Z",
+      "side": 1,
+      "message": "When \u0027context-\u003eReset()\u0027 called, \u0027DxgiOutputDuplicator::Unregister\u0027 will erase \u0027context\u0027, So if we don\u0027t call \u0027Setup\u0027, the next frame(DoDuplicateOne will be called after EnsureFrameCaptured) may be messed up?",
+      "parentUuid": "e225c2d5_86df3aa3",
+      "range": {
+        "startLine": 504,
+        "startChar": 0,
+        "endLine": 504,
+        "endChar": 19
+      },
+      "revId": "a17038eecdbdc55908afbe43006c32895ccf2131",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
