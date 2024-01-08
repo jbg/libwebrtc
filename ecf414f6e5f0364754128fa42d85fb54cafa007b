@@ -85,6 +85,23 @@
       "parentUuid": "61448666_3bd111d5",
       "revId": "ecf414f6e5f0364754128fa42d85fb54cafa007b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f417ab5d_440e599f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2024-01-08T13:33:30Z",
+      "side": 1,
+      "message": "WPT \"fixed\"... well, or at least not causing failures anymore.",
+      "revId": "ecf414f6e5f0364754128fa42d85fb54cafa007b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
