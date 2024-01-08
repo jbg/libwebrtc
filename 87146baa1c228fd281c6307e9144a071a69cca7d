@@ -3,6 +3,63 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "429f8f08_5d42fabc",
+        "filename": "modules/rtp_rtcp/source/rtp_format_h264.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-01-08T14:12:50Z",
+      "side": 1,
+      "message": "`/*first\u003d*/aggregated_fragments \u003d\u003d 0,`\n\nto be clang tidy friendly:\nhttps://clang.llvm.org/extra/clang-tidy/checks/bugprone/argument-comment.html",
+      "range": {
+        "startLine": 184,
+        "startChar": 39,
+        "endLine": 184,
+        "endChar": 76
+      },
+      "revId": "87146baa1c228fd281c6307e9144a071a69cca7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1834e43b_ce759feb",
+        "filename": "modules/rtp_rtcp/source/rtp_format_h264.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-01-08T14:12:50Z",
+      "side": 1,
+      "message": "this check looks redundand to check at line#228",
+      "revId": "87146baa1c228fd281c6307e9144a071a69cca7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eff74efa_867aa31d",
+        "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-01-08T14:12:50Z",
+      "side": 1,
+      "message": "`rtc::Buffer frame(empty_nal_input)` should work\n\nhttps://webrtc.googlesource.com/src/+/refs/heads/main/rtc_base/buffer.h#115\n\nor actually.... there is no need for rtc::Buffer at all:\n`RtpPacketizerH264` takes rtc::ArrayView as 1st parameter, so passing `empty_nal_input` directly should work:\n\n`RtpPacketizerH264 packetizer(empty_nal_input, limits, ...);`",
+      "revId": "87146baa1c228fd281c6307e9144a071a69cca7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "79f6690c_21ed127e",
         "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
         "patchSetId": 9
@@ -14,6 +71,80 @@
       "writtenOn": "2024-01-08T13:47:00Z",
       "side": 1,
       "message": "not sure if this still tests anything other than the need to call Clear() above.\nReducing it was not possible but at least it serves as a documentation of the CHECK we have.",
+      "revId": "87146baa1c228fd281c6307e9144a071a69cca7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7ff2726_6e7f2747",
+        "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-01-08T14:12:50Z",
+      "side": 1,
+      "message": "With fuzzer it might be more idiomatic to add this test case to corpora for the fuzzer",
+      "revId": "87146baa1c228fd281c6307e9144a071a69cca7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b4aae5a_a4595773",
+        "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-01-08T14:12:50Z",
+      "side": 1,
+      "message": "ditto, rtc::Buffer just adds a memcpy here without any benefit.",
+      "revId": "87146baa1c228fd281c6307e9144a071a69cca7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9c50c79_929cd41f",
+        "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-01-08T14:12:50Z",
+      "side": 1,
+      "message": "or `EXPECT_THAT(packets, SizeIs(2));`\nthough then no need to add variable that is used just once:\n`EXPECT_THAT(FetchAllPackets(\u0026packetizer), SizeIs(2));`",
+      "revId": "87146baa1c228fd281c6307e9144a071a69cca7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da0c4d66_997e66d7",
+        "filename": "test/fuzzers/rtp_format_h264_fuzzer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-01-08T14:12:50Z",
+      "side": 1,
+      "message": "2024",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
       "revId": "87146baa1c228fd281c6307e9144a071a69cca7d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
