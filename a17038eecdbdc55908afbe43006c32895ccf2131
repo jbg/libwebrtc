@@ -159,6 +159,30 @@
       },
       "revId": "a17038eecdbdc55908afbe43006c32895ccf2131",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba4c96a2_2c369dc5",
+        "filename": "modules/desktop_capture/win/dxgi_duplicator_controller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 5029
+      },
+      "writtenOn": "2024-01-09T07:26:02Z",
+      "side": 1,
+      "message": "Oh, yes, sorry, I made a mistake here. No further question now, and wait for Mark to approve the change as I am not the owner anymore.",
+      "parentUuid": "a877ff77_b085b96b",
+      "range": {
+        "startLine": 504,
+        "startChar": 0,
+        "endLine": 504,
+        "endChar": 19
+      },
+      "revId": "a17038eecdbdc55908afbe43006c32895ccf2131",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
