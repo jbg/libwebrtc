@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "30cff52a_753cf68b",
+        "filename": "modules/desktop_capture/win/dxgi_duplicator_controller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2024-01-09T21:05:30Z",
+      "side": 1,
+      "message": "Please add a comment here, something like:\n\n// When capturing multiple monitors, we need to update the captured region to\n// prevent flickering by re-setting `context`.  See\n// https://crbug.com/webrtc/15718 for details.",
+      "revId": "a17038eecdbdc55908afbe43006c32895ccf2131",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd7f22aa_4de6cbe5",
         "filename": "modules/desktop_capture/win/dxgi_duplicator_controller.cc",
         "patchSetId": 3
