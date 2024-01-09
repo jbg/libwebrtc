@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d328dde_2f6d5684",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20759
+      },
+      "writtenOn": "2024-01-09T12:32:38Z",
+      "side": 1,
+      "message": "There are no functional changes in this CL.\nIt just fixes the CRLF line-endings for 3 files.",
+      "revId": "85f3958094094fada298852708344c366b1b2827",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
