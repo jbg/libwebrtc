@@ -16,6 +16,24 @@
       "message": "While I\u0027m open to making this optional, I wonder if we could make it required in the WebRTC / Chrome context with an ifdef or something similar. Otherwise, it might be difficult to identify threading issues if we try to change how it\u0027s used.",
       "revId": "4fdb5c87061ce43b884075f0ef548faf5256538a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f55dfa49_39bf7bc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2024-01-09T11:46:56Z",
+      "side": 1,
+      "message": "How about using a validating proxy, that implements the dcsctp::DcSctpSocket interface, calls the sequence checker, and then calls into the other component. I would prefer that and since we have a pure virtual interface defined, it\u0027s quite simple. I\u0027ll look into it as a follow-up. Thanks!",
+      "parentUuid": "9e0c2177_8de49e8a",
+      "revId": "4fdb5c87061ce43b884075f0ef548faf5256538a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
