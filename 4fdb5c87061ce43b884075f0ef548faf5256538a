@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e0c2177_8de49e8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2024-01-09T10:49:32Z",
+      "side": 1,
+      "message": "While I\u0027m open to making this optional, I wonder if we could make it required in the WebRTC / Chrome context with an ifdef or something similar. Otherwise, it might be difficult to identify threading issues if we try to change how it\u0027s used.",
+      "revId": "4fdb5c87061ce43b884075f0ef548faf5256538a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
