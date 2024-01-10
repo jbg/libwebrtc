@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91dbfe0a_618cde94",
+        "filename": "modules/desktop_capture/win/dxgi_duplicator_controller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 17664
+      },
+      "writtenOn": "2024-01-10T10:43:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30cff52a_753cf68b",
+      "revId": "a17038eecdbdc55908afbe43006c32895ccf2131",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd7f22aa_4de6cbe5",
