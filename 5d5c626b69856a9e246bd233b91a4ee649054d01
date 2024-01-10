@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b2aab45d_8a7e74af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2024-01-10T12:52:15Z",
+      "side": 1,
+      "message": "There seem to be some issues when compiling. Could you fix those and upload a new revision for this change?",
+      "revId": "5d5c626b69856a9e246bd233b91a4ee649054d01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2729b4b2_a454f3a0",
         "filename": "sdk/objc/api/peerconnection/RTCRtpCapabilities+Private.h",
         "patchSetId": 2
