@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ddd4b41_bbb38c0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 22800
+      },
+      "writtenOn": "2024-01-10T17:53:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2aab45d_8a7e74af",
+      "revId": "5d5c626b69856a9e246bd233b91a4ee649054d01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2729b4b2_a454f3a0",
@@ -41,6 +59,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eee6ddf_a647a320",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpCapabilities+Private.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 22800
+      },
+      "writtenOn": "2024-01-10T17:53:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2729b4b2_a454f3a0",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "5d5c626b69856a9e246bd233b91a4ee649054d01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c792c1cb_1b771c27",
@@ -54,6 +96,30 @@
       "writtenOn": "2024-01-10T11:51:36Z",
       "side": 1,
       "message": "Is the formatter doing this?\n```suggestion\n@interface RTC_OBJC_TYPE (RTCRtpCodecCapability)()\n\n /**\n * The native RtpCodecCapability representation of this RTCRtpCodecCapability\n * object. This is needed to pass to the underlying C++ APIs.\n */\n@property(nonatomic, readonly) webrtc::RtpCodecCapability nativeRtpCodecCapability;\n\n```",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "5d5c626b69856a9e246bd233b91a4ee649054d01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "186aee86_6dbdf098",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpCodecCapability+Private.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 22800
+      },
+      "writtenOn": "2024-01-10T17:53:15Z",
+      "side": 1,
+      "message": "I was trying to follow the existing style in *-Private.h Obj-C files",
+      "parentUuid": "c792c1cb_1b771c27",
       "range": {
         "startLine": 17,
         "startChar": 0,
