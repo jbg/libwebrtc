@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9267db1d_6c8e2615",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2024-01-10T10:46:12Z",
+      "side": 1,
+      "message": "Expanding on this: While there are some codepaths that will require field trials to configure SVC, those are all legacy, unsupported and out of specification.\nWe\u0027re not accepting new features for those as we are actively trying to remove them from the codebase.\nIt is best to submit improvements in your use case to improve the fallback to 2 layers when the device is not performant enough.",
+      "parentUuid": "e1c65893_60038370",
+      "revId": "2365efb2e9614a408c01cb24f4bb55f34e56a3cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2a8e29cb_4596220a",
