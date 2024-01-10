@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2729b4b2_a454f3a0",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpCapabilities+Private.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2024-01-10T11:51:36Z",
+      "side": 1,
+      "message": "```suggestion\n@interface RTC_OBJC_TYPE (RTCRtpCapabilities)()\n\n/**\n * The native RtpCapabilities representation of this RTCRtpCapabilities\n * object. This is needed to pass to the underlying C++ APIs.\n */\n@property(nonatomic, readonly) webrtc::RtpCapabilities nativeRtpCapabilities;\n\n```",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "5d5c626b69856a9e246bd233b91a4ee649054d01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c792c1cb_1b771c27",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpCodecCapability+Private.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2024-01-10T11:51:36Z",
+      "side": 1,
+      "message": "Is the formatter doing this?\n```suggestion\n@interface RTC_OBJC_TYPE (RTCRtpCodecCapability)()\n\n /**\n * The native RtpCodecCapability representation of this RTCRtpCodecCapability\n * object. This is needed to pass to the underlying C++ APIs.\n */\n@property(nonatomic, readonly) webrtc::RtpCodecCapability nativeRtpCodecCapability;\n\n```",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "5d5c626b69856a9e246bd233b91a4ee649054d01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
