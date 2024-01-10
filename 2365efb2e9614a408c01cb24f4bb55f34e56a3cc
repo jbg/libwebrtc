@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1c65893_60038370",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2024-01-10T09:52:57Z",
+      "side": 1,
+      "message": "We should not add field trials (experiment flags with end dates) to control the number of spatial layers or temporal layers. APIs should control app-specific settings. For configuring number of temporal or spatial layers we already have scalabilityMode. The app can probably already do what this experiment flag is trying to achieve.\n\nE.g. sender.setParameters({encodings:[{scalabilityMode:\"L2T2_KEY\"}]}\n\nhttps://w3c.github.io/webrtc-svc/",
+      "revId": "2365efb2e9614a408c01cb24f4bb55f34e56a3cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2a8e29cb_4596220a",
