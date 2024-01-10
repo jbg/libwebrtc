@@ -33,6 +33,23 @@
       "message": "Hi! I\u0027m not familiar enough with the video parts of media/, removing myself as reviewer.\n\n+cc the folks in https://bugs.webrtc.org/15747",
       "revId": "2365efb2e9614a408c01cb24f4bb55f34e56a3cc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb687cf3_bcc181cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2024-01-10T10:21:55Z",
+      "side": 1,
+      "message": "I agree with Henrik. Field trials as a config flags are heavely discouraged. It was used like that in the past and now we are stuck with hundred of field trials very hard to remove.\n\nEspecially in this case, where there\u0027s existing API to set up exactly that you want.",
+      "revId": "2365efb2e9614a408c01cb24f4bb55f34e56a3cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
