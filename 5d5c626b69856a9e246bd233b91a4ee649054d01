@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a1d4248e_288ff2d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2024-01-11T11:18:29Z",
+      "side": 1,
+      "message": "Still failing: `RTCPeerConnectionFactory_xctest.m:384:71: error: property \u0027codecs\u0027 cannot be found in forward class object \u0027RTCRtpCapabilities\u0027`",
+      "parentUuid": "7ddd4b41_bbb38c0f",
+      "revId": "5d5c626b69856a9e246bd233b91a4ee649054d01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2729b4b2_a454f3a0",
         "filename": "sdk/objc/api/peerconnection/RTCRtpCapabilities+Private.h",
         "patchSetId": 2
