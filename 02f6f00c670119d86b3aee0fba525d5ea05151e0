@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d09dffb2_b322d58b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2024-01-11T07:51:54Z",
+      "side": 1,
+      "message": "Here is the error on the Chromium roll that induced this rollback https://ci.chromium.org/ui/p/chromium/builders/try/linux-chromeos-compile-dbg/1653318/overview.",
+      "revId": "02f6f00c670119d86b3aee0fba525d5ea05151e0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
