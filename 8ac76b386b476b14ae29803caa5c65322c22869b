@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5457a5c4_ac5cc615",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2024-01-11T11:09:31Z",
+      "side": 1,
+      "message": "Mirko: Can you review the changes to the BUILD.gn file?",
+      "revId": "8ac76b386b476b14ae29803caa5c65322c22869b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
