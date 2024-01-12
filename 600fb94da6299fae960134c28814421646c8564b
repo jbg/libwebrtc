@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef44b9c5_080b593b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2024-01-12T02:05:36Z",
+      "side": 1,
+      "message": "I\u0027m not sure if you\u0027d prefer the CL I have here or if you\u0027d want to call ReadyToUseInStartPhase() instead of UseInStartPhase(), I\u0027m happy to make the change but I\u0027d like to prevent this crash so CRD isn\u0027t blocked from release an M122 host.  If the CL looks good, I\u0027ll get a bug filed and land this change.\n\nAlso, you may want to check the Browser crash logs and see if there are similar crashes in that product.\n\nThanks!",
+      "revId": "600fb94da6299fae960134c28814421646c8564b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
