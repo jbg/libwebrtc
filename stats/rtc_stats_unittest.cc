@@ -16,6 +16,7 @@
 #include <iostream>
 
 #include "rtc_base/checks.h"
+#include "rtc_base/logging.h"
 #include "rtc_base/strings/json.h"
 #include "stats/test/rtc_test_stats.h"
 #include "test/gtest.h"
@@ -65,6 +66,40 @@ WEBRTC_RTCSTATS_IMPL(RTCGrandChildStats,
                      RTCChildStats,
                      "grandchild-stats",
                      &grandchild_int)
+
+#define WEBRTC_FOO_BAR(...)                                   \
+  std::vector<Attribute> FooBar() {                           \
+    AttributeInit attribute_inits[] = {__VA_ARGS__};          \
+    size_t attribute_inits_size =                             \
+        sizeof(attribute_inits) / sizeof(attribute_inits[0]); \
+    std::vector<Attribute> attributes;                        \
+    for (size_t i = 0; i < attribute_inits_size; ++i) {       \
+      attributes.push_back(absl::visit(                       \
+          [&](const auto* field) {                            \
+            return Attribute(attribute_inits[i].name, field); \
+          },                                                  \
+          attribute_inits[i].variant));                       \
+    }                                                         \
+    return attributes;                                        \
+  }
+
+TEST(RTCStatsTest, HelloWorld) {
+  struct TestOnly {
+    TestOnly() : foo("foo"), bar("bar") {
+      foo = "value of foo";
+      bar = 1337;
+    }
+
+    WEBRTC_FOO_BAR(AttributeInit("hello", &foo), AttributeInit("world", &bar))
+
+    RTCStatsMember<std::string> foo;
+    RTCStatsMember<uint32_t> bar;
+  } test_only;
+
+  auto attributes = test_only.FooBar();
+  RTC_LOG(LS_ERROR) << attributes[0].get<std::string>();
+  RTC_LOG(LS_ERROR) << attributes[1].get<uint32_t>();
+}
 
 TEST(RTCStatsTest, RTCStatsAndAttributes) {
   RTCTestStats stats("testId", Timestamp::Micros(42));
