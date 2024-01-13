@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5df6041a_bfb27926",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-01-13T08:07:55Z",
+      "side": 1,
+      "message": "Some discomfort with making more allowances for strings, but it makes sense.\n+1.",
+      "revId": "f6aef116e470c260181d42eb07819eaffc7259e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26026e5e_842366bf",
+        "filename": "rtc_base/byte_buffer_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-01-13T08:07:55Z",
+      "side": 1,
+      "message": "This can be simplified into \"ByteBufferReader read_buf(reinterpret_cast\u003cconst uint8_t*\u003e(\u0026write_string[0]), sizeof(write_string))\", I think (may have to add an extra set of parentheses to make the cast to rtc::ArrayView obvious to the compiler, or make it explicit).\n\nNo need to instantiate a ByteBufferWriter.",
+      "revId": "f6aef116e470c260181d42eb07819eaffc7259e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "522d24a1_867464c8",
+        "filename": "rtc_base/byte_buffer_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-01-13T08:07:55Z",
+      "side": 1,
+      "message": "would be tighter to put this first and build write_string off the components.",
+      "revId": "f6aef116e470c260181d42eb07819eaffc7259e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
