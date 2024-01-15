@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a8d1feb_0360f0e3",
+        "filename": "rtc_base/byte_buffer_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-01-15T20:08:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26026e5e_842366bf",
+      "revId": "f6aef116e470c260181d42eb07819eaffc7259e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "522d24a1_867464c8",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-01-13T08:07:55Z",
       "side": 1,
       "message": "would be tighter to put this first and build write_string off the components.",
+      "revId": "f6aef116e470c260181d42eb07819eaffc7259e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b11e7cd_1dd98e7a",
+        "filename": "rtc_base/byte_buffer_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-01-15T20:08:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "522d24a1_867464c8",
       "revId": "f6aef116e470c260181d42eb07819eaffc7259e2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
