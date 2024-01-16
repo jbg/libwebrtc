@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbc576bb_b78149d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2024-01-16T23:18:35Z",
+      "side": 1,
+      "message": "Hi Mark,\nCan you take a look at this CL that partly fixes the issue with the capture chip that is displayed on Sonoma whenever the getDisplayMedia dialog is shown.",
+      "revId": "ef44f033e713e70c47a9a058f58df496ecd86f91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
