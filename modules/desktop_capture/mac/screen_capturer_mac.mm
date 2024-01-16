@@ -440,6 +440,10 @@ void ScreenCapturerMac::ScreenConfigurationChanged() {
 bool ScreenCapturerMac::RegisterRefreshAndMoveHandlers() {
   RTC_DCHECK(thread_checker_.IsCurrent());
   desktop_config_ = desktop_config_monitor_->desktop_configuration();
+  if (!desktop_frame_provider_.allow_iosurface()) {
+    return true;
+  }
+
   for (const auto& config : desktop_config_.displays) {
     size_t pixel_width = config.pixel_bounds.width();
     size_t pixel_height = config.pixel_bounds.height();
