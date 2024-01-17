@@ -16,6 +16,23 @@
       "message": "ptal - simple change that I\u0027ll follow up on with a few things, including adding a unit test file for candidate.* 😊 I\u0027ll eventually remove use of the cricket:: constants for the `candidate.type()` property and it also seems like some related constants are scattered and should be enums rather than unchecked strings.",
       "revId": "d2e432f2b687736bb7764c4bd42ec2157136b010",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fc4c5b1_74c28ef2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-01-17T15:42:13Z",
+      "side": 1,
+      "message": "This works as a hitless move because port.h includes candidate.h - but leads to IWYU violations in the places where it\u0027s used.\n\nI\u0027m not quite comfortable with moving these to api/ - but I guess it\u0027s transitory due to planning to delete them once we do enums. Note: we need the names still for generating the a\u003dcandidate lines in sdp - but they should become an internal dependency for the SDP-generation code, not something visible in api/\n\nShould we encourage people to use the candidate.is_xxx() function and try to keep the actual enum hidden, or is that too much hiding?\n\n+1 anyway.",
+      "revId": "d2e432f2b687736bb7764c4bd42ec2157136b010",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
