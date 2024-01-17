@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b9d7e13_9eaa3a4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-01-17T15:24:42Z",
+      "side": 1,
+      "message": "ptal - simple change that I\u0027ll follow up on with a few things, including adding a unit test file for candidate.* 😊 I\u0027ll eventually remove use of the cricket:: constants for the `candidate.type()` property and it also seems like some related constants are scattered and should be enums rather than unchecked strings.",
+      "revId": "d2e432f2b687736bb7764c4bd42ec2157136b010",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
