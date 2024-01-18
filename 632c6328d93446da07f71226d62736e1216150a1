@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2081da62_27b1ae4c",
+        "filename": "sdk/objc/native/src/audio/audio_device_ios.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2024-01-18T12:51:19Z",
+      "side": 1,
+      "message": "Is mach a well-known term in this context?",
+      "revId": "632c6328d93446da07f71226d62736e1216150a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
