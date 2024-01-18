@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8abf524_104b61e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-01-18T09:41:42Z",
+      "side": 1,
+      "message": "I\u0027ve started with removing just rtc::TaskQueue include, but there were too many other unused includes, couldn\u0027t hold myself.",
+      "revId": "fea3f725ec9b778de831e6f984f4fab1935c2cce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
