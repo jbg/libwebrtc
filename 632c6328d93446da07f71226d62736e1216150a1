@@ -16,6 +16,24 @@
       "message": "Is mach a well-known term in this context?",
       "revId": "632c6328d93446da07f71226d62736e1216150a1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df08c570_dd3ce4bd",
+        "filename": "sdk/objc/native/src/audio/audio_device_ios.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 7255
+      },
+      "writtenOn": "2024-01-18T14:07:15Z",
+      "side": 1,
+      "message": "The documentation for mach_timebase_info (https://developer.apple.com/documentation/driverkit/3433733-mach_timebase_info) says `Returns fraction to multiply a value in mach tick units with to convert it to nanoseconds.` which is why I named the variable `machToNanoseconds`.\nI do however think `machTickUnitsToNanoseconds` would be a more descriptive variable name. A google search of `mach tick units` gets good results, where just `mach` does not.",
+      "parentUuid": "2081da62_27b1ae4c",
+      "revId": "632c6328d93446da07f71226d62736e1216150a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
