@@ -33,6 +33,24 @@
       "message": "Should we replace it from channel_send.cc as well?",
       "revId": "d0977d91a146cc1f09a387e222e8fe305bda7cc7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f67cf60_59502d93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-01-18T09:36:53Z",
+      "side": 1,
+      "message": "Yes, but there are some nuances related to race between deleting/stopping the task queue and running a task on it. Thus prefer to do it in a dedicated change.",
+      "parentUuid": "f01b28ce_1456bb3f",
+      "revId": "d0977d91a146cc1f09a387e222e8fe305bda7cc7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
