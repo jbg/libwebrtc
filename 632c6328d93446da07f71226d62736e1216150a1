@@ -34,6 +34,24 @@
       "parentUuid": "2081da62_27b1ae4c",
       "revId": "632c6328d93446da07f71226d62736e1216150a1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "731350f4_2cceee5e",
+        "filename": "sdk/objc/native/src/audio/audio_device_ios.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2024-01-18T14:39:10Z",
+      "side": 1,
+      "message": "You know this area better than I do. I just reacted when I read mach -\u003e nanosecond since it was not clear to me what base mach is.",
+      "parentUuid": "df08c570_dd3ce4bd",
+      "revId": "632c6328d93446da07f71226d62736e1216150a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
