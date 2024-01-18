@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85b21398_57731032",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2024-01-18T14:52:46Z",
+      "side": 1,
+      "message": "The @available macros should work, but I think that for now we would like to have the option to control it by means of an experiment. allow_iosurface_ is set to false on Sonoma through an experiment.\n\nAlthough, the APIs are marked as deprecated, they are still working correctly. At the moment, there are just slight differences to how users are informed that the screen is captured.",
+      "parentUuid": "a91ec6d7_5aaf9d94",
+      "revId": "ef44f033e713e70c47a9a058f58df496ecd86f91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3437ba71_f94c87c5",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-01-18T01:43:41Z",
       "side": 1,
       "message": "Nit: Move one line up to avoid no-op call to desktop_configuration().",
+      "revId": "ef44f033e713e70c47a9a058f58df496ecd86f91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5aa5b059_58fc78fb",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2024-01-18T14:52:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3437ba71_f94c87c5",
       "revId": "ef44f033e713e70c47a9a058f58df496ecd86f91",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
