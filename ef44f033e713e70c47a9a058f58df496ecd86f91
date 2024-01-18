@@ -16,6 +16,40 @@
       "message": "Hi Mark,\nCan you take a look at this CL that partly fixes the issue with the capture chip that is displayed on Sonoma whenever the getDisplayMedia dialog is shown.",
       "revId": "ef44f033e713e70c47a9a058f58df496ecd86f91",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a91ec6d7_5aaf9d94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2024-01-18T01:43:41Z",
+      "side": 1,
+      "message": "LGTM with one nit.\n\nDoes WebRTC know what version of Mac OS it is running under?  It could be simpler to do a version check than try to avoid use of deprecated APIs using custom booleans.",
+      "revId": "ef44f033e713e70c47a9a058f58df496ecd86f91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3437ba71_f94c87c5",
+        "filename": "modules/desktop_capture/mac/screen_capturer_mac.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2024-01-18T01:43:41Z",
+      "side": 1,
+      "message": "Nit: Move one line up to avoid no-op call to desktop_configuration().",
+      "revId": "ef44f033e713e70c47a9a058f58df496ecd86f91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
