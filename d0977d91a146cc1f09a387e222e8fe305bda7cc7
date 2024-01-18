@@ -16,6 +16,23 @@
       "message": "Removing rtc::TaskQueue in channel_send.cc would follow in a separate change as that one is a bit less straightforward.",
       "revId": "d0977d91a146cc1f09a387e222e8fe305bda7cc7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f01b28ce_1456bb3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2024-01-18T08:10:11Z",
+      "side": 1,
+      "message": "Should we replace it from channel_send.cc as well?",
+      "revId": "d0977d91a146cc1f09a387e222e8fe305bda7cc7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
