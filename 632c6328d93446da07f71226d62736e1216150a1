@@ -52,6 +52,24 @@
       "parentUuid": "df08c570_dd3ce4bd",
       "revId": "632c6328d93446da07f71226d62736e1216150a1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03aebf87_9ecb8b8a",
+        "filename": "sdk/objc/native/src/audio/audio_device_ios.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 7255
+      },
+      "writtenOn": "2024-01-19T12:34:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "731350f4_2cceee5e",
+      "revId": "632c6328d93446da07f71226d62736e1216150a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
