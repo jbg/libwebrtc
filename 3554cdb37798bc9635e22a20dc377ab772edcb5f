@@ -22,6 +22,29 @@
       },
       "revId": "3554cdb37798bc9635e22a20dc377ab772edcb5f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8300c0c3_95dcdefa",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2024-01-22T15:07:36Z",
+      "side": 1,
+      "message": "and put this behind enable_priority_bitrate_",
+      "range": {
+        "startLine": 826,
+        "startChar": 0,
+        "endLine": 845,
+        "endChar": 3
+      },
+      "revId": "3554cdb37798bc9635e22a20dc377ab772edcb5f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
