@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f582bb95_c7338e2c",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2024-01-22T14:49:56Z",
+      "side": 1,
+      "message": "I\u0027d rather invert this condition (look at enable_audio_alr_probing_ for example).",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 0
+      },
+      "revId": "3554cdb37798bc9635e22a20dc377ab772edcb5f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
