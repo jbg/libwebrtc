@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c690d905_941bba26",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 19269
+      },
+      "writtenOn": "2024-01-22T17:48:59Z",
+      "side": 1,
+      "message": "changed to \"enable_priority_bitrate_\"",
+      "parentUuid": "f582bb95_c7338e2c",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 0
+      },
+      "revId": "3554cdb37798bc9635e22a20dc377ab772edcb5f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8300c0c3_95dcdefa",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-01-22T15:07:36Z",
       "side": 1,
       "message": "and put this behind enable_priority_bitrate_",
+      "range": {
+        "startLine": 826,
+        "startChar": 0,
+        "endLine": 845,
+        "endChar": 3
+      },
+      "revId": "3554cdb37798bc9635e22a20dc377ab772edcb5f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f3121ff_c3ad7b45",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 19269
+      },
+      "writtenOn": "2024-01-22T17:48:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8300c0c3_95dcdefa",
       "range": {
         "startLine": 826,
         "startChar": 0,
