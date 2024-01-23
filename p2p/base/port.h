@@ -524,9 +524,8 @@ class RTC_EXPORT Port : public PortInterface, public sigslot::has_slots<> {
                              webrtc::FieldTrialBasedConfig>
       field_trials_;
 
-  bool MaybeObfuscateAddress(Candidate* c,
-                             absl::string_view type,
-                             bool is_final) RTC_RUN_ON(thread_);
+  bool MaybeObfuscateAddress(const Candidate& c, bool is_final)
+      RTC_RUN_ON(thread_);
 
   friend class Connection;
   webrtc::CallbackList<PortInterface*> port_destroyed_callback_list_;
