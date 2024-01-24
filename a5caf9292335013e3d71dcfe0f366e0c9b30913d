@@ -69,6 +69,24 @@
       "parentUuid": "5f9daea0_6c521aa9",
       "revId": "a5caf9292335013e3d71dcfe0f366e0c9b30913d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcc15962_adea21cb",
+        "filename": "p2p/base/connection.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-01-24T17:32:39Z",
+      "side": 1,
+      "message": "I\u0027m working on removing both of them now (unknown and numvalues) in a separate CL (and chasing down some external users). Hopefully we\u0027ll end up with just one enum 👍",
+      "parentUuid": "e0de79fa_8d8a612a",
+      "revId": "a5caf9292335013e3d71dcfe0f366e0c9b30913d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
