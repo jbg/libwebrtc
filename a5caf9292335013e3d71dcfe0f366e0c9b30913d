@@ -33,6 +33,24 @@
       "message": "This name is misleading now, and by structure, it should be a getter on the candidate, not a standalone function.",
       "revId": "a5caf9292335013e3d71dcfe0f366e0c9b30913d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f9daea0_6c521aa9",
+        "filename": "p2p/base/connection.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-01-24T07:36:42Z",
+      "side": 1,
+      "message": "I have an upcoming CL that adds an enum type and a getter to Candidate and I was initially thinking of using `IceCandidateType` for this but that enumeration has `kUnknown` and `kNumValues` as possible values and I was hoping to only have valid values in the enumeration.\n\nSo the approach I\u0027m currently thinking of taking is to have a type in candidate.h that is just `webrtc::CandidateType` and as a later step consider to replace `IceCandidateType` with that type if we can get rid of kUnknown and kNumValues. The value of having only valid values being that we can get compile time values when a function doesn\u0027t cover all the possible values as well as encourage initializing variables to valid values at construction time.\n\nThoughts?\n\nFor now, I renamed this to GetRtcEventLogCandidateType().",
+      "parentUuid": "6439a60c_471afe3f",
+      "revId": "a5caf9292335013e3d71dcfe0f366e0c9b30913d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
