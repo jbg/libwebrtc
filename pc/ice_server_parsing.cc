@@ -32,7 +32,7 @@ namespace {
 const size_t kTurnTransportTokensNum = 2;
 // The default stun port.
 const int kDefaultStunPort = 3478;
-const int kDefaultStunTlsPort = 5349;
+const int kDefaultStunSPort = 5349;
 const char kTransport[] = "transport";
 
 // Allowed characters in hostname per RFC 3986 Appendix A "reg-name"
@@ -230,8 +230,12 @@ RTCError ParseIceServerUrl(
   }
 
   int default_port = kDefaultStunPort;
-  if (service_type == ServiceType::TURNS) {
-    default_port = kDefaultStunTlsPort;
+  if (service_type == ServiceType::TURNS &&
+      turn_transport_type == cricket::PROTO_UDP) {
+    default_port = kDefaultStunSPort;
+    turn_transport_type = cricket::PROTO_DTLS;
+  } else if (service_type == ServiceType::TURNS) {
+    default_port = kDefaultStunSPort;
     turn_transport_type = cricket::PROTO_TLS;
   }
 

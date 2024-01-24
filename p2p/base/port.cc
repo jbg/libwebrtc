@@ -52,6 +52,8 @@ rtc::PacketInfoProtocolType ConvertProtocolTypeToPacketInfoProtocolType(
   switch (type) {
     case cricket::ProtocolType::PROTO_UDP:
       return rtc::PacketInfoProtocolType::kUdp;
+    case cricket::ProtocolType::PROTO_DTLS:
+      return rtc::PacketInfoProtocolType::kDtls;
     case cricket::ProtocolType::PROTO_TCP:
       return rtc::PacketInfoProtocolType::kTcp;
     case cricket::ProtocolType::PROTO_SSLTCP:
@@ -69,9 +71,9 @@ const int kPortTimeoutDelay = cricket::STUN_TOTAL_TIMEOUT + 5000;
 
 }  // namespace
 
-static const char* const PROTO_NAMES[] = {UDP_PROTOCOL_NAME, TCP_PROTOCOL_NAME,
-                                          SSLTCP_PROTOCOL_NAME,
-                                          TLS_PROTOCOL_NAME};
+static const char* const PROTO_NAMES[] = {
+    UDP_PROTOCOL_NAME, DTLS_PROTOCOL_NAME, TCP_PROTOCOL_NAME,
+    SSLTCP_PROTOCOL_NAME, TLS_PROTOCOL_NAME};
 
 const char* ProtoToString(ProtocolType proto) {
   return PROTO_NAMES[proto];
