@@ -25,9 +25,9 @@ namespace rtc {
 class SSLCertificateVerifier;
 class AsyncResolverInterface;
 
-struct PacketSocketTcpOptions {
-  PacketSocketTcpOptions() = default;
-  ~PacketSocketTcpOptions() = default;
+struct PacketSocketOptions {
+  PacketSocketOptions() = default;
+  ~PacketSocketOptions() = default;
 
   int opts = 0;
   std::vector<std::string> tls_alpn_protocols;
@@ -42,6 +42,10 @@ class RTC_EXPORT PacketSocketFactory {
  public:
   enum Options {
     OPT_STUN = 0x04,
+
+    // The DTLS options below are mutually exclusive.
+    OPT_DTLS = 0x20,           // Real and secure DTLS.
+    OPT_DTLS_INSECURE = 0x10,  // Fake DTLS with a dummy SSL handshake.
 
     // The TLS options below are mutually exclusive.
     OPT_TLS = 0x02,           // Real and secure TLS.
@@ -58,6 +62,12 @@ class RTC_EXPORT PacketSocketFactory {
   virtual AsyncPacketSocket* CreateUdpSocket(const SocketAddress& address,
                                              uint16_t min_port,
                                              uint16_t max_port) = 0;
+  virtual AsyncPacketSocket* CreateClientUdpSocket(
+      const SocketAddress& local_address,
+      const SocketAddress& remote_address,
+      uint16_t min_port,
+      uint16_t max_port,
+      const PacketSocketOptions& udp_options) = 0;
   virtual AsyncListenSocket* CreateServerTcpSocket(
       const SocketAddress& local_address,
       uint16_t min_port,
@@ -69,7 +79,7 @@ class RTC_EXPORT PacketSocketFactory {
       const SocketAddress& remote_address,
       const ProxyInfo& proxy_info,
       const std::string& user_agent,
-      const PacketSocketTcpOptions& tcp_options) = 0;
+      const PacketSocketOptions& tcp_options) = 0;
 
   virtual std::unique_ptr<webrtc::AsyncDnsResolverInterface>
   CreateAsyncDnsResolver() = 0;
