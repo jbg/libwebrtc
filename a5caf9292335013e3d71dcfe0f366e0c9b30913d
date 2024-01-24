@@ -51,6 +51,24 @@
       "parentUuid": "6439a60c_471afe3f",
       "revId": "a5caf9292335013e3d71dcfe0f366e0c9b30913d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0de79fa_8d8a612a",
+        "filename": "p2p/base/connection.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-01-24T11:40:03Z",
+      "side": 1,
+      "message": "Looks good for now.\nIs the enum value kUnknown used anywhere?\nkNumValues is a bad habit - if needed, it should be kLastValue and defined identical to the biggest value. But if it\u0027s used in macros/templates, it\u0027s hard to change...",
+      "parentUuid": "5f9daea0_6c521aa9",
+      "revId": "a5caf9292335013e3d71dcfe0f366e0c9b30913d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

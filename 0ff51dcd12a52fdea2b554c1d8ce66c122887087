@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40cff8b8_4f0ed9cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-01-24T11:40:03Z",
+      "side": 1,
+      "message": "OK, let\u0027s go with this.",
+      "revId": "0ff51dcd12a52fdea2b554c1d8ce66c122887087",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
