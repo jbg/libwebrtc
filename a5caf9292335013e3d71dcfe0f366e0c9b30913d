@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a5236aa_f25d5a5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-01-24T02:13:12Z",
+      "side": 1,
+      "message": "Looks nice, but I think you should move GetCandidateTypeByString() into the Candidate class while you\u0027re touching it.",
+      "revId": "a5caf9292335013e3d71dcfe0f366e0c9b30913d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6439a60c_471afe3f",
+        "filename": "p2p/base/connection.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-01-24T02:13:12Z",
+      "side": 1,
+      "message": "This name is misleading now, and by structure, it should be a getter on the candidate, not a standalone function.",
+      "revId": "a5caf9292335013e3d71dcfe0f366e0c9b30913d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
