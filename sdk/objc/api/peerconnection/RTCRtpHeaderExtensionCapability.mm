@@ -9,6 +9,7 @@
  */
 
 #import "RTCRtpHeaderExtensionCapability+Private.h"
+#import "RTCRtpTransceiver+Private.h"
 
 #import "helpers/NSString+StdString.h"
 
@@ -31,6 +32,8 @@
       _preferredId = [NSNumber numberWithInt:*nativeRtpHeaderExtensionCapability.preferred_id];
     }
     _preferredEncrypted = nativeRtpHeaderExtensionCapability.preferred_encrypt;
+    _direction = [RTCRtpTransceiver
+        rtpTransceiverDirectionFromNativeDirection:nativeRtpHeaderExtensionCapability.direction];
   }
   return self;
 }
@@ -50,6 +53,8 @@
     rtpHeaderExtensionCapability.preferred_id = absl::optional<int>(_preferredId.intValue);
   }
   rtpHeaderExtensionCapability.preferred_encrypt = _preferredEncrypted;
+  rtpHeaderExtensionCapability.direction =
+      [RTCRtpTransceiver nativeRtpTransceiverDirectionFromDirection:_direction];
   return rtpHeaderExtensionCapability;
 }
 
