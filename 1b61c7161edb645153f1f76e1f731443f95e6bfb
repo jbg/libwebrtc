@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "943736d6_899c04c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6192
+      },
+      "writtenOn": "2024-01-24T13:00:57Z",
+      "side": 1,
+      "message": "This fails on compilation for real iPhones: https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d15797",
+      "revId": "1b61c7161edb645153f1f76e1f731443f95e6bfb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
