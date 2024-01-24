@@ -65,6 +65,11 @@ void PacketRouter::AddSendRtpModule(RtpRtcpInterface* rtp_module,
   }
 }
 
+bool PacketRouter::SupportsRtxPayloadPadding() const {
+  RTC_DCHECK_RUN_ON(&thread_checker_);
+  return last_send_module_ && last_send_module_->SupportsRtxPayloadPadding();
+}
+
 void PacketRouter::AddSendRtpModuleToMap(RtpRtcpInterface* rtp_module,
                                          uint32_t ssrc) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
