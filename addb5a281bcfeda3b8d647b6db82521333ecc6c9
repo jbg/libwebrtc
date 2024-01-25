@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a8a54dd_c54efe15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2024-01-25T05:23:23Z",
+      "side": 1,
+      "message": "Current failures on the bots are blocking the CQ, so I suggest disabling them until they are fixed. Please take a look. Thanks.",
+      "revId": "addb5a281bcfeda3b8d647b6db82521333ecc6c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
