@@ -46,7 +46,6 @@ class ClassLoader {
     // ClassLoader.loadClass expects a classname with components separated by
     // dots instead of the slashes that JNIEnv::FindClass expects.
     std::string name(c_name);
-    std::replace(name.begin(), name.end(), '/', '.');
     ScopedJavaLocalRef<jstring> j_name = NativeToJavaString(env, name);
     const jclass clazz = static_cast<jclass>(env->CallObjectMethod(
         class_loader_.obj(), load_class_method_, j_name.obj()));
