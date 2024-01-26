@@ -13,6 +13,7 @@
 #include <memory>
 #include <utility>
 
+#include "api/environment/environment_factory.h"
 #include "api/test/simulcast_test_fixture.h"
 #include "modules/video_coding/utility/simulcast_test_fixture_impl.h"
 
@@ -24,7 +25,8 @@ std::unique_ptr<SimulcastTestFixture> CreateSimulcastTestFixture(
     std::unique_ptr<VideoDecoderFactory> decoder_factory,
     SdpVideoFormat video_format) {
   return std::make_unique<SimulcastTestFixtureImpl>(
-      std::move(encoder_factory), std::move(decoder_factory), video_format);
+      CreateEnvironment(), std::move(encoder_factory),
+      std::move(decoder_factory), video_format);
 }
 
 }  // namespace test
