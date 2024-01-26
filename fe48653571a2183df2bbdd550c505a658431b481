@@ -16,6 +16,86 @@
       "message": "Removing all the CCs for now since this is just an initial draft.",
       "revId": "fe48653571a2183df2bbdd550c505a658431b481",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39d130aa_3a396256",
+        "filename": "api/rtp_headers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-01-26T12:03:09Z",
+      "side": 1,
+      "message": "https://webrtc.googlesource.com/src/+/refs/heads/main/api/README.md\n\n“Avoid defining api with structs as it makes harder for the api to evolve.”",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 6
+      },
+      "revId": "fe48653571a2183df2bbdd550c505a658431b481",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b7cc51b_c2b6f0e9",
+        "filename": "api/rtp_headers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-01-26T12:03:09Z",
+      "side": 1,
+      "message": "would prefer int\n\nhttps://google.github.io/styleguide/cppguide.html#Integer_Types\n“You should not use the unsigned integer types such as uint32_t, unless there is a valid reason such as representing a bit pattern rather than a number, or you need defined overflow modulo 2^N.”\n\ne.g. uint8_t is unhelpful when you try to LOG it, as it then treated as a character and often produce something unprintable. Need to remember to convert it to int in every log message.",
+      "range": {
+        "startLine": 89,
+        "startChar": 2,
+        "endLine": 89,
+        "endChar": 9
+      },
+      "revId": "fe48653571a2183df2bbdd550c505a658431b481",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a2176a8_a91bd21c",
+        "filename": "api/rtp_headers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-01-26T12:03:09Z",
+      "side": 1,
+      "message": "personally I would rather eliminate usage of the RTPHeaderExtension than try to improve it: http://bugs.webrtc.org/15054\n\nThis struct doesn\u0027t scale with increasing number of RTP header extension WebRTC supports",
+      "revId": "fe48653571a2183df2bbdd550c505a658431b481",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "898835b5_2563865f",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-01-26T12:03:09Z",
+      "side": 1,
+      "message": "I think this is a good idea.\n\nAudioLevel might be the only extension that still doesn\u0027t support parsing into single value.",
+      "revId": "fe48653571a2183df2bbdd550c505a658431b481",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
