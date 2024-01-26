@@ -428,6 +428,7 @@
         },
       },
       'ios_compile_arm64_dbg': {},
+      'ios_compile_arm64_pure': {},
       'ios_compile_arm64_rel': {},
       'ios_dbg_simulator': {
         'mixins': [

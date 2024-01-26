@@ -164,6 +164,7 @@
       # iOS
       'ios_compile_arm64_dbg': 'ios_debug_bot_arm64',
       'ios_compile_arm64_rel': 'ios_release_bot_arm64',
+      'ios_compile_arm64_rel_pure': 'ios_pure_release_bot_arm64',
       'ios_dbg_simulator': 'ios_debug_bot_x64',
 
       # Linux
@@ -326,6 +327,8 @@
       'ios', 'debug_bot', 'arm64', 'ios_code_signing_identity_description',
       'xctest'
     ],
+    # Keep this in sync with 'ios_pure_release_bot_arm64'
+    # except for code signing.
     'ios_internal_pure_release_bot_arm64': [
       'ios', 'pure_release_bot', 'arm64',
       'ios_code_signing_identity_description', 'xctest',
@@ -334,6 +337,12 @@
     'ios_internal_release_bot_arm64': [
       'ios', 'release_bot', 'arm64', 'ios_code_signing_identity_description',
       'xctest'
+    ],
+    # Keep this in sync with 'ios_internal_pure_release_bot_arm64'
+    # except for code signing.
+    'ios_pure_release_bot_arm64': [
+      'ios', 'pure_release_bot', 'arm64', 'no_ios_code_signing',
+      'xctest', 'rtc_objc_test_prefix',
     ],
     'ios_release_bot_arm64': [
       'ios', 'release_bot', 'arm64', 'no_ios_code_signing', 'xctest',
