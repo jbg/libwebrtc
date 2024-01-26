@@ -14,6 +14,7 @@
 #include <memory>
 #include <vector>
 
+#include "api/environment/environment.h"
 #include "api/test/mock_video_decoder.h"
 #include "api/test/mock_video_encoder.h"
 #include "api/test/simulcast_test_fixture.h"
@@ -28,7 +29,8 @@ namespace test {
 
 class SimulcastTestFixtureImpl final : public SimulcastTestFixture {
  public:
-  SimulcastTestFixtureImpl(std::unique_ptr<VideoEncoderFactory> encoder_factory,
+  SimulcastTestFixtureImpl(const Environment& env,
+                           std::unique_ptr<VideoEncoderFactory> encoder_factory,
                            std::unique_ptr<VideoDecoderFactory> decoder_factory,
                            SdpVideoFormat video_format);
   ~SimulcastTestFixtureImpl() final;

@@ -1026,6 +1026,7 @@ if (rtc_include_tests) {
     deps = [
       ":simulcast_test_fixture_api",
       "../modules/video_coding:simulcast_test_fixture_impl",
+      "environment:environment_factory",
       "video_codecs:video_codecs_api",
     ]
   }
