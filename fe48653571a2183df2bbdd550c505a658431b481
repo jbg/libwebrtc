@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1d1cb50_6cbc78e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7529
+      },
+      "writtenOn": "2024-01-26T02:17:39Z",
+      "side": 1,
+      "message": "Removing all the CCs for now since this is just an initial draft.",
+      "revId": "fe48653571a2183df2bbdd550c505a658431b481",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
