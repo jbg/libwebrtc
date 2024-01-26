@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af9b9a1e_650366c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-01-26T07:27:02Z",
+      "side": 1,
+      "message": "Adding Jonas in case he has strong opinions on how candidates and connections should be structured.",
+      "revId": "da458d04cbc8d9a0684e2aba3217dd83f22719cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
