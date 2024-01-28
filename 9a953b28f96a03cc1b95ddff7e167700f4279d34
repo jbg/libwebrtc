@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cfb2ec8_3717648b",
+        "filename": "p2p/base/p2p_constants.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 6720
+      },
+      "writtenOn": "2024-01-28T17:30:28Z",
+      "side": 1,
+      "message": "@hta@webrtc.org - Should we update the `Candidate` code to use this type (and these values)? See here:\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/api/candidate.h;l\u003d111?q\u003dtype_preference\u0026ss\u003dchromium\n\n(values are currently completely different though)",
+      "revId": "9a953b28f96a03cc1b95ddff7e167700f4279d34",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
