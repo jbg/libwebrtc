@@ -42,7 +42,7 @@ TEST(SampleCounterTest, NotEnoughSamples) {
 TEST(SampleCounterTest, EnoughSamples) {
   constexpr int kMinSamples = 5;
   SampleCounter counter;
-  for (int value : {1, 2, 3, 4, 5}) {
+  for (int value : {1, 2, 3, 4, 5, 6}) {
     counter.Add(value);
   }
   EXPECT_THAT(counter.Avg(kMinSamples), Eq(3));
