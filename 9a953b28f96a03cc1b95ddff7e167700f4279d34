@@ -16,6 +16,24 @@
       "message": "@hta@webrtc.org - Should we update the `Candidate` code to use this type (and these values)? See here:\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/api/candidate.h;l\u003d111?q\u003dtype_preference\u0026ss\u003dchromium\n\n(values are currently completely different though)",
       "revId": "9a953b28f96a03cc1b95ddff7e167700f4279d34",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f425b286_127f5728",
+        "filename": "p2p/base/p2p_constants.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-01-28T21:15:39Z",
+      "side": 1,
+      "message": "Actually fippo and jonaso are the experts on ICE priority these days.\n\nThe numbers from api/candidate.h seem to be too simplistic. The guidance in RFC 5245 section 4.1.2.2 seems to indicate that the values should be chosen based on context - go/toothpaste describes some of the issues we\u0027ve had on that.\n\nThe advice in 4.1.4 seems to talk about choice of default candidates, not of type preference values. Those seem to be different topics.\n\nJonathan Rosenberg has a convoluted mind...",
+      "parentUuid": "3cfb2ec8_3717648b",
+      "revId": "9a953b28f96a03cc1b95ddff7e167700f4279d34",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
