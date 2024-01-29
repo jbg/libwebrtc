@@ -34,6 +34,24 @@
       "parentUuid": "3cfb2ec8_3717648b",
       "revId": "9a953b28f96a03cc1b95ddff7e167700f4279d34",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b0a67d3_d6b0c6d5",
+        "filename": "p2p/base/p2p_constants.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2024-01-29T13:23:05Z",
+      "side": 1,
+      "message": "I think patch is good as is. LGTM\n\n1) As hta@ identifies, the type_preference() seems to be used when\ngenerating SDP. Not when ICE priorities between candidate pairs.\nUnclear if this means anything for any SPD peer that we care about.\n\n2) Wrt to the \"too simple numbers\",\nMaybe that is true. But any effort on changing them should be made outside the\nscope of this cleanup.",
+      "parentUuid": "f425b286_127f5728",
+      "revId": "9a953b28f96a03cc1b95ddff7e167700f4279d34",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
