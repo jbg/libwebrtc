@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f11c88c9_8a51b8c7",
+        "filename": "api/rtp_headers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 7529
+      },
+      "writtenOn": "2024-01-30T03:54:53Z",
+      "side": 1,
+      "message": "Ack, I will change this to a class, and add getter methods for the fields in the next version of the draft. Are there downstream consumers on your side that will require that the existing hasAudioLevel field remains available for one release?",
+      "parentUuid": "39d130aa_3a396256",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 6
+      },
+      "revId": "fe48653571a2183df2bbdd550c505a658431b481",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3b7cc51b_c2b6f0e9",
@@ -66,6 +90,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c37b03dd_6d1c9bc2",
+        "filename": "api/rtp_headers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 7529
+      },
+      "writtenOn": "2024-01-30T03:54:53Z",
+      "side": 1,
+      "message": "Will do.",
+      "parentUuid": "3b7cc51b_c2b6f0e9",
+      "range": {
+        "startLine": 89,
+        "startChar": 2,
+        "endLine": 89,
+        "endChar": 9
+      },
+      "revId": "fe48653571a2183df2bbdd550c505a658431b481",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "5a2176a8_a91bd21c",
         "filename": "api/rtp_headers.h",
         "patchSetId": 1
@@ -77,6 +125,24 @@
       "writtenOn": "2024-01-26T12:03:09Z",
       "side": 1,
       "message": "personally I would rather eliminate usage of the RTPHeaderExtension than try to improve it: http://bugs.webrtc.org/15054\n\nThis struct doesn\u0027t scale with increasing number of RTP header extension WebRTC supports",
+      "revId": "fe48653571a2183df2bbdd550c505a658431b481",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e65b52f_836ac639",
+        "filename": "api/rtp_headers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 7529
+      },
+      "writtenOn": "2024-01-30T03:54:53Z",
+      "side": 1,
+      "message": "Ack, but that seems like an orthogonal project with bigger scope.",
+      "parentUuid": "5a2176a8_a91bd21c",
       "revId": "fe48653571a2183df2bbdd550c505a658431b481",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
