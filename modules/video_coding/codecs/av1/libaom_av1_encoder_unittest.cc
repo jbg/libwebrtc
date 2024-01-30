@@ -188,6 +188,28 @@ TEST(LibaomAv1EncoderTest, CheckOddDimensionsWithSpatialLayers) {
   ASSERT_THAT(encoded_frames, SizeIs(6));
 }
 
+TEST(LibaomAv1EncoderTest, WithMaximumConsecutiveFrameDrop) {
+  test::ScopedFieldTrials field_trials(
+      "WebRTC-AV1-MaxConsecFrameDrop/maxdrop:2/");
+  VideoBitrateAllocation allocation;
+  allocation.SetBitrate(0, 0, 1000);  // some very low bitrate
+  std::unique_ptr<VideoEncoder> encoder = CreateLibaomAv1Encoder();
+  VideoCodec codec_settings = DefaultCodecSettings();
+  codec_settings.SetFrameDropEnabled(true);
+  codec_settings.startBitrate = allocation.get_sum_kbps();
+  ASSERT_EQ(encoder->InitEncode(&codec_settings, DefaultEncoderSettings()),
+            WEBRTC_VIDEO_CODEC_OK);
+  encoder->SetRates(VideoEncoder::RateControlParameters(
+      allocation, codec_settings.maxFramerate));
+  EncodedVideoFrameProducer evfp(*encoder);
+  evfp.SetResolution(
+      RenderResolution{codec_settings.width, codec_settings.height});
+  // We should code the first frame, skip two, then code another frame.
+  std::vector<EncodedVideoFrameProducer::EncodedFrame> encoded_frames =
+      evfp.SetNumInputFrames(4).Encode();
+  ASSERT_THAT(encoded_frames, SizeIs(2));
+}
+
 TEST(LibaomAv1EncoderTest, EncoderInfoWithoutResolutionBitrateLimits) {
   std::unique_ptr<VideoEncoder> encoder = CreateLibaomAv1Encoder();
   EXPECT_TRUE(encoder->GetEncoderInfo().resolution_bitrate_limits.empty());
