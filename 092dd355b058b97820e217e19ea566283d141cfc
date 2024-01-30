@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdac82be_d67f512a",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpTransceiver.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 22800
+      },
+      "writtenOn": "2024-01-30T05:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3db45fc_c9b51ac7",
+      "range": {
+        "startLine": 88,
+        "startChar": 39,
+        "endLine": 88,
+        "endChar": 65
+      },
+      "revId": "092dd355b058b97820e217e19ea566283d141cfc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1978858a_7b5283a7",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-01-26T16:13:24Z",
       "side": 1,
       "message": "Please use NSLocalizedDescriptionKey. Also do consider creating userInfo separately for increased readability.",
+      "range": {
+        "startLine": 158,
+        "startChar": 31,
+        "endLine": 158,
+        "endChar": 41
+      },
+      "revId": "092dd355b058b97820e217e19ea566283d141cfc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09ae5cd5_b3f91ca8",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpTransceiver.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 22800
+      },
+      "writtenOn": "2024-01-30T05:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1978858a_7b5283a7",
       "range": {
         "startLine": 158,
         "startChar": 31,
