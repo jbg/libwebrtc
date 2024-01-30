@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78cec8d9_a8998eb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2024-01-30T08:07:34Z",
+      "side": 1,
+      "message": "Maybe we should just nuke all the special cases there?\n\nOne thing I found surprising is that there is no sender implementation for v2, right? Nor anything along the lines of filtering redunant extensions like https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/media/engine/webrtc_media_engine.cc;l\u003d135;drc\u003d400bd0d71fb18ec50bd4fb36cfe59b7b90411244;bpv\u003d1;bpt\u003d1",
+      "revId": "e5b5ec0e51103add4af848b9fbc04c9e0976e614",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
