@@ -33,6 +33,24 @@
       "message": "LGTM!\n\nI haven\u0027t looked much at the RTP header extension API, but how are you supposed to enabled/disable header extensions? I made some tests with how I expected the API to work but get: \n```\nUncaught DOMException: Failed to execute \u0027setHeaderExtensionsToNegotiate\u0027 on\n\u0027RTCRtpTransceiver\u0027: Size of extensions to negotiate does not match.```",
       "revId": "e5b5ec0e51103add4af848b9fbc04c9e0976e614",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3507c034_14a9d7e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2024-01-30T09:49:10Z",
+      "side": 1,
+      "message": "it works differently from setCodecPreferences because it turned out we had very different mental models :-)\n\nYou query all available header extensions and then modify the direction on each extension, stopping the ones you do not want but keeping them in the array. See https://wpt.live/webrtc-extensions/RTCRtpTransceiver-headerExtensionControl.html",
+      "parentUuid": "3f0d28c0_ec1d48c6",
+      "revId": "e5b5ec0e51103add4af848b9fbc04c9e0976e614",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
