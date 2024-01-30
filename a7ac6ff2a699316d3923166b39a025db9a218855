@@ -16,6 +16,24 @@
       "message": "Should this be changed?",
       "revId": "a7ac6ff2a699316d3923166b39a025db9a218855",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6e8300d_789ec78d",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpTransceiver.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2024-01-30T10:04:59Z",
+      "side": 1,
+      "message": "Yes please, same as below.",
+      "parentUuid": "96b25e25_ef70ffdc",
+      "revId": "a7ac6ff2a699316d3923166b39a025db9a218855",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
