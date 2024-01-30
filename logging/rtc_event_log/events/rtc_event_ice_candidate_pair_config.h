@@ -18,6 +18,7 @@
 #include <vector>
 
 #include "absl/strings/string_view.h"
+#include "api/candidate.h"
 #include "api/rtc_event_log/rtc_event.h"
 #include "api/units/timestamp.h"
 #include "logging/rtc_event_log/events/rtc_event_field_encoding_parser.h"
@@ -32,12 +33,11 @@ enum class IceCandidatePairConfigType {
   kNumValues,
 };
 
-// TODO(tommi): Move this definition to candidate.h.
-enum class IceCandidateType {
-  kHost,
-  kSrflx,
-  kPrflx,
-  kRelay,
+enum class IceCandidateType : int {
+  kHost = static_cast<int>(CandidateType::kHost),
+  kSrflx = static_cast<int>(CandidateType::kSrflx),
+  kPrflx = static_cast<int>(CandidateType::kPrflx),
+  kRelay = static_cast<int>(CandidateType::kRelay),
   // TODO(tommi): Legacy names. Remove.
   kLocal [[deprecated("Use kHost instead")]] = kHost,
   kStun [[deprecated("Use kSrflx instead ")]] = kSrflx
