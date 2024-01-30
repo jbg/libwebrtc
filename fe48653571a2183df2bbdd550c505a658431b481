@@ -65,6 +65,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e63fda5_cc9bd95d",
+        "filename": "api/rtp_headers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-01-30T10:19:56Z",
+      "side": 1,
+      "message": "Yes, there are,\ngeneral rule of thumb is to give at least two weeks for the api consumers to migrate to the newer api.",
+      "parentUuid": "f11c88c9_8a51b8c7",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 6
+      },
+      "revId": "fe48653571a2183df2bbdd550c505a658431b481",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3b7cc51b_c2b6f0e9",
