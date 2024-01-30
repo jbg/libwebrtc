@@ -34,6 +34,24 @@
       "parentUuid": "96b25e25_ef70ffdc",
       "revId": "a7ac6ff2a699316d3923166b39a025db9a218855",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa8a20cb_51d650f1",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpTransceiver.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 22800
+      },
+      "writtenOn": "2024-01-30T10:15:53Z",
+      "side": 1,
+      "message": "That method is returning void, this prevent using it fluently in Swift (using try), should I make the return type BOOL?",
+      "parentUuid": "d6e8300d_789ec78d",
+      "revId": "a7ac6ff2a699316d3923166b39a025db9a218855",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
