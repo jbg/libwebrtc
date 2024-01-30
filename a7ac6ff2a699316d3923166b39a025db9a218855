@@ -52,6 +52,24 @@
       "parentUuid": "d6e8300d_789ec78d",
       "revId": "a7ac6ff2a699316d3923166b39a025db9a218855",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e4c742a_b8f08046",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpTransceiver.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 22800
+      },
+      "writtenOn": "2024-01-30T18:36:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa8a20cb_51d650f1",
+      "revId": "a7ac6ff2a699316d3923166b39a025db9a218855",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
