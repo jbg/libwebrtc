@@ -103,6 +103,23 @@
       "message": "oops, need an owner LGTM too",
       "revId": "e5b5ec0e51103add4af848b9fbc04c9e0976e614",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baffe9f1_e9207332",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-01-31T23:52:53Z",
+      "side": 1,
+      "message": "If Erik likes it, I like it. The fewer special cases, the better.",
+      "revId": "e5b5ec0e51103add4af848b9fbc04c9e0976e614",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
