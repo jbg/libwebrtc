@@ -1038,7 +1038,6 @@ rtc_library("threading") {
     ":async_dns_resolver",
     ":byte_order",
     ":checks",
-    ":criticalsection",
     ":event_tracer",
     ":ip_address",
     ":logging",
