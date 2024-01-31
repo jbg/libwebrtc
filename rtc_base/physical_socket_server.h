@@ -41,7 +41,6 @@
 #include <unordered_map>
 #include <vector>
 
-#include "rtc_base/deprecated/recursive_critical_section.h"
 #include "rtc_base/socket_server.h"
 #include "rtc_base/synchronization/mutex.h"
 #include "rtc_base/system/rtc_export.h"
@@ -98,6 +97,7 @@ class RTC_EXPORT PhysicalSocketServer : public SocketServer {
   void Add(Dispatcher* dispatcher);
   void Remove(Dispatcher* dispatcher);
   void Update(Dispatcher* dispatcher);
+  void UpdateLocked(Dispatcher* dispatcher);
 
  private:
   // The number of events to process with one call to "epoll_wait".
@@ -150,7 +150,7 @@ class RTC_EXPORT PhysicalSocketServer : public SocketServer {
   // Kept as a member variable just for efficiency.
   std::vector<uint64_t> current_dispatcher_keys_;
   Signaler* signal_wakeup_;  // Assigned in constructor only
-  RecursiveCriticalSection crit_;
+  webrtc::Mutex crit_;
 #if defined(WEBRTC_WIN)
   const WSAEVENT socket_ev_;
 #endif

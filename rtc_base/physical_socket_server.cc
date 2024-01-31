@@ -129,6 +129,8 @@ bool IsScmTimeStampExperimentDisabled() {
 
 namespace rtc {
 
+using ::webrtc::MutexLock;
+
 PhysicalSocket::PhysicalSocket(PhysicalSocketServer* ss, SOCKET s)
     : ss_(ss),
       s_(s),
@@ -283,12 +285,12 @@ int PhysicalSocket::DoConnect(const SocketAddress& connect_addr) {
 }
 
 int PhysicalSocket::GetError() const {
-  webrtc::MutexLock lock(&mutex_);
+  MutexLock lock(&mutex_);
   return error_;
 }
 
 void PhysicalSocket::SetError(int error) {
-  webrtc::MutexLock lock(&mutex_);
+  MutexLock lock(&mutex_);
   error_ = error;
 }
 
@@ -992,7 +994,9 @@ void SocketDispatcher::FinishBatchedEventUpdates() {
   RTC_DCHECK_NE(saved_enabled_events_, -1);
   uint8_t old_events = static_cast<uint8_t>(saved_enabled_events_);
   saved_enabled_events_ = -1;
-  MaybeUpdateDispatcher(old_events);
+  if (GetEpollEvents(enabled_events()) != GetEpollEvents(old_events)) {
+    ss_->UpdateLocked(this);
+  }
 }
 
 void SocketDispatcher::MaybeUpdateDispatcher(uint8_t old_events) {
@@ -1068,7 +1072,7 @@ class Signaler : public Dispatcher {
   }
 
   virtual void Signal() {
-    webrtc::MutexLock lock(&mutex_);
+    MutexLock lock(&mutex_);
     if (!fSignaled_) {
       const uint8_t b[1] = {0};
       const ssize_t res = write(afd_[1], b, sizeof(b));
@@ -1083,7 +1087,7 @@ class Signaler : public Dispatcher {
     // It is not possible to perfectly emulate an auto-resetting event with
     // pipes.  This simulates it by resetting before the event is handled.
 
-    webrtc::MutexLock lock(&mutex_);
+    MutexLock lock(&mutex_);
     if (fSignaled_) {
       uint8_t b[4];  // Allow for reading more than 1 byte, but expect 1.
       const ssize_t res = read(afd_[0], b, sizeof(b));
@@ -1227,7 +1231,7 @@ Socket* PhysicalSocketServer::WrapSocket(SOCKET s) {
 }
 
 void PhysicalSocketServer::Add(Dispatcher* pdispatcher) {
-  CritScope cs(&crit_);
+  MutexLock cs(&crit_);
   if (key_by_dispatcher_.count(pdispatcher)) {
     RTC_LOG(LS_WARNING)
         << "PhysicalSocketServer asked to add a duplicate dispatcher.";
@@ -1244,7 +1248,7 @@ void PhysicalSocketServer::Add(Dispatcher* pdispatcher) {
 }
 
 void PhysicalSocketServer::Remove(Dispatcher* pdispatcher) {
-  CritScope cs(&crit_);
+  MutexLock cs(&crit_);
   if (!key_by_dispatcher_.count(pdispatcher)) {
     RTC_LOG(LS_WARNING)
         << "PhysicalSocketServer asked to remove a unknown "
@@ -1261,19 +1265,27 @@ void PhysicalSocketServer::Remove(Dispatcher* pdispatcher) {
 #endif  // WEBRTC_USE_EPOLL
 }
 
-void PhysicalSocketServer::Update(Dispatcher* pdispatcher) {
+void PhysicalSocketServer::Update(Dispatcher* dispatcher) {
 #if defined(WEBRTC_USE_EPOLL)
+  MutexLock cs(&crit_);
+  UpdateLocked(dispatcher);
+#endif
+}
+
+void PhysicalSocketServer::UpdateLocked(Dispatcher* dispatcher) {
+#if defined(WEBRTC_USE_EPOLL)
+  crit_.AssertHeld();
   if (epoll_fd_ == INVALID_SOCKET) {
     return;
   }
 
   // Don't update dispatchers that haven't yet been added.
-  CritScope cs(&crit_);
-  if (!key_by_dispatcher_.count(pdispatcher)) {
+  auto it = key_by_dispatcher_.find(dispatcher);
+  if (it == key_by_dispatcher_.end()) {
     return;
   }
 
-  UpdateEpoll(pdispatcher, key_by_dispatcher_.at(pdispatcher));
+  UpdateEpoll(dispatcher, /*key=*/it->second);
 #endif
 }
 
@@ -1440,7 +1452,7 @@ bool PhysicalSocketServer::WaitSelect(int cmsWait, bool process_io) {
     FD_ZERO(&fdsWrite);
     int fdmax = -1;
     {
-      CritScope cr(&crit_);
+      MutexLock cr(&crit_);
       current_dispatcher_keys_.clear();
       for (auto const& kv : dispatcher_by_key_) {
         uint64_t key = kv.first;
@@ -1484,7 +1496,7 @@ bool PhysicalSocketServer::WaitSelect(int cmsWait, bool process_io) {
       return true;
     } else {
       // We have signaled descriptors
-      CritScope cr(&crit_);
+      MutexLock cr(&crit_);
       // Iterate only on the dispatchers whose file descriptors were passed into
       // select; this avoids the ABA problem (a socket being destroyed and a new
       // one created with the same file descriptor).
@@ -1633,7 +1645,7 @@ bool PhysicalSocketServer::WaitEpoll(int cmsWait) {
       return true;
     } else {
       // We have signaled descriptors
-      CritScope cr(&crit_);
+      MutexLock cr(&crit_);
       for (int i = 0; i < n; ++i) {
         const epoll_event& event = epoll_events_[i];
         uint64_t key = event.data.u64;
