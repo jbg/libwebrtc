@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ba434d0_cfd07f7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2024-01-31T10:02:09Z",
+      "side": 1,
+      "message": "LGTM with comments.",
+      "revId": "9352abaf599383c17b364ea9ec34300a905abf09",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49a4d170_3139a117",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2024-01-31T10:02:09Z",
+      "side": 1,
+      "message": "WebRTC-LibaomAv1Encoder-MaxConsecFrameDrop\n\nfor consistency with WebRTC-LibaomAv1Encoder-DisableFrameDropping",
+      "range": {
+        "startLine": 170,
+        "startChar": 54,
+        "endLine": 170,
+        "endChar": 57
+      },
+      "revId": "9352abaf599383c17b364ea9ec34300a905abf09",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5973c193_4dec6c52",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2024-01-31T10:02:09Z",
+      "side": 1,
+      "message": "Is it possible to verify that encoder follows exactly this pattern? Maybe check timestamps of encoded frames?",
+      "range": {
+        "startLine": 207,
+        "startChar": 15,
+        "endLine": 207,
+        "endChar": 71
+      },
+      "revId": "9352abaf599383c17b364ea9ec34300a905abf09",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
