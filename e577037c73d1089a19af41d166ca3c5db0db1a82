@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bcc3918_1211d2c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3282856
+      },
+      "writtenOn": "2024-02-01T13:48:23Z",
+      "side": 1,
+      "message": "Thanks for fixing this Jeremy.  I think the point of the previous patch (which resolved a /0 problem) is that a 0 target rate is not a legitimate input and thus should be blocked as a potential source of exploits or crashes, just as encoding a 0x0 sized image would not make sense. I will leave your own team to +2 this but it is fine from my perspective.",
+      "revId": "e577037c73d1089a19af41d166ca3c5db0db1a82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
