@@ -62,37 +62,9 @@
       }
     },
     'desktop_tests': {
-      'audio_decoder_unittests': {},
-      'common_audio_unittests': {},
-      'common_video_unittests': {},
-      'dcsctp_unittests': {},
-      'modules_tests': {
-        'mixins': ['shards-2'],
-      },
       'modules_unittests': {
         'mixins': ['shards-6'],
       },
-      'peerconnection_unittests': {
-        'mixins': ['shards-4'],
-      },
-      'rtc_media_unittests': {},
-      'rtc_pc_unittests': {},
-      'rtc_stats_unittests': {},
-      'rtc_unittests': {
-        'mixins': ['shards-6'],
-      },
-      'slow_peer_connection_unittests': {},
-      'svc_tests': {
-        'mixins': ['shards-4'],
-      },
-      'system_wrappers_unittests': {},
-      'test_support_unittests': {},
-      'tools_unittests': {},
-      'video_engine_tests': {
-        'mixins': ['shards-4'],
-      },
-      'voip_unittests': {},
-      'webrtc_nonparallel_tests': {},
     },
     'desktop_tests_linux_specific': {
       'shared_screencast_stream_test': {},
