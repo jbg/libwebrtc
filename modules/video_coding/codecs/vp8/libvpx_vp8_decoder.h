@@ -26,7 +26,7 @@ namespace webrtc {
 
 class LibvpxVp8Decoder : public VideoDecoder {
  public:
-  LibvpxVp8Decoder();
+  explicit LibvpxVp8Decoder(const FieldTrialsView& field_trials);
   ~LibvpxVp8Decoder() override;
 
   bool Configure(const Settings& settings) override;
