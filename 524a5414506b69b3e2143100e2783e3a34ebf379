@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49a6ab18_14cb3d90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-02-01T12:02:00Z",
+      "side": 1,
+      "message": "The note warning of deletion has been out since December 19.\nLet it go?",
+      "revId": "524a5414506b69b3e2143100e2783e3a34ebf379",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
