@@ -10,6 +10,7 @@
 
 #include <memory>
 
+#include "api/environment/environment_factory.h"
 #include "api/test/create_simulcast_test_fixture.h"
 #include "api/test/simulcast_test_fixture.h"
 #include "api/test/video/function_video_decoder_factory.h"
@@ -27,7 +28,7 @@ std::unique_ptr<SimulcastTestFixture> CreateSpecificSimulcastTestFixture() {
           []() { return VP8Encoder::Create(); });
   std::unique_ptr<VideoDecoderFactory> decoder_factory =
       std::make_unique<FunctionVideoDecoderFactory>(
-          []() { return VP8Decoder::Create(); });
+          []() { return CreateVp8Decoder(CreateEnvironment()); });
   return CreateSimulcastTestFixture(std::move(encoder_factory),
                                     std::move(decoder_factory),
                                     SdpVideoFormat("VP8"));
