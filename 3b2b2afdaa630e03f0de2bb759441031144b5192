@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b87b065_6309f700",
+        "filename": "api/candidate.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2024-02-01T15:04:40Z",
+      "side": 1,
+      "message": "when you remove this one can you also rename it to \"host\" to match the actual candidate type? I think the string is mainly used in logging...\n\nNow you can\u0027t unsee it ;-)",
+      "revId": "3b2b2afdaa630e03f0de2bb759441031144b5192",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
