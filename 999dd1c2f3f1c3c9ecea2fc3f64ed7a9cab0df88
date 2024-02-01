@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9939ce1_d6ede698",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6193
+      },
+      "writtenOn": "2024-02-01T10:18:44Z",
+      "side": 1,
+      "message": "To clarify, I need to update the deps to bring in the jni_zero changes that warrants the class_loader.cc change. This is work needed for the up and coming jni_generator deprecation, jni_zero is its replacement.",
+      "revId": "999dd1c2f3f1c3c9ecea2fc3f64ed7a9cab0df88",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
