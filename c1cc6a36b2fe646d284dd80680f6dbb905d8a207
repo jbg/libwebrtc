@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f8b2943_f2dfc952",
+        "filename": "test/pc/e2e/network_quality_metrics_reporter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2024-02-02T15:38:52Z",
+      "side": 0,
+      "message": "Is it enabled by default? If so, maybe let\u0027s keep a TODO here and in another place.",
+      "range": {
+        "startLine": 51,
+        "startChar": 20,
+        "endLine": 51,
+        "endChar": 53
+      },
+      "revId": "c1cc6a36b2fe646d284dd80680f6dbb905d8a207",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
