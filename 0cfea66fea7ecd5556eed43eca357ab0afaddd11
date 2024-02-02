@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e61aa85_95ad419c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2024-02-02T11:15:25Z",
+      "side": 1,
+      "message": "There are more vestiges of that field trial in the legacy stats collector but that might have an internal dependency so easier for you to \"delete, delete\"?",
+      "revId": "0cfea66fea7ecd5556eed43eca357ab0afaddd11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
