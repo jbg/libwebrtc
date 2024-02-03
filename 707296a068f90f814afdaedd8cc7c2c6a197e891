@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4962d2d1_c5743c96",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2024-02-03T09:52:45Z",
+      "side": 0,
+      "message": "Seems that return value was undefined if kVP8IosMaxNumberOfThreadFieldTrial was not set or max_thread_number\u003d0 on iOS. @sprang@webrtc.org, @peterhanspers@webrtc.org, FYI.",
+      "range": {
+        "startLine": 800,
+        "startChar": 0,
+        "endLine": 811,
+        "endChar": 3
+      },
+      "revId": "707296a068f90f814afdaedd8cc7c2c6a197e891",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
