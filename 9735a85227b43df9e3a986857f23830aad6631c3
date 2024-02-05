@@ -34,6 +34,24 @@
       "parentUuid": "c8f7ecf2_2370f8b9",
       "revId": "9735a85227b43df9e3a986857f23830aad6631c3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d16a77b_74c9bedd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2024-02-05T07:41:02Z",
+      "side": 1,
+      "message": "Aha, I understand. I didn\u0027t know if there are any similar CLs for fixing this issue. I\u0027ll keep it open until that CL is merged.",
+      "parentUuid": "3fa9433d_e730a40f",
+      "revId": "9735a85227b43df9e3a986857f23830aad6631c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
