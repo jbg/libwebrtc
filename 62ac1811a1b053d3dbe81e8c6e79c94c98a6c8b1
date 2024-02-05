@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "11d9c98b_204d201a",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2024-02-05T15:32:51Z",
+      "side": 1,
+      "message": "If it\u0027s as in the other CL, please move the check right after the `if (initialized_)` condition and add a comment explaining why the code above might be run on a wrong thread.",
+      "parentUuid": "bebb6079_c9895fd8",
+      "range": {
+        "startLine": 137,
+        "startChar": 2,
+        "endLine": 137,
+        "endChar": 47
+      },
+      "revId": "62ac1811a1b053d3dbe81e8c6e79c94c98a6c8b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a7efeda_1fd9b07b",
         "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
         "patchSetId": 1
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "This is intentional. We don\u0027t need members above to be guarded.",
       "parentUuid": "7a7efeda_1fd9b07b",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 47
+      },
+      "revId": "62ac1811a1b053d3dbe81e8c6e79c94c98a6c8b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccd14e72_181ae7fa",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2024-02-05T15:32:51Z",
+      "side": 1,
+      "message": "Since there\u0027s no early exit above that line, moving the check above won\u0027t change the behavior at all. Note, the checker here doesn\u0027t protect some members - it\u0027s not a lock which is grabbed. It\u0027s an annotation to the code.\n\nSo, please move it at the top.",
+      "parentUuid": "21468f67_a760c325",
       "range": {
         "startLine": 194,
         "startChar": 0,
