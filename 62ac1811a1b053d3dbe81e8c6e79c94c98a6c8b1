@@ -161,6 +161,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bf08263_de1223d2",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2024-02-05T18:55:03Z",
+      "side": 1,
+      "message": "It actually doesn\u0027t matter in this case (unlike in StopCapture), because we don\u0027t have stream created at this point. I moved it above.",
+      "parentUuid": "56884fb4_60c35070",
+      "range": {
+        "startLine": 137,
+        "startChar": 2,
+        "endLine": 137,
+        "endChar": 47
+      },
+      "revId": "62ac1811a1b053d3dbe81e8c6e79c94c98a6c8b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a7efeda_1fd9b07b",
