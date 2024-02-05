@@ -52,6 +52,24 @@
       "parentUuid": "3fa9433d_e730a40f",
       "revId": "9735a85227b43df9e3a986857f23830aad6631c3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f713bc7_6e8f5aa7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2024-02-05T11:04:37Z",
+      "side": 1,
+      "message": "Issue is fixed upstream, let\u0027s land this to unblock the roll !",
+      "parentUuid": "5d16a77b_74c9bedd",
+      "revId": "9735a85227b43df9e3a986857f23830aad6631c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
