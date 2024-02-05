@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8f7ecf2_2370f8b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2024-02-05T07:25:38Z",
+      "side": 1,
+      "message": "Hello, this CL is required for unblocking Chromium roll. Please take a look. Thanks.",
+      "revId": "9735a85227b43df9e3a986857f23830aad6631c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
