@@ -115,6 +115,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c22bccdb_e51aceae",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2024-02-05T15:59:50Z",
+      "side": 1,
+      "message": "That\u0027s very unobvious behavior. Please add a comment about that near that line.",
+      "parentUuid": "5dd8b1ed_455b6cd2",
+      "range": {
+        "startLine": 137,
+        "startChar": 2,
+        "endLine": 137,
+        "endChar": 47
+      },
+      "revId": "62ac1811a1b053d3dbe81e8c6e79c94c98a6c8b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a7efeda_1fd9b07b",
         "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
         "patchSetId": 1
