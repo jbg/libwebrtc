@@ -89,6 +89,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dd8b1ed_455b6cd2",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2024-02-05T15:47:36Z",
+      "side": 1,
+      "message": "The race detection need to be done at this point, not before, because the lock over the threaded loop makes sure callbacks won\u0027t be executed and these are exactly the ones that can cause a race. Same for StopCapture().",
+      "parentUuid": "11d9c98b_204d201a",
+      "range": {
+        "startLine": 137,
+        "startChar": 2,
+        "endLine": 137,
+        "endChar": 47
+      },
+      "revId": "62ac1811a1b053d3dbe81e8c6e79c94c98a6c8b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a7efeda_1fd9b07b",
@@ -150,6 +174,30 @@
       "side": 1,
       "message": "Since there\u0027s no early exit above that line, moving the check above won\u0027t change the behavior at all. Note, the checker here doesn\u0027t protect some members - it\u0027s not a lock which is grabbed. It\u0027s an annotation to the code.\n\nSo, please move it at the top.",
       "parentUuid": "21468f67_a760c325",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 47
+      },
+      "revId": "62ac1811a1b053d3dbe81e8c6e79c94c98a6c8b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9385aa00_e41398d0",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2024-02-05T15:47:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccd14e72_181ae7fa",
       "range": {
         "startLine": 194,
         "startChar": 0,
