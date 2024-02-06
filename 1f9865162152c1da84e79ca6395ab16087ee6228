@@ -16,6 +16,46 @@
       "message": "LGTM",
       "revId": "1f9865162152c1da84e79ca6395ab16087ee6228",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49a2e029_b3a87051",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2024-02-06T09:51:24Z",
+      "side": 1,
+      "message": "LGTM, but please fix a typo in the comment",
+      "revId": "1f9865162152c1da84e79ca6395ab16087ee6228",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30abdfd4_a5e0cb8e",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2024-02-06T09:51:24Z",
+      "side": 1,
+      "message": "\"not\"",
+      "range": {
+        "startLine": 201,
+        "startChar": 64,
+        "endLine": 201,
+        "endChar": 69
+      },
+      "revId": "1f9865162152c1da84e79ca6395ab16087ee6228",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
