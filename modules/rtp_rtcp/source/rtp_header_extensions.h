@@ -75,23 +75,20 @@ class AbsoluteCaptureTimeExtension {
                     const AbsoluteCaptureTime& extension);
 };
 
-class AudioLevel {
+class AudioLevelExtension {
  public:
+  using value_type = AudioLevel;
   static constexpr RTPExtensionType kId = kRtpExtensionAudioLevel;
   static constexpr uint8_t kValueSizeBytes = 1;
   static constexpr absl::string_view Uri() {
     return RtpExtension::kAudioLevelUri;
   }
 
-  static bool Parse(rtc::ArrayView<const uint8_t> data,
-                    bool* voice_activity,
-                    uint8_t* audio_level);
-  static size_t ValueSize(bool voice_activity, uint8_t audio_level) {
+  static bool Parse(rtc::ArrayView<const uint8_t> data, AudioLevel* extension);
+  static size_t ValueSize(const AudioLevel& extension) {
     return kValueSizeBytes;
   }
-  static bool Write(rtc::ArrayView<uint8_t> data,
-                    bool voice_activity,
-                    uint8_t audio_level);
+  static bool Write(rtc::ArrayView<uint8_t> data, const AudioLevel& extension);
 };
 
 class CsrcAudioLevel {
