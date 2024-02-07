@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '5c1222c039c4c405474143f6beb91904da6375e0',
+  'chromium_revision': '9179e4319d90e24099a0505610938b31293c3e75',
 
   # Fetch the prebuilt binaries for llvm-cov and llvm-profdata. Needed to
   # process the raw profiles produced by instrumented targets (built with
@@ -50,9 +50,9 @@ vars = {
 deps = {
   # TODO(kjellander): Move this to be Android-only.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@cdd683921b46fb95b9fd9dc867b823385abf3c5e',
+    'https://chromium.googlesource.com/chromium/src/base@860ad7e4c65a4e8c28394a86ab52024d39868b24',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@5347b6564336aaa53809dd92ddf7173f242ca7a8',
+    'https://chromium.googlesource.com/chromium/src/build@e106e0d472271988972881373d3c5fb0e623b12a',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@262e0f6f649a83f5ac98f3bac6eefff66fb90133',
   # Gradle 6.6.1. Used for testing Android Studio project generation for WebRTC.
@@ -65,9 +65,9 @@ deps = {
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@faa67274bf4519d5b5cbde7b2604ad1adf3b44ad',
+    'https://chromium.googlesource.com/chromium/src/testing@8efb26a889a8563d13efa47cf97887bfca8325fa',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@a59d781695ef8650f9cc3d16fd90e3d121497693',
+    'https://chromium.googlesource.com/chromium/src/third_party@f7edb94c0f2cf12424c8c626e85080289279d336',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -355,7 +355,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@71a8b59f465754b542f9151447144ff88f622b56',
+    'https://chromium.googlesource.com/chromium/src/tools@93ace97520f43e50ada54c7ae313f1aa93baf813',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
