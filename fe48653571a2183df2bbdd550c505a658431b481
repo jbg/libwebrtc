@@ -91,6 +91,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "cbdaa5ec_117bbf09",
+        "filename": "api/rtp_headers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 7529
+      },
+      "writtenOn": "2024-02-07T19:19:58Z",
+      "side": 1,
+      "message": "Done. Preserved access to the old variables in most recent patch set. If the rename from AudioLevel -\u003e AudioLevelExtension in rtp_header_extensions.h is a problem I can revert that, but then we need a new name for the API struct.",
+      "parentUuid": "8e63fda5_cc9bd95d",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 6
+      },
+      "revId": "fe48653571a2183df2bbdd550c505a658431b481",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3b7cc51b_c2b6f0e9",
         "filename": "api/rtp_headers.h",
         "patchSetId": 1
