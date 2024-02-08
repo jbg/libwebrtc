@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f10e7ea_c42c74b3",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-02-08T12:39:27Z",
+      "side": 1,
+      "message": "I agree it is a good rename, but it would be better to change this trait in backward compatible way so that webrtc users have some time to migrate to newer api.\n\ne.g.\n```\nclass AudioLevelExtension {\n public:\n  static bool Parse(rtc::ArrayView\u003cconst uint8_t\u003e data,\n                    bool* voice_activity,\n                    uint8_t* audio_level);\n};\n// TODO: bugs.webrtc.org/15788 - In two weeks remove this alias and put new meaning into AudioLevel class.\nusing AudioLevel [[deprecated]] \u003d AudioLevelExtension\n```\n\nor do a hack and temporary merge old and new meaning for the AudioLevel class:\n\n```\nclass AudioLevel {\n public:\n  AudioLevel(voice_activity, level);\n \n  // TODO: bugs.webrtc.org/15788 - In two weeks remove these functions in favor of the AudioLevelExtension trait below\n  [[deprecated]] static bool Parse(rtc::ArrayView\u003cconst uint8_t\u003e data,\n                    bool* voice_activity,\n                    uint8_t* audio_level); \n\n\n private:\n  bool voice_activity_;\n  int level_;\n};\n\nclass AudioLevelExtension {\n public:\n  static bool Parse(rtc::ArrayView\u003cconst uint8_t\u003e data, AudioLevel* value);\n};\n```\n(this hack might be faster way to migrate without breaking existent code, it needs less intermediate steps.)",
+      "revId": "6fee1af01925bb25379ac14846199e6344fd76fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
