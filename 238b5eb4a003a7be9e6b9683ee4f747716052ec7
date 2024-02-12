@@ -86,6 +86,24 @@
       "parentUuid": "820655ca_c947ce5e",
       "revId": "238b5eb4a003a7be9e6b9683ee4f747716052ec7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "927080c6_480650ec",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2024-02-12T13:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "820655ca_c947ce5e",
+      "revId": "238b5eb4a003a7be9e6b9683ee4f747716052ec7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
