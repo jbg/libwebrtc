@@ -53,6 +53,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48bdb1e5_bc06c4a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2024-02-12T14:14:47Z",
+      "side": 1,
+      "message": "I also expect that once we are in a situation when we have to import DMABufs as a texture, there will be whole negotiation process that will not allow us (with current code) to use DMABufs, similar to screen sharing, where we originally mmapped DMABufs in first implementations and later the whole negotiation process was changed to eliminate clients not supporting texture imports.",
+      "parentUuid": "f6c936fc_4936ef4f",
+      "revId": "238b5eb4a003a7be9e6b9683ee4f747716052ec7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "820655ca_c947ce5e",
