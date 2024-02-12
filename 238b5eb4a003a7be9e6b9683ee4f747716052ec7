@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2013d2dd_f95e3d0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8178
+      },
+      "writtenOn": "2024-02-12T10:24:50Z",
+      "side": 1,
+      "message": "I don\u0027t have much opinion or knowledge here. I can imagine some perf improvements can be made, but that seems out of scope. The camera capture framework would need a bit of work for that.",
+      "revId": "238b5eb4a003a7be9e6b9683ee4f747716052ec7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
