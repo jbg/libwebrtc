@@ -16,6 +16,23 @@
       "message": "I don\u0027t have much opinion or knowledge here. I can imagine some perf improvements can be made, but that seems out of scope. The camera capture framework would need a bit of work for that.",
       "revId": "238b5eb4a003a7be9e6b9683ee4f747716052ec7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "444ac496_b33bf9fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2024-02-12T13:22:18Z",
+      "side": 1,
+      "message": "Cameras are probably v4l2 cameras and even libcamera currently does not export any DMABufs that are actually GPU memory. So directly mmapping the buffers makes no difference.\n\nSo, right now, we\u0027re fine. But that will probably change in the future and it may be tricky to resolve:\nmmap for a GPU buffer can be really slow. That\u0027s why the desktop capture code imports the DMABuf as a texture and does a glReadPixels.\nBut doing that to a DMABuf from v4l2 is probably not a good idea either...",
+      "revId": "238b5eb4a003a7be9e6b9683ee4f747716052ec7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
