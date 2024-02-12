@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6c936fc_4936ef4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2024-02-12T13:41:56Z",
+      "side": 1,
+      "message": "This is not meant to make any difference (performance wise), but PipeWire doesn\u0027t support mmapping DMABufs, this is going to be added in the next release for V4L2 and libcamera DMABufs only, but still it would be good to support older (current) versions of PipeWire.",
+      "parentUuid": "444ac496_b33bf9fd",
+      "revId": "238b5eb4a003a7be9e6b9683ee4f747716052ec7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "820655ca_c947ce5e",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-02-12T13:34:09Z",
       "side": 1,
       "message": "Doing the DMA_BUF_SYNC_START here and the DMA_BUF_SYNC_END in the ScopedBuf feels wrong to me. Why is this not part of the ScopedBuf::initialize()?",
+      "revId": "238b5eb4a003a7be9e6b9683ee4f747716052ec7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df38f099_b6f76537",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2024-02-12T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "820655ca_c947ce5e",
       "revId": "238b5eb4a003a7be9e6b9683ee4f747716052ec7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
