@@ -16,6 +16,24 @@
       "message": "Turned out to be easier to just ask the allocator - even though I wonder why that isn\u0027t done for the ice-ufrag et al.",
       "revId": "e3a779de0d6346ee212303c0368cdadeb09d2f9b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2465c655_7249fc04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2024-02-12T12:05:31Z",
+      "side": 1,
+      "message": "Thanks. At first sight this SGTM.\n\nLet\u0027s try to land.",
+      "parentUuid": "7a945acb_8efdf73d",
+      "revId": "e3a779de0d6346ee212303c0368cdadeb09d2f9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
