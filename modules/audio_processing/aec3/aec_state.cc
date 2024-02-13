@@ -129,6 +129,9 @@ AecState::AecState(const EchoCanceller3Config& config,
       erl_estimator_(2 * kNumBlocksPerSecond),
       erle_estimator_(2 * kNumBlocksPerSecond, config_, num_capture_channels_),
       filter_analyzer_(config_, num_capture_channels_),
+      echo_path_gain_analyzer_(
+          /*initial_consistent_status=*/!config_.ep_strength
+              .track_echo_path_gain_consistency),
       echo_audibility_(
           config_.echo_audibility.use_stationarity_properties_at_init),
       reverb_model_estimator_(config_, num_capture_channels_),
@@ -193,10 +196,7 @@ void AecState::Update(
                                      &any_coarse_filter_converged,
                                      &all_filters_diverged);
 
-  bool any_filter_consistent;
-  float max_echo_path_gain;
-  filter_analyzer_.Update(adaptive_filter_impulse_responses, render_buffer,
-                          &any_filter_consistent, &max_echo_path_gain);
+  filter_analyzer_.Update(adaptive_filter_impulse_responses, render_buffer);
 
   // Estimate the direct path delay of the filter.
   if (config_.filter.use_linear_filter) {
@@ -224,6 +224,9 @@ void AecState::Update(
   blocks_with_active_render_ += active_render ? 1 : 0;
   strong_not_saturated_render_blocks_ +=
       active_render && !SaturatedCapture() ? 1 : 0;
+
+  echo_path_gain_analyzer_.Update(
+      filter_analyzer_.instantaneous_maximum_echo_path_gain(), active_render);
 
   std::array<float, kFftLengthBy2Plus1> avg_render_spectrum_with_reverb;
 
@@ -256,7 +259,7 @@ void AecState::Update(
   if (config_.ep_strength.echo_can_saturate) {
     saturation_detector_.Update(aligned_render_block, SaturatedCapture(),
                                 UsableLinearEstimate(), subtractor_output,
-                                max_echo_path_gain);
+                                filter_analyzer_.max_echo_path_gain());
   } else {
     RTC_DCHECK(!saturation_detector_.SaturatedEcho());
   }
@@ -267,9 +270,10 @@ void AecState::Update(
   // Detect whether the transparent mode should be activated.
   if (transparent_state_) {
     transparent_state_->Update(
-        delay_state_.MinDirectPathFilterDelay(), any_filter_consistent,
-        any_filter_converged, any_coarse_filter_converged, all_filters_diverged,
-        active_render, SaturatedCapture());
+        delay_state_.MinDirectPathFilterDelay(),
+        filter_analyzer_.any_filter_consistent(), any_filter_converged,
+        any_coarse_filter_converged, all_filters_diverged, active_render,
+        SaturatedCapture());
   }
 
   // Analyze the quality of the filter.
@@ -302,7 +306,8 @@ void AecState::Update(
   data_dumper_->DumpRaw("aec3_filter_delay",
                         filter_analyzer_.MinFilterDelayBlocks());
 
-  data_dumper_->DumpRaw("aec3_any_filter_consistent", any_filter_consistent);
+  data_dumper_->DumpRaw("aec3_any_filter_consistent",
+                        filter_analyzer_.any_filter_consistent());
   data_dumper_->DumpRaw("aec3_initial_state",
                         initial_state_.InitialStateActive());
   data_dumper_->DumpRaw("aec3_capture_saturation", SaturatedCapture());
