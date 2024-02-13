@@ -10,6 +10,8 @@
 
 #include "modules/congestion_controller/goog_cc/send_side_bandwidth_estimation.h"
 
+#include <stdbool.h>
+
 #include <algorithm>
 #include <cstdint>
 #include <cstdio>
@@ -700,8 +702,12 @@ bool SendSideBandwidthEstimation::LossBasedBandwidthEstimatorV2Enabled() const {
 
 bool SendSideBandwidthEstimation::LossBasedBandwidthEstimatorV2ReadyForUse()
     const {
-  return LossBasedBandwidthEstimatorV2Enabled() &&
-         loss_based_bandwidth_estimator_v2_->IsReady();
+  return loss_based_bandwidth_estimator_v2_->IsReady();
+}
+
+bool SendSideBandwidthEstimation::PaceAtLossBasedEstimate() const {
+  return LossBasedBandwidthEstimatorV2ReadyForUse() &&
+         loss_based_bandwidth_estimator_v2_->PaceAtLossBasedEstimate();
 }
 
 }  // namespace webrtc
