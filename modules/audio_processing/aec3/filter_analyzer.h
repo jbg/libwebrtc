@@ -43,9 +43,7 @@ class FilterAnalyzer {
 
   // Updates the estimates with new input data.
   void Update(rtc::ArrayView<const std::vector<float>> filters_time_domain,
-              const RenderBuffer& render_buffer,
-              bool* any_filter_consistent,
-              float* max_echo_path_gain);
+              const RenderBuffer& render_buffer);
 
   // Returns the delay in blocks for each filter.
   rtc::ArrayView<const int> FilterDelaysBlocks() const {
@@ -67,6 +65,15 @@ class FilterAnalyzer {
 
   // Public for testing purposes only.
   void SetRegionToAnalyze(size_t filter_size);
+
+  // Return the instantaneous maximum filter gain.
+  float instantaneous_maximum_echo_path_gain() const {
+    return instantaneous_max_echo_path_gain_;
+  }
+
+  bool any_filter_consistent() const { return any_filter_consistent_; }
+
+  float max_echo_path_gain() const { return max_echo_path_gain_; }
 
  private:
   struct FilterAnalysisState;
@@ -143,6 +150,12 @@ class FilterAnalyzer {
   std::vector<int> filter_delays_blocks_;
 
   int min_filter_delay_blocks_ = 0;
+
+  float instantaneous_max_echo_path_gain_ = 1.0f;
+
+  bool any_filter_consistent_ = false;
+
+  float max_echo_path_gain_ = 1.0f;
 };
 
 }  // namespace webrtc
