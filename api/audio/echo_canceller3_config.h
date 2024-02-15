@@ -114,6 +114,7 @@ struct RTC_EXPORT EchoCanceller3Config {
     bool bounded_erl = false;
     bool erle_onset_compensation_in_dominant_nearend = false;
     bool use_conservative_tail_frequency_response = true;
+    bool track_echo_path_gain_consistency = false;
   } ep_strength;
 
   struct EchoAudibility {

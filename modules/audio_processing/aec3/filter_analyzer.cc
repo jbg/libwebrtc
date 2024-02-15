@@ -74,11 +74,7 @@ void FilterAnalyzer::Reset() {
 
 void FilterAnalyzer::Update(
     rtc::ArrayView<const std::vector<float>> filters_time_domain,
-    const RenderBuffer& render_buffer,
-    bool* any_filter_consistent,
-    float* max_echo_path_gain) {
-  RTC_DCHECK(any_filter_consistent);
-  RTC_DCHECK(max_echo_path_gain);
+    const RenderBuffer& render_buffer) {
   RTC_DCHECK_EQ(filters_time_domain.size(), filter_analysis_states_.size());
   RTC_DCHECK_EQ(filters_time_domain.size(), h_highpass_.size());
 
@@ -88,14 +84,14 @@ void FilterAnalyzer::Update(
 
   // Aggregate the results for all capture channels.
   auto& st_ch0 = filter_analysis_states_[0];
-  *any_filter_consistent = st_ch0.consistent_estimate;
-  *max_echo_path_gain = st_ch0.gain;
+  any_filter_consistent_ = st_ch0.consistent_estimate;
+  max_echo_path_gain_ = st_ch0.gain;
   min_filter_delay_blocks_ = filter_delays_blocks_[0];
   for (size_t ch = 1; ch < filters_time_domain.size(); ++ch) {
     auto& st_ch = filter_analysis_states_[ch];
-    *any_filter_consistent =
-        *any_filter_consistent || st_ch.consistent_estimate;
-    *max_echo_path_gain = std::max(*max_echo_path_gain, st_ch.gain);
+    any_filter_consistent_ =
+        any_filter_consistent_ || st_ch.consistent_estimate;
+    max_echo_path_gain_ = std::max(max_echo_path_gain_, st_ch.gain);
     min_filter_delay_blocks_ =
         std::min(min_filter_delay_blocks_, filter_delays_blocks_[ch]);
   }
