@@ -24,6 +24,7 @@
 #include "modules/audio_processing/aec3/aec3_common.h"
 #include "modules/audio_processing/aec3/delay_estimate.h"
 #include "modules/audio_processing/aec3/echo_audibility.h"
+#include "modules/audio_processing/aec3/echo_path_gain_analyzer.h"
 #include "modules/audio_processing/aec3/echo_path_variability.h"
 #include "modules/audio_processing/aec3/erl_estimator.h"
 #include "modules/audio_processing/aec3/erle_estimator.h"
@@ -254,7 +255,8 @@ class AecState {
                 bool transparent_mode,
                 bool saturated_capture,
                 const absl::optional<DelayEstimate>& external_delay,
-                bool any_filter_converged);
+                bool any_filter_converged,
+                bool consistent_filter);
 
    private:
     const bool use_linear_filter_;
@@ -289,6 +291,7 @@ class AecState {
   size_t blocks_with_active_render_ = 0;
   bool capture_signal_saturation_ = false;
   FilterAnalyzer filter_analyzer_;
+  EchoPathGainAnalyzer echo_path_gain_analyzer_;
   EchoAudibility echo_audibility_;
   ReverbModelEstimator reverb_model_estimator_;
   ReverbModel avg_render_reverb_;
