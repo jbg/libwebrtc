@@ -12,6 +12,11 @@
 
 namespace webrtc {
 
+AudioLevel::AudioLevel() : voice_activity_(false), audio_level_(0) {}
+
+AudioLevel::AudioLevel(bool voice_activity, int audio_level)
+    : voice_activity_(voice_activity), audio_level_(audio_level) {}
+
 RTPHeaderExtension::RTPHeaderExtension()
     : hasTransmissionTimeOffset(false),
       transmissionTimeOffset(0),
@@ -33,6 +38,24 @@ RTPHeaderExtension::RTPHeaderExtension(const RTPHeaderExtension& other) =
 
 RTPHeaderExtension& RTPHeaderExtension::operator=(
     const RTPHeaderExtension& other) = default;
+
+absl::optional<AudioLevel> RTPHeaderExtension::audio_level() const {
+  if (!hasAudioLevel) {
+    return absl::nullopt;
+  }
+  return AudioLevel(voiceActivity, audioLevel);
+}
+
+void RTPHeaderExtension::set_audio_level(
+    absl::optional<AudioLevel> audio_level) {
+  if (audio_level) {
+    hasAudioLevel = true;
+    voiceActivity = audio_level->voice_activity();
+    audioLevel = audio_level->audio_level();
+  } else {
+    hasAudioLevel = false;
+  }
+}
 
 RTPHeader::RTPHeader()
     : markerBit(false),
