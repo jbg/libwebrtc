@@ -75,7 +75,7 @@ class AbsoluteCaptureTimeExtension {
                     const AbsoluteCaptureTime& extension);
 };
 
-class AudioLevel {
+class AudioLevelExtension {
  public:
   static constexpr RTPExtensionType kId = kRtpExtensionAudioLevel;
   static constexpr uint8_t kValueSizeBytes = 1;
@@ -93,6 +93,9 @@ class AudioLevel {
                     bool voice_activity,
                     uint8_t audio_level);
 };
+// TODO: bugs.webrtc.org/15788 - In two weeks remove this alias and put new
+// meaning into AudioLevel class.
+using AudioLevel [[deprecated]] = AudioLevelExtension;
 
 class CsrcAudioLevel {
  public:
