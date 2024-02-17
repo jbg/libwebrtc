@@ -11,6 +11,7 @@
 #include "api/candidate.h"
 
 #include "absl/base/attributes.h"
+#include "rtc_base/crc32.h"
 #include "rtc_base/helpers.h"
 #include "rtc_base/ip_address.h"
 #include "rtc_base/logging.h"
@@ -203,6 +204,16 @@ Candidate Candidate::ToSanitizedCopy(bool use_hostname_address,
         rtc::EmptySocketAddressWithFamily(copy.address().family()));
   }
   return copy;
+}
+
+void Candidate::ComputeFoundation(const rtc::SocketAddress& base_address,
+                                  absl::optional<uint64_t> tie_breaker) {
+  rtc::StringBuilder sb;
+  sb << type_ << base_address.ipaddr().ToString() << protocol_
+     << relay_protocol_;
+  if (tie_breaker.has_value())
+    sb << rtc::ToString(*tie_breaker);
+  foundation_ = rtc::ToString(rtc::ComputeCrc32(sb.Release()));
 }
 
 void Candidate::Assign(std::string& s, absl::string_view view) {
