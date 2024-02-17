@@ -81,9 +81,7 @@ class DecisionLogic : public NetEqController {
   bool SetMinimumDelay(int delay_ms) override {
     return delay_manager_->SetMinimumDelay(delay_ms);
   }
-  bool SetBaseMinimumDelay(int delay_ms) override {
-    return delay_manager_->SetBaseMinimumDelay(delay_ms);
-  }
+  bool SetBaseMinimumDelay(int delay_ms) override;
   int GetBaseMinimumDelay() const override {
     return delay_manager_->GetBaseMinimumDelay();
   }
@@ -177,6 +175,7 @@ class DecisionLogic : public NetEqController {
   std::unique_ptr<TickTimer::Countdown> timescale_countdown_;
   int time_stretched_cn_samples_ = 0;
   bool buffer_flush_ = false;
+  bool precise_jitter_buffer_target_mode_ = false;
 };
 
 }  // namespace webrtc
