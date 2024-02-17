@@ -19,6 +19,7 @@
 
 #include "absl/base/attributes.h"
 #include "absl/strings/string_view.h"
+#include "absl/types/optional.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/network_constants.h"
 #include "rtc_base/socket_address.h"
@@ -216,6 +217,9 @@ class RTC_EXPORT Candidate {
   // candidate.
   Candidate ToSanitizedCopy(bool use_hostname_address,
                             bool filter_related_address) const;
+
+  void ComputeFoundation(const rtc::SocketAddress& base_address,
+                         absl::optional<uint64_t> tie_breaker);
 
  private:
   // TODO(bugs.webrtc.org/13220): With C++17, we get a std::string assignment
