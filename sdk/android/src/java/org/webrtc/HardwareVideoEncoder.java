@@ -30,6 +30,8 @@ import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 import org.webrtc.ThreadUtils.ThreadChecker;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Android hardware video encoder.
@@ -169,6 +171,9 @@ class HardwareVideoEncoder implements VideoEncoder {
   // True if collection of encoding statistics is enabled.
   private boolean isEncodingStatisticsEnabled;
 
+  private boolean isRefFrameControlEnabled = true;
+  private int frameNum;
+
   /**
    * Creates a new HardwareVideoEncoder with the given codecName, codecType, colorFormat, key frame
    * intervals, and bitrateAdjuster.
@@ -234,6 +239,8 @@ class HardwareVideoEncoder implements VideoEncoder {
 
     isEncodingStatisticsEnabled = false;
 
+    frameNum = 0;
+
     try {
       codec = mediaCodecWrapperFactory.createByCodecName(codecName);
     } catch (IOException | IllegalArgumentException e) {
@@ -270,6 +277,10 @@ class HardwareVideoEncoder implements VideoEncoder {
       if (codecName.equals("c2.google.av1.encoder")) {
         // Enable RTC mode in AV1 HW encoder.
         format.setInteger("vendor.google-av1enc.encoding-preset.int32.value", 1);
+
+        if (isRefFrameControlEnabled) {
+          format.setInteger("vendor.google-av1enc.encoding-refframe-control.int32.value", 1);
+        }
       }
 
       if (isEncodingStatisticsSupported()) {
@@ -290,6 +301,12 @@ class HardwareVideoEncoder implements VideoEncoder {
       }
 
       updateInputFormat(codec.getInputFormat());
+
+      //if (codecName.equals("c2.google.av1.encoder")) {
+      //  MediaFormat f = codec.getInputFormat();
+      //  int num_ref_frame_buffers = f.getInteger("vendor.google-av1enc.encoding-refframe-number.int32.value");
+      //  Logging.e(TAG, "--num_ref_frame_buffers: " + num_ref_frame_buffers);
+      //}
 
       codec.start();
     } catch (IllegalArgumentException | IllegalStateException e) {
@@ -384,7 +401,20 @@ class HardwareVideoEncoder implements VideoEncoder {
 
     if (requestedKeyFrame || shouldForceKeyFrame(videoFrame.getTimestampNs())) {
       requestKeyFrame(videoFrame.getTimestampNs());
+    } else if (isRefFrameControlEnabled && frameNum > 0){
+      Bundle b = new Bundle();
+
+      ArrayList<Integer> refBufferIndices = new ArrayList<Integer>();
+      refBufferIndices.add((frameNum - 1) % 7);
+      b.putIntegerArrayList("vendor.google-av1enc.refframe-buffers.blob.value", refBufferIndices);
+      
+      int updateBufferIndex = frameNum % 7;
+      b.putInt("vendor.google-av1enc.encoding-update-refframe.int32.value", updateBufferIndex);
+
+      Logging.e(TAG, "refBufferIndices: " + refBufferIndices + " updateBufferIndex: " + updateBufferIndex);
+      codec.setParameters(b);
     }
+    ++frameNum;
 
     EncodedImage.Builder builder = EncodedImage.builder()
                                        .setCaptureTimeNs(videoFrame.getTimestampNs())
