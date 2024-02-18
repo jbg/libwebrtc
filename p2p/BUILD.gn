@@ -666,7 +666,6 @@ rtc_library("port") {
     "../rtc_base:byte_buffer",
     "../rtc_base:callback_list",
     "../rtc_base:checks",
-    "../rtc_base:crc32",
     "../rtc_base:dscp",
     "../rtc_base:event_tracer",
     "../rtc_base:ip_address",
