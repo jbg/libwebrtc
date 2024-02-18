@@ -93,17 +93,6 @@ const char TCPTYPE_ACTIVE_STR[] = "active";
 const char TCPTYPE_PASSIVE_STR[] = "passive";
 const char TCPTYPE_SIMOPEN_STR[] = "so";
 
-std::string Port::ComputeFoundation(absl::string_view type,
-                                    absl::string_view protocol,
-                                    absl::string_view relay_protocol,
-                                    const rtc::SocketAddress& base_address) {
-  // TODO(bugs.webrtc.org/14605): ensure IceTiebreaker() is set.
-  rtc::StringBuilder sb;
-  sb << type << base_address.ipaddr().ToString() << protocol << relay_protocol
-     << rtc::ToString(IceTiebreaker());
-  return rtc::ToString(rtc::ComputeCrc32(sb.Release()));
-}
-
 Port::Port(TaskQueueBase* thread,
            absl::string_view type,
            rtc::PacketSocketFactory* factory,
@@ -260,22 +249,24 @@ void Port::AddAddress(const rtc::SocketAddress& address,
                       bool is_final) {
   RTC_DCHECK_RUN_ON(thread_);
 
-  std::string foundation =
-      ComputeFoundation(type, protocol, relay_protocol, base_address);
+  // TODO(tommi): Set relay_protocol and optionally provide the base address
+  // to automatically compute the foundation in the ctor?
   Candidate c(component_, protocol, address, 0U, username_fragment(), password_,
-              type, generation_, foundation, network_->id(), network_cost_);
+              type, generation_, "", network_->id(), network_cost_);
+  // Set the relay protocol before computing the foundation field.
+  c.set_relay_protocol(relay_protocol);
+  // TODO(bugs.webrtc.org/14605): ensure IceTiebreaker() is set.
+  c.ComputeFoundation(base_address, tiebreaker_);
 
+  c.set_priority(
+      c.GetPriority(type_preference, network_->preference(), relay_preference,
+                    field_trials_->IsEnabled(
+                        "WebRTC-IncreaseIceCandidatePriorityHostSrflx")));
 #if RTC_DCHECK_IS_ON
   if (protocol == TCP_PROTOCOL_NAME && c.is_local()) {
     RTC_DCHECK(!tcptype.empty());
   }
 #endif
-
-  c.set_relay_protocol(relay_protocol);
-  c.set_priority(
-      c.GetPriority(type_preference, network_->preference(), relay_preference,
-                    field_trials_->IsEnabled(
-                        "WebRTC-IncreaseIceCandidatePriorityHostSrflx")));
   c.set_tcptype(tcptype);
   c.set_network_name(network_->name());
   c.set_network_type(network_->type());
