@@ -11,6 +11,8 @@
 #include "api/candidate.h"
 
 #include "absl/base/attributes.h"
+#include "p2p/base/p2p_constants.h"
+#include "rtc_base/crc32.h"
 #include "rtc_base/helpers.h"
 #include "rtc_base/ip_address.h"
 #include "rtc_base/logging.h"
@@ -25,7 +27,7 @@ ABSL_CONST_INIT const absl::string_view RELAY_PORT_TYPE = "relay";
 
 Candidate::Candidate()
     : id_(rtc::CreateRandomString(8)),
-      component_(0),
+      component_(ICE_CANDIDATE_COMPONENT_DEFAULT),
       priority_(0),
       type_(LOCAL_PORT_TYPE),
       network_type_(rtc::ADAPTER_TYPE_UNKNOWN),
@@ -203,6 +205,16 @@ Candidate Candidate::ToSanitizedCopy(bool use_hostname_address,
         rtc::EmptySocketAddressWithFamily(copy.address().family()));
   }
   return copy;
+}
+
+void Candidate::ComputeFoundation(const rtc::SocketAddress& base_address,
+                                  absl::optional<uint64_t> tie_breaker) {
+  rtc::StringBuilder sb;
+  sb << type_ << base_address.ipaddr().ToString() << protocol_
+     << relay_protocol_;
+  if (tie_breaker.has_value())
+    sb << rtc::ToString(*tie_breaker);
+  foundation_ = rtc::ToString(rtc::ComputeCrc32(sb.Release()));
 }
 
 void Candidate::Assign(std::string& s, absl::string_view view) {
