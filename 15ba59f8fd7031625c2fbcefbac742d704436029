@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0a07da1_1ea77a5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2024-02-19T09:37:52Z",
+      "side": 1,
+      "message": "Uh, the crash seems to be:\n\n```\n02-16 15:43:37.619  2660  2677 E rtc     : #\n02-16 15:43:37.619  2660  2677 E rtc     : # Fatal error in: ../../system_wrappers/source/metrics.cc, line 290\n02-16 15:43:37.619  2660  2677 E rtc     : # last system error: 2\n02-16 15:43:37.619  2660  2677 E rtc     : # Check failed: 0 \u003d\u003d g_rtc_histogram_called.load(std::memory_order_acquire) (0 vs. 1)\n02-16 15:43:37.619  2660  2677 E rtc     : # \n```\n\nNot expected.. :)",
+      "revId": "15ba59f8fd7031625c2fbcefbac742d704436029",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
