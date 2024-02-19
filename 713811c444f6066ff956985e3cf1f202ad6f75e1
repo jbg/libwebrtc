@@ -16,6 +16,24 @@
       "message": "Have you tested that this works as expected? It would be great if you can attach a before and after plot for example.\n\nThis change will not have an effect while receiving DTX, which seems to be the case in the bug.",
       "revId": "713811c444f6066ff956985e3cf1f202ad6f75e1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6049518a_ac52636a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3281934
+      },
+      "writtenOn": "2024-02-19T12:50:35Z",
+      "side": 1,
+      "message": "Yes, I tested and saw great improvement. With the self built Chromium webrtc-internals crashes after few seconds, so getting the after plot is problematic, but I can log the stats to console. Improving for DTX scenario seemed more complex, but I can look into it more.",
+      "parentUuid": "c4c633ff_76ab833c",
+      "revId": "713811c444f6066ff956985e3cf1f202ad6f75e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
