@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4c633ff_76ab833c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2024-02-19T08:25:51Z",
+      "side": 1,
+      "message": "Have you tested that this works as expected? It would be great if you can attach a before and after plot for example.\n\nThis change will not have an effect while receiving DTX, which seems to be the case in the bug.",
+      "revId": "713811c444f6066ff956985e3cf1f202ad6f75e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
