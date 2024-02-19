@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2912f430_20dd4967",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2024-02-19T11:12:58Z",
+      "side": 1,
+      "message": "I tried breaking up the circular dependency in https://webrtc-review.googlesource.com/c/src/+/339941 but think that will get a bit easier after https://webrtc-review.googlesource.com/c/src/+/337441\n\nSo for now lets just be consistent. A bit...",
+      "revId": "56edf992b4293bd7501025fec1d426b2796a1764",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
