@@ -24,6 +24,7 @@
 #include "modules/audio_processing/aec3/aec3_common.h"
 #include "modules/audio_processing/aec3/delay_estimate.h"
 #include "modules/audio_processing/aec3/echo_audibility.h"
+#include "modules/audio_processing/aec3/echo_path_gain_analyzer.h"
 #include "modules/audio_processing/aec3/echo_path_variability.h"
 #include "modules/audio_processing/aec3/erl_estimator.h"
 #include "modules/audio_processing/aec3/erle_estimator.h"
@@ -55,6 +56,12 @@ class AecState {
   bool UseLinearFilterOutput() const {
     return filter_quality_state_.LinearFilterUsable() &&
            config_.filter.use_linear_filter;
+  }
+
+  // Returns whether the linear filter has a consistent shape
+  bool ConsistentLinearFilter() const {
+    return echo_path_gain_analyzer_.consistent_echo_path_gain() ||
+           filter_analyzer_.any_filter_consistent();
   }
 
   // Returns whether the render signal is currently active.
@@ -289,6 +296,7 @@ class AecState {
   size_t blocks_with_active_render_ = 0;
   bool capture_signal_saturation_ = false;
   FilterAnalyzer filter_analyzer_;
+  EchoPathGainAnalyzer echo_path_gain_analyzer_;
   EchoAudibility echo_audibility_;
   ReverbModelEstimator reverb_model_estimator_;
   ReverbModel avg_render_reverb_;

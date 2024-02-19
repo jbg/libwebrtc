@@ -105,6 +105,18 @@ void NonLinearEstimate(
   }
 }
 
+void ConstraintByNonLinearEstimate(
+    float echo_path_gain,
+    const std::array<float, kFftLengthBy2Plus1>& X2,
+    rtc::ArrayView<std::array<float, kFftLengthBy2Plus1>> R2) {
+  const size_t num_capture_channels = R2.size();
+  for (size_t ch = 0; ch < num_capture_channels; ++ch) {
+    for (size_t k = 0; k < kFftLengthBy2Plus1; ++k) {
+      R2[ch][k] = std::max(X2[k] * echo_path_gain, R2[ch][k]);
+    }
+  }
+}
+
 // Applies a soft noise gate to the echo generating power.
 void ApplyNoiseGate(const EchoCanceller3Config::EchoModel& config,
                     rtc::ArrayView<float, kFftLengthBy2Plus1> X2) {
@@ -188,7 +200,7 @@ void ResidualEchoEstimator::Estimate(
   UpdateRenderNoisePower(render_buffer);
 
   // Estimate the residual echo power.
-  if (aec_state.UsableLinearEstimate()) {
+  if (aec_state.UsableLinearEstimate() && aec_state.ConsistentLinearFilter()) {
     // When there is saturated echo, assume the same spectral content as is
     // present in the microphone signal.
     if (aec_state.SaturatedEcho()) {
@@ -202,11 +214,51 @@ void ResidualEchoEstimator::Estimate(
       LinearEstimate(S2_linear, aec_state.Erle(onset_compensated), R2);
       LinearEstimate(S2_linear, aec_state.ErleUnbounded(), R2_unbounded);
     }
-
     UpdateReverb(ReverbType::kLinear, aec_state, render_buffer,
                  dominant_nearend);
     AddReverb(R2);
     AddReverb(R2_unbounded);
+  } else if (aec_state.UsableLinearEstimate()) {
+    if (aec_state.SaturatedEcho()) {
+      for (size_t ch = 0; ch < num_capture_channels; ++ch) {
+        std::copy(Y2[ch].begin(), Y2[ch].end(), R2[ch].begin());
+        std::copy(Y2[ch].begin(), Y2[ch].end(), R2_unbounded[ch].begin());
+      }
+    } else {
+      const float echo_path_gain =
+          GetEchoPathGain(aec_state, /*gain_for_early_reflections=*/true);
+
+      // Doing a linear estimate
+      const bool onset_compensated =
+          erle_onset_compensation_in_dominant_nearend_ || !dominant_nearend;
+      LinearEstimate(S2_linear, aec_state.Erle(onset_compensated), R2);
+      LinearEstimate(S2_linear, aec_state.ErleUnbounded(), R2_unbounded);
+
+      // Doing a non linear estimate
+      // Estimate the echo generating signal power.
+      std::array<float, kFftLengthBy2Plus1> X2;
+      EchoGeneratingPower(num_render_channels_,
+                          render_buffer.GetSpectrumBuffer(), config_.echo_model,
+                          aec_state.MinDirectPathFilterDelay(), X2);
+      if (!aec_state.UseStationarityProperties()) {
+        ApplyNoiseGate(config_.echo_model, X2);
+      }
+
+      // Subtract the stationary noise power to avoid stationary noise causing
+      // excessive echo suppression.
+      for (size_t k = 0; k < kFftLengthBy2Plus1; ++k) {
+        X2[k] -= config_.echo_model.stationary_gate_slope * X2_noise_floor_[k];
+        X2[k] = std::max(0.f, X2[k]);
+      }
+
+      ConstraintByNonLinearEstimate(echo_path_gain, X2, R2);
+      ConstraintByNonLinearEstimate(echo_path_gain, X2, R2_unbounded);
+    }
+    UpdateReverb(ReverbType::kLinear, aec_state, render_buffer,
+                 dominant_nearend);
+    AddReverb(R2);
+    AddReverb(R2_unbounded);
+
   } else {
     const float echo_path_gain =
         GetEchoPathGain(aec_state, /*gain_for_early_reflections=*/true);
