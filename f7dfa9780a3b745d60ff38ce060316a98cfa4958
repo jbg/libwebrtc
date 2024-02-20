@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d63baee8_2a04109e",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 15039
+      },
+      "writtenOn": "2024-02-20T09:06:46Z",
+      "side": 1,
+      "message": "What happens if a client \u003c29 tries to access this?",
+      "range": {
+        "startLine": 163,
+        "startChar": 11,
+        "endLine": 163,
+        "endChar": 40
+      },
+      "revId": "f7dfa9780a3b745d60ff38ce060316a98cfa4958",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
