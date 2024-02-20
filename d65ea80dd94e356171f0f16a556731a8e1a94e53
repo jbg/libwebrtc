@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a21ac56b_e019d63b",
+        "filename": "api/candidate.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2024-02-20T10:20:17Z",
+      "side": 1,
+      "message": "The tie breaker was included by me to avoid the trivial-crc32 reversal attack from https://niespodd.github.io/webrtc-local-ip-leak/\n\nI am splitting that up and moving to include a \"foundation seed\" in\nhttps://webrtc-review.googlesource.com/c/src/+/338982 - I think that gets simpler after this change landed. We\u0027re moving in the right direction",
+      "parentUuid": "559a5ff3_9507f891",
+      "revId": "d65ea80dd94e356171f0f16a556731a8e1a94e53",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a6a94e6e_800df224",
         "filename": "p2p/base/port.cc",
         "patchSetId": 14
