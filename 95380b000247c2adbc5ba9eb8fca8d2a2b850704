@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee3ff4f8_5f6f1bc0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12094
+      },
+      "writtenOn": "2024-02-20T02:12:13Z",
+      "side": 1,
+      "message": "This is a follow up of [the comment in CL 338860](https://webrtc-review.googlesource.com/c/src/+/338860/comments/c23fd8bf_8f22a341). Please take a look. Thanks.",
+      "revId": "95380b000247c2adbc5ba9eb8fca8d2a2b850704",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
