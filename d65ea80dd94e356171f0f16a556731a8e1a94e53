@@ -106,6 +106,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f984dfb9_a018d375",
+        "filename": "api/candidate.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-02-20T15:14:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d35dc234_8f8d92fc",
+      "revId": "d65ea80dd94e356171f0f16a556731a8e1a94e53",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6a94e6e_800df224",
