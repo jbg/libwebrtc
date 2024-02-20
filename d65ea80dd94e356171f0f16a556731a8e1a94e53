@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d92e3782_58067de8",
+        "filename": "api/candidate.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-02-20T14:27:45Z",
+      "side": 1,
+      "message": "Thanks for catching. Added a note about some of these responsibilities being handled outside of the class",
+      "parentUuid": "17d23b80_e251eef7",
+      "revId": "d65ea80dd94e356171f0f16a556731a8e1a94e53",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "559a5ff3_9507f891",
@@ -72,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d35dc234_8f8d92fc",
+        "filename": "api/candidate.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-02-20T14:27:45Z",
+      "side": 1,
+      "message": "Added a note about the tie-breaker. I\u0027d like to keep that variable name btw since it makes things easier to navigate between the code and RFC.",
+      "parentUuid": "a21ac56b_e019d63b",
+      "revId": "d65ea80dd94e356171f0f16a556731a8e1a94e53",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a6a94e6e_800df224",
         "filename": "p2p/base/port.cc",
         "patchSetId": 14
@@ -83,6 +119,24 @@
       "writtenOn": "2024-02-20T09:59:45Z",
       "side": 1,
       "message": "it would actually be good to provide base address and relay protocol to the candidate at construction time, and make them const. Changing either should be considered as making a different candidate.\n\n(Haven\u0027t checked if they\u0027re changeable, though)",
+      "revId": "d65ea80dd94e356171f0f16a556731a8e1a94e53",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3269d681_e4654a1b",
+        "filename": "p2p/base/port.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-02-20T14:27:45Z",
+      "side": 1,
+      "message": "Added that to the todo",
+      "parentUuid": "a6a94e6e_800df224",
       "revId": "d65ea80dd94e356171f0f16a556731a8e1a94e53",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
