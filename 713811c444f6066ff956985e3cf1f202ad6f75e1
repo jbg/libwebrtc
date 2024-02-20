@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a1b835f8_a6e6203d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3281934
+      },
+      "writtenOn": "2024-02-20T19:05:43Z",
+      "side": 1,
+      "message": "I built Chromimum with official build flags now and looks like the crashes went away. So I should be able to provide the stats plots. When I tried to also change delay during DTX, it happens that silent concealed sample count gets bigger than just concealed sample count, which makes some debug checks to fail. Need to dig more.",
+      "parentUuid": "6049518a_ac52636a",
+      "revId": "713811c444f6066ff956985e3cf1f202ad6f75e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e74687c_44a6e02b",
         "filename": "modules/audio_coding/neteq/decision_logic.cc",
         "patchSetId": 3
@@ -49,6 +67,30 @@
       "writtenOn": "2024-02-20T17:00:58Z",
       "side": 1,
       "message": "I don\u0027t think this will work well without the TimescaleAllowed(). For example, it will be possible to add/remove multiple pitch cycles from the same frame, which will both sound worse and one can get stuck in expanding the same frame until the target delay is reached.",
+      "range": {
+        "startLine": 328,
+        "startChar": 6,
+        "endLine": 333,
+        "endChar": 7
+      },
+      "revId": "713811c444f6066ff956985e3cf1f202ad6f75e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08f6b6b6_69daea18",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 3281934
+      },
+      "writtenOn": "2024-02-20T19:05:43Z",
+      "side": 1,
+      "message": "I agree. I haven\u0027t done much listening tests. The scenario which I am particularly interested to improve is synchronising multiple jitter buffers. For example if there are several playbacks in the same room and these are little bit off then AEC fails to cancel that playback out and remotes hear echo. In which case it is more important to maintain good sync and adapt to a target quickly even if it may cause slight degradation to audio.",
+      "parentUuid": "2e74687c_44a6e02b",
       "range": {
         "startLine": 328,
         "startChar": 6,
