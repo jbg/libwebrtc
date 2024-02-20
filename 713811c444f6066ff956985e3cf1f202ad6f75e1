@@ -34,6 +34,29 @@
       "parentUuid": "c4c633ff_76ab833c",
       "revId": "713811c444f6066ff956985e3cf1f202ad6f75e1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e74687c_44a6e02b",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2024-02-20T17:00:58Z",
+      "side": 1,
+      "message": "I don\u0027t think this will work well without the TimescaleAllowed(). For example, it will be possible to add/remove multiple pitch cycles from the same frame, which will both sound worse and one can get stuck in expanding the same frame until the target delay is reached.",
+      "range": {
+        "startLine": 328,
+        "startChar": 6,
+        "endLine": 333,
+        "endChar": 7
+      },
+      "revId": "713811c444f6066ff956985e3cf1f202ad6f75e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
