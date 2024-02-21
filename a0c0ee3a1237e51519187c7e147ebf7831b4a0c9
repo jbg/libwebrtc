@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5eca3f0e_4c045a1e",
+        "filename": "pc/rtc_stats_collector_unittest.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-02-21T09:21:24Z",
+      "side": 1,
+      "message": "@hta@webrtc.org - drive by observation here - isn\u0027t it suspicious that this loop (and the ones below), in a test, are being marked as not being covered by tests?",
+      "revId": "a0c0ee3a1237e51519187c7e147ebf7831b4a0c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
