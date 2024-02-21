@@ -97,10 +97,9 @@ class WebRtcAudioRecord {
   private final ScheduledExecutorService executor;
   private @Nullable ScheduledFuture<String> future;
 
-  private volatile boolean microphoneMute;
+  private boolean microphoneMute = true;
   private final AtomicReference<Boolean> audioSourceMatchesRecordingSessionRef =
       new AtomicReference<>();
-  private byte[] emptyBytes;
 
   private final @Nullable AudioRecordErrorCallback errorCallback;
   private final @Nullable AudioRecordStateCallback stateCallback;
@@ -138,10 +137,6 @@ class WebRtcAudioRecord {
       while (keepAlive) {
         int bytesRead = audioRecord.read(byteBuffer, byteBuffer.capacity());
         if (bytesRead == byteBuffer.capacity()) {
-          if (microphoneMute) {
-            byteBuffer.clear();
-            byteBuffer.put(emptyBytes);
-          }
           // It's possible we've been shut down during the read, and stopRecording() tried and
           // failed to join this thread. To be a bit safer, try to avoid calling any native methods
           // in case they've been unregistered after stopRecording() returned.
@@ -288,7 +283,6 @@ class WebRtcAudioRecord {
       return -1;
     }
     Logging.d(TAG, "byteBuffer.capacity: " + byteBuffer.capacity());
-    emptyBytes = new byte[byteBuffer.capacity()];
     // Rather than passing the ByteBuffer with every callback (requiring
     // the potentially expensive GetDirectBufferAddress) we simply have the
     // the native class cache the address to the memory once.
@@ -371,9 +365,25 @@ class WebRtcAudioRecord {
     }
   }
 
+ /**
+  * Starts recording audio.
+  * This method is called by native code through JNI (Java Native Interface) to initiate audio recording.
+  *
+  * @return {@code true} if the recording started successfully, {@code false} otherwise.
+  *
+  * @see #setMicrophoneMute(boolean) To control the recording state based on the mute status of the microphone.
+  * @see #stopRecordingThread() To terminate the audio recording thread.
+  */
   @CalledByNative
   private boolean startRecording() {
     Logging.d(TAG, "startRecording");
+
+    //Added check to avoid default call from jni for this startRecording() after initRecording() method.
+    if (microphoneMute) {
+        Logging.d(TAG, "AudioRecord.startRecording Recording is not started because the microphone is muted.");
+        return false;
+    }
+
     assertTrue(audioRecord != null);
     assertTrue(audioThread == null);
     try {
@@ -395,10 +405,34 @@ class WebRtcAudioRecord {
     return true;
   }
 
+ /**
+  * This method is called by native code through JNI (Java Native Interface) when the audio recording needs to be cleared.
+  * It stops the audio recording thread and releases/clears audio resources.
+  *
+  * @return {@code true} if the operation was successful, {@code false} otherwise.
+  * @see #stopRecordingThread() To stop only audio recording thread.
+  */
   @CalledByNative
   private boolean stopRecording() {
     Logging.d(TAG, "stopRecording");
-    assertTrue(audioThread != null);
+    if (audioThread != null) {
+        stopRecordingThread();
+    }
+    effects.release();
+    releaseAudioResources();
+    return true;
+  }
+
+  /**
+   * This method is responsible for stopping the audio recording thread without releasing audio resources.
+   * If audio resources are released, initRecording() needs to be called again with "sample rate" and "channel".
+   *
+   * @see #stopRecording() To release audio resources after terminating the recording thread.
+   * @see #setMicrophoneMute(boolean) To control the recording state based on the mute status of the microphone
+   */
+  private void stopRecordingThread() {
+      Logging.d(TAG, "stopRecordingThread");
+      if (audioThread == null) return;
     if (future != null) {
       if (!future.isDone()) {
         // Might be needed if the client calls startRecording(), stopRecording() back-to-back.
@@ -412,9 +446,6 @@ class WebRtcAudioRecord {
       WebRtcAudioUtils.logAudioState(TAG, context, audioManager);
     }
     audioThread = null;
-    effects.release();
-    releaseAudioResources();
-    return true;
   }
 
   @TargetApi(Build.VERSION_CODES.M)
@@ -504,11 +535,28 @@ class WebRtcAudioRecord {
   private native void nativeDataIsRecorded(
       long nativeAudioRecordJni, int bytes, long captureTimestampNs);
 
-  // Sets all recorded samples to zero if `mute` is true, i.e., ensures that
-  // the microphone is muted.
+ /**
+  * Stops or starts recording based on the mute status.
+  * If {@param mute} is true, recording is stopped; otherwise, it is started.
+  *
+  * @see #stopRecordingThread() To stop recording when muting the microphone.
+  * @see #startRecording() To start recording when unmuting the microphone.
+  *
+  */
   public void setMicrophoneMute(boolean mute) {
     Logging.w(TAG, "setMicrophoneMute(" + mute + ")");
+    if (microphoneMute == mute) return; //same state, no need any changes.
     microphoneMute = mute;
+    // In Android 12 and newer devices, even when the microphone is not in use,
+    // a green indicator still appear in the top right corner.
+    // To prevent this indicator from showing, we stop and start recording based on setMicrophoneMute.
+    if (mute) {
+        // for muting, stop recording
+        stopRecordingThread();
+    } else {
+        // for unmuting, start recording
+        startRecording();
+    }
   }
 
   // Sets whether NoiseSuppressor should be enabled or disabled.
