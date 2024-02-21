@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62babbbe_d1b6a68b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2024-02-21T18:19:22Z",
+      "side": 1,
+      "message": "I tried to add proper fuzzing for frame drop config but got some issues (seems all related to fuzzer itself. for example, 1) need a longer frame history window for per-layer drop mode, 2) should avoid dropping key frame upper layers, etc). I will fix it later (added TODO).",
+      "revId": "493dda69e9cecfc094a43042e38a8f1fc5066f8c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
