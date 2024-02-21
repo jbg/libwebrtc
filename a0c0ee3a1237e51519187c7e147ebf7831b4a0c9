@@ -16,6 +16,24 @@
       "message": "@hta@webrtc.org - drive by observation here - isn\u0027t it suspicious that this loop (and the ones below), in a test, are being marked as not being covered by tests?",
       "revId": "a0c0ee3a1237e51519187c7e147ebf7831b4a0c9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bb661db_9de5e043",
+        "filename": "pc/rtc_stats_collector_unittest.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2024-02-21T09:29:11Z",
+      "side": 1,
+      "message": "that is because CreateMockRtpSendersReceiversAndChannels is never called (1x) with any receiving tracks? I wonder where/when that got lost or if we simply never noticed because we now have coverage ;-)",
+      "parentUuid": "5eca3f0e_4c045a1e",
+      "revId": "a0c0ee3a1237e51519187c7e147ebf7831b4a0c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ],
   "submitRequirementResults": [
