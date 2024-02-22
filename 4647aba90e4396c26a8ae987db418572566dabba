@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "753a1f2e_e051b4b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-02-22T14:55:52Z",
+      "side": 1,
+      "message": "less names for cleaner code!\nwould like to delete it before it is spread.",
+      "revId": "4647aba90e4396c26a8ae987db418572566dabba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
