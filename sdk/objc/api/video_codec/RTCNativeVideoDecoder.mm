@@ -10,7 +10,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "RTCWrappedNativeVideoDecoder.h"
+#import "RTCNativeVideoDecoder.h"
 #import "base/RTCMacros.h"
 #import "helpers/NSString+StdString.h"
 
