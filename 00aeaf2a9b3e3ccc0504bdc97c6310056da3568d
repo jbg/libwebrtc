@@ -69,6 +69,24 @@
       "parentUuid": "ee3c8857_7f5f2a77",
       "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "684262c7_633d09c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3311177
+      },
+      "writtenOn": "2024-02-23T15:54:52Z",
+      "side": 1,
+      "message": "Got it thanks. want to share that we also attempted using the AudioManager\u0027s setMicrophoneMute(boolean) method during audio recording to prevent the privacy indicator from appearing.\n\n  Enabling AudioManager.setMicrophoneMute to \u0027true\u0027. It works as expected(mic privacy indicator not shown) in our app. \nbut we faced some other issue with the phone application. like., if we are in our app call, and another normal call is received during this process, attending normal call ends up \"muted\" by default. \n \n Also saw that according to the documentation, this method should only be utilized by the telephony app or the primary audio controller app, as it affects the entire android os.",
+      "parentUuid": "aa64ebe7_cfa4f413",
+      "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
