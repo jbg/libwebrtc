@@ -33,6 +33,42 @@
       "message": "@henrika@webrtc.org Thanks for the update. but \"soft mute\" shows privacy indicator on android 12+ devices even when user had muted or not using microphone giving an impression of audio being recorded.\nIs any other better way to fix it ?",
       "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa64ebe7_cfa4f413",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2024-02-23T14:49:04Z",
+      "side": 1,
+      "message": "Adding some more details and motivations given that I am blocking this CL.\n\nFor WebRTC on Android, when the microphone is muted, it does not stop the audio recording, all it does is to silence the recorded samples. Most likely, Android 12 sees this as \"microphone is being used\" even if the ADM is muted. It all boils down to how muted is defined.\n\nIn WebRTC, the silent audio stream is still recorded, encoded and transmitted while muted. There are pros and cons with this approach but that is how it has always worked.\n\nIMO, to mute the mic is NOT the same as hanging up the call and the UI should reflect that the input audio is in fact muted.\n\nI would also like to add that even if you call https://developer.android.com/reference/android/media/AudioManager#setMicrophoneMute(boolean) while recording, the UI still indicates that the mic is in use. Hence, the indicator is designed to show that the microphone is in use and not as a mute indicator.",
+      "parentUuid": "a27795a3_6378eecb",
+      "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5164a2c_e22fff45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2024-02-23T14:49:04Z",
+      "side": 1,
+      "message": "As I state, the current design in WebRTC is to keep recording alive and replace the recorded signal with zeros with the goal to keep stats alive, avoid echo and glitches at unmute and also reduce latency when unmuting. And the UI correctly reflects that the microphone is active. If you need a \"hard mute\", you can simply follow the example I linked to and instead of injecting the default Java ADM, inject the default ADM with the patch that you have done here. Then you are in full control and can do it your way. This is simply not what most WebRTC clients need at the moment.",
+      "parentUuid": "ee3c8857_7f5f2a77",
+      "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
