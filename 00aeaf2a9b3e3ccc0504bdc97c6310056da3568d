@@ -87,6 +87,24 @@
       "parentUuid": "aa64ebe7_cfa4f413",
       "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c733b753_67a189bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2024-02-23T16:00:22Z",
+      "side": 1,
+      "message": "Thanks. Judging from the CL and your feedback it is clear that you know this area well. Hope you will manage to inject your own ADM that does exactly what you need but note the potential issues that I mentioned.",
+      "parentUuid": "684262c7_633d09c8",
+      "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
