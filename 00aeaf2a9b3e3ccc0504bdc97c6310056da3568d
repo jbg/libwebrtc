@@ -16,6 +16,23 @@
       "message": "This component is part of the default AudioDeviceModule in WebRTC and we have not seen reports from any major client that the current design is not OK.\n\nThe existing design is to implement mute as a \"soft mute\" and don\u0027t stop recording at the same time since it will lead to audio glitches and delays when unmuting.\n\nIf you prefer this design you are free to implement your own ADM and inject it in [1]. That way you don\u0027t have to go through any reviews but can own and develop your ADM as you like.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/examples/androidapp/src/org/appspot/apprtc/PeerConnectionClient.java;l\u003d451;drc\u003d4e86aa0870e5e34031a320e9ef95e86c897ffa4e",
       "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee3c8857_7f5f2a77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3311177
+      },
+      "writtenOn": "2024-02-23T13:00:58Z",
+      "side": 1,
+      "message": "@henrika@webrtc.org Thanks for the update. but \"soft mute\" shows privacy indicator on android 12+ devices even when user had muted or not using microphone giving an impression of audio being recorded.\nIs any other better way to fix it ?",
+      "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
