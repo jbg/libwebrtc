@@ -1645,9 +1645,19 @@ ParsedRtcEventLog::ParseStatus ParsedRtcEventLog::StoreParsedLegacyEvent(
 
       // Use RtpPacketReceived instead of more generic RtpPacket because former
       // has a buildin convertion to RTPHeader.
+      rtc::CopyOnWriteBuffer buffer(rtp_packet.header());
+      bool has_padding = false;
+      if (!buffer.empty()) {
+        // Extract the padding bit manually before parsing the header. The
+        // parser expects the padding size to be present at the end of the
+        // packet if the bit is set. Since we're only passing it the header the
+        // parsing would otherwise fail.
+        constexpr uint8_t kMask = 0b00'1'0'0000;
+        has_padding = buffer[0] & kMask;
+        buffer.MutableData()[0] = buffer[0] & ~kMask;
+      }
       RtpPacketReceived rtp_header;
-      RTC_PARSE_CHECK_OR_RETURN(
-          rtp_header.Parse(rtc::CopyOnWriteBuffer(rtp_packet.header())));
+      RTC_PARSE_CHECK_OR_RETURN(rtp_header.Parse(buffer));
 
       if (const RtpHeaderExtensionMap* extension_map = GetRtpHeaderExtensionMap(
               rtp_packet.incoming(), rtp_header.Ssrc())) {
@@ -1662,7 +1672,7 @@ ParsedRtcEventLog::ParseStatus ParsedRtcEventLog::StoreParsedLegacyEvent(
       // length in RTC event log. In absence of it, we assume the RTP packet to
       // contain only padding, if the padding bit is set.
       // TODO(webrtc:9730): Use a generic way to obtain padding length.
-      if (rtp_header.has_padding())
+      if (has_padding)
         parsed_header.paddingLength = total_length - rtp_header.size();
 
       RTC_PARSE_CHECK_OR_RETURN(event.has_timestamp_us());
