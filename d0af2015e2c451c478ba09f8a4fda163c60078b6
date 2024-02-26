@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84868855_f0f1d6e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-02-26T14:12:28Z",
+      "side": 1,
+      "message": "Treating such padding RTP packets as valid is intentional\nIt allows to use RtpPacket class not just for packets, but also for RTP packet headers.\n\nhttps://webrtc-review.googlesource.com/c/src/+/225265",
+      "revId": "d0af2015e2c451c478ba09f8a4fda163c60078b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
