@@ -544,7 +544,10 @@ bool RtpPacket::ParseBuffer(const uint8_t* buffer, size_t size) {
     payload_offset_ = extension_offset + extensions_capacity;
   }
 
-  if (has_padding && payload_offset_ < size) {
+  if (has_padding && payload_offset_ == size) {
+    RTC_LOG(LS_WARNING) << "Padding was set, but padding size wasn't specified";
+    return false;
+  } else if (has_padding && payload_offset_ < size) {
     padding_size_ = buffer[size - 1];
     if (padding_size_ == 0) {
       RTC_LOG(LS_WARNING) << "Padding was set, but padding size is zero";

@@ -541,26 +541,58 @@ TEST(RtpPacketTest, ParseHeaderOnly) {
   EXPECT_EQ(packet.payload_size(), 0u);
 }
 
-TEST(RtpPacketTest, ParseHeaderOnlyWithPadding) {
+TEST(RtpPacketTest, RejectsHeaderHavingPaddingBitWithoutPaddingSize) {
   // clang-format off
   constexpr uint8_t kPaddingHeader[] = {
-      0xa0, 0x62, 0x35, 0x79,
-      0x65, 0x43, 0x12, 0x78,
-      0x12, 0x34, 0x56, 0x78};
+      // Fixed header
+      0b10'1'0'0000, 0, 0, 0,
+      0, 0, 0, 0,
+      0, 0, 0, 0};
+      // No payload or padding
   // clang-format on
 
   RtpPacket packet;
-  EXPECT_TRUE(packet.Parse(rtc::CopyOnWriteBuffer(kPaddingHeader)));
-
-  EXPECT_TRUE(packet.has_padding());
-  EXPECT_EQ(packet.padding_size(), 0u);
-  EXPECT_EQ(packet.payload_size(), 0u);
+  EXPECT_FALSE(packet.Parse(rtc::CopyOnWriteBuffer(kPaddingHeader)));
 }
 
-TEST(RtpPacketTest, ParseHeaderOnlyWithExtensionAndPadding) {
+TEST(RtpPacketTest, RejectsHeaderHavingPaddingBitWithZeroPaddingSize) {
   // clang-format off
   constexpr uint8_t kPaddingHeader[] = {
-      0xb0, 0x62, 0x35, 0x79,
+      // Fixed header
+      0b10'1'0'0000, 0, 0, 0,
+      0, 0, 0, 0,
+      0, 0, 0, 0,
+      // Padding or payload?
+      0};
+  // clang-format on
+
+  RtpPacket packet;
+  EXPECT_FALSE(packet.Parse(rtc::CopyOnWriteBuffer(kPaddingHeader)));
+}
+
+TEST(RtpPacketTest, ParsesHeaderHavingPaddingBitAndNonZeroPaddingSize) {
+  // clang-format off
+  constexpr uint8_t kPaddingHeader[] = {
+      // Fixed header
+      0b10'1'0'0000, 0, 0, 0,
+      0, 0, 0, 0,
+      0, 0, 0, 0,
+      // No payload
+      // Padding
+      0, 0, 3};
+  // clang-format on
+
+  RtpPacket packet;
+  ASSERT_TRUE(packet.Parse(rtc::CopyOnWriteBuffer(kPaddingHeader)));
+
+  EXPECT_TRUE(packet.has_padding());
+  EXPECT_EQ(packet.padding_size(), size_t{3});
+}
+
+TEST(RtpPacketTest, ParseHeaderOnlyWithExtension) {
+  // clang-format off
+  constexpr uint8_t kPaddingHeader[] = {
+      0x90, 0x62, 0x35, 0x79,
       0x65, 0x43, 0x12, 0x78,
       0x12, 0x34, 0x56, 0x78,
       0xbe, 0xde, 0x00, 0x01,
@@ -571,24 +603,7 @@ TEST(RtpPacketTest, ParseHeaderOnlyWithExtensionAndPadding) {
   extensions.Register<TransmissionOffset>(1);
   RtpPacket packet(&extensions);
   EXPECT_TRUE(packet.Parse(rtc::CopyOnWriteBuffer(kPaddingHeader)));
-  EXPECT_TRUE(packet.has_padding());
   EXPECT_TRUE(packet.HasExtension<TransmissionOffset>());
-  EXPECT_EQ(packet.padding_size(), 0u);
-}
-
-TEST(RtpPacketTest, ParsePaddingOnlyPacket) {
-  // clang-format off
-  constexpr uint8_t kPaddingHeader[] = {
-      0xa0, 0x62, 0x35, 0x79,
-      0x65, 0x43, 0x12, 0x78,
-      0x12, 0x34, 0x56, 0x78,
-      0, 0, 3};
-  // clang-format on
-
-  RtpPacket packet;
-  EXPECT_TRUE(packet.Parse(rtc::CopyOnWriteBuffer(kPaddingHeader)));
-  EXPECT_TRUE(packet.has_padding());
-  EXPECT_EQ(packet.padding_size(), 3u);
 }
 
 TEST(RtpPacketTest, GetExtensionWithoutParametersReturnsOptionalValue) {
