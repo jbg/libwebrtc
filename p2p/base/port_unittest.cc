@@ -150,15 +150,11 @@ class TestPort : public Port {
            absl::string_view username_fragment,
            absl::string_view password,
            const webrtc::FieldTrialsView* field_trials = nullptr)
-      : Port(thread,
+      : Port({thread, factory, network, username_fragment, password,
+              field_trials},
              type,
-             factory,
-             network,
              min_port,
-             max_port,
-             username_fragment,
-             password,
-             field_trials) {}
+             max_port) {}
   ~TestPort() {}
 
   // Expose GetStunMessage so that we can test it.

@@ -168,7 +168,7 @@ UDPPort::UDPPort(rtc::Thread* thread,
                  absl::string_view password,
                  bool emit_local_for_anyaddress,
                  const webrtc::FieldTrialsView* field_trials)
-    : Port(thread, type, factory, network, username, password, field_trials),
+    : Port({thread, factory, network, username, password, field_trials}, type),
       request_manager_(
           thread,
           [this](const void* data, size_t size, StunRequest* request) {
@@ -191,15 +191,12 @@ UDPPort::UDPPort(rtc::Thread* thread,
                  absl::string_view password,
                  bool emit_local_for_anyaddress,
                  const webrtc::FieldTrialsView* field_trials)
-    : Port(thread,
+    : Port({thread,
+
+            factory, network, username, password, field_trials},
            type,
-           factory,
-           network,
            min_port,
-           max_port,
-           username,
-           password,
-           field_trials),
+           max_port),
       request_manager_(
           thread,
           [this](const void* data, size_t size, StunRequest* request) {

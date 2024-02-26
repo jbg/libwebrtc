@@ -98,15 +98,10 @@ TCPPort::TCPPort(rtc::Thread* thread,
                  absl::string_view password,
                  bool allow_listen,
                  const webrtc::FieldTrialsView* field_trials)
-    : Port(thread,
+    : Port({thread, factory, network, username, password, field_trials},
            LOCAL_PORT_TYPE,
-           factory,
-           network,
            min_port,
-           max_port,
-           username,
-           password,
-           field_trials),
+           max_port),
       allow_listen_(allow_listen),
       error_(0) {
   // TODO(mallinath) - Set preference value as per RFC 6544.
