@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6266b33_e1a99d67",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 20849
+      },
+      "writtenOn": "2024-02-26T03:54:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87661631_0a362df5",
+      "range": {
+        "startLine": 9,
+        "startChar": 45,
+        "endLine": 9,
+        "endChar": 72
+      },
+      "revId": "9e7516441956b13257c82359082d27515c1dd83d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d17bedc9_362a420c",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-23T13:22:43Z",
       "side": 1,
       "message": "This needs to be changed.\n\nI am not sure you want to check in the code as is and then make it work but I suggest at least to make this configurable.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 56
+      },
+      "revId": "9e7516441956b13257c82359082d27515c1dd83d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c98af19_51a6f3a9",
+        "filename": "tools_webrtc/chromiumos/exporter/bazel/generate.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 20849
+      },
+      "writtenOn": "2024-02-26T03:54:58Z",
+      "side": 1,
+      "message": "Done, thanks for catching, we actually already parse `-from` from the command line so this is fixed by passing it from the main function.",
+      "parentUuid": "d17bedc9_362a420c",
       "range": {
         "startLine": 41,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "638f1958_5757a5c1",
+        "filename": "tools_webrtc/chromiumos/exporter/go.mod",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 20849
+      },
+      "writtenOn": "2024-02-26T03:54:58Z",
+      "side": 1,
+      "message": "For our purposes, this line is only used to make the go tooling figure out which import paths belong to the local files, and yes, changing this would allow us to get rid of github in the other import statements.\n\nIf we use a \"correct\" import path, other people\u0027s code can import our code and `go get` would work. While I don\u0027t see any immediate use for this yet I think we can make it this way from day 1.",
+      "parentUuid": "9a33164a_b5a851c7",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 37
+      },
+      "revId": "9e7516441956b13257c82359082d27515c1dd83d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a348ac52_da37aa60",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-02-23T13:22:43Z",
       "side": 1,
       "message": "remove?",
+      "range": {
+        "startLine": 23,
+        "startChar": 1,
+        "endLine": 23,
+        "endChar": 3
+      },
+      "revId": "9e7516441956b13257c82359082d27515c1dd83d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bfb98c6_2fb8b83a",
+        "filename": "tools_webrtc/chromiumos/exporter/main.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 20849
+      },
+      "writtenOn": "2024-02-26T03:54:58Z",
+      "side": 1,
+      "message": "This is used for the Must1 function. I changed it to not use dot imports so it is more obvious.",
+      "parentUuid": "a348ac52_da37aa60",
       "range": {
         "startLine": 23,
         "startChar": 1,
