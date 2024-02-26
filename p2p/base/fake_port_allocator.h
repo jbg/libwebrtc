@@ -63,16 +63,11 @@ class TestUDPPort : public UDPPort {
               absl::string_view password,
               bool emit_localhost_for_anyaddress,
               const webrtc::FieldTrialsView* field_trials)
-      : UDPPort(thread,
+      : UDPPort({thread, factory, network, username, password, field_trials},
                 LOCAL_PORT_TYPE,
-                factory,
-                network,
                 min_port,
                 max_port,
-                username,
-                password,
-                emit_localhost_for_anyaddress,
-                field_trials) {}
+                emit_localhost_for_anyaddress) {}
 };
 
 // A FakePortAllocatorSession can be used with either a real or fake socket
