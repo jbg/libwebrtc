@@ -159,18 +159,13 @@ bool UDPPort::AddressResolver::GetResolvedAddress(
   return it->second->result().GetResolvedAddress(family, output);
 }
 
-UDPPort::UDPPort(rtc::Thread* thread,
+UDPPort::UDPPort(const CreatePortArgs& args,
                  absl::string_view type,
-                 rtc::PacketSocketFactory* factory,
-                 const rtc::Network* network,
                  rtc::AsyncPacketSocket* socket,
-                 absl::string_view username,
-                 absl::string_view password,
-                 bool emit_local_for_anyaddress,
-                 const webrtc::FieldTrialsView* field_trials)
-    : Port(thread, type, factory, network, username, password, field_trials),
+                 bool emit_local_for_anyaddress)
+    : Port(args, type),
       request_manager_(
-          thread,
+          args.network_thread,
           [this](const void* data, size_t size, StunRequest* request) {
             OnSendPacket(data, size, request);
           }),
@@ -180,6 +175,38 @@ UDPPort::UDPPort(rtc::Thread* thread,
       stun_keepalive_delay_(STUN_KEEPALIVE_INTERVAL),
       dscp_(rtc::DSCP_NO_CHANGE),
       emit_local_for_anyaddress_(emit_local_for_anyaddress) {}
+
+UDPPort::UDPPort(const CreatePortArgs& args,
+                 absl::string_view type,
+                 uint16_t min_port,
+                 uint16_t max_port,
+                 bool emit_local_for_anyaddress)
+    : Port(args, type),
+      request_manager_(
+          args.network_thread,
+          [this](const void* data, size_t size, StunRequest* request) {
+            OnSendPacket(data, size, request);
+          }),
+      socket_(nullptr),
+      error_(0),
+      ready_(false),
+      stun_keepalive_delay_(STUN_KEEPALIVE_INTERVAL),
+      dscp_(rtc::DSCP_NO_CHANGE),
+      emit_local_for_anyaddress_(emit_local_for_anyaddress) {}
+
+UDPPort::UDPPort(rtc::Thread* thread,
+                 absl::string_view type,
+                 rtc::PacketSocketFactory* factory,
+                 const rtc::Network* network,
+                 rtc::AsyncPacketSocket* socket,
+                 absl::string_view username,
+                 absl::string_view password,
+                 bool emit_local_for_anyaddress,
+                 const webrtc::FieldTrialsView* field_trials)
+    : UDPPort({thread, factory, network, username, password, field_trials},
+              type,
+              socket,
+              emit_local_for_anyaddress) {}
 
 UDPPort::UDPPort(rtc::Thread* thread,
                  absl::string_view type,
@@ -191,15 +218,12 @@ UDPPort::UDPPort(rtc::Thread* thread,
                  absl::string_view password,
                  bool emit_local_for_anyaddress,
                  const webrtc::FieldTrialsView* field_trials)
-    : Port(thread,
+    : Port({thread,
+
+            factory, network, username, password, field_trials},
            type,
-           factory,
-           network,
            min_port,
-           max_port,
-           username,
-           password,
-           field_trials),
+           max_port),
       request_manager_(
           thread,
           [this](const void* data, size_t size, StunRequest* request) {

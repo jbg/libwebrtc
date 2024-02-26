@@ -117,6 +117,26 @@ class RTC_EXPORT UDPPort : public Port {
   StunRequestManager& request_manager() { return request_manager_; }
 
  protected:
+  UDPPort(const CreatePortArgs& args,
+          absl::string_view type,
+          rtc::AsyncPacketSocket* socket,
+          bool emit_local_for_anyaddress);
+  UDPPort(const CreatePortArgs& args,
+          absl::string_view type,
+          uint16_t min_port,
+          uint16_t max_port,
+          bool emit_local_for_anyaddress);
+  // [[deprecated("Pass arguments using CreatePortArgs")]]
+  UDPPort(rtc::Thread* thread,
+          absl::string_view type,
+          rtc::PacketSocketFactory* factory,
+          const rtc::Network* network,
+          rtc::AsyncPacketSocket* socket,
+          absl::string_view username,
+          absl::string_view password,
+          bool emit_local_for_anyaddress,
+          const webrtc::FieldTrialsView* field_trials);
+  // [[deprecated("Pass arguments using CreatePortArgs")]]
   UDPPort(rtc::Thread* thread,
           absl::string_view type,
           rtc::PacketSocketFactory* factory,
@@ -127,17 +147,6 @@ class RTC_EXPORT UDPPort : public Port {
           absl::string_view password,
           bool emit_local_for_anyaddress,
           const webrtc::FieldTrialsView* field_trials);
-
-  UDPPort(rtc::Thread* thread,
-          absl::string_view type,
-          rtc::PacketSocketFactory* factory,
-          const rtc::Network* network,
-          rtc::AsyncPacketSocket* socket,
-          absl::string_view username,
-          absl::string_view password,
-          bool emit_local_for_anyaddress,
-          const webrtc::FieldTrialsView* field_trials);
-
   bool Init();
 
   int SendTo(const void* data,
