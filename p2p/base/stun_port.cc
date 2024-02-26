@@ -159,18 +159,13 @@ bool UDPPort::AddressResolver::GetResolvedAddress(
   return it->second->result().GetResolvedAddress(family, output);
 }
 
-UDPPort::UDPPort(rtc::Thread* thread,
+UDPPort::UDPPort(const CreatePortArgs& args,
                  absl::string_view type,
-                 rtc::PacketSocketFactory* factory,
-                 const rtc::Network* network,
                  rtc::AsyncPacketSocket* socket,
-                 absl::string_view username,
-                 absl::string_view password,
-                 bool emit_local_for_anyaddress,
-                 const webrtc::FieldTrialsView* field_trials)
-    : Port(thread, type, factory, network, username, password, field_trials),
+                 bool emit_local_for_anyaddress)
+    : Port(args, type),
       request_manager_(
-          thread,
+          args.network_thread,
           [this](const void* data, size_t size, StunRequest* request) {
             OnSendPacket(data, size, request);
           }),
@@ -180,6 +175,38 @@ UDPPort::UDPPort(rtc::Thread* thread,
       stun_keepalive_delay_(STUN_KEEPALIVE_INTERVAL),
       dscp_(rtc::DSCP_NO_CHANGE),
       emit_local_for_anyaddress_(emit_local_for_anyaddress) {}
+
+UDPPort::UDPPort(const CreatePortArgs& args,
+                 absl::string_view type,
+                 uint16_t min_port,
+                 uint16_t max_port,
+                 bool emit_local_for_anyaddress)
+    : Port(args, type, min_port, max_port),
+      request_manager_(
+          args.network_thread,
+          [this](const void* data, size_t size, StunRequest* request) {
+            OnSendPacket(data, size, request);
+          }),
+      socket_(nullptr),
+      error_(0),
+      ready_(false),
+      stun_keepalive_delay_(STUN_KEEPALIVE_INTERVAL),
+      dscp_(rtc::DSCP_NO_CHANGE),
+      emit_local_for_anyaddress_(emit_local_for_anyaddress) {}
+
+UDPPort::UDPPort(rtc::Thread* thread,
+                 absl::string_view type,
+                 rtc::PacketSocketFactory* factory,
+                 const rtc::Network* network,
+                 rtc::AsyncPacketSocket* socket,
+                 absl::string_view username,
+                 absl::string_view password,
+                 bool emit_local_for_anyaddress,
+                 const webrtc::FieldTrialsView* field_trials)
+    : UDPPort({thread, factory, network, username, password, field_trials},
+              type,
+              socket,
+              emit_local_for_anyaddress) {}
 
 UDPPort::UDPPort(rtc::Thread* thread,
                  absl::string_view type,
@@ -191,15 +218,10 @@ UDPPort::UDPPort(rtc::Thread* thread,
                  absl::string_view password,
                  bool emit_local_for_anyaddress,
                  const webrtc::FieldTrialsView* field_trials)
-    : Port(thread,
+    : Port({thread, factory, network, username, password, field_trials},
            type,
-           factory,
-           network,
            min_port,
-           max_port,
-           username,
-           password,
-           field_trials),
+           max_port),
       request_manager_(
           thread,
           [this](const void* data, size_t size, StunRequest* request) {
@@ -623,20 +645,13 @@ bool UDPPort::HasStunCandidateWithAddress(
 }
 
 std::unique_ptr<StunPort> StunPort::Create(
-    rtc::Thread* thread,
-    rtc::PacketSocketFactory* factory,
-    const rtc::Network* network,
+    const CreatePortArgs& args,
     uint16_t min_port,
     uint16_t max_port,
-    absl::string_view username,
-    absl::string_view password,
     const ServerAddresses& servers,
-    absl::optional<int> stun_keepalive_interval,
-    const webrtc::FieldTrialsView* field_trials) {
+    absl::optional<int> stun_keepalive_interval) {
   // Using `new` to access a non-public constructor.
-  auto port = absl::WrapUnique(new StunPort(thread, factory, network, min_port,
-                                            max_port, username, password,
-                                            servers, field_trials));
+  auto port = absl::WrapUnique(new StunPort(args, min_port, max_port, servers));
   port->set_stun_keepalive_delay(stun_keepalive_interval);
   if (!port->Init()) {
     return nullptr;
@@ -644,25 +659,11 @@ std::unique_ptr<StunPort> StunPort::Create(
   return port;
 }
 
-StunPort::StunPort(rtc::Thread* thread,
-                   rtc::PacketSocketFactory* factory,
-                   const rtc::Network* network,
+StunPort::StunPort(const CreatePortArgs& args,
                    uint16_t min_port,
                    uint16_t max_port,
-                   absl::string_view username,
-                   absl::string_view password,
-                   const ServerAddresses& servers,
-                   const webrtc::FieldTrialsView* field_trials)
-    : UDPPort(thread,
-              STUN_PORT_TYPE,
-              factory,
-              network,
-              min_port,
-              max_port,
-              username,
-              password,
-              false,
-              field_trials) {
+                   const ServerAddresses& servers)
+    : UDPPort(args, STUN_PORT_TYPE, min_port, max_port, false) {
   set_server_addresses(servers);
 }
 
