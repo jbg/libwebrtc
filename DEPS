@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'a44e4a5e326ed73137c943c645157d3d58bca36d',
+  'chromium_revision': '98d533810a2a9be0c4de413fe21e5c0dc1ad393c',
 
   # Fetch the prebuilt binaries for llvm-cov and llvm-profdata. Needed to
   # process the raw profiles produced by instrumented targets (built with
@@ -61,13 +61,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@5661d22bf5c797b6320e9cbd319b3def37b87ba7',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@70d31a30ca2d17e0119bccde3055f52003c6d59e',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@4686dee27f54647199a4944cd50e956fcb691b48',
+    'https://chromium.googlesource.com/chromium/src/testing@6a2e50072e27aafb6863d5f3073f63c2c93e5f31',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@21431ba73b82b57852ec94f23d51a6e24d2f326e',
+    'https://chromium.googlesource.com/chromium/src/third_party@f91afd3791a11a4d609ec0ee879ac9a2b8fdcfd7',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -115,7 +115,7 @@ deps = {
   'src/third_party/clang-format/script':
     'https://chromium.googlesource.com/external/github.com/llvm/llvm-project/clang/tools/clang-format.git@e5337933f2951cacd3aeacd238ce4578163ca0b9',
   'src/third_party/libc++/src':
-    'https://chromium.googlesource.com/external/github.com/llvm/llvm-project/libcxx.git@08b8dfd3a9689085f0b0aa0f3e5912e88e5d4ac6',
+    'https://chromium.googlesource.com/external/github.com/llvm/llvm-project/libcxx.git@aff3a0b23ca52ebd6daae2333e5bb0aa5d6c1847',
   'src/third_party/libc++abi/src':
     'https://chromium.googlesource.com/external/github.com/llvm/llvm-project/libcxxabi.git@5b35c9f06c3f8f17b43bd3da9527d6fecdf916c2',
   'src/third_party/libunwind/src':
@@ -355,7 +355,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@cefc25bc1c7688dbb601306db5cc7cfe1678cd06',
+    'https://chromium.googlesource.com/chromium/src/tools@c5a82566d2bce9f436f64df2eff02894cdb97ce2',
 
   'src/third_party/accessibility_test_framework': {
       'packages': [
