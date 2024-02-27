@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c62e3930_258c4e38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2024-02-27T06:21:33Z",
+      "side": 1,
+      "message": "Hi Alex, I think this needs your approval too, because you are owner of the PipeWire code that exists for screen sharing. This doesn\u0027t change anything, it just moves some code from `SharedScreencastStream` to `PipeWireUtils` so it can be used for cameras and adds DmaBuf support this code had in the past.",
+      "revId": "5965fc8349e1431823d12978d7d2475b8c60ee21",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
