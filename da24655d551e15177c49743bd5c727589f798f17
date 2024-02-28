@@ -34,6 +34,24 @@
       "parentUuid": "a81e7bc7_3fcd624f",
       "revId": "da24655d551e15177c49743bd5c727589f798f17",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecf75b97_ab94e1ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2024-02-28T07:35:08Z",
+      "side": 1,
+      "message": "Yeah... but even then I think you want to pass it all the way through to the base port? Lets keep it like this for now.\nMaybe this will make eliminating one of the two constructors possible even.",
+      "parentUuid": "49d59275_6ccb6f46",
+      "revId": "da24655d551e15177c49743bd5c727589f798f17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
