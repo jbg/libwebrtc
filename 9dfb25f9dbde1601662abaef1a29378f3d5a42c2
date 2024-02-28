@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "158e8997_644bf91e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2024-02-28T14:58:31Z",
+      "side": 1,
+      "message": "Thanks for fixing!",
+      "revId": "9dfb25f9dbde1601662abaef1a29378f3d5a42c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ea5ac61_f6a33cc0",
+        "filename": "api/video_codecs/simulcast_stream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2024-02-28T14:58:31Z",
+      "side": 1,
+      "message": "refer to issue perhaps",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 16
+      },
+      "revId": "9dfb25f9dbde1601662abaef1a29378f3d5a42c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
