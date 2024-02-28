@@ -97,6 +97,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f5aed791_10571ca8",
+        "filename": "p2p/base/port_interface.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2024-02-28T15:45:04Z",
+      "side": 1,
+      "message": "Done. Haven\u0027t renamed CreateRelayPortArgs because I assume it is used internally.",
+      "parentUuid": "ae9523e9_b09a2b52",
+      "range": {
+        "startLine": 52,
+        "startChar": 7,
+        "endLine": 52,
+        "endChar": 21
+      },
+      "revId": "da24655d551e15177c49743bd5c727589f798f17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "61d625a6_66520171",
         "filename": "p2p/base/port_interface.h",
         "patchSetId": 12
@@ -137,6 +161,47 @@
         "endLine": 543,
         "endChar": 70
       },
+      "revId": "da24655d551e15177c49743bd5c727589f798f17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84852106_47fe75da",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2024-02-28T15:45:04Z",
+      "side": 1,
+      "message": "Done. I\u0027m hoping we can move min and max ports to the CreatePortArgs as optionals.",
+      "parentUuid": "10bd3577_91d23c77",
+      "range": {
+        "startLine": 542,
+        "startChar": 32,
+        "endLine": 543,
+        "endChar": 70
+      },
+      "revId": "da24655d551e15177c49743bd5c727589f798f17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4b6d719_f453eed1",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2024-02-28T15:45:04Z",
+      "side": 1,
+      "message": "hah, explicitly passing nullptr here made the designated initializers exercise worth it ;-)",
       "revId": "da24655d551e15177c49743bd5c727589f798f17",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }

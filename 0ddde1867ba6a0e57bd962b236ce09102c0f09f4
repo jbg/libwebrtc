@@ -16,6 +16,24 @@
       "message": "can\u0027t you write this better as : Port(args, type, 0, 0)?",
       "revId": "0ddde1867ba6a0e57bd962b236ce09102c0f09f4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cba110e1_16bb6625",
+        "filename": "p2p/base/port.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 19549
+      },
+      "writtenOn": "2024-02-28T15:45:04Z",
+      "side": 1,
+      "message": "Questions that now become very valid ;-)\n\nDifference is subtle enough I missed it but tests caught it: shared_socket has a different value.\n\nI *think* moving min_port and max_port to the parameters and turning them into optionals is the way to change that.",
+      "parentUuid": "5c45a699_9235f8e6",
+      "revId": "0ddde1867ba6a0e57bd962b236ce09102c0f09f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
