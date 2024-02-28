@@ -16,6 +16,24 @@
       "message": "one notable difference from CreateRelayPortArgs is that this is a TQ, not a Thread. They are related by inheritance and this one seems to work.",
       "revId": "d5ca8e8987a0f9c1c356ddee1bb9a248df1ac577",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24df0b1d_4605aaff",
+        "filename": "p2p/base/port_interface.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-02-28T10:36:05Z",
+      "side": 1,
+      "message": "I welcome this direction - if a class doesn\u0027t need `Thread` specific functionality, give it a `TaskQueue`. Then it would be easier to swap implementation in the future.",
+      "parentUuid": "540cfdb0_3063b6f7",
+      "revId": "d5ca8e8987a0f9c1c356ddee1bb9a248df1ac577",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

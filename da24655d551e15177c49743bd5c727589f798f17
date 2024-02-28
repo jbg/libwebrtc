@@ -52,6 +52,93 @@
       "parentUuid": "49d59275_6ccb6f46",
       "revId": "da24655d551e15177c49743bd5c727589f798f17",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fc91d26_a24991e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-02-28T10:36:05Z",
+      "side": 1,
+      "message": "Yes, then I still want to pass it all the way through.\nDo not want to block you to keep it like this for now.",
+      "parentUuid": "ecf75b97_ab94e1ff",
+      "revId": "da24655d551e15177c49743bd5c727589f798f17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae9523e9_b09a2b52",
+        "filename": "p2p/base/port_interface.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-02-28T10:36:05Z",
+      "side": 1,
+      "message": "May be note in the name this is a reference type/not safe to storing (it has string_view members)\ne.g.\nPortArgsRef/PortParametersRef\n\n(may be no need to note in the name this is construction parameters - that is likely infer from where it is used)",
+      "range": {
+        "startLine": 52,
+        "startChar": 7,
+        "endLine": 52,
+        "endChar": 21
+      },
+      "revId": "da24655d551e15177c49743bd5c727589f798f17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61d625a6_66520171",
+        "filename": "p2p/base/port_interface.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-02-28T10:36:05Z",
+      "side": 1,
+      "message": "may be annotate pointers\nabsl::Nonnull\u003cwebrtc::TaskQueueBase*\u003e\n\nabsl::Nullable\u003cconst rtc::Network*\u003e\n\nfor better documentation.",
+      "range": {
+        "startLine": 53,
+        "startChar": 2,
+        "endLine": 53,
+        "endChar": 24
+      },
+      "revId": "da24655d551e15177c49743bd5c727589f798f17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10bd3577_91d23c77",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-02-28T10:36:05Z",
+      "side": 1,
+      "message": "passing arguments by position is error-prone:\neasy to swap two string parameters without noticing,\nhard to add new parameters to the middle of the CreatePortArgs.\n\nI would strongly advice to use designated initializers here:\n```\n{.network_thread \u003d \u0026main_,\n .socket_factory \u003d socket_factory,\n .ice_username_fragment \u003d username_,\n ...},\n ```\n\n And document remaining parameters too (though that part is not new. so feel free to keep it as is):\n`/*min_port\u003d*/0, /*max_port\u003d*/0, /*what_is_this_parameter?\u003d*/true, ...`",
+      "range": {
+        "startLine": 542,
+        "startChar": 32,
+        "endLine": 543,
+        "endChar": 70
+      },
+      "revId": "da24655d551e15177c49743bd5c727589f798f17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
