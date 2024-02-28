@@ -105,6 +105,24 @@
       "parentUuid": "684262c7_633d09c8",
       "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0cc638f_0896fbb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3311177
+      },
+      "writtenOn": "2024-02-28T16:18:23Z",
+      "side": 1,
+      "message": "Hey @henrika@webrtc.org I was trying to implement my own ADM. is deriving it from Java audio device is a good approach ?",
+      "parentUuid": "c733b753_67a189bb",
+      "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
