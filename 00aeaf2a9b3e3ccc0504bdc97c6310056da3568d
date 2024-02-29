@@ -195,6 +195,24 @@
       "parentUuid": "0819685c_85b3ee5b",
       "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "622821fd_656f8ce6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2024-02-29T08:50:33Z",
+      "side": 1,
+      "message": "I don\u0027t think I will be able to provide exact and detailed instructions on how to implement it but I know that several clients have done what you ask similar modifications to the default ADM and that it works well. You could try searching for other open source implementation in this area.",
+      "parentUuid": "05a2eb75_22187af0",
+      "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
