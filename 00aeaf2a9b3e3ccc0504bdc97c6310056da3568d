@@ -141,6 +141,24 @@
       "parentUuid": "f0cc638f_0896fbb1",
       "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1823953a_97bb50a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2024-02-29T08:07:11Z",
+      "side": 1,
+      "message": "You can build the WebRTC demo client and follow the example in https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/examples/androidapp/src/org/appspot/apprtc/PeerConnectionClient.java;l\u003d451;drc\u003d4e86aa0870e5e34031a320e9ef95e86c897ffa4e",
+      "parentUuid": "1c037217_9ac2e538",
+      "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
