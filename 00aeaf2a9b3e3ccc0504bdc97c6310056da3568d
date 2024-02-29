@@ -177,6 +177,24 @@
       "parentUuid": "1823953a_97bb50a9",
       "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05a2eb75_22187af0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3311177
+      },
+      "writtenOn": "2024-02-29T08:14:41Z",
+      "side": 1,
+      "message": "@henrika@webrtc.org Yes, because I only need to make changes in the WebRtcAudioRecord file, I attempted to develop a custom extension of ADM that extends JavaAudioDeviceModule.java and modifying the audioInput for WebRtcAudioRecord. However, I encountered difficulty as JavaAudioDeviceModule.java lacks a public constructor. Is there an alternative approach for accomplishing this?",
+      "parentUuid": "0819685c_85b3ee5b",
+      "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
