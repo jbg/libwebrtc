@@ -159,6 +159,24 @@
       "parentUuid": "1c037217_9ac2e538",
       "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0819685c_85b3ee5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2024-02-29T08:08:14Z",
+      "side": 1,
+      "message": "The external ADM is created in https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/examples/androidapp/src/org/appspot/apprtc/PeerConnectionClient.java;l\u003d459?q\u003dcreateJavaAudioDevice\u0026ss\u003dchromium",
+      "parentUuid": "1823953a_97bb50a9",
+      "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
