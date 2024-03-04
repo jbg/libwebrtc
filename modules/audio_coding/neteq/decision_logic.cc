@@ -203,6 +203,21 @@ int DecisionLogic::UnlimitedTargetLevelMs() const {
   return delay_manager_->UnlimitedTargetLevelMs();
 }
 
+bool DecisionLogic::SetBaseMinimumDelay(int delay_ms) {
+  if (delay_ms == 0) {
+    if (precise_jitter_buffer_target_mode_) {
+      RTC_LOG(LS_INFO) << "Switching to normal jitter buffer target mode";
+      precise_jitter_buffer_target_mode_ = false;
+      SetMaximumDelay(0);
+    }
+  } else if (delay_ms == GetBaseMinimumDelay()) {
+    RTC_LOG(LS_INFO) << "Switching to precise jitter buffer target mode";
+    precise_jitter_buffer_target_mode_ = true;
+    SetMaximumDelay(delay_ms);
+  }
+  return delay_manager_->SetBaseMinimumDelay(delay_ms);
+}
+
 int DecisionLogic::GetFilteredBufferLevel() const {
   return buffer_level_filter_->filtered_current_level();
 }
@@ -307,6 +322,21 @@ NetEq::Operation DecisionLogic::ExpectedPacketAvailable(
     NetEqController::NetEqStatus status) {
   if (!disallow_time_stretching_ && status.last_mode != NetEq::Mode::kExpand &&
       !status.play_dtmf) {
+    if (precise_jitter_buffer_target_mode_) {
+      const int playout_delay_ms = GetPlayoutDelayMs(status);
+      const int target_delay_ms = delay_manager_->TargetDelayMs();
+      if (TimescaleAllowed()) {
+        if (playout_delay_ms >
+            target_delay_ms + kDelayAdjustmentGranularityMs / 2) {
+          return NetEq::Operation::kAccelerate;
+        }
+        if (playout_delay_ms <
+            target_delay_ms - kDelayAdjustmentGranularityMs / 2) {
+          return NetEq::Operation::kPreemptiveExpand;
+        }
+      }
+      return NetEq::Operation::kNormal;
+    }
     if (config_.enable_stable_delay_mode) {
       const int playout_delay_ms = GetPlayoutDelayMs(status);
       const int64_t low_limit = TargetLevelMs();
@@ -351,6 +381,15 @@ NetEq::Operation DecisionLogic::ExpectedPacketAvailable(
 
 NetEq::Operation DecisionLogic::FuturePacketAvailable(
     NetEqController::NetEqStatus status) {
+  int target_level_window_ms = kTargetLevelWindowMs;
+
+  if (precise_jitter_buffer_target_mode_) {
+    target_level_window_ms = kDelayAdjustmentGranularityMs;
+    if (status.next_packet->waiting_time < GetBaseMinimumDelay()) {
+      return NoPacket(status);
+    }
+  }
+
   // Required packet is not available, but a future packet is.
   // Check if we should continue with an ongoing concealment because the new
   // packet is too far into the future.
@@ -360,9 +399,9 @@ NetEq::Operation DecisionLogic::FuturePacketAvailable(
             ? status.packet_buffer_info.span_samples_wait_time
             : status.packet_buffer_info.span_samples;
     const int buffer_delay_ms = buffer_delay_samples / sample_rate_khz_;
-    const int high_limit = TargetLevelMs() + kTargetLevelWindowMs / 2;
+    const int high_limit = TargetLevelMs() + target_level_window_ms / 2;
     const int low_limit =
-        std::max(0, TargetLevelMs() - kTargetLevelWindowMs / 2);
+        std::max(0, TargetLevelMs() - target_level_window_ms / 2);
     const bool above_target_delay = buffer_delay_ms > high_limit;
     const bool below_target_delay = buffer_delay_ms < low_limit;
     if ((PacketTooEarly(status) && !above_target_delay) ||
