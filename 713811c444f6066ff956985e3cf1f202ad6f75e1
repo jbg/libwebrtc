@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a418e02_f2628fe1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3281934
+      },
+      "writtenOn": "2024-03-04T17:34:50Z",
+      "side": 1,
+      "message": "Now the delay is adjusted even during complete silence",
+      "parentUuid": "a1b835f8_a6e6203d",
+      "revId": "713811c444f6066ff956985e3cf1f202ad6f75e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e74687c_44a6e02b",
         "filename": "modules/audio_coding/neteq/decision_logic.cc",
         "patchSetId": 3
@@ -91,6 +109,30 @@
       "side": 1,
       "message": "I agree. I haven\u0027t done much listening tests. The scenario which I am particularly interested to improve is synchronising multiple jitter buffers. For example if there are several playbacks in the same room and these are little bit off then AEC fails to cancel that playback out and remotes hear echo. In which case it is more important to maintain good sync and adapt to a target quickly even if it may cause slight degradation to audio.",
       "parentUuid": "2e74687c_44a6e02b",
+      "range": {
+        "startLine": 328,
+        "startChar": 6,
+        "endLine": 333,
+        "endChar": 7
+      },
+      "revId": "713811c444f6066ff956985e3cf1f202ad6f75e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4592c574_4e19ced5",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 3281934
+      },
+      "writtenOn": "2024-03-04T17:34:50Z",
+      "side": 1,
+      "message": "Added TimescaleAllowed()",
+      "parentUuid": "08f6b6b6_69daea18",
       "range": {
         "startLine": 328,
         "startChar": 6,
