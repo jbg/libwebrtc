@@ -72,6 +72,7 @@ class NetEqController {
 
   struct PacketInfo {
     uint32_t timestamp;
+    int waiting_time;
     bool is_dtx;
     bool is_cng;
   };

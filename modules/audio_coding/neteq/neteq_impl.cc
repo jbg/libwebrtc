@@ -1117,7 +1117,8 @@ int NetEqImpl::GetDecision(Operation* operation,
   status.sync_buffer_samples = sync_buffer_->FutureLength();
   if (packet) {
     status.next_packet = {
-        packet->timestamp, packet->frame && packet->frame->IsDtxPacket(),
+        packet->timestamp, static_cast<int>(packet->waiting_time->ElapsedMs()),
+        packet->frame && packet->frame->IsDtxPacket(),
         decoder_database_->IsComfortNoise(packet->payload_type)};
   }
   *operation = controller_->GetDecision(status, &reset_decoder_);
