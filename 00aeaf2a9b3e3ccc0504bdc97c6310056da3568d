@@ -213,6 +213,24 @@
       "parentUuid": "05a2eb75_22187af0",
       "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ddf4283_4cc598e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3311177
+      },
+      "writtenOn": "2024-03-05T14:28:23Z",
+      "side": 1,
+      "message": "Hey @henrika@webrtc.org I was too close to create a custom ADM. I\u0027m good with java class but just getting error with cpp jni files because of import error. I\u0027m not sure how to import webrtc framework headers in application layer cpp.\n\nWhat I did was....\n\n1. I generated webrtc aar file.\n2. linked and using in application via android maven.\n3. Created a custom java audio device module and used it on while creating Peerconnectionfactory.,\n4. Faced issues with c++ not linked.\n5. Now, extracted the same audio_device cc and h files since all I need to change is package name and class name in JNI.\n6. Now, faced Import issue..\n   - Tried linked as a separate .so file also, seems cmakelists works but still the import of .h is persistent.\n   \nQuestions : \n1. Can you give me some hints or reference how can I use header files in application.\n2. can you confirm me, is it possible to create a custom ADM without any small change in the framework ?\n3. I followed this steps to generate aar. https://webrtc.github.io/webrtc-org/native-code/android/ do I need to any other comments to make headers imports work in application layer ?\n4. Also, since ADM is a custom module in application layer I was doing in my Mac system. is that also need to be linux machine?\n5. I believe that modifying this particular file within the WebRTC framework would be simpler, but I am concerned about potential challenges with future updates. If it is replaced or overlooked, it could lead to a messy situation\n\nyour reply would be appreciated. Thanks.",
+      "parentUuid": "622821fd_656f8ce6",
+      "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
