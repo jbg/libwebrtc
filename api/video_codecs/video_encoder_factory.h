@@ -16,6 +16,7 @@
 #include <vector>
 
 #include "absl/types/optional.h"
+#include "api/environment/environment.h"
 #include "api/units/data_rate.h"
 #include "api/video/render_resolution.h"
 #include "api/video_codecs/sdp_video_format.h"
@@ -63,6 +64,8 @@ class VideoEncoderFactory {
     virtual absl::optional<SdpVideoFormat> OnEncoderBroken() = 0;
   };
 
+  virtual ~VideoEncoderFactory() = default;
+
   // Returns a list of supported video formats in order of preference, to use
   // for signaling etc.
   virtual std::vector<SdpVideoFormat> GetSupportedFormats() const = 0;
@@ -84,20 +87,18 @@ class VideoEncoderFactory {
   // subject to change without notice.
   virtual CodecSupport QueryCodecSupport(
       const SdpVideoFormat& format,
-      absl::optional<std::string> scalability_mode) const {
-    // Default implementation, query for supported formats and check if the
-    // specified format is supported. Returns false if scalability_mode is
-    // specified.
-    CodecSupport codec_support;
-    if (!scalability_mode) {
-      codec_support.is_supported = format.IsCodecInList(GetSupportedFormats());
-    }
-    return codec_support;
-  }
+      absl::optional<std::string> scalability_mode) const;
 
   // Creates a VideoEncoder for the specified format.
+  virtual std::unique_ptr<VideoEncoder> Create(const Environment& env,
+                                               const SdpVideoFormat& format);
+
+  // Deprecated in favor of the `Create` above.
+  // TODO: bugs.webrtc.org/15860 - Make private when all callers are updated
+  // to use Create function above. Delete when all derived classes implement
+  // `Create` instead of this function.
   virtual std::unique_ptr<VideoEncoder> CreateVideoEncoder(
-      const SdpVideoFormat& format) = 0;
+      const SdpVideoFormat& format);
 
   // This method creates a EncoderSelector to use for a VideoSendStream.
   // (and hence should probably been called CreateEncoderSelector()).
@@ -118,8 +119,6 @@ class VideoEncoderFactory {
   virtual std::unique_ptr<EncoderSelectorInterface> GetEncoderSelector() const {
     return nullptr;
   }
-
-  virtual ~VideoEncoderFactory() {}
 };
 
 }  // namespace webrtc
