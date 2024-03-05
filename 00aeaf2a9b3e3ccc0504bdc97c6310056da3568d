@@ -231,6 +231,41 @@
       "parentUuid": "622821fd_656f8ce6",
       "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcebc27c_223de0bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2024-03-05T14:52:02Z",
+      "side": 1,
+      "message": "cn",
+      "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bbb2e14_5ece16cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2024-03-05T14:52:02Z",
+      "side": 1,
+      "message": "I am unable to reply on each individual step here but can confirm that we (Google) have several different ADM version in Java (not open source) where different teams are injecting their own external ADMs with their own APIs and modifications of existing APIs.\n\nI have not seen any usage which includes aar files, only clean builds where the WebRTC parts are built from source. There might be issues I don\u0027t know about when using a prebuilt version of WebRTC.\n\nThe reference client for Android which injects an external ADM is give by https://webrtc.googlesource.com/src/+/master/examples/objc/AppRTCMobile/\n\nHere is an open source example based on iOS https://github.com/mstyura/RTCAudioDevice",
+      "parentUuid": "4ddf4283_4cc598e7",
+      "revId": "00aeaf2a9b3e3ccc0504bdc97c6310056da3568d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
