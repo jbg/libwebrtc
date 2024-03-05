@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a744ba22_ef6dabe3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-03-05T19:08:01Z",
+      "side": 1,
+      "message": "Given that this class supports the default parameterless constructor, this is a good and necessary change.",
+      "revId": "1d367fc90e457a16ee4ae94f91aed7a783a4ea38",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
