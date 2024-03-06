@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dd892e36_d6039ec4",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 3281934
+      },
+      "writtenOn": "2024-03-06T12:25:29Z",
+      "side": 1,
+      "message": "Ok, I see. What about triggering \"precise_jitter_buffer_target_mode_ \u003d true\" when min and max delay are equal? NetEq already has API to set min and max delay.\nAnd there exists rtp extension https://webrtc.googlesource.com/src/+/refs/heads/main/docs/native-code/rtp-hdrext/playout-delay, which if i am not missing something, is wired only for video. Wiring it for audio too might give the desired control to application layer, and at the same time it is worth to give a try with adding a new web exposed API.",
+      "parentUuid": "a75b6b96_9512c22c",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 3
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2916f06_43807f39",
         "filename": "modules/audio_coding/neteq/decision_logic.cc",
         "patchSetId": 6
@@ -180,6 +204,30 @@
       "side": 1,
       "message": "No. If there is a network delay spike causing an underrun, then the delay will increase (in-order packets are not discarded in NetEq unless the buffer is full).",
       "parentUuid": "0fa99c07_bc694707",
+      "range": {
+        "startLine": 344,
+        "startChar": 33,
+        "endLine": 344,
+        "endChar": 71
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ad4e503_5a9813c9",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 3281934
+      },
+      "writtenOn": "2024-03-06T12:25:29Z",
+      "side": 1,
+      "message": "Ok, then discarding the packets which do not fit into target delay is also missing from this CL.",
+      "parentUuid": "8d5a0fef_0017918b",
       "range": {
         "startLine": 344,
         "startChar": 33,
