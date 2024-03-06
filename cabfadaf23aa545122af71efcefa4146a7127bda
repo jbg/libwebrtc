@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "003f27c4_81b70950",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-03-06T12:55:22Z",
+      "side": 1,
+      "message": "Commenting on the standards process only.",
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f486500a_16b282f8",
@@ -86,6 +103,30 @@
       "side": 1,
       "message": "Ok, I see. What about triggering \"precise_jitter_buffer_target_mode_ \u003d true\" when min and max delay are equal? NetEq already has API to set min and max delay.\nAnd there exists rtp extension https://webrtc.googlesource.com/src/+/refs/heads/main/docs/native-code/rtp-hdrext/playout-delay, which if i am not missing something, is wired only for video. Wiring it for audio too might give the desired control to application layer, and at the same time it is worth to give a try with adding a new web exposed API.",
       "parentUuid": "a75b6b96_9512c22c",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 3
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "503d9e93_e0878829",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-03-06T12:55:22Z",
+      "side": 1,
+      "message": "Adding new functionality by abusing (\"re-interpreting\") existing APIs is generally frowned upon. If you have an API proposal in a bug / PR in the working group, it is acceptable (and customary) to add it in chromium behind a feature flag, so that it can be experimented with before it is standardized.\n\nI am very much aware that the process of driving through new features is a lot more painful than it seems to have any justification for being - but we haven\u0027t abandoned it yet; if we manage to drive it through, we at least have the hope that the browsers eventually converge on it; with non-standard API hacks, the chances are low-to-zero.",
+      "parentUuid": "dd892e36_d6039ec4",
       "range": {
         "startLine": 213,
         "startChar": 0,
