@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a75b6b96_9512c22c",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2024-03-06T10:46:50Z",
+      "side": 1,
+      "message": "I know it\u0027s a painful process but it seems like the right thing in this case :) \n\nChanging the behavior like this seems highly non-obvious for users and is not something that will be approved (sorry).",
+      "parentUuid": "180972bc_8944a312",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 3
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2916f06_43807f39",
         "filename": "modules/audio_coding/neteq/decision_logic.cc",
         "patchSetId": 6
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "This \"low_limit + packet_arrival_history_-\u003eGetMaxDelayMs()\" part i do no quite understand yet, but isn\u0027t it more of a problem when the target delay is influenced by network conditions? With this change the max delay is set equal to min delay and there are no stretching expected unless the externally set jitterBufferTarget hasn\u0027t been reached yet. But once it is reached the delay is expected to be stable.",
       "parentUuid": "079780e6_a68aff5b",
+      "range": {
+        "startLine": 344,
+        "startChar": 33,
+        "endLine": 344,
+        "endChar": 71
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d5a0fef_0017918b",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2024-03-06T10:46:50Z",
+      "side": 1,
+      "message": "No. If there is a network delay spike causing an underrun, then the delay will increase (in-order packets are not discarded in NetEq unless the buffer is full).",
+      "parentUuid": "0fa99c07_bc694707",
       "range": {
         "startLine": 344,
         "startChar": 33,
