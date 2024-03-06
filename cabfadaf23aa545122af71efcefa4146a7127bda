@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f486500a_16b282f8",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2024-03-06T08:52:20Z",
+      "side": 1,
+      "message": "Tight latency bounds may have a negative effect on quality (resulting in more time stretching and underruns). Existing users of the playoutDelayHint API may use it to increase quality (at the cost of latency). This change breaks what we originally intended with the spec.\n\nI think it would be more appropriate to have another API, for example where it\u0027s possible to set both the min and max delay, for this use case where a fixed delay is more important than quality.",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 3
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2916f06_43807f39",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2024-03-06T08:52:20Z",
+      "side": 1,
+      "message": "This will not actually make the adaptation faster, which you described was the problem in the bug? So is this really necessary?",
+      "range": {
+        "startLine": 325,
+        "startChar": 8,
+        "endLine": 325,
+        "endChar": 42
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "079780e6_a68aff5b",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2024-03-06T08:52:20Z",
+      "side": 1,
+      "message": "This max delay is pretty important to avoid accelerating directly after an underrun (i.e. when network delay \u003e playout delay).",
+      "range": {
+        "startLine": 344,
+        "startChar": 33,
+        "endLine": 344,
+        "endChar": 71
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd6617a4_30701a14",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2024-03-06T08:52:20Z",
+      "side": 1,
+      "message": "This will cause decoding to wait when there is packet loss until the right delay is achieved. Not sure if this is the correct thing to do. However, I think something similar to this would be appropriate when in DTX. It used to be the case, but it was changed recently, I think an oversight from my side, see `below_target_delay \u0026\u0026 !config_.combine_concealment_decision`.",
+      "range": {
+        "startLine": 386,
+        "startChar": 6,
+        "endLine": 386,
+        "endChar": 40
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
