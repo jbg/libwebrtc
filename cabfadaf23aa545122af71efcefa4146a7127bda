@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "180972bc_8944a312",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 3281934
+      },
+      "writtenOn": "2024-03-06T10:22:12Z",
+      "side": 1,
+      "message": "Another API like proposed in https://github.com/w3c/webrtc-extensions/issues/199 would be ideal, but adding a new web exposed API is a painful process. Here I just came up with a workaround by setting the jitterBufferTarget to same value multiple times in a row, which results in setting precise_jitter_buffer_target_mode_ \u003d true. Rest of the changes are guarded by precise_jitter_buffer_target_mode_.",
+      "parentUuid": "f486500a_16b282f8",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 3
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2916f06_43807f39",
         "filename": "modules/audio_coding/neteq/decision_logic.cc",
         "patchSetId": 6
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-06T08:52:20Z",
       "side": 1,
       "message": "This will not actually make the adaptation faster, which you described was the problem in the bug? So is this really necessary?",
+      "range": {
+        "startLine": 325,
+        "startChar": 8,
+        "endLine": 325,
+        "endChar": 42
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "427504e9_c9c05cad",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 3281934
+      },
+      "writtenOn": "2024-03-06T10:22:12Z",
+      "side": 1,
+      "message": "The bug was initially filed based on just one example where the target was reached very slowly, which later turned out to specific to DTX scenario. In DTX scenario the adaption would be faster after this change. But during active speech the difference is slightly tighter delay tolerance and eliminating dependency on field trial \"config_.enable_stable_delay_mode\"",
+      "parentUuid": "f2916f06_43807f39",
       "range": {
         "startLine": 325,
         "startChar": 8,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0fa99c07_bc694707",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 3281934
+      },
+      "writtenOn": "2024-03-06T10:22:12Z",
+      "side": 1,
+      "message": "This \"low_limit + packet_arrival_history_-\u003eGetMaxDelayMs()\" part i do no quite understand yet, but isn\u0027t it more of a problem when the target delay is influenced by network conditions? With this change the max delay is set equal to min delay and there are no stretching expected unless the externally set jitterBufferTarget hasn\u0027t been reached yet. But once it is reached the delay is expected to be stable.",
+      "parentUuid": "079780e6_a68aff5b",
+      "range": {
+        "startLine": 344,
+        "startChar": 33,
+        "endLine": 344,
+        "endChar": 71
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd6617a4_30701a14",
         "filename": "modules/audio_coding/neteq/decision_logic.cc",
         "patchSetId": 6
@@ -83,6 +155,30 @@
       "writtenOn": "2024-03-06T08:52:20Z",
       "side": 1,
       "message": "This will cause decoding to wait when there is packet loss until the right delay is achieved. Not sure if this is the correct thing to do. However, I think something similar to this would be appropriate when in DTX. It used to be the case, but it was changed recently, I think an oversight from my side, see `below_target_delay \u0026\u0026 !config_.combine_concealment_decision`.",
+      "range": {
+        "startLine": 386,
+        "startChar": 6,
+        "endLine": 386,
+        "endChar": 40
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77b12776_47d1c595",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 3281934
+      },
+      "writtenOn": "2024-03-06T10:22:12Z",
+      "side": 1,
+      "message": "As far as I understood taking a future packet would change the playout delay, which is undesired in precise_jitter_buffer_target_mode_, but this change was mostly needed to make the delay adapt to the target in no voice activity periods.",
+      "parentUuid": "dd6617a4_30701a14",
       "range": {
         "startLine": 386,
         "startChar": 6,
