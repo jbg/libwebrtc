@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5fc70f4_fd115157",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3333013
+      },
+      "writtenOn": "2024-03-07T04:27:31Z",
+      "side": 1,
+      "message": "Hi:\nThe Android camera does not work well in finding the closest desired frame rate. It does not correctly calculate the weight for comparing frame rates.\n\nFor example, if the desired frame rate is 15 frames per second, and the phone has two FramerateRanges: [12, 15] and [15, 15], the previous logic would match only [12, 15]. \n\nThis commit fixes this issue.",
+      "revId": "674552b8d3fbcb0ced4644eb6ce753a6deb69b44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
