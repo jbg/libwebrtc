@@ -163,6 +163,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9c4ad0c5_7c3ccb96",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2024-03-07T10:41:09Z",
+      "side": 1,
+      "message": "I\u0027d like to avoid any special modes in NetEq (like a fixed delay mode), if possible. However, I do think it makes sense to allow applications to set a maximum target delay (that has been requested before).\n\nI think it would be good to have a design discussion somewhere, to discuss what the goals are and how to achieve them in the best way. Not sure how that\u0027s usually done for external contributors, github or bug or doc? Any input Harald?",
+      "parentUuid": "9a7d026f_e0ec58d5",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 3
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2916f06_43807f39",
         "filename": "modules/audio_coding/neteq/decision_logic.cc",
         "patchSetId": 6
