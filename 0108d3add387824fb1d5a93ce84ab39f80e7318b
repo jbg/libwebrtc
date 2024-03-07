@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05263106_6b97c080",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2024-03-07T21:34:02Z",
+      "side": 1,
+      "message": "Before submitting you need to pass a code review \"Code-Review+1\". Peter, can you take a look?",
+      "revId": "0108d3add387824fb1d5a93ce84ab39f80e7318b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
