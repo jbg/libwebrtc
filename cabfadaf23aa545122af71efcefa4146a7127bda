@@ -139,6 +139,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a7d026f_e0ec58d5",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 3281934
+      },
+      "writtenOn": "2024-03-07T07:20:13Z",
+      "side": 1,
+      "message": "Is there a need for new API in NetEq too or can min_delay \u003d\u003d max_delay condition to trigger precise target mode be sufficient and not considered as abuse of existing API? Also what would be the correct course of actions? Does it first need to be implemented in libWebrtc and then add JS API or should I start from intent to implement in blink-dev?",
+      "parentUuid": "503d9e93_e0878829",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 3
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2916f06_43807f39",
         "filename": "modules/audio_coding/neteq/decision_logic.cc",
         "patchSetId": 6
