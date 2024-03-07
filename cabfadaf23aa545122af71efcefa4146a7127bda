@@ -187,6 +187,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f2c13a68_0b4d1a84",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-03-07T14:12:38Z",
+      "side": 1,
+      "message": "For API changes like adding min and max values to JitterBufferTarget, the proposal for the functionality should be added as an issue on https://github.com/w3c/webrtc-extensions and the proposed API should be added as a PR on the same repo.\n\nThe current jitterBufferTarget parameter doesn\u0027t say whether it\u0027s intended as a min or a max.",
+      "parentUuid": "9c4ad0c5_7c3ccb96",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 3
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2916f06_43807f39",
         "filename": "modules/audio_coding/neteq/decision_logic.cc",
         "patchSetId": 6
