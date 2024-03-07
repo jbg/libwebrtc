@@ -177,8 +177,8 @@ public class CameraEnumerationAndroid {
 
           @Override
           int diff(CaptureFormat.FramerateRange range) {
-            final int minFpsError = progressivePenalty(
-                range.min, MIN_FPS_THRESHOLD, MIN_FPS_LOW_VALUE_WEIGHT, MIN_FPS_HIGH_VALUE_WEIGHT);
+            final int minFpsError = progressivePenalty(Math.abs(requestedFps * 1000 - range.min),
+                MIN_FPS_THRESHOLD, MIN_FPS_LOW_VALUE_WEIGHT, MIN_FPS_HIGH_VALUE_WEIGHT);
             final int maxFpsError = progressivePenalty(Math.abs(requestedFps * 1000 - range.max),
                 MAX_FPS_DIFF_THRESHOLD, MAX_FPS_LOW_DIFF_WEIGHT, MAX_FPS_HIGH_DIFF_WEIGHT);
             return minFpsError + maxFpsError;
