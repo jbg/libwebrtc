@@ -211,6 +211,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c1592b2_15c95f4a",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 3281934
+      },
+      "writtenOn": "2024-03-07T14:31:45Z",
+      "side": 1,
+      "message": "I did some more testing and it seems main evil at the moment is here:\n\"const int64_t high_limit \u003d low_limit +\n                                 packet_arrival_history_-\u003eGetMaxDelayMs() +\n                                 kDelayAdjustmentGranularityMs;\"\nBasically it doesn\u0027t allow the playout delay to never reach target. Lets say the GetMaxDelayMs() returns 40 and adding the granularity 20 means that playout delay remains at +60ms forever given that the target is stable at some value. This affects also normal usage without externally set jitterBufferTarget, leaving the delay potentially at much higher values than necessary. Can we get rid of the + packet_arrival_history_-\u003eGetMaxDelayMs() and find other solution to avoid acceleration right after underrun what you mentioned earlier? Another question is if \"config_.enable_stable_delay_mode\" is something which will be always used in the future and that can be counted on?",
+      "parentUuid": "9c4ad0c5_7c3ccb96",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 3
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2916f06_43807f39",
         "filename": "modules/audio_coding/neteq/decision_logic.cc",
         "patchSetId": 6
