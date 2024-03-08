@@ -235,6 +235,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "50d85202_8ee2ba6d",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2024-03-08T12:42:10Z",
+      "side": 1,
+      "message": "Yes, it is possible that it could be done better. In the initial version we used `max(low_limit, GetMaxDelayMs())` but that resulted in quite a bit lower delay than expected (and hence more underruns). I need to spend some time thinking and evaluating options.\n\nAn easy solution for the specific case when a minimum delay is set (jitterBufferTarget/playoutDelayHint) is to apply it after the delay manager target + GetMaxDelayMs.\n\n`enable_stable_delay_mode` is enabled by default and used in Chrome. I cannot promise it will always be used by we don\u0027t have any other plans currently :)",
+      "parentUuid": "7c1592b2_15c95f4a",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 3
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2916f06_43807f39",
         "filename": "modules/audio_coding/neteq/decision_logic.cc",
         "patchSetId": 6
