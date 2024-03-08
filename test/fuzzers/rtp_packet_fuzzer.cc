@@ -73,9 +73,8 @@ void FuzzOneInput(const uint8_t* data, size_t size) {
         packet.GetExtension<TransmissionOffset>(&offset);
         break;
       case kRtpExtensionAudioLevel:
-        bool voice_activity;
-        uint8_t audio_level;
-        packet.GetExtension<AudioLevelExtension>(&voice_activity, &audio_level);
+        AudioLevel audio_level;
+        packet.GetExtension<AudioLevelExtension>(&audio_level);
         break;
       case kRtpExtensionCsrcAudioLevel: {
         std::vector<uint8_t> audio_levels;
