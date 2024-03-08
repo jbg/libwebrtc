@@ -259,6 +259,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d62d508c_1c8bea7d",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 3281934
+      },
+      "writtenOn": "2024-03-08T13:18:43Z",
+      "side": 1,
+      "message": "I would be very much interested in an easy solution which could be done in a short term. In patch set 7 I limited the delay using max delay, which isn\u0027t web exposed yet. What you are suggesting is to ignore GetMaxDelayMs() in case jitterBufferTarget is set without having max delay set? That would be great.\n\n\u003eenable_stable_delay_mode is enabled by default and used in Chrome\nSounds good. I was worried about if it is controlled by field trials or other means to flip it in production over night.",
+      "parentUuid": "50d85202_8ee2ba6d",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 3
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2916f06_43807f39",
         "filename": "modules/audio_coding/neteq/decision_logic.cc",
         "patchSetId": 6
