@@ -16,6 +16,24 @@
       "message": "Hi Philip and Erik,\n\nI will do some tests with AV1 screen share. As I understand it, CPU speed 11 is supposed to be used for screen share.\n\nDoes this change make sense to you or have I misunderstood how this works?",
       "revId": "595edd8dfefe414c57cd43a80a23590ac91b5f6c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9595d77_5861f010",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2024-03-08T14:03:12Z",
+      "side": 1,
+      "message": "Ideally we should be more dynamic, but this should be fine for initial iterations.",
+      "parentUuid": "0accf993_0f059c7a",
+      "revId": "595edd8dfefe414c57cd43a80a23590ac91b5f6c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
