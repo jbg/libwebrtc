@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e54f43ce_27bdec56",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-03-09T11:35:14Z",
+      "side": 0,
+      "message": "please keep old Write/Parse function too. they are used downstream.\nif you think having both old and new versions is confusing long term, mark old functions deprecated.",
+      "revId": "17e358096ef31c75bb6bc6586a9b5946e2f52aee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

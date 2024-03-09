@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f6d55f5_37e239b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-03-09T11:35:14Z",
+      "side": 1,
+      "message": "overall looks good, few nits here and there",
+      "revId": "9d7e3cee52a03e6a22d49480e32a5548049b3a21",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72f163b8_c924373f",
+        "filename": "api/rtp_headers.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-03-09T11:35:14Z",
+      "side": 1,
+      "message": "add explicit defaulted copy constructor/assignment operator to indicate this class is intentionally copyable.\n\nhttps://google.github.io/styleguide/cppguide.html#Copyable_Movable_Types",
+      "revId": "9d7e3cee52a03e6a22d49480e32a5548049b3a21",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcbecade_c02e3cb6",
+        "filename": "api/rtp_headers.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-03-09T11:35:14Z",
+      "side": 1,
+      "message": "you can use union trick to be more explicit these are deprecated:\nunion {\n[[deprecated]] bool hasAudioLevel;\nbool deprecated_has_audio_level;\n};\n\nor just deprecate them and use pragma macros to access these fields in the accessor/setter above.",
+      "revId": "9d7e3cee52a03e6a22d49480e32a5548049b3a21",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6f93ed1_e1090b97",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-03-09T11:35:14Z",
+      "side": 1,
+      "message": "may be move these 2 checks into AudioLevel constructor.",
+      "revId": "9d7e3cee52a03e6a22d49480e32a5548049b3a21",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
