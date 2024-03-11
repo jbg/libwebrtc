@@ -77,6 +77,7 @@ class DelayManager {
   // Assuming `delay` is in valid range.
   virtual bool SetMinimumDelay(int delay_ms);
   virtual bool SetMaximumDelay(int delay_ms);
+  virtual int GetMaximumDelay() const;
   virtual bool SetBaseMinimumDelay(int delay_ms);
   virtual int GetBaseMinimumDelay() const;
 
