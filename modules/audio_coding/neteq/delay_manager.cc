@@ -171,6 +171,10 @@ bool DelayManager::SetMaximumDelay(int delay_ms) {
   return true;
 }
 
+int DelayManager::GetMaximumDelay() const {
+  return maximum_delay_ms_;
+}
+
 bool DelayManager::SetBaseMinimumDelay(int delay_ms) {
   if (!IsValidBaseMinimumDelay(delay_ms)) {
     return false;
