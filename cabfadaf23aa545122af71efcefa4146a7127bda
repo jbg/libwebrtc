@@ -283,6 +283,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2d9ea732_71a1bee6",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2024-03-11T13:44:24Z",
+      "side": 1,
+      "message": "Not fully ignore, but we can apply it before we apply the minimum delay.\nSo instead of doing `high_level \u003d max(target_delay, min_delay) + GetMaxDelayMs()` we can do `high_level \u003d max(target_delay + GetMaxDelayMs(), min_delay)`.",
+      "parentUuid": "d62d508c_1c8bea7d",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 3
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2916f06_43807f39",
         "filename": "modules/audio_coding/neteq/decision_logic.cc",
         "patchSetId": 6
