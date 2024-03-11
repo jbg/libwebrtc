@@ -44,6 +44,7 @@ class FakeSctpTransport : public cricket::SctpTransportInternal {
   int max_message_size() const { return max_message_size_; }
   absl::optional<int> max_outbound_streams() const { return absl::nullopt; }
   absl::optional<int> max_inbound_streams() const { return absl::nullopt; }
+  size_t buffered_amount(int sid) const { return 0; }
   int local_port() const {
     RTC_DCHECK(local_port_);
     return *local_port_;
