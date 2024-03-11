@@ -307,6 +307,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2794ac26_41c805e3",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 3281934
+      },
+      "writtenOn": "2024-03-11T16:31:34Z",
+      "side": 1,
+      "message": "Ok, I see.Implemented in patch set 8. It may help in case jitterBufferTarget is set quite a bit higher than the underrun_optimizer_.GetOptimalDelayMs(). It would be more useful if value of GetMaxDelayMs() could be seen in stats, to be able to know how much jitterBufferTarget has to be increased to make it reachable.",
+      "parentUuid": "2d9ea732_71a1bee6",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 3
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2916f06_43807f39",
         "filename": "modules/audio_coding/neteq/decision_logic.cc",
         "patchSetId": 6
