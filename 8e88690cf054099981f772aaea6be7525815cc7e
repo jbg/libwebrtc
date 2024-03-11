@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02b49de6_a9c55bdb",
+        "filename": "infra/config/config.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 747,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2024-03-11T21:13:24Z",
+      "side": 1,
+      "message": "Let\u0027s add a TODO comment here. If we forget to re-enable, at least we are going to have an easy way to find the reason.",
+      "range": {
+        "startLine": 747,
+        "startChar": 0,
+        "endLine": 747,
+        "endChar": 36
+      },
+      "revId": "8e88690cf054099981f772aaea6be7525815cc7e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
