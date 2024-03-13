@@ -16,6 +16,24 @@
       "message": "Is this Note: OBE?",
       "revId": "d92953facf9ec6352b00428411c69e31600597ca",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0a2477b_129f3d6e",
+        "filename": "api/transport/data_channel_transport_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2024-03-13T15:41:43Z",
+      "side": 1,
+      "message": "That note about IsReadyToSend is not correct, but since that is a separate issue, which I will tend to in a follow-up CL, I\u0027ll postpone that work until then.",
+      "parentUuid": "4c906ca6_fc09493c",
+      "revId": "d92953facf9ec6352b00428411c69e31600597ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
