@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2588f0d_5c3a4918",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-03-13T09:48:26Z",
+      "side": 1,
+      "message": "Same as https://webrtc-review.googlesource.com/c/src/+/339864\nbut now for VideoEncoder",
+      "revId": "7e664a72b0dcfc0efd1ce26e81829406e948f07c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
