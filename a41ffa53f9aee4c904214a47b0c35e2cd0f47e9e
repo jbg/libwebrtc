@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "678d5d5a_1f4ff2b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3333648
+      },
+      "writtenOn": "2024-03-13T23:59:14Z",
+      "side": 1,
+      "message": "Would you please have a look at the proposed build fix, thank you.",
+      "revId": "a41ffa53f9aee4c904214a47b0c35e2cd0f47e9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
