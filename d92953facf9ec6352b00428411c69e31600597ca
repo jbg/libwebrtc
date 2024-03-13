@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c906ca6_fc09493c",
+        "filename": "api/transport/data_channel_transport_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-03-13T11:46:52Z",
+      "side": 1,
+      "message": "Is this Note: OBE?",
+      "revId": "d92953facf9ec6352b00428411c69e31600597ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
