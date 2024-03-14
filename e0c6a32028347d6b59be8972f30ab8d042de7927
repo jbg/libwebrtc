@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20a299cb_32dec1cb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2024-03-14T09:52:36Z",
+      "side": 1,
+      "message": "Could you please clarify this? Did you mean that current implementation before your fix could cause the signaling thread to be blocked? Please provide more details, where and how is it blocked.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 102
+      },
+      "revId": "e0c6a32028347d6b59be8972f30ab8d042de7927",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a445650e_45c24d2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2024-03-14T09:52:36Z",
+      "side": 1,
+      "message": "FYI, you don\u0027t need to add all the owners you could find as reviewers. 1-2 owners per file is always enough.\n\nEach owner is supposed to know the code well enough to review your CL. If it happens that someone\u0027s specific expertise is required, reviewers could always add more reviewers themselves.\n\nAlso, contrary to common belief that with many reviewers someone would reply faster, when there are too many people involved everyone tends to think \"this is already covered without me\" and the overall review might take even longer.",
+      "revId": "e0c6a32028347d6b59be8972f30ab8d042de7927",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
