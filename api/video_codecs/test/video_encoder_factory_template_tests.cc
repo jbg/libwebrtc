@@ -8,6 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include "api/environment/environment.h"
+#include "api/environment/environment_factory.h"
 #include "api/test/mock_video_encoder.h"
 #include "api/video_codecs/video_encoder_factory_template.h"
 #include "api/video_codecs/video_encoder_factory_template_libaom_av1_adapter.h"
@@ -17,19 +19,22 @@
 #include "test/gmock.h"
 #include "test/gtest.h"
 
+namespace webrtc {
+namespace {
+
 using ::testing::Contains;
 using ::testing::Each;
 using ::testing::Eq;
 using ::testing::Field;
 using ::testing::IsEmpty;
 using ::testing::IsNull;
+using ::testing::NiceMock;
 using ::testing::Not;
 using ::testing::NotNull;
+using ::testing::StrictMock;
 using ::testing::UnorderedElementsAre;
-
-namespace webrtc {
-namespace {
 using CodecSupport = VideoEncoderFactory::CodecSupport;
+
 const SdpVideoFormat kFooSdp("Foo");
 const SdpVideoFormat kBarLowSdp("Bar", {{"profile", "low"}});
 const SdpVideoFormat kBarHighSdp("Bar", {{"profile", "high"}});
@@ -39,7 +44,7 @@ struct FooEncoderTemplateAdapter {
 
   static std::unique_ptr<VideoEncoder> CreateEncoder(
       const SdpVideoFormat& format) {
-    return std::make_unique<testing::StrictMock<MockVideoEncoder>>();
+    return std::make_unique<StrictMock<MockVideoEncoder>>();
   }
 
   static bool IsScalabilityModeSupported(ScalabilityMode scalability_mode) {
@@ -53,9 +58,29 @@ struct BarEncoderTemplateAdapter {
     return {kBarLowSdp, kBarHighSdp};
   }
 
+  // TODO: bugs.webrtc.org/15860 - Remove this variant when requesting to create
+  // VideoEncoder without Environment would be no longer supported.
   static std::unique_ptr<VideoEncoder> CreateEncoder(
       const SdpVideoFormat& format) {
-    return std::make_unique<testing::StrictMock<MockVideoEncoder>>();
+    auto encoder = std::make_unique<NiceMock<MockVideoEncoder>>();
+    ON_CALL(*encoder, GetEncoderInfo).WillByDefault([] {
+      VideoEncoder::EncoderInfo info;
+      info.implementation_name = "bar_without_env";
+      return info;
+    });
+    return encoder;
+  }
+
+  static std::unique_ptr<VideoEncoder> CreateEncoder(
+      const Environment& env,
+      const SdpVideoFormat& format) {
+    auto encoder = std::make_unique<NiceMock<MockVideoEncoder>>();
+    ON_CALL(*encoder, GetEncoderInfo).WillByDefault([] {
+      VideoEncoder::EncoderInfo info;
+      info.implementation_name = "bar_with_env";
+      return info;
+    });
+    return encoder;
   }
 
   static bool IsScalabilityModeSupported(ScalabilityMode scalability_mode) {
@@ -103,6 +128,29 @@ TEST(VideoEncoderFactoryTemplate, TwoTemplateAdaptersCreateEncoders) {
   EXPECT_THAT(factory.CreateVideoEncoder(kBarHighSdp), NotNull());
   EXPECT_THAT(factory.CreateVideoEncoder(SdpVideoFormat("FooX")), IsNull());
   EXPECT_THAT(factory.CreateVideoEncoder(SdpVideoFormat("Bar")), NotNull());
+}
+
+TEST(VideoEncoderFactoryTemplate,
+     CreatesEncoderWithoutEnvironmentWhenNotNeeded) {
+  // FooEncoderTemplateAdapter::CreateEncoder doesn't take Environment parameter
+  // Expect it can be created both with newer and older api.
+  VideoEncoderFactoryTemplate<FooEncoderTemplateAdapter> factory;
+
+  EXPECT_THAT(factory.CreateVideoEncoder(kFooSdp), NotNull());
+  EXPECT_THAT(factory.Create(CreateEnvironment(), kFooSdp), NotNull());
+}
+
+TEST(VideoEncoderFactoryTemplate, CreatesEncoderWithEnvironmentWhenProvided) {
+  VideoEncoderFactoryTemplate<BarEncoderTemplateAdapter> factory;
+
+  std::unique_ptr<VideoEncoder> bar1 = factory.CreateVideoEncoder(kBarLowSdp);
+  ASSERT_THAT(bar1, NotNull());
+  EXPECT_EQ(bar1->GetEncoderInfo().implementation_name, "bar_without_env");
+
+  std::unique_ptr<VideoEncoder> bar2 =
+      factory.Create(CreateEnvironment(), kBarLowSdp);
+  ASSERT_THAT(bar2, NotNull());
+  EXPECT_EQ(bar2->GetEncoderInfo().implementation_name, "bar_with_env");
 }
 
 TEST(VideoEncoderFactoryTemplate, TwoTemplateAdaptersCodecSupport) {
