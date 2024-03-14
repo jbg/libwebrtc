@@ -16,6 +16,23 @@
       "message": "Would you please have a look at the proposed build fix, thank you.",
       "revId": "a41ffa53f9aee4c904214a47b0c35e2cd0f47e9e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b930c3b7_222cd1b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12299
+      },
+      "writtenOn": "2024-03-14T06:54:20Z",
+      "side": 1,
+      "message": "\"Bug: \" section should be at the end of the description and contain either None or a bug id created with https://bugs.chromium.org/p/webrtc/issues/entry.",
+      "revId": "a41ffa53f9aee4c904214a47b0c35e2cd0f47e9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
