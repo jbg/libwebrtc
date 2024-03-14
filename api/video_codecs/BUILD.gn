@@ -166,8 +166,9 @@ rtc_source_set("video_encoder_factory_template") {
 
   deps = [
     ":video_codecs_api",
-    "../../api:array_view",
+    "../:array_view",
     "../../modules/video_coding/svc:scalability_mode_util",
+    "../environment",
   ]
 
   absl_deps = [ "//third_party/abseil-cpp/absl/algorithm:container" ]
@@ -187,20 +188,36 @@ rtc_source_set("video_encoder_factory_template_libvpx_vp8_adapter") {
   absl_deps = [ "//third_party/abseil-cpp/absl/container:inlined_vector" ]
 }
 
-rtc_source_set("video_encoder_factory_template_libvpx_vp9_adapter") {
+rtc_library("video_encoder_factory_template_libvpx_vp9_adapter") {
   visibility = [ "*" ]
   allow_poison = [ "software_video_codecs" ]
-  public = [ "video_encoder_factory_template_libvpx_vp9_adapter.h" ]
+  sources = [
+    "video_encoder_factory_template_libvpx_vp9_adapter.cc",
+    "video_encoder_factory_template_libvpx_vp9_adapter.h",
+  ]
 
-  deps = [ "../../modules/video_coding:webrtc_vp9" ]
+  deps = [
+    ":scalability_mode",
+    ":video_codecs_api",
+    "../../modules/video_coding:webrtc_vp9",
+    "../environment",
+  ]
 }
 
-rtc_source_set("video_encoder_factory_template_open_h264_adapter") {
+rtc_library("video_encoder_factory_template_open_h264_adapter") {
   visibility = [ "*" ]
   allow_poison = [ "software_video_codecs" ]
-  public = [ "video_encoder_factory_template_open_h264_adapter.h" ]
-
-  deps = [ "../../modules/video_coding:webrtc_h264" ]
+  sources = [
+    "video_encoder_factory_template_open_h264_adapter.cc",
+    "video_encoder_factory_template_open_h264_adapter.h",
+  ]
+  deps = [
+    ":scalability_mode",
+    ":video_codecs_api",
+    "../../media:media_constants",
+    "../../modules/video_coding:webrtc_h264",
+    "../environment",
+  ]
 }
 
 rtc_source_set("video_encoder_factory_template_libaom_av1_adapter") {
