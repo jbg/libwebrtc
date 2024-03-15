@@ -1293,7 +1293,13 @@ void VideoStreamEncoder::ReconfigureEncoder() {
     VideoEncoder::Settings settings = VideoEncoder::Settings(
         settings_.capabilities, number_of_cores_, max_data_payload_length);
     settings.encoder_thread_limit = experimental_encoder_thread_limit_;
-    int error = encoder_->InitEncode(&send_codec_, settings);
+    // Before passing VideoCodec config to encoder, remove any non-active
+    // layers from the top and update the spatial layer count and total
+    // resolution, to avoid codecs with limited capabilities from needlessly
+    // falling back to software.
+    VideoCodec simpliedfied_confed_config =
+        VideoCodecInitializer::CullInactiveTopSpatialLayers(send_codec_);
+    int error = encoder_->InitEncode(&simpliedfied_confed_config, settings);
     if (error != 0) {
       RTC_LOG(LS_ERROR) << "Failed to initialize the encoder associated with "
                            "codec type: "
