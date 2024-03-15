@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd43406d_bb76b268",
+        "filename": "modules/video_coding/video_codec_initializer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2024-03-15T15:08:55Z",
+      "side": 1,
+      "message": "Maybe https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/video_coding/svc/scalability_mode_util.cc;l\u003d295;drc\u003dc292340f0c721cd88f9b14c453c877c55d13ce6b could be used here instead?",
+      "range": {
+        "startLine": 414,
+        "startChar": 6,
+        "endLine": 414,
+        "endChar": 42
+      },
+      "revId": "1c2cb074ddf5307b30d80751dfe3d0c2698dbf18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
