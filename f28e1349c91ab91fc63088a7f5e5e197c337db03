@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5475c4b4_22563d07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-03-15T14:40:50Z",
+      "side": 1,
+      "message": "wonder if the thinking was to support async proxy methods? (something we\u0027ve discussed in the past - but not done anything about due to operation ordering concerns)",
+      "revId": "f28e1349c91ab91fc63088a7f5e5e197c337db03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
