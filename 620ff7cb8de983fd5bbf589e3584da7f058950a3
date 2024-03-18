@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02b1feca_419875d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2024-03-18T16:00:38Z",
+      "side": 1,
+      "message": "Tommi, please +1 to clear:\n\n```\nYou need LGTM from owners of depends\\-on paths in DEPS that  were modified in this CL:\n    \u0027\\+absl/strings/str\\_split\\.h\u0027,\n```",
+      "revId": "620ff7cb8de983fd5bbf589e3584da7f058950a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
