@@ -329,6 +329,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "387cbf42_8b8f00d2",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 3281934
+      },
+      "writtenOn": "2024-03-18T18:07:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2794ac26_41c805e3",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 3
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2916f06_43807f39",
@@ -366,6 +390,30 @@
       "side": 1,
       "message": "The bug was initially filed based on just one example where the target was reached very slowly, which later turned out to specific to DTX scenario. In DTX scenario the adaption would be faster after this change. But during active speech the difference is slightly tighter delay tolerance and eliminating dependency on field trial \"config_.enable_stable_delay_mode\"",
       "parentUuid": "f2916f06_43807f39",
+      "range": {
+        "startLine": 325,
+        "startChar": 8,
+        "endLine": 325,
+        "endChar": 42
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd9546c0_b607f841",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 3281934
+      },
+      "writtenOn": "2024-03-18T18:07:14Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "427504e9_c9c05cad",
       "range": {
         "startLine": 325,
         "startChar": 8,
@@ -471,6 +519,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "708d53f2_16f94f68",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 3281934
+      },
+      "writtenOn": "2024-03-18T18:07:14Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0ad4e503_5a9813c9",
+      "range": {
+        "startLine": 344,
+        "startChar": 33,
+        "endLine": 344,
+        "endChar": 71
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd6617a4_30701a14",
@@ -508,6 +580,30 @@
       "side": 1,
       "message": "As far as I understood taking a future packet would change the playout delay, which is undesired in precise_jitter_buffer_target_mode_, but this change was mostly needed to make the delay adapt to the target in no voice activity periods.",
       "parentUuid": "dd6617a4_30701a14",
+      "range": {
+        "startLine": 386,
+        "startChar": 6,
+        "endLine": 386,
+        "endChar": 40
+      },
+      "revId": "cabfadaf23aa545122af71efcefa4146a7127bda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc718e01_dddf0c6e",
+        "filename": "modules/audio_coding/neteq/decision_logic.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 3281934
+      },
+      "writtenOn": "2024-03-18T18:07:14Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "77b12776_47d1c595",
       "range": {
         "startLine": 386,
         "startChar": 6,
