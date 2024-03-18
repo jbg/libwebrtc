@@ -320,6 +320,9 @@ class MediaReceiveChannelInterface {
   // Returns current value of base minimum delay in milliseconds.
   virtual absl::optional<int> GetBaseMinimumPlayoutDelayMs(
       uint32_t ssrc) const = 0;
+
+  // Returns false if there is no stream with given ssrc.
+  virtual bool SetBaseMaximumPlayoutDelayMs(uint32_t ssrc, int delay_ms) = 0;
 };
 
 // The stats information is structured as follows:

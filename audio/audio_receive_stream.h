@@ -101,6 +101,7 @@ class AudioReceiveStreamImpl final : public webrtc::AudioReceiveStreamInterface,
   void SetGain(float gain) override;
   bool SetBaseMinimumPlayoutDelayMs(int delay_ms) override;
   int GetBaseMinimumPlayoutDelayMs() const override;
+  bool SetBaseMaximumPlayoutDelayMs(int delay_ms) override;
   std::vector<webrtc::RtpSource> GetSources() const override;
 
   // AudioMixer::Source

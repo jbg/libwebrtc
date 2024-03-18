@@ -130,6 +130,9 @@ class ChannelReceiveInterface : public RtpPacketSinkInterface {
   // determines minimum delay until audio playout.
   virtual bool SetBaseMinimumPlayoutDelayMs(int delay_ms) = 0;
   virtual int GetBaseMinimumPlayoutDelayMs() const = 0;
+  // Base maximum delay sets higher bound on maximum delay value which
+  // determines maximum delay until audio playout.
+  virtual bool SetBaseMaximumPlayoutDelayMs(int delay_ms) = 0;
 
   // Produces the transport-related timestamps; current_delay_ms is left unset.
   virtual absl::optional<Syncable::Info> GetSyncInfo() const = 0;

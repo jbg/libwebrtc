@@ -165,6 +165,8 @@ void VideoRtpReceiver::RestartMediaChannel_w(
 
     media_channel_->SetBaseMinimumPlayoutDelayMs(*signaled_ssrc_,
                                                  delay_.GetMs());
+    media_channel_->SetBaseMaximumPlayoutDelayMs(*signaled_ssrc_,
+                                                 maximum_delay_);
   }
 }
 
@@ -256,6 +258,15 @@ void VideoRtpReceiver::SetJitterBufferMinimumDelay(
   if (media_channel_ && signaled_ssrc_)
     media_channel_->SetBaseMinimumPlayoutDelayMs(*signaled_ssrc_,
                                                  delay_.GetMs());
+}
+
+void VideoRtpReceiver::SetJitterBufferMaximumDelay(
+    absl::optional<int> delay_ms) {
+  RTC_DCHECK_RUN_ON(worker_thread_);
+  maximum_delay_ = delay_ms.value_or(0);
+  if (media_channel_ && signaled_ssrc_)
+    media_channel_->SetBaseMinimumPlayoutDelayMs(*signaled_ssrc_,
+                                                 maximum_delay_);
 }
 
 void VideoRtpReceiver::SetMediaChannel(

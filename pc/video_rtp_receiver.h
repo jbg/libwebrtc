@@ -101,6 +101,7 @@ class VideoRtpReceiver : public RtpReceiverInternal {
 
   void SetJitterBufferMinimumDelay(
       absl::optional<double> delay_seconds) override;
+  void SetJitterBufferMaximumDelay(absl::optional<int> delay_ms) override;
 
   void SetMediaChannel(
       cricket::MediaReceiveChannelInterface* media_channel) override;
@@ -172,6 +173,7 @@ class VideoRtpReceiver : public RtpReceiverInternal {
   // Stores the minimum jitter buffer delay. Handles caching cases
   // if `SetJitterBufferMinimumDelay` is called before start.
   JitterBufferDelay delay_ RTC_GUARDED_BY(worker_thread_);
+  int maximum_delay_ RTC_GUARDED_BY(worker_thread_) = 0;
 
   // Records if we should generate a keyframe when `media_channel_` gets set up
   // or switched.

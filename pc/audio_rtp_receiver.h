@@ -111,6 +111,7 @@ class AudioRtpReceiver : public ObserverInterface,
 
   void SetJitterBufferMinimumDelay(
       absl::optional<double> delay_seconds) override;
+  void SetJitterBufferMaximumDelay(absl::optional<int> delay_ms) override;
 
   void SetMediaChannel(
       cricket::MediaReceiveChannelInterface* media_channel) override;
@@ -154,6 +155,7 @@ class AudioRtpReceiver : public ObserverInterface,
   // Stores and updates the playout delay. Handles caching cases if
   // `SetJitterBufferMinimumDelay` is called before start.
   JitterBufferDelay delay_ RTC_GUARDED_BY(worker_thread_);
+  int maximum_delay_ RTC_GUARDED_BY(worker_thread_) = 0;
   rtc::scoped_refptr<FrameTransformerInterface> frame_transformer_
       RTC_GUARDED_BY(worker_thread_);
   const rtc::scoped_refptr<PendingTaskSafetyFlag> worker_thread_safety_;

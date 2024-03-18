@@ -200,6 +200,8 @@ void AudioRtpReceiver::RestartMediaChannel_w(
   if (signaled_ssrc_) {
     media_channel_->SetBaseMinimumPlayoutDelayMs(*signaled_ssrc_,
                                                  delay_.GetMs());
+    media_channel_->SetBaseMaximumPlayoutDelayMs(*signaled_ssrc_,
+                                                 maximum_delay_);
   }
 
   Reconfigure(track_enabled);
@@ -320,6 +322,16 @@ void AudioRtpReceiver::SetJitterBufferMinimumDelay(
   if (media_channel_ && signaled_ssrc_)
     media_channel_->SetBaseMinimumPlayoutDelayMs(*signaled_ssrc_,
                                                  delay_.GetMs());
+}
+
+void AudioRtpReceiver::SetJitterBufferMaximumDelay(
+    absl::optional<int> delay_ms) {
+  RTC_DCHECK_RUN_ON(worker_thread_);
+  maximum_delay_ = delay_ms.value_or(0);
+  if (media_channel_ && signaled_ssrc_) {
+    media_channel_->SetBaseMaximumPlayoutDelayMs(*signaled_ssrc_,
+                                                 maximum_delay_);
+  }
 }
 
 void AudioRtpReceiver::SetMediaChannel(

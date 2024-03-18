@@ -3241,6 +3241,11 @@ absl::optional<int> WebRtcVideoReceiveChannel::GetBaseMinimumPlayoutDelayMs(
   }
 }
 
+bool WebRtcVideoReceiveChannel::SetBaseMaximumPlayoutDelayMs(uint32_t ssrc,
+                                                             int delay_ms) {
+  return false;
+}
+
 std::vector<webrtc::RtpSource> WebRtcVideoReceiveChannel::GetSources(
     uint32_t ssrc) const {
   RTC_DCHECK_RUN_ON(&thread_checker_);

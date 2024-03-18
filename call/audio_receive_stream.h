@@ -193,6 +193,9 @@ class AudioReceiveStreamInterface : public MediaReceiveStreamInterface {
   // Returns current value of base minimum delay in milliseconds.
   virtual int GetBaseMinimumPlayoutDelayMs() const = 0;
 
+  // Returns true if value was successfully set, false overwise.
+  virtual bool SetBaseMaximumPlayoutDelayMs(int delay_ms) = 0;
+
   // Synchronization source (stream identifier) to be received.
   // This member will not change mid-stream and can be assumed to be const
   // post initialization.

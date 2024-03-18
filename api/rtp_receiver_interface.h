@@ -90,6 +90,12 @@ class RTC_EXPORT RtpReceiverInterface : public webrtc::RefCountInterface {
   virtual void SetJitterBufferMinimumDelay(
       absl::optional<double> delay_seconds) = 0;
 
+  // Sets the jitter buffer maximum delay until media playout. Actual observed
+  // delay may differ depending on the congestion control. `delay_ms` is a
+  // positive value including 0 measured in milliseconds. `nullopt` means
+  // default value must be used.
+  virtual void SetJitterBufferMaximumDelay(absl::optional<int> delay_ms) = 0;
+
   // TODO(zhihuang): Remove the default implementation once the subclasses
   // implement this. Currently, the only relevant subclass is the
   // content::FakeRtpReceiver in Chromium.

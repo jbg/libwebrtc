@@ -1991,6 +1991,18 @@ class WebRtcVoiceReceiveChannel::WebRtcAudioReceiveStream {
     return stream_->GetBaseMinimumPlayoutDelayMs();
   }
 
+  bool SetBaseMaximumPlayoutDelayMs(int delay_ms) {
+    RTC_DCHECK_RUN_ON(&worker_thread_checker_);
+    if (stream_->SetBaseMaximumPlayoutDelayMs(delay_ms))
+      return true;
+
+    RTC_LOG(LS_ERROR) << "Failed to SetBaseMaximumPlayoutDelayMs"
+                         " on AudioReceiveStreamInterface on SSRC="
+                      << stream_->remote_ssrc()
+                      << " with delay_ms=" << delay_ms;
+    return false;
+  }
+
   std::vector<webrtc::RtpSource> GetSources() {
     RTC_DCHECK_RUN_ON(&worker_thread_checker_);
     return stream_->GetSources();
@@ -2423,6 +2435,29 @@ absl::optional<int> WebRtcVoiceReceiveChannel::GetBaseMinimumPlayoutDelayMs(
   return absl::nullopt;
 }
 
+bool WebRtcVoiceReceiveChannel::SetBaseMaximumPlayoutDelayMs(uint32_t ssrc,
+                                                             int delay_ms) {
+  RTC_DCHECK_RUN_ON(worker_thread_);
+  std::vector<uint32_t> ssrcs(1, ssrc);
+  // SSRC of 0 represents the default receive stream.
+  if (ssrc == 0) {
+    default_recv_base_maximum_delay_ms_ = delay_ms;
+    ssrcs = unsignaled_recv_ssrcs_;
+  }
+  for (uint32_t ssrc : ssrcs) {
+    const auto it = recv_streams_.find(ssrc);
+    if (it == recv_streams_.end()) {
+      RTC_LOG(LS_WARNING) << "SetBaseMaximumPlayoutDelayMs: no recv stream "
+                          << ssrc;
+      return false;
+    }
+    it->second->SetBaseMaximumPlayoutDelayMs(delay_ms);
+    RTC_LOG(LS_INFO) << "SetBaseMaximumPlayoutDelayMs() to " << delay_ms
+                     << " for recv stream with ssrc " << ssrc;
+  }
+  return true;
+}
+
 void WebRtcVoiceReceiveChannel::SetFrameDecryptor(
     uint32_t ssrc,
     rtc::scoped_refptr<webrtc::FrameDecryptorInterface> frame_decryptor) {
@@ -2501,6 +2536,7 @@ bool WebRtcVoiceReceiveChannel::MaybeCreateDefaultReceiveStream(
 
   SetOutputVolume(ssrc, default_recv_volume_);
   SetBaseMinimumPlayoutDelayMs(ssrc, default_recv_base_minimum_delay_ms_);
+  SetBaseMaximumPlayoutDelayMs(ssrc, default_recv_base_maximum_delay_ms_);
 
   // The default sink can only be attached to one stream at a time, so we hook
   // it up to the *latest* unsignaled stream we've seen, in order to support

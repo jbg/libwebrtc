@@ -152,6 +152,7 @@ class ChannelReceive : public ChannelReceiveInterface,
   // Audio quality.
   bool SetBaseMinimumPlayoutDelayMs(int delay_ms) override;
   int GetBaseMinimumPlayoutDelayMs() const override;
+  bool SetBaseMaximumPlayoutDelayMs(int delay_ms) override;
 
   // Produces the transport-related timestamps; current_delay_ms is left unset.
   absl::optional<Syncable::Info> GetSyncInfo() const override;
@@ -1027,6 +1028,10 @@ bool ChannelReceive::SetBaseMinimumPlayoutDelayMs(int delay_ms) {
 
 int ChannelReceive::GetBaseMinimumPlayoutDelayMs() const {
   return acm_receiver_.GetBaseMinimumDelayMs();
+}
+
+bool ChannelReceive::SetBaseMaximumPlayoutDelayMs(int delay_ms) {
+  return acm_receiver_.SetMaximumDelay(delay_ms);
 }
 
 absl::optional<Syncable::Info> ChannelReceive::GetSyncInfo() const {

@@ -605,6 +605,8 @@ class WebRtcVideoReceiveChannel : public MediaChannelUtil,
   absl::optional<int> GetBaseMinimumPlayoutDelayMs(
       uint32_t ssrc) const override;
 
+  bool SetBaseMaximumPlayoutDelayMs(uint32_t ssrc, int delay_ms) override;
+
   // Choose one of the available SSRCs (or default if none) as the current
   // receiver report SSRC.
   void ChooseReceiverReportSsrc(const std::set<uint32_t>& choices) override;

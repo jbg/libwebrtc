@@ -403,6 +403,8 @@ class WebRtcVoiceReceiveChannel final
   absl::optional<int> GetBaseMinimumPlayoutDelayMs(
       uint32_t ssrc) const override;
 
+  bool SetBaseMaximumPlayoutDelayMs(uint32_t ssrc, int delay_ms) override;
+
   void OnPacketReceived(const webrtc::RtpPacketReceived& packet) override;
   bool GetStats(VoiceMediaReceiveInfo* info,
                 bool get_and_clear_legacy_stats) override;
@@ -477,6 +479,9 @@ class WebRtcVoiceReceiveChannel final
 
   // Delay for unsignaled streams, which may be set before the stream exists.
   int default_recv_base_minimum_delay_ms_ = 0;
+
+  // Delay for unsignaled streams, which may be set before the stream exists.
+  int default_recv_base_maximum_delay_ms_ = 0;
 
   // Sink for latest unsignaled stream - may be set before the stream exists.
   std::unique_ptr<webrtc::AudioSinkInterface> default_sink_;
