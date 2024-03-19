@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e375cdd7_8f991e05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2024-03-19T08:28:44Z",
+      "side": 1,
+      "message": "Let\u0027s continue the discussion in the github bug a bit to make sure that there is some agreement that this is what we want.",
+      "revId": "0b109ab56cf0c4fe65fb1196228a74699cede13a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
