@@ -16,6 +16,23 @@
       "message": "Can you file a bug for this and also add a test that verifies the right frame rates are matched? (as per the CL description)",
       "revId": "157c245f53af0bbd8693c0f57cdd682d9e210d85",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68bb0af5_db0f3130",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2024-03-19T09:19:35Z",
+      "side": 1,
+      "message": "Removed myself as Reviewer since I don\u0027t know this functionality or background well enough to provide qualified comments.",
+      "revId": "157c245f53af0bbd8693c0f57cdd682d9e210d85",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
