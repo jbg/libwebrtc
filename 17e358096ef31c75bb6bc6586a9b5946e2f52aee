@@ -34,6 +34,24 @@
       "parentUuid": "e54f43ce_27bdec56",
       "revId": "17e358096ef31c75bb6bc6586a9b5946e2f52aee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e389bcb_f1a8c56e",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-03-21T22:17:19Z",
+      "side": 0,
+      "message": "ValueSize with old signature is also needed for old version of Write to work.\nsorry for forgetting about that function earlier.",
+      "parentUuid": "7e09ac6e_03419f2b",
+      "revId": "17e358096ef31c75bb6bc6586a9b5946e2f52aee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
