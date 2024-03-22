@@ -73,19 +73,28 @@ class VideoCodecInitializerTest : public ::testing::Test {
     if (num_simulcast_streams.has_value()) {
       config_.number_of_streams = num_simulcast_streams.value();
     }
-    if (type == VideoCodecType::kVideoCodecVP8) {
-      ASSERT_FALSE(num_spatial_streams.has_value());
-      VideoCodecVP8 vp8_settings = VideoEncoder::GetDefaultVp8Settings();
-      vp8_settings.numberOfTemporalLayers = num_temporal_streams;
-      config_.encoder_specific_settings = rtc::make_ref_counted<
-          webrtc::VideoEncoderConfig::Vp8EncoderSpecificSettings>(vp8_settings);
-    } else if (type == VideoCodecType::kVideoCodecVP9) {
-      ASSERT_TRUE(num_spatial_streams.has_value());
-      VideoCodecVP9 vp9_settings = VideoEncoder::GetDefaultVp9Settings();
-      vp9_settings.numberOfSpatialLayers = num_spatial_streams.value();
-      vp9_settings.numberOfTemporalLayers = num_temporal_streams;
-      config_.encoder_specific_settings = rtc::make_ref_counted<
-          webrtc::VideoEncoderConfig::Vp9EncoderSpecificSettings>(vp9_settings);
+    switch (type) {
+      case VideoCodecType::kVideoCodecVP8: {
+        ASSERT_FALSE(num_spatial_streams.has_value());
+        VideoCodecVP8 vp8_settings = VideoEncoder::GetDefaultVp8Settings();
+        vp8_settings.numberOfTemporalLayers = num_temporal_streams;
+        config_.encoder_specific_settings = rtc::make_ref_counted<
+            webrtc::VideoEncoderConfig::Vp8EncoderSpecificSettings>(
+            vp8_settings);
+      } break;
+      case VideoCodecType::kVideoCodecVP9: {
+        ASSERT_TRUE(num_spatial_streams.has_value());
+        VideoCodecVP9 vp9_settings = VideoEncoder::GetDefaultVp9Settings();
+        vp9_settings.numberOfSpatialLayers = num_spatial_streams.value();
+        vp9_settings.numberOfTemporalLayers = num_temporal_streams;
+        config_.encoder_specific_settings = rtc::make_ref_counted<
+            webrtc::VideoEncoderConfig::Vp9EncoderSpecificSettings>(
+            vp9_settings);
+      } break;
+
+      default:
+        // Scalability not currently supported for other codecs.
+        break;
     }
   }
 
@@ -640,6 +649,355 @@ TEST_F(VideoCodecInitializerTest, UpdatesVp9SpecificFieldsWithScalabilityMode) {
   EXPECT_EQ(codec.VP9()->numberOfSpatialLayers, 3u);
   EXPECT_EQ(codec.VP9()->numberOfTemporalLayers, 1u);
   EXPECT_EQ(codec.VP9()->interLayerPred, InterLayerPredMode::kOff);
+}
+
+TEST_F(VideoCodecInitializerTest, CullVp9L3ToL2) {
+  SetUpFor(VideoCodecType::kVideoCodecVP9, absl::nullopt, 3, 1, false);
+  VideoStream stream = DefaultStream();
+  streams_.push_back(stream);
+
+  config_.simulcast_layers.resize(3);
+
+  // Deactivate top layer
+  config_.simulcast_layers[0].active = true;
+  config_.simulcast_layers[1].active = true;
+  config_.simulcast_layers[2].active = false;
+  EXPECT_TRUE(InitializeCodec());
+  EXPECT_EQ(codec_out_.VP9()->numberOfSpatialLayers, 3);
+  EXPECT_TRUE(codec_out_.spatialLayers[0].active);
+  EXPECT_TRUE(codec_out_.spatialLayers[1].active);
+  EXPECT_FALSE(codec_out_.spatialLayers[2].active);
+  EXPECT_EQ(codec_out_.width, 1280);
+  EXPECT_EQ(codec_out_.height, 720);
+
+  VideoCodec culled_codec =
+      VideoCodecInitializer::CullInactiveTopSpatialLayers(codec_out_);
+  EXPECT_EQ(culled_codec.VP9()->numberOfSpatialLayers, 2);
+  EXPECT_TRUE(culled_codec.spatialLayers[0].active);
+  EXPECT_TRUE(culled_codec.spatialLayers[1].active);
+  EXPECT_EQ(culled_codec.width, 640);
+  EXPECT_EQ(culled_codec.height, 360);
+}
+
+TEST_F(VideoCodecInitializerTest, CullVp9L3ToL1) {
+  SetUpFor(VideoCodecType::kVideoCodecVP9, absl::nullopt, 3, 1, false);
+  VideoStream stream = DefaultStream();
+  streams_.push_back(stream);
+
+  config_.simulcast_layers.resize(3);
+
+  // Deactivate two top layers
+  config_.simulcast_layers[0].active = true;
+  config_.simulcast_layers[1].active = false;
+  config_.simulcast_layers[2].active = false;
+  EXPECT_TRUE(InitializeCodec());
+  EXPECT_EQ(codec_out_.VP9()->numberOfSpatialLayers, 3);
+  EXPECT_TRUE(codec_out_.spatialLayers[0].active);
+  EXPECT_FALSE(codec_out_.spatialLayers[1].active);
+  EXPECT_FALSE(codec_out_.spatialLayers[2].active);
+  EXPECT_EQ(codec_out_.width, 1280);
+  EXPECT_EQ(codec_out_.height, 720);
+
+  VideoCodec culled_codec =
+      VideoCodecInitializer::CullInactiveTopSpatialLayers(codec_out_);
+  EXPECT_EQ(culled_codec.VP9()->numberOfSpatialLayers, 1);
+  EXPECT_TRUE(culled_codec.spatialLayers[0].active);
+  EXPECT_FALSE(culled_codec.spatialLayers[1].active);
+  EXPECT_FALSE(culled_codec.spatialLayers[2].active);
+  EXPECT_EQ(culled_codec.width, 320);
+  EXPECT_EQ(culled_codec.height, 180);
+}
+
+TEST_F(VideoCodecInitializerTest, CullVp9L3ToL1WithScalabilityModes) {
+  SetUpFor(VideoCodecType::kVideoCodecVP9, absl::nullopt, 3, 1, false);
+  VideoStream stream = DefaultStream();
+  stream.scalability_mode = ScalabilityMode::kL3T1;
+  streams_.push_back(stream);
+  EXPECT_TRUE(InitializeCodec());
+
+  EXPECT_EQ(codec_out_.VP9()->numberOfSpatialLayers, 3);
+  EXPECT_EQ(codec_out_.GetScalabilityMode(), ScalabilityMode::kL3T1);
+  // When using scalability modes with vp9, turning off layers via
+  // simulcast streams is not supported in VideoCodecInitializer, so
+  // just turn off L2/L3 manually here for now.
+  codec_out_.spatialLayers[0].active = true;
+  codec_out_.spatialLayers[1].active = false;
+  codec_out_.spatialLayers[2].active = false;
+  EXPECT_EQ(codec_out_.width, 1280);
+  EXPECT_EQ(codec_out_.height, 720);
+
+  VideoCodec culled_codec =
+      VideoCodecInitializer::CullInactiveTopSpatialLayers(codec_out_);
+  EXPECT_EQ(culled_codec.VP9()->numberOfSpatialLayers, 1);
+  EXPECT_TRUE(culled_codec.spatialLayers[0].active);
+  EXPECT_FALSE(culled_codec.spatialLayers[1].active);
+  EXPECT_FALSE(culled_codec.spatialLayers[2].active);
+  EXPECT_EQ(culled_codec.width, 320);
+  EXPECT_EQ(culled_codec.height, 180);
+}
+
+TEST_F(VideoCodecInitializerTest, CullVp9L2ToL1) {
+  SetUpFor(VideoCodecType::kVideoCodecVP9, absl::nullopt, 2, 1, false);
+  VideoStream stream = DefaultStream();
+  streams_.push_back(stream);
+
+  config_.simulcast_layers.resize(2);
+
+  // Deactivate top layer
+  config_.simulcast_layers[0].active = true;
+  config_.simulcast_layers[1].active = false;
+  EXPECT_TRUE(InitializeCodec());
+  EXPECT_EQ(codec_out_.VP9()->numberOfSpatialLayers, 2);
+  EXPECT_TRUE(codec_out_.spatialLayers[0].active);
+  EXPECT_FALSE(codec_out_.spatialLayers[1].active);
+  EXPECT_EQ(codec_out_.width, 1280);
+  EXPECT_EQ(codec_out_.height, 720);
+
+  VideoCodec culled_codec =
+      VideoCodecInitializer::CullInactiveTopSpatialLayers(codec_out_);
+  EXPECT_EQ(culled_codec.VP9()->numberOfSpatialLayers, 1);
+  EXPECT_TRUE(culled_codec.spatialLayers[0].active);
+  EXPECT_FALSE(culled_codec.spatialLayers[1].active);
+  EXPECT_EQ(culled_codec.width, 640);
+  EXPECT_EQ(culled_codec.height, 360);
+}
+
+TEST_F(VideoCodecInitializerTest, CullVp9InactiveMidLayerDoesNothing) {
+  SetUpFor(VideoCodecType::kVideoCodecVP9, absl::nullopt, 3, 1, false);
+  VideoStream stream = DefaultStream();
+  streams_.push_back(stream);
+
+  config_.simulcast_layers.resize(3);
+
+  // Deactivate middle layer
+  config_.simulcast_layers[0].active = true;
+  config_.simulcast_layers[1].active = false;
+  config_.simulcast_layers[2].active = true;
+  EXPECT_TRUE(InitializeCodec());
+  EXPECT_EQ(codec_out_.VP9()->numberOfSpatialLayers, 3);
+  EXPECT_TRUE(codec_out_.spatialLayers[0].active);
+  EXPECT_FALSE(codec_out_.spatialLayers[1].active);
+  EXPECT_TRUE(codec_out_.spatialLayers[2].active);
+  EXPECT_EQ(codec_out_.width, 1280);
+  EXPECT_EQ(codec_out_.height, 720);
+
+  VideoCodec culled_codec =
+      VideoCodecInitializer::CullInactiveTopSpatialLayers(codec_out_);
+  EXPECT_EQ(culled_codec.VP9()->numberOfSpatialLayers, 3);
+  EXPECT_TRUE(culled_codec.spatialLayers[0].active);
+  EXPECT_FALSE(culled_codec.spatialLayers[1].active);
+  EXPECT_TRUE(culled_codec.spatialLayers[2].active);
+  EXPECT_EQ(culled_codec.width, 1280);
+  EXPECT_EQ(culled_codec.height, 720);
+}
+
+TEST_F(VideoCodecInitializerTest, CullVp9OnlyMidLayerActive) {
+  SetUpFor(VideoCodecType::kVideoCodecVP9, absl::nullopt, 3, 1, false);
+  VideoStream stream = DefaultStream();
+  streams_.push_back(stream);
+
+  config_.simulcast_layers.resize(3);
+
+  // Deactivate bottom and top layers.
+  config_.simulcast_layers[0].active = false;
+  config_.simulcast_layers[1].active = true;
+  config_.simulcast_layers[2].active = false;
+  EXPECT_TRUE(InitializeCodec());
+
+  // Bottom layer already omitted when constructing default config.
+  EXPECT_EQ(codec_out_.VP9()->numberOfSpatialLayers, 2);
+  EXPECT_TRUE(codec_out_.spatialLayers[0].active);
+  EXPECT_FALSE(codec_out_.spatialLayers[1].active);
+  EXPECT_EQ(codec_out_.width, 1280);
+  EXPECT_EQ(codec_out_.height, 720);
+
+  // Culling top layer effectively turns this into singlecast.
+  VideoCodec culled_codec =
+      VideoCodecInitializer::CullInactiveTopSpatialLayers(codec_out_);
+  EXPECT_EQ(culled_codec.VP9()->numberOfSpatialLayers, 1);
+  EXPECT_TRUE(culled_codec.spatialLayers[0].active);
+  EXPECT_FALSE(culled_codec.spatialLayers[1].active);
+  EXPECT_FALSE(culled_codec.spatialLayers[2].active);
+  EXPECT_EQ(culled_codec.width, 640);
+  EXPECT_EQ(culled_codec.height, 360);
+  EXPECT_EQ(culled_codec.spatialLayers[0].width, 640);
+  EXPECT_EQ(culled_codec.spatialLayers[0].height, 360);
+}
+
+TEST_F(VideoCodecInitializerTest, CullVp9NoActiveLayers) {
+  SetUpFor(VideoCodecType::kVideoCodecVP9, absl::nullopt, 3, 1, false);
+  VideoStream stream = DefaultStream();
+  streams_.push_back(stream);
+
+  config_.simulcast_layers.resize(3);
+
+  // Deactivate all layers.
+  config_.simulcast_layers[0].active = false;
+  config_.simulcast_layers[1].active = false;
+  config_.simulcast_layers[2].active = false;
+  EXPECT_TRUE(InitializeCodec());
+
+  // Bottom layer already omitted when constructing default config.
+  EXPECT_EQ(codec_out_.VP9()->numberOfSpatialLayers, 3);
+  EXPECT_FALSE(codec_out_.spatialLayers[0].active);
+  EXPECT_FALSE(codec_out_.spatialLayers[1].active);
+  EXPECT_FALSE(codec_out_.spatialLayers[2].active);
+  EXPECT_EQ(codec_out_.width, 1280);
+  EXPECT_EQ(codec_out_.height, 720);
+
+  // Culling does nothing.
+  VideoCodec culled_codec =
+      VideoCodecInitializer::CullInactiveTopSpatialLayers(codec_out_);
+  EXPECT_EQ(culled_codec.VP9()->numberOfSpatialLayers, 3);
+  EXPECT_FALSE(culled_codec.spatialLayers[0].active);
+  EXPECT_FALSE(culled_codec.spatialLayers[1].active);
+  EXPECT_FALSE(culled_codec.spatialLayers[2].active);
+  EXPECT_EQ(culled_codec.width, 1280);
+  EXPECT_EQ(culled_codec.height, 720);
+}
+
+TEST_F(VideoCodecInitializerTest, CullAv1L3ToL2) {
+  VideoEncoderConfig config;
+  config.codec_type = VideoCodecType::kVideoCodecAV1;
+  std::vector<VideoStream> streams = {DefaultStream()};
+  streams[0].scalability_mode = ScalabilityMode::kL3T3_KEY;
+  config.spatial_layers.resize(3);
+  config.spatial_layers[0].active = true;
+  config.spatial_layers[1].active = true;
+  config.spatial_layers[2].active = false;
+
+  VideoCodec codec;
+  EXPECT_TRUE(VideoCodecInitializer::SetupCodec(config, streams, &codec));
+
+  EXPECT_EQ(codec.GetScalabilityMode(), ScalabilityMode::kL3T3_KEY);
+  EXPECT_TRUE(codec.spatialLayers[0].active);
+  EXPECT_TRUE(codec.spatialLayers[1].active);
+  EXPECT_FALSE(codec.spatialLayers[2].active);
+  EXPECT_EQ(codec.width, 1280);
+  EXPECT_EQ(codec.height, 720);
+
+  VideoCodec culled_codec =
+      VideoCodecInitializer::CullInactiveTopSpatialLayers(codec);
+  EXPECT_EQ(culled_codec.GetScalabilityMode(), ScalabilityMode::kL2T3_KEY);
+  EXPECT_TRUE(culled_codec.spatialLayers[0].active);
+  EXPECT_TRUE(culled_codec.spatialLayers[1].active);
+  EXPECT_EQ(culled_codec.width, 640);
+  EXPECT_EQ(culled_codec.height, 360);
+}
+
+TEST_F(VideoCodecInitializerTest, CullAv1L3ToL1) {
+  VideoEncoderConfig config;
+  config.codec_type = VideoCodecType::kVideoCodecAV1;
+  std::vector<VideoStream> streams = {DefaultStream()};
+  streams[0].scalability_mode = ScalabilityMode::kL3T3_KEY;
+  config.spatial_layers.resize(3);
+  config.spatial_layers[0].active = true;
+  config.spatial_layers[1].active = false;
+  config.spatial_layers[2].active = false;
+
+  VideoCodec codec;
+  EXPECT_TRUE(VideoCodecInitializer::SetupCodec(config, streams, &codec));
+
+  EXPECT_EQ(codec.GetScalabilityMode(), ScalabilityMode::kL3T3_KEY);
+  EXPECT_TRUE(codec.spatialLayers[0].active);
+  EXPECT_FALSE(codec.spatialLayers[1].active);
+  EXPECT_FALSE(codec.spatialLayers[2].active);
+  EXPECT_EQ(codec.width, 1280);
+  EXPECT_EQ(codec.height, 720);
+
+  VideoCodec culled_codec =
+      VideoCodecInitializer::CullInactiveTopSpatialLayers(codec);
+  EXPECT_EQ(culled_codec.GetScalabilityMode(), ScalabilityMode::kL1T3);
+  EXPECT_TRUE(culled_codec.spatialLayers[0].active);
+  EXPECT_EQ(culled_codec.width, 320);
+  EXPECT_EQ(culled_codec.height, 180);
+}
+
+TEST_F(VideoCodecInitializerTest, CullAv1InactiveMidLayerDoesNothing) {
+  VideoEncoderConfig config;
+  config.codec_type = VideoCodecType::kVideoCodecAV1;
+  std::vector<VideoStream> streams = {DefaultStream()};
+  streams[0].scalability_mode = ScalabilityMode::kL3T3_KEY;
+  config.spatial_layers.resize(3);
+  config.spatial_layers[0].active = true;
+  config.spatial_layers[1].active = false;
+  config.spatial_layers[2].active = true;
+
+  VideoCodec codec;
+  EXPECT_TRUE(VideoCodecInitializer::SetupCodec(config, streams, &codec));
+
+  EXPECT_EQ(codec.GetScalabilityMode(), ScalabilityMode::kL3T3_KEY);
+  EXPECT_TRUE(codec.spatialLayers[0].active);
+  EXPECT_FALSE(codec.spatialLayers[1].active);
+  EXPECT_TRUE(codec.spatialLayers[2].active);
+  EXPECT_EQ(codec.width, 1280);
+  EXPECT_EQ(codec.height, 720);
+
+  VideoCodec culled_codec =
+      VideoCodecInitializer::CullInactiveTopSpatialLayers(codec);
+  EXPECT_EQ(culled_codec.GetScalabilityMode(), ScalabilityMode::kL3T3_KEY);
+  EXPECT_TRUE(culled_codec.spatialLayers[0].active);
+  EXPECT_EQ(culled_codec.width, 1280);
+  EXPECT_EQ(culled_codec.height, 720);
+}
+
+TEST_F(VideoCodecInitializerTest, CullAv1OnlyMidLayerActive) {
+  VideoEncoderConfig config;
+  config.codec_type = VideoCodecType::kVideoCodecAV1;
+  std::vector<VideoStream> streams = {DefaultStream()};
+  streams[0].scalability_mode = ScalabilityMode::kL3T3_KEY;
+  config.spatial_layers.resize(3);
+  config.spatial_layers[0].active = false;
+  config.spatial_layers[1].active = true;
+  config.spatial_layers[2].active = false;
+
+  VideoCodec codec;
+  EXPECT_TRUE(VideoCodecInitializer::SetupCodec(config, streams, &codec));
+
+  EXPECT_EQ(codec.GetScalabilityMode(), ScalabilityMode::kL3T3_KEY);
+  EXPECT_FALSE(codec.spatialLayers[0].active);
+  EXPECT_TRUE(codec.spatialLayers[1].active);
+  EXPECT_FALSE(codec.spatialLayers[2].active);
+  EXPECT_EQ(codec.width, 1280);
+  EXPECT_EQ(codec.height, 720);
+
+  VideoCodec culled_codec =
+      VideoCodecInitializer::CullInactiveTopSpatialLayers(codec);
+  EXPECT_EQ(culled_codec.GetScalabilityMode(), ScalabilityMode::kL2T3_KEY);
+  EXPECT_FALSE(culled_codec.spatialLayers[0].active);
+  EXPECT_TRUE(culled_codec.spatialLayers[1].active);
+  EXPECT_EQ(culled_codec.width, 640);
+  EXPECT_EQ(culled_codec.height, 360);
+}
+
+TEST_F(VideoCodecInitializerTest, CullAV1NoActiveLayers) {
+  VideoEncoderConfig config;
+  config.codec_type = VideoCodecType::kVideoCodecAV1;
+  std::vector<VideoStream> streams = {DefaultStream()};
+  streams[0].scalability_mode = ScalabilityMode::kL3T3_KEY;
+  config.spatial_layers.resize(3);
+  config.spatial_layers[0].active = false;
+  config.spatial_layers[1].active = false;
+  config.spatial_layers[2].active = false;
+
+  VideoCodec codec;
+  EXPECT_TRUE(VideoCodecInitializer::SetupCodec(config, streams, &codec));
+
+  EXPECT_EQ(codec.GetScalabilityMode(), ScalabilityMode::kL3T3_KEY);
+  EXPECT_FALSE(codec.spatialLayers[0].active);
+  EXPECT_FALSE(codec.spatialLayers[1].active);
+  EXPECT_FALSE(codec.spatialLayers[2].active);
+  EXPECT_EQ(codec.width, 1280);
+  EXPECT_EQ(codec.height, 720);
+
+  VideoCodec culled_codec =
+      VideoCodecInitializer::CullInactiveTopSpatialLayers(codec);
+  EXPECT_EQ(culled_codec.GetScalabilityMode(), ScalabilityMode::kL3T3_KEY);
+  EXPECT_FALSE(culled_codec.spatialLayers[0].active);
+  EXPECT_FALSE(culled_codec.spatialLayers[1].active);
+  EXPECT_FALSE(culled_codec.spatialLayers[2].active);
+  EXPECT_EQ(culled_codec.width, 1280);
+  EXPECT_EQ(culled_codec.height, 720);
 }
 
 }  // namespace webrtc
