@@ -18,6 +18,8 @@
 #include "absl/types/optional.h"
 #include "api/scoped_refptr.h"
 #include "api/units/data_rate.h"
+#include "api/video_codecs/scalability_mode.h"
+#include "api/video_codecs/scalability_mode_helper.h"
 #include "api/video_codecs/video_encoder.h"
 #include "modules/video_coding/codecs/av1/av1_svc_config.h"
 #include "modules/video_coding/codecs/vp8/vp8_scalability.h"
@@ -347,6 +349,93 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
   }
 
   return video_codec;
+}
+
+VideoCodec VideoCodecInitializer::CullInactiveTopSpatialLayers(
+    const VideoCodec& config) {
+  int num_spatial_layers;
+  switch (config.codecType) {
+    case kVideoCodecAV1:
+      if (config.GetScalabilityMode().has_value()) {
+        num_spatial_layers =
+            ScalabilityModeStringToNumSpatialLayers(
+                ScalabilityModeToString(*config.GetScalabilityMode()))
+                .value_or(0);
+      } else {
+        num_spatial_layers = 0;
+      }
+      break;
+    case kVideoCodecVP9:
+      num_spatial_layers = config.VP9().numberOfSpatialLayers;
+      if (config.GetScalabilityMode().has_value()) {
+        int num_spatial_layers_from_scalability_mode =
+            ScalabilityModeToNumSpatialLayers(*config.GetScalabilityMode());
+        if (num_spatial_layers > 0) {
+          RTC_DCHECK_EQ(num_spatial_layers,
+                        num_spatial_layers_from_scalability_mode);
+        }
+        num_spatial_layers = num_spatial_layers_from_scalability_mode;
+      }
+      break;
+    default:
+      num_spatial_layers = 0;
+  }
+  if (num_spatial_layers <= 1) {
+    return config;
+  }
+
+  int highest_active_spatial_layer_id = -1;
+  for (int sid = num_spatial_layers - 1; sid >= 0; --sid) {
+    if (config.spatialLayers[sid].active) {
+      highest_active_spatial_layer_id = sid;
+      break;
+    }
+  }
+
+  if (highest_active_spatial_layer_id < 0 ||
+      highest_active_spatial_layer_id >= num_spatial_layers - 1) {
+    return config;
+  }
+
+  int highest_resolution_layer_id = -1;
+  for (int sid = 0; sid <= highest_active_spatial_layer_id; ++sid) {
+    if (config.spatialLayers[sid].active &&
+        (highest_resolution_layer_id == -1 ||
+         (config.spatialLayers[sid].width >
+          config.spatialLayers[highest_resolution_layer_id].width))) {
+      highest_resolution_layer_id = sid;
+    }
+  }
+
+  VideoCodec culled_config = config;
+  culled_config.width = config.spatialLayers[highest_resolution_layer_id].width;
+  culled_config.height =
+      config.spatialLayers[highest_resolution_layer_id].height;
+
+  int reduced_num_spatial_layers = highest_active_spatial_layer_id + 1;
+  switch (config.codecType) {
+    case kVideoCodecAV1: {
+      culled_config.SetScalabilityMode(LimitNumSpatialLayers(
+          *config.GetScalabilityMode(), reduced_num_spatial_layers));
+    } break;
+    case kVideoCodecVP9: {
+      culled_config.VP9()->numberOfSpatialLayers = reduced_num_spatial_layers;
+      auto scalability_mode = config.GetScalabilityMode();
+      if (scalability_mode.has_value()) {
+        culled_config.SetScalabilityMode(LimitNumSpatialLayers(
+            *config.GetScalabilityMode(), reduced_num_spatial_layers));
+      }
+    } break;
+    default:
+      RTC_CHECK_NOTREACHED();
+  }
+
+  for (int sid = highest_active_spatial_layer_id + 1; sid < kMaxSpatialLayers;
+       ++sid) {
+    culled_config.spatialLayers[sid] = SpatialLayer();
+  }
+
+  return culled_config;
 }
 
 }  // namespace webrtc

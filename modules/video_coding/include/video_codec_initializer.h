@@ -29,6 +29,8 @@ class VideoCodecInitializer {
                          const std::vector<VideoStream>& streams,
                          VideoCodec* codec);
 
+  static VideoCodec CullInactiveTopSpatialLayers(const VideoCodec& config);
+
  private:
   static VideoCodec VideoEncoderConfigToVideoCodec(
       const VideoEncoderConfig& config,
