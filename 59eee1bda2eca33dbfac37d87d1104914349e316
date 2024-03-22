@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46b1aa0b_648cf009",
+        "filename": "modules/video_coding/video_codec_initializer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2024-03-22T16:38:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6957010a_a60169be",
+      "range": {
+        "startLine": 384,
+        "startChar": 6,
+        "endLine": 384,
+        "endChar": 37
+      },
+      "revId": "59eee1bda2eca33dbfac37d87d1104914349e316",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7831076_320ac4ba",
@@ -47,6 +71,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81c62e65_e8dd8e38",
+        "filename": "modules/video_coding/video_codec_initializer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2024-03-22T16:38:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7831076_320ac4ba",
+      "range": {
+        "startLine": 397,
+        "startChar": 6,
+        "endLine": 397,
+        "endChar": 33
+      },
+      "revId": "59eee1bda2eca33dbfac37d87d1104914349e316",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "195ceeab_4fbf2284",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-03-21T10:56:49Z",
       "side": 1,
       "message": "Shouldn\u0027t we `SetScalabilityMode` for VP9 as well?",
+      "range": {
+        "startLine": 417,
+        "startChar": 9,
+        "endLine": 417,
+        "endChar": 23
+      },
+      "revId": "59eee1bda2eca33dbfac37d87d1104914349e316",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b684128_78132e5c",
+        "filename": "modules/video_coding/video_codec_initializer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2024-03-22T16:38:32Z",
+      "side": 1,
+      "message": "Added. Though I don\u0027t think it\u0027s used in practice since turning off layers doesn\u0027t seem to work then...",
+      "parentUuid": "195ceeab_4fbf2284",
       "range": {
         "startLine": 417,
         "startChar": 9,
