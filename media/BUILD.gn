@@ -490,6 +490,19 @@ rtc_library("rtc_simulcast_encoder_adapter") {
   ]
 }
 
+rtc_library("rtc_black_frame_decoder_factory") {
+  sources = [
+    "engine/black_frame_decoder_factory.cc",
+    "engine/black_frame_decoder_factory.h",
+  ]
+  deps = [
+    "../api/video_codecs:video_codecs_api",
+    "../modules/video_coding:black_frame_decoder",
+    "../rtc_base:logging",
+    "../rtc_base/system:rtc_export",
+  ]
+}
+
 rtc_library("rtc_internal_video_codecs") {
   visibility = [ "*" ]
   allow_poison = [ "software_video_codecs" ]
@@ -498,6 +511,7 @@ rtc_library("rtc_internal_video_codecs") {
   deps = [
     ":codec",
     ":media_constants",
+    ":rtc_black_frame_decoder_factory",
     ":rtc_simulcast_encoder_adapter",
     "../api/environment",
     "../api/video:encoded_image",
@@ -720,8 +734,8 @@ if (rtc_build_dcsctp) {
       ":media_channel",
       ":rtc_data_sctp_transport_internal",
       "../api:array_view",
-      "../api/environment",
       "../api:libjingle_peerconnection_api",
+      "../api/environment",
       "../api/task_queue:pending_task_safety_flag",
       "../api/task_queue:task_queue",
       "../net/dcsctp/public:factory",
