@@ -16,6 +16,29 @@
       "message": "Please?",
       "revId": "bdc7654afed966c4f12cdda7ed364c8db9bd07e7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0d0548b_d3cc8490",
+        "filename": "modules/pacing/packet_router_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 5597
+      },
+      "writtenOn": "2024-03-27T17:06:55Z",
+      "side": 1,
+      "message": "nit: can\u0027t this just be `WillOnce(Return(true));` ?",
+      "range": {
+        "startLine": 453,
+        "startChar": 34,
+        "endLine": 455,
+        "endChar": 5
+      },
+      "revId": "bdc7654afed966c4f12cdda7ed364c8db9bd07e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
