@@ -110,8 +110,9 @@ inline void CheckException(JNIEnv* env) {
 constexpr uint64_t kJniStackMarkerValue = 0xbdbdef1bebcade1b;
 
 // Context about the JNI call with exception checked to be stored in stack.
-struct BASE_EXPORT JniJavaCallContextUnchecked {
-  inline JniJavaCallContextUnchecked() {
+template <bool checked>
+struct BASE_EXPORT JniJavaCallContext {
+  inline JniJavaCallContext() {
 // TODO(ssid): Implement for other architectures.
 #if defined(__arm__) || defined(__aarch64__)
     // This assumes that this method does not increment the stack pointer.
@@ -139,9 +140,12 @@ struct BASE_EXPORT JniJavaCallContextUnchecked {
         env, clazz, method_name, jni_signature, atomic_method_id);
   }
 
-  ~JniJavaCallContextUnchecked() {
+  ~JniJavaCallContext() {
     // Reset so that spurious marker finds are avoided.
     memset(&marker, 0, sizeof(marker));
+    if (checked) {
+      jni_zero::CheckException(base.env1);
+    }
   }
 
   uint64_t marker;
@@ -152,35 +156,11 @@ struct BASE_EXPORT JniJavaCallContextUnchecked {
   jmethodID method_id;
 };
 
-// Context about the JNI call with exception unchecked to be stored in stack.
-struct BASE_EXPORT JniJavaCallContextChecked {
-  // Force no inline to reduce code size.
-  template <jni_zero::MethodID::Type type>
-  void Init(JNIEnv* env,
-            jclass clazz,
-            const char* method_name,
-            const char* jni_signature,
-            std::atomic<jmethodID>* atomic_method_id) {
-    base.Init<type>(env, clazz, method_name, jni_signature, atomic_method_id);
-    // Reset `pc` to correct caller.
-    base.pc = reinterpret_cast<uintptr_t>(__builtin_return_address(0));
-  }
-
-  ~JniJavaCallContextChecked() { jni_zero::CheckException(base.env1); }
-
-  JniJavaCallContextUnchecked base;
-};
-
-static_assert(sizeof(JniJavaCallContextChecked) ==
-                  sizeof(JniJavaCallContextUnchecked),
-              "Stack unwinder cannot work with structs of different sizes.");
-
 }  // namespace jni_zero
 
 namespace jni_zero {
 namespace internal {
-using jni_zero::JniJavaCallContextChecked;
-using jni_zero::JniJavaCallContextUnchecked;
+using jni_zero::JniJavaCallContext;
 using webrtc::LazyGetClass;
 }  // namespace internal
 }  // namespace jni_zero
@@ -189,8 +169,7 @@ using webrtc::LazyGetClass;
 // TODO(b/319078685): Remove once all uses of the jni_generator has been
 // updated.
 namespace jni_generator {
-using jni_zero::JniJavaCallContextChecked;
-using jni_zero::JniJavaCallContextUnchecked;
+using jni_zero::JniJavaCallContext;
 }  // namespace jni_generator
 
 // Re-export helpers in the namespaces that the old jni_generator script
