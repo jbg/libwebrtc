@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "580f29aa_5fd393b9",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_interface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-03-29T08:48:09Z",
+      "side": 1,
+      "message": "```suggestion\n    // TODO: bugs.webrtc.org/15368 - Delete once DEPRECATED_RtpSenderEgress is\n```",
+      "revId": "7e48a6fa8d829327c4d74fb66a41a3f3a875bf6c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
