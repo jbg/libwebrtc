@@ -86,17 +86,16 @@ JsepTransport::JsepTransport(
       unencrypted_rtp_transport_(std::move(unencrypted_rtp_transport)),
       sdes_transport_(std::move(sdes_transport)),
       dtls_srtp_transport_(std::move(dtls_srtp_transport)),
-      rtp_dtls_transport_(rtp_dtls_transport
-                              ? rtc::make_ref_counted<webrtc::DtlsTransport>(
-                                    std::move(rtp_dtls_transport))
-                              : nullptr),
+      rtp_dtls_transport_(rtc::make_ref_counted<webrtc::DtlsTransport>(
+          std::move(rtp_dtls_transport))),
       rtcp_dtls_transport_(rtcp_dtls_transport
                                ? rtc::make_ref_counted<webrtc::DtlsTransport>(
                                      std::move(rtcp_dtls_transport))
                                : nullptr),
       sctp_transport_(sctp_transport
                           ? rtc::make_ref_counted<webrtc::SctpTransport>(
-                                std::move(sctp_transport))
+                                std::move(sctp_transport),
+                                rtp_dtls_transport_)
                           : nullptr),
       rtcp_mux_active_callback_(std::move(rtcp_mux_active_callback)) {
   TRACE_EVENT0("webrtc", "JsepTransport::JsepTransport");
@@ -117,10 +116,6 @@ JsepTransport::JsepTransport(
     RTC_DCHECK(dtls_srtp_transport_);
     RTC_DCHECK(!unencrypted_rtp_transport);
     RTC_DCHECK(!sdes_transport);
-  }
-
-  if (sctp_transport_) {
-    sctp_transport_->SetDtlsTransport(rtp_dtls_transport_);
   }
 }
 
