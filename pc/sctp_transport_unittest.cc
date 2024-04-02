@@ -117,19 +117,16 @@ class SctpTransportTest : public ::testing::Test {
   SctpTransportObserverInterface* observer() { return &observer_; }
 
   void CreateTransport() {
-    auto cricket_sctp_transport =
-        absl::WrapUnique(new FakeCricketSctpTransport());
-    transport_ =
-        rtc::make_ref_counted<SctpTransport>(std::move(cricket_sctp_transport));
-  }
-
-  void AddDtlsTransport() {
     std::unique_ptr<cricket::DtlsTransportInternal> cricket_transport =
         std::make_unique<FakeDtlsTransport>(
             "audio", cricket::ICE_CANDIDATE_COMPONENT_RTP);
     dtls_transport_ =
         rtc::make_ref_counted<DtlsTransport>(std::move(cricket_transport));
-    transport_->SetDtlsTransport(dtls_transport_);
+
+    auto cricket_sctp_transport =
+        absl::WrapUnique(new FakeCricketSctpTransport());
+    transport_ = rtc::make_ref_counted<SctpTransport>(
+        std::move(cricket_sctp_transport), dtls_transport_);
   }
 
   void CompleteSctpHandshake() {
@@ -167,7 +164,6 @@ TEST(SctpTransportSimpleTest, CreateClearDelete) {
 TEST_F(SctpTransportTest, EventsObservedWhenConnecting) {
   CreateTransport();
   transport()->RegisterObserver(observer());
-  AddDtlsTransport();
   CompleteSctpHandshake();
   ASSERT_EQ_WAIT(SctpTransportState::kConnected, observer_.State(),
                  kDefaultTimeout);
@@ -178,7 +174,6 @@ TEST_F(SctpTransportTest, EventsObservedWhenConnecting) {
 TEST_F(SctpTransportTest, CloseWhenClearing) {
   CreateTransport();
   transport()->RegisterObserver(observer());
-  AddDtlsTransport();
   CompleteSctpHandshake();
   ASSERT_EQ_WAIT(SctpTransportState::kConnected, observer_.State(),
                  kDefaultTimeout);
@@ -190,7 +185,6 @@ TEST_F(SctpTransportTest, CloseWhenClearing) {
 TEST_F(SctpTransportTest, MaxChannelsSignalled) {
   CreateTransport();
   transport()->RegisterObserver(observer());
-  AddDtlsTransport();
   EXPECT_FALSE(transport()->Information().MaxChannels());
   EXPECT_FALSE(observer_.LastReceivedInformation().MaxChannels());
   CompleteSctpHandshake();
@@ -206,7 +200,6 @@ TEST_F(SctpTransportTest, MaxChannelsSignalled) {
 TEST_F(SctpTransportTest, CloseWhenTransportCloses) {
   CreateTransport();
   transport()->RegisterObserver(observer());
-  AddDtlsTransport();
   CompleteSctpHandshake();
   ASSERT_EQ_WAIT(SctpTransportState::kConnected, observer_.State(),
                  kDefaultTimeout);
