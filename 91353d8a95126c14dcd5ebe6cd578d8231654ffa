@@ -33,6 +33,24 @@
       "message": "Given the problem described in the original CL (that setting an empty realm doesn\u0027t work), shouldn\u0027t we simply remove the \"if\"?",
       "revId": "91353d8a95126c14dcd5ebe6cd578d8231654ffa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "341adc5f_ce4a4789",
+        "filename": "p2p/base/turn_port.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 3350241
+      },
+      "writtenOn": "2024-04-02T15:55:25Z",
+      "side": 1,
+      "message": "I wondered about that but accepting a present but empty realm seems meh when we explicitly reject the lack of realm: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/p2p/base/turn_port.cc;l\u003d1432?q\u003dturn_port.cc\u0026ss\u003dchromium",
+      "parentUuid": "5cb144c0_0654ffc3",
+      "revId": "91353d8a95126c14dcd5ebe6cd578d8231654ffa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
