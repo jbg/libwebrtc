@@ -16,6 +16,24 @@
       "message": "can we make this const now? Or do we need access while destructing?",
       "revId": "eb2d2ad64cbd48e07a0a76a561d7f1dff848a934",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6273d0d2_2c1f4866",
+        "filename": "pc/sctp_transport.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2024-04-03T10:10:45Z",
+      "side": 1,
+      "message": "It\u0027s cleared when destructing, so I can\u0027t do that :(",
+      "parentUuid": "b494ee88_48c2a97f",
+      "revId": "eb2d2ad64cbd48e07a0a76a561d7f1dff848a934",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
