@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24c5cca3_74c91d1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-04-03T10:11:36Z",
+      "side": 1,
+      "message": "OK, let\u0027s land this.\nI\u0027m not happy with set_realm failing with just a log message to show that there was a failure, but handling an error return can be complicated.\n\nSince realm has to be specified both in the auth-storage and in the remote message, perhaps we should nix usage of the empty realm in those places (and DCHECK here that it\u0027s non-empty once we know that those changes stick)?",
+      "revId": "ac4fe18e915d3f056e61dab4c271f0781013837a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
