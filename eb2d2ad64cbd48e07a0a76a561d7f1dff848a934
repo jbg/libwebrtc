@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b494ee88_48c2a97f",
+        "filename": "pc/sctp_transport.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-04-03T10:06:36Z",
+      "side": 1,
+      "message": "can we make this const now? Or do we need access while destructing?",
+      "revId": "eb2d2ad64cbd48e07a0a76a561d7f1dff848a934",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
