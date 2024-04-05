@@ -34,6 +34,24 @@
       "parentUuid": "6ec22716_4bac62f3",
       "revId": "725f99a20fb835ae2f58d7607bcab80426840eee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98854487_f505838d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2024-04-05T07:54:52Z",
+      "side": 1,
+      "message": "Actually, I changed my mind about this. It has already been in stable for a couple of weeks and I haven\u0027t heard of any issues, so I think it is safe to remove.",
+      "parentUuid": "4ae26662_2dc189da",
+      "revId": "725f99a20fb835ae2f58d7607bcab80426840eee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
