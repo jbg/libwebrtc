@@ -19,6 +19,7 @@
 #include "absl/types/optional.h"
 #include "api/array_view.h"
 #include "api/frame_transformer_interface.h"
+#include "api/rtp_stream_sender.h"
 #include "api/scoped_refptr.h"
 #include "api/sequence_checker.h"
 #include "api/task_queue/task_queue_base.h"
@@ -147,6 +148,36 @@ class RTPSenderVideo : public RTPVideoFrameSenderInterface {
   // 'retransmission_mode' is either a value of enum RetransmissionMode, or
   // computed with bitwise operators on values of enum RetransmissionMode.
   void SetRetransmissionSetting(int32_t retransmission_settings);
+
+  class RtpStreamSenderImpl : public RtpStreamSender {
+  public:
+    RtpStreamSenderImpl(RTPSender* const rtp_sender) : rtp_sender_(rtp_sender) {}
+
+    void SendRtp(std::unique_ptr<RtpStreamSenderPacket> packet) override {
+      RTC_LOG(LS_ERROR) << "RtpStreamSenderImpl::SendRtp";
+      if (false) {
+        RtpHeaderExtensionMap extension_map;
+        std::unique_ptr<RtpPacketToSend> packet_to_send = std::make_unique<RtpPacketToSend>(&extension_map);
+        packet_to_send->SetSsrc(packet.Ssrc());
+        packet_to_send->SetCsrcs(packet.Csrcs());
+
+        // TODO Reserve extensions?
+        // TODO MID & RID extensions?
+
+        packet_to_send->SetPayloadType(packet.PayloadType());
+        packet_to_send->SetTimestamp(packet.RtpTimestamp());
+
+        rtp_sender_->EnqueuePackets({});
+      }
+    }
+
+  private:
+    RTPSender* const rtp_sender_;
+  };
+
+  scoped_refptr<RtpStreamSender> ReplaceStreamSender() {
+    return rtc::make_ref_counted<RtpStreamSenderImpl>(rtp_sender_);
+  }
 
  protected:
   static uint8_t GetTemporalId(const RTPVideoHeader& header);

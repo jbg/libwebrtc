@@ -32,6 +32,7 @@
 #include "api/rtc_error.h"
 #include "api/rtp_parameters.h"
 #include "api/rtp_sender_interface.h"
+#include "api/rtp_stream_sender.h"
 #include "api/scoped_refptr.h"
 #include "api/sequence_checker.h"
 #include "media/base/audio_source.h"
@@ -224,6 +225,13 @@ class RtpSenderBase : public RtpSenderInternal, public ObserverInterface {
     send_codecs_ = send_codecs;
   }
 
+  rtc::scoped_refptr<RtpStreamSender> ReplaceStreamSender() override {
+    return worker_thread_->BlockingCall(
+        [&] {
+      return media_channel_->ReplaceStreamSender();
+    });
+  }
+
  protected:
   // If `set_streams_observer` is not null, it is invoked when SetStreams()
   // is called. `set_streams_observer` is not owned by this object. If not
@@ -286,6 +294,8 @@ class RtpSenderBase : public RtpSenderInternal, public ObserverInterface {
       encoder_selector_;
 
   virtual RTCError GenerateKeyFrame(const std::vector<std::string>& rids) = 0;
+
+  rtc::scoped_refptr<RtpStreamSender> rtp_stream_sender_ = nullptr;
 };
 
 // LocalAudioSinkAdapter receives data callback as a sink to the local
