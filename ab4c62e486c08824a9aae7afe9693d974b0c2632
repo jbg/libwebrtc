@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35bd32a1_512c7de7",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 20429
+      },
+      "writtenOn": "2024-04-06T04:51:27Z",
+      "side": 1,
+      "message": "libvpx_vp8_encoder.cc and libvpx_vp9_encoder.cc assert similar conditions, but they use `RTC_DCHECK_EQ` rather than `RTC_CHECK_EQ`:\n\n```\nstd::vector\u003crtc::scoped_refptr\u003cVideoFrameBuffer\u003e\u003e                \nLibvpxVp8Encoder::PrepareBuffers(rtc::scoped_refptr\u003cVideoFrameBuffer\u003e buffer) {\n  RTC_DCHECK_EQ(buffer-\u003ewidth(), raw_images_[0].d_w);\n  RTC_DCHECK_EQ(buffer-\u003eheight(), raw_images_[0].d_h);          \n  ...\n```\n\n```\nint LibvpxVp9Encoder::Encode(const VideoFrame\u0026 input_image,               \n                             const std::vector\u003cVideoFrameType\u003e* frame_types) {\n  ...                                                                 \n  RTC_DCHECK_EQ(input_image.width(), raw_-\u003ed_w);        \n  RTC_DCHECK_EQ(input_image.height(), raw_-\u003ed_h);                                                                    \n  ...\n```\n\nTo help investigate b/330482827, we need to use `RTC_CHECK_EQ`.",
+      "revId": "ab4c62e486c08824a9aae7afe9693d974b0c2632",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
