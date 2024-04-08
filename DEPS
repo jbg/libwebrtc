@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'dc6a426381badfaedc4eb4e921dd5a32443ad91f',
+  'chromium_revision': 'ea0d72d572a97406907aae7de0735f1251448977',
 
   # Fetch the prebuilt binaries for llvm-cov and llvm-profdata. Needed to
   # process the raw profiles produced by instrumented targets (built with
@@ -63,13 +63,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@80a2be8b562ce81e1e77d96684bd4834b349368d',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@6b34494bec6bf0b49e32b5a87b823f4b3ca045af',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@b66f13b352a5f4632be179373cb19cc82c07a395',
+    'https://chromium.googlesource.com/chromium/src/testing@eb548bea8f7a9cc8c8c86dc3c53cee0b58e9a0fb',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@60fbcafb2bcd77538cfa175bab9c80e6b064c405',
+    'https://chromium.googlesource.com/chromium/src/third_party@8936cc4588393a921820df95b01fe5604478c748',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -304,7 +304,7 @@ deps = {
       'condition': 'checkout_android',
   },
   'src/third_party/perfetto':
-    'https://android.googlesource.com/platform/external/perfetto.git@7609c6712c3a3afc5f2f6b3e4dfe308ee6517f74',
+    'https://android.googlesource.com/platform/external/perfetto.git@53124bc271e792d522c2d29a8761daae2436b506',
   'src/third_party/protobuf-javascript/src':
     Var('chromium_git') + '/external/github.com/protocolbuffers/protobuf-javascript' + '@' + 'e34549db516f8712f678fcd4bc411613b5cc5295',
   'src/third_party/libvpx/source/libvpx':
@@ -359,7 +359,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@cc13938b8167980e6491fb6ffc78214a18c7c50a',
+    'https://chromium.googlesource.com/chromium/src/tools@5a3fe5322487c7c3825a94a8e8464ab0c7a079f1',
 
   'src/third_party/espresso': {
       'packages': [
@@ -398,7 +398,7 @@ deps = {
     'packages': [
       {
           'package': 'chromium/third_party/androidx',
-          'version': '6dUQJo3e3Ya4I6P2r0VGg5SlgUjqkpaDTEXI4VxFM6UC',
+          'version': 'tz8HJfCXuMOkGt8q2IWfJ0VGD2vob2Uts5iwSXmbrdUC',
       },
     ],
     'condition': 'checkout_android',
@@ -1727,11 +1727,6 @@ deps = {
       ],
       'condition': 'checkout_android',
       'dep_type': 'cipd',
-  },
-
-  'src/third_party/instrumented_libs': {
-    'url': Var('chromium_git') + '/chromium/third_party/instrumented_libraries.git' + '@' + '0afcd954d906cd988fa5e55807c19f1443080657',
-    'condition': 'checkout_instrumented_libraries',
   },
 
   'src/third_party/android_deps/libs/javax_annotation_javax_annotation_api': {
