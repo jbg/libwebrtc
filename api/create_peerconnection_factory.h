@@ -30,10 +30,6 @@ class Thread;
 
 namespace webrtc {
 
-class AudioDeviceModule;
-class AudioFrameProcessor;
-class AudioProcessing;
-
 // Create a new instance of PeerConnectionFactoryInterface with optional video
 // codec factories. These video factories represents all video codecs, i.e. no
 // extra internal video codecs will be added.
