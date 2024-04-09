@@ -20,6 +20,8 @@
 #include "logging/rtc_event_log/events/rtc_event_rtp_packet_outgoing.h"
 #include "rtc_base/logging.h"
 
+#include "base/logging.h"
+
 namespace webrtc {
 namespace {
 constexpr uint32_t kTimestampTicksPerMs = 90;
@@ -125,6 +127,9 @@ void RtpSenderEgress::SendPacket(std::unique_ptr<RtpPacketToSend> packet,
                                  const PacedPacketInfo& pacing_info) {
   RTC_DCHECK_RUN_ON(worker_queue_);
   RTC_DCHECK(packet);
+  if (packet->packet_type() == RtpPacketMediaType::kVideo) {
+    LOG(ERROR) << "RtpSenderEgress::SendPacket " << packet->ToString();
+  }
 
   if (packet->Ssrc() == ssrc_ &&
       packet->packet_type() != RtpPacketMediaType::kRetransmission) {
@@ -221,6 +226,10 @@ void RtpSenderEgress::SendPacket(std::unique_ptr<RtpPacketToSend> packet,
     } else {
       packet->set_pacer_exit_time(now);
     }
+  }
+
+  if (packet->packet_type() == RtpPacketMediaType::kVideo) {
+    LOG(ERROR) << "RtpSenderEgress Sending custom packet " << packet->ToString();
   }
 
   auto compound_packet = Packet{std::move(packet), pacing_info, now};

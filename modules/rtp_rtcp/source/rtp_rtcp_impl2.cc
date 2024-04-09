@@ -33,6 +33,8 @@
 #include "rtc_base/time_utils.h"
 #include "system_wrappers/include/ntp_time.h"
 
+#include "base/logging.h"
+
 #ifdef _WIN32
 // Disable warning C4355: 'this' : used in base member initializer list.
 #pragma warning(disable : 4355)
@@ -343,6 +345,9 @@ bool ModuleRtpRtcpImpl2::OnSendingRtpFrame(uint32_t timestamp,
 bool ModuleRtpRtcpImpl2::CanSendPacket(const RtpPacketToSend& packet) const {
   RTC_DCHECK(rtp_sender_);
   RTC_DCHECK_RUN_ON(&rtp_sender_->sequencing_checker);
+  if (packet.packet_type() == RtpPacketMediaType::kVideo) {
+    LOG(ERROR) << "void ModuleRtpRtcpImpl2::CanSendPacket rtp_sender_->packet_generator.SendingMedia() " << rtp_sender_->packet_generator.SendingMedia();
+  }
   if (!rtp_sender_->packet_generator.SendingMedia()) {
     return false;
   }
@@ -369,6 +374,10 @@ void ModuleRtpRtcpImpl2::SendPacket(std::unique_ptr<RtpPacketToSend> packet,
                                     const PacedPacketInfo& pacing_info) {
   RTC_DCHECK_RUN_ON(&rtp_sender_->sequencing_checker);
   RTC_DCHECK(CanSendPacket(*packet));
+  if (packet->packet_type() == RtpPacketMediaType::kVideo) {
+    LOG(ERROR) << "void ModuleRtpRtcpImpl2::SendPacket ";
+  }
+
   rtp_sender_->packet_sender.SendPacket(std::move(packet), pacing_info);
 }
 
