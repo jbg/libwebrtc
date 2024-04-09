@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7b4e439_b0a98dc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-09T14:32:02Z",
+      "side": 1,
+      "message": "VP8 DefaultTemporalLayers class uses field trials, and it would be easier to pass them there it that class is created without extra Vp8FrameBufferControllerFactory interface.",
+      "revId": "696f05e15478901342851d2d72fbf0af22051d98",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
