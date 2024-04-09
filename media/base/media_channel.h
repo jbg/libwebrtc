@@ -29,6 +29,7 @@
 #include "api/rtc_error.h"
 #include "api/rtp_parameters.h"
 #include "api/rtp_sender_interface.h"
+#include "api/rtp_stream_sender.h"
 #include "api/task_queue/pending_task_safety_flag.h"
 #include "api/transport/data_channel_transport_interface.h"
 #include "api/transport/rtp/rtp_source.h"
@@ -256,6 +257,8 @@ class MediaSendChannelInterface {
   // TODO(bugs.webrtc.org/13931): Remove when configuration is more sensible
   virtual void SetSendCodecChangedCallback(
       absl::AnyInvocable<void()> callback) = 0;
+
+  virtual rtc::scoped_refptr<webrtc::RtpStreamSender> ReplaceStreamSender() = 0;
 };
 
 class MediaReceiveChannelInterface {

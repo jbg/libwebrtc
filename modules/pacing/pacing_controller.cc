@@ -26,6 +26,8 @@
 #include "rtc_base/logging.h"
 #include "system_wrappers/include/clock.h"
 
+#include "base/logging.h"
+
 namespace webrtc {
 namespace {
 constexpr TimeDelta kCongestedPacketInterval = TimeDelta::Millis(500);
@@ -195,6 +197,10 @@ void PacingController::EnqueuePacket(std::unique_ptr<RtpPacketToSend> packet) {
   RTC_DCHECK(pacing_rate_ > DataRate::Zero())
       << "SetPacingRate must be called before InsertPacket.";
   RTC_CHECK(packet->packet_type());
+
+  if (packet->Ssrc() == 123) {
+    LOG(ERROR) << "Packet in PacingController::EnqueuePacket seen_first_packet_ " << seen_first_packet_;
+  }
 
   if (keyframe_flushing_ &&
       packet->packet_type() == RtpPacketMediaType::kVideo &&
@@ -460,6 +466,7 @@ void PacingController::ProcessPackets() {
     std::unique_ptr<RtpPacketToSend> rtp_packet =
         GetPendingPacket(pacing_info, target_send_time, now);
     if (rtp_packet == nullptr) {
+      LOG(ERROR) << "No pending packets";
       // No packet available to send, check if we should send padding.
       if (now - target_send_time > kMaxPaddingReplayDuration) {
         // The target send time is more than `kMaxPaddingReplayDuration` behind
@@ -489,6 +496,9 @@ void PacingController::ProcessPackets() {
       // Can't fetch new packet and no padding to send, exit send loop.
       break;
     } else {
+      if (rtp_packet->packet_type() == RtpPacketMediaType::kVideo) {
+        LOG(ERROR) << "Got pending packet " << rtp_packet->ToString();
+      }
       RTC_DCHECK(rtp_packet);
       RTC_DCHECK(rtp_packet->packet_type().has_value());
       const RtpPacketMediaType packet_type = *rtp_packet->packet_type();

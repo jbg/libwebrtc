@@ -25,6 +25,8 @@
 #include "rtc_base/system/unused.h"
 #include "rtc_base/trace_event.h"
 
+#include "base/logging.h"
+
 namespace webrtc {
 
 PacketRouter::PacketRouter() : PacketRouter(1) {}
@@ -167,7 +169,7 @@ void PacketRouter::SendPacket(std::unique_ptr<RtpPacketToSend> packet,
   uint32_t ssrc = packet->Ssrc();
   auto it = send_modules_map_.find(ssrc);
   if (it == send_modules_map_.end()) {
-    RTC_LOG(LS_WARNING)
+    LOG(WARNING)
         << "Failed to send packet, matching RTP module not found "
            "or transport error. SSRC = "
         << packet->Ssrc() << ", sequence number " << packet->SequenceNumber();
@@ -176,7 +178,7 @@ void PacketRouter::SendPacket(std::unique_ptr<RtpPacketToSend> packet,
 
   RtpRtcpInterface* rtp_module = it->second;
   if (!rtp_module->TrySendPacket(std::move(packet), cluster_info)) {
-    RTC_LOG(LS_WARNING) << "Failed to send packet, rejected by RTP module.";
+    LOG(WARNING) << "Failed to send packet, rejected by RTP module.";
     return;
   }
   modules_used_in_current_batch_.insert(rtp_module);
