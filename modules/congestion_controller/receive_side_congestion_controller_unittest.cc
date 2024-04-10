@@ -10,6 +10,8 @@
 
 #include "modules/congestion_controller/include/receive_side_congestion_controller.h"
 
+#include <cstdint>
+
 #include "api/test/network_emulation/create_cross_traffic.h"
 #include "api/test/network_emulation/cross_traffic.h"
 #include "api/units/data_rate.h"
@@ -33,6 +35,7 @@ using ::testing::_;
 using ::testing::AtLeast;
 using ::testing::ElementsAre;
 using ::testing::MockFunction;
+using ::testing::SizeIs;
 
 constexpr DataRate kInitialBitrate = DataRate::BitsPerSec(60'000);
 
@@ -78,6 +81,67 @@ TEST(ReceiveSideCongestionControllerTest,
       nullptr);
   EXPECT_CALL(remb_sender, Call(123, _));
   controller.SetMaxDesiredReceiveBitrate(DataRate::BitsPerSec(123));
+}
+
+TEST(ReceiveSideCongestionControllerTest,
+     SendsTransportFeedbackWithRfc8888IfNoTsn) {
+  MockFunction<void(std::vector<std::unique_ptr<rtcp::RtcpPacket>>)>
+      feedback_sender;
+  SimulatedClock clock_(123456);
+  ReceiveSideCongestionController controller(
+      &clock_, feedback_sender.AsStdFunction(), RembThrottler::RembSender(),
+      /*network_state_estimator=*/nullptr,
+      /*support_rfc8888_feedback_format=*/true);
+
+  EXPECT_CALL(feedback_sender, Call)
+      .WillOnce([](std::vector<std::unique_ptr<rtcp::RtcpPacket>> packets) {
+        ASSERT_THAT(packets, SizeIs(1));
+        rtc::Buffer buffer = packets[0]->Build();
+        rtcp::CommonHeader header;
+        EXPECT_TRUE(header.Parse(buffer.data(), buffer.size()));
+        EXPECT_EQ(header.fmt(),
+                  rtcp::TransportLayerFeedback::kFeedbackMessageType);
+      });
+  RtpPacketReceived packet;
+  packet.SetSsrc(123);
+  packet.set_arrival_time(clock_.CurrentTime());
+  controller.OnReceivedPacket(packet, MediaType::AUDIO);
+  TimeDelta time_to_process = controller.MaybeProcess();
+  EXPECT_LE(time_to_process.ms(), 100);
+  clock_.AdvanceTime(time_to_process);
+  controller.MaybeProcess();
+}
+
+TEST(ReceiveSideCongestionControllerTest,
+     SendsTransportFeedbackWithLegacyIfTsn) {
+  MockFunction<void(std::vector<std::unique_ptr<rtcp::RtcpPacket>>)>
+      feedback_sender;
+  SimulatedClock clock_(123456);
+  ReceiveSideCongestionController controller(
+      &clock_, feedback_sender.AsStdFunction(), RembThrottler::RembSender(),
+      /*network_state_estimator=*/nullptr,
+      /*support_rfc8888_feedback_format=*/true);
+
+  EXPECT_CALL(feedback_sender, Call)
+      .WillOnce([](std::vector<std::unique_ptr<rtcp::RtcpPacket>> packets) {
+        ASSERT_THAT(packets, SizeIs(1));
+        rtc::Buffer buffer = packets[0]->Build();
+        rtcp::CommonHeader header;
+        EXPECT_TRUE(header.Parse(buffer.data(), buffer.size()));
+        EXPECT_EQ(header.fmt(), rtcp::TransportFeedback::kFeedbackMessageType);
+      });
+
+  RtpHeaderExtensionMap extensions;
+  extensions.Register<TransportSequenceNumber>(1);
+  RtpPacketReceived packet(&extensions);
+  packet.SetSsrc(123);
+  packet.ReserveExtension<TransportSequenceNumber>();
+  packet.set_arrival_time(clock_.CurrentTime());
+  controller.OnReceivedPacket(packet, MediaType::AUDIO);
+  TimeDelta time_to_process = controller.MaybeProcess();
+  EXPECT_LE(time_to_process.ms(), 100);
+  clock_.AdvanceTime(time_to_process);
+  controller.MaybeProcess();
 }
 
 TEST(ReceiveSideCongestionControllerTest, ConvergesToCapacity) {
