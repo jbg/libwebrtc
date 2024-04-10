@@ -18,6 +18,7 @@
 #include <vector>
 
 #include "absl/types/optional.h"
+#include "api/environment/environment_factory.h"
 #include "api/fec_controller_override.h"
 #include "api/scoped_refptr.h"
 #include "api/test/mock_video_encoder.h"
@@ -36,9 +37,9 @@
 #include "rtc_base/fake_clock.h"
 #include "test/fake_encoder.h"
 #include "test/fake_texture_frame.h"
-#include "test/field_trial.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
+#include "test/scoped_key_value_config.h"
 
 namespace webrtc {
 using ::testing::_;
@@ -1123,9 +1124,10 @@ INSTANTIATE_TEST_SUITE_P(
 
 TEST_P(ResolutionBasedFallbackTest, VerifyForcedEncoderFallback) {
   const ResolutionBasedFallbackTestParams& params = GetParam();
-  test::ScopedFieldTrials field_trials(params.field_trials);
-  auto primary = new test::FakeEncoder(Clock::GetRealTimeClock());
-  auto fallback = new test::FakeEncoder(Clock::GetRealTimeClock());
+  test::ScopedKeyValueConfig field_trials(params.field_trials);
+  Environment env = CreateEnvironment(&field_trials);
+  auto primary = new test::FakeEncoder(env);
+  auto fallback = new test::FakeEncoder(env);
   auto encoder = CreateVideoEncoderSoftwareFallbackWrapper(
       std::unique_ptr<VideoEncoder>(fallback),
       std::unique_ptr<VideoEncoder>(primary),

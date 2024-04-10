@@ -48,9 +48,9 @@ CallTest::CallTest()
       fake_encoder_factory_([this]() {
         std::unique_ptr<FakeEncoder> fake_encoder;
         if (video_encoder_configs_[0].codec_type == kVideoCodecVP8) {
-          fake_encoder = std::make_unique<FakeVp8Encoder>(&env_.clock());
+          fake_encoder = std::make_unique<FakeVp8Encoder>(env_);
         } else {
-          fake_encoder = std::make_unique<FakeEncoder>(&env_.clock());
+          fake_encoder = std::make_unique<FakeEncoder>(env_);
         }
         fake_encoder->SetMaxBitrate(fake_encoder_max_bitrate_);
         return fake_encoder;
