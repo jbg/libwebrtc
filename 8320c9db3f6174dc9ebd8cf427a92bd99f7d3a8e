@@ -34,6 +34,24 @@
       "parentUuid": "461440ee_f3d9f37e",
       "revId": "8320c9db3f6174dc9ebd8cf427a92bd99f7d3a8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85289570_03da9f0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2024-04-10T11:24:02Z",
+      "side": 1,
+      "message": "Friendly ping",
+      "parentUuid": "a314767a_7c1a4811",
+      "revId": "8320c9db3f6174dc9ebd8cf427a92bd99f7d3a8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
