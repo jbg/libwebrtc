@@ -30,6 +30,7 @@
 #include "api/units/timestamp.h"
 #include "modules/rtp_rtcp/include/report_block_data.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/remote_estimate.h"
+#include "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.h"
 #include "system_wrappers/include/clock.h"
 
 #define RTCP_CNAME_SIZE 256  // RFC 3550 page 44, including null termination
@@ -107,6 +108,7 @@ enum RTCPPacketType : uint32_t {
   kRtcpXrReceiverReferenceTime = 0x40000,
   kRtcpXrDlrrReportBlock = 0x80000,
   kRtcpTransportFeedback = 0x100000,
+  kRtcpTransportLayerFeedback = 0x200000,
   kRtcpXrTargetBitrate = 0x200000
 };
 
@@ -164,6 +166,10 @@ class NetworkLinkRtcpObserver {
 
   virtual void OnTransportFeedback(Timestamp receive_time,
                                    const rtcp::TransportFeedback& feedback) {}
+  // Feeedback following RFC 8888.
+  virtual void OnTransportLayerFeedback(
+      Timestamp receive_time,
+      const rtcp::TransportLayerFeedback& feedback) {}
   virtual void OnReceiverEstimatedMaxBitrate(Timestamp receive_time,
                                              DataRate bitrate) {}
 

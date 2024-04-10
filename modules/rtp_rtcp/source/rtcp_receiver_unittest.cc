@@ -10,6 +10,7 @@
 
 #include "modules/rtp_rtcp/source/rtcp_receiver.h"
 
+#include <cstdint>
 #include <memory>
 #include <set>
 #include <utility>
@@ -1754,6 +1755,26 @@ TEST(RtcpReceiverTest,
   packet.AddReceivedPacket(1, Timestamp::Millis(1));
 
   EXPECT_CALL(mocks.network_link_rtcp_observer, OnTransportFeedback);
+  receiver.IncomingPacket(packet.Build());
+}
+
+TEST(RtcpReceiverTest, NotifiesNetworkLinkObserverOnTransportLayerFeedback) {
+  ReceiverMocks mocks;
+  RtpRtcpInterface::Configuration config = DefaultConfiguration(&mocks);
+  RTCPReceiver receiver(config, &mocks.rtp_rtcp_impl);
+  receiver.SetRemoteSSRC(kSenderSsrc);
+
+  std::map<uint32_t /*ssrc*/,
+           std::vector<rtcp::TransportLayerFeedback::PacketInfo>>
+      received_packets = {{/*ssrc*/ 1,
+                           {{
+                               .sequence_number = 1,
+                           }}}};
+  const uint32_t kCompactNtp = 324;
+  rtcp::TransportLayerFeedback packet(std::move(received_packets), kCompactNtp);
+  packet.SetSenderSsrc(kSenderSsrc);
+
+  EXPECT_CALL(mocks.network_link_rtcp_observer, OnTransportLayerFeedback);
   receiver.IncomingPacket(packet.Build());
 }
 

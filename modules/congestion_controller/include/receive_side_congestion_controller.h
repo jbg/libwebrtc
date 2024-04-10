@@ -18,6 +18,7 @@
 #include "api/units/data_rate.h"
 #include "api/units/time_delta.h"
 #include "modules/congestion_controller/remb_throttler.h"
+#include "modules/congestion_controller/transport_feedback_sender.h"
 #include "modules/pacing/packet_router.h"
 #include "modules/remote_bitrate_estimator/remote_estimator_proxy.h"
 #include "modules/rtp_rtcp/source/rtp_packet_received.h"
@@ -39,6 +40,12 @@ class ReceiveSideCongestionController : public CallStatsObserver {
       RemoteEstimatorProxy::TransportFeedbackSender feedback_sender,
       RembThrottler::RembSender remb_sender,
       NetworkStateEstimator* network_state_estimator);
+  ReceiveSideCongestionController(
+      Clock* clock,
+      RemoteEstimatorProxy::TransportFeedbackSender feedback_sender,
+      RembThrottler::RembSender remb_sender,
+      NetworkStateEstimator* network_state_estimator,
+      bool support_rfc8888_feedback_format);
 
   ~ReceiveSideCongestionController() override {}
 
@@ -73,6 +80,8 @@ class ReceiveSideCongestionController : public CallStatsObserver {
       RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_);
 
   Clock& clock_;
+  const bool support_rfc8888_feedback_format_;
+  TransportFeedbackSender feedback_sender_;
   RembThrottler remb_throttler_;
   RemoteEstimatorProxy remote_estimator_proxy_;
 

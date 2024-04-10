@@ -33,6 +33,11 @@ class MockNetworkLinkRtcpObserver : public NetworkLinkRtcpObserver {
               (Timestamp receive_time, const rtcp::TransportFeedback& feedback),
               (override));
   MOCK_METHOD(void,
+              OnTransportLayerFeedback,
+              (Timestamp receive_time,
+               const rtcp::TransportLayerFeedback& feedback),
+              (override));
+  MOCK_METHOD(void,
               OnReceiverEstimatedMaxBitrate,
               (Timestamp receive_time, DataRate bitrate),
               (override));
