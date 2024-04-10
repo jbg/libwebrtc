@@ -131,6 +131,7 @@ struct RTCPReceiver::PacketInformation {
   absl::optional<TimeDelta> rtt;
   uint32_t receiver_estimated_max_bitrate_bps = 0;
   std::unique_ptr<rtcp::TransportFeedback> transport_feedback;
+  absl::optional<rtcp::TransportLayerFeedback> transport_layer_feedback;
   absl::optional<VideoBitrateAllocation> target_bitrate_allocation;
   absl::optional<NetworkStateEstimate> network_state_estimate;
   std::unique_ptr<rtcp::LossNotification> loss_notification;
@@ -437,6 +438,9 @@ bool RTCPReceiver::ParseCompoundPacket(rtc::ArrayView<const uint8_t> packet,
             break;
           case rtcp::TransportFeedback::kFeedbackMessageType:
             HandleTransportFeedback(rtcp_block, packet_information);
+            break;
+          case rtcp::TransportLayerFeedback::kFeedbackMessageType:
+            HandleTransportLayerFeedback(rtcp_block, packet_information);
             break;
           default:
             ++num_skipped_packets_;
@@ -1048,6 +1052,22 @@ void RTCPReceiver::HandleTransportFeedback(
   }
 }
 
+void RTCPReceiver::HandleTransportLayerFeedback(
+    const CommonHeader& rtcp_block,
+    PacketInformation* packet_information) {
+  rtcp::TransportLayerFeedback transport_layer_feedback;
+  if (!transport_layer_feedback.Parse(rtcp_block)) {
+    ++num_skipped_packets_;
+    // Application layer feedback message doesn't have a standard format.
+    // Failing to parse it as transport feedback messages doesn't indicate an
+    // invalid RTCP.
+    return;
+  }
+  packet_information->packet_type_flags |= kRtcpTransportLayerFeedback;
+  packet_information->transport_layer_feedback.emplace(
+      std::move(transport_layer_feedback));
+}
+
 void RTCPReceiver::NotifyTmmbrUpdated() {
   // Find bounding set.
   std::vector<rtcp::TmmbItem> bounding =
@@ -1136,6 +1156,10 @@ void RTCPReceiver::TriggerCallbacksFromRtcpPacket(
     if (packet_information.transport_feedback != nullptr) {
       network_link_rtcp_observer_->OnTransportFeedback(
           now, *packet_information.transport_feedback);
+    }
+    if (packet_information.transport_layer_feedback) {
+      network_link_rtcp_observer_->OnTransportLayerFeedback(
+          now, *packet_information.transport_layer_feedback);
     }
   }
 

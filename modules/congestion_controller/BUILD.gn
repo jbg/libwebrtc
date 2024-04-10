@@ -24,16 +24,22 @@ rtc_library("congestion_controller") {
     "receive_side_congestion_controller.cc",
     "remb_throttler.cc",
     "remb_throttler.h",
+    "transport_feedback_sender.cc",
+    "transport_feedback_sender.h",
   ]
 
   deps = [
     "../../api:rtp_parameters",
+    "../../api:sequence_checker",
     "../../api/transport:network_control",
     "../../api/units:data_rate",
     "../../api/units:time_delta",
     "../../api/units:timestamp",
+    "../../modules/rtp_rtcp:rtp_rtcp",
     "../../rtc_base:logging",
     "../../rtc_base:macromagic",
+    "../../rtc_base:rtc_numerics",
+    "../../rtc_base/network:ecn_marking",
     "../../rtc_base/synchronization:mutex",
     "../pacing",
     "../remote_bitrate_estimator",
