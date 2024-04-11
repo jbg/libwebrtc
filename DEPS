@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '8feabe72a1885ec60963e9baa5f1eabb967e9e0a',
+  'chromium_revision': '6b5726af1635661d07714f52c15c0364b082d3cb',
 
   # Fetch the prebuilt binaries for llvm-cov and llvm-profdata. Needed to
   # process the raw profiles produced by instrumented targets (built with
@@ -54,7 +54,7 @@ deps = {
   'src/base':
     'https://chromium.googlesource.com/chromium/src/base@c8453b12ef48a0fcefd93368a6d63a43323e677f',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@5fb1330b84e1ee6d5bda9bd11602087defc32cd9',
+    'https://chromium.googlesource.com/chromium/src/build@e13fba5f6558e6e208eaac79d74e3a62dea60feb',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@5384d31f9ec3eead487ae8bcac930cd82b30fee8',
   # Gradle 6.6.1. Used for testing Android Studio project generation for WebRTC.
@@ -67,9 +67,9 @@ deps = {
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@730987164e1c501a7f0329999069b00fbadb6af9',
+    'https://chromium.googlesource.com/chromium/src/testing@0829658117db3b052a48b9c852a34c532c4ba4bd',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@78be9bffb2a70807dfd51d990811fc511dc413be',
+    'https://chromium.googlesource.com/chromium/src/third_party@c9afb7e15655133d791aba01023d0c00aaeb194b',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -294,7 +294,7 @@ deps = {
   'src/third_party/libjpeg_turbo':
     'https://chromium.googlesource.com/chromium/deps/libjpeg_turbo.git@9b894306ec3b28cea46e84c32b56773a98c483da',
   'src/third_party/libsrtp':
-    'https://chromium.googlesource.com/chromium/deps/libsrtp.git@5b7c744eb8310250ccc534f3f86a2015b3887a0a',
+    'https://chromium.googlesource.com/chromium/deps/libsrtp.git@7a7e64c8b5a632f55929cb3bb7d3e6fb48c3205a',
   'src/third_party/dav1d/libdav1d':
     'https://chromium.googlesource.com/external/github.com/videolan/dav1d.git@006ca01d387ac6652825d6cce1a57b2de67dbf8d',
   'src/third_party/libaom/source/libaom':
