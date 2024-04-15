@@ -24,6 +24,7 @@
 #include "api/sequence_checker.h"
 #include "api/task_queue/task_queue_base.h"
 #include "api/task_queue/task_queue_factory.h"
+#include "api/transport/goog_cc_factory.h"
 #include "api/transport/network_control.h"
 #include "api/units/data_rate.h"
 #include "call/rtp_bitrate_configurator.h"
@@ -169,8 +170,8 @@ class RtpTransportControllerSend final
 
   NetworkControllerFactoryInterface* const controller_factory_override_
       RTC_PT_GUARDED_BY(sequence_checker_);
-  const std::unique_ptr<NetworkControllerFactoryInterface>
-      controller_factory_fallback_ RTC_PT_GUARDED_BY(sequence_checker_);
+  GoogCcNetworkControllerFactory controller_factory_fallback_
+      RTC_GUARDED_BY(sequence_checker_);
 
   std::unique_ptr<CongestionControlHandler> control_handler_
       RTC_GUARDED_BY(sequence_checker_) RTC_PT_GUARDED_BY(sequence_checker_);
