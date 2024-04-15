@@ -84,9 +84,9 @@ RtpTransportControllerSend::RtpTransportControllerSend(
       observer_(nullptr),
       controller_factory_override_(config.network_controller_factory),
       controller_factory_fallback_(
-          std::make_unique<GoogCcNetworkControllerFactory>(
-              config.network_state_predictor_factory)),
-      process_interval_(controller_factory_fallback_->GetProcessInterval()),
+          {.network_state_predictor_factory =
+               config.network_state_predictor_factory}),
+      process_interval_(controller_factory_fallback_.GetProcessInterval()),
       last_report_block_time_(
           Timestamp::Millis(env_.clock().TimeInMilliseconds())),
       reset_feedback_on_route_change_(
@@ -642,8 +642,8 @@ void RtpTransportControllerSend::MaybeCreateControllers() {
     process_interval_ = controller_factory_override_->GetProcessInterval();
   } else {
     RTC_LOG(LS_INFO) << "Creating fallback congestion controller";
-    controller_ = controller_factory_fallback_->Create(initial_config_);
-    process_interval_ = controller_factory_fallback_->GetProcessInterval();
+    controller_ = controller_factory_fallback_.Create(initial_config_);
+    process_interval_ = controller_factory_fallback_.GetProcessInterval();
   }
   UpdateControllerWithTimeInterval();
   StartProcessPeriodicTasks();
