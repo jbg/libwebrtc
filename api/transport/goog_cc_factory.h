@@ -17,7 +17,6 @@
 #include "api/transport/network_control.h"
 
 namespace webrtc {
-class RtcEventLog;
 
 struct GoogCcFactoryConfig {
   std::unique_ptr<NetworkStateEstimatorFactory>
@@ -31,29 +30,14 @@ class GoogCcNetworkControllerFactory
     : public NetworkControllerFactoryInterface {
  public:
   GoogCcNetworkControllerFactory() = default;
-  ABSL_DEPRECATED("")
-  explicit GoogCcNetworkControllerFactory(RtcEventLog* event_log);
-  explicit GoogCcNetworkControllerFactory(
-      NetworkStatePredictorFactoryInterface* network_state_predictor_factory);
-
   explicit GoogCcNetworkControllerFactory(GoogCcFactoryConfig config);
+
   std::unique_ptr<NetworkControllerInterface> Create(
       NetworkControllerConfig config) override;
   TimeDelta GetProcessInterval() const override;
 
  protected:
-  RtcEventLog* const event_log_ = nullptr;
   GoogCcFactoryConfig factory_config_;
-};
-
-// Deprecated, use GoogCcFactoryConfig to enable feedback only mode instead.
-// Factory to create packet feedback only GoogCC, this can be used for
-// connections providing packet receive time feedback but no other reports.
-class ABSL_DEPRECATED("use GoogCcFactoryConfig instead")
-    GoogCcFeedbackNetworkControllerFactory
-    : public GoogCcNetworkControllerFactory {
- public:
-  explicit GoogCcFeedbackNetworkControllerFactory(RtcEventLog* event_log);
 };
 
 }  // namespace webrtc
