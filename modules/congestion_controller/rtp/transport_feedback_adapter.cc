@@ -241,10 +241,10 @@ TransportFeedbackAdapter::ProcessTransportFeedbackInner(
         }
 
         PacketFeedback packet_feedback = it->second;
+        Timestamp receive_time = Timestamp::PlusInfinity();
         if (delta_since_base.IsFinite()) {
-          packet_feedback.receive_time =
-              current_offset_ +
-              delta_since_base.RoundDownTo(TimeDelta::Millis(1));
+          receive_time = current_offset_ +
+                         delta_since_base.RoundDownTo(TimeDelta::Millis(1));
           // Note: Lost packets are not removed from history because they might
           // be reported as received by a later feedback.
           history_.erase(it);
@@ -252,7 +252,7 @@ TransportFeedbackAdapter::ProcessTransportFeedbackInner(
         if (packet_feedback.network_route == network_route_) {
           PacketResult result;
           result.sent_packet = packet_feedback.sent;
-          result.receive_time = packet_feedback.receive_time;
+          result.receive_time = receive_time;
           packet_result_vector.push_back(result);
         } else {
           ++ignored;

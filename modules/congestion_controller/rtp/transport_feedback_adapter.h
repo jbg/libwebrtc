@@ -32,10 +32,6 @@ struct PacketFeedback {
   // Time corresponding to when this object was created.
   Timestamp creation_time = Timestamp::MinusInfinity();
   SentPacket sent;
-  // Time corresponding to when the packet was received. Timestamped with the
-  // receiver's clock. For unreceived packet, Timestamp::PlusInfinity() is
-  // used.
-  Timestamp receive_time = Timestamp::PlusInfinity();
 
   // The network route that this packet is associated with.
   rtc::NetworkRoute network_route;
