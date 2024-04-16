@@ -314,6 +314,7 @@ LibvpxVp8Encoder::LibvpxVp8Encoder(const Environment& env,
           env_.field_trials(),
           "WebRTC-VP8VariableFramerateScreenshare")),
       framerate_controller_(variable_framerate_experiment_.framerate_limit),
+      encoder_info_override_(env_.field_trials()),
       max_frame_drop_interval_(ParseFrameDropInterval(env_.field_trials())),
       android_specific_threading_settings_(env_.field_trials().IsEnabled(
           "WebRTC-LibvpxVp8Encoder-AndroidSpecificThreadingSettings")) {
