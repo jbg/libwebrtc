@@ -16,6 +16,241 @@
       "message": "Would you mind reviewing? \nThanks",
       "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53e35b64_0f446781",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-18T13:59:49Z",
+      "side": 1,
+      "message": "1st pass",
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acdbdd9f_d9e8e77d",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-18T13:59:49Z",
+      "side": 1,
+      "message": "use CamelCase for functions, i.e. `To13bitAto`\nhttps://google.github.io/styleguide/cppguide.html#Function_Names",
+      "range": {
+        "startLine": 79,
+        "startChar": 9,
+        "endLine": 79,
+        "endChar": 21
+      },
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfc08320_b6cf8e94",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-18T13:59:49Z",
+      "side": 1,
+      "message": "did you mean `\u003d\u003d`?",
+      "range": {
+        "startLine": 95,
+        "startChar": 10,
+        "endLine": 95,
+        "endChar": 12
+      },
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a5c9327_7a2b2bff",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-18T13:59:49Z",
+      "side": 1,
+      "message": "this is always false (both because if already took just 13 bits and because above have a condition \u0027\u003e\u003d\u0027. Did you mean `\u003d\u003d`?",
+      "range": {
+        "startLine": 98,
+        "startChar": 10,
+        "endLine": 98,
+        "endChar": 11
+      },
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb54d768_368b05c3",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-18T13:59:49Z",
+      "side": 1,
+      "message": "or\n`TimeDelta::Seconds(ato) / 1024` [to skip conversion to float]\nbut converting through float works too.",
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2ab4d2b_53e3e44f",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-18T13:59:49Z",
+      "side": 1,
+      "message": "prefer auto capture because this lambda can\u0027t escape current scope.\nhttp://go/c-readability-advice#explicit-vs-implicit-lambda-capture-clauses",
+      "range": {
+        "startLine": 167,
+        "startChar": 32,
+        "endLine": 167,
+        "endChar": 50
+      },
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9456b77_14ff37bc",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-18T13:59:49Z",
+      "side": 1,
+      "message": "where do you check `packets_` is not empty?",
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e25796b3_48c68319",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-18T13:59:49Z",
+      "side": 1,
+      "message": "might be safer to rely on rtc::ArrayView::subview\n\nsomething like\n```\nrtc::ArrayView\u003cconst Packet\u003e remaining(packets);\nwhile(...) {\n  if (...) {\n     write(remaining.subview(0, number_of_packets_for_ssrc));\n     remaining \u003d remaining.subview(number_of_packets_for_ssrc);\n  }\n}\nwrite(remaining);\n````",
+      "range": {
+        "startLine": 220,
+        "startChar": 28,
+        "endLine": 221,
+        "endChar": 76
+      },
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84f0d536_1a06744e",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-18T13:59:49Z",
+      "side": 1,
+      "message": "`TransportLayerFeedback` is any RTCP message with type \u003d 205 (i.e., `Rtpfb` should really be called `TransportLayerFeedback`\n\nThis type is more specific.\nMay be call it `CongestionControlFeedback` to better match the spec.",
+      "range": {
+        "startLine": 27,
+        "startChar": 6,
+        "endLine": 27,
+        "endChar": 28
+      },
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76f78606_ff1cdfef",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-18T13:59:49Z",
+      "side": 1,
+      "message": "remove one of the spaces, or insert some word inbetween",
+      "range": {
+        "startLine": 32,
+        "startChar": 24,
+        "endLine": 32,
+        "endChar": 26
+      },
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c377386b_0e7a7bfc",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-18T13:59:49Z",
+      "side": 1,
+      "message": "`compact_ntp` is de-defacto a type of a timestamp or timedelta\nCan you please instead name this after what that time represents.\ne.g. `base_time` (to note this the base time from which offsets are calculated) or `report_timestamp` to match the spec.\n\nor `report_timestamp_compact_ntp` to mention both \u0027what it is\u0027 and \u0027used units\u0027\n(though for the latter it might be better idea to introduce CompactNtp type and use it instead of the `uint32_t` in various rtcp messages, but that is out of scope of this change)",
+      "range": {
+        "startLine": 49,
+        "startChar": 11,
+        "endLine": 49,
+        "endChar": 22
+      },
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
