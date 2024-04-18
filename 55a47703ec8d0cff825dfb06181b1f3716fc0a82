@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99f1967e_5cf95d07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5444
+      },
+      "writtenOn": "2024-04-18T09:25:42Z",
+      "side": 1,
+      "message": "lgtm, but I don\u0027t have permission to actually r+",
+      "revId": "55a47703ec8d0cff825dfb06181b1f3716fc0a82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
