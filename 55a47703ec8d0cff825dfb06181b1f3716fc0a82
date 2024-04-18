@@ -16,6 +16,23 @@
       "message": "lgtm, but I don\u0027t have permission to actually r+",
       "revId": "55a47703ec8d0cff825dfb06181b1f3716fc0a82",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "517605c0_84fb8643",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-04-18T09:27:33Z",
+      "side": 1,
+      "message": "Thanks for the verbal lgtm anyway!",
+      "revId": "55a47703ec8d0cff825dfb06181b1f3716fc0a82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
