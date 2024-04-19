@@ -277,6 +277,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b4dc00f4_d71a89d3",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-19T10:09:40Z",
+      "side": 1,
+      "message": "`RTC_DCHECK(!packets_.empty());`\nor `if (packets_.empty()) return false`\nfound be fine for now too.\n\nit just looks unsafe to silently assume `!packets_.empty()`\nthough... now code looks safe - it is restructured so that that lambda is never called with empty packets.",
+      "parentUuid": "c0fcf8bc_5d976945",
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e25796b3_48c68319",
         "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.cc",
         "patchSetId": 2
@@ -317,6 +335,76 @@
         "startChar": 28,
         "endLine": 221,
         "endChar": 76
+      },
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "418d6486_56be0367",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-19T10:09:40Z",
+      "side": 1,
+      "message": "looks better than my suggestion!",
+      "parentUuid": "b41be310_26da4b0d",
+      "range": {
+        "startLine": 220,
+        "startChar": 28,
+        "endLine": 221,
+        "endChar": 76
+      },
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2b435aa_bb711d8d",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-19T10:09:40Z",
+      "side": 1,
+      "message": "that is not `bool` constant\n(I guess that would implicitly convert to `true` because it is not 0)",
+      "range": {
+        "startLine": 283,
+        "startChar": 11,
+        "endLine": 283,
+        "endChar": 13
+      },
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb1eecd4_ad8e1d8d",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-19T10:09:40Z",
+      "side": 1,
+      "message": "may be update max_position:\n```\nmax_position -\u003d kTimestampLength;\ncompact_ntp_timestamp_ \u003d ByteReader\u003cuint32_t\u003e::ReadBigEndian(payload + max_position);\nwhile (position \u003c max_position - kHeaderPerMediaSssrcLength) {\n...\n}\nreturn position \u003d\u003d max_position;\n```",
+      "range": {
+        "startLine": 289,
+        "startChar": 0,
+        "endLine": 290,
+        "endChar": 70
       },
       "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"

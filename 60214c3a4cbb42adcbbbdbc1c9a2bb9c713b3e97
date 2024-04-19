@@ -16,6 +16,207 @@
       "message": "PTAL",
       "revId": "60214c3a4cbb42adcbbbdbc1c9a2bb9c713b3e97",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51d4ea25_d59bd95e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-19T10:09:40Z",
+      "side": 1,
+      "message": "2nd pass, I still need to review tests.",
+      "revId": "60214c3a4cbb42adcbbbdbc1c9a2bb9c713b3e97",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92f6e142_cce2bee4",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-19T10:09:40Z",
+      "side": 1,
+      "message": ".ms() is value/1000, but spec limits value/1024\n\nmay be something like:\n```\nif (arrival_time_offset \u003c TimeDelta::Zero()) {\n  return 0x1FFF;\n}\nreturn std::min(static_cast\u003cint64_t\u003e(1024 * arrival_time_offset.seconds\u003cfloat\u003e()), 0x1FFE);\n```\n\nin particular that avoids using both decimal and hexadecimal representation of the upper limit. 8189 \u003d 0x1FFD is only mentioned in the comment.",
+      "range": {
+        "startLine": 80,
+        "startChar": 25,
+        "endLine": 80,
+        "endChar": 30
+      },
+      "revId": "60214c3a4cbb42adcbbbdbc1c9a2bb9c713b3e97",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f036b39c_6ad548fe",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-19T10:09:40Z",
+      "side": 1,
+      "message": "may be check `received` once:\n```\nuint16_t packet_info \u003d 0;\nif (received) {\n  uint16_ato \u003d ...\n  packet_info \u003d 0x8000 | ecn | ato;\n  ++packet_index;\n}\nByteWriter\u003cuint16_t\u003e::WriteBigEndian(\u0026buffer[*position], packet_info);\n```",
+      "range": {
+        "startLine": 197,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 7
+      },
+      "revId": "60214c3a4cbb42adcbbbdbc1c9a2bb9c713b3e97",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1edbdef_f9df9532",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-19T10:09:40Z",
+      "side": 1,
+      "message": "This happens to be right just because kPerPacketLength \u003d 2;\nand thus (packet_block_size % 4) is either 0 (nothing need to be added), or 2 (then 4-2 \u003d 2 need to be added)\n\nbut I\u0027m worried that might be confusing way to round up (e.g. someone would copy paste this code, but they won\u0027t have the same alignment).\nmay be \n`return size + packet_block_size + (packet_block_size + 3) % 4) * 4;`\n(may should add or find dedicated helper for rounding up to certain alignment...)",
+      "range": {
+        "startLine": 249,
+        "startChar": 12,
+        "endLine": 249,
+        "endChar": 54
+      },
+      "revId": "60214c3a4cbb42adcbbbdbc1c9a2bb9c713b3e97",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b30dcd71_e52e9a95",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-19T10:09:40Z",
+      "side": 1,
+      "message": "this is not `bool`, and it would likely implcitily convert to `true` because it is `!\u003d0`",
+      "range": {
+        "startLine": 279,
+        "startChar": 10,
+        "endLine": 279,
+        "endChar": 13
+      },
+      "revId": "60214c3a4cbb42adcbbbdbc1c9a2bb9c713b3e97",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97af501d_19958027",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-19T10:09:40Z",
+      "side": 1,
+      "message": "may be do this check once instead of every loop:\n\n```\nif (position + kPerPacketLength * num_reports \u003e max_position) {\n  return false;\n}\nfor (int i \u003d 0; i \u003c num_reports; ++i) {\n...\n```\n\n(as it is now it would actually succeed the parse if there are less per packet entries than the num_reports)",
+      "range": {
+        "startLine": 301,
+        "startChar": 28,
+        "endLine": 301,
+        "endChar": 70
+      },
+      "revId": "60214c3a4cbb42adcbbbdbc1c9a2bb9c713b3e97",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88078e41_6e63125a",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-19T10:09:40Z",
+      "side": 1,
+      "message": "why convert to ms before comparison?\n(values are passed in 1/1024 s, not 1/1000 s, so ms() rounding won\u0027t help to mitigate inprecision)",
+      "range": {
+        "startLine": 37,
+        "startChar": 15,
+        "endLine": 37,
+        "endChar": 71
+      },
+      "revId": "60214c3a4cbb42adcbbbdbc1c9a2bb9c713b3e97",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "848216e3_bb069014",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-19T10:09:40Z",
+      "side": 1,
+      "message": "may be `: ` instead of two spacaes",
+      "range": {
+        "startLine": 42,
+        "startChar": 67,
+        "endLine": 42,
+        "endChar": 68
+      },
+      "revId": "60214c3a4cbb42adcbbbdbc1c9a2bb9c713b3e97",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67a217d4_74221673",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-19T10:09:40Z",
+      "side": 1,
+      "message": "add \u0027:\u0027",
+      "range": {
+        "startLine": 43,
+        "startChar": 45,
+        "endLine": 43,
+        "endChar": 51
+      },
+      "revId": "60214c3a4cbb42adcbbbdbc1c9a2bb9c713b3e97",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
