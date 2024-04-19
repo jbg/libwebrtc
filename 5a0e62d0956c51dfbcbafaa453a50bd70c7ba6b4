@@ -58,6 +58,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a651ec8_1a845746",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2024-04-19T09:28:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acdbdd9f_d9e8e77d",
+      "range": {
+        "startLine": 79,
+        "startChar": 9,
+        "endLine": 79,
+        "endChar": 21
+      },
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfc08320_b6cf8e94",
@@ -81,6 +105,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "296ef181_39a07fe7",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2024-04-19T09:28:37Z",
+      "side": 1,
+      "message": "yes....",
+      "parentUuid": "bfc08320_b6cf8e94",
+      "range": {
+        "startLine": 95,
+        "startChar": 10,
+        "endLine": 95,
+        "endChar": 12
+      },
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a5c9327_7a2b2bff",
@@ -94,6 +142,30 @@
       "writtenOn": "2024-04-18T13:59:49Z",
       "side": 1,
       "message": "this is always false (both because if already took just 13 bits and because above have a condition \u0027\u003e\u003d\u0027. Did you mean `\u003d\u003d`?",
+      "range": {
+        "startLine": 98,
+        "startChar": 10,
+        "endLine": 98,
+        "endChar": 11
+      },
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77e85ded_ec02d3f5",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2024-04-19T09:28:37Z",
+      "side": 1,
+      "message": "yes.",
+      "parentUuid": "2a5c9327_7a2b2bff",
       "range": {
         "startLine": 98,
         "startChar": 10,
@@ -144,6 +216,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6275b69d_9500e5c0",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2024-04-19T09:28:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2ab4d2b_53e3e44f",
+      "range": {
+        "startLine": 167,
+        "startChar": 32,
+        "endLine": 167,
+        "endChar": 50
+      },
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9456b77_14ff37bc",
@@ -163,6 +259,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c0fcf8bc_5d976945",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2024-04-19T09:28:37Z",
+      "side": 1,
+      "message": "At the moment no in this cl. But you are right, maybe we should sometimes send empty reports.",
+      "parentUuid": "d9456b77_14ff37bc",
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e25796b3_48c68319",
         "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.cc",
         "patchSetId": 2
@@ -174,6 +288,30 @@
       "writtenOn": "2024-04-18T13:59:49Z",
       "side": 1,
       "message": "might be safer to rely on rtc::ArrayView::subview\n\nsomething like\n```\nrtc::ArrayView\u003cconst Packet\u003e remaining(packets);\nwhile(...) {\n  if (...) {\n     write(remaining.subview(0, number_of_packets_for_ssrc));\n     remaining \u003d remaining.subview(number_of_packets_for_ssrc);\n  }\n}\nwrite(remaining);\n````",
+      "range": {
+        "startLine": 220,
+        "startChar": 28,
+        "endLine": 221,
+        "endChar": 76
+      },
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b41be310_26da4b0d",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2024-04-19T09:28:37Z",
+      "side": 1,
+      "message": "Good inspiration. How about this?",
+      "parentUuid": "e25796b3_48c68319",
       "range": {
         "startLine": 220,
         "startChar": 28,
@@ -207,6 +345,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24be15d2_c9dcb52f",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2024-04-19T09:28:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84f0d536_1a06744e",
+      "range": {
+        "startLine": 27,
+        "startChar": 6,
+        "endLine": 27,
+        "endChar": 28
+      },
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76f78606_ff1cdfef",
@@ -230,6 +392,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bda5d882_17516503",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2024-04-19T09:28:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76f78606_ff1cdfef",
+      "range": {
+        "startLine": 32,
+        "startChar": 24,
+        "endLine": 32,
+        "endChar": 26
+      },
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c377386b_0e7a7bfc",
@@ -243,6 +429,30 @@
       "writtenOn": "2024-04-18T13:59:49Z",
       "side": 1,
       "message": "`compact_ntp` is de-defacto a type of a timestamp or timedelta\nCan you please instead name this after what that time represents.\ne.g. `base_time` (to note this the base time from which offsets are calculated) or `report_timestamp` to match the spec.\n\nor `report_timestamp_compact_ntp` to mention both \u0027what it is\u0027 and \u0027used units\u0027\n(though for the latter it might be better idea to introduce CompactNtp type and use it instead of the `uint32_t` in various rtcp messages, but that is out of scope of this change)",
+      "range": {
+        "startLine": 49,
+        "startChar": 11,
+        "endLine": 49,
+        "endChar": 22
+      },
+      "revId": "5a0e62d0956c51dfbcbafaa453a50bd70c7ba6b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d7dc84c_c09ad40f",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/transport_layer_feedback.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2024-04-19T09:28:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c377386b_0e7a7bfc",
       "range": {
         "startLine": 49,
         "startChar": 11,
