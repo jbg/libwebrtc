@@ -152,6 +152,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b080beee_b9853b9c",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-19T10:53:45Z",
+      "side": 1,
+      "message": "looks unused",
+      "revId": "60214c3a4cbb42adcbbbdbc1c9a2bb9c713b3e97",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88078e41_6e63125a",
         "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback_unittest.cc",
         "patchSetId": 5
@@ -214,6 +231,155 @@
         "startChar": 45,
         "endLine": 43,
         "endChar": 51
+      },
+      "revId": "60214c3a4cbb42adcbbbdbc1c9a2bb9c713b3e97",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a188f7e_667987c2",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-19T10:53:45Z",
+      "side": 1,
+      "message": "Alternativly you may try to use Pointwise matcher\nhttps://google.github.io/googletest/reference/matchers.html#container-matchers\n\nsomething like\n`EXPECT_THAT(parsed_fb.packets(), Pointwise(PacketInfoEqual, kPackets));`\n(that would require to convert PacketInfoEqual into 2-tuple matcher)\n\nBut I\u0027m not sure that would be cleaner.",
+      "revId": "60214c3a4cbb42adcbbbdbc1c9a2bb9c713b3e97",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdccd81f_3e52ae8f",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-19T10:53:45Z",
+      "side": 1,
+      "message": "`Verify` prefix looks redundant (all tests should verify something)",
+      "range": {
+        "startLine": 62,
+        "startChar": 36,
+        "endLine": 62,
+        "endChar": 42
+      },
+      "revId": "60214c3a4cbb42adcbbbdbc1c9a2bb9c713b3e97",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fd96437_0e29b198",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-19T10:53:45Z",
+      "side": 1,
+      "message": "may be do not specify this offset because it doesn\u0027t affect BlockLength calculation.",
+      "range": {
+        "startLine": 91,
+        "startChar": 7,
+        "endLine": 91,
+        "endChar": 50
+      },
+      "revId": "60214c3a4cbb42adcbbbdbc1c9a2bb9c713b3e97",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba2871a7_6ae0bc58",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-19T10:53:45Z",
+      "side": 1,
+      "message": "may be drop \u0027padded\u0027 here because there is no padding in this test scenario.",
+      "range": {
+        "startLine": 108,
+        "startChar": 19,
+        "endLine": 108,
+        "endChar": 25
+      },
+      "revId": "60214c3a4cbb42adcbbbdbc1c9a2bb9c713b3e97",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bc64cc1_35d0d88a",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-19T10:53:45Z",
+      "side": 1,
+      "message": "may be add a test where sequence number are not sequential to verify space is allocated per sequence number, not per received packet:\ne.g.\n```\nstd::vector\u003cCongestionControlFeedback::PacketInfo\u003e packets \u003d {\n      {.ssrc \u003d 1, .sequence_number \u003d 1},\n      {.ssrc \u003d 1, .sequence_number \u003d 5}}\u0027\n```",
+      "revId": "60214c3a4cbb42adcbbbdbc1c9a2bb9c713b3e97",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41482dc7_0ec9226b",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-19T10:53:45Z",
+      "side": 1,
+      "message": "or reuse RtcpPacket::Build function that does all that boilerplate internally:\n`rtc::Buffer buffer \u003d fb.Build();`",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 80
+      },
+      "revId": "60214c3a4cbb42adcbbbdbc1c9a2bb9c713b3e97",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15fbb59b_aef7e2ac",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-19T10:53:45Z",
+      "side": 1,
+      "message": "`IsEmpty()`\nlikely clearer in this test.",
+      "range": {
+        "startLine": 142,
+        "startChar": 35,
+        "endLine": 142,
+        "endChar": 60
       },
       "revId": "60214c3a4cbb42adcbbbdbc1c9a2bb9c713b3e97",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
