@@ -87,6 +87,7 @@ if (!build_with_chromium) {
       "../rtc_base:threading",
       "../rtc_base/system:rtc_export",
       "../stats:rtc_stats",
+      "audio:audio_frame_processor",
       "audio:audio_mixer_api",
       "audio_codecs:audio_codecs_api",
       "task_queue:default_task_queue_factory",

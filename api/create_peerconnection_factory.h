@@ -13,6 +13,7 @@
 
 #include <memory>
 
+#include "api/audio/audio_frame_processor.h"
 #include "api/audio/audio_mixer.h"
 #include "api/audio_codecs/audio_decoder_factory.h"
 #include "api/audio_codecs/audio_encoder_factory.h"
@@ -21,6 +22,8 @@
 #include "api/scoped_refptr.h"
 #include "api/video_codecs/video_decoder_factory.h"
 #include "api/video_codecs/video_encoder_factory.h"
+#include "modules/audio_device/include/audio_device.h"
+#include "modules/audio_processing/include/audio_processing.h"
 #include "rtc_base/system/rtc_export.h"
 
 namespace rtc {
@@ -31,10 +34,6 @@ class Thread;
 }  // namespace rtc
 
 namespace webrtc {
-
-class AudioDeviceModule;
-class AudioFrameProcessor;
-class AudioProcessing;
 
 // Create a new instance of PeerConnectionFactoryInterface with optional video
 // codec factories. These video factories represents all video codecs, i.e. no
