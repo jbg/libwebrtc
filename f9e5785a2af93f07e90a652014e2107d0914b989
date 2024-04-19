@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99160481_9704ac20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-04-19T13:24:16Z",
+      "side": 1,
+      "message": "This is the kick-the-can-down-the-road solution to the problem.",
+      "revId": "f9e5785a2af93f07e90a652014e2107d0914b989",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
