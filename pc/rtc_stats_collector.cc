@@ -517,7 +517,7 @@ std::unique_ptr<RTCRemoteOutboundRtpStreamStats>
 CreateRemoteOutboundMediaStreamStats(
     const cricket::MediaReceiverInfo& media_receiver_info,
     const std::string& mid,
-    cricket::MediaType media_type,
+    const std::string& kind,
     const RTCInboundRtpStreamStats& inbound_audio_stats,
     const std::string& transport_id) {
   if (!media_receiver_info.last_sender_report_timestamp_ms.has_value()) {
@@ -531,13 +531,13 @@ CreateRemoteOutboundMediaStreamStats(
   // Create.
   auto stats = std::make_unique<RTCRemoteOutboundRtpStreamStats>(
       /*id=*/RTCRemoteOutboundRTPStreamStatsIDFromSSRC(
-          media_type, media_receiver_info.ssrc()),
+          cricket::MEDIA_TYPE_AUDIO, media_receiver_info.ssrc()),
       Timestamp::Millis(*media_receiver_info.last_sender_report_timestamp_ms));
 
   // Populate.
   // - RTCRtpStreamStats.
   stats->ssrc = media_receiver_info.ssrc();
-  stats->kind = cricket::MediaTypeToString(media_type);
+  stats->kind = kind;
   stats->transport_id = transport_id;
   if (inbound_audio_stats.codec_id.has_value()) {
     stats->codec_id = *inbound_audio_stats.codec_id;
@@ -1711,8 +1711,7 @@ void RTCStatsCollector::ProduceAudioRTPStreamStats_n(
     }
     // Remote-outbound.
     auto remote_outbound_audio = CreateRemoteOutboundMediaStreamStats(
-        voice_receiver_info, mid, cricket::MEDIA_TYPE_AUDIO, *inbound_audio_ptr,
-        transport_id);
+        voice_receiver_info, mid, "audio", *inbound_audio_ptr, transport_id);
     // Add stats.
     if (remote_outbound_audio) {
       // When the remote outbound stats are available, the remote ID for the
@@ -1805,8 +1804,7 @@ void RTCStatsCollector::ProduceVideoRTPStreamStats_n(
     }
     // Remote-outbound.
     auto remote_outbound_video = CreateRemoteOutboundMediaStreamStats(
-        video_receiver_info, mid, cricket::MEDIA_TYPE_VIDEO, *inbound_video_ptr,
-        transport_id);
+        video_receiver_info, mid, "video", *inbound_video_ptr, transport_id);
     // Add stats.
     if (remote_outbound_video) {
       // When the remote outbound stats are available, the remote ID for the
