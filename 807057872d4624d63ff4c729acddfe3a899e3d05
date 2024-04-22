@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25311694_5eded28d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-04-22T12:27:19Z",
+      "side": 1,
+      "message": "lgtm % comment nit",
+      "revId": "807057872d4624d63ff4c729acddfe3a899e3d05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25d4c3f8_1b4886f2",
+        "filename": "rtc_base/trace_event.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-04-22T12:27:19Z",
+      "side": 1,
+      "message": "nit: s/Enum/Constants?\n(unless you want to convert these to enum values?)",
+      "revId": "807057872d4624d63ff4c729acddfe3a899e3d05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
