@@ -16,6 +16,230 @@
       "message": "ptal",
       "revId": "4dc0b5ab0a8812925393b0f1116e351e37410f72",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edacd038_29613a29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-22T09:00:16Z",
+      "side": 1,
+      "message": "mostly formatting nits",
+      "revId": "4dc0b5ab0a8812925393b0f1116e351e37410f72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cec892e8_88666eb0",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-22T09:00:16Z",
+      "side": 1,
+      "message": "https://google.github.io/styleguide/cppguide.html#64-bit_Portability\n\n“Use braced-initialization as needed to create 64-bit constants.\"\n\ni.e., `int64_t{0x1FFE}`\n\nor rely on implicit conversion\n`std::min\u003cint64_t\u003e(1024 * arrival_time_offset.seconds\u003cfloat\u003e(), 0x1FFE);`\n(though latter is likely less readable in this case where you then convert result into uint16_t)",
+      "range": {
+        "startLine": 84,
+        "startChar": 6,
+        "endLine": 84,
+        "endChar": 13
+      },
+      "revId": "4dc0b5ab0a8812925393b0f1116e351e37410f72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf9c2500_79be6a52",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-22T09:00:16Z",
+      "side": 1,
+      "message": "may be remove ... part in the diagram because in this context it suppose to describe single \u0027receive_info\u0027 which is exactly 16 bits",
+      "range": {
+        "startLine": 89,
+        "startChar": 38,
+        "endLine": 89,
+        "endChar": 70
+      },
+      "revId": "4dc0b5ab0a8812925393b0f1116e351e37410f72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebd6605b_22aacb41",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-22T09:00:16Z",
+      "side": 1,
+      "message": "personally I would do it other way around:\n`(receive_info \u003e\u003e 13) \u0026 0b11`\nto make it clearer it is in range 0-3",
+      "range": {
+        "startLine": 116,
+        "startChar": 22,
+        "endLine": 116,
+        "endChar": 52
+      },
+      "revId": "4dc0b5ab0a8812925393b0f1116e351e37410f72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12c0d6c4_d8d06c77",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-22T09:00:16Z",
+      "side": 1,
+      "message": "personally I prefer pointer arithmetic: one less variable to track:\nconst uint8_t* payload \u003d packet.payload();\nconst uint8_t* payload_end \u003d payload + packet.payload_size_bytes();\n\nReadBigEndian(payload);\npayload +\u003d 4;\n\nreport_timestamp \u003d ReadBigEndian(payload_end - 4);\npayload_end -\u003d 4;\n\nwhile (payload + kHeaderPerSSRC \u003c max_position) {\n  ...\n}\n\n...\nreturn payload \u003d\u003d payload_end;",
+      "range": {
+        "startLine": 280,
+        "startChar": 0,
+        "endLine": 281,
+        "endChar": 16
+      },
+      "revId": "4dc0b5ab0a8812925393b0f1116e351e37410f72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "809c88c2_3d48a039",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-22T09:00:16Z",
+      "side": 1,
+      "message": "nit: this class is already in the rtcp subnamespace, so you may drop it here",
+      "range": {
+        "startLine": 27,
+        "startChar": 41,
+        "endLine": 27,
+        "endChar": 47
+      },
+      "revId": "4dc0b5ab0a8812925393b0f1116e351e37410f72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5994bc56_0f15dd08",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-22T09:00:16Z",
+      "side": 1,
+      "message": "report timestamp or `report_timestamp_compact_ntp`",
+      "range": {
+        "startLine": 32,
+        "startChar": 25,
+        "endLine": 32,
+        "endChar": 46
+      },
+      "revId": "4dc0b5ab0a8812925393b0f1116e351e37410f72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99ecfc52_b4d30fac",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-22T09:00:16Z",
+      "side": 1,
+      "message": "ditto - may remove `rtcp::`",
+      "range": {
+        "startLine": 45,
+        "startChar": 19,
+        "endLine": 45,
+        "endChar": 26
+      },
+      "revId": "4dc0b5ab0a8812925393b0f1116e351e37410f72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1e58786_6218c986",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-22T09:00:16Z",
+      "side": 1,
+      "message": "can you please make formatting of the two entries consistent, e.g., remove comma after TimeDelta::Millis(3)",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 8
+      },
+      "revId": "4dc0b5ab0a8812925393b0f1116e351e37410f72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a9647f3_0c1a5efa",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/congestion_control_feedback_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-22T09:00:16Z",
+      "side": 1,
+      "message": "can you please remove commas after TimeDelta::Millis(1)\nfor more concise formatting, and the one consistent with the tests above.",
+      "range": {
+        "startLine": 211,
+        "startChar": 0,
+        "endLine": 216,
+        "endChar": 54
+      },
+      "revId": "4dc0b5ab0a8812925393b0f1116e351e37410f72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
