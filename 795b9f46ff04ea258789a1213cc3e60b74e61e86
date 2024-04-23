@@ -16,6 +16,24 @@
       "message": "A follow-up to the other one that\u0027s being reviewed.\n\nHere, I\u0027m wondering if this approach is fine or if alternatively we should consider using AudioFrameView\u003c\u003e instead of ArrayView\u003c\u003e? There\u0027s one problem with AudioFrameView however which is that it\u0027s both const and non const, which means that it\u0027s not a fit for either AudioFrame::data() or AudioFrame::mutable_data() (arguably it would fit for the latter, but there we don\u0027t really need/want the \u0027const\u0027 part).\n\nThoughts?",
       "revId": "795b9f46ff04ea258789a1213cc3e60b74e61e86",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92d97ad5_991187a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-04-23T12:52:05Z",
+      "side": 1,
+      "message": "Nevermind - looks like AudioFrameView needs to be de-interleaved whereas where I\u0027ve been incorporating ArrayView, the buffer is interleaved.",
+      "parentUuid": "e262b08d_683116aa",
+      "revId": "795b9f46ff04ea258789a1213cc3e60b74e61e86",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
