@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7d6647d_e178699e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-04-23T03:16:29Z",
+      "side": 1,
+      "message": "Hi Danil - the previous CL took slightly longer to land than I thought so the lgtm on this one expired. Mind +1-ing again?",
+      "revId": "d5e192bcbf952bfb5d599d9b39d9e81da9af1390",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
