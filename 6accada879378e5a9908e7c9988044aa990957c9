@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "480240d7_3fe99bbd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5826
+      },
+      "writtenOn": "2024-04-23T17:56:54Z",
+      "side": 1,
+      "message": "I\u0027m more and more inclined towards AudioFrameView for non-interleaved audio, because it does not require any manual calculations. We can add ToArrayView() to it to make it nicer. (And we can even make something like InterlievedAudioFrameView if needed)",
+      "revId": "6accada879378e5a9908e7c9988044aa990957c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d13d482_e0ab2aa3",
+        "filename": "audio/remix_resample.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5826
+      },
+      "writtenOn": "2024-04-23T17:56:54Z",
+      "side": 1,
+      "message": "AudioFrameView would be perfect here",
+      "range": {
+        "startLine": 33,
+        "startChar": 23,
+        "endLine": 33,
+        "endChar": 40
+      },
+      "revId": "6accada879378e5a9908e7c9988044aa990957c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aac4eec3_4061ad0e",
+        "filename": "audio/remix_resample.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5826
+      },
+      "writtenOn": "2024-04-23T17:56:54Z",
+      "side": 1,
+      "message": "And especially here AudioFrameView looks like the candidate. @peah@webrtc.org WDYT?",
+      "revId": "6accada879378e5a9908e7c9988044aa990957c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
