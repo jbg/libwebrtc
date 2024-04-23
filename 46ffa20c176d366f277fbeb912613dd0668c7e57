@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64eecb8c_043a086e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-04-23T12:42:27Z",
+      "side": 1,
+      "message": "I can\u0027t say I understand JNI to the degree needed, but it looks good to me.",
+      "revId": "46ffa20c176d366f277fbeb912613dd0668c7e57",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
