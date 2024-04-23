@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1efa2d16_00c3e0a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3350241
+      },
+      "writtenOn": "2024-04-23T05:19:35Z",
+      "side": 1,
+      "message": "merge approval is here: https://issues.chromium.org/issues/336222282#comment7\nFeel free to +2 right away",
+      "revId": "2f51c12aae7c21909653dae0b7d269f62f2dba46",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
