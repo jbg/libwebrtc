@@ -33,6 +33,23 @@
       "message": "Looks like some tests are failing.  Will LGTM once the bots are green.",
       "revId": "bc7df89a517c0d2081369d932174165996571976",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dea4dd10_71688cdb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14134
+      },
+      "writtenOn": "2024-04-24T15:39:28Z",
+      "side": 1,
+      "message": "Hi Tao,\n\nI have a customer who is asking about this bug fix.  Do you have time soon to look at the test failures and put up a new patchset to resolve them?",
+      "revId": "bc7df89a517c0d2081369d932174165996571976",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
