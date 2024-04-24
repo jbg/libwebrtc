@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cc110c9_3bcd0444",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2024-04-24T11:53:28Z",
+      "side": 1,
+      "message": "lgtm\nThanks for this CL!",
+      "revId": "6accada879378e5a9908e7c9988044aa990957c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d13d482_e0ab2aa3",
@@ -106,6 +123,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7a23fd8_76759545",
+        "filename": "audio/remix_resample.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2024-04-24T11:53:28Z",
+      "side": 1,
+      "message": "I think it depends on what the calling code does/looks like.\nThe move to using an AudioFrameView would be to using a container of audio-frames of samples, which is a bit different from how it is now.\n\nI think that adding ArraView and bundling the size with the raw pointer is a good step to start regardless of whether the next step is to design an AudioFrameView container dedicated to this usecase.",
+      "parentUuid": "a68cbce0_e47c682b",
+      "range": {
+        "startLine": 33,
+        "startChar": 23,
+        "endLine": 33,
+        "endChar": 40
+      },
+      "revId": "6accada879378e5a9908e7c9988044aa990957c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aac4eec3_4061ad0e",
@@ -119,6 +160,47 @@
       "writtenOn": "2024-04-23T17:56:54Z",
       "side": 1,
       "message": "And especially here AudioFrameView looks like the candidate. @peah@webrtc.org WDYT?",
+      "revId": "6accada879378e5a9908e7c9988044aa990957c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8b6381d_0f5a5d38",
+        "filename": "audio/remix_resample.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2024-04-24T11:53:28Z",
+      "side": 1,
+      "message": "I guess you mean https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/modules/audio_processing/include/audio_frame_view.h?\n\n\nI think it\u0027d be better to implement something different than that. From what I recall that class is a wrapper class for the AudioBuffer, which is different from what we do here, and I don\u0027t think the two usecases should be combined.",
+      "parentUuid": "aac4eec3_4061ad0e",
+      "revId": "6accada879378e5a9908e7c9988044aa990957c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24cf3871_c9ba889a",
+        "filename": "audio/utility/audio_frame_operations.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2024-04-24T11:53:28Z",
+      "side": 1,
+      "message": "Separate discussion, but this is an operation that could poor audio quality due to saturation. I.e., to make the audio sound good, one must pre-process the samples.\n\nRelevant to the CL though: I could not find that it is used anywhere though so maybe we can simply remove the function instead of updating it? (in particular due to the above concerns I think we should not encourage it being used)",
+      "range": {
+        "startLine": 65,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 7
+      },
       "revId": "6accada879378e5a9908e7c9988044aa990957c9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
