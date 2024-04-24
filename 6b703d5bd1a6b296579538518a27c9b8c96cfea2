@@ -16,6 +16,213 @@
       "message": "danil: welcome back (for three weeks?), can I get a first round of review please?\nThe plumbing to get the field trial to the packetizer is a bit \"meh\" but should be transitional.",
       "revId": "6b703d5bd1a6b296579538518a27c9b8c96cfea2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbb463df_785166c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-24T16:59:23Z",
+      "side": 1,
+      "message": "oops, forgot to update OOO message, thanks for pointing it out.",
+      "parentUuid": "4af7e7a3_3f5c5e2f",
+      "revId": "6b703d5bd1a6b296579538518a27c9b8c96cfea2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "202f3334_4fb945dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-24T16:59:23Z",
+      "side": 1,
+      "message": "Good idea!",
+      "revId": "6b703d5bd1a6b296579538518a27c9b8c96cfea2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a19c524b_a8f6cdf5",
+        "filename": "api/video/rtp_video_frame_assembler_unittests.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-24T16:59:23Z",
+      "side": 1,
+      "message": "kDisable \u003d false\nDoes it mean it is !disabled, i.e., enabled, or does this value represent values that indicates disabled? I\u0027m worried this is a common confusion, so I would advise not to have such flag.\nInstead either rely on a default value as suggested in another comment,\nor everywhere it is needed\n`RtpPacketizer::Create(...,  kDisableAv1EvenPacketization);`\nwrite instead\n`RtpPacketizer::Create(...,  /*enable_av1_even_split\u003d*/false);`",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 52
+      },
+      "revId": "6b703d5bd1a6b296579538518a27c9b8c96cfea2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e841908d_c6041c22",
+        "filename": "modules/rtp_rtcp/source/rtp_format.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-24T16:59:23Z",
+      "side": 1,
+      "message": "because majority of users likely do not care about this flag, and it is temporary,\nmay be add a default value.\n(thus avoid breaking their compilation)",
+      "range": {
+        "startLine": 44,
+        "startChar": 11,
+        "endLine": 44,
+        "endChar": 32
+      },
+      "revId": "6b703d5bd1a6b296579538518a27c9b8c96cfea2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8720b61c_ff143190",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_av1.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-24T16:59:23Z",
+      "side": 1,
+      "message": "`packets.size()` likely clearer at this point",
+      "range": {
+        "startLine": 328,
+        "startChar": 6,
+        "endLine": 328,
+        "endChar": 18
+      },
+      "revId": "6b703d5bd1a6b296579538518a27c9b8c96cfea2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04ef14b3_09a8ccc5",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_av1.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-24T16:59:23Z",
+      "side": 1,
+      "message": "doesn\u0027t look like you need the original `limits` after this line,\nso you may just modify it instead of making a copy.\nThis way `event_max_packet_limit` variable is not needed either - can modify limits.max_packet_len directly.\n\nWith less variables I think it would be easier to follow what is happening in the code.",
+      "revId": "6b703d5bd1a6b296579538518a27c9b8c96cfea2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc3f5642_d850d40f",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_av1_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-24T16:59:23Z",
+      "side": 1,
+      "message": "::testing::Bool()\n\nhttps://google.github.io/googletest/reference/testing.html#INSTANTIATE_TEST_SUITE_P",
+      "range": {
+        "startLine": 361,
+        "startChar": 25,
+        "endLine": 361,
+        "endChar": 55
+      },
+      "revId": "6b703d5bd1a6b296579538518a27c9b8c96cfea2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0893808_b4c2c5fd",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_av1_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-24T16:59:23Z",
+      "side": 1,
+      "message": "prefer c++17 `std::size` from \u003citerator\u003e in new code over `arraysize` macro\nhttps://en.cppreference.com/w/cpp/iterator/size",
+      "range": {
+        "startLine": 377,
+        "startChar": 29,
+        "endLine": 377,
+        "endChar": 38
+      },
+      "revId": "6b703d5bd1a6b296579538518a27c9b8c96cfea2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f87f8cbd_1359db8a",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_av1_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-24T16:59:23Z",
+      "side": 1,
+      "message": "may be add helper\n```\nstd::vector\u003csize_t\u003e PayloadSizes(rtc::ArrayView\u003cconst RtpPayload\u003e payloads) {\n  std::vector\u003csize_t\u003e result;\n  for (const RtpPayload\u0026 p : payload) { result.push_back(p.size()); }\n}\n```\n\nThen all the expectations in this test can collapse into two:\n\n```\nEXPECT_THAT(\n  PayloadSizes(Packetize(kFrame, {}, /*even_distribution\u003d*/false)),\n  ElementsAre(1200, 1200, 1200, 523));\n\nEXPECT_THAT(\n  PayloadSizes(Packetize(kFrame, {}, /*even_distribution\u003d*/true)),\n  ElementsAre(1032, 1032, 1032, 1028));\n```\n\nWithout it is still possible to reduce all the expectation into two:\n```\nEXPECT_THAT(\n  Packetize(kFrame, {}, /*even_distribution\u003d*/false),\n  ElementsAre(SizeIs(1200), SizeIs(1200), SizeIs(1200), SizeIs(523)));\n\nEXPECT_THAT(\n  Packetize(kFrame, {}, /*even_distribution\u003d*/true),\n  ElementsAre(SizeIs(1032), SizeIs(1032), SizeIs(1032), SizeIs(1028)));\n```",
+      "revId": "6b703d5bd1a6b296579538518a27c9b8c96cfea2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d79c0ecc_ca1d01e1",
+        "filename": "test/fuzzers/rtp_packetizer_av1_fuzzer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-24T16:59:23Z",
+      "side": 1,
+      "message": "or\n```\nbool even_distribution \u003d fuzz_input.ReadOrDefaultValue\u003cbool\u003e(true);\n...packetizer(..., even_distribution);\n```\n\nTo keep testing old behavior too.\ndownside ofc - that would de-facto invalidate currently collected corpus.\n\nyet another option - add somehow a small loop over {false, true} and test both each time.",
+      "range": {
+        "startLine": 40,
+        "startChar": 52,
+        "endLine": 40,
+        "endChar": 56
+      },
+      "revId": "6b703d5bd1a6b296579538518a27c9b8c96cfea2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
