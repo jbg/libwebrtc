@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90c6c3e9_b5b0182f",
+        "filename": "net/dcsctp/tx/retransmission_timeout.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2024-04-24T12:32:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f92e37c1_bb49a41a",
+      "revId": "5c8283885c49772e9f211d61656e51fa47edd6b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10667fca_69de4cd6",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-04-24T11:38:27Z",
       "side": 1,
       "message": "Is \"in milliseconds\" wrong, since it\u0027s a TimeDelta?",
+      "revId": "5c8283885c49772e9f211d61656e51fa47edd6b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5139798d_6adfe9c3",
+        "filename": "net/dcsctp/tx/retransmission_timeout.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2024-04-24T12:32:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10667fca_69de4cd6",
       "revId": "5c8283885c49772e9f211d61656e51fa47edd6b1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -69,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bbd9a76_8395ee67",
+        "filename": "net/dcsctp/tx/retransmission_timeout.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2024-04-24T12:32:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9994aa19_39517faa",
+      "revId": "5c8283885c49772e9f211d61656e51fa47edd6b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ccae38b1_0b8731b8",
@@ -82,6 +136,24 @@
       "writtenOn": "2024-04-24T11:38:27Z",
       "side": 1,
       "message": "These tests seem to be \"observing the times and then putting them in\".\nAre there analytical reasons for the results observed?\n(in this case, if ObserveRTT and the rto should be converging, the jump from 234 to 235 looks a bit strange).",
+      "revId": "5c8283885c49772e9f211d61656e51fa47edd6b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbe9b623_1f4ee55a",
+        "filename": "net/dcsctp/tx/retransmission_timeout_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 12215
+      },
+      "writtenOn": "2024-04-24T12:32:01Z",
+      "side": 1,
+      "message": "There is no feedback loop (intentional, or unintentional). The tests just verifies that the numbers become fairly stable with fairly stable RTTs.\n\nBut since the observed values aren\u0027t identical - there is some variation, and that makes the jump from 234 to 235. It\u0027s minor - but expected.",
+      "parentUuid": "ccae38b1_0b8731b8",
       "revId": "5c8283885c49772e9f211d61656e51fa47edd6b1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
