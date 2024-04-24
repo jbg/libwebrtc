@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13af2913_a35fe1bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5826
+      },
+      "writtenOn": "2024-04-24T10:48:47Z",
+      "side": 1,
+      "message": "LGTM per offline discussion (2d frame view to be introduced later).",
+      "revId": "6accada879378e5a9908e7c9988044aa990957c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d13d482_e0ab2aa3",
@@ -55,6 +72,30 @@
       "side": 1,
       "message": "I thought so too, but AudioFrameView doesn\u0027t hold a single contiguous buffer like AudioFrame does (the name seems a bit unfortunate from that pov). Instead, AudioFrameView holds an array of channel pointers. So as is, they\u0027re incompatible.",
       "parentUuid": "4d13d482_e0ab2aa3",
+      "range": {
+        "startLine": 33,
+        "startChar": 23,
+        "endLine": 33,
+        "endChar": 40
+      },
+      "revId": "6accada879378e5a9908e7c9988044aa990957c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a68cbce0_e47c682b",
+        "filename": "audio/remix_resample.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5826
+      },
+      "writtenOn": "2024-04-24T10:48:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4032aa7c_d7c28524",
       "range": {
         "startLine": 33,
         "startChar": 23,
