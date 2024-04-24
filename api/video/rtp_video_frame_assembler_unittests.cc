@@ -62,7 +62,8 @@ class PacketBuilder {
 
   RtpPacketReceived Build() {
     auto packetizer =
-        RtpPacketizer::Create(GetVideoCodecType(), payload_, {}, video_header_);
+        RtpPacketizer::Create(GetVideoCodecType(), payload_, {}, video_header_,
+                              /*enable_av1_even_split=*/false);
     packetizer->NextPacket(&packet_to_send_);
     packet_to_send_.SetSequenceNumber(seq_num_);
 
@@ -505,7 +506,8 @@ TEST(RtpVideoFrameAssembler, SeqNumStartAndSeqNumEndSet) {
   limits.max_payload_len = sizeof(kPayload) - 1;
 
   auto packetizer =
-      RtpPacketizer::Create(kVideoCodecGeneric, kPayload, limits, video_header);
+      RtpPacketizer::Create(kVideoCodecGeneric, kPayload, limits, video_header,
+                            /*enable_av1_even_split=*/false);
   ASSERT_THAT(packetizer->NumPackets(), Eq(2U));
 
   RtpPacketReceived::ExtensionManager extension_manager;
@@ -554,7 +556,8 @@ TEST(RtpVideoFrameAssembler, SeqNumStartAndSeqNumEndSetWhenPaddingReceived) {
   limits.max_payload_len = sizeof(kPayload) - 1;
 
   auto packetizer =
-      RtpPacketizer::Create(kVideoCodecGeneric, kPayload, limits, video_header);
+      RtpPacketizer::Create(kVideoCodecGeneric, kPayload, limits, video_header,
+                            /*enable_av1_even_split=*/false);
   ASSERT_THAT(packetizer->NumPackets(), Eq(2U));
 
   {
