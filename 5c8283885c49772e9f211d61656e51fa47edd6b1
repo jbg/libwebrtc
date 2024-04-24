@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dd84abd_a45b3b31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-04-24T11:38:27Z",
+      "side": 1,
+      "message": "A few nits?\nSub-ms calculation is Good For The World!",
+      "revId": "5c8283885c49772e9f211d61656e51fa47edd6b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f92e37c1_bb49a41a",
+        "filename": "net/dcsctp/tx/retransmission_timeout.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-04-24T11:38:27Z",
+      "side": 1,
+      "message": "Can you take the 8 out and make it kHeuristicVarianceAdjustment or something, with a comment saying the thing that the CL description says?",
+      "revId": "5c8283885c49772e9f211d61656e51fa47edd6b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10667fca_69de4cd6",
+        "filename": "net/dcsctp/tx/retransmission_timeout.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-04-24T11:38:27Z",
+      "side": 1,
+      "message": "Is \"in milliseconds\" wrong, since it\u0027s a TimeDelta?",
+      "revId": "5c8283885c49772e9f211d61656e51fa47edd6b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9994aa19_39517faa",
+        "filename": "net/dcsctp/tx/retransmission_timeout.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-04-24T11:38:27Z",
+      "side": 1,
+      "message": "Here too - wrong comment",
+      "revId": "5c8283885c49772e9f211d61656e51fa47edd6b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccae38b1_0b8731b8",
+        "filename": "net/dcsctp/tx/retransmission_timeout_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-04-24T11:38:27Z",
+      "side": 1,
+      "message": "These tests seem to be \"observing the times and then putting them in\".\nAre there analytical reasons for the results observed?\n(in this case, if ObserveRTT and the rto should be converging, the jump from 234 to 235 looks a bit strange).",
+      "revId": "5c8283885c49772e9f211d61656e51fa47edd6b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
