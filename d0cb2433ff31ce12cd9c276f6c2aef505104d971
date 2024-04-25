@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1068fa34_6050e69c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-04-25T16:54:16Z",
+      "side": 1,
+      "message": "got ideas how to get rid of both macros.\n2nd macro is simpler - just relying on \u0027\u0026\u0026\u0027 operator.\n1st macro is a bit more challenging - but with lambda that returns void, I think doesn\u0027t look too bad.\nAs a bonus - all code paths that returns some failure are now look the same, not just those that tries to SetEncoderControlParameters.",
+      "revId": "d0cb2433ff31ce12cd9c276f6c2aef505104d971",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
