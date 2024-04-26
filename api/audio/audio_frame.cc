@@ -147,10 +147,12 @@ rtc::ArrayView<int16_t> AudioFrame::mutable_data(size_t samples_per_channel,
   RTC_CHECK_LE(total_samples, kMaxDataSizeSamples);
   RTC_CHECK_LE(num_channels, kMaxConcurrentChannels);
   // Sanity check for valid argument values during development.
-  // If `samples_per_channel` is <= kMaxConcurrentChannels but larger than 0,
+  // If `samples_per_channel` is < `num_channels` but larger than 0,
   // then chances are the order of arguments is incorrect.
   RTC_DCHECK((samples_per_channel == 0 && num_channels == 0) ||
-             samples_per_channel > kMaxConcurrentChannels);
+             num_channels <= samples_per_channel)
+      << "samples_per_channel=" << samples_per_channel
+      << "num_channels=" << num_channels;
 
   // TODO: bugs.webrtc.org/5647 - Can we skip zeroing the buffer?
   // Consider instead if we should rather zero the whole buffer when `muted_` is
