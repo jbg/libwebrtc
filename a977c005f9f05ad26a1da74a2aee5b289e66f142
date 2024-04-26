@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "32fc20c4_be5db23a",
+        "filename": "modules/rtp_rtcp/source/rtp_format.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 3350241
+      },
+      "writtenOn": "2024-04-26T13:52:23Z",
+      "side": 1,
+      "message": "Lets keep using the old style for old issue tracker numbers (-:",
+      "parentUuid": "01649aa0_d1aa7aa2",
+      "range": {
+        "startLine": 44,
+        "startChar": 6,
+        "endLine": 44,
+        "endChar": 59
+      },
+      "revId": "a977c005f9f05ad26a1da74a2aee5b289e66f142",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "432a1302_23873944",
         "filename": "modules/rtp_rtcp/source/rtp_packetizer_av1.cc",
         "patchSetId": 8
@@ -37,6 +61,30 @@
       "writtenOn": "2024-04-25T09:29:51Z",
       "side": 1,
       "message": "packets.size()",
+      "range": {
+        "startLine": 329,
+        "startChar": 54,
+        "endLine": 329,
+        "endChar": 66
+      },
+      "revId": "a977c005f9f05ad26a1da74a2aee5b289e66f142",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbfb1fd3_0f33b6d8",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_av1.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 3350241
+      },
+      "writtenOn": "2024-04-26T13:52:23Z",
+      "side": 1,
+      "message": "Done!",
+      "parentUuid": "432a1302_23873944",
       "range": {
         "startLine": 329,
         "startChar": 54,
@@ -72,6 +120,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "760b3c6d_7e437076",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_av1.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 3350241
+      },
+      "writtenOn": "2024-04-26T13:52:23Z",
+      "side": 1,
+      "message": "Both conditions were avoiding integer overflows but now operate on a signed integer. Turned into DCHECKs.",
+      "parentUuid": "e9e1702c_c2e0334a",
+      "range": {
+        "startLine": 332,
+        "startChar": 7,
+        "endLine": 332,
+        "endChar": 55
+      },
+      "revId": "a977c005f9f05ad26a1da74a2aee5b289e66f142",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "92099507_556f0a66",
         "filename": "modules/rtp_rtcp/source/rtp_packetizer_av1.cc",
         "patchSetId": 8
@@ -83,6 +155,30 @@
       "writtenOn": "2024-04-25T09:29:51Z",
       "side": 1,
       "message": "I think you can remove `even_max_packet_limit` variable and modify `limits.max_payload_len` directly.",
+      "range": {
+        "startLine": 337,
+        "startChar": 46,
+        "endLine": 337,
+        "endChar": 67
+      },
+      "revId": "a977c005f9f05ad26a1da74a2aee5b289e66f142",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56db672f_4bd9b14e",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_av1.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 3350241
+      },
+      "writtenOn": "2024-04-26T13:52:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92099507_556f0a66",
       "range": {
         "startLine": 337,
         "startChar": 46,
@@ -106,6 +202,30 @@
       "writtenOn": "2024-04-25T09:29:51Z",
       "side": 1,
       "message": "lines 366-375  can be removed because are redundant with the two expectations below",
+      "range": {
+        "startLine": 366,
+        "startChar": 0,
+        "endLine": 375,
+        "endChar": 66
+      },
+      "revId": "a977c005f9f05ad26a1da74a2aee5b289e66f142",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ed10f76_11304000",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_av1_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 3350241
+      },
+      "writtenOn": "2024-04-26T13:52:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc815d50_3f1b03ab",
       "range": {
         "startLine": 366,
         "startChar": 0,
