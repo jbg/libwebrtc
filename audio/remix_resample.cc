@@ -73,10 +73,14 @@ void RemixAndResample(const int16_t* src_data,
   // TODO(tommi): Could we rather assume that this has been done by the caller?
   dst_frame->SetSampleRateAndChannelSize(dst_frame->sample_rate_hz_);
 
-  int out_length = resampler->Resample(
-      rtc::ArrayView<const int16_t>(audio_ptr, src_length),
-      dst_frame->mutable_data(dst_frame->samples_per_channel_,
-                              dst_frame->num_channels_));
+  // TODO(tommi): Update Resample to accept InterleavedView<> (and remove call
+  // to .data()).
+  int out_length =
+      resampler->Resample(rtc::ArrayView<const int16_t>(audio_ptr, src_length),
+                          dst_frame
+                              ->mutable_data(dst_frame->samples_per_channel_,
+                                             dst_frame->num_channels_)
+                              .data());
   if (out_length == -1) {
     RTC_FATAL() << "Resample failed: audio_ptr = " << audio_ptr
                 << ", src_length = " << src_length
