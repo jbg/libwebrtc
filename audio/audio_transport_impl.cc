@@ -73,18 +73,21 @@ int Resample(const AudioFrame& frame,
              rtc::ArrayView<int16_t> destination) {
   TRACE_EVENT2("webrtc", "Resample", "frame sample rate", frame.sample_rate_hz_,
                "destination_sample_rate", destination_sample_rate);
-  const int number_of_channels = static_cast<int>(frame.num_channels_);
   const int target_number_of_samples_per_channel =
       destination_sample_rate / 100;
   RTC_CHECK_EQ(destination.size(),
                frame.num_channels_ * target_number_of_samples_per_channel);
 
   resampler->InitializeIfNeeded(frame.sample_rate_hz_, destination_sample_rate,
-                                number_of_channels);
+                                static_cast<int>(frame.num_channels()));
 
-  // TODO(yujo): make resampler take an AudioFrame, and add special case
-  // handling of muted frames.
-  return resampler->Resample(frame.data_view(), destination);
+  // TODO(yujo): Add special case handling of muted frames.
+  // TODO: b/335805780 - data_view() should return InterleavedView<>.
+  return resampler->Resample(
+      InterleavedView<const int16_t>(frame.data_view().data(),
+                                     frame.samples_per_channel(),
+                                     frame.num_channels()),
+      destination);
 }
 }  // namespace
 
