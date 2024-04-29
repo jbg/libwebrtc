@@ -891,7 +891,6 @@ class VoiceMediaSendChannelInterface : public MediaSendChannelInterface {
   // DTMF event 0-9, *, #, A-D.
   virtual bool InsertDtmf(uint32_t ssrc, int event, int duration) = 0;
   virtual bool GetStats(VoiceMediaSendInfo* stats) = 0;
-  virtual bool SenderNackEnabled() const = 0;
   virtual bool SenderNonSenderRttEnabled() const = 0;
 };
 

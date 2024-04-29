@@ -569,7 +569,6 @@ class FakeVoiceMediaSendChannel
   bool CanInsertDtmf() override;
   bool InsertDtmf(uint32_t ssrc, int event_code, int duration) override;
 
-  bool SenderNackEnabled() const override { return false; }
   bool SenderNonSenderRttEnabled() const override { return false; }
   void SetReceiveNackEnabled(bool enabled) {}
   void SetReceiveNonSenderRttEnabled(bool enabled) {}
