@@ -10,6 +10,7 @@
 
 #include "system_wrappers/include/clock.h"
 
+#include "rtc_base/system_time.h"
 #include "rtc_base/time_utils.h"
 
 namespace webrtc {

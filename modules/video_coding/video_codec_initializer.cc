@@ -14,6 +14,7 @@
 #include <string.h>
 
 #include <algorithm>
+#include <iostream>
 
 #include "absl/types/optional.h"
 #include "api/array_view.h"
@@ -38,6 +39,11 @@ VideoCodec VideoCodecInitializer::SetupCodec(
     const FieldTrialsView& field_trials,
     const VideoEncoderConfig& config,
     const std::vector<VideoStream>& streams) {
+  std::cout << "SetupCodec " << config.ToString() << "\nStreams:\n";
+  for (const VideoStream& stream : streams) {
+    std::cout << "  " << stream.ToString() << "\n";
+  }
+
   static const int kEncoderMinBitrateKbps = 30;
   RTC_DCHECK(!streams.empty());
   RTC_DCHECK_GE(config.min_transmit_bitrate_bps, 0);
@@ -341,6 +347,8 @@ VideoCodec VideoCodecInitializer::SetupCodec(
       video_codec.spatialLayers[0].minBitrate = experimental_min_bitrate_kbps;
     }
   }
+
+  std::cout << "Returned " << video_codec.ToString() << "\n";
 
   return video_codec;
 }

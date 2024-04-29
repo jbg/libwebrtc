@@ -14,6 +14,7 @@
 
 #include <algorithm>
 #include <cstdint>
+#include <iostream>
 #include <iterator>
 #include <memory>
 #include <string>
@@ -363,6 +364,7 @@ int LibvpxVp8Encoder::Release() {
 }
 
 void LibvpxVp8Encoder::SetRates(const RateControlParameters& parameters) {
+  std::cout << parameters.ToString() << "\n";
   if (!inited_) {
     RTC_LOG(LS_WARNING) << "SetRates() while not initialize";
     return;
@@ -474,6 +476,8 @@ void LibvpxVp8Encoder::SetFecControllerOverride(
 // TODO(eladalon): s/inst/codec_settings/g.
 int LibvpxVp8Encoder::InitEncode(const VideoCodec* inst,
                                  const VideoEncoder::Settings& settings) {
+  std::cout << "VideoCodec: " << inst->ToString() << "\n";
+
   if (inst == NULL) {
     return WEBRTC_VIDEO_CODEC_ERR_PARAMETER;
   }

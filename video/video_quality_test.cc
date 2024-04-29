@@ -17,6 +17,7 @@
 
 #include <algorithm>
 #include <deque>
+#include <iostream>
 #include <map>
 #include <memory>
 #include <string>
@@ -242,8 +243,8 @@ class QualityTestVideoEncoder : public VideoEncoder,
       int simulcast_index = encoded_image.SimulcastIndex().value_or(0);
       RTC_DCHECK_GE(simulcast_index, 0);
       if (analyzer_) {
-        analyzer_->PostEncodeOnFrame(simulcast_index,
-                                     encoded_image.RtpTimestamp());
+        analyzer_->PostEncodeOnFrame(
+            simulcast_index, encoded_image.RtpTimestamp(), encoded_image.qp_);
       }
       if (static_cast<size_t>(simulcast_index) < writers_.size()) {
         writers_[simulcast_index]->WriteFrame(encoded_image,
@@ -565,6 +566,8 @@ std::vector<int> VideoQualityTest::ParseCSV(const std::string& str) {
 // Static.
 VideoStream VideoQualityTest::DefaultVideoStream(const Params& params,
                                                  size_t video_idx) {
+  std::cout << "DefaultVideoStream: target bitrate "
+            << params.video[video_idx].target_bitrate_bps << "\n";
   VideoStream stream;
   stream.width = params.video[video_idx].width;
   stream.height = params.video[video_idx].height;

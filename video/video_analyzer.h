@@ -74,7 +74,7 @@ class VideoAnalyzer : public PacketReceiver,
                             undemuxable_packet_handler) override;
 
   void PreEncodeOnFrame(const VideoFrame& video_frame);
-  void PostEncodeOnFrame(size_t stream_id, uint32_t timestamp);
+  void PostEncodeOnFrame(size_t stream_id, uint32_t timestamp, int qp);
 
   bool SendRtp(rtc::ArrayView<const uint8_t> packet,
                const PacketOptions& options) override;
@@ -97,27 +97,32 @@ class VideoAnalyzer : public PacketReceiver,
     FrameComparison();
     FrameComparison(const VideoFrame& reference,
                     const VideoFrame& render,
+                    const VideoFrame& previous,
                     bool dropped,
                     int64_t input_time_ms,
                     int64_t send_time_ms,
                     int64_t recv_time_ms,
                     int64_t render_time_ms,
-                    size_t encoded_frame_size);
+                    size_t encoded_frame_size,
+                    int qp);
     FrameComparison(bool dropped,
                     int64_t input_time_ms,
                     int64_t send_time_ms,
                     int64_t recv_time_ms,
                     int64_t render_time_ms,
-                    size_t encoded_frame_size);
+                    size_t encoded_frame_size,
+                    int qp);
 
     absl::optional<VideoFrame> reference;
     absl::optional<VideoFrame> render;
+    absl::optional<VideoFrame> previous;
     bool dropped;
     int64_t input_time_ms;
     int64_t send_time_ms;
     int64_t recv_time_ms;
     int64_t render_time_ms;
     size_t encoded_frame_size;
+    int qp;
   };
 
   struct Sample {
@@ -127,8 +132,11 @@ class VideoAnalyzer : public PacketReceiver,
            int64_t recv_time_ms,
            int64_t render_time_ms,
            size_t encoded_frame_size,
+           int qp,
            double psnr,
-           double ssim);
+           double ssim,
+           double regional_min_psnr,
+           double delta_psnr);
 
     int dropped;
     int64_t input_time_ms;
@@ -136,8 +144,11 @@ class VideoAnalyzer : public PacketReceiver,
     int64_t recv_time_ms;
     int64_t render_time_ms;
     size_t encoded_frame_size;
+    int qp;
     double psnr;
     double ssim;
+    double regional_min_psnr;
+    double delta_psnr;
   };
 
   // Implements VideoSinkInterface to receive captured frames from a
@@ -187,6 +198,7 @@ class VideoAnalyzer : public PacketReceiver,
 
   void AddFrameComparison(const VideoFrame& reference,
                           const VideoFrame& render,
+                          const VideoFrame& previous,
                           bool dropped,
                           int64_t render_time_ms)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(lock_);
@@ -293,10 +305,12 @@ class VideoAnalyzer : public PacketReceiver,
 
   std::deque<VideoFrame> frames_ RTC_GUARDED_BY(lock_);
   absl::optional<VideoFrame> last_rendered_frame_ RTC_GUARDED_BY(lock_);
+  absl::optional<VideoFrame> last_reference_frame_ RTC_GUARDED_BY(lock_);
   RtpTimestampUnwrapper wrap_handler_ RTC_GUARDED_BY(lock_);
   std::map<int64_t, int64_t> send_times_ RTC_GUARDED_BY(lock_);
   std::map<int64_t, int64_t> recv_times_ RTC_GUARDED_BY(lock_);
   std::map<int64_t, size_t> encoded_frame_sizes_ RTC_GUARDED_BY(lock_);
+  std::map<int64_t, int> qps_ RTC_GUARDED_BY(lock_);
   absl::optional<uint32_t> first_encoded_timestamp_ RTC_GUARDED_BY(lock_);
   absl::optional<uint32_t> first_sent_timestamp_ RTC_GUARDED_BY(lock_);
   const double avg_psnr_threshold_;

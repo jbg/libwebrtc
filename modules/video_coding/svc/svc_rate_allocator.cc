@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <cmath>
 #include <cstddef>
+#include <iostream>
 #include <numeric>
 #include <vector>
 
@@ -221,6 +222,9 @@ SvcRateAllocator::SvcRateAllocator(const VideoCodec& codec)
 
 VideoBitrateAllocation SvcRateAllocator::Allocate(
     VideoBitrateAllocationParameters parameters) {
+  std::cout << "parameters: total bitrate = " << parameters.total_bitrate.kbps()
+            << " kbps, stable = " << parameters.stable_bitrate.kbps()
+            << " kbps, framerate = " << parameters.framerate << "\n";
   DataRate total_bitrate = parameters.total_bitrate;
   if (codec_.maxBitrate != 0) {
     total_bitrate =
@@ -278,6 +282,7 @@ VideoBitrateAllocation SvcRateAllocator::Allocate(
                                             num_spatial_layers);
   }
   allocation.set_bw_limited(num_spatial_layers < active_layers.num);
+  std::cout << "Allocation: " << allocation.ToString() << "\n";
   return allocation;
 }
 

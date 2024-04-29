@@ -45,6 +45,19 @@ class ClockInterface {
   virtual int64_t TimeNanos() const = 0;
 };
 
+class SlowClock : public ClockInterface {
+ public:
+  // The constructors assume an epoch of Jan 1, 1970.
+  explicit SlowClock(int slow_down_factor);
+  ~SlowClock() override;
+
+  // Return a timestamp with an epoch of Jan 1, 1970.
+  int64_t TimeNanos() const override;
+
+ private:
+  const int slow_down_factor;
+};
+
 // Sets the global source of time. This is useful mainly for unit tests.
 //
 // Returns the previously set ClockInterface, or nullptr if none is set.

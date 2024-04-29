@@ -12,6 +12,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <iostream>
 #include <memory>
 #include <vector>
 
@@ -236,14 +237,24 @@ std::vector<SpatialLayer> GetSvcConfig(
   RTC_DCHECK_GT(num_spatial_layers, 0);
   RTC_DCHECK_GT(num_temporal_layers, 0);
 
+  std::vector<SpatialLayer> layers;
   if (is_screen_sharing) {
-    return ConfigureSvcScreenSharing(input_width, input_height,
-                                     max_framerate_fps, num_spatial_layers);
+    std::cout << "GetSvcConfig is_screensharing\n";
+    layers = ConfigureSvcScreenSharing(input_width, input_height,
+                                       max_framerate_fps, num_spatial_layers);
   } else {
-    return ConfigureSvcNormalVideo(input_width, input_height, max_framerate_fps,
-                                   first_active_layer, num_spatial_layers,
-                                   num_temporal_layers, config);
+    std::cout << "GetSvcConfig video\n";
+    layers = ConfigureSvcNormalVideo(
+        input_width, input_height, max_framerate_fps, first_active_layer,
+        num_spatial_layers, num_temporal_layers, config);
   }
+
+  for (const SpatialLayer& layer : layers) {
+    std::cout << "l: " << layer.minBitrate << ", " << layer.maxBitrate << ", "
+              << layer.targetBitrate << "\n";
+  }
+
+  return layers;
 }
 
 }  // namespace webrtc

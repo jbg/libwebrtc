@@ -15,6 +15,7 @@
 #include <string>
 
 #include "absl/strings/match.h"
+#include "modules/video_coding/svc/scalability_mode_util.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/strings/string_builder.h"
 
@@ -80,7 +81,12 @@ std::string VideoCodec::ToString() const {
   ss << "VideoCodec {" << "type: " << CodecTypeToPayloadString(codecType)
      << ", mode: "
      << (mode == VideoCodecMode::kRealtimeVideo ? "RealtimeVideo"
-                                                : "Screensharing");
+                                                : "Screensharing")
+     << ", startBitrate: " << startBitrate << " kbps"
+     << ", maxBitrate: " << maxBitrate << " kbps"
+     << ", minBitrate: " << minBitrate << " kbps"
+     << ", maxFramerate: " << maxFramerate << " fps";
+
   if (IsSinglecast()) {
     absl::optional<ScalabilityMode> scalability_mode = GetScalabilityMode();
     if (scalability_mode.has_value()) {
@@ -102,8 +108,30 @@ std::string VideoCodec::ToString() const {
     }
     ss << "}";
   }
+  ss << ", spatial layers: ";
+  for (int i = 0; i < GetNumSpatialLayers(); ++i) {
+    ss << "{" << i << ": " << spatialLayers[i].width << "x"
+       << spatialLayers[i].height
+       << ", min_kbps: " << spatialLayers[i].minBitrate
+       << ", target_kbps: " << spatialLayers[i].targetBitrate
+       << ", max_kbps: " << spatialLayers[i].maxBitrate
+       << ", max_fps: " << spatialLayers[i].maxFramerate
+       << ", max_qp: " << spatialLayers[i].qpMax
+       << ", num_tl: " << spatialLayers[i].numberOfTemporalLayers
+       << ", active: " << (spatialLayers[i].active ? "true" : "false") << "}";
+  }
   ss << "}";
   return ss.str();
+}
+
+int VideoCodec::GetNumSpatialLayers() const {
+  if (codecType == kVideoCodecVP9) {
+    return VP9().numberOfSpatialLayers;
+  } else if (codecType == kVideoCodecAV1 && GetScalabilityMode().has_value()) {
+    return ScalabilityModeToNumSpatialLayers(*GetScalabilityMode());
+  } else {
+    return 0;
+  }
 }
 
 VideoCodecVP8* VideoCodec::VP8() {

@@ -14,6 +14,7 @@
 #ifdef RTC_ENABLE_VP9
 
 #include <algorithm>
+#include <iostream>
 #include <limits>
 #include <utility>
 #include <vector>
@@ -502,6 +503,7 @@ void LibvpxVp9Encoder::SetActiveSpatialLayers() {
 }
 
 void LibvpxVp9Encoder::SetRates(const RateControlParameters& parameters) {
+  std::cout << parameters.ToString() << "\n";
   if (!inited_) {
     RTC_LOG(LS_WARNING) << "SetRates() called while uninitialized.";
     return;
@@ -526,6 +528,8 @@ void LibvpxVp9Encoder::SetRates(const RateControlParameters& parameters) {
 // TODO(eladalon): s/inst/codec_settings/g.
 int LibvpxVp9Encoder::InitEncode(const VideoCodec* inst,
                                  const Settings& settings) {
+  std::cout << "VideoCodec: " << inst->ToString() << "\n";
+
   if (inst == nullptr) {
     return WEBRTC_VIDEO_CODEC_ERR_PARAMETER;
   }

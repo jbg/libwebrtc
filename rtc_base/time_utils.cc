@@ -47,6 +47,15 @@ ClockInterface* GetClockForTesting() {
   return g_clock;
 }
 
+SlowClock::SlowClock(int slow_down_factor)
+    : slow_down_factor(slow_down_factor) {}
+
+SlowClock::~SlowClock() {}
+
+int64_t SlowClock::TimeNanos() const {
+  return rtc::SystemTimeNanos() / slow_down_factor;
+}
+
 #if defined(WINUWP)
 
 namespace {

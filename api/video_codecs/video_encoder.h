@@ -270,6 +270,8 @@ class RTC_EXPORT VideoEncoder {
                           DataRate bandwidth_allocation);
     virtual ~RateControlParameters();
 
+    std::string ToString() const;
+
     // Target bitrate, per spatial/temporal layer.
     // A target bitrate of 0bps indicates a layer should not be encoded at all.
     VideoBitrateAllocation target_bitrate;

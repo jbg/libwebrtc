@@ -297,6 +297,18 @@ bool VideoEncoder::RateControlParameters::operator!=(
 
 VideoEncoder::RateControlParameters::~RateControlParameters() = default;
 
+std::string VideoEncoder::RateControlParameters::ToString() const {
+  char string_buf[2048];
+  rtc::SimpleStringBuilder oss(string_buf);
+  oss << "RateControlParameters { " << "target_bitrate { "
+      << target_bitrate.ToString() << "}, " << "bitrate { "
+      << bitrate.ToString() << "}, " << "framerate_fps = " << framerate_fps
+      << ", " << "bandwidth_allocation = " << bandwidth_allocation.kbps()
+      << " kbps";
+  oss << "}";
+  return oss.str();
+}
+
 void VideoEncoder::SetFecControllerOverride(
     FecControllerOverride* fec_controller_override) {}
 

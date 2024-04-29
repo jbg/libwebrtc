@@ -45,7 +45,7 @@ enum class VideoType {
 };
 
 // This is the max PSNR value our algorithms can return.
-const double kPerfectPSNR = 48.0f;
+const double kPerfectPSNR = 128.0f;
 
 // Calculate the required buffer size.
 // Input:
@@ -94,6 +94,13 @@ double I420SSE(const I420BufferInterface& ref_buffer,
 double I420PSNR(const VideoFrame* ref_frame, const VideoFrame* test_frame);
 double I420PSNR(const I420BufferInterface& ref_buffer,
                 const I420BufferInterface& test_buffer);
+
+double I420_MIN_WINDOW_PSNR(const I420BufferInterface& ref_buffer,
+                            const I420BufferInterface& test_buffer,
+                            int window_size);
+double I420_MIN_WINDOW_PSNR(const VideoFrame* ref_frame,
+                            const VideoFrame* test_frame,
+                            int window_size);
 
 // Computes the weighted PSNR-YUV for an I420 buffer.
 //

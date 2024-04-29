@@ -8,6 +8,10 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+// Questions:
+// Why are so many frames dropped?
+// Why is delta PSNR always 48?
+
 #include <stdio.h>
 
 #include <memory>
@@ -24,6 +28,7 @@
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/string_encode.h"
+#include "rtc_base/time_utils.h"
 #include "system_wrappers/include/field_trial.h"
 #include "test/field_trial.h"
 #include "test/gtest.h"
@@ -310,6 +315,15 @@ std::vector<std::string> Slides() {
   return slides;
 }
 
+ABSL_FLAG(int,
+          slow_clock_factor,
+          0,
+          "If set, slows down the clock by this factor so that the client can "
+          "encode large frames without missing its deadlines.");
+int SlowClockFactor() {
+  return absl::GetFlag(FLAGS_slow_clock_factor);
+}
+
 void Loopback() {
   BuiltInNetworkBehaviorConfig pipe_config;
   pipe_config.loss_percent = LossPercent();
@@ -347,6 +361,8 @@ void Loopback() {
   params.screenshare[0].slides = Slides();
   params.analyzer.test_label = "screenshare";
   params.analyzer.test_durations_secs = DurationSecs();
+  params.analyzer.graph_data_output_filename = OutputFilename();
+  params.analyzer.graph_title = GraphTitle();
   params.config = pipe_config;
   params.logging.rtc_event_log_name = RtcEventLogName();
   params.logging.rtp_dump_name = RtpDumpName();
@@ -377,6 +393,9 @@ void Loopback() {
 int main(int argc, char* argv[]) {
   ::testing::InitGoogleTest(&argc, argv);
   absl::ParseCommandLine(argc, argv);
+
+  rtc::SlowClock slow_clock(SlowClockFactor());
+  rtc::SetClockForTesting(&slow_clock);
 
   rtc::LogMessage::SetLogToStderr(absl::GetFlag(FLAGS_logs));
 

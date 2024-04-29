@@ -260,6 +260,66 @@ double I420PSNR(const VideoFrame* ref_frame, const VideoFrame* test_frame) {
                   *test_frame->video_frame_buffer()->ToI420());
 }
 
+// Compute PSNR for an I420 frame (all planes). Can upscale test frame.
+double I420_MIN_WINDOW_PSNR(const I420BufferInterface& ref_buffer,
+                            const I420BufferInterface& test_buffer,
+                            int window_size) {
+  RTC_DCHECK_GE(ref_buffer.width(), test_buffer.width());
+  RTC_DCHECK_GE(ref_buffer.height(), test_buffer.height());
+  if ((ref_buffer.width() != test_buffer.width()) ||
+      (ref_buffer.height() != test_buffer.height())) {
+    rtc::scoped_refptr<I420Buffer> scaled_buffer =
+        I420Buffer::Create(ref_buffer.width(), ref_buffer.height());
+    scaled_buffer->ScaleFrom(test_buffer);
+    return I420_MIN_WINDOW_PSNR(ref_buffer, *scaled_buffer, window_size);
+  }
+  double min_psnr = 1e9;
+
+  int step = window_size / 2;
+  int uv_step = (step + 1) >> 1;
+
+  int w_count = test_buffer.width() / step - 1;
+  int h_count = test_buffer.height() / step - 1;
+
+  for (int hi = 0; hi < h_count; ++hi) {
+    for (int wi = 0; wi < w_count; ++wi) {
+      double psnr = libyuv::I420Psnr(
+          ref_buffer.DataY() + wi * step + hi * step * ref_buffer.StrideY(),
+          ref_buffer.StrideY(),
+          ref_buffer.DataU() + wi * uv_step +
+              hi * uv_step * ref_buffer.StrideU(),
+          ref_buffer.StrideU(),
+          ref_buffer.DataV() + wi * uv_step +
+              hi * uv_step * ref_buffer.StrideV(),
+          ref_buffer.StrideV(),
+          test_buffer.DataY() + wi * step + hi * step * test_buffer.StrideY(),
+          test_buffer.StrideY(),
+          test_buffer.DataU() + wi * uv_step +
+              hi * uv_step * test_buffer.StrideU(),
+          test_buffer.StrideU(),
+          test_buffer.DataV() + wi * uv_step +
+              hi * uv_step * test_buffer.StrideV(),
+          test_buffer.StrideV(), window_size, window_size);
+      if (psnr < min_psnr)
+        min_psnr = psnr;
+    }
+  }
+
+  // LibYuv sets the max psnr value to 128, we restrict it here.
+  // In case of 0 mse in one frame, 128 can skew the results significantly.
+  return (min_psnr > kPerfectPSNR) ? kPerfectPSNR : min_psnr;
+}
+
+double I420_MIN_WINDOW_PSNR(const VideoFrame* ref_frame,
+                            const VideoFrame* test_frame,
+                            int window_size) {
+  if (!ref_frame || !test_frame)
+    return -1;
+  return I420_MIN_WINDOW_PSNR(*ref_frame->video_frame_buffer()->ToI420(),
+                              *test_frame->video_frame_buffer()->ToI420(),
+                              window_size);
+}
+
 double I420WeightedPSNR(const I420BufferInterface& ref_buffer,
                         const I420BufferInterface& test_buffer) {
   RTC_DCHECK_GE(ref_buffer.width(), test_buffer.width());

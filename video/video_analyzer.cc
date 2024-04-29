@@ -265,11 +265,14 @@ void VideoAnalyzer::PreEncodeOnFrame(const VideoFrame& video_frame) {
   }
 }
 
-void VideoAnalyzer::PostEncodeOnFrame(size_t stream_id, uint32_t timestamp) {
+void VideoAnalyzer::PostEncodeOnFrame(size_t stream_id,
+                                      uint32_t timestamp,
+                                      int qp) {
   MutexLock lock(&lock_);
   if (!first_sent_timestamp_ && stream_id == selected_stream_) {
     first_sent_timestamp_ = timestamp;
   }
+  qps_[timestamp] = qp;
 }
 
 bool VideoAnalyzer::SendRtp(rtc::ArrayView<const uint8_t> packet,
@@ -326,8 +329,8 @@ void VideoAnalyzer::OnFrame(const VideoFrame& video_frame) {
       // before rendering.
       ++dropped_frames_before_rendering_;
     } else {
-      AddFrameComparison(frames_.front(), *last_rendered_frame_, true,
-                         render_time_ms);
+      AddFrameComparison(frames_.front(), *last_rendered_frame_,
+                         frames_.front(), true, render_time_ms);
     }
     frames_.pop_front();
     RTC_DCHECK(!frames_.empty());
@@ -343,10 +346,12 @@ void VideoAnalyzer::OnFrame(const VideoFrame& video_frame) {
     ++send_timestamp;
   }
   ASSERT_EQ(reference_timestamp, send_timestamp);
-
-  AddFrameComparison(reference_frame, video_frame, false, render_time_ms);
+  AddFrameComparison(reference_frame, video_frame,
+                     last_reference_frame_.value_or(reference_frame), false,
+                     render_time_ms);
 
   last_rendered_frame_ = video_frame;
+  last_reference_frame_ = reference_frame;
 
   StopExcludingCpuThreadTime();
 }
@@ -767,10 +772,15 @@ void VideoAnalyzer::PerformFrameComparison(
     const VideoAnalyzer::FrameComparison& comparison) {
   // Perform expensive psnr and ssim calculations while not holding lock.
   double psnr = -1.0;
+  double regional_min_psnr = -1.0;
   double ssim = -1.0;
+  double delta_psnr = -1.0;
   if (comparison.reference && !comparison.dropped) {
     psnr = I420PSNR(&*comparison.reference, &*comparison.render);
+    regional_min_psnr =
+        I420_MIN_WINDOW_PSNR(&*comparison.reference, &*comparison.render, 128);
     ssim = I420SSIM(&*comparison.reference, &*comparison.render);
+    delta_psnr = I420PSNR(&*comparison.reference, &*comparison.previous);
   }
 
   MutexLock lock(&comparison_lock_);
@@ -783,7 +793,8 @@ void VideoAnalyzer::PerformFrameComparison(
     samples_.push_back(Sample(comparison.dropped, comparison.input_time_ms,
                               comparison.send_time_ms, comparison.recv_time_ms,
                               comparison.render_time_ms,
-                              comparison.encoded_frame_size, psnr, ssim));
+                              comparison.encoded_frame_size, comparison.qp,
+                              psnr, ssim, regional_min_psnr, delta_psnr));
   }
   if (psnr >= 0.0)
     psnr_.AddSample(psnr);
@@ -875,15 +886,20 @@ void VideoAnalyzer::PrintSamplesToFile() {
           "recv_time_ms "
           "render_time_ms "
           "encoded_frame_size "
+          "qp "
           "psnr "
           "ssim "
+          "regional_min_psnr "
+          "delta_psnr "
           "encode_time_ms\n");
   for (const Sample& sample : samples_) {
     fprintf(out,
-            "%d %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %zu %lf %lf\n",
+            "%d %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64
+            " %zu %d %lf %lf %lf %lf\n",
             sample.dropped, sample.input_time_ms, sample.send_time_ms,
             sample.recv_time_ms, sample.render_time_ms,
-            sample.encoded_frame_size, sample.psnr, sample.ssim);
+            sample.encoded_frame_size, sample.qp, sample.psnr, sample.ssim,
+            sample.regional_min_psnr, sample.delta_psnr);
   }
 }
 
@@ -905,6 +921,7 @@ void VideoAnalyzer::AddCapturedFrameForComparison(
 
 void VideoAnalyzer::AddFrameComparison(const VideoFrame& reference,
                                        const VideoFrame& render,
+                                       const VideoFrame& previous,
                                        bool dropped,
                                        int64_t render_time_ms) {
   int64_t reference_timestamp = wrap_handler_.Unwrap(reference.rtp_timestamp());
@@ -921,15 +938,22 @@ void VideoAnalyzer::AddFrameComparison(const VideoFrame& reference,
   if (it != encoded_frame_sizes_.end())
     encoded_frame_sizes_.erase(it);
 
+  auto qp_it = qps_.find(reference_timestamp);
+  if (qp_it == qps_.end())
+    qp_it = qps_.find(reference_timestamp - 1);
+  int qp = qp_it == qps_.end() ? -1 : qp_it->second;
+  if (qp_it != qps_.end())
+    qps_.erase(qp_it);
+
   MutexLock lock(&comparison_lock_);
   if (comparisons_.size() < kMaxComparisons) {
     comparisons_.push_back(FrameComparison(
-        reference, render, dropped, reference.ntp_time_ms(), send_time_ms,
-        recv_time_ms, render_time_ms, encoded_size));
+        reference, render, previous, dropped, reference.ntp_time_ms(),
+        send_time_ms, recv_time_ms, render_time_ms, encoded_size, qp));
   } else {
     comparisons_.push_back(FrameComparison(dropped, reference.ntp_time_ms(),
                                            send_time_ms, recv_time_ms,
-                                           render_time_ms, encoded_size));
+                                           render_time_ms, encoded_size, qp));
   }
   comparison_available_event_.Set();
 }
@@ -940,37 +964,44 @@ VideoAnalyzer::FrameComparison::FrameComparison()
       send_time_ms(0),
       recv_time_ms(0),
       render_time_ms(0),
-      encoded_frame_size(0) {}
+      encoded_frame_size(0),
+      qp(0) {}
 
 VideoAnalyzer::FrameComparison::FrameComparison(const VideoFrame& reference,
                                                 const VideoFrame& render,
+                                                const VideoFrame& previous,
                                                 bool dropped,
                                                 int64_t input_time_ms,
                                                 int64_t send_time_ms,
                                                 int64_t recv_time_ms,
                                                 int64_t render_time_ms,
-                                                size_t encoded_frame_size)
+                                                size_t encoded_frame_size,
+                                                int qp)
     : reference(reference),
       render(render),
+      previous(previous),
       dropped(dropped),
       input_time_ms(input_time_ms),
       send_time_ms(send_time_ms),
       recv_time_ms(recv_time_ms),
       render_time_ms(render_time_ms),
-      encoded_frame_size(encoded_frame_size) {}
+      encoded_frame_size(encoded_frame_size),
+      qp(qp) {}
 
 VideoAnalyzer::FrameComparison::FrameComparison(bool dropped,
                                                 int64_t input_time_ms,
                                                 int64_t send_time_ms,
                                                 int64_t recv_time_ms,
                                                 int64_t render_time_ms,
-                                                size_t encoded_frame_size)
+                                                size_t encoded_frame_size,
+                                                int qp)
     : dropped(dropped),
       input_time_ms(input_time_ms),
       send_time_ms(send_time_ms),
       recv_time_ms(recv_time_ms),
       render_time_ms(render_time_ms),
-      encoded_frame_size(encoded_frame_size) {}
+      encoded_frame_size(encoded_frame_size),
+      qp(qp) {}
 
 VideoAnalyzer::Sample::Sample(int dropped,
                               int64_t input_time_ms,
@@ -978,16 +1009,22 @@ VideoAnalyzer::Sample::Sample(int dropped,
                               int64_t recv_time_ms,
                               int64_t render_time_ms,
                               size_t encoded_frame_size,
+                              int qp,
                               double psnr,
-                              double ssim)
+                              double ssim,
+                              double regional_min_psnr,
+                              double delta_psnr)
     : dropped(dropped),
       input_time_ms(input_time_ms),
       send_time_ms(send_time_ms),
       recv_time_ms(recv_time_ms),
       render_time_ms(render_time_ms),
       encoded_frame_size(encoded_frame_size),
+      qp(qp),
       psnr(psnr),
-      ssim(ssim) {}
+      ssim(ssim),
+      regional_min_psnr(regional_min_psnr),
+      delta_psnr(delta_psnr) {}
 
 VideoAnalyzer::CapturedFrameForwarder::CapturedFrameForwarder(
     VideoAnalyzer* analyzer,

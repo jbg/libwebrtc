@@ -10,6 +10,7 @@
 #include "video/config/encoder_stream_factory.h"
 
 #include <algorithm>
+#include <iostream>
 #include <limits>
 #include <set>
 #include <string>
@@ -143,6 +144,11 @@ std::vector<webrtc::VideoStream> EncoderStreamFactory::CreateEncoderStreams(
   // as simulcast since the simulcast configuration assumes very low bitrates
   // on the first layer. This would prevent rampup of multiple spatial layers.
   // See https://crbug.com/webrtc/15041.
+
+  std::cout << "CreateEncoderStreams: is_screenshare_ = " << is_screenshare_
+            << ", is_simulcast = " << is_simulcast
+            << ", conference_mode_ = " << conference_mode_ << "\n";
+
   if (is_simulcast &&
       encoder_config.simulcast_layers[0].scalability_mode.has_value()) {
     // Require at least one non-first layer to be active for is_simulcast=true.
@@ -158,10 +164,11 @@ std::vector<webrtc::VideoStream> EncoderStreamFactory::CreateEncoderStreams(
   if (is_simulcast || ((absl::EqualsIgnoreCase(codec_name_, kVp8CodecName) ||
                         absl::EqualsIgnoreCase(codec_name_, kH264CodecName)) &&
                        is_screenshare_ && conference_mode_)) {
+    std::cout << "Call CreateSimulcastOrConferenceModeScreenshareStreams\n";
     return CreateSimulcastOrConferenceModeScreenshareStreams(
         frame_width, frame_height, encoder_config, experimental_min_bitrate);
   }
-
+  std::cout << "Call CreateDefaultVideoStreams\n";
   return CreateDefaultVideoStreams(frame_width, frame_height, encoder_config,
                                    experimental_min_bitrate);
 }
@@ -183,12 +190,14 @@ EncoderStreamFactory::CreateDefaultVideoStreams(
   absl::optional<int> api_max_bitrate_bps;
   if (encoder_config.simulcast_layers[0].max_bitrate_bps > 0) {
     api_max_bitrate_bps = encoder_config.simulcast_layers[0].max_bitrate_bps;
+    std::cout << " api_max: " << *api_max_bitrate_bps;
   }
   if (encoder_config.max_bitrate_bps > 0) {
     api_max_bitrate_bps =
         api_max_bitrate_bps.has_value()
             ? std::min(encoder_config.max_bitrate_bps, *api_max_bitrate_bps)
             : encoder_config.max_bitrate_bps;
+    std::cout << " B api_max: " << *api_max_bitrate_bps;
   }
 
   // For unset max bitrates set default bitrate for non-simulcast.
@@ -206,8 +215,10 @@ EncoderStreamFactory::CreateDefaultVideoStreams(
     // Use set min bitrate.
     min_bitrate_bps = encoder_config.simulcast_layers[0].min_bitrate_bps;
     // If only min bitrate is configured, make sure max is above min.
-    if (!api_max_bitrate_bps.has_value())
+    if (!api_max_bitrate_bps.has_value()) {
       max_bitrate_bps = std::max(min_bitrate_bps, max_bitrate_bps);
+      std::cout << " A:" << max_bitrate_bps;
+    }
   }
   int max_framerate = (encoder_config.simulcast_layers[0].max_framerate > 0)
                           ? encoder_config.simulcast_layers[0].max_framerate
@@ -257,14 +268,16 @@ EncoderStreamFactory::CreateDefaultVideoStreams(
                   encoder_config.spatial_layers.size(),
                   size_t{vp9_settings.numberOfSpatialLayers}});
 
-    if (width * height > 0 &&
-        (layer.num_temporal_layers > 1u || num_spatial_layers > 1)) {
+    // If there was no request for spatial layering, don't limit bitrate
+    // of single spatial layer.
+    if (width * height > 0 && num_spatial_layers > 1) {
       // In SVC mode, the VP9 max bitrate is determined by SvcConfig, instead of
       // GetMaxDefaultVideoBitrateKbps().
       std::vector<webrtc::SpatialLayer> svc_layers =
           webrtc::GetSvcConfig(width, height, max_framerate,
                                /*first_active_layer=*/0, num_spatial_layers,
                                *layer.num_temporal_layers, is_screenshare_);
+
       int sum_max_bitrates_kbps = 0;
       for (const webrtc::SpatialLayer& spatial_layer : svc_layers) {
         sum_max_bitrates_kbps += spatial_layer.maxBitrate;
@@ -302,6 +315,8 @@ EncoderStreamFactory::CreateDefaultVideoStreams(
   }
   layer.scalability_mode = encoder_config.simulcast_layers[0].scalability_mode;
   layers.push_back(layer);
+
+  std::cout << "\n";
   return layers;
 }
 
