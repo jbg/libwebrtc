@@ -263,19 +263,18 @@ class WebRtcVoiceSendChannel final : public MediaChannelUtil,
       rtc::scoped_refptr<webrtc::FrameTransformerInterface> frame_transformer)
       override;
 
-  bool SenderNackEnabled() const override {
-    if (!send_codec_spec_) {
-      return false;
-    }
-    return send_codec_spec_->nack_enabled;
-  }
   bool SenderNonSenderRttEnabled() const override {
     if (!send_codec_spec_) {
       return false;
     }
     return send_codec_spec_->enable_non_sender_rtt;
   }
-  bool SendCodecHasNack() const override { return SenderNackEnabled(); }
+  bool SendCodecHasNack() const override {
+    if (!send_codec_spec_) {
+      return false;
+    }
+    return send_codec_spec_->nack_enabled;
+  }
 
   void SetSendCodecChangedCallback(
       absl::AnyInvocable<void()> callback) override {

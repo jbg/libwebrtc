@@ -943,7 +943,7 @@ bool VoiceChannel::SetRemoteContent_w(const MediaContentDescription* content,
   // Update Receive channel based on Send channel's codec information.
   // TODO(bugs.webrtc.org/14911): This is silly. Stop doing it.
   media_receive_channel()->SetReceiveNackEnabled(
-      media_send_channel()->SenderNackEnabled());
+      media_send_channel()->SendCodecHasNack());
   media_receive_channel()->SetReceiveNonSenderRttEnabled(
       media_send_channel()->SenderNonSenderRttEnabled());
   last_send_params_ = send_params;
