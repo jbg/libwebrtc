@@ -16,6 +16,24 @@
       "message": "I dont think you need my approval.",
       "revId": "08ffda65ee0f24646da5e253e48c7b7a7afd5842",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "684d8fe7_212f0c26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3350241
+      },
+      "writtenOn": "2024-04-30T13:51:30Z",
+      "side": 1,
+      "message": "the rule of two requires it ;-)",
+      "parentUuid": "d999c982_7345a96d",
+      "revId": "08ffda65ee0f24646da5e253e48c7b7a7afd5842",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
