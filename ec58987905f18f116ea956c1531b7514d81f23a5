@@ -33,6 +33,24 @@
       "message": "Can you unify it a different way?\nSenderNackEnabled is a dirty hack because some other piece of code insists on setting the nack property on the send codec while it is used on the receive codec. \n\nSee https://issues.webrtc.org/42225541 for some background.",
       "revId": "ec58987905f18f116ea956c1531b7514d81f23a5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33c06f53_b7d39f29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3350241
+      },
+      "writtenOn": "2024-04-30T15:50:10Z",
+      "side": 1,
+      "message": "oh I remember that one. Will try, abandoning here",
+      "parentUuid": "d32864f9_d9d4cf9e",
+      "revId": "ec58987905f18f116ea956c1531b7514d81f23a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ],
   "submitRequirementResults": [
