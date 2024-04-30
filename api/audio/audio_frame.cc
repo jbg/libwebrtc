@@ -128,7 +128,7 @@ const int16_t* AudioFrame::data() const {
   return muted_ ? zeroed_data().begin() : data_;
 }
 
-rtc::ArrayView<const int16_t> AudioFrame::data_view() const {
+AudioFrame::View<const int16_t> AudioFrame::data_view() const {
   const auto samples = samples_per_channel_ * num_channels_;
   // If you get a nullptr from `data_view()`, it's likely because the
   // samples_per_channel_ and/or num_channels_ haven't been properly set.
@@ -137,8 +137,8 @@ rtc::ArrayView<const int16_t> AudioFrame::data_view() const {
   // return nullptr. So, even when an AudioFrame is muted and we want to
   // return `zeroed_data()`, if samples_per_channel_ or  num_channels_ is 0,
   // the view will point to nullptr.
-  return muted_ ? zeroed_data().subview(0, samples)
-                : rtc::ArrayView<const int16_t>(&data_[0], samples);
+  return View<const int16_t>(muted_ ? &zeroed_data()[0] : &data_[0],
+                             num_channels_, samples_per_channel_);
 }
 
 int16_t* AudioFrame::mutable_data() {

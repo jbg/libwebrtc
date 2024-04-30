@@ -15,6 +15,7 @@
 #include <vector>
 
 #include "api/array_view.h"
+#include "api/audio/audio_frame.h"
 
 namespace webrtc {
 
@@ -37,7 +38,7 @@ class PushResampler {
 
   // Returns the total number of samples provided in destination (e.g. 32 kHz,
   // 2 channel audio gives 640 samples).
-  int Resample(rtc::ArrayView<const T> src, rtc::ArrayView<T> dst);
+  int Resample(AudioFrame::View<const T> src, AudioFrame::View<T> dst);
 
  private:
   int src_sample_rate_hz_;

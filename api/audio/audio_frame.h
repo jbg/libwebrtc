@@ -88,6 +88,66 @@ class AudioFrame {
   AudioFrame(const AudioFrame&) = delete;
   AudioFrame& operator=(const AudioFrame&) = delete;
 
+  template <typename T>
+  class View final {
+   public:
+    template <typename U>
+    View(U* data, size_t num_channels, size_t samples_per_channel)
+        : data_(data, num_channels * samples_per_channel),
+          num_channels_(num_channels),
+          samples_per_channel_(samples_per_channel) {}
+
+    T& operator[](size_t idx) const { return data_[idx]; }
+    T* begin() const { return data_.begin(); }
+    T* end() const { return data_.end(); }
+    const T* cbegin() const { return data_.cbegin(); }
+    const T* cend() const { return data_.cend(); }
+    std::reverse_iterator<T*> rbegin() const { return data_.rbegin(); }
+    std::reverse_iterator<T*> rend() const { return data_.rend(); }
+    std::reverse_iterator<const T*> crbegin() const { return data_.crbegin(); }
+    std::reverse_iterator<const T*> crend() const { return data_.crend(); }
+
+    size_t size() const { return data_.size(); }
+    size_t empty() const { return data_.empty(); }
+
+    size_t num_channels() const { return num_channels_; }
+    size_t samples_per_channel() const { return samples_per_channel_; }
+
+    void ZeroAllSamples() { memset(data_.data(), 0, data_.size() * sizeof(T)); }
+
+    template <typename U>
+    void CopyFrom(const View<U> v) {
+      static_assert(sizeof(U) == sizeof(T), "");
+      RTC_DCHECK_EQ(v.num_channels(), num_channels_);
+      RTC_DCHECK_EQ(v.samples_per_channel(), samples_per_channel_);
+      memcpy(&data_[0], &v[0], v.size() * sizeof(T));
+    }
+
+    // Should this accept   std::vector<T*>? to be compatible with
+    // PushResampler::channel_data_array_?
+    template <typename U>
+    void Deinterleave(rtc::ArrayView<rtc::ArrayView<U>> deinterleaved) {
+      RTC_DCHECK(num_channels_ > 0u);
+      RTC_DCHECK_EQ(deinterleaved.size(), num_channels_);
+      RTC_DCHECK_EQ(deinterleaved[0].size(), num_channels_);
+      // TBD.
+      /*
+      for (size_t i = 0; i < num_channels_; ++i) {
+        T* channel = deinterleaved[i];
+        size_t interleaved_idx = i;
+        for (size_t j = 0; j < samples_per_channel; ++j) {
+          channel[j] = interleaved[interleaved_idx];
+          interleaved_idx += num_channels;
+        }
+      }*/
+    }
+
+   private:
+    const rtc::ArrayView<T> data_;
+    const size_t num_channels_;
+    const size_t samples_per_channel_;
+  };
+
   // Resets all members to their default state.
   void Reset();
   // Same as Reset(), but leaves mute state unchanged. Muting a frame requires
@@ -125,7 +185,7 @@ class AudioFrame {
   // Returns a read-only view of all the valid samples held by the AudioFrame.
   // Note that for a muted AudioFrame, the size of the returned view will be
   // 0u and the contained data will be nullptr.
-  rtc::ArrayView<const int16_t> data_view() const;
+  AudioFrame::View<const int16_t> data_view() const;
 
   // mutable_frame() always returns a non-static buffer; the first call to
   // mutable_frame() zeros the buffer and marks the frame as unmuted.

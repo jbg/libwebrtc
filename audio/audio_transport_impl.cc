@@ -67,6 +67,7 @@ void ProcessCaptureFrame(uint32_t delay_ms,
 
 // Resample audio in `frame` to given sample rate preserving the
 // channel count and place the result in `destination`.
+// TODO(tommi): change destination to be AudioFrame::View<int16_t>.
 int Resample(const AudioFrame& frame,
              const int destination_sample_rate,
              PushResampler<int16_t>* resampler,
