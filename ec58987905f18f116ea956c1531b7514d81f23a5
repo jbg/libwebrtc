@@ -16,6 +16,23 @@
       "message": "you actually touched this last during \"merge all the channels\" ;-)",
       "revId": "ec58987905f18f116ea956c1531b7514d81f23a5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d32864f9_d9d4cf9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-04-30T07:18:16Z",
+      "side": 1,
+      "message": "Can you unify it a different way?\nSenderNackEnabled is a dirty hack because some other piece of code insists on setting the nack property on the send codec while it is used on the receive codec. \n\nSee https://issues.webrtc.org/42225541 for some background.",
+      "revId": "ec58987905f18f116ea956c1531b7514d81f23a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
