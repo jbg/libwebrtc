@@ -12,6 +12,7 @@
 
 #include <string.h>
 
+#include "api/audio/audio_frame.h"
 #include "rtc_base/logging.h"
 
 namespace webrtc {
@@ -27,14 +28,15 @@ int ACMResampler::Resample10Msec(const int16_t* in_audio,
                                  size_t num_audio_channels,
                                  size_t out_capacity_samples,
                                  int16_t* out_audio) {
-  size_t in_length = in_freq_hz * num_audio_channels / 100;
+  InterleavedView<const int16_t> src(
+      in_audio, SampleRateToDefaultChannelSize(in_freq_hz), num_audio_channels);
   if (in_freq_hz == out_freq_hz) {
-    if (out_capacity_samples < in_length) {
+    if (out_capacity_samples < src.data().size()) {
       RTC_DCHECK_NOTREACHED();
       return -1;
     }
-    memcpy(out_audio, in_audio, in_length * sizeof(int16_t));
-    return static_cast<int>(in_length / num_audio_channels);
+    memcpy(out_audio, in_audio, src.data().size() * sizeof(int16_t));
+    return static_cast<int>(src.samples_per_channel());
   }
 
   if (resampler_.InitializeIfNeeded(in_freq_hz, out_freq_hz,
@@ -46,11 +48,10 @@ int ACMResampler::Resample10Msec(const int16_t* in_audio,
   }
 
   int out_length = resampler_.Resample(
-      rtc::ArrayView<const int16_t>(in_audio, in_length),
-      rtc::ArrayView<int16_t>(out_audio, out_capacity_samples));
+      src, rtc::ArrayView<int16_t>(out_audio, out_capacity_samples));
   if (out_length == -1) {
-    RTC_LOG(LS_ERROR) << "Resample(" << in_audio << ", " << in_length << ", "
-                      << out_audio << ", " << out_capacity_samples
+    RTC_LOG(LS_ERROR) << "Resample(" << in_audio << ", " << src.data().size()
+                      << ", " << out_audio << ", " << out_capacity_samples
                       << ") failed.";
     return -1;
   }

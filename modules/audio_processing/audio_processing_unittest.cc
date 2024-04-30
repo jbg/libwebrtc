@@ -2152,8 +2152,9 @@ TEST_P(AudioProcessingTest, Formats) {
 
       const size_t ref_length =
           AudioProcessing::GetFrameSize(ref_rate) * out_num;
-      const size_t out_length =
-          AudioProcessing::GetFrameSize(out_rate) * out_num;
+      const size_t out_samples_per_channel =
+          AudioProcessing::GetFrameSize(out_rate);
+      const size_t out_length = out_samples_per_channel * out_num;
       // Data from the reference file.
       std::unique_ptr<float[]> ref_data(new float[ref_length]);
       // Data from the output file.
@@ -2196,10 +2197,12 @@ TEST_P(AudioProcessingTest, Formats) {
         if (out_rate != ref_rate) {
           // Resample the output back to its internal processing rate if
           // necessary.
-          ASSERT_EQ(ref_length,
-                    static_cast<size_t>(resampler.Resample(
-                        rtc::ArrayView<const float>(out_ptr, out_length),
-                        rtc::ArrayView<float>(cmp_data.get(), ref_length))));
+          InterleavedView<const float> src(out_ptr, out_samples_per_channel,
+                                           out_num);
+          ASSERT_EQ(
+              ref_length,
+              static_cast<size_t>(resampler.Resample(
+                  src, rtc::ArrayView<float>(cmp_data.get(), ref_length))));
           out_ptr = cmp_data.get();
         }
 
