@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7517f4e5_75803425",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 894,
+      "author": {
+        "id": 3350241
+      },
+      "writtenOn": "2024-04-30T04:52:46Z",
+      "side": 0,
+      "message": "MediaChannelSendChannelInterface has SendCodecHasNack already",
+      "revId": "d78e30e00bff28779e97df0ff19c539a73dfe8f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

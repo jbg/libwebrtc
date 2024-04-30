@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f49fe459_4518d02f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3350241
+      },
+      "writtenOn": "2024-04-30T04:52:46Z",
+      "side": 1,
+      "message": "you actually touched this last during \"merge all the channels\" ;-)",
+      "revId": "ec58987905f18f116ea956c1531b7514d81f23a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
