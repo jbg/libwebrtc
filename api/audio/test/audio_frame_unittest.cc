@@ -75,8 +75,9 @@ TEST(AudioFrameTest, UnmutedFrameIsInitiallyZeroed) {
   AudioFrame frame;
   auto data = frame.mutable_data(kSamplesPerChannel, kNumChannelsMono);
   EXPECT_FALSE(frame.muted());
+  EXPECT_TRUE(IsMono(data));
   EXPECT_EQ(frame.data_view().size(), kSamplesPerChannel);
-  EXPECT_EQ(data.size(), kSamplesPerChannel);
+  EXPECT_EQ(SamplesPerChannel(data), kSamplesPerChannel);
   EXPECT_TRUE(AllSamplesAre(0, frame));
 }
 
