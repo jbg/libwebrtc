@@ -50,11 +50,10 @@ void RemixAndResample(const int16_t* src_data,
         << "dst_frame->num_channels_: " << dst_frame->num_channels_;
 
     AudioFrameOperations::DownmixChannels(
-        rtc::ArrayView<const int16_t>(src_data,
-                                      num_channels * samples_per_channel),
-        num_channels, samples_per_channel, dst_frame->num_channels_,
-        rtc::ArrayView<int16_t>(&downmixed_audio[0], dst_frame->num_channels_ *
-                                                         samples_per_channel));
+        InterleavedView<const int16_t>(src_data, samples_per_channel,
+                                       num_channels),
+        InterleavedView<int16_t>(&downmixed_audio[0], samples_per_channel,
+                                 dst_frame->num_channels_));
     audio_ptr = downmixed_audio;
     audio_ptr_num_channels = dst_frame->num_channels_;
   }
@@ -71,19 +70,20 @@ void RemixAndResample(const int16_t* src_data,
   // resampler to return output length without doing the resample, so we know
   // how much to zero here; or 2) make resampler accept a hint that the input is
   // zeroed.
-  const size_t src_length = samples_per_channel * audio_ptr_num_channels;
+
   // Ensure the `samples_per_channel_` member is set correctly based on the
   // destination sample rate, number of channels and assumed 10ms buffer size.
   // TODO(tommi): Could we rather assume that this has been done by the caller?
   dst_frame->SetSampleRateAndChannelSize(dst_frame->sample_rate_hz_);
 
+  InterleavedView<const int16_t> src_view(audio_ptr, samples_per_channel,
+                                          audio_ptr_num_channels);
   int out_length = resampler->Resample(
-      rtc::ArrayView<const int16_t>(audio_ptr, src_length),
-      dst_frame->mutable_data(dst_frame->samples_per_channel_,
-                              dst_frame->num_channels_));
+      src_view, dst_frame->mutable_data(dst_frame->samples_per_channel_,
+                                        dst_frame->num_channels_));
   if (out_length == -1) {
     RTC_FATAL() << "Resample failed: audio_ptr = " << audio_ptr
-                << ", src_length = " << src_length
+                << ", src_length = " << src_view.data().size()
                 << ", dst_frame->mutable_data() = "
                 << dst_frame->mutable_data();
   }

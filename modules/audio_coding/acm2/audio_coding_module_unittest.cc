@@ -621,13 +621,15 @@ class AcmSenderBitExactnessOldApi : public ::testing::Test,
 
   // Helper: result must be one the "|"-separated checksums.
   void ExpectChecksumEq(absl::string_view ref, absl::string_view result) {
+    fprintf(stderr, "*** ExpectChecksumEq\n");
     if (ref.size() == result.size()) {
       // Only one checksum: clearer message.
       EXPECT_EQ(ref, result);
     } else {
       EXPECT_NE(ref.find(result), absl::string_view::npos)
           << result << " must be one of these:\n"
-          << ref;
+          << ref << "\nref.size()=" << ref.size()
+          << ", result.size()==" << result.size();
     }
   }
 
