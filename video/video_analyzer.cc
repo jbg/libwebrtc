@@ -924,10 +924,10 @@ void VideoAnalyzer::AddFrameComparison(const VideoFrame& reference,
   MutexLock lock(&comparison_lock_);
   if (comparisons_.size() < kMaxComparisons) {
     comparisons_.push_back(FrameComparison(
-        reference, render, dropped, reference.ntp_time_ms(), send_time_ms,
+        reference, render, dropped, reference.ntp_time()->ms(), send_time_ms,
         recv_time_ms, render_time_ms, encoded_size));
   } else {
-    comparisons_.push_back(FrameComparison(dropped, reference.ntp_time_ms(),
+    comparisons_.push_back(FrameComparison(dropped, reference.ntp_time()->ms(),
                                            send_time_ms, recv_time_ms,
                                            render_time_ms, encoded_size));
   }
@@ -1013,9 +1013,9 @@ void VideoAnalyzer::CapturedFrameForwarder::OnFrame(
   // Frames from the capturer does not have a rtp timestamp.
   // Create one so it can be used for comparison.
   RTC_DCHECK_EQ(0, video_frame.rtp_timestamp());
-  if (video_frame.ntp_time_ms() == 0)
-    copy.set_ntp_time_ms(clock_->CurrentNtpInMilliseconds());
-  copy.set_rtp_timestamp(copy.ntp_time_ms() * 90);
+  if (!video_frame.ntp_time())
+    copy.set_ntp_time(Timestamp::Millis(clock_->CurrentNtpInMilliseconds()));
+  copy.set_rtp_timestamp(copy.ntp_time()->ms() * 90);
   analyzer_->AddCapturedFrameForComparison(copy);
   MutexLock lock(&lock_);
   ++captured_frames_;

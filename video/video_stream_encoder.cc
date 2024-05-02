@@ -672,8 +672,8 @@ VideoStreamEncoder::VideoStreamEncoder(
                             : encoder_selector_from_factory_.get()),
       encoder_stats_observer_(encoder_stats_observer),
       frame_cadence_adapter_(std::move(frame_cadence_adapter)),
-      delta_ntp_internal_ms_(env_.clock().CurrentNtpInMilliseconds() -
-                             env_.clock().TimeInMilliseconds()),
+      delta_ntp_internal_us_(env_.clock().CurrentNtpInMicroseconds() -
+                             env_.clock().TimeInMicroseconds()),
       last_frame_log_ms_(env_.clock().TimeInMilliseconds()),
       next_frame_types_(1, VideoFrameType::kVideoFrameDelta),
       automatic_animation_detection_experiment_(
@@ -1515,30 +1515,31 @@ void VideoStreamEncoder::OnFrame(Timestamp post_time,
     incoming_frame.set_timestamp_us(post_time.us());
 
   // Capture time may come from clock with an offset and drift from clock_.
-  int64_t capture_ntp_time_ms;
-  if (video_frame.ntp_time_ms() > 0) {
-    capture_ntp_time_ms = video_frame.ntp_time_ms();
-  } else if (video_frame.render_time_ms() != 0) {
-    capture_ntp_time_ms = video_frame.render_time_ms() + delta_ntp_internal_ms_;
+  int64_t capture_ntp_time_us;
+  if (video_frame.ntp_time() && video_frame.ntp_time()->ms() > 0) {
+    capture_ntp_time_us = video_frame.ntp_time()->us();
+  } else if (video_frame.timestamp_us() != 0) {
+    capture_ntp_time_us = video_frame.timestamp_us() + delta_ntp_internal_us_;
   } else {
-    capture_ntp_time_ms = post_time.ms() + delta_ntp_internal_ms_;
+    capture_ntp_time_us = post_time.us() + delta_ntp_internal_us_;
   }
-  incoming_frame.set_ntp_time_ms(capture_ntp_time_ms);
+  incoming_frame.set_ntp_time(Timestamp::Micros(capture_ntp_time_us));
 
   // Convert NTP time, in ms, to RTP timestamp.
   const int kMsToRtpTimestamp = 90;
   incoming_frame.set_rtp_timestamp(
-      kMsToRtpTimestamp * static_cast<uint32_t>(incoming_frame.ntp_time_ms()));
+      kMsToRtpTimestamp *
+      static_cast<uint32_t>(incoming_frame.ntp_time()->ms()));
 
   // Identifier should remain the same for newly produced incoming frame and the
   // received |video_frame|.
   incoming_frame.set_capture_time_identifier(
       video_frame.capture_time_identifier());
 
-  if (incoming_frame.ntp_time_ms() <= last_captured_timestamp_) {
+  if (incoming_frame.ntp_time()->us() <= last_captured_timestamp_) {
     // We don't allow the same capture time for two frames, drop this one.
     RTC_LOG(LS_WARNING) << "Same/old NTP timestamp ("
-                        << incoming_frame.ntp_time_ms()
+                        << incoming_frame.ntp_time()->us()
                         << " <= " << last_captured_timestamp_
                         << ") for incoming frame. Dropping.";
     ProcessDroppedFrame(incoming_frame,
@@ -1552,7 +1553,7 @@ void VideoStreamEncoder::OnFrame(Timestamp post_time,
     log_stats = true;
   }
 
-  last_captured_timestamp_ = incoming_frame.ntp_time_ms();
+  last_captured_timestamp_ = incoming_frame.ntp_time()->us();
 
   encoder_stats_observer_->OnIncomingFrame(incoming_frame.width(),
                                            incoming_frame.height());
@@ -1879,7 +1880,7 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
                                           int64_t time_when_posted_us) {
   RTC_DCHECK_RUN_ON(encoder_queue_.get());
   RTC_LOG(LS_VERBOSE) << __func__ << " posted " << time_when_posted_us
-                      << " ntp time " << video_frame.ntp_time_ms();
+                      << " ntp time " << video_frame.ntp_time()->ms();
 
   // If the encoder fail we can't continue to encode frames. When this happens
   // the WebrtcVideoSender is notified and the whole VideoSendStream is
@@ -1984,7 +1985,7 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
 
     out_frame.set_video_frame_buffer(cropped_buffer);
     out_frame.set_update_rect(update_rect);
-    out_frame.set_ntp_time_ms(video_frame.ntp_time_ms());
+    out_frame.set_ntp_time(video_frame.ntp_time());
     out_frame.set_capture_time_identifier(
         video_frame.capture_time_identifier());
     // Since accumulated_update_rect_ is constructed before cropping,

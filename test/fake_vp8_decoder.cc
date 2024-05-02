@@ -58,7 +58,7 @@ int32_t FakeVp8Decoder::Decode(const EncodedImage& input,
           .set_timestamp_ms(render_time_ms)
           .build();
   frame.set_rtp_timestamp(input.RtpTimestamp());
-  frame.set_ntp_time_ms(input.ntp_time_ms_);
+  frame.set_ntp_time(Timestamp::Millis(input.ntp_time_ms_));
 
   callback_->Decoded(frame, /*decode_time_ms=*/absl::nullopt,
                      /*qp=*/absl::nullopt);

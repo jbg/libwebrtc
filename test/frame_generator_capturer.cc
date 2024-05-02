@@ -111,7 +111,7 @@ void FrameGeneratorCapturer::InsertFrame() {
                            .set_color_space(fake_color_space_)
                            .build();
     if (first_frame_capture_time_ == -1) {
-      first_frame_capture_time_ = frame.ntp_time_ms();
+      first_frame_capture_time_ = frame.ntp_time()->ms();
     }
 
     TestVideoCapturer::OnFrame(frame);

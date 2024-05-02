@@ -128,7 +128,7 @@ void VCMDecodedFrameCallback::Decoded(VideoFrame& decodedImage,
     return;
   }
 
-  decodedImage.set_ntp_time_ms(frame_info->ntp_time_ms);
+  decodedImage.set_ntp_time(Timestamp::Millis(frame_info->ntp_time_ms));
   decodedImage.set_packet_infos(frame_info->packet_infos);
   decodedImage.set_rotation(frame_info->rotation);
   VideoFrame::RenderParameters render_parameters = _timing->RenderParameters();
@@ -152,7 +152,7 @@ void VCMDecodedFrameCallback::Decoded(VideoFrame& decodedImage,
   // Report timing information.
   TimingFrameInfo timing_frame_info;
   if (frame_info->timing.flags != VideoSendTiming::kInvalid) {
-    int64_t capture_time_ms = decodedImage.ntp_time_ms() - ntp_offset_;
+    int64_t capture_time_ms = decodedImage.ntp_time()->ms() - ntp_offset_;
     // Convert remote timestamps to local time from ntp timestamps.
     frame_info->timing.encode_start_ms -= ntp_offset_;
     frame_info->timing.encode_finish_ms -= ntp_offset_;
@@ -162,7 +162,7 @@ void VCMDecodedFrameCallback::Decoded(VideoFrame& decodedImage,
     frame_info->timing.network2_timestamp_ms -= ntp_offset_;
 
     int64_t sender_delta_ms = 0;
-    if (decodedImage.ntp_time_ms() < 0) {
+    if (!decodedImage.ntp_time()) {
       // Sender clock is not estimated yet. Make sure that sender times are all
       // negative to indicate that. Yet they still should be relatively correct.
       sender_delta_ms =

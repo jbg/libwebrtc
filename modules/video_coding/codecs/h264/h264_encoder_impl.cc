@@ -452,7 +452,7 @@ int32_t H264EncoderImpl::Encode(
     pictures_[i].iPicWidth = configurations_[i].width;
     pictures_[i].iPicHeight = configurations_[i].height;
     pictures_[i].iColorFormat = EVideoFormatType::videoFormatI420;
-    pictures_[i].uiTimeStamp = input_frame.ntp_time_ms();
+    pictures_[i].uiTimeStamp = input_frame.ntp_time()->ms();
     // Downscale images on second and ongoing layers.
     if (i == 0) {
       pictures_[i].iStride[0] = frame_buffer->StrideY();

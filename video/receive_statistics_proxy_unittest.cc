@@ -87,8 +87,8 @@ class ReceiveStatisticsProxyTest : public ::testing::Test {
             .set_timestamp_ms(render_time_ms)
             .set_rotation(kVideoRotation_0)
             .build();
-    frame.set_ntp_time_ms(
-        time_controller_.GetClock()->CurrentNtpInMilliseconds());
+    frame.set_ntp_time(Timestamp::Millis(
+        time_controller_.GetClock()->CurrentNtpInMilliseconds()));
     return frame;
   }
 
@@ -1021,8 +1021,8 @@ TEST_F(ReceiveStatisticsProxyTest, DoesNotReportStaleFramerates) {
   for (int i = 0; i < kDefaultFps.hertz(); ++i) {
     // Since OnRenderedFrame is never called the fps in each sample will be 0,
     // i.e. bad
-    frame.set_ntp_time_ms(
-        time_controller_.GetClock()->CurrentNtpInMilliseconds());
+    frame.set_ntp_time(Timestamp::Millis(
+        time_controller_.GetClock()->CurrentNtpInMilliseconds()));
     statistics_proxy_->OnDecodedFrame(frame, absl::nullopt, TimeDelta::Zero(),
                                       VideoContentType::UNSPECIFIED,
                                       VideoFrameType::kVideoFrameKey);

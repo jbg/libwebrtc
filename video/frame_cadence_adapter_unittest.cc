@@ -217,8 +217,9 @@ TEST(FrameCadenceAdapterTest, ForwardsFramesDelayed) {
           EXPECT_EQ(post_time, time_controller.GetClock()->CurrentTime());
           EXPECT_EQ(frame.timestamp_us(),
                     original_timestamp_us + index * rtc::kNumMicrosecsPerSec);
-          EXPECT_EQ(frame.ntp_time_ms(), original_ntp_time.ToMs() +
-                                             index * rtc::kNumMillisecsPerSec);
+          EXPECT_EQ(
+              frame.ntp_time()->ms(),
+              original_ntp_time.ToMs() + index * rtc::kNumMillisecsPerSec);
         }));
     time_controller.AdvanceTime(TimeDelta::Seconds(1));
     frame = CreateFrameWithTimestamps(&time_controller);
@@ -295,7 +296,7 @@ TEST(FrameCadenceAdapterTest, RepeatsFramesDelayed) {
       .WillOnce(Invoke([&](Timestamp post_time, bool, const VideoFrame& frame) {
         EXPECT_EQ(post_time, time_controller.GetClock()->CurrentTime());
         EXPECT_EQ(frame.timestamp_us(), original_timestamp_us);
-        EXPECT_EQ(frame.ntp_time_ms(), original_ntp_time.ToMs());
+        EXPECT_EQ(frame.ntp_time()->ms(), original_ntp_time.ToMs());
       }));
   time_controller.AdvanceTime(TimeDelta::Seconds(1));
   Mock::VerifyAndClearExpectations(&callback);
@@ -305,7 +306,7 @@ TEST(FrameCadenceAdapterTest, RepeatsFramesDelayed) {
         EXPECT_EQ(post_time, time_controller.GetClock()->CurrentTime());
         EXPECT_EQ(frame.timestamp_us(),
                   original_timestamp_us + rtc::kNumMicrosecsPerSec);
-        EXPECT_EQ(frame.ntp_time_ms(),
+        EXPECT_EQ(frame.ntp_time()->ms(),
                   original_ntp_time.ToMs() + rtc::kNumMillisecsPerSec);
       }));
   time_controller.AdvanceTime(TimeDelta::Seconds(1));
@@ -316,7 +317,7 @@ TEST(FrameCadenceAdapterTest, RepeatsFramesDelayed) {
         EXPECT_EQ(post_time, time_controller.GetClock()->CurrentTime());
         EXPECT_EQ(frame.timestamp_us(),
                   original_timestamp_us + 2 * rtc::kNumMicrosecsPerSec);
-        EXPECT_EQ(frame.ntp_time_ms(),
+        EXPECT_EQ(frame.ntp_time()->ms(),
                   original_ntp_time.ToMs() + 2 * rtc::kNumMillisecsPerSec);
       }));
   time_controller.AdvanceTime(TimeDelta::Seconds(1));
@@ -345,7 +346,7 @@ TEST(FrameCadenceAdapterTest,
       .WillOnce(Invoke([&](Timestamp post_time, bool, const VideoFrame& frame) {
         EXPECT_EQ(post_time, time_controller.GetClock()->CurrentTime());
         EXPECT_EQ(frame.timestamp_us(), 0);
-        EXPECT_EQ(frame.ntp_time_ms(), 0);
+        EXPECT_EQ(frame.ntp_time()->ms(), 0);
       }));
   time_controller.AdvanceTime(TimeDelta::Seconds(1));
   Mock::VerifyAndClearExpectations(&callback);
@@ -353,7 +354,7 @@ TEST(FrameCadenceAdapterTest,
       .WillOnce(Invoke([&](Timestamp post_time, bool, const VideoFrame& frame) {
         EXPECT_EQ(post_time, time_controller.GetClock()->CurrentTime());
         EXPECT_EQ(frame.timestamp_us(), 0);
-        EXPECT_EQ(frame.ntp_time_ms(), 0);
+        EXPECT_EQ(frame.ntp_time()->ms(), 0);
       }));
   time_controller.AdvanceTime(TimeDelta::Seconds(1));
 }
@@ -384,7 +385,7 @@ TEST(FrameCadenceAdapterTest, StopsRepeatingFramesDelayed) {
   EXPECT_CALL(callback, OnFrame)
       .WillOnce(Invoke([&](Timestamp, bool, const VideoFrame& frame) {
         EXPECT_EQ(frame.timestamp_us(), 5 * rtc::kNumMicrosecsPerSec / 2);
-        EXPECT_EQ(frame.ntp_time_ms(),
+        EXPECT_EQ(frame.ntp_time()->ms(),
                   original_ntp_time.ToMs() + 5u * rtc::kNumMillisecsPerSec / 2);
       }));
   time_controller.AdvanceTime(TimeDelta::Seconds(1));
@@ -1037,7 +1038,7 @@ TEST(FrameCadenceAdapterRealTimeTest, TimestampsDoNotDrift) {
     adapter->OnConstraintsChanged(VideoTrackSourceConstraints{0, 30});
     auto frame = CreateFrame();
     original_ntp_time_ms = clock->CurrentNtpInMilliseconds();
-    frame.set_ntp_time_ms(original_ntp_time_ms);
+    frame.set_ntp_time(Timestamp::Millis(original_ntp_time_ms));
     original_timestamp_us = clock->CurrentTime().us();
     frame.set_timestamp_us(original_timestamp_us);
     constexpr int kSleepMs = rtc::kNumMillisecsPerSec / 2;
@@ -1049,7 +1050,7 @@ TEST(FrameCadenceAdapterRealTimeTest, TimestampsDoNotDrift) {
               if (frame_counter == 2) {
                 SleepMs(kSleepMs);
               } else if (frame_counter == 3) {
-                EXPECT_GE(incoming_frame.ntp_time_ms(),
+                EXPECT_GE(incoming_frame.ntp_time()->ms(),
                           original_ntp_time_ms + kSleepMs);
                 EXPECT_GE(incoming_frame.timestamp_us(),
                           original_timestamp_us + kSleepMs);
