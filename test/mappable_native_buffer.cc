@@ -53,7 +53,7 @@ VideoFrame CreateMappableNativeFrame(int64_t ntp_time_ms,
           .set_timestamp_ms(99)
           .set_rotation(kVideoRotation_0)
           .build();
-  frame.set_ntp_time_ms(ntp_time_ms);
+  frame.set_ntp_time(Timestamp::Millis(ntp_time_ms));
   return frame;
 }
 
