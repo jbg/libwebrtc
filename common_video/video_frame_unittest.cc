@@ -213,8 +213,8 @@ TEST(TestVideoFrame, WidthHeightValues) {
   EXPECT_EQ(valid_value, frame.height());
   frame.set_rtp_timestamp(123u);
   EXPECT_EQ(123u, frame.rtp_timestamp());
-  frame.set_ntp_time_ms(456);
-  EXPECT_EQ(456, frame.ntp_time_ms());
+  frame.set_ntp_time(Timestamp::Millis(456));
+  EXPECT_EQ(456, frame.ntp_time()->ms());
   EXPECT_EQ(789, frame.render_time_ms());
 }
 
@@ -247,7 +247,7 @@ TEST(TestVideoFrame, ShallowCopy) {
                           .set_timestamp_us(0)
                           .build();
   frame1.set_rtp_timestamp(timestamp);
-  frame1.set_ntp_time_ms(ntp_time_ms);
+  frame1.set_ntp_time(Timestamp::Millis(ntp_time_ms));
   frame1.set_timestamp_us(timestamp_us);
   VideoFrame frame2(frame1);
 
@@ -261,17 +261,17 @@ TEST(TestVideoFrame, ShallowCopy) {
   EXPECT_EQ(yuv1->DataV(), yuv2->DataV());
 
   EXPECT_EQ(frame2.rtp_timestamp(), frame1.rtp_timestamp());
-  EXPECT_EQ(frame2.ntp_time_ms(), frame1.ntp_time_ms());
+  EXPECT_EQ(frame2.ntp_time(), frame1.ntp_time());
   EXPECT_EQ(frame2.timestamp_us(), frame1.timestamp_us());
   EXPECT_EQ(frame2.rotation(), frame1.rotation());
 
   frame2.set_rtp_timestamp(timestamp + 1);
-  frame2.set_ntp_time_ms(ntp_time_ms + 1);
+  frame2.set_ntp_time(Timestamp::Millis(ntp_time_ms + 1));
   frame2.set_timestamp_us(timestamp_us + 1);
   frame2.set_rotation(kVideoRotation_90);
 
   EXPECT_NE(frame2.rtp_timestamp(), frame1.rtp_timestamp());
-  EXPECT_NE(frame2.ntp_time_ms(), frame1.ntp_time_ms());
+  EXPECT_NE(frame2.ntp_time(), frame1.ntp_time());
   EXPECT_NE(frame2.timestamp_us(), frame1.timestamp_us());
   EXPECT_NE(frame2.rotation(), frame1.rotation());
 }
