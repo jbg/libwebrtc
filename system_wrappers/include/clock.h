@@ -41,6 +41,7 @@ class RTC_EXPORT Clock {
   // Retrieve an NTP absolute timestamp (with an epoch of Jan 1, 1900).
   NtpTime CurrentNtpTime() { return ConvertTimestampToNtpTime(CurrentTime()); }
   int64_t CurrentNtpInMilliseconds() { return CurrentNtpTime().ToMs(); }
+  int64_t CurrentNtpInMicroseconds() { return CurrentNtpTime().ToUs(); }
 
   // Converts between a relative timestamp returned by this clock, to NTP time.
   virtual NtpTime ConvertTimestampToNtpTime(Timestamp timestamp) = 0;
