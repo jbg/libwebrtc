@@ -137,15 +137,6 @@ class RTC_EXPORT VideoFrame {
     RtpPacketInfos packet_infos_;
   };
 
-  // To be deprecated. Migrate all use to Builder.
-  VideoFrame(const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
-             webrtc::VideoRotation rotation,
-             int64_t timestamp_us);
-  VideoFrame(const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
-             uint32_t timestamp_rtp,
-             int64_t render_time_ms,
-             VideoRotation rotation);
-
   ~VideoFrame();
 
   // Support move and copy.
@@ -201,12 +192,16 @@ class RTC_EXPORT VideoFrame {
   // TODO(https://bugs.webrtc.org/13756): Deprecate and use rtp_timestamp.
   uint32_t timestamp() const { return timestamp_rtp_; }
 
-  // Set capture ntp time in milliseconds.
-  void set_ntp_time_ms(int64_t ntp_time_ms) { ntp_time_ms_ = ntp_time_ms; }
+  // Set capture ntp time in Timestamp.
+  void set_ntp_time(const absl::optional<Timestamp>& ntp_time) {
+    ntp_time_ = ntp_time;
+  }
+
+  // Get capture ntp time in Timestamp.
+  const absl::optional<Timestamp>& ntp_time() const { return ntp_time_; }
 
   // Get capture ntp time in milliseconds.
-  int64_t ntp_time_ms() const { return ntp_time_ms_; }
-
+  int64_t ntp_time_ms() const { return ntp_time() ? ntp_time()->ms() : 0; }
   // Naming convention for Coordination of Video Orientation. Please see
   // http://www.etsi.org/deliver/etsi_ts/126100_126199/126114/12.07.00_60/ts_126114v120700p.pdf
   //
@@ -294,7 +289,7 @@ class RTC_EXPORT VideoFrame {
              const absl::optional<Timestamp>& capture_time_identifier,
              const absl::optional<Timestamp>& reference_time,
              uint32_t timestamp_rtp,
-             int64_t ntp_time_ms,
+             const absl::optional<Timestamp>& ntp_time,
              VideoRotation rotation,
              const absl::optional<ColorSpace>& color_space,
              const RenderParameters& render_parameters,
@@ -305,7 +300,7 @@ class RTC_EXPORT VideoFrame {
   // An opaque reference counted handle that stores the pixel data.
   rtc::scoped_refptr<webrtc::VideoFrameBuffer> video_frame_buffer_;
   uint32_t timestamp_rtp_;
-  int64_t ntp_time_ms_;
+  absl::optional<Timestamp> ntp_time_;
   int64_t timestamp_us_;
   absl::optional<Timestamp> capture_time_identifier_;
   // Contains a monotonically increasing clock time and represents the time
