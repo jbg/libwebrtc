@@ -101,7 +101,7 @@ void FrameEncodeMetadataWriter::OnEncodeStarted(const VideoFrame& frame) {
   FrameMetadata metadata;
   metadata.rtp_timestamp = frame.rtp_timestamp();
   metadata.encode_start_time_ms = rtc::TimeMillis();
-  metadata.ntp_time_ms = frame.ntp_time_ms();
+  metadata.ntp_time_ms = frame.ntp_time()->ms();
   metadata.timestamp_us = frame.timestamp_us();
   metadata.rotation = frame.rotation();
   metadata.color_space = frame.color_space();
