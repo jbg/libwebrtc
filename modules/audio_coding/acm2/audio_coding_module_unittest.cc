@@ -627,7 +627,8 @@ class AcmSenderBitExactnessOldApi : public ::testing::Test,
     } else {
       EXPECT_NE(ref.find(result), absl::string_view::npos)
           << result << " must be one of these:\n"
-          << ref;
+          << ref << "\nref.size()=" << ref.size()
+          << ", result.size()==" << result.size();
     }
   }
 

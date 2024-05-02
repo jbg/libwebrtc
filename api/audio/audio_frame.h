@@ -15,6 +15,7 @@
 #include <stdint.h>
 
 #include "api/array_view.h"
+#include "api/audio/audio_view.h"
 #include "api/audio/channel_layout.h"
 #include "api/rtp_packet_infos.h"
 #include "rtc_base/checks.h"
@@ -125,7 +126,7 @@ class AudioFrame {
   // Returns a read-only view of all the valid samples held by the AudioFrame.
   // Note that for a muted AudioFrame, the size of the returned view will be
   // 0u and the contained data will be nullptr.
-  rtc::ArrayView<const int16_t> data_view() const;
+  InterleavedView<const int16_t> data_view() const;
 
   // mutable_frame() always returns a non-static buffer; the first call to
   // mutable_frame() zeros the buffer and marks the frame as unmuted.
@@ -139,8 +140,8 @@ class AudioFrame {
   // internal member variables; `samples_per_channel()` and `num_channels()`
   // respectively.
   // If the state is currently muted, the returned view will be zeroed out.
-  rtc::ArrayView<int16_t> mutable_data(size_t samples_per_channel,
-                                       size_t num_channels);
+  InterleavedView<int16_t> mutable_data(size_t samples_per_channel,
+                                        size_t num_channels);
 
   // Prefer to mute frames using AudioFrameOperations::Mute.
   void Mute();
