@@ -213,7 +213,7 @@ TEST(TestVideoFrame, WidthHeightValues) {
   EXPECT_EQ(valid_value, frame.height());
   frame.set_rtp_timestamp(123u);
   EXPECT_EQ(123u, frame.rtp_timestamp());
-  frame.set_ntp_time_ms(456);
+  frame.set_ntp_time(Timestamp::Millis(456));
   EXPECT_EQ(456, frame.ntp_time_ms());
   EXPECT_EQ(789, frame.render_time_ms());
 }

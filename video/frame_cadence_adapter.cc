@@ -649,7 +649,7 @@ void ZeroHertzAdapterMode::ScheduleRepeat(int frame_id, bool idle_repeat) {
   Timestamp now = clock_->CurrentTime();
   if (!scheduled_repeat_.has_value()) {
     scheduled_repeat_.emplace(now, queued_frames_.front().timestamp_us(),
-                              queued_frames_.front().ntp_time_ms());
+                              queued_frames_.front().ntp_time()->ms());
   }
   scheduled_repeat_->scheduled = now;
   scheduled_repeat_->idle = idle_repeat;
@@ -691,9 +691,9 @@ void ZeroHertzAdapterMode::ProcessRepeatedFrameOnDelayedCadence(int frame_id) {
     frame.set_timestamp_us(scheduled_repeat_->origin_timestamp_us +
                            total_delay.us());
   }
-  if (frame.ntp_time_ms()) {
-    frame.set_ntp_time_ms(scheduled_repeat_->origin_ntp_time_ms +
-                          total_delay.ms());
+  if (frame.ntp_time()) {
+    frame.set_ntp_time(Timestamp::Millis(scheduled_repeat_->origin_ntp_time_ms +
+                                         total_delay.ms()));
   }
 
   // Schedule another repeat before sending the frame off which could take time.
