@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f314d217_b0665afd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2024-05-02T08:43:28Z",
+      "side": 1,
+      "message": "Need more details.\n\nFrom https://issues.webrtc.org/issues/42225010#comment1: \"This acts like having OpenH264 available on the system and allows apps to build with H264 support and just later replace it with real OpenH264 for 3rd party repositories.\"\n\nHow will \"replace it with real OpenH264\" work?",
+      "revId": "d160e62d5ade13cdeca36e02977cf848597167fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
