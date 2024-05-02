@@ -575,7 +575,7 @@ class AdaptingFrameForwarder : public test::FrameForwarder {
             VideoFrame::Builder()
                 .set_video_frame_buffer(rtc::make_ref_counted<TestBuffer>(
                     nullptr, out_width, out_height))
-                .set_ntp_time_ms(video_frame.ntp_time_ms())
+                .set_ntp_time_ms(video_frame.ntp_time()->ms())
                 .set_timestamp_ms(video_frame.timestamp_us() * 1000)
                 .set_rotation(kVideoRotation_0)
                 .build();
@@ -1256,13 +1256,13 @@ class VideoStreamEncoderTest : public ::testing::Test {
           expect_null_frame_ = false;
         } else {
           EXPECT_GT(input_image.rtp_timestamp(), timestamp_);
-          EXPECT_GT(input_image.ntp_time_ms(), ntp_time_ms_);
+          EXPECT_GT(input_image.ntp_time()->ms(), ntp_time_ms_);
           EXPECT_EQ(input_image.rtp_timestamp(),
-                    input_image.ntp_time_ms() * 90);
+                    input_image.ntp_time()->ms() * 90);
         }
 
         timestamp_ = input_image.rtp_timestamp();
-        ntp_time_ms_ = input_image.ntp_time_ms();
+        ntp_time_ms_ = input_image.ntp_time()->ms();
         last_input_width_ = input_image.width();
         last_input_height_ = input_image.height();
         last_update_rect_ = input_image.update_rect();
@@ -8121,7 +8121,7 @@ TEST_F(VideoStreamEncoderTest, AutomaticAnimationDetection) {
   // Pass enough frames with the full update to trigger animation detection.
   for (int i = 0; i < kNumFrames; ++i) {
     int64_t timestamp_ms = CurrentTimeMs();
-    frame.set_ntp_time_ms(timestamp_ms);
+    frame.set_ntp_time_ms(Timestamp::Millis(timestamp_ms));
     frame.set_timestamp_us(timestamp_ms * 1000);
     video_source_.IncomingCapturedFrame(frame);
     WaitForEncodedFrame(timestamp_ms);
@@ -8136,7 +8136,7 @@ TEST_F(VideoStreamEncoderTest, AutomaticAnimationDetection) {
   // Pass one frame with no known update.
   //  Resolution cap should be removed immediately.
   int64_t timestamp_ms = CurrentTimeMs();
-  frame.set_ntp_time_ms(timestamp_ms);
+  frame.set_ntp_time_ms(Timestamp::Millis(timestamp_ms));
   frame.set_timestamp_us(timestamp_ms * 1000);
   frame.clear_update_rect();
 
@@ -8168,7 +8168,7 @@ TEST_F(VideoStreamEncoderTest, ConfiguresVp9SvcAtOddResolutions) {
   // Pass enough frames with the full update to trigger animation detection.
   for (int i = 0; i < kNumFrames; ++i) {
     int64_t timestamp_ms = CurrentTimeMs();
-    frame.set_ntp_time_ms(timestamp_ms);
+    frame.set_ntp_time_ms(Timestamp::Millis(timestamp_ms));
     frame.set_timestamp_us(timestamp_ms * 1000);
     video_source_.IncomingCapturedFrame(frame);
     WaitForEncodedFrame(timestamp_ms);

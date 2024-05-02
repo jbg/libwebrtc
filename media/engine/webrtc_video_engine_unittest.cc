@@ -4283,7 +4283,8 @@ TEST_F(WebRtcVideoChannelTest, EstimatesNtpStartTimeCorrectly) {
   // here.
   time_controller_.AdvanceTime(webrtc::TimeDelta::Millis(kFrameOffsetMs));
   video_frame.set_rtp_timestamp(kFrameOffsetMs * 90 - 1);
-  video_frame.set_ntp_time_ms(kInitialNtpTimeMs + kFrameOffsetMs);
+  video_frame.set_ntp_time(
+      Timestamp::Millis(kInitialNtpTimeMs + kFrameOffsetMs));
   stream->InjectFrame(video_frame);
 
   EXPECT_EQ(2, renderer.num_rendered_frames());

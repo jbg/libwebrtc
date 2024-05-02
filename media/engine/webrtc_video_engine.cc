@@ -3570,8 +3570,9 @@ void WebRtcVideoReceiveChannel::WebRtcVideoReceiveStream::OnFrame(
   if (first_frame_timestamp_ < 0)
     first_frame_timestamp_ = time_now_ms;
   int64_t elapsed_time_ms = time_now_ms - first_frame_timestamp_;
-  if (frame.ntp_time_ms() > 0)
-    estimated_remote_start_ntp_time_ms_ = frame.ntp_time_ms() - elapsed_time_ms;
+  if (frame.ntp_time())
+    estimated_remote_start_ntp_time_ms_ =
+        frame.ntp_time()->ms() - elapsed_time_ms;
 
   if (sink_ == NULL) {
     RTC_LOG(LS_WARNING)

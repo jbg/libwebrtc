@@ -165,8 +165,8 @@ VideoFrame VideoFrame::Builder::build() {
   RTC_CHECK(video_frame_buffer_ != nullptr);
   return VideoFrame(id_, video_frame_buffer_, timestamp_us_,
                     capture_time_identifier_, reference_time_, timestamp_rtp_,
-                    ntp_time_ms_, rotation_, color_space_, render_parameters_,
-                    update_rect_, packet_infos_);
+                    Timestamp::Millis(ntp_time_ms_), rotation_, color_space_,
+                    render_parameters_, update_rect_, packet_infos_);
 }
 
 VideoFrame::Builder& VideoFrame::Builder::set_video_frame_buffer(
@@ -251,34 +251,13 @@ VideoFrame::Builder& VideoFrame::Builder::set_packet_infos(
   return *this;
 }
 
-VideoFrame::VideoFrame(const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
-                       webrtc::VideoRotation rotation,
-                       int64_t timestamp_us)
-    : video_frame_buffer_(buffer),
-      timestamp_rtp_(0),
-      ntp_time_ms_(0),
-      timestamp_us_(timestamp_us),
-      rotation_(rotation) {}
-
-VideoFrame::VideoFrame(const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
-                       uint32_t timestamp_rtp,
-                       int64_t render_time_ms,
-                       VideoRotation rotation)
-    : video_frame_buffer_(buffer),
-      timestamp_rtp_(timestamp_rtp),
-      ntp_time_ms_(0),
-      timestamp_us_(render_time_ms * rtc::kNumMicrosecsPerMillisec),
-      rotation_(rotation) {
-  RTC_DCHECK(buffer);
-}
-
 VideoFrame::VideoFrame(uint16_t id,
                        const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
                        int64_t timestamp_us,
                        const absl::optional<Timestamp>& capture_time_identifier,
                        const absl::optional<Timestamp>& reference_time,
                        uint32_t timestamp_rtp,
-                       int64_t ntp_time_ms,
+                       const absl::optional<Timestamp>& ntp_time,
                        VideoRotation rotation,
                        const absl::optional<ColorSpace>& color_space,
                        const RenderParameters& render_parameters,
@@ -287,7 +266,7 @@ VideoFrame::VideoFrame(uint16_t id,
     : id_(id),
       video_frame_buffer_(buffer),
       timestamp_rtp_(timestamp_rtp),
-      ntp_time_ms_(ntp_time_ms),
+      ntp_time_(ntp_time),
       timestamp_us_(timestamp_us),
       capture_time_identifier_(capture_time_identifier),
       reference_time_(reference_time),

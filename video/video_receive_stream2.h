@@ -63,7 +63,7 @@ struct VideoFrameMetaData {
   VideoFrameMetaData(const webrtc::VideoFrame& frame, Timestamp now)
       : rtp_timestamp(frame.rtp_timestamp()),
         timestamp_us(frame.timestamp_us()),
-        ntp_time_ms(frame.ntp_time_ms()),
+        ntp_time_ms(frame.ntp_time() ? frame.ntp_time()->ms() : 0),
         width(frame.width()),
         height(frame.height()),
         decode_timestamp(now) {}
