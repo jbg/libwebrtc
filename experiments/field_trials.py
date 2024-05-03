@@ -490,9 +490,6 @@ POLICY_EXEMPT_FIELD_TRIALS: FrozenSet[FieldTrial] = frozenset([
     FieldTrial('WebRTC-BindUsingInterfaceName',
                42220770,
                date(2024, 4, 1)),
-    FieldTrial('WebRTC-BoostedScreenshareQp',
-               42234864,
-               date(2024, 4, 1)),
     FieldTrial('WebRTC-Bwe-AllocationProbing',
                42220440,
                date(2024, 4, 1)),
@@ -893,7 +890,7 @@ POLICY_EXEMPT_FIELD_TRIALS: FrozenSet[FieldTrial] = frozenset([
 ])  # yapf: disable
 
 POLICY_EXEMPT_FIELD_TRIALS_DIGEST: str = \
-    '263c7a29291a7c4472ff60c7c3b2520f6dd5cea8'
+    '2910deb825b447e7a9b40a7b78346dd105747287'
 
 REGISTERED_FIELD_TRIALS: FrozenSet[FieldTrial] = ACTIVE_FIELD_TRIALS.union(
     POLICY_EXEMPT_FIELD_TRIALS)
