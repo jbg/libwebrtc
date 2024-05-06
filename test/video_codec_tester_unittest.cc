@@ -622,8 +622,8 @@ TEST_P(VideoCodecTesterTestPacing, PaceEncode) {
 
   std::map<uint32_t, EncodingSettings> encoding_settings =
       VideoCodecTester::CreateEncodingSettings(
-          "VP8", "L1T1", kSourceWidth, kSourceHeight, {kTargetLayerBitrateKbps},
-          kTargetFramerate.hertz(), kNumFrames);
+          env, "VP8", "L1T1", kSourceWidth, kSourceHeight,
+          {kTargetLayerBitrateKbps}, kTargetFramerate.hertz(), kNumFrames);
 
   EncoderSettings encoder_settings;
   encoder_settings.pacing_settings = pacing_settings;
@@ -689,7 +689,8 @@ TEST_P(VideoCodecTesterTestEncodingSettings, CreateEncodingSettings) {
   EncodingSettingsTestParameters test_params = GetParam();
   std::map<uint32_t, EncodingSettings> encoding_settings =
       VideoCodecTester::CreateEncodingSettings(
-          test_params.codec_type, test_params.scalability_mode, /*width=*/1280,
+          CreateEnvironment(), test_params.codec_type,
+          test_params.scalability_mode, /*width=*/1280,
           /*height=*/720, test_params.bitrate_kbps, /*framerate_fps=*/30,
           /*num_frames=*/1);
   ASSERT_THAT(encoding_settings, SizeIs(1));

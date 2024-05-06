@@ -191,6 +191,7 @@ class VideoCodecTester {
   // A helper function that creates `EncodingSettings` for `num_frames` frames,
   // wraps the settings into RTP timestamp -> settings map and returns the map.
   static std::map<uint32_t, EncodingSettings> CreateEncodingSettings(
+      const Environment& env,
       std::string codec_type,
       std::string scalability_name,
       int width,

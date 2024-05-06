@@ -316,7 +316,7 @@ TEST_P(SpatialQualityTest, SpatialQuality) {
 
   std::map<uint32_t, EncodingSettings> frames_settings =
       VideoCodecTester::CreateEncodingSettings(
-          codec_type, /*scalability_mode=*/"L1T1", width, height,
+          env, codec_type, /*scalability_mode=*/"L1T1", width, height,
           {bitrate_kbps}, framerate_fps, num_frames);
 
   std::unique_ptr<VideoCodecStats> stats = RunEncodeDecodeTest(
@@ -392,7 +392,7 @@ TEST_P(BitrateAdaptationTest, BitrateAdaptation) {
 
   std::map<uint32_t, EncodingSettings> encoding_settings =
       VideoCodecTester::CreateEncodingSettings(
-          codec_type, /*scalability_mode=*/"L1T1",
+          env, codec_type, /*scalability_mode=*/"L1T1",
           /*width=*/640, /*height=*/360, {bitrate_kbps.first},
           /*framerate_fps=*/30, num_frames);
 
@@ -401,7 +401,7 @@ TEST_P(BitrateAdaptationTest, BitrateAdaptation) {
 
   std::map<uint32_t, EncodingSettings> encoding_settings2 =
       VideoCodecTester::CreateEncodingSettings(
-          codec_type, /*scalability_mode=*/"L1T1",
+          env, codec_type, /*scalability_mode=*/"L1T1",
           /*width=*/640, /*height=*/360, {bitrate_kbps.second},
           /*framerate_fps=*/30, num_frames, initial_timestamp_rtp);
 
@@ -471,7 +471,7 @@ TEST_P(FramerateAdaptationTest, FramerateAdaptation) {
 
   std::map<uint32_t, EncodingSettings> encoding_settings =
       VideoCodecTester::CreateEncodingSettings(
-          codec_type, /*scalability_mode=*/"L1T1",
+          env, codec_type, /*scalability_mode=*/"L1T1",
           /*width=*/640, /*height=*/360,
           /*layer_bitrates_kbps=*/{512}, framerate_fps.first,
           static_cast<int>(duration_s * framerate_fps.first));
@@ -482,7 +482,7 @@ TEST_P(FramerateAdaptationTest, FramerateAdaptation) {
 
   std::map<uint32_t, EncodingSettings> encoding_settings2 =
       VideoCodecTester::CreateEncodingSettings(
-          codec_type, /*scalability_mode=*/"L1T1", /*width=*/640,
+          env, codec_type, /*scalability_mode=*/"L1T1", /*width=*/640,
           /*height=*/360,
           /*layer_bitrates_kbps=*/{512}, framerate_fps.second,
           static_cast<int>(duration_s * framerate_fps.second),
@@ -551,7 +551,7 @@ TEST(VideoCodecTest, DISABLED_EncodeDecode) {
 
   std::map<uint32_t, EncodingSettings> frames_settings =
       VideoCodecTester::CreateEncodingSettings(
-          CodecNameToCodecType(absl::GetFlag(FLAGS_encoder)),
+          env, CodecNameToCodecType(absl::GetFlag(FLAGS_encoder)),
           absl::GetFlag(FLAGS_scalability_mode),
           absl::GetFlag(FLAGS_width).value_or(absl::GetFlag(FLAGS_input_width)),
           absl::GetFlag(FLAGS_height)
