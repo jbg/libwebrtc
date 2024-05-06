@@ -21,17 +21,14 @@
 namespace webrtc {
 
 CongestionWindowPushbackController::CongestionWindowPushbackController(
-    const FieldTrialsView* key_value_config)
-    : add_pacing_(
-          absl::StartsWith(key_value_config->Lookup(
-                               "WebRTC-AddPacingToCongestionWindowPushback"),
-                           "Enabled")),
+    const FieldTrialsView& key_value_config)
+    : add_pacing_(key_value_config.IsEnabled(
+          "WebRTC-AddPacingToCongestionWindowPushback")),
       min_pushback_target_bitrate_bps_(
-          RateControlSettings::ParseFromKeyValueConfig(key_value_config)
+          RateControlSettings(key_value_config)
               .CongestionWindowMinPushbackTargetBitrateBps()),
-      current_data_window_(
-          RateControlSettings::ParseFromKeyValueConfig(key_value_config)
-              .CongestionWindowInitialDataWindow()) {}
+      current_data_window_(RateControlSettings(key_value_config)
+                               .CongestionWindowInitialDataWindow()) {}
 
 void CongestionWindowPushbackController::UpdateOutstandingData(
     int64_t outstanding_bytes) {
