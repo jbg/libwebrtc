@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "970837e5_fa4a98a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-06T11:36:21Z",
+      "side": 1,
+      "message": "a cleanup before removing RateControlSettings::ParseFromFieldTrial() function",
+      "revId": "f8878b725d8e5e6b244fb06a00828ba2dde7ad30",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
