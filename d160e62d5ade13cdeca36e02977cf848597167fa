@@ -16,6 +16,24 @@
       "message": "Need more details.\n\nFrom https://issues.webrtc.org/issues/42225010#comment1: \"This acts like having OpenH264 available on the system and allows apps to build with H264 support and just later replace it with real OpenH264 for 3rd party repositories.\"\n\nHow will \"replace it with real OpenH264\" work?",
       "revId": "d160e62d5ade13cdeca36e02977cf848597167fa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b753102_d3e6e6d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2024-05-06T07:23:37Z",
+      "side": 1,
+      "message": "The \"noopenh264\" implements all the symbols apps need to link against openh264, but it doesn\u0027t provide any functionality, it acts just as an enablement of openh264 during the build time. It\u0027s basically a dummy implementation. The replacemenent is then done on the distribution packaging level, where for example in Fedora users can install \"real\" openh264 after 3rd party repositories are enabled. Since it is done the way that both package have equal names, but the noopenh264 always has smaller version, the real openh264 will be installed automatically as an update once 3rd party repositories are enabled. Usually these 3rd party repositories are enabled in the first login wizard.",
+      "parentUuid": "f314d217_b0665afd",
+      "revId": "d160e62d5ade13cdeca36e02977cf848597167fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
