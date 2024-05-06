@@ -52,6 +52,24 @@
       "parentUuid": "2b753102_d3e6e6d7",
       "revId": "d160e62d5ade13cdeca36e02977cf848597167fa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "651b610c_eaafb452",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2024-05-06T10:09:56Z",
+      "side": 1,
+      "message": "It\u0027s a normal shared library that is dynamically linked to e.g. Chromium or Firefox or whatever app used WebRTC.",
+      "parentUuid": "94c68bae_037727fe",
+      "revId": "d160e62d5ade13cdeca36e02977cf848597167fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
