@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c49b7258_079590c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2024-05-06T17:39:37Z",
+      "side": 1,
+      "message": "Thanks for this CL.\nI agree that this is quite an improvement from prior code and you definitely convinced me of the value of this approach.\n\nI have only some minor comments, where the largest one probably is the question about the stride parameter.",
+      "revId": "b7038172fe07271dea887735ee57718a1ebb7dfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7687feb0_c80f4a17",
+        "filename": "api/audio/audio_view.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2024-05-06T17:39:37Z",
+      "side": 1,
+      "message": "For audio frames, it would be nice to store them as int\u0027s since that\u0027d cover any number of samples used in practice and avoid issues with signed, unsigned arithmetics",
+      "range": {
+        "startLine": 114,
+        "startChar": 2,
+        "endLine": 116,
+        "endChar": 18
+      },
+      "revId": "b7038172fe07271dea887735ee57718a1ebb7dfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce381cde_38bfb1f1",
+        "filename": "api/audio/audio_view.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2024-05-06T17:39:37Z",
+      "side": 1,
+      "message": "Do we have any examples in the code where stride would not match the number of channels?",
+      "range": {
+        "startLine": 131,
+        "startChar": 5,
+        "endLine": 132,
+        "endChar": 69
+      },
+      "revId": "b7038172fe07271dea887735ee57718a1ebb7dfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d89f2bc8_1ae92079",
+        "filename": "api/audio/audio_view.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2024-05-06T17:39:37Z",
+      "side": 1,
+      "message": "+1\nAlso please see above regarding option to change these to ints.",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 79
+      },
+      "revId": "b7038172fe07271dea887735ee57718a1ebb7dfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8076db36_149f5cb8",
+        "filename": "api/audio/audio_view.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2024-05-06T17:39:37Z",
+      "side": 1,
+      "message": "I\u0027m not convinced the naming is optimal here.\nThe name \"CopyView\" to me indicates that the view is copied, but this instead copies the underlying data.\n\nWould it be possible to name this differently to avoid that ambiguity?",
+      "range": {
+        "startLine": 245,
+        "startChar": 5,
+        "endLine": 245,
+        "endChar": 13
+      },
+      "revId": "b7038172fe07271dea887735ee57718a1ebb7dfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
