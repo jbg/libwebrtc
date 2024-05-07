@@ -38,14 +38,36 @@ namespace webrtc {
 namespace webrtc_internal_rtp_video_sender {
 
 RtpStreamSender::RtpStreamSender(
+    uint32_t ssrc,
+    TaskQueueFactory* factory,
     std::unique_ptr<ModuleRtpRtcpImpl2> rtp_rtcp,
     std::unique_ptr<RTPSenderVideo> sender_video,
+    rtc::scoped_refptr<FrameTransformerInterface> transformer,
     std::unique_ptr<VideoFecGenerator> fec_generator)
     : rtp_rtcp(std::move(rtp_rtcp)),
-      sender_video(std::move(sender_video)),
-      fec_generator(std::move(fec_generator)) {}
+      rtp_sender_video(std::move(sender_video)),
+      transformer(
+          transformer != nullptr
+              ? rtc::make_ref_counted<RTPSenderVideoFrameTransformerDelegate>(
+                    rtp_sender_video.get(),
+                    std::move(transformer),
+                    ssrc,
+                    factory)
+              : nullptr),
+      fec_generator(std::move(fec_generator)) {
+  if (this->transformer != nullptr) {
+    this->transformer->Init();
+    sender = this->transformer.get();
+  } else {
+    sender = rtp_sender_video.get();
+  }
+}
 
-RtpStreamSender::~RtpStreamSender() = default;
+RtpStreamSender::~RtpStreamSender() {
+  if (transformer != nullptr) {
+    transformer->Reset();
+  }
+}
 
 }  // namespace webrtc_internal_rtp_video_sender
 
@@ -294,10 +316,11 @@ std::vector<RtpStreamSender> CreateRtpStreamSenders(
       video_config.fec_type = fec_generator->GetFecType();
       video_config.fec_overhead_bytes = fec_generator->MaxPacketOverhead();
     }
-    video_config.frame_transformer = frame_transformer;
     video_config.task_queue_factory = task_queue_factory;
     auto sender_video = std::make_unique<RTPSenderVideo>(video_config);
-    rtp_streams.emplace_back(std::move(rtp_rtcp), std::move(sender_video),
+    rtp_streams.emplace_back(rtp_config.ssrcs[i], task_queue_factory,
+                             std::move(rtp_rtcp), std::move(sender_video),
+                             std::move(frame_transformer),
                              std::move(fec_generator));
   }
   return rtp_streams;
@@ -555,6 +578,8 @@ EncodedImageCallback::Result RtpVideoSender::OnEncodedImage(
         rtp_streams_[simulcast_index].rtp_rtcp->ExpectedRetransmissionTime();
   }
 
+  RTPVideoFrameSenderInterface& sender_video =
+      *rtp_streams_[simulcast_index].sender;
   if (IsFirstFrameOfACodedVideoSequence(encoded_image, codec_specific_info)) {
     // In order to use the dependency descriptor RTP header extension:
     //  - Pass along any `FrameDependencyStructure` templates produced by the
@@ -564,7 +589,6 @@ EncodedImageCallback::Result RtpVideoSender::OnEncodedImage(
     //    minimal set of templates.
     //  - Otherwise, don't pass along any templates at all which will disable
     //    the generation of a dependency descriptor.
-    RTPSenderVideo& sender_video = *rtp_streams_[simulcast_index].sender_video;
     if (codec_specific_info && codec_specific_info->template_structure) {
       sender_video.SetVideoStructure(&*codec_specific_info->template_structure);
     } else if (absl::optional<FrameDependencyStructure> structure =
@@ -581,12 +605,17 @@ EncodedImageCallback::Result RtpVideoSender::OnEncodedImage(
     frame_id = shared_frame_id_;
   }
 
-  bool send_result =
-      rtp_streams_[simulcast_index].sender_video->SendEncodedImage(
-          rtp_config_.payload_type, codec_type_, rtp_timestamp, encoded_image,
-          params_[simulcast_index].GetRtpVideoHeader(
-              encoded_image, codec_specific_info, frame_id),
-          expected_retransmission_time);
+  bool send_result = sender_video.Send(
+      {.payload_type = rtp_config_.payload_type,
+       .codec_type = codec_type_,
+       .rtp_timestamp = rtp_timestamp,
+       .capture_time = encoded_image.CaptureTime(),
+       .capture_time_identifier = encoded_image.CaptureTimeIdentifier(),
+       .payload = encoded_image.GetEncodedData(),
+       .encoded_output_size = encoded_image.size(),
+       .video_header = params_[simulcast_index].GetRtpVideoHeader(
+           encoded_image, codec_specific_info, frame_id),
+       .expected_retransmission_time = expected_retransmission_time});
   if (frame_count_observer_) {
     FrameCounts& counts = frame_counts_[simulcast_index];
     if (encoded_image._frameType == VideoFrameType::kVideoFrameKey) {
@@ -640,7 +669,7 @@ void RtpVideoSender::OnVideoLayersAllocationUpdated(
     for (size_t i = 0; i < rtp_streams_.size(); ++i) {
       VideoLayersAllocation stream_allocation = allocation;
       stream_allocation.rtp_stream_index = i;
-      rtp_streams_[i].sender_video->SetVideoLayersAllocation(
+      rtp_streams_[i].sender->SetVideoLayersAllocation(
           std::move(stream_allocation));
       // Only send video frames on the rtp module if the encoder is configured
       // to send. This is to prevent stray frames to be sent after an encoder
@@ -664,7 +693,7 @@ DataRate RtpVideoSender::GetPostEncodeOverhead() const {
   for (size_t i = 0; i < rtp_streams_.size(); ++i) {
     if (rtp_streams_[i].rtp_rtcp->SendingMedia()) {
       post_encode_overhead +=
-          rtp_streams_[i].sender_video->PostEncodeOverhead();
+          rtp_streams_[i].rtp_sender_video->PostEncodeOverhead();
     }
   }
   return post_encode_overhead;
@@ -901,7 +930,7 @@ int RtpVideoSender::ProtectionRequest(const FecProtectionParams* delta_params,
 void RtpVideoSender::SetRetransmissionMode(int retransmission_mode) {
   MutexLock lock(&mutex_);
   for (const RtpStreamSender& stream : rtp_streams_) {
-      stream.sender_video->SetRetransmissionSetting(retransmission_mode);
+    stream.rtp_sender_video->SetRetransmissionSetting(retransmission_mode);
   }
 }
 
