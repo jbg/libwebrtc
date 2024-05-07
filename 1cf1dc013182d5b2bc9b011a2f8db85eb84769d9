@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "88cc6411_d9795bf4",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2022,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-05-07T11:29:36Z",
+      "side": 1,
+      "message": "It shouldn\u0027t map. That\u0027s how you do it when you negotiate.\nI think payload types should be set in a different place, but I\u0027m not sure where yet (or whether they are already set).",
+      "parentUuid": "1170ba94_0c8abff1",
+      "revId": "1cf1dc013182d5b2bc9b011a2f8db85eb84769d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "69848ec2_bbe161b8",
         "filename": "pc/media_session.cc",
         "patchSetId": 3
@@ -191,6 +209,24 @@
       "side": 1,
       "message": "This logic looks pretty self contained, no? SetCodecsInAnswer is only called here.\nIs it the semantics of has_usable_media_codecs you\u0027re concerned about? Leaving that as-is when codecs_to_include is empty makes sense, but should be straightforward.\n\nAny other risky/hairy things I\u0027ve missed?",
       "parentUuid": "117f2b0e_5c6b1735",
+      "revId": "1cf1dc013182d5b2bc9b011a2f8db85eb84769d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd25604e_7cd1814d",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2225,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-05-07T11:29:36Z",
+      "side": 1,
+      "message": "Right, SetCodecsInAnswer has as its first step the call to NegotiateCodecs, so lifting that out should be straightforward.\n\nUnfortunately moving NegotiateCodecs before the check for usable codecs caused one of the tests to crash, so I think I\u0027ll leave out simplifying that part of the logic (for now).",
+      "parentUuid": "1a8c5942_668d4059",
       "revId": "1cf1dc013182d5b2bc9b011a2f8db85eb84769d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
