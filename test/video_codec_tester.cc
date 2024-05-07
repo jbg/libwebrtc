@@ -1090,34 +1090,39 @@ class Encoder : public EncodedImageCallback {
         break;
     }
 
-    bool is_simulcast =
-        num_spatial_layers > 1 &&
-        (vc.codecType == kVideoCodecVP8 || vc.codecType == kVideoCodecH264 ||
-         vc.codecType == kVideoCodecH265);
-    if (is_simulcast) {
+    bool is_svc_codec =
+        (vc.codecType == kVideoCodecVP9 || vc.codecType == kVideoCodecAV1);
+    if (!is_svc_codec && num_spatial_layers > 1) {
       vc.numberOfSimulcastStreams = num_spatial_layers;
-      for (int sidx = 0; sidx < num_spatial_layers; ++sidx) {
-        auto tl0_settings = es.layers_settings.find(
-            LayerId{.spatial_idx = sidx, .temporal_idx = 0});
-        auto tlx_settings = es.layers_settings.find(LayerId{
-            .spatial_idx = sidx, .temporal_idx = num_temporal_layers - 1});
-        DataRate total_bitrate = std::accumulate(
-            tl0_settings, tlx_settings, DataRate::Zero(),
-            [](DataRate acc,
-               const std::pair<const LayerId, LayerSettings> layer) {
-              return acc + layer.second.bitrate;
-            });
-        SimulcastStream& ss = vc.simulcastStream[sidx];
-        ss.width = tl0_settings->second.resolution.width;
-        ss.height = tl0_settings->second.resolution.height;
-        ss.numberOfTemporalLayers = num_temporal_layers;
-        ss.maxBitrate = total_bitrate.kbps();
-        ss.targetBitrate = total_bitrate.kbps();
-        ss.minBitrate = 0;
-        ss.maxFramerate = vc.maxFramerate;
-        ss.qpMax = vc.qpMax;
-        ss.active = true;
-      }
+    }
+
+    for (int sidx = 0; sidx < num_spatial_layers; ++sidx) {
+      auto tl0_settings = es.layers_settings.find(
+          LayerId{.spatial_idx = sidx, .temporal_idx = 0});
+      auto tlx_settings = es.layers_settings.find(LayerId{
+          .spatial_idx = sidx, .temporal_idx = num_temporal_layers - 1});
+      DataRate total_bitrate = std::accumulate(
+          tl0_settings, tlx_settings, DataRate::Zero(),
+          [](DataRate acc,
+             const std::pair<const LayerId, LayerSettings> layer) {
+            return acc + layer.second.bitrate;
+          });
+      // Spatial streams/layers are ordered from low to high in
+      // simulcastStreams[] and from high to low in spatialLayers[].
+      SimulcastStream& ss =
+          is_svc_codec ? vc.spatialLayers[num_spatial_layers - sidx - 1]
+                       : vc.simulcastStream[sidx];
+      ss.width = tl0_settings->second.resolution.width;
+      ss.height = tl0_settings->second.resolution.height;
+      ss.numberOfTemporalLayers = num_temporal_layers;
+      ss.maxBitrate = total_bitrate.kbps();
+      ss.targetBitrate = total_bitrate.kbps();
+      ss.minBitrate = 0;
+      ss.maxFramerate = vc.maxFramerate;
+      ss.qpMax = vc.qpMax;
+      ss.min_qp = tl0_settings.min_qp;
+      ss.max_qp = tl0_settings.max_qp;
+      ss.active = true;
     }
 
     VideoEncoder::Settings ves(
@@ -1492,7 +1497,9 @@ EncodingSettings VideoCodecTester::CreateEncodingSettings(
     std::vector<DataRate> bitrate,
     Frequency framerate,
     bool screencast,
-    bool frame_drop) {
+    bool frame_drop,
+    absl::optional<int> min_qp,
+    absl::optional<int> max_qp) {
   VideoCodecMode content_type = screencast ? VideoCodecMode::kScreensharing
                                            : VideoCodecMode::kRealtimeVideo;
 
@@ -1515,7 +1522,9 @@ EncodingSettings VideoCodecTester::CreateEncodingSettings(
           LayerSettings{
               .resolution = {.width = layer_width, .height = layer_height},
               .framerate = framerate / (1 << (num_temporal_layers - tidx - 1)),
-              .bitrate = adjusted_bitrate[sidx * num_temporal_layers + tidx]});
+              .bitrate = adjusted_bitrate[sidx * num_temporal_layers + tidx],
+              .min_qp = min_qp,
+              .max_qp = max_qp});
     }
   }
 

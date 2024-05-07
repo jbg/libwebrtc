@@ -2562,4 +2562,33 @@ INSTANTIATE_TEST_SUITE_P(
             .expected_framedrop_mode = FULL_SUPERFRAME_DROP,
             .expected_max_consec_drop = 7}));
 
+TEST(Vp9ImplTest, CustomQpLimits) {
+  std::unique_ptr<VideoEncoder> encoder = CreateVp9Encoder(CreateEnvironment());
+  VideoCodec codec_settings = DefaultCodecSettings();
+  codec_settings.spatialLayers[0].min_qp = 1;
+  codec_settings.spatialLayers[0].max_qp = 2;
+  ASSERT_EQ(encoder->InitEncode(&codec_settings, kSettings),
+            WEBRTC_VIDEO_CODEC_OK);
+
+  std::vector<EncodedVideoFrameProducer::EncodedFrame> encoded_frames =
+      EncodedVideoFrameProducer(*encoder)
+          .SetNumInputFrames(1)
+          .SetResolution({kWidth, kHeight})
+          .Encode();
+  ASSERT_THAT(encoded_frames, SizeIs(1));
+  ASSERT_THAT(encoded_frames, SizeIs(1));
+  // QP range in libvpx encoder settings is [0, 63]. Reported range is [0, 255].
+  EXPECT_EQ(encoded_frames[0].encoded_image.qp_ * 64 / 256, 2);
+
+  codec_settings.spatialLayers[0].min_qp = 62;
+  codec_settings.spatialLayers[0].max_qp = 63;
+  ASSERT_EQ(encoder->InitEncode(&codec_settings, kSettings),
+            WEBRTC_VIDEO_CODEC_OK);
+  encoded_frames = EncodedVideoFrameProducer(*encoder)
+                       .SetNumInputFrames(1)
+                       .SetResolution({kWidth, kHeight})
+                       .Encode();
+  ASSERT_THAT(encoded_frames, SizeIs(1));
+  EXPECT_EQ(encoded_frames[0].encoded_image.qp_ * 64 / 256, 62);
+}
 }  // namespace webrtc
