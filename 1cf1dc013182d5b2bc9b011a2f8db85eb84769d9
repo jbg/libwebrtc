@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1170ba94_0c8abff1",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2022,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2024-05-07T11:07:02Z",
+      "side": 1,
+      "message": "How about the bits below about \"// The payload types should come from codecs, but the order should come\n// from current_content-\u003ecodecs() and then supported_codecs, to ensure that\n// re-offers don\u0027t change existing codec priority, and that new codecs are added\n// with the right priority.\"? I\u0027m not sure how that should map to the new way of setting codecs.",
+      "parentUuid": "5a1b1c2a_0cb8d6c0",
+      "revId": "1cf1dc013182d5b2bc9b011a2f8db85eb84769d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "69848ec2_bbe161b8",
         "filename": "pc/media_session.cc",
         "patchSetId": 3
@@ -100,6 +118,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ddffaae_c1ffda21",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2073,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2024-05-07T11:07:02Z",
+      "side": 1,
+      "message": "Ah, I was just looking at the previous MoveValue(). Nevermind.",
+      "parentUuid": "881d704d_25df4dd0",
+      "range": {
+        "startLine": 2073,
+        "startChar": 50,
+        "endLine": 2073,
+        "endChar": 67
+      },
+      "revId": "1cf1dc013182d5b2bc9b011a2f8db85eb84769d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9e5431f_0b66ad41",
@@ -131,6 +173,24 @@
       "side": 1,
       "message": "Me too (surprise). I am trying quite hard to not modify the existing code paths to avoid unintended side effects.",
       "parentUuid": "e9e5431f_0b66ad41",
+      "revId": "1cf1dc013182d5b2bc9b011a2f8db85eb84769d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a8c5942_668d4059",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2225,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2024-05-07T11:07:02Z",
+      "side": 1,
+      "message": "This logic looks pretty self contained, no? SetCodecsInAnswer is only called here.\nIs it the semantics of has_usable_media_codecs you\u0027re concerned about? Leaving that as-is when codecs_to_include is empty makes sense, but should be straightforward.\n\nAny other risky/hairy things I\u0027ve missed?",
+      "parentUuid": "117f2b0e_5c6b1735",
       "revId": "1cf1dc013182d5b2bc9b011a2f8db85eb84769d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -207,6 +267,30 @@
       "side": 1,
       "message": "As above.",
       "parentUuid": "65daef97_1d8be431",
+      "range": {
+        "startLine": 2245,
+        "startChar": 52,
+        "endLine": 2245,
+        "endChar": 69
+      },
+      "revId": "1cf1dc013182d5b2bc9b011a2f8db85eb84769d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2d78a07_77d8e1a4",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2245,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2024-05-07T11:07:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "139b17a2_ed88bd26",
       "range": {
         "startLine": 2245,
         "startChar": 52,
