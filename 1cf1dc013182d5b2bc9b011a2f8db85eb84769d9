@@ -89,6 +89,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08aae308_17b195c8",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2022,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2024-05-07T12:19:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "88cc6411_d9795bf4",
+      "revId": "1cf1dc013182d5b2bc9b011a2f8db85eb84769d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69848ec2_bbe161b8",
@@ -227,6 +245,24 @@
       "side": 1,
       "message": "Right, SetCodecsInAnswer has as its first step the call to NegotiateCodecs, so lifting that out should be straightforward.\n\nUnfortunately moving NegotiateCodecs before the check for usable codecs caused one of the tests to crash, so I think I\u0027ll leave out simplifying that part of the logic (for now).",
       "parentUuid": "1a8c5942_668d4059",
+      "revId": "1cf1dc013182d5b2bc9b011a2f8db85eb84769d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "972b7eef_29ccec7f",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2225,
+      "author": {
+        "id": 17470
+      },
+      "writtenOn": "2024-05-07T12:19:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fd25604e_7cd1814d",
       "revId": "1cf1dc013182d5b2bc9b011a2f8db85eb84769d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
