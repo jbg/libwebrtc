@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bde4e955_e9af0eb4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-05-07T09:59:45Z",
+      "side": 1,
+      "message": "This allows caller to override codec selection. Next step is to add correct decision on codec selection to higher levels; cleanup step is to remove the old codec selection entirely (or export via helper functions rather than calling when creating offers / answers).",
+      "revId": "1cf1dc013182d5b2bc9b011a2f8db85eb84769d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
