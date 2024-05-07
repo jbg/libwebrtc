@@ -84,7 +84,6 @@ class RTPSenderVideo : public RTPVideoFrameSenderInterface {
     bool enable_retransmit_all_layers = false;
     absl::optional<int> red_payload_type;
     const FieldTrialsView* field_trials = nullptr;
-    rtc::scoped_refptr<FrameTransformerInterface> frame_transformer;
     TaskQueueFactory* task_queue_factory = nullptr;
   };
 
@@ -97,6 +96,7 @@ class RTPSenderVideo : public RTPVideoFrameSenderInterface {
   // `encoder_output_size` is the size of the video frame as it came out of the
   // video encoder, excluding any additional overhead.
   // Calls to this method are assumed to be externally serialized.
+  // [[deprecated]]
   bool SendVideo(int payload_type,
                  absl::optional<VideoCodecType> codec_type,
                  uint32_t rtp_timestamp,
@@ -105,8 +105,9 @@ class RTPSenderVideo : public RTPVideoFrameSenderInterface {
                  size_t encoder_output_size,
                  RTPVideoHeader video_header,
                  TimeDelta expected_retransmission_time,
-                 std::vector<uint32_t> csrcs) override;
+                 std::vector<uint32_t> csrcs);
 
+  // [[deprecated]]
   bool SendEncodedImage(int payload_type,
                         absl::optional<VideoCodecType> codec_type,
                         uint32_t rtp_timestamp,
@@ -114,15 +115,14 @@ class RTPSenderVideo : public RTPVideoFrameSenderInterface {
                         RTPVideoHeader video_header,
                         TimeDelta expected_retransmission_time);
 
+  bool Send(RtpVideoFrame frame) override;
+
   // Configures video structures produced by encoder to send using the
   // dependency descriptor rtp header extension. Next call to SendVideo should
   // have video_header.frame_type == kVideoFrameKey.
   // All calls to SendVideo after this call must use video_header compatible
   // with the video_structure.
-  void SetVideoStructure(const FrameDependencyStructure* video_structure);
-  // Should only be used by a RTPSenderVideoFrameTransformerDelegate and exists
-  // to ensure correct syncronization.
-  void SetVideoStructureAfterTransformation(
+  void SetVideoStructure(
       const FrameDependencyStructure* video_structure) override;
 
   // Sets current active VideoLayersAllocation. The allocation will be sent
@@ -130,11 +130,7 @@ class RTPSenderVideo : public RTPVideoFrameSenderInterface {
   // sent in full on every key frame. The allocation will be sent once on a
   // none discardable delta frame per call to this method and will not contain
   // resolution and frame rate.
-  void SetVideoLayersAllocation(VideoLayersAllocation allocation);
-  // Should only be used by a RTPSenderVideoFrameTransformerDelegate and exists
-  // to ensure correct syncronization.
-  void SetVideoLayersAllocationAfterTransformation(
-      VideoLayersAllocation allocation) override;
+  void SetVideoLayersAllocation(VideoLayersAllocation allocation) override;
 
   // Returns the current post encode overhead rate, in bps. Note that this is
   // the payload overhead, eg the VP8 payload headers and any other added
@@ -249,9 +245,6 @@ class RTPSenderVideo : public RTPVideoFrameSenderInterface {
   // Tracks updates to the active decode targets and decides when active decode
   // targets bitmask should be attached to the dependency descriptor.
   ActiveDecodeTargetsHelper active_decode_targets_tracker_;
-
-  const rtc::scoped_refptr<RTPSenderVideoFrameTransformerDelegate>
-      frame_transformer_delegate_;
 
   // Whether to do two-pass packetization for AV1 which leads to a set of
   // packets with more even size distribution.

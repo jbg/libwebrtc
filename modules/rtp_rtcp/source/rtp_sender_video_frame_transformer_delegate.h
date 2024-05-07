@@ -30,20 +30,34 @@ namespace webrtc {
 // have been applied.
 class RTPVideoFrameSenderInterface {
  public:
-  virtual bool SendVideo(int payload_type,
-                         absl::optional<VideoCodecType> codec_type,
-                         uint32_t rtp_timestamp,
-                         Timestamp capture_time,
-                         rtc::ArrayView<const uint8_t> payload,
-                         size_t encoder_output_size,
-                         RTPVideoHeader video_header,
-                         TimeDelta expected_retransmission_time,
-                         std::vector<uint32_t> csrcs) = 0;
+  struct RtpVideoFrame {
+    void SetPayload(rtc::ArrayView<const uint8_t> payload) {
+      this->payload =
+          EncodedImageBuffer::Create(payload.data(), payload.size());
+    }
 
-  virtual void SetVideoStructureAfterTransformation(
+    int payload_type = 0;
+    absl::optional<VideoCodecType> codec_type;
+    uint32_t rtp_timestamp = 0;
+    Timestamp capture_time = Timestamp::MinusInfinity();
+    absl::optional<Timestamp> capture_time_identifier;
+    rtc::scoped_refptr<EncodedImageBufferInterface> payload;
+    size_t encoded_output_size = 0;
+    RTPVideoHeader video_header;
+    TimeDelta expected_retransmission_time = TimeDelta::Zero();
+    std::vector<uint32_t> csrcs;
+    // TODO(danilchap): Set and use this structure instead of the
+    // `SetVideoStructure` function. For now it is here to make struct
+    // `RtpVideoFrame` move-only.
+    std::unique_ptr<FrameDependencyStructure> video_structure;
+  };
+
+  virtual bool Send(RtpVideoFrame frame) = 0;
+
+  virtual void SetVideoLayersAllocation(VideoLayersAllocation allocation) = 0;
+
+  virtual void SetVideoStructure(
       const FrameDependencyStructure* video_structure) = 0;
-  virtual void SetVideoLayersAllocationAfterTransformation(
-      VideoLayersAllocation allocation) = 0;
 
  protected:
   virtual ~RTPVideoFrameSenderInterface() = default;
@@ -52,7 +66,9 @@ class RTPVideoFrameSenderInterface {
 // Delegates calls to FrameTransformerInterface to transform frames, and to
 // RTPSenderVideo to send the transformed frames. Ensures thread-safe access to
 // the sender.
-class RTPSenderVideoFrameTransformerDelegate : public TransformedFrameCallback {
+class RTPSenderVideoFrameTransformerDelegate
+    : public TransformedFrameCallback,
+      public RTPVideoFrameSenderInterface {
  public:
   RTPSenderVideoFrameTransformerDelegate(
       RTPVideoFrameSenderInterface* sender,
@@ -63,12 +79,7 @@ class RTPSenderVideoFrameTransformerDelegate : public TransformedFrameCallback {
   void Init();
 
   // Delegates the call to FrameTransformerInterface::TransformFrame.
-  bool TransformFrame(int payload_type,
-                      absl::optional<VideoCodecType> codec_type,
-                      uint32_t rtp_timestamp,
-                      const EncodedImage& encoded_image,
-                      RTPVideoHeader video_header,
-                      TimeDelta expected_retransmission_time);
+  bool Send(RTPVideoFrameSenderInterface::RtpVideoFrame video_frame) override;
 
   // Implements TransformedFrameCallback. Can be called on any thread. Posts
   // the transformed frame to be sent on the `encoder_queue_`.
@@ -83,13 +94,13 @@ class RTPSenderVideoFrameTransformerDelegate : public TransformedFrameCallback {
 
   // Delegates the call to RTPSendVideo::SetVideoStructureAfterTransformation
   // under `sender_lock_`.
-  void SetVideoStructureUnderLock(
-      const FrameDependencyStructure* video_structure);
+  void SetVideoStructure(
+      const FrameDependencyStructure* video_structure) override;
 
   // Delegates the call to
   // RTPSendVideo::SetVideoLayersAllocationAfterTransformation under
   // `sender_lock_`.
-  void SetVideoLayersAllocationUnderLock(VideoLayersAllocation allocation);
+  void SetVideoLayersAllocation(VideoLayersAllocation allocation) override;
 
   // Unregisters and releases the `frame_transformer_` reference, and resets
   // `sender_` under lock. Called from RTPSenderVideo destructor to prevent the

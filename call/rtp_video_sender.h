@@ -50,8 +50,11 @@ namespace webrtc_internal_rtp_video_sender {
 // RTP state for a single simulcast stream. Internal to the implementation of
 // RtpVideoSender.
 struct RtpStreamSender {
-  RtpStreamSender(std::unique_ptr<ModuleRtpRtcpImpl2> rtp_rtcp,
+  RtpStreamSender(uint32_t ssrc,
+                  TaskQueueFactory* factory,
+                  std::unique_ptr<ModuleRtpRtcpImpl2> rtp_rtcp,
                   std::unique_ptr<RTPSenderVideo> sender_video,
+                  rtc::scoped_refptr<FrameTransformerInterface> transformer,
                   std::unique_ptr<VideoFecGenerator> fec_generator);
   ~RtpStreamSender();
 
@@ -60,7 +63,9 @@ struct RtpStreamSender {
 
   // Note: Needs pointer stability.
   std::unique_ptr<ModuleRtpRtcpImpl2> rtp_rtcp;
-  std::unique_ptr<RTPSenderVideo> sender_video;
+  std::unique_ptr<RTPSenderVideo> rtp_sender_video;
+  rtc::scoped_refptr<RTPSenderVideoFrameTransformerDelegate> video_transformer;
+  absl::Nonnull<RTPVideoFrameSenderInterface*> sender;
   std::unique_ptr<VideoFecGenerator> fec_generator;
 };
 

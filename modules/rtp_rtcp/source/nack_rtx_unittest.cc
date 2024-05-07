@@ -203,14 +203,16 @@ class RtpRtcpRtxNackTest : public ::testing::Test {
     uint32_t timestamp = 3000;
     uint16_t nack_list[kVideoNackListSize];
     for (int frame = 0; frame < kNumFrames; ++frame) {
-      RTPVideoHeader video_header;
+      RTPVideoFrameSenderInterface::RtpVideoFrame video_frame;
+      video_frame.SetPayload(payload_data);
+      video_frame.capture_time = Timestamp::Millis(timestamp / 90);
+      video_frame.rtp_timestamp = timestamp;
+
       EXPECT_TRUE(rtp_rtcp_module_->OnSendingRtpFrame(timestamp, timestamp / 90,
                                                       kPayloadType, false));
-      video_header.frame_type = VideoFrameType::kVideoFrameDelta;
-      EXPECT_TRUE(rtp_sender_video_->SendVideo(
-          kPayloadType, VideoCodecType::kVideoCodecGeneric, timestamp,
-          /*capture_time=*/Timestamp::Millis(timestamp / 90), payload_data,
-          sizeof(payload_data), video_header, TimeDelta::Zero(), {}));
+      video_frame.video_header.frame_type = VideoFrameType::kVideoFrameDelta;
+      EXPECT_TRUE(rtp_sender_video_->Send(std::move(video_frame)));
+
       // Min required delay until retransmit = 5 + RTT ms (RTT = 0).
       fake_clock.AdvanceTimeMilliseconds(5);
       int length = BuildNackList(nack_list);
