@@ -834,6 +834,26 @@ TEST_F(TestVp8Impl, GetEncoderInfoFpsAllocationSimulcastVideo) {
               ::testing::ElementsAreArray(expected_fps_allocation));
 }
 
+TEST_F(TestVp8Impl, CustomQpLimits) {
+  codec_settings_.simulcastStream[0].min_qp = 1;
+  codec_settings_.simulcastStream[0].max_qp = 2;
+  ASSERT_EQ(encoder_->InitEncode(&codec_settings_, kSettings),
+            WEBRTC_VIDEO_CODEC_OK);
+  EncodedImage encoded_frame;
+  CodecSpecificInfo codec_specific_info;
+  EncodeAndWaitForFrame(NextInputFrame(), &encoded_frame, &codec_specific_info);
+  // QP range in libvpx encoder settings is [0, 63]. Reported range is [0, 127].
+  // Mapping is not linear (see kQTrans in libvpx).
+  EXPECT_EQ(encoded_frame.qp_, 2);
+
+  codec_settings_.simulcastStream[0].min_qp = 62;
+  codec_settings_.simulcastStream[0].max_qp = 63;
+  ASSERT_EQ(encoder_->InitEncode(&codec_settings_, kSettings),
+            WEBRTC_VIDEO_CODEC_OK);
+  EncodeAndWaitForFrame(NextInputFrame(), &encoded_frame, &codec_specific_info);
+  EXPECT_EQ(encoded_frame.qp_, 124);
+}
+
 class TestVp8ImplWithMaxFrameDropTrial
     : public TestVp8Impl,
       public ::testing::WithParamInterface<

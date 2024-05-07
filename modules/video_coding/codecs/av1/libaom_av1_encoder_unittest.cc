@@ -455,5 +455,39 @@ TEST(LibaomAv1EncoderTest, DisableAutomaticResize) {
             absl::nullopt);
 }
 
+TEST(LibaomAv1EncoderTest, CustomQpLimits) {
+  std::unique_ptr<VideoEncoder> encoder =
+      CreateLibaomAv1Encoder(CreateEnvironment());
+  VideoEncoder::RateControlParameters rate_parameters;
+  rate_parameters.framerate_fps = 30;
+  rate_parameters.bitrate.SetBitrate(/*spatial_index=*/0, /*temporal_index=*/0,
+                                     300'000);
+
+  VideoCodec codec_settings = DefaultCodecSettings();
+  codec_settings.spatialLayers[0].min_qp = 1;
+  codec_settings.spatialLayers[0].max_qp = 2;
+
+  ASSERT_EQ(encoder->InitEncode(&codec_settings, DefaultEncoderSettings()),
+            WEBRTC_VIDEO_CODEC_OK);
+  encoder->SetRates(rate_parameters);
+
+  std::vector<EncodedVideoFrameProducer::EncodedFrame> encoded_frames =
+      EncodedVideoFrameProducer(*encoder).SetNumInputFrames(1).Encode();
+  ASSERT_THAT(encoded_frames, SizeIs(1));
+  // QP range in libaom encoder settings is [0, 63]. Reported range is [0, 255].
+  // Mapping is not linear (see quantizer_to_qindex in libaom).
+  EXPECT_EQ(encoded_frames[0].encoded_image.qp_, 8);
+
+  codec_settings.spatialLayers[0].min_qp = 62;
+  codec_settings.spatialLayers[0].max_qp = 63;
+  ASSERT_EQ(encoder->InitEncode(&codec_settings, DefaultEncoderSettings()),
+            WEBRTC_VIDEO_CODEC_OK);
+  encoder->SetRates(rate_parameters);
+  encoded_frames =
+      EncodedVideoFrameProducer(*encoder).SetNumInputFrames(1).Encode();
+  ASSERT_THAT(encoded_frames, SizeIs(1));
+  EXPECT_EQ(encoded_frames[0].encoded_image.qp_, 249);
+}
+
 }  // namespace
 }  // namespace webrtc

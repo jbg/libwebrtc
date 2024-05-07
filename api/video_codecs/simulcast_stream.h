@@ -33,7 +33,10 @@ struct SimulcastStream {
   unsigned int maxBitrate = 0;     // kilobits/sec.
   unsigned int targetBitrate = 0;  // kilobits/sec.
   unsigned int minBitrate = 0;     // kilobits/sec.
+  // TODO(ssilkin): Remove after min/max_qp are fully deployed.
   unsigned int qpMax = 0;          // minimum quality
+  absl::optional<int> min_qp;
+  absl::optional<int> max_qp;
   bool active = false;             // encoded and sent.
 };
 
