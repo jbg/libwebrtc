@@ -1602,6 +1602,7 @@ if (is_ios || is_mac) {
         "../rtc_base:buffer",
         "../rtc_base:logging",
         "../rtc_base:ssl",
+        "../rtc_base:ssl_adapter",
         "../rtc_base:threading",
       ]
       if (is_ios) {
