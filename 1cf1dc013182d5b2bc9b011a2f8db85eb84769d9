@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a1b1c2a_0cb8d6c0",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2022,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-05-07T10:51:02Z",
+      "side": 1,
+      "message": "Took a stab at it.",
+      "parentUuid": "0368bc7e_e0a2129b",
+      "revId": "1cf1dc013182d5b2bc9b011a2f8db85eb84769d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "69848ec2_bbe161b8",
         "filename": "pc/media_session.cc",
         "patchSetId": 3
@@ -48,6 +66,30 @@
       "writtenOn": "2024-05-07T10:29:39Z",
       "side": 1,
       "message": "std::move(codecs_to_include)",
+      "range": {
+        "startLine": 2073,
+        "startChar": 50,
+        "endLine": 2073,
+        "endChar": 67
+      },
+      "revId": "1cf1dc013182d5b2bc9b011a2f8db85eb84769d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "881d704d_25df4dd0",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2073,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-05-07T10:51:02Z",
+      "side": 1,
+      "message": "It\u0027s a std::vector\u003cCodec\u003e\u0026 not a std::vector\u003cCodec\u003e. Is there any advantage to making it a pass-by-value and moving?",
+      "parentUuid": "69848ec2_bbe161b8",
       "range": {
         "startLine": 2073,
         "startChar": 50,
@@ -77,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "117f2b0e_5c6b1735",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2225,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-05-07T10:51:02Z",
+      "side": 1,
+      "message": "Me too (surprise). I am trying quite hard to not modify the existing code paths to avoid unintended side effects.",
+      "parentUuid": "e9e5431f_0b66ad41",
+      "revId": "1cf1dc013182d5b2bc9b011a2f8db85eb84769d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fee12c80_d5310d66",
         "filename": "pc/media_session.cc",
         "patchSetId": 3
@@ -88,6 +148,24 @@
       "writtenOn": "2024-05-07T10:29:39Z",
       "side": 1,
       "message": "Not really \"in common\" if they\u0027re being directly set rather than intersected with the remote ones here. |has_usable_media_codecs| or something?",
+      "revId": "1cf1dc013182d5b2bc9b011a2f8db85eb84769d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bc777d8_48a85fa3",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2231,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-05-07T10:51:02Z",
+      "side": 1,
+      "message": "Good point on naming. Done.",
+      "parentUuid": "fee12c80_d5310d66",
       "revId": "1cf1dc013182d5b2bc9b011a2f8db85eb84769d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -105,6 +183,30 @@
       "writtenOn": "2024-05-07T10:29:39Z",
       "side": 1,
       "message": "std::move(codecs_to_include)?",
+      "range": {
+        "startLine": 2245,
+        "startChar": 52,
+        "endLine": 2245,
+        "endChar": 69
+      },
+      "revId": "1cf1dc013182d5b2bc9b011a2f8db85eb84769d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "139b17a2_ed88bd26",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2245,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-05-07T10:51:02Z",
+      "side": 1,
+      "message": "As above.",
+      "parentUuid": "65daef97_1d8be431",
       "range": {
         "startLine": 2245,
         "startChar": 52,
