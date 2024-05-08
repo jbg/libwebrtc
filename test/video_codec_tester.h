@@ -58,6 +58,8 @@ class VideoCodecTester {
       Resolution resolution;
       Frequency framerate;
       DataRate bitrate;
+      absl::optional<int> min_qp;
+      absl::optional<int> max_qp;
     };
     std::map<LayerId, LayerSettings> layers_settings;
   };
@@ -193,14 +195,17 @@ class VideoCodecTester {
   // and per-temporal layer. If layer bitrates are not explicitly specified,
   // then the codec-specific rate allocators used to distribute the total
   // bitrate across spatial or/and temporal layers.
-  static EncodingSettings CreateEncodingSettings(std::string codec_type,
-                                                 std::string scalability_name,
-                                                 int width,
-                                                 int height,
-                                                 std::vector<DataRate> bitrate,
-                                                 Frequency framerate,
-                                                 bool screencast = false,
-                                                 bool frame_drop = true);
+  static EncodingSettings CreateEncodingSettings(
+      std::string codec_type,
+      std::string scalability_name,
+      int width,
+      int height,
+      std::vector<DataRate> bitrate,
+      Frequency framerate,
+      bool screencast = false,
+      bool frame_drop = true,
+      absl::optional<int> min_qp = absl::nullopt,
+      absl::optional<int> max_qp = absl::nullopt);
 
   // A helper function that creates a map of RTP timestamps to
   // `EncodingSettings` for the given number of frames.

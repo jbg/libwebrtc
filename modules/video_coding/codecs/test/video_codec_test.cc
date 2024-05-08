@@ -66,6 +66,8 @@ ABSL_FLAG(absl::optional<double>,
           "Encode target frame rate of the top temporal layer in fps.");
 ABSL_FLAG(bool, screencast, false, "Enable screen encoding mode.");
 ABSL_FLAG(bool, frame_drop, true, "Enable frame dropping.");
+ABSL_FLAG(absl::optional<int>, min_qp, absl::nullopt, "Min QP.");
+ABSL_FLAG(absl::optional<int>, max_qp, absl::nullopt, "Max QP.");
 ABSL_FLAG(int, num_frames, 300, "Number of frames to encode and/or decode.");
 ABSL_FLAG(std::string, field_trials, "", "Field trials to apply.");
 ABSL_FLAG(std::string, test_name, "", "Test name.");
@@ -571,7 +573,8 @@ TEST(VideoCodecTest, DISABLED_EncodeDecode) {
       Frequency::Hertz<double>(
           absl::GetFlag(FLAGS_framerate_fps)
               .value_or(absl::GetFlag(FLAGS_input_framerate_fps))),
-      absl::GetFlag(FLAGS_screencast), absl::GetFlag(FLAGS_frame_drop));
+      absl::GetFlag(FLAGS_screencast), absl::GetFlag(FLAGS_frame_drop),
+      absl::GetFlag(FLAGS_min_qp), absl::GetFlag(FLAGS_max_qp));
 
   std::map<uint32_t, EncodingSettings> frame_settings =
       VideoCodecTester::CreateFrameSettings(encoding_settings,
