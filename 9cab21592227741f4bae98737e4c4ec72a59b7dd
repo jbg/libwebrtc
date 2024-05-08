@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e46004b_5292b4ad",
+        "filename": "modules/video_coding/codecs/test/video_codec_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2024-05-08T11:05:31Z",
+      "side": 1,
+      "message": "Maybe add key_interval as an optional parameter to CreateFrameSettings and handle the configuration within this method?",
+      "range": {
+        "startLine": 585,
+        "startChar": 0,
+        "endLine": 589,
+        "endChar": 3
+      },
+      "revId": "9cab21592227741f4bae98737e4c4ec72a59b7dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
