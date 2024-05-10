@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d9771e7_6c5a6180",
+        "filename": "modules/video_coding/media_opt_util.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-10T14:41:03Z",
+      "side": 0,
+      "message": "This line is the main change (i.e., parse rate_control_settings_ from `field_trials` instead of ParseFromFieldTrials() that uses global string internally)",
+      "revId": "ac426265b65df19740f0cb1a017cca6cefa3fb41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
