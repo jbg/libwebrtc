@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '6893822af1e123511d7ac312272fd100da331264',
+  'chromium_revision': 'da711097e69e29ed3ac2eb0eacaabd7f018354d1',
 
   # Fetch the prebuilt binaries for llvm-cov and llvm-profdata. Needed to
   # process the raw profiles produced by instrumented targets (built with
@@ -55,7 +55,7 @@ vars = {
 deps = {
   # TODO(kjellander): Move this to be Android-only.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@eca74b9a11ca510f6431fccee6dcd57bec190ece',
+    'https://chromium.googlesource.com/chromium/src/base@61ee4ef40cad986e396719d6aec376991ee5b481',
   'src/build':
     'https://chromium.googlesource.com/chromium/src/build@01e3c73f58ca209014103abf934cc33be5f863d6',
   'src/buildtools':
@@ -70,9 +70,9 @@ deps = {
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@efc3bab65d1fd0df766df9e1efef4532c6cbec1d',
+    'https://chromium.googlesource.com/chromium/src/testing@63194413ab7abb36adb3bbf98fd6c046a535d3f5',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@6bf0c6a91efe8c226517c7fbc3609a29dc94818a',
+    'https://chromium.googlesource.com/chromium/src/third_party@220c66207ac7eeac95f9d06672c610cc0f6dabae',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -225,7 +225,7 @@ deps = {
   'src/third_party/ffmpeg':
     'https://chromium.googlesource.com/chromium/third_party/ffmpeg.git@092f84b6141055bfab609b6b2666b724eee2e130',
   'src/third_party/flatbuffers/src':
-    'https://chromium.googlesource.com/external/github.com/google/flatbuffers.git@bcb9ef187628fe07514e57756d05e6a6296f7dc5',
+    'https://chromium.googlesource.com/external/github.com/google/flatbuffers.git@c696275eaffec33796b5ca8755614fd9fec0a6a7',
   'src/third_party/grpc/src': {
     'url': 'https://chromium.googlesource.com/external/github.com/grpc/grpc.git@822dab21d9995c5cf942476b35ca12a1aa9d2737',
   },
@@ -380,7 +380,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@1e12d458b712fd3db8753af6d5a79b822da4886d',
+    'https://chromium.googlesource.com/chromium/src/tools@b1e6a423acb4c8a3ebea2f43fbc11c8a98a3eecf',
 
   'src/third_party/espresso': {
       'packages': [
