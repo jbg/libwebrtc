@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8752aa3e_6cc6c342",
+        "filename": "api/audio/audio_view.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-05-13T07:51:10Z",
+      "side": 1,
+      "message": "OK, going through the code I got the impression that more recent code was using `size_t` for values that should never be negative - is that not the case perhaps?\n\nAlso, I was thinking that making that distinction between a specific value (e.g. sample or channel count vs an error value) also reduces cases where we use a return value to be two things. There are several cases of \"int GetMyValue()\" where the caller is forced to also check for negative values (which are illegal). If we stick to `int`, it seems to me that we leave more room for ambiguity. Wdyt?",
+      "parentUuid": "7687feb0_c80f4a17",
+      "range": {
+        "startLine": 114,
+        "startChar": 2,
+        "endLine": 116,
+        "endChar": 18
+      },
+      "revId": "b7038172fe07271dea887735ee57718a1ebb7dfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce381cde_38bfb1f1",
         "filename": "api/audio/audio_view.h",
         "patchSetId": 18
@@ -54,6 +78,30 @@
       "writtenOn": "2024-05-06T17:39:37Z",
       "side": 1,
       "message": "Do we have any examples in the code where stride would not match the number of channels?",
+      "range": {
+        "startLine": 131,
+        "startChar": 5,
+        "endLine": 132,
+        "endChar": 69
+      },
+      "revId": "b7038172fe07271dea887735ee57718a1ebb7dfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e10b6c7d_894f86f7",
+        "filename": "api/audio/audio_view.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-05-13T07:51:10Z",
+      "side": 1,
+      "message": "I\u0027m not sure. There is some code that manages these buffers as a `std::vector\u003c\u003e` of pointers to discrete buffer allocations per channel. What I was thinking here was to have the concept of a stride which could allow channels to be shrunk without the channel pointers having to change, but perhaps that\u0027s not a practical use case. \n\nActually, storing pointers to such channels rather than indices should probably be an anti pattern.\n\nShould I remove the stride related member and method?",
+      "parentUuid": "ce381cde_38bfb1f1",
       "range": {
         "startLine": 131,
         "startChar": 5,
@@ -100,6 +148,30 @@
       "writtenOn": "2024-05-06T17:39:37Z",
       "side": 1,
       "message": "I\u0027m not convinced the naming is optimal here.\nThe name \"CopyView\" to me indicates that the view is copied, but this instead copies the underlying data.\n\nWould it be possible to name this differently to avoid that ambiguity?",
+      "range": {
+        "startLine": 245,
+        "startChar": 5,
+        "endLine": 245,
+        "endChar": 13
+      },
+      "revId": "b7038172fe07271dea887735ee57718a1ebb7dfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78b324d9_3d3403c1",
+        "filename": "api/audio/audio_view.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-05-13T07:51:10Z",
+      "side": 1,
+      "message": "Would `CopySamples()` be better?",
+      "parentUuid": "8076db36_149f5cb8",
       "range": {
         "startLine": 245,
         "startChar": 5,
