@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '7b0dbaf21a89b74417a092bd5f4cba1db233becd',
+  'chromium_revision': 'b03ea7be32d3f7505a068724d1188765b537ea80',
 
   # Fetch the prebuilt binaries for llvm-cov and llvm-profdata. Needed to
   # process the raw profiles produced by instrumented targets (built with
@@ -45,7 +45,7 @@ vars = {
   # RBE instance to use for running remote builds
   'rbe_instance': 'projects/rbe-webrtc-developer/instances/default_instance',
   # reclient CIPD package version
-  'reclient_version': 're_client_version:0.141.1.29a9d3c-gomaip',
+  'reclient_version': 're_client_version:0.143.0.518e369-gomaip',
 
   # ninja CIPD package version
   # https://chrome-infra-packages.appspot.com/p/infra/3pp/tools/ninja
@@ -55,9 +55,9 @@ vars = {
 deps = {
   # TODO(kjellander): Move this to be Android-only.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@2c77edb79f7d549263f173a2696e98af49cde9b1',
+    'https://chromium.googlesource.com/chromium/src/base@ee13646635eedd3ef8acd0098a66998f4403ea1b',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@e6bad9d579ad23c516bb49a145dedae944a7e639',
+    'https://chromium.googlesource.com/chromium/src/build@b3cecaf5d149044ff759cfa60abe197248915ad6',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@6206ead2d5fbf66d174c5ee7edd05dbefcc849a0',
   # Gradle 6.6.1. Used for testing Android Studio project generation for WebRTC.
@@ -66,7 +66,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@c7e4c69b99650c20560fe531dafad70b5b0218c0',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@a8b6d141a3204c063fa7cbdbc6887544dab41877',
     'condition': 'checkout_ios',
   },
   'src/testing':
@@ -221,7 +221,7 @@ deps = {
   'src/third_party/crc32c/src':
     'https://chromium.googlesource.com/external/github.com/google/crc32c.git@fa5ade41ee480003d9c5af6f43567ba22e4e17e6',
   'src/third_party/depot_tools':
-    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@84798693112c7e241d8c560ea6090e5d91a12fa2',
+    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@52ed6cd7eb4c2538c582a67ee3c1a84eb6cfcad3',
   'src/third_party/ffmpeg':
     'https://chromium.googlesource.com/chromium/third_party/ffmpeg.git@092f84b6141055bfab609b6b2666b724eee2e130',
   'src/third_party/flatbuffers/src':
@@ -237,7 +237,7 @@ deps = {
   'src/third_party/freetype/src':
     'https://chromium.googlesource.com/chromium/src/third_party/freetype2.git@68399b4244d85a1acc18ce669176b531b2eb7e32',
   'src/third_party/harfbuzz-ng/src':
-    'https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz.git@bba0c0e27cf22244d6ffcd9dffc8e9ad1f4c1bc6',
+    'https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz.git@1da053e87f0487382404656edca98b85fe51f2fd',
   'src/third_party/google_benchmark/src': {
     'url': 'https://chromium.googlesource.com/external/github.com/google/benchmark.git@344117638c8ff7e239044fd0fa7085839fc03021',
   },
@@ -321,7 +321,7 @@ deps = {
       'condition': 'checkout_android',
   },
   'src/third_party/perfetto':
-    'https://android.googlesource.com/platform/external/perfetto.git@15decdc02fc0dfa89e8c07e070f961e6c643e350',
+    'https://android.googlesource.com/platform/external/perfetto.git@2b4e9309d3a6a59d918416e5554449144acc10d5',
   'src/third_party/protobuf-javascript/src':
     Var('chromium_git') + '/external/github.com/protocolbuffers/protobuf-javascript' + '@' + 'e34549db516f8712f678fcd4bc411613b5cc5295',
   'src/third_party/libvpx/source/libvpx':
@@ -380,7 +380,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@0a0483184da3c78dedc0c689c44db698261d892e',
+    'https://chromium.googlesource.com/chromium/src/tools@17a200e0bf15ac540354bb54fdb3671b57e8ac23',
 
   'src/third_party/espresso': {
       'packages': [
@@ -419,7 +419,7 @@ deps = {
     'packages': [
       {
           'package': 'chromium/third_party/androidx',
-          'version': 'f1Bj3ULRcpJf4oqa2lCfAQvtCeeyVsDq876w4esaoT8C',
+          'version': 'boqwrBEk7n2uyvEyOQybF6HuJ7oPTDgV6joQofLkDfgC',
       },
     ],
     'condition': 'checkout_android',
