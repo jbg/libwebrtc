@@ -825,7 +825,8 @@ LibaomAv1EncoderFactory::GetEncoderCapabilities() const {
            .supported_frame_types = {FrameType::kKeyframe,
                                      FrameType::kStartFrame,
                                      FrameType::kDeltaFrame}},
-      .input_constraints = {
+      .input_constraints =
+          {
               .min = {.width = 64, .height = 36},
               .max = {.width = 3840, .height = 2160},
               .pixel_alignment = 1,
@@ -838,7 +839,8 @@ LibaomAv1EncoderFactory::GetEncoderCapabilities() const {
           {.qp_range = {0, kMaxQp},
            .rc_modes = {VideoEncoderFactoryInterface::RateControlMode::kCbr,
                         VideoEncoderFactoryInterface::RateControlMode::kCqp}},
-      .performance = {.min_max_effort_level = {kMinEffortLevel,
+      .performance = {.encode_on_calling_thread = true,
+                      .min_max_effort_level = {kMinEffortLevel,
                                                kMaxEffortLevel}},
   };
 }
