@@ -22,7 +22,6 @@
 
 #include "rtc_base/checks.h"
 #include "rtc_base/experiments/rate_control_settings.h"
-#include "system_wrappers/include/field_trial.h"
 
 namespace webrtc {
 namespace {
@@ -62,6 +61,14 @@ SimulcastRateAllocator::SimulcastRateAllocator(const VideoCodec& codec)
     : codec_(codec),
       stable_rate_settings_(StableTargetRateExperiment::ParseFromFieldTrials()),
       rate_control_settings_(RateControlSettings::ParseFromFieldTrials()),
+      legacy_conference_mode_(false) {}
+
+SimulcastRateAllocator::SimulcastRateAllocator(
+    const FieldTrialsView& field_trials,
+    const VideoCodec& codec)
+    : codec_(codec),
+      stable_rate_settings_(StableTargetRateExperiment::ParseFromFieldTrials()),
+      rate_control_settings_(field_trials),
       legacy_conference_mode_(false) {}
 
 SimulcastRateAllocator::~SimulcastRateAllocator() = default;

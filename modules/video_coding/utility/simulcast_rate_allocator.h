@@ -16,6 +16,7 @@
 
 #include <vector>
 
+#include "api/field_trials_view.h"
 #include "api/video/video_bitrate_allocation.h"
 #include "api/video/video_bitrate_allocator.h"
 #include "api/video_codecs/video_codec.h"
@@ -26,7 +27,11 @@ namespace webrtc {
 
 class SimulcastRateAllocator : public VideoBitrateAllocator {
  public:
+  // TODO: bugs.webrtc.org/42220378 - Provide field trials explicitly to create
+  // the SimulcastRateAllocator, then delete the one-parameter constructor.
   explicit SimulcastRateAllocator(const VideoCodec& codec);
+  SimulcastRateAllocator(const FieldTrialsView& field_trials,
+                         const VideoCodec& codec);
   ~SimulcastRateAllocator() override;
 
   SimulcastRateAllocator(const SimulcastRateAllocator&) = delete;
