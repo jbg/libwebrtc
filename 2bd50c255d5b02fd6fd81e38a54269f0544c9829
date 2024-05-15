@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8402ee7a_0a0c3b16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2024-05-15T12:37:38Z",
+      "side": 1,
+      "message": "Hello Kári,\n\nCould you please take a look at this CL and consider/decide if it possible to accept such change exposing additional API from ObjC SDK?\n\nThanks a lot in advance,\nYury.",
+      "revId": "2bd50c255d5b02fd6fd81e38a54269f0544c9829",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
