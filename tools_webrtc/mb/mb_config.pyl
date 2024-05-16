@@ -529,7 +529,7 @@
       'mixins': ['release', 'reclient', 'dcheck_off'],
     },
     'reclient': {
-      'gn_args': 'use_remoteexec=true',
+      'gn_args': 'use_remoteexec=false',
     },
     'release': {
       'gn_args': 'is_debug=false',
