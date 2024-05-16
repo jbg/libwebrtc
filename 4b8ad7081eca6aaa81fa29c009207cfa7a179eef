@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abcd5a79_e65f56f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2024-05-16T08:02:59Z",
+      "side": 1,
+      "message": "Hi Yury, thanks for this! \n\nI left some small nits on the code, but as to whether this is something we want to add to the interface, I\u0027ll leave that up to @hta@webrtc.org",
+      "revId": "4b8ad7081eca6aaa81fa29c009207cfa7a179eef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9361307f_0282a345",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpReceiver.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2024-05-16T08:02:59Z",
+      "side": 1,
+      "message": "nit: prefer to spell out the type here. Also should these be const?",
+      "range": {
+        "startLine": 72,
+        "startChar": 2,
+        "endLine": 72,
+        "endChar": 6
+      },
+      "revId": "4b8ad7081eca6aaa81fa29c009207cfa7a179eef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "097dff57_78707943",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpSource+Private.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2024-05-16T08:02:59Z",
+      "side": 1,
+      "message": "const reference?",
+      "range": {
+        "startLine": 22,
+        "startChar": 7,
+        "endLine": 22,
+        "endChar": 24
+      },
+      "revId": "4b8ad7081eca6aaa81fa29c009207cfa7a179eef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef7b2c34_f13d809c",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpSource.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2024-05-16T08:02:59Z",
+      "side": 1,
+      "message": "can we make this non-optional?",
+      "range": {
+        "startLine": 23,
+        "startChar": 2,
+        "endLine": 23,
+        "endChar": 15
+      },
+      "revId": "4b8ad7081eca6aaa81fa29c009207cfa7a179eef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "befb5446_2b4bf71f",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpSource.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2024-05-16T08:02:59Z",
+      "side": 1,
+      "message": "const reference?",
+      "range": {
+        "startLine": 67,
+        "startChar": 41,
+        "endLine": 67,
+        "endChar": 58
+      },
+      "revId": "4b8ad7081eca6aaa81fa29c009207cfa7a179eef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
