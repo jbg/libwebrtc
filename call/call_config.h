@@ -41,7 +41,6 @@ struct CallConfig {
   Environment env;
 
   // Bitrate config used until valid bitrate estimates are calculated. Also
-  // used to cap total bitrate used. This comes from the remote connection.
   BitrateConstraints bitrate_config;
 
   // AudioState which is possibly shared between multiple calls.

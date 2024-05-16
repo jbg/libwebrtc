@@ -52,7 +52,7 @@ error() {
   exit 1
 }
 
-WORKDIR=out/Default
+WORKDIR=out/linux_rel
 
 usage() {
   echo "Usage: $0 [ -c compile-commands-file.json ] [-r] file.cc"
