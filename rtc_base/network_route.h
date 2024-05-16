@@ -13,6 +13,7 @@
 
 #include <stdint.h>
 
+#include <cstdint>
 #include <string>
 
 #include "rtc_base/network_constants.h"
@@ -44,6 +45,11 @@ class RouteEndpoint {
   static RouteEndpoint CreateWithNetworkId(uint16_t network_id) {
     return RouteEndpoint(ADAPTER_TYPE_UNKNOWN,
                          /* adapter_id = */ 0, network_id,
+                         /* uses_turn = */ false);
+  }
+  static RouteEndpoint CreateWithNetworkIdAndAdapterId(uint16_t network_id,
+                                                       uint16_t adapter_id) {
+    return RouteEndpoint(ADAPTER_TYPE_UNKNOWN, adapter_id, network_id,
                          /* uses_turn = */ false);
   }
   RouteEndpoint CreateWithTurn(bool uses_turn) const {

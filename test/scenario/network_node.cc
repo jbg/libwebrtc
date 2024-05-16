@@ -14,6 +14,7 @@
 #include <vector>
 
 #include "absl/cleanup/cleanup.h"
+#include "api/sequence_checker.h"
 #include "rtc_base/net_helper.h"
 #include "rtc_base/numerics/safe_minmax.h"
 
@@ -68,7 +69,9 @@ ColumnPrinter SimulationNode::ConfigPrinter() const {
 
 NetworkNodeTransport::NetworkNodeTransport(Clock* sender_clock,
                                            Call* sender_call)
-    : sender_clock_(sender_clock), sender_call_(sender_call) {}
+    : sender_clock_(sender_clock), sender_call_(sender_call) {
+  sequence_checker_.Detach();
+}
 
 NetworkNodeTransport::~NetworkNodeTransport() = default;
 
@@ -103,16 +106,26 @@ bool NetworkNodeTransport::SendRtcp(rtc::ArrayView<const uint8_t> packet) {
   return true;
 }
 
+void NetworkNodeTransport::UpdateAdapterId(int adapter_id) {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
+  adapter_id_ = adapter_id;
+}
+
 void NetworkNodeTransport::Connect(EmulatedEndpoint* endpoint,
                                    const rtc::SocketAddress& receiver_address,
                                    DataSize packet_overhead) {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
   rtc::NetworkRoute route;
   route.connected = true;
   // We assume that the address will be unique in the lower bytes.
-  route.local = rtc::RouteEndpoint::CreateWithNetworkId(static_cast<uint16_t>(
-      receiver_address.ipaddr().v4AddressAsHostOrderInteger()));
-  route.remote = rtc::RouteEndpoint::CreateWithNetworkId(static_cast<uint16_t>(
-      receiver_address.ipaddr().v4AddressAsHostOrderInteger()));
+  route.local = rtc::RouteEndpoint::CreateWithNetworkIdAndAdapterId(
+      static_cast<uint16_t>(
+          receiver_address.ipaddr().v4AddressAsHostOrderInteger()),
+      adapter_id_);
+  route.remote = rtc::RouteEndpoint::CreateWithNetworkIdAndAdapterId(
+      static_cast<uint16_t>(
+          receiver_address.ipaddr().v4AddressAsHostOrderInteger()),
+      adapter_id_);
   route.packet_overhead = packet_overhead.bytes() +
                           receiver_address.ipaddr().overhead() +
                           cricket::kUdpHeaderSize;
