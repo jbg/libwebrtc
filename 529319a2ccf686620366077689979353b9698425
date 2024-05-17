@@ -88,6 +88,24 @@
       "parentUuid": "d38bd4dd_a11071b0",
       "revId": "529319a2ccf686620366077689979353b9698425",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f78d12c0_1e21b43a",
+        "filename": "api/video_codecs/video_encoder_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-17T12:39:22Z",
+      "side": 1,
+      "message": "I like to structure code so that when you want a default behavior, you need to write nothing.\nThat makes it easier to change the default later, or remove/rename the member/function.\n\ni.e.,\neither\n```\nstruct FrameEncodeSettings {\n  absl::Nullable\u003cstd::unique_ptr\u003cBufferProviderInterface\u003e\u003e output_buffer_provider;\n};\n```\nor\n```\nstruct FrameEncodeSettings {\n  absl::Nonnull\u003cstd::unique_ptr\u003cBufferProviderInterface\u003e\u003e output_buffer_provider \u003d CreateDefaultBufferProvider();\n};\n```",
+      "parentUuid": "4e3ea416_0fe137da",
+      "revId": "529319a2ccf686620366077689979353b9698425",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
