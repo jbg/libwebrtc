@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9aa6b6a7_2606a871",
+        "filename": "api/video_codecs/video_encoder_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-17T10:42:53Z",
+      "side": 1,
+      "message": "another idea - take the buffer as input, but also return the same buffer as output:\n```\nclass BufferProviderInterface {\n public:\n  virtual rtc::ArrayView\u003cuint8_t\u003e GiveMeTheBufferToWriteTo(size_t size) \u003d 0;\n  // or maybe, though unlikely.\n  rtc::ArrayView\u003cuint8_t\u003e AppendBuffer(size_t size);\n  \n  virtual rtc::ArrayView\u003cconst uint8_t\u003e GiveMeTheTheSameBufferAsAResult() const \u003d 0;\n};\n\nstruct FrameEncodeSettings {\n  ...\n  // Can be null\n  std::unique_ptr\u003cBufferProviderInterface\u003e output_buffer_provider;\n  ...\n};\n\nstruct FrameEncodedData {\n  // Guaranteed to be the same as in the FrameEncodeSettings if was not null there,\n  // Some own implementation if was null there.\n  std::unique\u003cconst BufferProviderInterface\u003e output_buffer;\n}\n\n\nclass InternalBufferProvider : public BufferProviderInterface  {\n public:\n  rtc::ArrayView\u003cuint8_t\u003e GiveMeTheBufferToWriteTo(size_t size) override {\n    buffer_.emplace(size);\n    return *buffer_;\n  }\n  \n  rtc::ArrayView\u003cconst uint8_t\u003e GiveMeTheTheSameBufferAsAResult() const override {\n    return *buffer_;\n  }\n \n private:\n  absl::optional\u003cabsl::FixedArray\u003cuint8_t\u003e\u003e buffer_;\n}\n```",
+      "revId": "529319a2ccf686620366077689979353b9698425",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
