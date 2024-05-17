@@ -16,7 +16,7 @@
 #include <utility>
 
 #include "absl/strings/string_view.h"
-#include "api/audio_codecs/builtin_audio_decoder_factory.h"
+#include "api/adaptation/resource.h"
 #include "api/environment/environment.h"
 #include "api/environment/environment_factory.h"
 #include "api/media_types.h"
@@ -37,6 +37,7 @@
 #include "test/mock_audio_decoder_factory.h"
 #include "test/mock_transport.h"
 #include "test/run_loop.h"
+#include "unknown/video/config/video_encoder_config.h"
 
 namespace webrtc {
 namespace {
