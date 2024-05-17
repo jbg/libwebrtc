@@ -106,6 +106,24 @@
       "parentUuid": "4e3ea416_0fe137da",
       "revId": "529319a2ccf686620366077689979353b9698425",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f815a39_44c5da2a",
+        "filename": "api/video_codecs/video_encoder_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2024-05-17T12:44:25Z",
+      "side": 1,
+      "message": "I think this is the best of both worlds:\n\n    class VideoEncoderInterface {\n      ...\n      struct OutputFunctions {\n        virtual rtc::ArrayView\u003cuint8_t\u003e GetOutputBuffer() \u003d 0\n        virtual void EncodeDone(const EncodeResult\u0026 encode_result) \u003d 0;\n      };\n      ...\n      struct FrameEncodeSettings {\n        ...\n        OutputFunctions output_functions;\n      };\n    };\n\nNow it\u0027s trivial to add a `std::vector\u003cuint8_t\u003e` member to the `OutputFunctionsImpl`, and it is accessible to `EncodDone` when it is called.",
+      "parentUuid": "4e3ea416_0fe137da",
+      "revId": "529319a2ccf686620366077689979353b9698425",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
