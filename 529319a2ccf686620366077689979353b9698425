@@ -124,6 +124,24 @@
       "parentUuid": "4e3ea416_0fe137da",
       "revId": "529319a2ccf686620366077689979353b9698425",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e36a973b_ce53c1f5",
+        "filename": "api/video_codecs/video_encoder_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-17T12:52:13Z",
+      "side": 1,
+      "message": "+1\n\nMerging multiple functions into same interface looks like the right approach (AnyInvocable/std::function is a sort of a shortcut for an interface with a single function, but if you have several - proper interface looks cleaner).",
+      "parentUuid": "1f815a39_44c5da2a",
+      "revId": "529319a2ccf686620366077689979353b9698425",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
