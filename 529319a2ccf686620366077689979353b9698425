@@ -52,6 +52,24 @@
       "parentUuid": "6fae4404_ba405a89",
       "revId": "529319a2ccf686620366077689979353b9698425",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d38bd4dd_a11071b0",
+        "filename": "api/video_codecs/video_encoder_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-17T12:10:25Z",
+      "side": 1,
+      "message": "this makes it explicit buffer ownership transfer:\n\nCaller of the api may own the buffer and pass it to the encoder with ownership in `FrameEncodeSettings`.\nEncoder fills the buffer, and pass it back the caller via FrameEncodedData\n\nabsl::AnyInvocable solution makes it harder to manage ownership of the buffer, in particular it is harder to capture when buffer is free for reuse or to deallocate\nWith proposed solution destructor of the interface signals when buffer is free to reuse or to deallocate as no longer needed.\n\nWhen Caller doesn\u0027t want to manage ownership, it doesn\u0027t provide buffer, then Encoder creates own buffer using InternalBufferProvider implementation (similar to like it was done previosly with `rtc::scoped_refptr\u003cEncodedImageBufferInterface\u003e bitstream_data` solution). But that latter behavior is less important, you might as well make it a requirement to always provide `output_buffer_provider`:\n```\nstruct FrameEncodeSettings {\n  ...\n  absl::Nonnull\u003cstd::unique_ptr\u003cBufferProviderInterface\u003e\u003e output_buffer_provider;\n  ...\n};\n```",
+      "parentUuid": "e8a6894a_7a0e9e16",
+      "revId": "529319a2ccf686620366077689979353b9698425",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
