@@ -70,6 +70,24 @@
       "parentUuid": "e8a6894a_7a0e9e16",
       "revId": "529319a2ccf686620366077689979353b9698425",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e3ea416_0fe137da",
+        "filename": "api/video_codecs/video_encoder_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2024-05-17T12:29:48Z",
+      "side": 1,
+      "message": "Ack, thanks for the explanation!\n\nYeah that does make some sense. We\u0027re now implicitly requiring the callback to actually take ownership of that memory. If caller and callback are not directly the same component that could be fragile.\n\nI\u0027d prefer the nonnullable way in that case. It does require the caller to set up more things in order to do the call, but in practice that would really only be a bother for tests, and I\u0027m fine with a little extra overhead there.\n\nI\u0027ll leave it up to philip how to actually move forward though.",
+      "parentUuid": "d38bd4dd_a11071b0",
+      "revId": "529319a2ccf686620366077689979353b9698425",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
