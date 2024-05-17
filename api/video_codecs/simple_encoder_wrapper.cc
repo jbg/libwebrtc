@@ -184,8 +184,17 @@ void SimpleEncoderWrapper::Encode(
       dependency_structure = svc_controller_->DependencyStructure();
     }
 
+    rtc::scoped_refptr<EncodedImageBuffer> bitstream_buffer =
+        EncodedImageBuffer::Create();
+
+    settings.output_buffer_provider = [buf = bitstream_buffer](int min_size) {
+      buf->Realloc(min_size);
+      return rtc::ArrayView<uint8_t>(*buf);
+    };
+
     settings.result_callback =
-        [cb = callback, ds = std::move(dependency_structure),
+        [buf = std::move(bitstream_buffer), cb = callback,
+         ds = std::move(dependency_structure),
          info = std::move(frame_infos[settings.spatial_id])](
             const VideoEncoderInterface::EncodeResult& result) mutable {
           auto* data =
@@ -199,7 +208,7 @@ void SimpleEncoderWrapper::Encode(
           }
 
           res.frame_type = data->frame_type;
-          res.bitstream_data = std::move(data->bitstream_data);
+          res.bitstream_data = std::move(buf);
           res.generic_frame_info = info;
           if (res.frame_type == FrameType::kKeyframe) {
             res.dependency_structure = ds;

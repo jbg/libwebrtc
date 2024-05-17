@@ -769,6 +769,7 @@ void LibaomAv1Encoder::Encode(
 
     EncodedData result;
     aom_codec_iter_t iter = nullptr;
+    rtc::ArrayView<uint8_t> output_buffer;
     while (const aom_codec_cx_pkt_t* pkt =
                aom_codec_get_cx_data(&ctx_, &iter)) {
       if (pkt->kind == AOM_CODEC_CX_FRAME_PKT && pkt->data.frame.sz > 0) {
@@ -777,13 +778,18 @@ void LibaomAv1Encoder::Encode(
         result.frame_type = pkt->data.frame.flags & AOM_EFLAG_FORCE_KF
                                 ? FrameType::kKeyframe
                                 : FrameType::kDeltaFrame;
-        result.bitstream_data = EncodedImageBuffer::Create(
-            static_cast<uint8_t*>(pkt->data.frame.buf), pkt->data.frame.sz);
+        output_buffer =
+            std::move(settings.output_buffer_provider)(pkt->data.frame.sz);
+        if (output_buffer.size() < pkt->data.frame.sz) {
+          DoErrorCallback(frame_settings);
+          return;
+        }
+        memcpy(output_buffer.data(), pkt->data.frame.buf, pkt->data.frame.sz);
         break;
       }
     }
 
-    if (result.bitstream_data == nullptr) {
+    if (output_buffer.empty()) {
       DoErrorCallback(frame_settings);
       return;
     } else {

@@ -45,13 +45,14 @@ class VideoEncoderInterface {
   // Results from calling Encode. Called once for each configured frame.
   struct EncodingError {};
   struct EncodedData {
-    rtc::scoped_refptr<EncodedImageBufferInterface> bitstream_data;
     FrameType frame_type;
     int encoded_qp;
   };
   using EncodeResult = absl::variant<EncodingError, EncodedData>;
   using EncodeResultCallback =
       absl::AnyInvocable<void(const EncodeResult& result) &&>;
+  using BitstreamOutputBufferProvider =
+      absl::AnyInvocable<rtc::ArrayView<uint8_t>(int min_size) &&>;
 
   struct FrameEncodeSettings {
     struct Cbr {
@@ -73,6 +74,7 @@ class VideoEncoderInterface {
     absl::optional<int> update_buffer;
     int effort_level = 0;
 
+    BitstreamOutputBufferProvider output_buffer_provider;
     EncodeResultCallback result_callback;
   };
 
