@@ -183,6 +183,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f08256d8_d64f7f43",
+        "filename": "api/video_codecs/video_encoder_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-20T14:26:45Z",
+      "side": 1,
+      "message": "BitstreamOutputBuffer is part of the EncodeResult, so it doesn\u0027t look that weird to me.",
+      "parentUuid": "ab8a3263_9b82ab36",
+      "range": {
+        "startLine": 48,
+        "startChar": 9,
+        "endLine": 48,
+        "endChar": 24
+      },
+      "revId": "477b4afe3d2aaa2cd0c8ab51d4df768df84d50ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "877d0c91_c2cb3981",
         "filename": "api/video_codecs/video_encoder_interface.h",
         "patchSetId": 5
@@ -294,6 +318,30 @@
         "startChar": 17,
         "endLine": 51,
         "endChar": 25
+      },
+      "revId": "477b4afe3d2aaa2cd0c8ab51d4df768df84d50ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c06c1cc2_9a9e4d0b",
+        "filename": "api/video_codecs/video_encoder_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-20T14:26:45Z",
+      "side": 1,
+      "message": "ofc not compile time overhead, I meant readability overhead.\nI find DataSize helpful when you need to compute DataRate - then it automatically converts Bytes into BitsPerSecond.\n\nBut otherwise I find more appropriate to \"Be consistent with the broader C++ community\" (https://google.github.io/styleguide/cppguide.html#Goals)\nand use `size_t` type.",
+      "parentUuid": "0880a3ce_9bbce9b7",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 16
       },
       "revId": "477b4afe3d2aaa2cd0c8ab51d4df768df84d50ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
