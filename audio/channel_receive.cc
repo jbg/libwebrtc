@@ -35,6 +35,7 @@
 #include "logging/rtc_event_log/events/rtc_event_neteq_set_minimum_delay.h"
 #include "modules/audio_coding/acm2/acm_receiver.h"
 #include "modules/audio_coding/audio_network_adaptor/include/audio_network_adaptor_config.h"
+#include "modules/audio_coding/include/audio_coding_module_typedefs.h"
 #include "modules/pacing/packet_router.h"
 #include "modules/rtp_rtcp/include/receive_statistics.h"
 #include "modules/rtp_rtcp/include/remote_ntp_time_estimator.h"
@@ -135,6 +136,7 @@ class ChannelReceive : public ChannelReceiveInterface,
   // https://w3c.github.io/webrtc-stats/#dom-rtcmediastreamtrackstats-totalaudioenergy
   double GetTotalOutputEnergy() const override;
   double GetTotalOutputDuration() const override;
+  webrtc::TimeDelta GetTotalProcessingDelay() const override;
 
   // Stats.
   NetworkStatistics GetNetworkStatistics(
@@ -255,7 +257,9 @@ class ChannelReceive : public ChannelReceiveInterface,
   acm2::AcmReceiver acm_receiver_;
   AudioSinkInterface* audio_sink_ = nullptr;
   AudioLevel _outputAudioLevel;
+
   ArrivalTimeTracker arrival_time_tracker_;
+  webrtc::TimeDelta total_processing_delay_ = webrtc::TimeDelta::Zero();
 
   Clock* const clock_;
   RemoteNtpTimeEstimator ntp_estimator_ RTC_GUARDED_BY(ts_stats_lock_);
@@ -408,6 +412,14 @@ AudioMixer::Source::AudioFrameInfo ChannelReceive::GetAudioFrameWithInfo(
     return AudioMixer::Source::AudioFrameInfo::kError;
   }
 
+  std::optional<Timestamp> arrival_time =
+      arrival_time_tracker_.GetArrivalTime(audio_frame->timestamp_);
+  if (arrival_time &&
+      audio_frame->speech_type_ == AudioFrame::SpeechType::kNormalSpeech) {
+    total_processing_delay_ += audio_frame->samples_per_channel() *
+                               (clock_->CurrentTime() - *arrival_time);
+  }
+
   {
     // Pass the audio buffers to an optional sink callback, before applying
     // scaling/panning, as that applies to the mix operation.
@@ -482,8 +494,6 @@ AudioMixer::Source::AudioFrameInfo ChannelReceive::GetAudioFrameWithInfo(
                   packet_info.absolute_capture_time()
                       ->estimated_capture_clock_offset)));
     }
-    std::optional<Timestamp> arrival_time =
-        arrival_time_tracker_.GetArrivalTime(audio_frame->timestamp_);
     if (arrival_time) {
       new_packet_info.set_receive_time(*arrival_time);
     }
@@ -788,6 +798,11 @@ double ChannelReceive::GetTotalOutputEnergy() const {
 double ChannelReceive::GetTotalOutputDuration() const {
   RTC_DCHECK_RUN_ON(&worker_thread_checker_);
   return _outputAudioLevel.TotalDuration();
+}
+
+webrtc::TimeDelta ChannelReceive::GetTotalProcessingDelay() const {
+  RTC_DCHECK_RUN_ON(&worker_thread_checker_);
+  return total_processing_delay_;
 }
 
 void ChannelReceive::SetChannelOutputVolumeScaling(float scaling) {

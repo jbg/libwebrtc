@@ -100,6 +100,8 @@ class AudioReceiveStreamInterface : public MediaReceiveStreamInterface {
     absl::optional<TimeDelta> round_trip_time;
     TimeDelta total_round_trip_time = TimeDelta::Zero();
     int round_trip_time_measurements = 0;
+    // https://w3c.github.io/webrtc-stats/#dom-rtcinboundrtpstreamstats-totalprocessingdelay
+    webrtc::TimeDelta total_processing_delay = webrtc::TimeDelta::Zero();
   };
 
   struct Config {

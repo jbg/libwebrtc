@@ -297,6 +297,7 @@ webrtc::AudioReceiveStreamInterface::Stats AudioReceiveStreamImpl::GetStats(
   stats.estimated_playout_ntp_timestamp_ms =
       channel_receive_->GetCurrentEstimatedPlayoutNtpTimestampMs(
           rtc::TimeMillis());
+  stats.total_processing_delay = channel_receive_->GetTotalProcessingDelay();
 
   // Get jitter buffer and total delay (alg + jitter + playout) stats.
   auto ns = channel_receive_->GetNetworkStatistics(get_and_clear_legacy_stats);
