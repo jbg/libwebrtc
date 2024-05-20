@@ -16,6 +16,24 @@
       "message": "By default you are keeping reference to Builder\u0027s member.\nBut Builder is normally destroyed once it creates FrameEncodeSettings, so a test that would try to use OutputFunctions would use deleted memory.\n\nBy Default (the one in constructor) should use different implementation of the OutFuncs, e.g.:\n\n```\nclass DefaultFuncs : VideoEncoderInterface::OutputFunctions {\n public:\n   rtc::ArrayView\u003cuint8_t\u003e GetBitstreamOutputBuffer(DataSize size) override {\n     unread_.resize(size.bytes());\n     return unread_;\n   }\n   void EncodeComplete(const EncodeResult\u0026 encode_result) override {}\n  private:\n   std::vector\u003cuint8_t\u003e unread_;   \n};\n```",
       "revId": "c9fe561c4c77572949c4ddaaa8af6b4580953cbf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4130587_23db06a8",
+        "filename": "api/video_codecs/libaom_av1_encoder_factory_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2024-05-20T14:52:42Z",
+      "side": 1,
+      "message": "Good catch, fixed!",
+      "parentUuid": "83b6e7b2_22fe0069",
+      "revId": "c9fe561c4c77572949c4ddaaa8af6b4580953cbf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

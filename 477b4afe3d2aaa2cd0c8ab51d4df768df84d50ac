@@ -255,6 +255,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8769cc84_3832f9ca",
+        "filename": "api/video_codecs/video_encoder_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2024-05-20T14:52:42Z",
+      "side": 1,
+      "message": "`FrameOutput` SGTM, updated.",
+      "parentUuid": "d3a1e5dd_929859f7",
+      "range": {
+        "startLine": 48,
+        "startChar": 9,
+        "endLine": 48,
+        "endChar": 24
+      },
+      "revId": "477b4afe3d2aaa2cd0c8ab51d4df768df84d50ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "877d0c91_c2cb3981",
         "filename": "api/video_codecs/video_encoder_interface.h",
         "patchSetId": 5
