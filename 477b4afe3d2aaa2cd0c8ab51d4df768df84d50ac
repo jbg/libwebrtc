@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b9dae31_2f4baaa8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2024-05-20T13:58:21Z",
+      "side": 1,
+      "message": "overall lgtm",
+      "revId": "477b4afe3d2aaa2cd0c8ab51d4df768df84d50ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6fcb4f0e_657dc7fc",
@@ -144,6 +161,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a8929b9_769af383",
+        "filename": "api/video_codecs/video_encoder_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2024-05-20T13:58:21Z",
+      "side": 1,
+      "message": "This was based on discussion of how mojo buffer management works today, where we want a preallocated buffer with at least the size we want. But agree it\u0027s easier to reason about here if what we ask for is the exact size.",
+      "parentUuid": "102291ec_d9af5ff6",
+      "range": {
+        "startLine": 51,
+        "startChar": 17,
+        "endLine": 51,
+        "endChar": 25
+      },
+      "revId": "477b4afe3d2aaa2cd0c8ab51d4df768df84d50ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "da8c23df_0b6b8b0e",
@@ -163,6 +204,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5600d2a5_86dd84d2",
+        "filename": "api/video_codecs/video_encoder_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2024-05-20T13:58:21Z",
+      "side": 1,
+      "message": "maybe... but part of what I like with a single method is that we know the guarantee that `EncodeComplete` is always called exactly once - rather than \"exactly one of `OnEncoded` OR `OnError` is called exactly once\"",
+      "parentUuid": "da8c23df_0b6b8b0e",
+      "revId": "477b4afe3d2aaa2cd0c8ab51d4df768df84d50ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f4d069f4_68a1835b",
         "filename": "api/video_codecs/video_encoder_interface.h",
         "patchSetId": 5
@@ -174,6 +233,24 @@
       "writtenOn": "2024-05-20T13:11:26Z",
       "side": 1,
       "message": "follow-up idea:\nmerge FrameEncodeSettings and OutputFunctions:\n\n```\nclass FrameEncodeSettings {\n public:\n  virtual void OnEncodeComplete() \u0026\u0026 \u003d 0;\n  virtual void OnEncodeFailure() \u0026\u0026 \u003d 0;\n  \n  virtual rtc::ArrayView\u003cuint8_t\u003e GetBitstreamOutputBuffer(size_t size) \u003d 0;\n  virtual void SetEncodedQp(int qp);\n  \n    \n  void SetFrameType(FrameType);\n  FrameType GetFrameType() const;\n  \n};\n\nvoid Encode(..., tu_settings, std::vector\u003cstd::unique_ptr\u003cFrameEncodeSettings\u003e\u003e frame_settings) \u003d 0;\n```",
+      "revId": "477b4afe3d2aaa2cd0c8ab51d4df768df84d50ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc19111b_1f880039",
+        "filename": "api/video_codecs/video_encoder_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2024-05-20T13:58:21Z",
+      "side": 1,
+      "message": "I think I prefer input settings and output settings to be separate.",
+      "parentUuid": "f4d069f4_68a1835b",
       "revId": "477b4afe3d2aaa2cd0c8ab51d4df768df84d50ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
