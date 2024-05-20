@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ad39568_85bbf6f4",
+        "filename": "api/bandwidth_estimation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2024-05-20T12:48:36Z",
+      "side": 1,
+      "message": "Other Goog CC bandwidth estimation files are in api/transport. \n\nHowever, this type seems to be an implementation detail. Why in API at all?",
+      "range": {
+        "startLine": 16,
+        "startChar": 11,
+        "endLine": 16,
+        "endChar": 25
+      },
+      "revId": "f30aa8a71c73d1843de312a8f95d9a0c57897c38",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
