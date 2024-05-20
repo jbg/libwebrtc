@@ -1,0 +1,181 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bffef49_10d2b223",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-20T13:11:26Z",
+      "side": 1,
+      "message": "conceptually lgtm\n\nnaming shortcuts.... looks like better be polished before this interface is released, and samples are suggested as an example how it should be used.",
+      "revId": "477b4afe3d2aaa2cd0c8ab51d4df768df84d50ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fcb4f0e_657dc7fc",
+        "filename": "api/video_codecs/libaom_av1_encoder_factory.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-20T13:11:26Z",
+      "side": 1,
+      "message": "may be `!\u003d`\n(if output_buffer.size() \u003e .sz, then bytes after .sz would remain uninitialized, which might be confusing)",
+      "range": {
+        "startLine": 783,
+        "startChar": 33,
+        "endLine": 783,
+        "endChar": 34
+      },
+      "revId": "477b4afe3d2aaa2cd0c8ab51d4df768df84d50ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e77f55ea_c7d9e8d0",
+        "filename": "api/video_codecs/libaom_av1_encoder_factory.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-20T13:11:26Z",
+      "side": 1,
+      "message": "this looks a bit confusing way to check there was no frame.\n\nmay be use more explicit variable:\n```\nbool produced_frame \u003d false;\nwhile (const ...) \n  if (...) {\n    rtc::ArrayView\u003cuint8_t\u003e output_buffer \u003d ...GetBitstream(...);\n    ...\n    memcpy(...);\n    ....EncodedComplete(result);\n    ...output_functions \u003d nullptr;\n    produced_frame \u003d true;\n    break;\n  }\n}\n\nif (!produced_frame) {\n  DoErrorCallback(...);\n  return;\n}\n```",
+      "revId": "477b4afe3d2aaa2cd0c8ab51d4df768df84d50ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7412e8d7_ce505e24",
+        "filename": "api/video_codecs/simple_encoder_wrapper.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-20T13:11:26Z",
+      "side": 1,
+      "message": "`return bitstream` should likely work",
+      "revId": "477b4afe3d2aaa2cd0c8ab51d4df768df84d50ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "789ccbe5_e2ccc774",
+        "filename": "api/video_codecs/video_encoder_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-20T13:11:26Z",
+      "side": 1,
+      "message": "This names smells like a placeholder (i.e., look uninformative)\nAre you planning to settle on the name later?\n\n(e.g. `FrameEncodeResult` might look better because it resemble `FrameEncodeSettings` name, and there is 1:1 between these two)",
+      "range": {
+        "startLine": 48,
+        "startChar": 9,
+        "endLine": 48,
+        "endChar": 24
+      },
+      "revId": "477b4afe3d2aaa2cd0c8ab51d4df768df84d50ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "877d0c91_c2cb3981",
+        "filename": "api/video_codecs/video_encoder_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-20T13:11:26Z",
+      "side": 1,
+      "message": "Personally I think that for this function using type DataSize instead of size_t or int would add unnecessary overhead.",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 16
+      },
+      "revId": "477b4afe3d2aaa2cd0c8ab51d4df768df84d50ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "102291ec_d9af5ff6",
+        "filename": "api/video_codecs/video_encoder_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-20T13:11:26Z",
+      "side": 1,
+      "message": "why `min_size` instead of just `size`?\nHow the actual size of the encoded frame will be communicated then?",
+      "range": {
+        "startLine": 51,
+        "startChar": 17,
+        "endLine": 51,
+        "endChar": 25
+      },
+      "revId": "477b4afe3d2aaa2cd0c8ab51d4df768df84d50ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da8c23df_0b6b8b0e",
+        "filename": "api/video_codecs/video_encoder_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-20T13:11:26Z",
+      "side": 1,
+      "message": "because it is a function in the interfac, now there is no need to collapse EncodeResult into variant, instead you may have two functions:\n\n```\nvoid OnEncoded(const EncodedData\u0026) \u003d 0;\nvoid OnError() \u003d 0;\n```",
+      "revId": "477b4afe3d2aaa2cd0c8ab51d4df768df84d50ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4d069f4_68a1835b",
+        "filename": "api/video_codecs/video_encoder_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-20T13:11:26Z",
+      "side": 1,
+      "message": "follow-up idea:\nmerge FrameEncodeSettings and OutputFunctions:\n\n```\nclass FrameEncodeSettings {\n public:\n  virtual void OnEncodeComplete() \u0026\u0026 \u003d 0;\n  virtual void OnEncodeFailure() \u0026\u0026 \u003d 0;\n  \n  virtual rtc::ArrayView\u003cuint8_t\u003e GetBitstreamOutputBuffer(size_t size) \u003d 0;\n  virtual void SetEncodedQp(int qp);\n  \n    \n  void SetFrameType(FrameType);\n  FrameType GetFrameType() const;\n  \n};\n\nvoid Encode(..., tu_settings, std::vector\u003cstd::unique_ptr\u003cFrameEncodeSettings\u003e\u003e frame_settings) \u003d 0;\n```",
+      "revId": "477b4afe3d2aaa2cd0c8ab51d4df768df84d50ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
