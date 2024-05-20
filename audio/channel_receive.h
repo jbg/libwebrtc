@@ -25,6 +25,7 @@
 #include "api/frame_transformer_interface.h"
 #include "api/neteq/neteq_factory.h"
 #include "api/transport/rtp/rtp_source.h"
+#include "api/units/time_delta.h"
 #include "call/rtp_packet_sink_interface.h"
 #include "call/syncable.h"
 #include "modules/audio_coding/include/audio_coding_module_typedefs.h"
@@ -87,6 +88,11 @@ class ChannelSendInterface;
 
 class ChannelReceiveInterface : public RtpPacketSinkInterface {
  public:
+  struct TotalProcessingDelay {
+    TimeDelta accumulated_processing_delay;
+    int count;
+  };
+
   virtual ~ChannelReceiveInterface() = default;
 
   virtual void SetSink(AudioSinkInterface* sink) = 0;
@@ -109,6 +115,9 @@ class ChannelReceiveInterface : public RtpPacketSinkInterface {
   // https://w3c.github.io/webrtc-stats/#dom-rtcmediastreamtrackstats-totalaudioenergy
   virtual double GetTotalOutputEnergy() const = 0;
   virtual double GetTotalOutputDuration() const = 0;
+
+  // https://w3c.github.io/webrtc-stats/#dom-rtcinboundrtpstreamstats-totalprocessingdelay
+  virtual TotalProcessingDelay GetTotalProcessingDelay() const = 0;
 
   // Stats.
   virtual NetworkStatistics GetNetworkStatistics(

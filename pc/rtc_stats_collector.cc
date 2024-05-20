@@ -476,6 +476,7 @@ std::unique_ptr<RTCInboundRtpStreamStats> CreateInboundAudioStreamStats(
     inbound_audio->last_packet_received_timestamp =
         voice_receiver_info.last_packet_received->ms<double>();
   }
+  inbound_audio->total_processing_delay = voice_receiver_info.total_processing_delay.seconds<double>();
   if (voice_receiver_info.estimated_playout_ntp_timestamp_ms.has_value()) {
     // TODO(bugs.webrtc.org/10529): Fix time origin.
     inbound_audio->estimated_playout_timestamp = static_cast<double>(

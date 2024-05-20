@@ -300,6 +300,12 @@ webrtc::AudioReceiveStreamInterface::Stats AudioReceiveStreamImpl::GetStats(
 
   // Get jitter buffer and total delay (alg + jitter + playout) stats.
   auto ns = channel_receive_->GetNetworkStatistics(get_and_clear_legacy_stats);
+  const voe::ChannelReceiveInterface::TotalProcessingDelay
+      total_processing_delay = channel_receive_->GetTotalProcessingDelay();
+  stats.total_processing_delay =
+      (total_processing_delay.accumulated_processing_delay /
+       total_processing_delay.count) *
+      ns.jitterBufferEmittedCount;
   stats.packets_discarded = ns.packetsDiscarded;
   stats.fec_packets_received = ns.fecPacketsReceived;
   stats.fec_packets_discarded = ns.fecPacketsDiscarded;
