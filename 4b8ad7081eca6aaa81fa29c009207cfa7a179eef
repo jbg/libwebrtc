@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38269cf3_1e7031f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2024-05-20T08:03:58Z",
+      "side": 1,
+      "message": "Thanks for review, Kári. I\u0027ve mostly fixed code except optional part - I\u0027ve added explanation of such choice.\nHarald, could you please also have a look and decide if this API exposure could be landed. \nThanks a lot in advance!",
+      "revId": "4b8ad7081eca6aaa81fa29c009207cfa7a179eef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9361307f_0282a345",
@@ -41,6 +58,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90cbe441_6d8b5301",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpReceiver.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2024-05-20T08:03:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9361307f_0282a345",
+      "range": {
+        "startLine": 72,
+        "startChar": 2,
+        "endLine": 72,
+        "endChar": 6
+      },
+      "revId": "4b8ad7081eca6aaa81fa29c009207cfa7a179eef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "097dff57_78707943",
@@ -54,6 +95,30 @@
       "writtenOn": "2024-05-16T08:02:59Z",
       "side": 1,
       "message": "const reference?",
+      "range": {
+        "startLine": 22,
+        "startChar": 7,
+        "endLine": 22,
+        "endChar": 24
+      },
+      "revId": "4b8ad7081eca6aaa81fa29c009207cfa7a179eef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62fd8ba2_e6e55c56",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpSource+Private.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2024-05-20T08:03:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "097dff57_78707943",
       "range": {
         "startLine": 22,
         "startChar": 7,
@@ -89,6 +154,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "603b2c99_db3c7b2c",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpSource.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2024-05-20T08:03:58Z",
+      "side": 1,
+      "message": "The reason I had to use this kind of indirection here is that `webrtc::RtpSource` has no default constructor and hence `RTCRtpSource` could not have this field as is due to initialization requirements. So between `unique_ptr` and `optional` I\u0027ve picked optional, but can switch to `unique_ptr` or something else if required.",
+      "parentUuid": "ef7b2c34_f13d809c",
+      "range": {
+        "startLine": 23,
+        "startChar": 2,
+        "endLine": 23,
+        "endChar": 15
+      },
+      "revId": "4b8ad7081eca6aaa81fa29c009207cfa7a179eef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "befb5446_2b4bf71f",
         "filename": "sdk/objc/api/peerconnection/RTCRtpSource.mm",
         "patchSetId": 5
@@ -100,6 +189,30 @@
       "writtenOn": "2024-05-16T08:02:59Z",
       "side": 1,
       "message": "const reference?",
+      "range": {
+        "startLine": 67,
+        "startChar": 41,
+        "endLine": 67,
+        "endChar": 58
+      },
+      "revId": "4b8ad7081eca6aaa81fa29c009207cfa7a179eef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5689e4b3_8433806e",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpSource.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2024-05-20T08:03:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "befb5446_2b4bf71f",
       "range": {
         "startLine": 67,
         "startChar": 41,
