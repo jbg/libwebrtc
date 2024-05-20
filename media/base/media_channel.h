@@ -564,6 +564,8 @@ struct VoiceReceiverInfo : public MediaReceiverInfo {
   // longer than 150 ms).
   int32_t interruption_count = 0;
   int32_t total_interruption_duration_ms = 0;
+  // https://w3c.github.io/webrtc-stats/#dom-rtcinboundrtpstreamstats-totalprocessingdelay
+  webrtc::TimeDelta total_processing_delay = webrtc::TimeDelta::Zero();
 };
 
 struct VideoSenderInfo : public MediaSenderInfo {

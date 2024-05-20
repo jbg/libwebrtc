@@ -13,6 +13,8 @@
 
 #include <map>
 
+#include "api/units/time_delta.h"
+
 namespace webrtc {
 
 ///////////////////////////////////////////////////////////////////////////
@@ -130,6 +132,8 @@ struct NetworkStatistics {
   int32_t interruptionCount;
   // total duration of audio interruptions
   int32_t totalInterruptionDurationMs;
+  // https://w3c.github.io/webrtc-stats/#dom-rtcinboundrtpstreamstats-totalprocessingdelay
+  webrtc::TimeDelta totalProcessingDelay = webrtc::TimeDelta::Zero();
 };
 
 }  // namespace webrtc

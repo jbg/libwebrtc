@@ -19,6 +19,7 @@
 
 #include "api/crypto/frame_decryptor_interface.h"
 #include "api/test/mock_frame_encryptor.h"
+#include "api/units/time_delta.h"
 #include "audio/channel_receive.h"
 #include "audio/channel_send.h"
 #include "modules/rtp_rtcp/source/rtp_packet_received.h"
@@ -48,6 +49,10 @@ class MockChannelReceive : public voe::ChannelReceiveInterface {
               (const, override));
   MOCK_METHOD(int, GetSpeechOutputLevelFullRange, (), (const, override));
   MOCK_METHOD(double, GetTotalOutputEnergy, (), (const, override));
+  MOCK_METHOD(TotalProcessingDelay,
+              GetTotalProcessingDelay,
+              (),
+              (const, override));
   MOCK_METHOD(double, GetTotalOutputDuration, (), (const, override));
   MOCK_METHOD(uint32_t, GetDelayEstimate, (), (const, override));
   MOCK_METHOD(void, SetSink, (AudioSinkInterface*), (override));
