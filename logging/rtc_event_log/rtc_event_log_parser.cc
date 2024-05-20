@@ -21,7 +21,7 @@
 #include "absl/memory/memory.h"
 #include "absl/strings/string_view.h"
 #include "absl/types/optional.h"
-#include "api/network_state_predictor.h"
+#include "api/bandwidth_estimation.h"
 #include "api/rtc_event_log/rtc_event_log.h"
 #include "api/rtp_headers.h"
 #include "api/rtp_parameters.h"

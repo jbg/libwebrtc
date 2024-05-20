@@ -12,7 +12,7 @@
 
 #include <stdint.h>
 
-#include "api/network_state_predictor.h"
+#include "api/bandwidth_estimation.h"
 
 namespace webrtc {
 

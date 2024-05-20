@@ -15,7 +15,7 @@
 
 #include <algorithm>
 
-#include "api/network_state_predictor.h"
+#include "api/bandwidth_estimation.h"
 #include "modules/remote_bitrate_estimator/test/bwe_test_logging.h"
 #include "rtc_base/logging.h"
 

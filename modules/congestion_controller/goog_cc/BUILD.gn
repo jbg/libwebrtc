@@ -124,6 +124,7 @@ rtc_library("estimators") {
   ]
 
   deps = [
+    "../../../api:bandwidth_estimation",
     "../../../api:field_trials_view",
     "../../../api:network_state_predictor_api",
     "../../../api/rtc_event_log",
@@ -198,8 +199,8 @@ rtc_library("send_side_bwe") {
   deps = [
     ":loss_based_bwe_v1",
     ":loss_based_bwe_v2",
+    "../../../api:bandwidth_estimation",
     "../../../api:field_trials_view",
-    "../../../api:network_state_predictor_api",
     "../../../api/rtc_event_log",
     "../../../api/transport:network_control",
     "../../../api/units:data_rate",
@@ -336,6 +337,7 @@ if (rtc_include_tests) {
         ":probe_controller",
         ":pushback_controller",
         ":send_side_bwe",
+        "../../../api:bandwidth_estimation",
         "../../../api:field_trials_view",
         "../../../api:network_state_predictor_api",
         "../../../api/environment",

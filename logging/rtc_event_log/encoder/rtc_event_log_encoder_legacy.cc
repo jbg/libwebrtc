@@ -16,7 +16,7 @@
 
 #include "absl/types/optional.h"
 #include "api/array_view.h"
-#include "api/network_state_predictor.h"
+#include "api/bandwidth_estimation.h"
 #include "api/rtp_headers.h"
 #include "api/rtp_parameters.h"
 #include "api/transport/network_types.h"
