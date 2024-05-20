@@ -115,8 +115,8 @@ rtc_library("rtp_headers") {
     ":array_view",
     "units:timestamp",
     "video:video_rtp_headers",
+    "//third_party/abseil-cpp/absl/types:optional",
   ]
-  absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
 }
 
 rtc_library("rtp_packet_info") {
@@ -1275,6 +1275,7 @@ if (rtc_include_tests) {
     testonly = true
     sources = [ "test/mock_session_description_interface.h" ]
     deps = [
+      ":candidate",
       ":libjingle_peerconnection_api",
       "../test:test_support",
     ]
