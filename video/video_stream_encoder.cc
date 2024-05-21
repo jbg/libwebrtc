@@ -39,7 +39,7 @@
 #include "modules/video_coding/include/video_codec_initializer.h"
 #include "modules/video_coding/svc/scalability_mode_util.h"
 #include "modules/video_coding/svc/svc_rate_allocator.h"
-#include "modules/video_coding/utility/vp8_constants.h"
+#include "modules/video_coding/utility/quality_convergence_monitor.h"
 #include "rtc_base/arraysize.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/event.h"
@@ -2118,8 +2118,8 @@ EncodedImage VideoStreamEncoder::AugmentEncodedImage(
   RTC_LOG(LS_VERBOSE) << __func__ << " ntp time " << encoded_image.NtpTimeMs()
                       << " stream_idx " << stream_idx << " qp "
                       << image_copy.qp_;
-  image_copy.SetAtTargetQuality(codec_type == kVideoCodecVP8 &&
-                                image_copy.qp_ <= kVp8SteadyStateQpThreshold);
+  image_copy.SetAtTargetQuality(
+      QualityConvergenceMonitor::AtTarget(codec_type, image_copy.qp_));
 
   return image_copy;
 }
