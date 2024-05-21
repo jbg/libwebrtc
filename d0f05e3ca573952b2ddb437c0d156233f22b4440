@@ -16,6 +16,24 @@
       "message": "Is the point here that one should be able to move everything from absl_deps \u003d into regular deps \u003d section? or is it different?\nI\u0027d like to see at least one target stop using absl_deps as part of the CL, so that we can test that it works well for all build targets / systems.",
       "revId": "d0f05e3ca573952b2ddb437c0d156233f22b4440",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e847500_b0838047",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2024-05-21T11:14:37Z",
+      "side": 1,
+      "message": "Yes, that\u0027s the point. Updated a simple target for this review and I will update the rest in future refactorings.",
+      "parentUuid": "2971eb79_01883635",
+      "revId": "d0f05e3ca573952b2ddb437c0d156233f22b4440",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
