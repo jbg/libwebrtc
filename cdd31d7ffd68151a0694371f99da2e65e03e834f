@@ -33,6 +33,24 @@
       "message": "Drive-by fix?",
       "revId": "cdd31d7ffd68151a0694371f99da2e65e03e834f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cca3012_e54d89c7",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 1278,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2024-05-21T11:26:15Z",
+      "side": 1,
+      "message": "Automatic fix for a future stacked CL which should not belong here!",
+      "parentUuid": "c6abf343_fcbc4027",
+      "revId": "cdd31d7ffd68151a0694371f99da2e65e03e834f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
