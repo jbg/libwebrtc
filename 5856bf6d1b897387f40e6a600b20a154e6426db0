@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb6b7f3e_c5ab195d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-05-21T09:09:48Z",
+      "side": 1,
+      "message": "renamed copy method and removed the stride stuff",
+      "revId": "5856bf6d1b897387f40e6a600b20a154e6426db0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
