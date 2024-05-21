@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "484800fc_52f07789",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-05-21T11:19:31Z",
+      "side": 1,
+      "message": "If all the bots pass....",
+      "revId": "cdd31d7ffd68151a0694371f99da2e65e03e834f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6abf343_fcbc4027",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 1278,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-05-21T11:19:31Z",
+      "side": 1,
+      "message": "Drive-by fix?",
+      "revId": "cdd31d7ffd68151a0694371f99da2e65e03e834f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
