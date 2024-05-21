@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b330bf8_e0b21723",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-05-21T06:02:49Z",
+      "side": 1,
+      "message": "Exposing this API seems to bring the MM API closer to the JS API, so is a Good Thing. Approved.",
+      "revId": "63ed3d7edf957e3a00b10cda938f50424dcfdf05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
