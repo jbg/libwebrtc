@@ -16,6 +16,52 @@
       "message": "Exposing this API seems to bring the MM API closer to the JS API, so is a Good Thing. Approved.",
       "revId": "63ed3d7edf957e3a00b10cda938f50424dcfdf05",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26a4f493_81a86a66",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpSource+Private.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2024-05-22T07:32:30Z",
+      "side": 1,
+      "message": "Odd formatting.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 74
+      },
+      "revId": "63ed3d7edf957e3a00b10cda938f50424dcfdf05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f574c97_222c4e89",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpSource.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5670
+      },
+      "writtenOn": "2024-05-22T07:32:30Z",
+      "side": 1,
+      "message": "Is this odd formatting from the tool?",
+      "range": {
+        "startLine": 27,
+        "startChar": 1,
+        "endLine": 33,
+        "endChar": 53
+      },
+      "revId": "63ed3d7edf957e3a00b10cda938f50424dcfdf05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
