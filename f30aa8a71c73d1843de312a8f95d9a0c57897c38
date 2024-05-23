@@ -22,6 +22,30 @@
       },
       "revId": "f30aa8a71c73d1843de312a8f95d9a0c57897c38",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fe9a2b7_28ac1e07",
+        "filename": "api/bandwidth_estimation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2024-05-23T13:28:49Z",
+      "side": 1,
+      "message": "api/network_state_predictor.h depends on it. The purpose of the CL is just to avoid dependencies on network_state_predictor.h from code that never touches the NetworkStatePredictor interface",
+      "parentUuid": "9ad39568_85bbf6f4",
+      "range": {
+        "startLine": 16,
+        "startChar": 11,
+        "endLine": 16,
+        "endChar": 25
+      },
+      "revId": "f30aa8a71c73d1843de312a8f95d9a0c57897c38",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
