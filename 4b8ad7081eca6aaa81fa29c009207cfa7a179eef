@@ -176,6 +176,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c860d82_6baa05de",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpSource.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2024-05-23T08:32:41Z",
+      "side": 1,
+      "message": "That makes sense, let\u0027s leave it like this.",
+      "parentUuid": "603b2c99_db3c7b2c",
+      "range": {
+        "startLine": 23,
+        "startChar": 2,
+        "endLine": 23,
+        "endChar": 15
+      },
+      "revId": "4b8ad7081eca6aaa81fa29c009207cfa7a179eef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "befb5446_2b4bf71f",
