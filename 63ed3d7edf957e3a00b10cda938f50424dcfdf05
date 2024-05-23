@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a2894e9_58314e9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2024-05-23T08:17:54Z",
+      "side": 1,
+      "message": "Peter, thanks for review. I\u0027ve clarified odd formatting.",
+      "revId": "63ed3d7edf957e3a00b10cda938f50424dcfdf05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26a4f493_81a86a66",
@@ -54,6 +71,30 @@
       "writtenOn": "2024-05-22T07:32:30Z",
       "side": 1,
       "message": "Is this odd formatting from the tool?",
+      "range": {
+        "startLine": 27,
+        "startChar": 1,
+        "endLine": 33,
+        "endChar": 53
+      },
+      "revId": "63ed3d7edf957e3a00b10cda938f50424dcfdf05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a42043f3_d0292713",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpSource.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2024-05-23T08:17:54Z",
+      "side": 1,
+      "message": "Yes, this is formatting produced by `git cl format`. Such strange pattern appears in other places across ObjC SDK, e.g:\n\n1. https://webrtc.googlesource.com/src/+/refs/heads/main/sdk/objc/api/peerconnection/RTCPeerConnection+Private.h#74\n2. https://webrtc.googlesource.com/src/+/refs/heads/main/sdk/objc/api/peerconnection/RTCPeerConnectionFactory+Native.h#33\n3. https://webrtc.googlesource.com/src/+/refs/heads/main/sdk/objc/api/peerconnection/RTCDataChannelConfiguration+Private.h#17\n4. a lot of others.\n\nSo probably `git cl format` need to be fixed and formatting applied to whole SKD as separate CL.",
+      "parentUuid": "2f574c97_222c4e89",
       "range": {
         "startLine": 27,
         "startChar": 1,
