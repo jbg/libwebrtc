@@ -46,6 +46,30 @@
       },
       "revId": "f30aa8a71c73d1843de312a8f95d9a0c57897c38",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b867c07b_e8f6b20c",
+        "filename": "api/bandwidth_estimation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2024-05-23T14:05:33Z",
+      "side": 1,
+      "message": "Sure, it  make sense that other code is not depending on NetworkStatePredictor.\nBut I am wondering if we can \n1. Delete NetworkStatePredictor all together? AS far as I can see there is no way to inject one from /api. Only in GoogCCFactory.\n2. If not, can this BandwidthUsage be made an internal enum of NetworkStatePredictor and goog cc use an internal version? This still feels like an implementation detail of class OverUseDetector. Not something that should have to live in the top API folder.",
+      "parentUuid": "0fe9a2b7_28ac1e07",
+      "range": {
+        "startLine": 16,
+        "startChar": 11,
+        "endLine": 16,
+        "endChar": 25
+      },
+      "revId": "f30aa8a71c73d1843de312a8f95d9a0c57897c38",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
