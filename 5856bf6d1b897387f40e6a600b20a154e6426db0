@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba842b14_1a14eb53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-05-24T14:43:56Z",
+      "side": 1,
+      "message": "Do you think you\u0027ll be able to take a look before the weekend?",
+      "revId": "5856bf6d1b897387f40e6a600b20a154e6426db0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f852c232_7c98bdbb",
@@ -48,6 +65,30 @@
       "writtenOn": "2024-05-24T12:08:42Z",
       "side": 1,
       "message": "Doublechecking: Is this the case? Looking at the implementation it seems like the returned data will not be nullptr for muted data?",
+      "range": {
+        "startLine": 127,
+        "startChar": 5,
+        "endLine": 128,
+        "endChar": 47
+      },
+      "revId": "5856bf6d1b897387f40e6a600b20a154e6426db0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b684474_e3e4e8a1",
+        "filename": "api/audio/audio_frame.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-05-24T14:43:56Z",
+      "side": 1,
+      "message": "ah thanks for catching - updated now.",
+      "parentUuid": "f852c232_7c98bdbb",
       "range": {
         "startLine": 127,
         "startChar": 5,
