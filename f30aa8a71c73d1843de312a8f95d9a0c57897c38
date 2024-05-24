@@ -70,6 +70,30 @@
       },
       "revId": "f30aa8a71c73d1843de312a8f95d9a0c57897c38",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e28c85ee_e793dbe2",
+        "filename": "api/bandwidth_estimation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2024-05-24T09:26:40Z",
+      "side": 1,
+      "message": "Done as discussed offline",
+      "parentUuid": "b867c07b_e8f6b20c",
+      "range": {
+        "startLine": 16,
+        "startChar": 11,
+        "endLine": 16,
+        "endChar": 25
+      },
+      "revId": "f30aa8a71c73d1843de312a8f95d9a0c57897c38",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
