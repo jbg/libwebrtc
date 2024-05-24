@@ -54,9 +54,9 @@
 #include "modules/video_coding/codecs/vp9/include/vp9.h"
 #include "modules/video_coding/codecs/vp9/include/vp9_globals.h"
 #include "modules/video_coding/codecs/vp9/svc_config.h"
+#include "modules/video_coding/utility/quality_convergence_monitor.h"
 #include "modules/video_coding/utility/quality_scaler.h"
 #include "modules/video_coding/utility/simulcast_rate_allocator.h"
-#include "modules/video_coding/utility/vp8_constants.h"
 #include "rtc_base/event.h"
 #include "rtc_base/experiments/encoder_info_settings.h"
 #include "rtc_base/gunit.h"
@@ -9517,66 +9517,6 @@ TEST(VideoStreamEncoderFrameCadenceTest,
   factory.DepleteTaskQueues();
 }
 
-TEST(VideoStreamEncoderFrameCadenceTest, UpdatesQualityConvergence) {
-  auto adapter = std::make_unique<MockFrameCadenceAdapter>();
-  auto* adapter_ptr = adapter.get();
-  SimpleVideoStreamEncoderFactory factory;
-  FrameCadenceAdapterInterface::Callback* video_stream_encoder_callback =
-      nullptr;
-  EXPECT_CALL(*adapter_ptr, Initialize)
-      .WillOnce(Invoke([&video_stream_encoder_callback](
-                           FrameCadenceAdapterInterface::Callback* callback) {
-        video_stream_encoder_callback = callback;
-      }));
-  TaskQueueBase* encoder_queue = nullptr;
-  auto video_stream_encoder =
-      factory.Create(std::move(adapter), &encoder_queue);
-
-  // Configure 2 simulcast layers and setup 1 MBit/s to unpause the encoder.
-  VideoEncoderConfig video_encoder_config;
-  test::FillEncoderConfiguration(kVideoCodecVP8, 2, &video_encoder_config);
-  video_stream_encoder->ConfigureEncoder(video_encoder_config.Copy(),
-                                         kMaxPayloadLength);
-  video_stream_encoder->OnBitrateUpdated(
-      DataRate::KilobitsPerSec(1000), DataRate::KilobitsPerSec(1000),
-      DataRate::KilobitsPerSec(1000), 0, 0, 0);
-
-  // Pass a frame which has unconverged results.
-  PassAFrame(encoder_queue, video_stream_encoder_callback, /*ntp_time_ms=*/1);
-  EXPECT_CALL(factory.GetMockFakeEncoder(), EncodeHook)
-      .WillRepeatedly(Invoke([](EncodedImage& encoded_image,
-                                rtc::scoped_refptr<EncodedImageBuffer> buffer) {
-        encoded_image.qp_ = kVp8SteadyStateQpThreshold + 1;
-        CodecSpecificInfo codec_specific;
-        codec_specific.codecType = kVideoCodecVP8;
-        return codec_specific;
-      }));
-  EXPECT_CALL(*adapter_ptr, UpdateLayerQualityConvergence(0, false));
-  EXPECT_CALL(*adapter_ptr, UpdateLayerQualityConvergence(1, false));
-  factory.DepleteTaskQueues();
-  Mock::VerifyAndClearExpectations(adapter_ptr);
-  Mock::VerifyAndClearExpectations(&factory.GetMockFakeEncoder());
-
-  // Pass a frame which converges in layer 0 and not in layer 1.
-  PassAFrame(encoder_queue, video_stream_encoder_callback, /*ntp_time_ms=*/2);
-  EXPECT_CALL(factory.GetMockFakeEncoder(), EncodeHook)
-      .WillRepeatedly(Invoke([](EncodedImage& encoded_image,
-                                rtc::scoped_refptr<EncodedImageBuffer> buffer) {
-        // This sets simulcast index 0 content to be at target quality, while
-        // index 1 content is not.
-        encoded_image.qp_ = kVp8SteadyStateQpThreshold +
-                            (encoded_image.SimulcastIndex() == 0 ? 0 : 1);
-        CodecSpecificInfo codec_specific;
-        codec_specific.codecType = kVideoCodecVP8;
-        return codec_specific;
-      }));
-  EXPECT_CALL(*adapter_ptr, UpdateLayerQualityConvergence(0, true));
-  EXPECT_CALL(*adapter_ptr, UpdateLayerQualityConvergence(1, false));
-  factory.DepleteTaskQueues();
-  Mock::VerifyAndClearExpectations(adapter_ptr);
-  Mock::VerifyAndClearExpectations(&factory.GetMockFakeEncoder());
-}
-
 TEST(VideoStreamEncoderFrameCadenceTest,
      RequestsRefreshFramesWhenCadenceAdapterInstructs) {
   auto adapter = std::make_unique<MockFrameCadenceAdapter>();
@@ -9711,6 +9651,84 @@ TEST_F(VideoStreamEncoderFrameCadenceRestrictionTest,
   restrictions_.set_target_pixels_per_frame(101);
   EXPECT_CALL(*adapter_ptr_, UpdateVideoSourceRestrictions(Eq(absl::nullopt)));
   UpdateVideoSourceRestrictions(restrictions_);
+}
+
+class VideoStreamEncoderQualityConvergenceTest
+    : public ::testing::TestWithParam<std::tuple<VideoCodecType, int>> {
+ public:
+  VideoCodecType Codec() const { return std::get<0>(GetParam()); }
+
+  int SteadyStateQpThreshold() const { return std::get<1>(GetParam()); }
+};
+
+INSTANTIATE_TEST_SUITE_P(
+    ,
+    VideoStreamEncoderQualityConvergenceTest,
+    ::testing::Values(
+        std::make_tuple(kVideoCodecVP8, kVp8SteadyStateQpThreshold),
+        std::make_tuple(kVideoCodecVP9, kVp9SteadyStateQpThreshold),
+        std::make_tuple(kVideoCodecAV1, kAv1SteadyStateQpThreshold)));
+
+TEST_P(VideoStreamEncoderQualityConvergenceTest, UpdatesQualityConvergence) {
+  auto adapter = std::make_unique<MockFrameCadenceAdapter>();
+  auto* adapter_ptr = adapter.get();
+  SimpleVideoStreamEncoderFactory factory;
+  FrameCadenceAdapterInterface::Callback* video_stream_encoder_callback =
+      nullptr;
+  EXPECT_CALL(*adapter_ptr, Initialize)
+      .WillOnce(Invoke([&video_stream_encoder_callback](
+                           FrameCadenceAdapterInterface::Callback* callback) {
+        video_stream_encoder_callback = callback;
+      }));
+  TaskQueueBase* encoder_queue = nullptr;
+  auto video_stream_encoder =
+      factory.Create(std::move(adapter), &encoder_queue);
+
+  // Configure 2 simulcast layers and setup 1 MBit/s to unpause the encoder.
+  VideoEncoderConfig video_encoder_config;
+  test::FillEncoderConfiguration(Codec(), 2, &video_encoder_config);
+  video_stream_encoder->ConfigureEncoder(video_encoder_config.Copy(),
+                                         kMaxPayloadLength);
+  video_stream_encoder->OnBitrateUpdated(
+      DataRate::KilobitsPerSec(1000), DataRate::KilobitsPerSec(1000),
+      DataRate::KilobitsPerSec(1000), 0, 0, 0);
+
+  // Pass a frame which has unconverged results.
+  PassAFrame(encoder_queue, video_stream_encoder_callback, /*ntp_time_ms=*/1);
+  EXPECT_CALL(factory.GetMockFakeEncoder(), EncodeHook)
+      .WillRepeatedly(
+          Invoke([this](EncodedImage& encoded_image,
+                        rtc::scoped_refptr<EncodedImageBuffer> buffer) {
+            encoded_image.qp_ = SteadyStateQpThreshold() + 1;
+            CodecSpecificInfo codec_specific;
+            codec_specific.codecType = Codec();
+            return codec_specific;
+          }));
+  EXPECT_CALL(*adapter_ptr, UpdateLayerQualityConvergence(0, false));
+  EXPECT_CALL(*adapter_ptr, UpdateLayerQualityConvergence(1, false));
+  factory.DepleteTaskQueues();
+  Mock::VerifyAndClearExpectations(adapter_ptr);
+  Mock::VerifyAndClearExpectations(&factory.GetMockFakeEncoder());
+
+  // Pass a frame which converges in layer 0 and not in layer 1.
+  PassAFrame(encoder_queue, video_stream_encoder_callback, /*ntp_time_ms=*/2);
+  EXPECT_CALL(factory.GetMockFakeEncoder(), EncodeHook)
+      .WillRepeatedly(
+          Invoke([this](EncodedImage& encoded_image,
+                        rtc::scoped_refptr<EncodedImageBuffer> buffer) {
+            // This sets simulcast index 0 content to be at target quality,
+            // while index 1 content is not.
+            encoded_image.qp_ = SteadyStateQpThreshold() +
+                                (encoded_image.SimulcastIndex() == 0 ? 0 : 1);
+            CodecSpecificInfo codec_specific;
+            codec_specific.codecType = Codec();
+            return codec_specific;
+          }));
+  EXPECT_CALL(*adapter_ptr, UpdateLayerQualityConvergence(0, true));
+  EXPECT_CALL(*adapter_ptr, UpdateLayerQualityConvergence(1, false));
+  factory.DepleteTaskQueues();
+  Mock::VerifyAndClearExpectations(adapter_ptr);
+  Mock::VerifyAndClearExpectations(&factory.GetMockFakeEncoder());
 }
 
 }  // namespace webrtc
