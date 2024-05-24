@@ -89,6 +89,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad85d885_f4fabfec",
+        "filename": "api/audio/audio_view.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2024-05-24T12:08:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "94601141_f164ef03",
+      "range": {
+        "startLine": 114,
+        "startChar": 2,
+        "endLine": 116,
+        "endChar": 18
+      },
+      "revId": "b7038172fe07271dea887735ee57718a1ebb7dfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce381cde_38bfb1f1",
@@ -150,6 +174,30 @@
       "side": 1,
       "message": "Ah, good point! I\u0027ve not thought about that way of reducing channels.\nIt is a bit restrictive though (requires the reduction to be map to a stride factor) so I\u0027m not sure about how many current usecases there are.\n\nRegarding storing stacked (non-interleaved) buffers as pointers to pointers (I think the vectors of pointers are mainly in test code, right?) is definitely a tricky aspect and I too think it is an anti-pattern. From what I know that type of audio is fairly well contained within the AudioBuffer type (that neither being perfect but still better than pointers to pointers) so I don\u0027t see an immediate use of the stride there.\n\nYes, my suggestion would be to remove the stride related member and method and reintroduce it when a clear usecase is identified.",
       "parentUuid": "e10b6c7d_894f86f7",
+      "range": {
+        "startLine": 131,
+        "startChar": 5,
+        "endLine": 132,
+        "endChar": 69
+      },
+      "revId": "b7038172fe07271dea887735ee57718a1ebb7dfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4408da21_19c10254",
+        "filename": "api/audio/audio_view.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2024-05-24T12:08:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d7cbcdb8_bb4f2a5d",
       "range": {
         "startLine": 131,
         "startChar": 5,

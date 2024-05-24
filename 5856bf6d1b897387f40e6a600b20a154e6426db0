@@ -16,6 +16,46 @@
       "message": "renamed copy method and removed the stride stuff",
       "revId": "5856bf6d1b897387f40e6a600b20a154e6426db0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fcb5f62_2ea87243",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2024-05-24T12:08:42Z",
+      "side": 1,
+      "message": "Thanks for this CL!\nlgtm!\n(added one question)",
+      "revId": "5856bf6d1b897387f40e6a600b20a154e6426db0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f852c232_7c98bdbb",
+        "filename": "api/audio/audio_frame.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2024-05-24T12:08:42Z",
+      "side": 1,
+      "message": "Doublechecking: Is this the case? Looking at the implementation it seems like the returned data will not be nullptr for muted data?",
+      "range": {
+        "startLine": 127,
+        "startChar": 5,
+        "endLine": 128,
+        "endChar": 47
+      },
+      "revId": "5856bf6d1b897387f40e6a600b20a154e6426db0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
