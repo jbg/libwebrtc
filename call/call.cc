@@ -1390,6 +1390,11 @@ void Call::DeliverRtpPacket(
     }
   }
 
+  const TimeDelta nw_to_deliver_delay =
+      env_.clock().CurrentTime() - packet.arrival_time();
+  RTC_HISTOGRAM_COUNTS_100000("WebRTC.TimeFromDeliverRtpPacketUs",
+                              nw_to_deliver_delay.us());
+
   // RateCounters expect input parameter as int, save it as int,
   // instead of converting each time it is passed to RateCounter::Add below.
   int length = static_cast<int>(packet.size());
