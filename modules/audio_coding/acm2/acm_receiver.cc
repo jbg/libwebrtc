@@ -221,12 +221,6 @@ void AcmReceiver::FlushBuffers() {
   neteq_->FlushBuffers();
 }
 
-void AcmReceiver::RemoveAllCodecs() {
-  MutexLock lock(&mutex_);
-  neteq_->RemoveAllPayloadTypes();
-  last_decoder_ = absl::nullopt;
-}
-
 absl::optional<uint32_t> AcmReceiver::GetPlayoutTimestamp() {
   return neteq_->GetPlayoutTimestamp();
 }
