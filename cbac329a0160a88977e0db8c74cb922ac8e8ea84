@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "906b8ef9_3d5d1613",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2024-05-28T08:57:17Z",
+      "side": 1,
+      "message": "Great, thanks! @hta@webrtc.org WDYT about announcing this change on the list to encourage clients to migrate?",
+      "revId": "cbac329a0160a88977e0db8c74cb922ac8e8ea84",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
