@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a4c0eb2_2feac47b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3350241
+      },
+      "writtenOn": "2024-05-28T18:02:47Z",
+      "side": 1,
+      "message": "efficiency question before I do the backward-compatible revert with public_deps trick...\n\nthe best way to also rename helpers.h to crypto_random.h and is to add a helpers.h which includes this? And I can do that in this step and in the second one (which also flips the target) delete the old file?",
+      "revId": "70134806da542626cd3af9e3231f46245be4b99b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c78266f_1ade8fc7",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 1550,
+      "author": {
+        "id": 3350241
+      },
+      "writtenOn": "2024-05-28T18:02:47Z",
+      "side": 1,
+      "message": "this can actually be moved to the is-boringssl if since it is only used by boringssl_certificate.cc",
+      "revId": "70134806da542626cd3af9e3231f46245be4b99b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
