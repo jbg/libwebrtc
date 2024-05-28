@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "feff84e7_6d2fb640",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2024-05-28T18:42:04Z",
+      "side": 1,
+      "message": "Correct.\n\nI would do this order:\n\n1. New header with the original content, old header #including the new header. New target (with the new header and the renamed .cc file). The old target depends on the new one (to link properly).\n\n2. Downstream can clean up and depend on the new target.\n\n3. Remove old header and if not needed also remove the dependency from the old target to the new target.\n\nIs crypto_random a good name here? I am not great at names but rtc_base:rng might capture the meaning better?",
+      "parentUuid": "3a4c0eb2_2feac47b",
+      "revId": "70134806da542626cd3af9e3231f46245be4b99b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6c78266f_1ade8fc7",
