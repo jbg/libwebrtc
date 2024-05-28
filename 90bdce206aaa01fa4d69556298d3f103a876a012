@@ -16,6 +16,46 @@
       "message": "Hi, I made a change to the recently merged CL: https://webrtc-review.googlesource.com/c/src/+/333402\nThis change will be beneficial to the objc SDK users. Could you please review this change? Thanks!",
       "revId": "90bdce206aaa01fa4d69556298d3f103a876a012",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57c02966_2d910d55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2024-05-28T08:15:17Z",
+      "side": 1,
+      "message": "Thanks! Since this method is part of the API, I think we may want to keep the old signature around too for backwards-compatibility for a while.",
+      "revId": "90bdce206aaa01fa4d69556298d3f103a876a012",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86d0d0bd_3cad08f6",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpTransceiver.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2024-05-28T08:15:17Z",
+      "side": 1,
+      "message": "nullable",
+      "range": {
+        "startLine": 126,
+        "startChar": 29,
+        "endLine": 126,
+        "endChar": 36
+      },
+      "revId": "90bdce206aaa01fa4d69556298d3f103a876a012",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
