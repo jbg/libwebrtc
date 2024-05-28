@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41396f3f_9e27f8ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2024-05-28T12:17:00Z",
+      "side": 1,
+      "message": "I wonder if this should be audio specific or if we should move up one layer to call.cc where we receive both audio and video packets on the worker thread.",
+      "revId": "bcb94aa0b12efd3afca8756053953404bf58c32e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9839dfce_c5fee7ff",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2024-05-28T12:17:00Z",
+      "side": 1,
+      "message": "why do we post to the worker thread again? To avoid blocking ReceivePacket?",
+      "range": {
+        "startLine": 668,
+        "startChar": 2,
+        "endLine": 668,
+        "endChar": 16
+      },
+      "revId": "bcb94aa0b12efd3afca8756053953404bf58c32e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7289092e_9b656a9f",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2024-05-28T12:17:00Z",
+      "side": 1,
+      "message": "How expensive is this? Should we sample a random set of packets instead?",
+      "range": {
+        "startLine": 671,
+        "startChar": 8,
+        "endLine": 671,
+        "endChar": 35
+      },
+      "revId": "bcb94aa0b12efd3afca8756053953404bf58c32e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
