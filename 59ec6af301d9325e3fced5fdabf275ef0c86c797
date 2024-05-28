@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e30ceee8_b11ea34d",
+        "filename": "call/call.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1393,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2024-05-28T12:53:45Z",
+      "side": 1,
+      "message": "nit: I wonder if we should move this to before `receiver_controller.OnRtpPacket` (or do we want to keep the current measurement which is *after* the packet has been fully delivered, which is also fine)?",
+      "range": {
+        "startLine": 1393,
+        "startChar": 18,
+        "endLine": 1393,
+        "endChar": 37
+      },
+      "revId": "59ec6af301d9325e3fced5fdabf275ef0c86c797",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
