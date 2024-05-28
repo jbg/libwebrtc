@@ -55,7 +55,7 @@
 #include "pc/usage_pattern.h"
 #include "pc/used_ids.h"
 #include "pc/webrtc_session_description_factory.h"
-#include "rtc_base/helpers.h"
+#include "rtc_base/crypto_random.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/rtc_certificate.h"
 #include "rtc_base/ssl_stream_adapter.h"
