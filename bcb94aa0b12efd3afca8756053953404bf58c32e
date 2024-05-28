@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12d02cc5_ecdc01d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10796
+      },
+      "writtenOn": "2024-05-28T12:46:02Z",
+      "side": 1,
+      "message": "Moved to call.cc so we get that for both video and audio.",
+      "parentUuid": "41396f3f_9e27f8ed",
+      "revId": "bcb94aa0b12efd3afca8756053953404bf58c32e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9839dfce_c5fee7ff",
@@ -41,6 +59,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9150dc13_82f179b3",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 10796
+      },
+      "writtenOn": "2024-05-28T12:46:02Z",
+      "side": 1,
+      "message": "Remove the posting to the worker thread.",
+      "parentUuid": "9839dfce_c5fee7ff",
+      "range": {
+        "startLine": 668,
+        "startChar": 2,
+        "endLine": 668,
+        "endChar": 16
+      },
+      "revId": "bcb94aa0b12efd3afca8756053953404bf58c32e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7289092e_9b656a9f",
@@ -54,6 +96,30 @@
       "writtenOn": "2024-05-28T12:17:00Z",
       "side": 1,
       "message": "How expensive is this? Should we sample a random set of packets instead?",
+      "range": {
+        "startLine": 671,
+        "startChar": 8,
+        "endLine": 671,
+        "endChar": 35
+      },
+      "revId": "bcb94aa0b12efd3afca8756053953404bf58c32e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a396296_7ce3165d",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 10796
+      },
+      "writtenOn": "2024-05-28T12:46:02Z",
+      "side": 1,
+      "message": "According to Fredrik this is very cheap. In chrome it is done for all audio callbacks.",
+      "parentUuid": "7289092e_9b656a9f",
       "range": {
         "startLine": 671,
         "startChar": 8,
