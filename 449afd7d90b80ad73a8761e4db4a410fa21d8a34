@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bab0e0f_c90cdea0",
+        "filename": "call/call.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1376,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-28T14:09:07Z",
+      "side": 1,
+      "message": "I\u0027m not 100% sure packet.arrival_time is aligned to the env_.clock(),\nlets histogram show that!\n\nIt really should be aligned to be helpful.",
+      "range": {
+        "startLine": 1376,
+        "startChar": 6,
+        "endLine": 1376,
+        "endChar": 56
+      },
+      "revId": "449afd7d90b80ad73a8761e4db4a410fa21d8a34",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
