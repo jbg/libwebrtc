@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6b8f38a6_05b00b5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2024-05-28T08:45:41Z",
+      "side": 1,
+      "message": "I think this change is trivial to migrate, so I didn\u0027t bother keeping the old signature. \nHowever, I\u0027ll keep the old method around for a while. Do I need to send a PSA to the mailing list?",
+      "parentUuid": "57c02966_2d910d55",
+      "revId": "90bdce206aaa01fa4d69556298d3f103a876a012",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "86d0d0bd_3cad08f6",
         "filename": "sdk/objc/api/peerconnection/RTCRtpTransceiver.h",
         "patchSetId": 3
@@ -48,6 +66,54 @@
       "writtenOn": "2024-05-28T08:15:17Z",
       "side": 1,
       "message": "nullable",
+      "range": {
+        "startLine": 126,
+        "startChar": 29,
+        "endLine": 126,
+        "endChar": 36
+      },
+      "revId": "90bdce206aaa01fa4d69556298d3f103a876a012",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6312b0b0_339fbb5f",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpTransceiver.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2024-05-28T08:45:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86d0d0bd_3cad08f6",
+      "range": {
+        "startLine": 126,
+        "startChar": 29,
+        "endLine": 126,
+        "endChar": 36
+      },
+      "revId": "90bdce206aaa01fa4d69556298d3f103a876a012",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ee7ee4c_b6f326b2",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpTransceiver.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2024-05-28T08:45:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86d0d0bd_3cad08f6",
       "range": {
         "startLine": 126,
         "startChar": 29,
