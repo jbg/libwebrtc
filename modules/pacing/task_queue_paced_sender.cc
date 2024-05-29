@@ -19,6 +19,8 @@
 #include "rtc_base/checks.h"
 #include "rtc_base/trace_event.h"
 
+#include "base/logging.h"
+
 namespace webrtc {
 
 const int TaskQueuePacedSender::kNoPacketHoldback = -1;
@@ -106,6 +108,9 @@ void TaskQueuePacedSender::EnqueuePackets(
                        "TaskQueuePacedSender::EnqueuePackets::Loop",
                        "sequence_number", packet->SequenceNumber(),
                        "rtp_timestamp", packet->Timestamp());
+          if (packet->Ssrc() == 123) {
+            LOG(ERROR) << "TaskQueuePacedSender::EnqueuePackets is_started_ " << is_started_;
+          }
 
           size_t packet_size = packet->payload_size() + packet->padding_size();
           if (include_overhead_) {

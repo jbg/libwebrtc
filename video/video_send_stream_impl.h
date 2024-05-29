@@ -23,6 +23,7 @@
 #include "api/environment/environment.h"
 #include "api/field_trials_view.h"
 #include "api/metronome/metronome.h"
+#include "api/rtp_stream_sender.h"
 #include "api/task_queue/pending_task_safety_flag.h"
 #include "api/task_queue/task_queue_base.h"
 #include "api/video/encoded_image.h"
@@ -111,6 +112,11 @@ class VideoSendStreamImpl : public webrtc::VideoSendStream,
   void StopPermanentlyAndGetRtpStates(RtpStateMap* rtp_state_map,
                                       RtpPayloadStateMap* payload_state_map);
   void GenerateKeyFrame(const std::vector<std::string>& rids) override;
+
+  scoped_refptr<RtpStreamSender> ReplaceStreamSender() override {
+    RTC_LOG(LS_ERROR) << "Inside VideoSendStreamImpl::ReplaceStreamSender";
+    return rtp_video_sender_->ReplaceStreamSender();
+  }
 
   // TODO(holmer): Move these to RtpTransportControllerSend.
   std::map<uint32_t, RtpState> GetRtpStates() const;

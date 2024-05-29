@@ -47,6 +47,8 @@
 #include "system_wrappers/include/metrics.h"
 #include "system_wrappers/include/ntp_time.h"
 
+#include "base/logging.h"
+
 namespace webrtc {
 
 namespace {
@@ -702,6 +704,10 @@ void RtpVideoStreamReceiver2::OnRecoveredPacket(
 // via FlexFEC.
 void RtpVideoStreamReceiver2::OnRtpPacket(const RtpPacketReceived& packet) {
   RTC_DCHECK_RUN_ON(&packet_sequence_checker_);
+
+  if (packet.PayloadType() == 1) {
+    LOG(ERROR) << "RtpVideoStreamReceiver2::OnRtpPacket " << packet.ToString();
+  }
 
   if (!receiving_)
     return;

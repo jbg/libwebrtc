@@ -54,7 +54,7 @@ static const int kMinSendSidePacketHistorySize = 600;
 // We don't do MTU discovery, so assume that we have the standard ethernet MTU.
 static const size_t kPathMTU = 1500;
 
-using webrtc_internal_rtp_video_sender::RtpStreamSender;
+using InternalRtpStreamSender = webrtc_internal_rtp_video_sender::RtpStreamSender;
 
 bool PayloadTypeSupportsSkippingFecPackets(absl::string_view payload_name,
                                            const FieldTrialsView& trials) {
@@ -185,7 +185,7 @@ std::unique_ptr<VideoFecGenerator> MaybeCreateFecGenerator(
   return nullptr;
 }
 
-std::vector<RtpStreamSender> CreateRtpStreamSenders(
+std::vector<InternalRtpStreamSender> CreateRtpStreamSenders(
     Clock* clock,
     const RtpConfig& rtp_config,
     const RtpSenderObservers& observers,
@@ -236,7 +236,7 @@ std::vector<RtpStreamSender> CreateRtpStreamSenders(
   configuration.enable_send_packet_batching =
       rtp_config.enable_send_packet_batching;
 
-  std::vector<RtpStreamSender> rtp_streams;
+  std::vector<InternalRtpStreamSender> rtp_streams;
 
   RTC_DCHECK(rtp_config.rtx.ssrcs.empty() ||
              rtp_config.rtx.ssrcs.size() == rtp_config.ssrcs.size());
@@ -430,7 +430,7 @@ RtpVideoSender::RtpVideoSender(
     const std::string& extension = rtp_config_.extensions[i].uri;
     int id = rtp_config_.extensions[i].id;
     RTC_DCHECK(RtpExtension::IsSupportedForVideo(extension));
-    for (const RtpStreamSender& stream : rtp_streams_) {
+    for (const InternalRtpStreamSender& stream : rtp_streams_) {
       stream.rtp_rtcp->RegisterRtpHeaderExtension(extension, id);
     }
   }
@@ -438,13 +438,13 @@ RtpVideoSender::RtpVideoSender(
   ConfigureSsrcs(suspended_ssrcs);
 
   if (!rtp_config_.mid.empty()) {
-    for (const RtpStreamSender& stream : rtp_streams_) {
+    for (const InternalRtpStreamSender& stream : rtp_streams_) {
       stream.rtp_rtcp->SetMid(rtp_config_.mid);
     }
   }
 
   bool fec_enabled = false;
-  for (const RtpStreamSender& stream : rtp_streams_) {
+  for (const InternalRtpStreamSender& stream : rtp_streams_) {
     // Simulcast has one module for each layer. Set the CNAME on all modules.
     stream.rtp_rtcp->SetCNAME(rtp_config_.c_name.c_str());
     stream.rtp_rtcp->SetMaxRtpPacketSize(rtp_config_.max_packet_size);
@@ -465,7 +465,7 @@ RtpVideoSender::RtpVideoSender(
   // * The pacer thread for actually sending packets.
   // * The transport thread when tearing down and quering GetRtpState().
   // Detach thread checkers.
-  for (const RtpStreamSender& stream : rtp_streams_) {
+  for (const InternalRtpStreamSender& stream : rtp_streams_) {
     stream.rtp_rtcp->OnPacketSendingThreadSwitched();
   }
 }
@@ -672,7 +672,7 @@ DataRate RtpVideoSender::GetPostEncodeOverhead() const {
 
 void RtpVideoSender::DeliverRtcp(const uint8_t* packet, size_t length) {
   // Runs on a network thread.
-  for (const RtpStreamSender& stream : rtp_streams_)
+  for (const InternalRtpStreamSender& stream : rtp_streams_)
     stream.rtp_rtcp->IncomingRtcpPacket(rtc::MakeArrayView(packet, length));
 }
 
@@ -707,7 +707,7 @@ void RtpVideoSender::ConfigureSsrcs(
 
   // Configure RTX payload types.
   RTC_DCHECK_GE(rtp_config_.rtx.payload_type, 0);
-  for (const RtpStreamSender& stream : rtp_streams_) {
+  for (const InternalRtpStreamSender& stream : rtp_streams_) {
     stream.rtp_rtcp->SetRtxSendPayloadType(rtp_config_.rtx.payload_type,
                                            rtp_config_.payload_type);
     stream.rtp_rtcp->SetRtxSendStatus(kRtxRetransmitted |
@@ -715,7 +715,7 @@ void RtpVideoSender::ConfigureSsrcs(
   }
   if (rtp_config_.ulpfec.red_payload_type != -1 &&
       rtp_config_.ulpfec.red_rtx_payload_type != -1) {
-    for (const RtpStreamSender& stream : rtp_streams_) {
+    for (const InternalRtpStreamSender& stream : rtp_streams_) {
       stream.rtp_rtcp->SetRtxSendPayloadType(
           rtp_config_.ulpfec.red_rtx_payload_type,
           rtp_config_.ulpfec.red_payload_type);
@@ -724,7 +724,7 @@ void RtpVideoSender::ConfigureSsrcs(
 }
 
 void RtpVideoSender::OnNetworkAvailability(bool network_available) {
-  for (const RtpStreamSender& stream : rtp_streams_) {
+  for (const InternalRtpStreamSender& stream : rtp_streams_) {
     stream.rtp_rtcp->SetRTCPStatus(network_available ? rtp_config_.rtcp_mode
                                                      : RtcpMode::kOff);
   }
@@ -777,7 +777,7 @@ void RtpVideoSender::OnTransportOverheadChanged(
   size_t max_rtp_packet_size =
       std::min(rtp_config_.max_packet_size,
                kPathMTU - transport_overhead_bytes_per_packet_);
-  for (const RtpStreamSender& stream : rtp_streams_) {
+  for (const InternalRtpStreamSender& stream : rtp_streams_) {
     stream.rtp_rtcp->SetMaxRtpPacketSize(max_rtp_packet_size);
   }
 }
@@ -885,7 +885,7 @@ int RtpVideoSender::ProtectionRequest(const FecProtectionParams* delta_params,
   *sent_video_rate_bps = 0;
   *sent_nack_rate_bps = 0;
   *sent_fec_rate_bps = 0;
-  for (const RtpStreamSender& stream : rtp_streams_) {
+  for (const InternalRtpStreamSender& stream : rtp_streams_) {
     stream.rtp_rtcp->SetFecProtectionParams(*delta_params, *key_params);
 
     auto send_bitrate = stream.rtp_rtcp->GetSendRates();
@@ -900,7 +900,7 @@ int RtpVideoSender::ProtectionRequest(const FecProtectionParams* delta_params,
 
 void RtpVideoSender::SetRetransmissionMode(int retransmission_mode) {
   MutexLock lock(&mutex_);
-  for (const RtpStreamSender& stream : rtp_streams_) {
+  for (const InternalRtpStreamSender& stream : rtp_streams_) {
       stream.sender_video->SetRetransmissionSetting(retransmission_mode);
   }
 }

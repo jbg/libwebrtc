@@ -30,6 +30,7 @@
 #include "api/ref_count.h"
 #include "api/rtc_error.h"
 #include "api/rtp_parameters.h"
+#include "api/rtp_stream_sender.h"
 #include "api/scoped_refptr.h"
 #include "api/video_codecs/video_encoder_factory.h"
 #include "rtc_base/system/rtc_export.h"
@@ -120,6 +121,10 @@ class RTC_EXPORT RtpSenderInterface : public webrtc::RefCountInterface,
   // TODO: bugs.webrtc.org/15929 - remove when all implementations are good
   void SetFrameTransformer(rtc::scoped_refptr<FrameTransformerInterface>
                                frame_transformer) override {}
+
+  virtual rtc::scoped_refptr<RtpStreamSender> ReplaceStreamSender() {
+    RTC_CHECK_NOTREACHED();
+  }
 
  protected:
   ~RtpSenderInterface() override = default;

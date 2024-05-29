@@ -18,6 +18,7 @@
 #include "api/array_view.h"
 #include "api/call/bitrate_allocation.h"
 #include "api/fec_controller_override.h"
+#include "api/rtp_stream_sender.h"
 #include "api/video/video_layers_allocation.h"
 #include "call/rtp_config.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
@@ -57,6 +58,11 @@ class RtpVideoSenderInterface : public EncodedImageCallback,
   virtual std::vector<RtpSequenceNumberMap::Info> GetSentRtpPacketInfos(
       uint32_t ssrc,
       rtc::ArrayView<const uint16_t> sequence_numbers) const = 0;
+
+  virtual scoped_refptr<RtpStreamSender> ReplaceStreamSender() {
+    RTC_LOG(LS_ERROR) << "Inside RtpVideoSenderInterface::ReplaceStreamSender";
+    RTC_CHECK_NOTREACHED();
+  }
 
   // Implements FecControllerOverride.
   void SetFecAllowed(bool fec_allowed) override = 0;

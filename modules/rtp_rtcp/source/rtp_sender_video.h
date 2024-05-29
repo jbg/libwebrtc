@@ -19,6 +19,7 @@
 #include "absl/types/optional.h"
 #include "api/array_view.h"
 #include "api/frame_transformer_interface.h"
+#include "api/rtp_stream_sender.h"
 #include "api/scoped_refptr.h"
 #include "api/sequence_checker.h"
 #include "api/task_queue/task_queue_base.h"
@@ -39,10 +40,13 @@
 #include "modules/rtp_rtcp/source/video_fec_generator.h"
 #include "rtc_base/bitrate_tracker.h"
 #include "rtc_base/frequency_tracker.h"
+#include "rtc_base/logging.h"
 #include "rtc_base/one_time_event.h"
 #include "rtc_base/race_checker.h"
 #include "rtc_base/synchronization/mutex.h"
 #include "rtc_base/thread_annotations.h"
+
+#include "base/logging.h"
 
 namespace webrtc {
 
@@ -147,6 +151,66 @@ class RTPSenderVideo : public RTPVideoFrameSenderInterface {
   // 'retransmission_mode' is either a value of enum RetransmissionMode, or
   // computed with bitwise operators on values of enum RetransmissionMode.
   void SetRetransmissionSetting(int32_t retransmission_settings);
+
+  class RtpStreamSenderImpl : public RtpStreamSender {
+  public:
+    RtpStreamSenderImpl(RTPSender* const rtp_sender);
+
+    void SendRtp(std::unique_ptr<RtpStreamSenderPacket> packet) override {
+      RTC_LOG(LS_ERROR) << "RtpStreamSenderImpl::SendRtp";
+      // Modelled after the packet creation in RTPSender::AllocatePacket() and
+      // RTPSenderVideo::SendVideo().
+      RtpHeaderExtensionMap extension_map;
+      std::unique_ptr<RtpPacketToSend> packet_to_send =
+          std::make_unique<RtpPacketToSend>(&extension_map);
+      packet_to_send->SetSsrc(rtp_sender_->SSRC());
+      packet_to_send->SetCsrcs(packet->Csrcs());
+      // TODO MID & RID extensions?
+
+      for (RtpStreamSenderPacket::HeaderExtension ext : packet->HeaderExtensions()) {
+        // TODO Find extension ID from URI.
+        int extension_id = 1;
+        uint8_t *ext_ptr = packet_to_send->AllocateRawExtension(extension_id, ext.value.size()).data();
+        memcpy(ext_ptr, ext.value.data(), ext.value.size());
+      }
+
+      packet_to_send->SetPayloadType(packet->PayloadType());
+      packet_to_send->SetTimestamp(packet->RtpTimestamp());
+
+      packet_to_send->set_first_packet_of_frame(packet->IsFirstPacketOfFrame());
+      packet_to_send->set_is_key_frame(packet->IsKeyFrame());
+
+      packet_to_send->SetMarker(packet->Marker());
+
+      packet_to_send->set_packet_type(RtpPacketMediaType::kVideo);
+
+      // TODO isAllowedRetransmission
+      // TODO FEC protect packet
+      // TODO RED (probs not)
+
+      uint8_t *payload_ptr = packet_to_send->AllocatePayload(packet->Data().size());
+      memcpy(payload_ptr, packet->Data().data(), packet->Data().size());
+
+      LOG(ERROR) << "RtpStreamSenderImpl Enqueueing packets " << packet_to_send->Ssrc();
+
+      std::vector<std::unique_ptr<webrtc::RtpPacketToSend>> packets;
+      packets.push_back(std::move(packet_to_send));
+      rtp_sender_->EnqueuePackets(std::move(packets));
+    }
+
+    void EnqueuePackets(std::vector<std::unique_ptr<RtpPacketToSend>> packets);
+
+
+    void RegisterPacketHandler(std::unique_ptr<PacketHandler> packet_handler) override {
+      packet_handler_ = std::move(packet_handler);
+    }
+
+  private:
+    RTPSender* const rtp_sender_;
+    std::unique_ptr<PacketHandler> packet_handler_;
+  };
+
+  scoped_refptr<RtpStreamSender> ReplaceStreamSender();
 
  protected:
   static uint8_t GetTemporalId(const RTPVideoHeader& header);

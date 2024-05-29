@@ -127,6 +127,16 @@ bool PacketWillLikelyBeRequestedForRestransmissionIfLost(
                : false);
 }
 
+class PacketInterceptorImpl : public RTPSender::PacketInterceptor {
+public:
+  PacketInterceptorImpl(scoped_refptr<RTPSenderVideo::RtpStreamSenderImpl> stream_sender_impl) : stream_sender_impl_(stream_sender_impl) {}
+  void EnqueuePackets(std::vector<std::unique_ptr<RtpPacketToSend>> packets) override {
+    stream_sender_impl_->EnqueuePackets(std::move(packets));
+  }
+private:
+  scoped_refptr<RTPSenderVideo::RtpStreamSenderImpl> stream_sender_impl_;
+};
+
 }  // namespace
 
 RTPSenderVideo::RTPSenderVideo(const Config& config)
@@ -865,6 +875,38 @@ void RTPSenderVideo::MaybeUpdateCurrentPlayoutDelay(
 
   current_playout_delay_ = requested_delay;
   playout_delay_pending_ = true;
+}
+
+RTPSenderVideo::RtpStreamSenderImpl::RtpStreamSenderImpl(RTPSender* const rtp_sender) : rtp_sender_(rtp_sender) {
+  RTC_LOG(LS_ERROR) << "Inside RtpStreamSenderImpl::RtpStreamSenderImpl";
+}
+
+void RTPSenderVideo::RtpStreamSenderImpl::EnqueuePackets(std::vector<std::unique_ptr<RtpPacketToSend>> packets) {
+  RTC_LOG(LS_ERROR) << "RTPSenderVideo::RtpStreamSenderImpl::EnqueuePackets, packet_handler_: " << !!packet_handler_;
+  if (packet_handler_) {
+    std::vector<std::unique_ptr<RtpStreamSenderPacket>> sender_packets;
+    for (auto& packet : packets) {
+
+      rtc::ArrayView<const uint8_t> data_view = rtc::ArrayView<const uint8_t>(packet->data(), packet->size());
+
+
+      sender_packets.push_back(std::make_unique<RtpStreamSenderPacket>(
+        packet->Csrcs(), packet->PayloadType(), packet->Timestamp(), packet->is_first_packet_of_frame(),
+        packet->is_key_frame(), packet->Marker(), data_view, std::vector<RtpStreamSender::RtpStreamSenderPacket::HeaderExtension>() // TODO Extensons
+      ));
+    }
+    packet_handler_->OnPackets(std::move(sender_packets));
+  } else {
+    rtp_sender_->EnqueuePackets(std::move(packets));
+  }
+}
+
+scoped_refptr<RtpStreamSender> RTPSenderVideo::ReplaceStreamSender() {
+  RTC_LOG(LS_ERROR) << "Inside RTPSenderVideo::ReplaceStreamSender";
+  auto stream_sender = rtc::make_ref_counted<RtpStreamSenderImpl>(rtp_sender_);
+  RTC_LOG(LS_ERROR) << "Calling register";
+  rtp_sender_->RegisterPacketInterceptor(std::make_unique<PacketInterceptorImpl>(stream_sender));
+  return stream_sender;
 }
 
 }  // namespace webrtc

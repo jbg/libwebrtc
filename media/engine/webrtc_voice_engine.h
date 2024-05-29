@@ -43,6 +43,7 @@
 #include "api/rtc_error.h"
 #include "api/rtp_parameters.h"
 #include "api/rtp_sender_interface.h"
+#include "api/rtp_stream_sender.h"
 #include "api/scoped_refptr.h"
 #include "api/sequence_checker.h"
 #include "api/task_queue/pending_task_safety_flag.h"
@@ -134,6 +135,7 @@ class WebRtcVoiceEngine final : public VoiceEngineInterface {
       override;
 
  private:
+
   // Every option that is "set" will be applied. Every option not "set" will be
   // ignored. This allows us to selectively turn on and off different options
   // easily at any time.
@@ -292,6 +294,11 @@ class WebRtcVoiceSendChannel final : public MediaChannelUtil,
   WebRtcVoiceEngine* engine() { return engine_; }
   bool SetMaxSendBitrate(int bps);
   void SetupRecording();
+
+  rtc::scoped_refptr<webrtc::RtpStreamSender> ReplaceStreamSender() override {
+    RTC_CHECK_NOTREACHED();
+    return nullptr;
+  }
 
   webrtc::TaskQueueBase* const worker_thread_;
   webrtc::ScopedTaskSafety task_safety_;

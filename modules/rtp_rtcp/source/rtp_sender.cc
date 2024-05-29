@@ -475,7 +475,12 @@ void RTPSender::EnqueuePackets(
     }
   }
 
-  paced_sender_->EnqueuePackets(std::move(packets));
+  MutexLock lock(&send_mutex_);
+  if (interceptor_) {
+    interceptor_->EnqueuePackets(std::move(packets));
+  } else {
+    paced_sender_->EnqueuePackets(std::move(packets));
+  }
 }
 
 size_t RTPSender::FecOrPaddingPacketMaxRtpHeaderLength() const {

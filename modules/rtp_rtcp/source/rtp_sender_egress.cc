@@ -20,6 +20,8 @@
 #include "logging/rtc_event_log/events/rtc_event_rtp_packet_outgoing.h"
 #include "rtc_base/logging.h"
 
+#include "base/logging.h"
+
 namespace webrtc {
 namespace {
 constexpr uint32_t kTimestampTicksPerMs = 90;

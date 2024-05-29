@@ -26,6 +26,8 @@
 #include "rtc_base/logging.h"
 #include "system_wrappers/include/clock.h"
 
+#include "base/logging.h"
+
 namespace webrtc {
 namespace {
 constexpr TimeDelta kCongestedPacketInterval = TimeDelta::Millis(500);
@@ -195,6 +197,10 @@ void PacingController::EnqueuePacket(std::unique_ptr<RtpPacketToSend> packet) {
   RTC_DCHECK(pacing_rate_ > DataRate::Zero())
       << "SetPacingRate must be called before InsertPacket.";
   RTC_CHECK(packet->packet_type());
+
+  if (packet->Ssrc() == 123) {
+    LOG(ERROR) << "Packet in PacingController::EnqueuePacket seen_first_packet_ " << seen_first_packet_;
+  }
 
   if (keyframe_flushing_ &&
       packet->packet_type() == RtpPacketMediaType::kVideo &&

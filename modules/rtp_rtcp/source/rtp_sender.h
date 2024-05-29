@@ -29,6 +29,7 @@
 #include "modules/rtp_rtcp/source/rtp_packet_history.h"
 #include "modules/rtp_rtcp/source/rtp_rtcp_config.h"
 #include "modules/rtp_rtcp/source/rtp_rtcp_interface.h"
+#include "rtc_base/logging.h"
 #include "rtc_base/random.h"
 #include "rtc_base/synchronization/mutex.h"
 #include "rtc_base/thread_annotations.h"
@@ -144,6 +145,18 @@ class RTPSender {
     return flexfec_ssrc_;
   }
 
+  class PacketInterceptor {
+  public:
+    virtual ~PacketInterceptor() = default;
+    virtual void EnqueuePackets(std::vector<std::unique_ptr<RtpPacketToSend>> packets) = 0;
+  };
+
+  void RegisterPacketInterceptor(std::unique_ptr<PacketInterceptor> interceptor) {
+    RTC_LOG(LS_ERROR) << "Inside RTPSender::RegisterPacketInterceptor";
+    MutexLock lock(&send_mutex_);
+    interceptor_ = std::move(interceptor);
+  }
+
   // Pass a set of packets to RtpPacketSender instance, for paced or immediate
   // sending to the network.
   void EnqueuePackets(std::vector<std::unique_ptr<RtpPacketToSend>> packets)
@@ -207,6 +220,8 @@ class RTPSender {
   bool supports_bwe_extension_ RTC_GUARDED_BY(send_mutex_);
 
   RateLimiter* const retransmission_rate_limiter_;
+
+  std::unique_ptr<PacketInterceptor> interceptor_ RTC_GUARDED_BY(send_mutex_);
 };
 
 }  // namespace webrtc

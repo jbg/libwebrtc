@@ -36,6 +36,7 @@
 #include "api/rtp_headers.h"
 #include "api/rtp_parameters.h"
 #include "api/rtp_sender_interface.h"
+#include "api/rtp_stream_sender.h"
 #include "api/scoped_refptr.h"
 #include "api/sequence_checker.h"
 #include "api/task_queue/pending_task_safety_flag.h"
@@ -287,6 +288,12 @@ class WebRtcVideoSendChannel : public MediaChannelUtil,
     return send_codec()->rtx_time;
   }
 
+  rtc::scoped_refptr<webrtc::RtpStreamSender> ReplaceStreamSender() override {
+    RTC_DCHECK_RUN_ON(&thread_checker_);
+    RTC_LOG(LS_ERROR) << "Inside WebRtcVideoSendChannel::ReplaceStreamSender";
+    return send_streams_.begin()->second->ReplaceStreamSender();
+  }
+
  private:
   struct ChangedSenderParameters {
     // These optionals are unset if not changed.
@@ -363,6 +370,11 @@ class WebRtcVideoSendChannel : public MediaChannelUtil,
         rtc::scoped_refptr<webrtc::FrameTransformerInterface>
             frame_transformer);
     void GenerateKeyFrame(const std::vector<std::string>& rids);
+
+    rtc::scoped_refptr<webrtc::RtpStreamSender> ReplaceStreamSender() {
+      RTC_DCHECK_RUN_ON(&thread_checker_);
+      return stream_->ReplaceStreamSender();
+    }
 
    private:
     // Parameters needed to reconstruct the underlying stream.

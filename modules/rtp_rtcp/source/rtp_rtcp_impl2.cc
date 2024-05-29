@@ -33,6 +33,8 @@
 #include "rtc_base/time_utils.h"
 #include "system_wrappers/include/ntp_time.h"
 
+#include "base/logging.h"
+
 #ifdef _WIN32
 // Disable warning C4355: 'this' : used in base member initializer list.
 #pragma warning(disable : 4355)
@@ -369,6 +371,7 @@ void ModuleRtpRtcpImpl2::SendPacket(std::unique_ptr<RtpPacketToSend> packet,
                                     const PacedPacketInfo& pacing_info) {
   RTC_DCHECK_RUN_ON(&rtp_sender_->sequencing_checker);
   RTC_DCHECK(CanSendPacket(*packet));
+
   rtp_sender_->packet_sender.SendPacket(std::move(packet), pacing_info);
 }
 

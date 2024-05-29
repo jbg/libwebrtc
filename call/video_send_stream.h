@@ -24,6 +24,7 @@
 #include "api/frame_transformer_interface.h"
 #include "api/rtp_parameters.h"
 #include "api/rtp_sender_interface.h"
+#include "api/rtp_stream_sender.h"
 #include "api/scoped_refptr.h"
 #include "api/video/video_content_type.h"
 #include "api/video/video_frame.h"
@@ -250,6 +251,11 @@ class VideoSendStream {
   virtual Stats GetStats() = 0;
 
   virtual void GenerateKeyFrame(const std::vector<std::string>& rids) = 0;
+
+  virtual rtc::scoped_refptr<RtpStreamSender> ReplaceStreamSender() {
+    RTC_LOG(LS_ERROR) << "Inside VideoSendStream::ReplaceStreamSender";
+    RTC_CHECK_NOTREACHED();
+  }
 
  protected:
   virtual ~VideoSendStream() {}

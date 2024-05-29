@@ -24,6 +24,7 @@
 #include "api/field_trials_view.h"
 #include "api/rtc_event_log/rtc_event_log.h"
 #include "api/sequence_checker.h"
+#include "api/rtp_stream_sender.h"
 #include "api/task_queue/task_queue_base.h"
 #include "api/task_queue/task_queue_factory.h"
 #include "api/video_codecs/video_encoder.h"
@@ -153,6 +154,11 @@ class RtpVideoSender : public RtpVideoSenderInterface,
   void OnPacketFeedbackVector(
       std::vector<StreamPacketInfo> packet_feedback_vector)
       RTC_LOCKS_EXCLUDED(mutex_) override;
+
+  rtc::scoped_refptr<RtpStreamSender> ReplaceStreamSender() override {
+    RTC_LOG(LS_ERROR) << "Inside RtpVideoSender::ReplaceStreamSender";
+    return rtp_streams_[0].sender_video->ReplaceStreamSender();
+  }
 
  private:
   bool IsActiveLocked() RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_);

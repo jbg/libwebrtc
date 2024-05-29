@@ -167,6 +167,10 @@ class RtpPacket {
   // Returns debug string of RTP packet (without detailed extension info).
   std::string ToString() const;
 
+  // Allocates and returns place to store rtp header extension.
+  // Returns empty arrayview on failure.
+  rtc::ArrayView<uint8_t> AllocateRawExtension(int id, size_t length);
+
  private:
   struct ExtensionInfo {
     explicit ExtensionInfo(uint8_t id) : ExtensionInfo(id, 0, 0) {}
@@ -188,10 +192,6 @@ class RtpPacket {
   // Returns reference to extension info for a given id. Creates a new entry
   // with the specified id if not found.
   ExtensionInfo& FindOrCreateExtensionInfo(int id);
-
-  // Allocates and returns place to store rtp header extension.
-  // Returns empty arrayview on failure.
-  rtc::ArrayView<uint8_t> AllocateRawExtension(int id, size_t length);
 
   // Promotes existing one-byte header extensions to two-byte header extensions
   // by rewriting the data and updates the corresponding extension offsets.
