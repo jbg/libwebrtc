@@ -190,7 +190,9 @@ TEST(FrameCombinerDeathTest, DebugBuildCrashesWithHighRate) {
       EXPECT_DEATH(
           combiner.Combine(frames_to_combine, number_of_channels, rate,
                            frames_to_combine.size(), &audio_frame_for_mixing),
-          "");
+          "")
+          << "number_of_channels=" << number_of_channels << ", rate=" << rate
+          << ", frames to combine=" << frames_to_combine.size();
 #elif !RTC_DCHECK_IS_ON
       combiner.Combine(frames_to_combine, number_of_channels, rate,
                        frames_to_combine.size(), &audio_frame_for_mixing);
