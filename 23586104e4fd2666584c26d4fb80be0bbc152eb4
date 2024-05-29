@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95d36c22_8b026509",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 1506,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2024-05-29T07:23:14Z",
+      "side": 1,
+      "message": "I think you should have crypto_random.{h,cc} already in this target, remove the public_deps but instead have a \"deps\" on ssl-\u003ecrypto_random.",
+      "revId": "23586104e4fd2666584c26d4fb80be0bbc152eb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
