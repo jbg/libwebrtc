@@ -16,6 +16,24 @@
       "message": "Are you OK with this?",
       "revId": "727a053dc9b3e19e0cc84a9f56ba4d6fd0ffeff2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5735d637_f4065e7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2024-05-29T08:02:52Z",
+      "side": 1,
+      "message": "Yes, I agree that this likely hasn\u0027t been used in ~5 years.\n\nHowever, the BWE_TEST_LOGGING macro makes it easier to plot additional fields (for debugging) compared to adding them to the event log. If this type of debugging is needed, I recommend using one of the other methods for emitting stats; for example the metrics API https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/api/test/metrics/",
+      "parentUuid": "a4f46a72_0ea24a4c",
+      "revId": "727a053dc9b3e19e0cc84a9f56ba4d6fd0ffeff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
