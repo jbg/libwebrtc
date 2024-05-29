@@ -67,6 +67,10 @@ TEST(ReceiveSideCongestionControllerTest, SendsRembWithAbsSendTime) {
   }
 }
 
+TEST(ReceiveSideCongestionControllerTest, SendsRfc8888FeedbackIfForced) {
+  // actually write some tests...
+}
+
 TEST(ReceiveSideCongestionControllerTest,
      SendsRembAfterSetMaxDesiredReceiveBitrate) {
   MockFunction<void(std::vector<std::unique_ptr<rtcp::RtcpPacket>>)>
