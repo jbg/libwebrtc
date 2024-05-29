@@ -16,6 +16,42 @@
       "message": "I think you should have crypto_random.{h,cc} already in this target, remove the public_deps but instead have a \"deps\" on ssl-\u003ecrypto_random.",
       "revId": "23586104e4fd2666584c26d4fb80be0bbc152eb4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02a69693_62abe64f",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 1506,
+      "author": {
+        "id": 3350241
+      },
+      "writtenOn": "2024-05-29T15:56:52Z",
+      "side": 1,
+      "message": "I tried but this would require me to introduce a dependency on crypto_random in p2p:rtc_p2p because portallocator.h still requires",
+      "parentUuid": "95d36c22_8b026509",
+      "revId": "23586104e4fd2666584c26d4fb80be0bbc152eb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08042bf4_559bd54d",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 1506,
+      "author": {
+        "id": 3350241
+      },
+      "writtenOn": "2024-05-29T15:56:52Z",
+      "side": 1,
+      "message": "I tried but that introduces a dependency on crypto_random in rtc_p2p because port_allocator.h still has the unnecessary include because of Chromium. Possible but I think it is going to be less churn doing the move in the second second.",
+      "parentUuid": "95d36c22_8b026509",
+      "revId": "23586104e4fd2666584c26d4fb80be0bbc152eb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
