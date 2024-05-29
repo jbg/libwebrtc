@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1da085f6_c590d435",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2024-05-29T14:27:06Z",
+      "side": 1,
+      "message": "Would you mind taking a first look even though no tests are written yet? \nThis class would need some more work in the future, but for now, I would like to not spend too much time on this if possible.",
+      "revId": "3c60f450923136bc08ecc5dd519f6272ab525cfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
