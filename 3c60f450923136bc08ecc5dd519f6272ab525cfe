@@ -16,6 +16,127 @@
       "message": "Would you mind taking a first look even though no tests are written yet? \nThis class would need some more work in the future, but for now, I would like to not spend too much time on this if possible.",
       "revId": "3c60f450923136bc08ecc5dd519f6272ab525cfe",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0323f30_a25abde6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-29T16:09:52Z",
+      "side": 1,
+      "message": "sure, any class might need some more work in the future, but for now better to do something minimal that is not too ugly and does the job.",
+      "parentUuid": "1da085f6_c590d435",
+      "revId": "3c60f450923136bc08ecc5dd519f6272ab525cfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccd93486_00549699",
+        "filename": "modules/congestion_controller/include/receive_side_congestion_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-29T16:09:52Z",
+      "side": 1,
+      "message": "why do you need such function in the api?\n\nIs this class created before negotiation is complete?\ncould re-negotiation turn off the RFC8888?",
+      "revId": "3c60f450923136bc08ecc5dd519f6272ab525cfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f706abb_1fb1fe7d",
+        "filename": "modules/congestion_controller/include/receive_side_congestion_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-29T16:09:52Z",
+      "side": 1,
+      "message": "missing \u0027 - \u0027\n(presubmit should shout at you for missing \u0027-\u0027 between link and details)\n\nSee https://google.github.io/styleguide/cppguide.html#TODO_Comments\nor http://go/todo-style",
+      "range": {
+        "startLine": 83,
+        "startChar": 35,
+        "endLine": 83,
+        "endChar": 36
+      },
+      "revId": "3c60f450923136bc08ecc5dd519f6272ab525cfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88aad275_52f0f32d",
+        "filename": "modules/congestion_controller/receive_side_congestion_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-29T16:09:52Z",
+      "side": 1,
+      "message": "if you do not need to enable RFC8888 dynamically, you can move creation of the generator into a smaller helper in the anonymous namespace, then less changes are needed to the main class:\n\n```\nabsl::Nonnull\u003cstd::unique_ptr\u003cRtpTransportFeedbackGenerator\u003e\u003e\nCreateGenerator(RtcpSender feedback_sender, const Environment\u0026 env, network_state_estimator) {\n  ParseFT(..., \u0026send_rfc8888, env.field_trials());\n  if (send_rfc8888) {\n    return std::make_unique\u003cCCFG\u003e(env_, std::move(feedback_sender));\n  } else {\n    return std::make_unique\u003cTSNFG\u003e(std::move(feedback_sender), network_state_estimator);\n  } \n}\n```",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 3
+      },
+      "revId": "3c60f450923136bc08ecc5dd519f6272ab525cfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1757e2a1_0f929f0e",
+        "filename": "modules/congestion_controller/receive_side_congestion_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-29T16:09:52Z",
+      "side": 1,
+      "message": "here you are using \nTSNFG::RtcpSender as CCFG::RtcpSender - seems would be better to move RtcpSender alias into the base interface even though the interface itself doesn\u0027t use it.",
+      "range": {
+        "startLine": 107,
+        "startChar": 65,
+        "endLine": 107,
+        "endChar": 77
+      },
+      "revId": "3c60f450923136bc08ecc5dd519f6272ab525cfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac0190b1_3b39b976",
+        "filename": "modules/congestion_controller/receive_side_congestion_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-29T16:09:52Z",
+      "side": 1,
+      "message": "so this automatically implies no Receive-side BWE?\nhm.... that makes `feedback_generator_` and `rbe_` mutually exclusive. so may be there could be a follow-up refactoring that would merge these two interfaces...\nDefinitely not now.",
+      "revId": "3c60f450923136bc08ecc5dd519f6272ab525cfe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
