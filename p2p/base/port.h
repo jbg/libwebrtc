@@ -181,6 +181,7 @@ class RTC_EXPORT Port : public PortInterface, public sigslot::has_slots<> {
     absl::string_view ice_password;
     const webrtc::FieldTrialsView* field_trials;
     uint64_t ice_tiebreaker;
+    uint64_t foundation_seed;
   };
 
  protected:
@@ -491,6 +492,7 @@ class RTC_EXPORT Port : public PortInterface, public sigslot::has_slots<> {
   bool enable_port_packets_;
   IceRole ice_role_;
   const uint64_t ice_tiebreaker_;
+  const uint64_t foundation_seed_;
   bool shared_socket_;
 
   // A virtual cost perceived by the user, usually based on the network type

@@ -119,6 +119,7 @@ Port::Port(const PortParametersRef& args,
       enable_port_packets_(false),
       ice_role_(ICEROLE_UNKNOWN),
       ice_tiebreaker_(args.ice_tiebreaker),
+      foundation_seed_(args.foundation_seed),
       shared_socket_(shared_socket),
       network_cost_(args.network->GetCost(*field_trials_)),
       weak_factory_(this) {
@@ -220,7 +221,7 @@ void Port::AddAddress(const rtc::SocketAddress& address,
               type, generation_, "", network_->id(), network_cost_);
   // Set the relay protocol before computing the foundation field.
   c.set_relay_protocol(relay_protocol);
-  c.ComputeFoundation(base_address, ice_tiebreaker_);
+  c.ComputeFoundation(base_address, foundation_seed_);
 
   c.set_priority(
       c.GetPriority(type_preference, network_->preference(), relay_preference,

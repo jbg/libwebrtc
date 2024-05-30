@@ -451,6 +451,7 @@ class RTC_EXPORT PortAllocator : public sigslot::has_slots<> {
   Candidate SanitizeCandidate(const Candidate& c) const;
 
   uint64_t ice_tiebreaker() const { return tiebreaker_; }
+  uint64_t foundation_seed() const { return foundation_seed_; }
 
   uint32_t flags() const {
     CheckRunOnValidThreadIfInitialized();
@@ -642,8 +643,10 @@ class RTC_EXPORT PortAllocator : public sigslot::has_slots<> {
   std::vector<std::unique_ptr<PortAllocatorSession>>::const_iterator
   FindPooledSession(const IceParameters* ice_credentials = nullptr) const;
 
-  // ICE tie breaker.
+  // ICE tie breaker. Random number sent out via the network.
   uint64_t tiebreaker_;
+  // Random seed for foundation generation.
+  uint64_t foundation_seed_;
 };
 
 }  // namespace cricket

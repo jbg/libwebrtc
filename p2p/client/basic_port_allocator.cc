@@ -1476,7 +1476,8 @@ void AllocationSequence::CreateUDPPorts() {
          .ice_username_fragment = session_->username(),
          .ice_password = session_->password(),
          .field_trials = session_->allocator()->field_trials(),
-         .ice_tiebreaker = session_->allocator()->ice_tiebreaker()},
+         .ice_tiebreaker = session_->allocator()->ice_tiebreaker(),
+         .foundation_seed = session_->allocator()->foundation_seed()},
         udp_socket_.get(), emit_local_candidate_for_anyaddress,
         session_->allocator()->stun_candidate_keepalive_interval());
   } else {
