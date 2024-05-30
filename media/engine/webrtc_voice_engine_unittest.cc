@@ -3314,6 +3314,82 @@ TEST_P(WebRtcVoiceEngineTestFake, SetOutputVolume) {
   EXPECT_DOUBLE_EQ(3, GetRecvStream(kSsrcY).gain());
 }
 
+TEST_P(WebRtcVoiceEngineTestFake, SetAudioLevelCallback) {
+  EXPECT_TRUE(SetupRecvStream());
+  auto& stream = GetRecvStream(kSsrcX);
+  // No callback object should be set at this point.
+  EXPECT_FALSE(stream.level_callback());
+
+  // Assign our own callback.
+  uint32_t callback_timestamp = 0;
+  absl::optional<uint8_t> callback_level;
+  receive_channel_->SetAudioLevelCallback(
+      kSsrcX, [&](uint32_t timestamp, absl::optional<uint8_t> level) {
+        callback_timestamp = timestamp;
+        callback_level = level;
+      });
+  ASSERT_TRUE(stream.level_callback());
+
+  // Verify that the correct callback object has been set on the receive stream.
+  stream.level_callback()(1000u, 55u);
+  EXPECT_EQ(callback_level, absl::optional<uint8_t>(55u));
+  EXPECT_EQ(callback_timestamp, 1000u);
+
+  // Verify that the `RemoveAudioLevelCallback()` code path is called.
+  receive_channel_->SetAudioLevelCallback(kSsrcX, nullptr);
+  EXPECT_FALSE(stream.level_callback());
+}
+
+TEST_P(WebRtcVoiceEngineTestFake, SetUnsignaledAudioLevelCallback) {
+  ASSERT_TRUE(SetupChannel());
+  EXPECT_TRUE(call_.GetAudioReceiveStreams().empty());
+
+  cricket::AudioRecvParameters parameters;
+  parameters.codecs.push_back(kOpusCodec);
+  parameters.codecs.push_back(kPcmuCodec);
+  EXPECT_TRUE(receive_channel_->SetRecvParameters(parameters));
+
+  // Assign our own default unsignaled callback.
+  uint32_t callback_timestamp = 0;
+  absl::optional<uint8_t> callback_level;
+  receive_channel_->SetAudioLevelCallback(
+      absl::nullopt, [&](uint32_t timestamp, absl::optional<uint8_t> level) {
+        callback_timestamp = timestamp;
+        callback_level = level;
+      });
+
+  DeliverPacket(kPcmuFrame, sizeof(kPcmuFrame));
+  ASSERT_EQ(1u, call_.GetAudioReceiveStreams().size());
+
+  auto& stream = GetRecvStream(kSsrc1);
+  ASSERT_TRUE(stream.level_callback());
+  // Store the internal id of this stream for later.
+  const int first_id = stream.id();
+
+  // Verify that the correct callback object has been set on the receive stream.
+  stream.level_callback()(1000u, 55u);
+  EXPECT_EQ(callback_level, absl::optional<uint8_t>(55u));
+  EXPECT_EQ(callback_timestamp, 1000u);
+
+  // Remove the default stream and create a new one.
+  // The same callback object should be assigned to the new stream.
+  EXPECT_TRUE(receive_channel_->RemoveRecvStream(kSsrc1));
+  ASSERT_TRUE(call_.GetAudioReceiveStreams().empty());
+  DeliverPacket(kPcmuFrame, sizeof(kPcmuFrame));
+
+  auto& stream2 = GetRecvStream(kSsrc1);
+  // Make sure that a new stream object was created.
+  EXPECT_NE(stream2.id(), first_id);
+
+  stream2.level_callback()(1111u, 66u);
+  EXPECT_EQ(callback_level, absl::optional<uint8_t>(66u));
+  EXPECT_EQ(callback_timestamp, 1111u);
+
+  // Verify that the default code path for the unsignaled ssrc is called.
+  receive_channel_->SetAudioLevelCallback(absl::nullopt, nullptr);
+  EXPECT_FALSE(stream2.level_callback());
+}
+
 TEST_P(WebRtcVoiceEngineTestFake, SetOutputVolumeUnsignaledRecvStream) {
   EXPECT_TRUE(SetupChannel());
 

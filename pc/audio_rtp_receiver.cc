@@ -65,6 +65,7 @@ AudioRtpReceiver::AudioRtpReceiver(
 AudioRtpReceiver::~AudioRtpReceiver() {
   RTC_DCHECK_RUN_ON(&signaling_thread_checker_);
   RTC_DCHECK(!media_channel_);
+  RTC_DCHECK(!source_started_);
 
   track_->GetSource()->UnregisterAudioObserver(this);
   track_->UnregisterObserver(this);
@@ -192,11 +193,17 @@ void AudioRtpReceiver::RestartMediaChannel_w(
   if (state != MediaSourceInterface::kInitializing) {
     if (signaled_ssrc_ == ssrc)
       return;
-    source_->Stop(media_channel_, signaled_ssrc_);
+    if (source_started_) {
+      source_started_ = false;
+      source_->Stop(media_channel_, signaled_ssrc_);
+    }
   }
+
+  RTC_DCHECK(!source_started_);
 
   signaled_ssrc_ = std::move(ssrc);
   source_->Start(media_channel_, signaled_ssrc_);
+  source_started_ = true;
   if (signaled_ssrc_) {
     media_channel_->SetBaseMinimumPlayoutDelayMs(*signaled_ssrc_,
                                                  delay_.GetMs());
@@ -327,8 +334,13 @@ void AudioRtpReceiver::SetMediaChannel(
   RTC_DCHECK_RUN_ON(worker_thread_);
   RTC_DCHECK(media_channel == nullptr ||
              media_channel->media_type() == media_type());
-  if (!media_channel && media_channel_)
+  if (!media_channel && media_channel_) {
     SetOutputVolume_w(0.0);
+    if (source_started_) {
+      source_started_ = false;
+      source_->Stop(media_channel_, signaled_ssrc_);
+    }
+  }
 
   media_channel ? worker_thread_safety_->SetAlive()
                 : worker_thread_safety_->SetNotAlive();

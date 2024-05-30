@@ -154,6 +154,9 @@ void FakeVoiceMediaReceiveChannel::SetDefaultRawAudioSink(
     std::unique_ptr<webrtc::AudioSinkInterface> sink) {
   sink_ = std::move(sink);
 }
+void FakeVoiceMediaReceiveChannel::SetAudioLevelCallback(
+    absl::optional<uint32_t> ssrc,
+    absl::AnyInvocable<void(uint32_t, absl::optional<uint8_t>)> callback) {}
 std::vector<webrtc::RtpSource> FakeVoiceMediaReceiveChannel::GetSources(
     uint32_t ssrc) const {
   return std::vector<webrtc::RtpSource>();

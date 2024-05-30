@@ -97,6 +97,11 @@ class FakeAudioReceiveStream final
   int received_packets() const { return received_packets_; }
   bool VerifyLastPacket(const uint8_t* data, size_t length) const;
   const webrtc::AudioSinkInterface* sink() const { return sink_; }
+  absl::AnyInvocable<void(uint32_t, absl::optional<uint8_t>)>& level_callback()
+      const {
+    return level_callback_;
+  }
+
   float gain() const { return gain_; }
   bool DeliverRtp(const uint8_t* packet, size_t length, int64_t packet_time_us);
   bool started() const { return started_; }
@@ -130,6 +135,11 @@ class FakeAudioReceiveStream final
   webrtc::AudioReceiveStreamInterface::Stats GetStats(
       bool get_and_clear_legacy_stats) const override;
   void SetSink(webrtc::AudioSinkInterface* sink) override;
+  void SetAudioLevelCallback(
+      absl::AnyInvocable<void(uint32_t, absl::optional<uint8_t>)> callback)
+      override;
+  absl::AnyInvocable<void(uint32_t, absl::optional<uint8_t>)>
+  RemoveAudioLevelCallback() override;
   void SetGain(float gain) override;
   bool SetBaseMinimumPlayoutDelayMs(int delay_ms) override {
     base_mininum_playout_delay_ms_ = delay_ms;
@@ -148,6 +158,10 @@ class FakeAudioReceiveStream final
   webrtc::AudioReceiveStreamInterface::Stats stats_;
   int received_packets_ = 0;
   webrtc::AudioSinkInterface* sink_ = nullptr;
+  // Mutable to allow tests to be able to call the level_callback() getter
+  // and check the callback object without requiring const_cast.
+  mutable absl::AnyInvocable<void(uint32_t, absl::optional<uint8_t>)>
+      level_callback_;
   float gain_ = 1.0f;
   rtc::Buffer last_packet_;
   bool started_ = false;

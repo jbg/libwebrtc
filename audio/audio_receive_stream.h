@@ -99,6 +99,11 @@ class AudioReceiveStreamImpl final : public webrtc::AudioReceiveStreamInterface,
   webrtc::AudioReceiveStreamInterface::Stats GetStats(
       bool get_and_clear_legacy_stats) const override;
   void SetSink(AudioSinkInterface* sink) override;
+  void SetAudioLevelCallback(
+      absl::AnyInvocable<void(uint32_t, absl::optional<uint8_t>)> callback)
+      override;
+  absl::AnyInvocable<void(uint32_t, absl::optional<uint8_t>)>
+  RemoveAudioLevelCallback() override;
   void SetGain(float gain) override;
   bool SetBaseMinimumPlayoutDelayMs(int delay_ms) override;
   int GetBaseMinimumPlayoutDelayMs() const override;

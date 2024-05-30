@@ -141,6 +141,7 @@ class AudioRtpReceiver : public ObserverInterface,
   std::vector<rtc::scoped_refptr<MediaStreamInterface>> streams_
       RTC_GUARDED_BY(&signaling_thread_checker_);
   bool cached_track_enabled_ RTC_GUARDED_BY(&signaling_thread_checker_);
+  bool source_started_ RTC_GUARDED_BY(worker_thread_) = false;
   double cached_volume_ RTC_GUARDED_BY(worker_thread_) = 1.0;
   RtpReceiverObserverInterface* observer_
       RTC_GUARDED_BY(&signaling_thread_checker_) = nullptr;

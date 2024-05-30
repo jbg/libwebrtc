@@ -68,6 +68,8 @@ void SourceTracker::OnFrameDeliveredInternal(
     entry.absolute_capture_time = packet_info.absolute_capture_time();
     entry.local_capture_clock_offset = packet_info.local_capture_clock_offset();
     entry.rtp_timestamp = packet_info.rtp_timestamp();
+
+    FireAudioLevelCallback(key, entry);
   }
 
   PruneEntries(now);
@@ -94,6 +96,29 @@ std::vector<RtpSource> SourceTracker::GetSources() const {
   return sources;
 }
 
+void SourceTracker::SetAudioLevelCallback(
+    uint32_t ssrc,
+    absl::AnyInvocable<void(uint32_t, absl::optional<uint8_t>)>
+        level_callback) {
+  RTC_DCHECK_RUN_ON(worker_thread_);
+  RTC_DCHECK(level_callback);
+  SourceKey key(RtpSourceType::SSRC, ssrc);
+  RTC_DCHECK(level_callbacks_.find(key) == level_callbacks_.end());
+  level_callbacks_.emplace(key, std::move(level_callback));
+}
+
+absl::AnyInvocable<void(uint32_t, absl::optional<uint8_t>)>
+SourceTracker::RemoveAudioLevelCallback(uint32_t ssrc) {
+  RTC_DCHECK_RUN_ON(worker_thread_);
+  SourceKey key(RtpSourceType::SSRC, ssrc);
+  auto it = level_callbacks_.find(key);
+  if (it == level_callbacks_.end())
+    return nullptr;
+  auto ret = std::move(it->second);
+  level_callbacks_.erase(it);
+  return ret;
+}
+
 SourceTracker::SourceEntry& SourceTracker::UpdateEntry(const SourceKey& key) {
   // We intentionally do |find() + emplace()|, instead of checking the return
   // value of `emplace()`, for performance reasons. It's much more likely for
@@ -114,9 +139,23 @@ SourceTracker::SourceEntry& SourceTracker::UpdateEntry(const SourceKey& key) {
 void SourceTracker::PruneEntries(Timestamp now) const {
   Timestamp prune = now - kTimeout;
   while (!list_.empty() && list_.back().second.timestamp < prune) {
-    map_.erase(list_.back().first);
+    const auto& key = list_.back().first;
+    if (key.source_type == RtpSourceType::SSRC) {
+      auto& entry = list_.back().second;
+      entry.audio_level = absl::nullopt;  // Signal timeout.
+      FireAudioLevelCallback(key, entry);
+    }
+
+    map_.erase(key);
     list_.pop_back();
   }
+}
+
+void SourceTracker::FireAudioLevelCallback(const SourceKey& key,
+                                           const SourceEntry& entry) const {
+  auto callback = level_callbacks_.find(key);
+  if (callback != level_callbacks_.end())
+    callback->second(entry.rtp_timestamp, entry.audio_level);
 }
 
 }  // namespace webrtc

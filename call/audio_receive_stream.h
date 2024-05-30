@@ -16,6 +16,7 @@
 #include <string>
 #include <vector>
 
+#include "absl/functional/any_invocable.h"
 #include "absl/types/optional.h"
 #include "api/audio_codecs/audio_decoder_factory.h"
 #include "api/call/transport.h"
@@ -180,6 +181,36 @@ class AudioReceiveStreamInterface : public MediaReceiveStreamInterface {
   // is being pulled+rendered and/or if audio is being pulled for the purposes
   // of feeding to the AEC.
   virtual void SetSink(AudioSinkInterface* sink) = 0;
+
+  // Allows signing up for audio level callbacks for the RTP audio stream.
+  // The audio levels reported are the same as provided via
+  // getContributingSources. Only one callback can be set per
+  // AudioReceiveStreamInterface instance.
+  //
+  // The first parameter will be the RTP timestamp of the most recent packet
+  // that the audio level represents.
+  //
+  // A callback implementation should expect that audio level can be
+  // absl::nullopt if packets have stopped arriving from the source.
+  // When set, the audio levels will be in the range 0..127 (-dBov) with 127
+  // representing digital silence and 0 the loudest value (closest to overload).
+  // See also https://datatracker.ietf.org/doc/html/rfc6464.
+  //
+  // Threading: Calls to `SetAudioLevelCallback` must be made from the worker
+  // thread and callbacks occur on the same thread. Subject to change however.
+  //
+  // TODO(tommi): Change this so that the callbacks arrive on the signaling
+  // thread instead of worker and move `getContributingSources` to the signaling
+  // thread as well. The worker and network threads might be configured
+  // to be one and the same and the API state is generally associated with the
+  // the signaling thread and should not block the network thread.
+  virtual void SetAudioLevelCallback(
+      absl::AnyInvocable<void(uint32_t, absl::optional<uint8_t>)> callback) = 0;
+
+  // Removes and returns a callback object previously registered via
+  // `SetAudioLevelCallback`.
+  virtual absl::AnyInvocable<void(uint32_t, absl::optional<uint8_t>)>
+  RemoveAudioLevelCallback() = 0;
 
   // Sets playback gain of the stream, applied when mixing, and thus after it
   // is potentially forwarded to any attached AudioSinkInterface implementation.

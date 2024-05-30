@@ -57,8 +57,9 @@ class AudioTrack : public MediaStreamTrack<AudioTrackInterface>,
   void OnChanged() override;
 
  private:
-  const rtc::scoped_refptr<AudioSourceInterface> audio_source_;
   RTC_NO_UNIQUE_ADDRESS SequenceChecker signaling_thread_checker_;
+  const rtc::scoped_refptr<AudioSourceInterface> audio_source_;
+  bool muted_ RTC_GUARDED_BY(&signaling_thread_checker_) = false;
 };
 
 }  // namespace webrtc

@@ -12,6 +12,7 @@
 
 #include <stddef.h>
 
+#include <limits>
 #include <memory>
 #include <string>
 #include <utility>
@@ -26,6 +27,30 @@
 #include "rtc_base/trace_event.h"
 
 namespace webrtc {
+namespace {
+
+// Returns true if `timestamp` is older than `current_timestamp`.
+bool IsOutOfOrderTimestamp(uint32_t current_timestamp, uint32_t timestamp) {
+  constexpr uint32_t kMaxDelta = std::numeric_limits<uint32_t>::max() / 2;
+  uint32_t delta;
+  if (timestamp > current_timestamp) {
+    // Most often the delta will be in the order of tens of ms. A corner case to
+    // be aware of is if current_timestamp recently wrapped around, then a
+    // late-arriving packet could meet this condition but a large delta will
+    // catch out of order packets.
+    delta = timestamp - current_timestamp;
+  } else {
+    // In the normal case when `timestamp` wrapped around, the delta will
+    // be smaller than `kMaxDelta`. If the delta is larger, then that's an
+    // out of order packet.
+    delta =
+        timestamp + (std::numeric_limits<uint32_t>::max() - current_timestamp);
+  }
+
+  return delta > kMaxDelta;
+}
+
+}  // namespace
 
 // This proxy is passed to the underlying media engine to receive audio data as
 // they come in. The data will then be passed back up to the RemoteAudioSource
@@ -78,11 +103,40 @@ void RemoteAudioSource::Start(
   // Register for callbacks immediately before AddSink so that we always get
   // notified when a channel goes out of scope (signaled when "AudioDataProxy"
   // is destroyed).
-  RTC_DCHECK(media_channel);
-  ssrc ? media_channel->SetRawAudioSink(*ssrc,
-                                        std::make_unique<AudioDataProxy>(this))
-       : media_channel->SetDefaultRawAudioSink(
-             std::make_unique<AudioDataProxy>(this));
+  auto proxy = std::make_unique<AudioDataProxy>(this);
+  ssrc ? media_channel->SetRawAudioSink(*ssrc, std::move(proxy))
+       : media_channel->SetDefaultRawAudioSink(std::move(proxy));
+
+  media_channel->SetAudioLevelCallback(
+      ssrc, [this](uint32_t timestamp, absl::optional<uint8_t> level) {
+        RTC_DCHECK_RUN_ON(worker_thread_);
+        if (muted_on_worker_thread_ != kAudioStateUnknown) {
+          if (IsOutOfOrderTimestamp(rtp_timestamp_, timestamp)) {
+            RTC_DLOG(LS_INFO)
+                << "Ignoring out of order packet. have=" << rtp_timestamp_
+                << " incoming=" << timestamp;
+            return;
+          }
+        }
+
+        rtp_timestamp_ = timestamp;
+
+        AudioStateOnWorker muted = (!level.has_value() || level.value() == 127)
+                                       ? kAudioStateMuted
+                                       : kAudioStateUnmuted;
+        if (muted == muted_on_worker_thread_)
+          return;
+
+        muted_on_worker_thread_ = muted;
+        main_thread_->PostTask(
+            [this, thiz = rtc::scoped_refptr<RemoteAudioSource>(this), muted] {
+              RTC_DCHECK_RUN_ON(main_thread_);
+              const auto required_current_state =
+                  (muted == kAudioStateMuted) ? kLive : kMuted;
+              if (state_ == required_current_state)
+                SetState((muted == kAudioStateMuted) ? kMuted : kLive);
+            });
+      });
 }
 
 void RemoteAudioSource::Stop(
@@ -92,6 +146,7 @@ void RemoteAudioSource::Stop(
   RTC_DCHECK(media_channel);
   ssrc ? media_channel->SetRawAudioSink(*ssrc, nullptr)
        : media_channel->SetDefaultRawAudioSink(nullptr);
+  media_channel->SetAudioLevelCallback(ssrc, nullptr);
 }
 
 void RemoteAudioSource::SetState(SourceState new_state) {
