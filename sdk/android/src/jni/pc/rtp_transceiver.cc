@@ -12,7 +12,9 @@
 
 #include <string>
 
+#include "sdk/android/generated_external_classes_jni/Void_jni.h"
 #include "sdk/android/generated_peerconnection_jni/RtpTransceiver_jni.h"
+#include "sdk/android/generated_rtcerror_jni/RTCErrorOr_jni.h"
 #include "sdk/android/native_api/jni/java_types.h"
 #include "sdk/android/src/jni/jni_helpers.h"
 #include "sdk/android/src/jni/pc/media_stream_track.h"
@@ -140,15 +142,24 @@ ScopedJavaLocalRef<jobject> JNI_RtpTransceiver_CurrentDirection(
                    : nullptr;
 }
 
-void JNI_RtpTransceiver_SetCodecPreferences(
+jni_zero::ScopedJavaLocalRef<jobject> JNI_RtpTransceiver_SetCodecPreferences(
     JNIEnv* jni,
     jlong j_rtp_transceiver_pointer,
     const JavaParamRef<jobject>& j_codecs) {
-  std::vector<RtpCodecCapability> codecs =
-      JavaListToNativeVector<RtpCodecCapability, jobject>(
-          jni, j_codecs, &JavaToNativeRtpCodecCapability);
-  reinterpret_cast<RtpTransceiverInterface*>(j_rtp_transceiver_pointer)
-      ->SetCodecPreferences(codecs);
+  std::vector<RtpCodecCapability> codecs;
+  if (j_codecs) {
+    codecs = JavaListToNativeVector<RtpCodecCapability, jobject>(
+        jni, j_codecs, &JavaToNativeRtpCodecCapability);
+  }
+  RTCError error =
+      reinterpret_cast<RtpTransceiverInterface*>(j_rtp_transceiver_pointer)
+          ->SetCodecPreferences(codecs);
+
+  if (!error.ok()) {
+    return Java_RTCErrorOr_error(jni, NativeToJavaString(jni, error.message()));
+  }
+
+  return Java_RTCErrorOr_success(jni, JNI_Void::Java_Void_Constructor(jni));
 }
 
 void JNI_RtpTransceiver_StopInternal(JNIEnv* jni,

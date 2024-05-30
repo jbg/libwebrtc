@@ -13,21 +13,18 @@ package org.webrtc;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.webrtc.MediaStreamTrack;
-import org.webrtc.RtpParameters;
 
 /**
  * Java wrapper for a C++ RtpTransceiverInterface.
  *
- * <p>The RTCRtpTransceiver maps to the RTCRtpTransceiver defined by the WebRTC
- * specification. A transceiver represents a combination of an RTCRtpSender
- * and an RTCRtpReceiver that share a common mid. As defined in JSEP, an
- * RTCRtpTransceiver is said to be associated with a media description if its
- * mid property is non-nil; otherwise, it is said to be disassociated.
- * JSEP: https://tools.ietf.org/html/draft-ietf-rtcweb-jsep-24
+ * <p>The RTCRtpTransceiver maps to the RTCRtpTransceiver defined by the WebRTC specification. A
+ * transceiver represents a combination of an RTCRtpSender and an RTCRtpReceiver that share a common
+ * mid. As defined in JSEP, an RTCRtpTransceiver is said to be associated with a media description
+ * if its mid property is non-nil; otherwise, it is said to be disassociated. JSEP:
+ * https://tools.ietf.org/html/draft-ietf-rtcweb-jsep-24
  *
- * <p>Note that RTCRtpTransceivers are only supported when using
- * RTCPeerConnection with Unified Plan SDP.
+ * <p>Note that RTCRtpTransceivers are only supported when using RTCPeerConnection with Unified Plan
+ * SDP.
  *
  * <p>WebRTC specification for RTCRtpTransceiver, the JavaScript analog:
  * https://w3c.github.io/webrtc-pc/#dom-rtcrtptransceiver
@@ -204,43 +201,42 @@ public class RtpTransceiver {
   public boolean setDirection(RtpTransceiverDirection rtpTransceiverDirection) {
     checkRtpTransceiverExists();
     return nativeSetDirection(nativeRtpTransceiver, rtpTransceiverDirection);
-  }
+    }
 
-  /**
-   * The Stop method will for the time being call the StopInternal method.
-   * After a migration procedure, stop() will be equivalent to StopStandard.
-   */
-  public void stop() {
-    checkRtpTransceiverExists();
-    nativeStopInternal(nativeRtpTransceiver);
-  }
+    /**
+     * The Stop method will for the time being call the StopInternal method. After a migration
+     * procedure, stop() will be equivalent to StopStandard.
+     */
+    public void stop() {
+        checkRtpTransceiverExists();
+        nativeStopInternal(nativeRtpTransceiver);
+    }
 
-  public void setCodecPreferences(List<RtpCapabilities.CodecCapability> codecs) {
-    checkRtpTransceiverExists();
-    nativeSetCodecPreferences(nativeRtpTransceiver, codecs);
-  }
+    public RTCErrorOr<Void> setCodecPreferences(List<RtpCapabilities.CodecCapability> codecs) {
+        checkRtpTransceiverExists();
+        return nativeSetCodecPreferences(nativeRtpTransceiver, codecs);
+    }
 
-  /**
-   * The StopInternal method stops the RtpTransceiver, like Stop, but goes
-   * immediately to Stopped state.
-   */
-  public void stopInternal() {
-    checkRtpTransceiverExists();
-    nativeStopInternal(nativeRtpTransceiver);
-  }
+    /**
+     * The StopInternal method stops the RtpTransceiver, like Stop, but goes immediately to Stopped
+     * state.
+     */
+    public void stopInternal() {
+        checkRtpTransceiverExists();
+        nativeStopInternal(nativeRtpTransceiver);
+    }
 
-  /**
-   * The StopStandard method irreversibly stops the RtpTransceiver. The sender
-   * of this transceiver will no longer send, the receiver will no longer
-   * receive.
-   *
-   * <p>The transceiver will enter Stopping state and signal NegotiationNeeded.
-   * https://w3c.github.io/webrtc-pc/#dom-rtcrtptransceiver-stop
-   */
-  public void stopStandard() {
-    checkRtpTransceiverExists();
-    nativeStopStandard(nativeRtpTransceiver);
-  }
+    /**
+     * The StopStandard method irreversibly stops the RtpTransceiver. The sender of this transceiver
+     * will no longer send, the receiver will no longer receive.
+     *
+     * <p>The transceiver will enter Stopping state and signal NegotiationNeeded.
+     * https://w3c.github.io/webrtc-pc/#dom-rtcrtptransceiver-stop
+     */
+    public void stopStandard() {
+        checkRtpTransceiverExists();
+        nativeStopStandard(nativeRtpTransceiver);
+    }
 
   @CalledByNative
   public void dispose() {
@@ -260,14 +256,22 @@ public class RtpTransceiver {
   private static native MediaStreamTrack.MediaType nativeGetMediaType(long rtpTransceiver);
   private static native String nativeGetMid(long rtpTransceiver);
   private static native RtpSender nativeGetSender(long rtpTransceiver);
-  private static native RtpReceiver nativeGetReceiver(long rtpTransceiver);
-  private static native boolean nativeStopped(long rtpTransceiver);
-  private static native RtpTransceiverDirection nativeDirection(long rtpTransceiver);
-  private static native RtpTransceiverDirection nativeCurrentDirection(long rtpTransceiver);
-  private static native void nativeStopInternal(long rtpTransceiver);
-  private static native void nativeStopStandard(long rtpTransceiver);
-  private static native boolean nativeSetDirection(
-      long rtpTransceiver, RtpTransceiverDirection rtpTransceiverDirection);
-  private static native void nativeSetCodecPreferences(
-      long rtpTransceiver, List<RtpCapabilities.CodecCapability> codecs);
+
+    private static native RtpReceiver nativeGetReceiver(long rtpTransceiver);
+
+    private static native boolean nativeStopped(long rtpTransceiver);
+
+    private static native RtpTransceiverDirection nativeDirection(long rtpTransceiver);
+
+    private static native RtpTransceiverDirection nativeCurrentDirection(long rtpTransceiver);
+
+    private static native void nativeStopInternal(long rtpTransceiver);
+
+    private static native void nativeStopStandard(long rtpTransceiver);
+
+    private static native boolean nativeSetDirection(
+            long rtpTransceiver, RtpTransceiverDirection rtpTransceiverDirection);
+
+    private static native RTCErrorOr nativeSetCodecPreferences(
+            long rtpTransceiver, List<RtpCapabilities.CodecCapability> codecs);
 }
