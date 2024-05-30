@@ -96,6 +96,9 @@ void CongestionControlFeedbackGenerator::SetTransportOverhead(
 void CongestionControlFeedbackGenerator::SendFeedback(Timestamp now) {
   absl::c_sort(packets_, [](const PacketInfo& a, const PacketInfo& b) {
     if (a.ssrc == b.ssrc) {
+      if (a.unwrapped_sequence_number == b.unwrapped_sequence_number) {
+        return a.arrival_time < b.arrival_time;
+      }
       return a.unwrapped_sequence_number < b.unwrapped_sequence_number;
     }
     return a.ssrc < b.ssrc;
