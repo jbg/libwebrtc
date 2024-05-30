@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df9c7672_1ea19c16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2024-05-30T23:46:36Z",
+      "side": 1,
+      "message": "Hi, @xalep@webrtc.org. Could you please review this change? \nI wonder if I need to separate newer version of `RtpTransceiver.setCodecPreferences` from the older one, or if I can just update the existing one.",
+      "revId": "7c731c5dbfe38fda4ec8e8ae89b7ab253b742752",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
