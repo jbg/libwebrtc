@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4b587ea_29f86186",
+        "filename": "modules/remote_bitrate_estimator/congestion_control_feedback_generator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-30T09:54:09Z",
+      "side": 1,
+      "message": "may be rewrite the comparison using tuples (with 3 members it become harder to ensure there is no off-by one error):\n\n```\nreturn std::tie(a.ssrc, a.unwrapped_sequence_number, a.arrival_time) \u003c\n       std::tie(b.ssrc, b.unwrapped_sequence_number, b.arrival_time);\n```",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 27
+      },
+      "revId": "104cbc818ea43807274c02b26cdc36a5d78b9367",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
