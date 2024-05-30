@@ -16,6 +16,120 @@
       "message": "PTAL",
       "revId": "012a524959520443243c6d93ae5e2eb02fe47965",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5cf65ac_e8cc550a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-30T09:42:03Z",
+      "side": 1,
+      "message": "I find it ugly to have both an interface and a flag describing what is behind the interface, but that works.",
+      "revId": "012a524959520443243c6d93ae5e2eb02fe47965",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5a625e8_dac88ac6",
+        "filename": "modules/congestion_controller/include/receive_side_congestion_controller.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-30T09:42:03Z",
+      "side": 1,
+      "message": "Having both interface, and a flag that indicates what is in this interface doesn\u0027t smell right....\nI wonder if it might be cleaner to have both Generators always created (they are not large, right?)\nand then based on this flag call one or another:\nThis way you won\u0027t need to keep copy of the rtcp_sender or overhead/estimate variables.\n```\nvoid OnPacket(...) {\n  if (use_rfc8888) { \n     ccfb_.OnPacket(...);\n     return;\n   }\n   if (has_tsn) {\n     tsnfb_.OnPacket(...);\n     return;\n   }\n   rbe_-\u003eOnPacket(...);\n}\n\nvoid Process() {\n  if (use_rfc8888) {\n     return ccfb_.Process();\n  }\n  return min(tsnfb_.Process(), rbe_-\u003eProcess());\n}\n\nvoid OnNewBandwidth(b) {\n  // just call both\n  ccfb_.OnNewBandwidth(b);\n  tsnfb_.OnNewBandwidth(b);\n}\n```",
+      "revId": "012a524959520443243c6d93ae5e2eb02fe47965",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7d9756a_b4c1e619",
+        "filename": "modules/congestion_controller/receive_side_congestion_controller_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-30T09:42:03Z",
+      "side": 1,
+      "message": "where in test is validated that what is sent is RFC8888?\n(may be (rtcp_sender, Call) should intersect the message, parse the RTCP header and check it has correct type/subtype)",
+      "range": {
+        "startLine": 86,
+        "startChar": 42,
+        "endLine": 86,
+        "endChar": 52
+      },
+      "revId": "012a524959520443243c6d93ae5e2eb02fe47965",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0a9a462_56cebca7",
+        "filename": "modules/congestion_controller/receive_side_congestion_controller_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-30T09:42:03Z",
+      "side": 1,
+      "message": "may be add a comment that there can\u0027t be Transport feedback because receive packet do not have transport sequence number rtp header extension.",
+      "revId": "012a524959520443243c6d93ae5e2eb02fe47965",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b36646e_d2331776",
+        "filename": "modules/remote_bitrate_estimator/rtp_transport_feedback_generator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-30T09:42:03Z",
+      "side": 1,
+      "message": "do not forget to document it.\n\nhttps://google.github.io/styleguide/cppguide.html#Aliases\n“Public aliases are for the benefit of an API\u0027s user, and should be clearly documented.”",
+      "revId": "012a524959520443243c6d93ae5e2eb02fe47965",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39e0e812_087448ea",
+        "filename": "modules/remote_bitrate_estimator/transport_sequence_number_feedback_generator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2024-05-30T09:42:03Z",
+      "side": 1,
+      "message": "you do not have to write the base class here - symbols declared there are automatically visible here too. But I do not mind you being explicit where it is definied.",
+      "range": {
+        "startLine": 48,
+        "startChar": 6,
+        "endLine": 48,
+        "endChar": 37
+      },
+      "revId": "012a524959520443243c6d93ae5e2eb02fe47965",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
