@@ -70,6 +70,24 @@
       "parentUuid": "08042bf4_559bd54d",
       "revId": "23586104e4fd2666584c26d4fb80be0bbc152eb4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9927467c_d2674204",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 1506,
+      "author": {
+        "id": 3350241
+      },
+      "writtenOn": "2024-05-30T13:58:49Z",
+      "side": 1,
+      "message": "PS6 shows a Chromium compile failure because remoting does not include helpers.h directly but via port_allocator.h while using the random id from it.\n\nAgree it is the same number of CLs",
+      "parentUuid": "0f108378_82e6482d",
+      "revId": "23586104e4fd2666584c26d4fb80be0bbc152eb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
