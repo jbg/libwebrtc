@@ -180,6 +180,7 @@ class RTC_EXPORT Port : public PortInterface, public sigslot::has_slots<> {
     absl::string_view ice_username_fragment;
     absl::string_view ice_password;
     const webrtc::FieldTrialsView* field_trials;
+    uint64_t ice_tiebreaker;
   };
 
  protected:
@@ -190,25 +191,6 @@ class RTC_EXPORT Port : public PortInterface, public sigslot::has_slots<> {
        uint16_t min_port,
        uint16_t max_port,
        bool shared_socket = false);
-  [[deprecated("Pass arguments using PortParametersRef")]] Port(
-      webrtc::TaskQueueBase* thread,
-      webrtc::IceCandidateType type,
-      rtc::PacketSocketFactory* factory,
-      const rtc::Network* network,
-      absl::string_view username_fragment,
-      absl::string_view password,
-      const webrtc::FieldTrialsView* field_trials = nullptr);
-  [[deprecated("Pass arguments using PortParametersRef")]] Port(
-      webrtc::TaskQueueBase* thread,
-      webrtc::IceCandidateType type,
-      rtc::PacketSocketFactory* factory,
-      const rtc::Network* network,
-      uint16_t min_port,
-      uint16_t max_port,
-      absl::string_view username_fragment,
-      absl::string_view password,
-      const webrtc::FieldTrialsView* field_trials = nullptr,
-      bool shared_socket = false);
 
  public:
   ~Port() override;
@@ -225,7 +207,6 @@ class RTC_EXPORT Port : public PortInterface, public sigslot::has_slots<> {
   IceRole GetIceRole() const override;
   void SetIceRole(IceRole role) override;
 
-  void SetIceTiebreaker(uint64_t tiebreaker) override;
   uint64_t IceTiebreaker() const override;
 
   bool SharedSocket() const override;
@@ -509,7 +490,7 @@ class RTC_EXPORT Port : public PortInterface, public sigslot::has_slots<> {
   int timeout_delay_;
   bool enable_port_packets_;
   IceRole ice_role_;
-  uint64_t tiebreaker_;
+  const uint64_t ice_tiebreaker_;
   bool shared_socket_;
 
   // A virtual cost perceived by the user, usually based on the network type

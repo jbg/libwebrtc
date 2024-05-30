@@ -118,7 +118,7 @@ Port::Port(const PortParametersRef& args,
       timeout_delay_(kPortTimeoutDelay),
       enable_port_packets_(false),
       ice_role_(ICEROLE_UNKNOWN),
-      tiebreaker_(0),
+      ice_tiebreaker_(args.ice_tiebreaker),
       shared_socket_(shared_socket),
       network_cost_(args.network->GetCost(*field_trials_)),
       weak_factory_(this) {
@@ -138,42 +138,6 @@ Port::Port(const PortParametersRef& args,
   RTC_LOG(LS_INFO) << ToString() << ": Port created with network cost "
                    << network_cost_;
 }
-
-Port::Port(TaskQueueBase* thread,
-           webrtc::IceCandidateType type,
-           rtc::PacketSocketFactory* factory,
-           const rtc::Network* network,
-           absl::string_view username_fragment,
-           absl::string_view password,
-           const webrtc::FieldTrialsView* field_trials)
-    : Port({.network_thread = thread,
-            .socket_factory = factory,
-            .network = network,
-            .ice_username_fragment = username_fragment,
-            .ice_password = password,
-            .field_trials = field_trials},
-           type) {}
-
-Port::Port(TaskQueueBase* thread,
-           webrtc::IceCandidateType type,
-           rtc::PacketSocketFactory* factory,
-           const rtc::Network* network,
-           uint16_t min_port,
-           uint16_t max_port,
-           absl::string_view username_fragment,
-           absl::string_view password,
-           const webrtc::FieldTrialsView* field_trials,
-           bool shared_socket /*= false*/)
-    : Port({.network_thread = thread,
-            .socket_factory = factory,
-            .network = network,
-            .ice_username_fragment = username_fragment,
-            .ice_password = password,
-            .field_trials = field_trials},
-           type,
-           min_port,
-           max_port,
-           shared_socket) {}
 
 Port::~Port() {
   RTC_DCHECK_RUN_ON(thread_);
@@ -196,12 +160,8 @@ void Port::SetIceRole(IceRole role) {
   ice_role_ = role;
 }
 
-void Port::SetIceTiebreaker(uint64_t tiebreaker) {
-  tiebreaker_ = tiebreaker;
-}
-
 uint64_t Port::IceTiebreaker() const {
-  return tiebreaker_;
+  return ice_tiebreaker_;
 }
 
 bool Port::SharedSocket() const {
@@ -260,8 +220,7 @@ void Port::AddAddress(const rtc::SocketAddress& address,
               type, generation_, "", network_->id(), network_cost_);
   // Set the relay protocol before computing the foundation field.
   c.set_relay_protocol(relay_protocol);
-  // TODO(bugs.webrtc.org/14605): ensure IceTiebreaker() is set.
-  c.ComputeFoundation(base_address, tiebreaker_);
+  c.ComputeFoundation(base_address, ice_tiebreaker_);
 
   c.set_priority(
       c.GetPriority(type_preference, network_->preference(), relay_preference,
@@ -686,7 +645,7 @@ bool Port::MaybeIceRoleConflict(const rtc::SocketAddress& addr,
   switch (ice_role_) {
     case ICEROLE_CONTROLLING:
       if (ICEROLE_CONTROLLING == remote_ice_role) {
-        if (remote_tiebreaker >= tiebreaker_) {
+        if (remote_tiebreaker >= ice_tiebreaker_) {
           SignalRoleConflict(this);
         } else {
           // Send Role Conflict (487) error response.
@@ -698,7 +657,7 @@ bool Port::MaybeIceRoleConflict(const rtc::SocketAddress& addr,
       break;
     case ICEROLE_CONTROLLED:
       if (ICEROLE_CONTROLLED == remote_ice_role) {
-        if (remote_tiebreaker < tiebreaker_) {
+        if (remote_tiebreaker < ice_tiebreaker_) {
           SignalRoleConflict(this);
         } else {
           // Send Role Conflict (487) error response.

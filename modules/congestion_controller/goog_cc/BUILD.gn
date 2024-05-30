@@ -8,16 +8,7 @@
 
 import("../../../webrtc.gni")
 
-config("bwe_test_logging") {
-  if (rtc_enable_bwe_test_logging) {
-    defines = [ "BWE_TEST_LOGGING_COMPILE_TIME_ENABLE=1" ]
-  } else {
-    defines = [ "BWE_TEST_LOGGING_COMPILE_TIME_ENABLE=0" ]
-  }
-}
-
 rtc_library("goog_cc") {
-  configs += [ ":bwe_test_logging" ]
   sources = [
     "goog_cc_network_control.cc",
     "goog_cc_network_control.h",
@@ -35,6 +26,7 @@ rtc_library("goog_cc") {
     "../../../api:network_state_predictor_api",
     "../../../api/environment",
     "../../../api/rtc_event_log",
+    "../../../api/transport:bandwidth_usage",
     "../../../api/transport:network_control",
     "../../../api/units:data_rate",
     "../../../api/units:data_size",
@@ -102,7 +94,6 @@ rtc_library("alr_detector") {
   ]
 }
 rtc_library("estimators") {
-  configs += [ ":bwe_test_logging" ]
   sources = [
     "acknowledged_bitrate_estimator.cc",
     "acknowledged_bitrate_estimator.h",
@@ -165,7 +156,6 @@ rtc_library("loss_based_bwe_v2") {
 }
 
 rtc_library("loss_based_bwe_v1") {
-  configs += [ ":bwe_test_logging" ]
   sources = [
     "loss_based_bandwidth_estimation.cc",
     "loss_based_bandwidth_estimation.h",
@@ -184,7 +174,6 @@ rtc_library("loss_based_bwe_v1") {
 }
 
 rtc_library("send_side_bwe") {
-  configs += [ ":bwe_test_logging" ]
   sources = [
     "send_side_bandwidth_estimation.cc",
     "send_side_bandwidth_estimation.h",
@@ -211,7 +200,6 @@ rtc_library("send_side_bwe") {
 }
 
 rtc_library("delay_based_bwe") {
-  configs += [ ":bwe_test_logging" ]
   sources = [
     "delay_based_bwe.cc",
     "delay_based_bwe.h",
@@ -225,6 +213,7 @@ rtc_library("delay_based_bwe") {
     "../../../api:field_trials_view",
     "../../../api:network_state_predictor_api",
     "../../../api/rtc_event_log",
+    "../../../api/transport:bandwidth_usage",
     "../../../api/transport:network_control",
     "../../../api/units:data_rate",
     "../../../api/units:data_size",
@@ -282,9 +271,13 @@ if (rtc_include_tests) {
       ":delay_based_bwe",
       ":estimators",
       ":goog_cc",
+      "../../../api:libjingle_logging_api",
       "../../../api/rtc_event_log",
       "../../../api/transport:goog_cc",
       "../../../api/transport:network_control",
+      "../../../api/units:data_rate",
+      "../../../api/units:data_size",
+      "../../../api/units:time_delta",
       "../../../api/units:timestamp",
       "../../../rtc_base:checks",
       "../../../test/logging:log_writer",
