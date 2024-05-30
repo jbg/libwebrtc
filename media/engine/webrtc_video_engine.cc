@@ -163,6 +163,40 @@ bool IsCodecValidForLowerRange(const Codec& codec) {
   return false;
 }
 
+template <class T>
+std::vector<webrtc::SdpVideoFormat> GetDefaultSupportedFormats(
+    const T* factory,
+    bool is_decoder_factory,
+    const webrtc::FieldTrialsView& trials) {
+  if (!factory) {
+    return {};
+  }
+
+  std::vector<webrtc::SdpVideoFormat> supported_formats =
+      factory->GetSupportedFormats();
+  if (is_decoder_factory) {
+    AddH264ConstrainedBaselineProfileToSupportedFormats(&supported_formats);
+  }
+
+  if (supported_formats.empty())
+    return supported_formats;
+
+  supported_formats.push_back(webrtc::SdpVideoFormat(kRedCodecName));
+  supported_formats.push_back(webrtc::SdpVideoFormat(kUlpfecCodecName));
+  // flexfec-03 is always supported as receive codec and as send codec
+  // only if WebRTC-FlexFEC-03-Advertised is enabled
+  if (is_decoder_factory || IsEnabled(trials, "WebRTC-FlexFEC-03-Advertised")) {
+    webrtc::SdpVideoFormat flexfec_format(kFlexfecCodecName);
+    // This value is currently arbitrarily set to 10 seconds. (The unit
+    // is microseconds.) This parameter MUST be present in the SDP, but
+    // we never use the actual value anywhere in our code however.
+    // TODO(brandtr): Consider honouring this value in the sender and receiver.
+    flexfec_format.parameters = {{kFlexfecFmtpRepairWindow, "10000000"}};
+    supported_formats.push_back(flexfec_format);
+  }
+  return supported_formats;
+}
+
 // This function will assign dynamic payload types (in the range [96, 127]
 // and then [35, 63]) to the input codecs, and also add ULPFEC, RED, FlexFEC,
 // and associated RTX codecs for recognized codecs (VP8, VP9, H264, and RED).
@@ -179,33 +213,8 @@ std::vector<Codec> GetPayloadTypesAndDefaultCodecs(
     bool is_decoder_factory,
     bool include_rtx,
     const webrtc::FieldTrialsView& trials) {
-  if (!factory) {
-    return {};
-  }
-
-  std::vector<webrtc::SdpVideoFormat> supported_formats =
-      factory->GetSupportedFormats();
-  if (is_decoder_factory) {
-    AddH264ConstrainedBaselineProfileToSupportedFormats(&supported_formats);
-  }
-
-  if (supported_formats.empty())
-    return std::vector<Codec>();
-
-  supported_formats.push_back(webrtc::SdpVideoFormat(kRedCodecName));
-  supported_formats.push_back(webrtc::SdpVideoFormat(kUlpfecCodecName));
-
-  // flexfec-03 is always supported as receive codec and as send codec
-  // only if WebRTC-FlexFEC-03-Advertised is enabled
-  if (is_decoder_factory || IsEnabled(trials, "WebRTC-FlexFEC-03-Advertised")) {
-    webrtc::SdpVideoFormat flexfec_format(kFlexfecCodecName);
-    // This value is currently arbitrarily set to 10 seconds. (The unit
-    // is microseconds.) This parameter MUST be present in the SDP, but
-    // we never use the actual value anywhere in our code however.
-    // TODO(brandtr): Consider honouring this value in the sender and receiver.
-    flexfec_format.parameters = {{kFlexfecFmtpRepairWindow, "10000000"}};
-    supported_formats.push_back(flexfec_format);
-  }
+  auto supported_formats =
+      GetDefaultSupportedFormats(factory, is_decoder_factory, trials);
 
   // Due to interoperability issues with old Chrome/WebRTC versions that
   // ignore the [35, 63] range prefer the lower range for new codecs.
