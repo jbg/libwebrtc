@@ -88,6 +88,24 @@
       "parentUuid": "0f108378_82e6482d",
       "revId": "23586104e4fd2666584c26d4fb80be0bbc152eb4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa4c3aef_661824aa",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 1506,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2024-05-31T07:59:09Z",
+      "side": 1,
+      "message": "Ok, but I think that the dependency rtc_p2p-\u003essl-\u003ecrypto_random allows you to cover that case as well.\n\nWhat I want to avoid is crypto_random.h to be moved a second time.",
+      "parentUuid": "9927467c_d2674204",
+      "revId": "23586104e4fd2666584c26d4fb80be0bbc152eb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
