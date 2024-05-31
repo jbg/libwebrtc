@@ -16,6 +16,7 @@
 #import "RTCRtpSender+Native.h"
 #import "base/RTCLogging.h"
 #import "helpers/NSString+StdString.h"
+#import "native/src/objc_video_encoder_factory.h"
 
 #include "api/media_stream_interface.h"
 
@@ -72,6 +73,11 @@
     nativeStreamIds.push_back([streamId UTF8String]);
   }
   _nativeRtpSender->SetStreams(nativeStreamIds);
+}
+
+- (void)setEncoderSelector:(id<RTC_OBJC_TYPE(RTCVideoEncoderSelector)>)encoderSelector {
+  auto nativeEncoderSelector = absl::make_unique<webrtc::ObjcVideoEncoderSelector>(encoderSelector);
+  _nativeRtpSender->SetEncoderSelector(std::move(nativeEncoderSelector));
 }
 
 - (NSString *)description {

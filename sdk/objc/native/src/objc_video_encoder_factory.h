@@ -14,6 +14,7 @@
 #import <Foundation/Foundation.h>
 
 #import "base/RTCMacros.h"
+#import "base/RTCVideoEncoderFactory.h"
 
 #include "api/environment/environment.h"
 #include "api/video_codecs/video_encoder_factory.h"
@@ -38,6 +39,18 @@ class ObjCVideoEncoderFactory : public VideoEncoderFactory {
 
  private:
   id<RTC_OBJC_TYPE(RTCVideoEncoderFactory)> encoder_factory_;
+};
+
+class ObjcVideoEncoderSelector : public VideoEncoderFactory::EncoderSelectorInterface {
+ public:
+  explicit ObjcVideoEncoderSelector(id<RTC_OBJC_TYPE(RTCVideoEncoderSelector)> selector);
+  void OnCurrentEncoder(const SdpVideoFormat &format) override;
+  absl::optional<SdpVideoFormat> OnEncoderBroken() override;
+  absl::optional<SdpVideoFormat> OnAvailableBitrate(const DataRate &rate) override;
+  absl::optional<SdpVideoFormat> OnResolutionChange(const RenderResolution &resolution) override;
+
+ private:
+  id<RTC_OBJC_TYPE(RTCVideoEncoderSelector)> selector_;
 };
 
 }  // namespace webrtc

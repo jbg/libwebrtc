@@ -14,6 +14,7 @@
 #import "RTCMacros.h"
 #import "RTCMediaStreamTrack.h"
 #import "RTCRtpParameters.h"
+#import "RTCVideoEncoderFactory.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -48,6 +49,8 @@ RTC_OBJC_EXPORT
 @interface RTC_OBJC_TYPE (RTCRtpSender) : NSObject <RTC_OBJC_TYPE(RTCRtpSender)>
 
 - (instancetype)init NS_UNAVAILABLE;
+
+- (void)setEncoderSelector:(id<RTC_OBJC_TYPE(RTCVideoEncoderSelector)>)encoderSelector;
 
 @end
 
