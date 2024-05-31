@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a6d1983_06fc608e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 29
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-05-31T06:40:12Z",
+      "side": 1,
+      "message": "Talk about a CL returning from the grave of forgetfulness....\n\nNo, the spec results from long discussions considering both audio and video.\n\nCurrent link is https://w3c.github.io/webrtc-pc/#mediastreamtrack-network-use - don\u0027t use the tr/ version, it\u0027s not updated with fixes.\n\nMute is a temporary state; ended is a permanent state.\nThere\u0027s nothing in the RTP spec that permits telling the receiver \"I\u0027ve temporarily stopped sending\", except for TMMBN, which the spec doesn\u0027t allow, or negotiating the track from sendrecv/sendonly to recvonly/inactive (that\u0027s the reference to \"muted by negotiation\").\nBYE is sometimes sent without the track ending, for instance when changing SSRCs, so we didn\u0027t want to end the track when it happens.\n\nI don\u0027t see a distinction between video and audio that we need to reflect here; Guido\u0027s been dealing with mute state in the absence of samples in other cases, so CCing him on the CL.\n\nPlease comment further if there\u0027s more that needs saying.",
+      "parentUuid": "c31d4a31_f4148f6c",
+      "revId": "2c6a001c78f4bdf41b1e6e2a0dba677d0270e336",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c7b8c6ba_d07c17a3",
         "filename": "media/engine/webrtc_voice_engine.cc",
         "patchSetId": 29
