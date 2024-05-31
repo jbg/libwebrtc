@@ -769,6 +769,7 @@ if (current_os == "linux" || is_android) {
       ":logging_jni",
       ":native_api_jni",
       ":native_api_stacktrace",
+      ":video_jni",
       "..:media_constraints",
       "../../api:dtmf_sender_interface",
       "../../api:enable_media",

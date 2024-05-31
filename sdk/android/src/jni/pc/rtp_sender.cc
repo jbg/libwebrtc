@@ -14,6 +14,7 @@
 #include "sdk/android/native_api/jni/java_types.h"
 #include "sdk/android/src/jni/jni_helpers.h"
 #include "sdk/android/src/jni/pc/rtp_parameters.h"
+#include "sdk/android/src/jni/video_encoder_factory_wrapper.h"
 
 namespace webrtc {
 namespace jni {
@@ -116,6 +117,16 @@ static ScopedJavaLocalRef<jstring> JNI_RtpSender_GetMediaType(
   return media_type == cricket::MEDIA_TYPE_AUDIO
              ? NativeToJavaString(jni, "audio")
              : NativeToJavaString(jni, "video");
+}
+
+static void JNI_RtpSender_SetEncoderSelector(
+    JNIEnv* jni,
+    jlong j_rtp_sender_pointer,
+    const JavaParamRef<jobject>& j_encoder_selector_pointer) {
+  auto encoder_selector = std::make_unique<VideoEncoderSelectorWrapper>(
+      jni, j_encoder_selector_pointer);
+  reinterpret_cast<RtpSenderInterface*>(j_rtp_sender_pointer)
+      ->SetEncoderSelector(std::move(encoder_selector));
 }
 
 }  // namespace jni

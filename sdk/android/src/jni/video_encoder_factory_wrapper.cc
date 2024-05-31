@@ -21,61 +21,54 @@
 
 namespace webrtc {
 namespace jni {
-namespace {
-class VideoEncoderSelectorWrapper
-    : public VideoEncoderFactory::EncoderSelectorInterface {
- public:
-  VideoEncoderSelectorWrapper(JNIEnv* jni,
-                              const JavaRef<jobject>& encoder_selector)
-      : encoder_selector_(jni, encoder_selector) {}
 
-  void OnCurrentEncoder(const SdpVideoFormat& format) override {
-    JNIEnv* jni = AttachCurrentThreadIfNeeded();
-    ScopedJavaLocalRef<jobject> j_codec_info =
-        SdpVideoFormatToVideoCodecInfo(jni, format);
-    Java_VideoEncoderSelector_onCurrentEncoder(jni, encoder_selector_,
-                                               j_codec_info);
+VideoEncoderSelectorWrapper::VideoEncoderSelectorWrapper(
+    JNIEnv* jni,
+    const JavaRef<jobject>& encoder_selector)
+    : encoder_selector_(jni, encoder_selector) {}
+
+void VideoEncoderSelectorWrapper::OnCurrentEncoder(
+    const SdpVideoFormat& format) {
+  JNIEnv* jni = AttachCurrentThreadIfNeeded();
+  ScopedJavaLocalRef<jobject> j_codec_info =
+      SdpVideoFormatToVideoCodecInfo(jni, format);
+  Java_VideoEncoderSelector_onCurrentEncoder(jni, encoder_selector_,
+                                             j_codec_info);
+}
+
+absl::optional<SdpVideoFormat> VideoEncoderSelectorWrapper::OnAvailableBitrate(
+    const DataRate& rate) {
+  JNIEnv* jni = AttachCurrentThreadIfNeeded();
+  ScopedJavaLocalRef<jobject> codec_info =
+      Java_VideoEncoderSelector_onAvailableBitrate(jni, encoder_selector_,
+                                                   rate.kbps<int>());
+  if (codec_info.is_null()) {
+    return absl::nullopt;
   }
+  return VideoCodecInfoToSdpVideoFormat(jni, codec_info);
+}
 
-  absl::optional<SdpVideoFormat> OnAvailableBitrate(
-      const DataRate& rate) override {
-    JNIEnv* jni = AttachCurrentThreadIfNeeded();
-    ScopedJavaLocalRef<jobject> codec_info =
-        Java_VideoEncoderSelector_onAvailableBitrate(jni, encoder_selector_,
-                                                     rate.kbps<int>());
-    if (codec_info.is_null()) {
-      return absl::nullopt;
-    }
-    return VideoCodecInfoToSdpVideoFormat(jni, codec_info);
+absl::optional<SdpVideoFormat> VideoEncoderSelectorWrapper::OnResolutionChange(
+    const RenderResolution& resolution) {
+  JNIEnv* jni = AttachCurrentThreadIfNeeded();
+  ScopedJavaLocalRef<jobject> codec_info =
+      Java_VideoEncoderSelector_onResolutionChange(
+          jni, encoder_selector_, resolution.Width(), resolution.Height());
+  if (codec_info.is_null()) {
+    return absl::nullopt;
   }
+  return VideoCodecInfoToSdpVideoFormat(jni, codec_info);
+}
 
-  absl::optional<SdpVideoFormat> OnResolutionChange(
-      const RenderResolution& resolution) override {
-    JNIEnv* jni = AttachCurrentThreadIfNeeded();
-    ScopedJavaLocalRef<jobject> codec_info =
-        Java_VideoEncoderSelector_onResolutionChange(
-            jni, encoder_selector_, resolution.Width(), resolution.Height());
-    if (codec_info.is_null()) {
-      return absl::nullopt;
-    }
-    return VideoCodecInfoToSdpVideoFormat(jni, codec_info);
+absl::optional<SdpVideoFormat> VideoEncoderSelectorWrapper::OnEncoderBroken() {
+  JNIEnv* jni = AttachCurrentThreadIfNeeded();
+  ScopedJavaLocalRef<jobject> codec_info =
+      Java_VideoEncoderSelector_onEncoderBroken(jni, encoder_selector_);
+  if (codec_info.is_null()) {
+    return absl::nullopt;
   }
-
-  absl::optional<SdpVideoFormat> OnEncoderBroken() override {
-    JNIEnv* jni = AttachCurrentThreadIfNeeded();
-    ScopedJavaLocalRef<jobject> codec_info =
-        Java_VideoEncoderSelector_onEncoderBroken(jni, encoder_selector_);
-    if (codec_info.is_null()) {
-      return absl::nullopt;
-    }
-    return VideoCodecInfoToSdpVideoFormat(jni, codec_info);
-  }
-
- private:
-  const ScopedJavaGlobalRef<jobject> encoder_selector_;
-};
-
-}  // namespace
+  return VideoCodecInfoToSdpVideoFormat(jni, codec_info);
+}
 
 VideoEncoderFactoryWrapper::VideoEncoderFactoryWrapper(
     JNIEnv* jni,

@@ -23,6 +23,26 @@
 namespace webrtc {
 namespace jni {
 
+class VideoEncoderSelectorWrapper
+    : public VideoEncoderFactory::EncoderSelectorInterface {
+ public:
+  VideoEncoderSelectorWrapper(JNIEnv* jni,
+                              const JavaRef<jobject>& encoder_selector);
+
+  void OnCurrentEncoder(const SdpVideoFormat& format) override;
+
+  absl::optional<SdpVideoFormat> OnAvailableBitrate(
+      const DataRate& rate) override;
+
+  absl::optional<SdpVideoFormat> OnResolutionChange(
+      const RenderResolution& resolution) override;
+
+  absl::optional<SdpVideoFormat> OnEncoderBroken() override;
+
+ private:
+  const ScopedJavaGlobalRef<jobject> encoder_selector_;
+};
+
 // Wrapper for Java VideoEncoderFactory class. Delegates method calls through
 // JNI and wraps the encoder inside VideoEncoderWrapper.
 class VideoEncoderFactoryWrapper : public VideoEncoderFactory {

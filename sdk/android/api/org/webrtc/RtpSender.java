@@ -103,6 +103,11 @@ public class RtpSender {
     nativeSetFrameEncryptor(nativeRtpSender, frameEncryptor.getNativeFrameEncryptor());
   }
 
+  public void setEncoderSelector(VideoEncoderFactory.VideoEncoderSelector encoderSelector) {
+    checkRtpSenderExists();
+    nativeSetEncoderSelector(nativeRtpSender, encoderSelector);
+  }
+
   public void dispose() {
     checkRtpSenderExists();
     if (dtmfSender != null) {
@@ -148,6 +153,9 @@ public class RtpSender {
   private static native String nativeGetId(long rtpSender);
 
   private static native void nativeSetFrameEncryptor(long rtpSender, long nativeFrameEncryptor);
+
+  private static native void nativeSetEncoderSelector(
+      long rtpSender, VideoEncoderFactory.VideoEncoderSelector encoderSelector);
 
   private static native String nativeGetMediaType(long rtpSender);
 };
