@@ -12,28 +12,28 @@
 
 namespace webrtc {
 
-namespace {
-
-std::vector<float*> ConstructChannelPointers(
-    std::vector<std::vector<float>>* x) {
-  std::vector<float*> channel_ptrs;
-  for (auto& v : *x) {
-    channel_ptrs.push_back(v.data());
-  }
-  return channel_ptrs;
-}
-}  // namespace
-
 VectorFloatFrame::VectorFloatFrame(int num_channels,
                                    int samples_per_channel,
                                    float start_value)
-    : channels_(num_channels,
-                std::vector<float>(samples_per_channel, start_value)),
-      channel_ptrs_(ConstructChannelPointers(&channels_)),
-      float_frame_view_(channel_ptrs_.data(),
-                        channels_.size(),
-                        samples_per_channel) {}
+    : channels_(num_channels * samples_per_channel, start_value),
+      view_(channels_.data(), samples_per_channel, num_channels) {}
 
 VectorFloatFrame::~VectorFloatFrame() = default;
+
+AudioFrameView<float> VectorFloatFrame::float_frame_view() {
+  // This initialization assumes the implementation detail in `AudioFrameView`
+  // that only the first channel pointer is required.
+  float* init[] = {&view_.data()[0]};
+  return AudioFrameView<float>(init, view_.num_channels(),
+                               view_.samples_per_channel());
+}
+
+AudioFrameView<const float> VectorFloatFrame::float_frame_view() const {
+  // This initialization assumes the implementation detail in `AudioFrameView`
+  // that only the first channel pointer is required.
+  const float* init[] = {&view_.data()[0]};
+  return AudioFrameView<const float>(init, view_.num_channels(),
+                                     view_.samples_per_channel());
+}
 
 }  // namespace webrtc
