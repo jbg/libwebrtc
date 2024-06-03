@@ -14,6 +14,9 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include <array>
+
+#include "absl/types/optional.h"
 #include "api/array_view.h"
 #include "api/audio/audio_view.h"
 #include "api/audio/channel_layout.h"
