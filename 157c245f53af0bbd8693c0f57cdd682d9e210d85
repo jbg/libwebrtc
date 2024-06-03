@@ -69,6 +69,24 @@
       "parentUuid": "f7750e78_bffdd3e8",
       "revId": "157c245f53af0bbd8693c0f57cdd682d9e210d85",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afb5ee13_e1f00356",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-06-03T10:07:18Z",
+      "side": 1,
+      "message": "Thanks for the details.  I was referring to this part of the CL description:\n\n\"Fix Android camera error of obtaining FramerateRange closest to the set frame rate.\"\n\nI understood this as the CL was addressing a failure (i.e. error) but now I understand it\u0027s improving the matching to the desired framerate.\n\nNevertheless, I think it would be a good idea to file a bug on https://bugs.webrtc.org/ that describes what the problem is.\nThen mark this CL with a \"Bug: \u003cbug id\u003e\" line at the bottom of the CL description.\n\nMagnus - can you take a look?",
+      "parentUuid": "2e3328a5_421539b7",
+      "revId": "157c245f53af0bbd8693c0f57cdd682d9e210d85",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
