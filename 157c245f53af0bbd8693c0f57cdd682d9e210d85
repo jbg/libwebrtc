@@ -105,6 +105,24 @@
       "parentUuid": "afb5ee13_e1f00356",
       "revId": "157c245f53af0bbd8693c0f57cdd682d9e210d85",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7df16ec6_4caaded4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2024-06-03T13:06:48Z",
+      "side": 1,
+      "message": "I want to clarify that the current code\u0027s preference for [12, 15] over [15, 15] when requesting 15 fps is actually the intended behavior. As the comments in `getClosestSupportedFramerateRange` mention, prioritizing a lower minimum FPS allows for flexibility in varying lighting conditions. Ideally, the optimal range in this case would be [0, 15]. We don\u0027t want to force the camera to output a specific framerate unless the lightning conditions allow it.",
+      "parentUuid": "3ba5bb02_1a62773c",
+      "revId": "157c245f53af0bbd8693c0f57cdd682d9e210d85",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
