@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62381664_28fd4640",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2024-06-04T17:22:41Z",
+      "side": 1,
+      "message": "LGTM,\n\n+Mark as second reviewer (doesn\u0027t look like Andreas has/can vote? Apologies if that\u0027s not the case).",
+      "revId": "54533efcc2eb705fdd8343dc7dcb7550bd5ef4f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b81a9a1_31280d35",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2024-06-04T17:22:41Z",
+      "side": 1,
+      "message": "NIT: Lightly prefer `latest_available_frame_` here.",
+      "range": {
+        "startLine": 866,
+        "startChar": 12,
+        "endLine": 866,
+        "endChar": 34
+      },
+      "revId": "54533efcc2eb705fdd8343dc7dcb7550bd5ef4f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}

@@ -34,6 +34,24 @@
       "parentUuid": "f2e897a0_0aa1c634",
       "revId": "fe34363ca0ff9d79d7d0943a98ae3a5198e61f75",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "150b210f_67ccdc69",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2024-06-04T17:22:41Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "fc2ee783_6dd3f7fb",
+      "revId": "fe34363ca0ff9d79d7d0943a98ae3a5198e61f75",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
