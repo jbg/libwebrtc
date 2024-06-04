@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2e897a0_0aa1c634",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 18474
+      },
+      "writtenOn": "2024-06-04T16:22:38Z",
+      "side": 0,
+      "message": "I think it still makes sense to keep the helper and just assert the lock is held as you do in the other method?",
+      "revId": "fe34363ca0ff9d79d7d0943a98ae3a5198e61f75",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
