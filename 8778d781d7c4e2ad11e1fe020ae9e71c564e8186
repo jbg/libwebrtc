@@ -34,6 +34,24 @@
       "parentUuid": "a3f4c84a_57ab32b7",
       "revId": "8778d781d7c4e2ad11e1fe020ae9e71c564e8186",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d39f953_40c54da1",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2024-06-04T17:04:39Z",
+      "side": 1,
+      "message": "And I don\u0027t think this temporary error was ever called, because at that point when we are calling it, the frame always has data and since we are in PipeWire callback, the PipeWire connection should still be alive.",
+      "parentUuid": "0fbb90ba_51c6bbff",
+      "revId": "8778d781d7c4e2ad11e1fe020ae9e71c564e8186",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
