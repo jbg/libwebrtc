@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e628ab6a_6bd2cde1",
+        "filename": "modules/desktop_capture/linux/wayland/shared_screencast_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 868,
+      "author": {
+        "id": 8178
+      },
+      "writtenOn": "2024-06-04T14:39:42Z",
+      "side": 1,
+      "message": "Could we make it lock only once instead? Should be easier to reason about then.\n\npseudo:\n```\nunique_ptr\u003c...\u003e frame;\n{\n  MutexLock latest_frame_lock(...);\n  ...\n  latest_av_fr \u003d queue_.current_frame();\n\n  if (!callback_) return;\n\n  frame \u003d queue_.current_frame()-\u003eShare();\n  frame-\u003eset_capturer_stuff();\n  if (use_damage_region_) {\n    ...\n  }\n}\nif (callback_) {\n  callback-\u003eOnCaptureResult(SUCCESS, std::move(frame));\n}\n```",
+      "revId": "2590ee483fbfa9631a626781971e19802ee88490",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
