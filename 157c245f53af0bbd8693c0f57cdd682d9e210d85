@@ -123,6 +123,24 @@
       "parentUuid": "3ba5bb02_1a62773c",
       "revId": "157c245f53af0bbd8693c0f57cdd682d9e210d85",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a019c030_f10c189c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3333013
+      },
+      "writtenOn": "2024-06-04T01:32:14Z",
+      "side": 1,
+      "message": "Sorry, I didn\u0027t notice the comment earlier. Thank you for your explanation. Since there are no issues, I will close this commit.",
+      "parentUuid": "7df16ec6_4caaded4",
+      "revId": "157c245f53af0bbd8693c0f57cdd682d9e210d85",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
