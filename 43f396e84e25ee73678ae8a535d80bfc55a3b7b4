@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ec06e91_edd0f1fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2024-06-05T10:09:10Z",
+      "side": 1,
+      "message": "Thanks for this CL!",
+      "revId": "43f396e84e25ee73678ae8a535d80bfc55a3b7b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b9ed578_c5809591",
+        "filename": "modules/audio_mixer/frame_combiner.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2024-06-05T10:09:10Z",
+      "side": 1,
+      "message": "Nit: Is the #if #endif needed?\nWon\u0027t the compiler notice that the RTC_DCHECK_EQ compiles to nothing, and remove the empty loop?",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 6
+      },
+      "revId": "43f396e84e25ee73678ae8a535d80bfc55a3b7b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcc18160_65432416",
+        "filename": "modules/audio_mixer/frame_combiner.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2024-06-05T10:09:10Z",
+      "side": 1,
+      "message": "mixing_buffer_.data() ?",
+      "range": {
+        "startLine": 193,
+        "startChar": 6,
+        "endLine": 193,
+        "endChar": 24
+      },
+      "revId": "43f396e84e25ee73678ae8a535d80bfc55a3b7b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73a0b770_028e5d13",
+        "filename": "modules/audio_mixer/frame_combiner.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2024-06-05T10:09:10Z",
+      "side": 1,
+      "message": "channel_pointers.data()",
+      "range": {
+        "startLine": 204,
+        "startChar": 6,
+        "endLine": 204,
+        "endChar": 26
+      },
+      "revId": "43f396e84e25ee73678ae8a535d80bfc55a3b7b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd6fddee_176a2294",
+        "filename": "modules/audio_processing/agc2/limiter.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2024-06-05T10:09:10Z",
+      "side": 1,
+      "message": "I\u0027m not sure about this change.\nAs I understand it the purpose of the MonoView is to store audio samples. For the float type, the audio samples normally have a limited range in the AGC (i.e., the allowed range is -32768.f:32767.f).\n\nWhat is done here though is instead that the MonoView is used to store scaling factors which are not at all samples,and which are not subject to the restrictions that samples have.\n\nI think this is a case where an ArrayView should be used instead. In contrast though, the parameter `signal` probably should be stored as a view.",
+      "range": {
+        "startLine": 76,
+        "startChar": 18,
+        "endLine": 76,
+        "endChar": 67
+      },
+      "revId": "43f396e84e25ee73678ae8a535d80bfc55a3b7b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
