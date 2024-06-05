@@ -804,13 +804,11 @@ std::map<std::string, std::string> LibaomAv1EncoderFactory::CodecSpecifics()
   return {};
 }
 
-// clang-format off
-// The formater and cpplint have conflicting ideas.
 VideoEncoderFactoryInterface::Capabilities
 LibaomAv1EncoderFactory::GetEncoderCapabilities() const {
   return {
-      .prediction_constraints = {
-           .num_buffers = kNumBuffers,
+      .prediction_constraints =
+          {.num_buffers = kNumBuffers,
            .max_references = kMaxReferences,
            .max_temporal_layers = kMaxTemporalLayers,
            .buffer_space_type = VideoEncoderFactoryInterface::Capabilities::
@@ -821,17 +819,15 @@ LibaomAv1EncoderFactory::GetEncoderCapabilities() const {
            .supported_frame_types = {FrameType::kKeyframe,
                                      FrameType::kStartFrame,
                                      FrameType::kDeltaFrame}},
-      .input_constraints = {
-              .min = {.width = 64, .height = 36},
-              .max = {.width = 3840, .height = 2160},
-              .pixel_alignment = 1,
-              .input_formats = {kSupportedInputFormats.begin(),
-                                kSupportedInputFormats.end()},
-          },
+      .input_constraints = {.min = {.width = 64, .height = 36},
+                            .max = {.width = 3840, .height = 2160},
+                            .pixel_alignment = 1,
+                            .input_formats = {kSupportedInputFormats.begin(),
+                                              kSupportedInputFormats.end()}},
       .encoding_formats = {{.sub_sampling = EncodingFormat::k420,
                             .bit_depth = 8}},
-      .rate_control = {
-           .qp_range = {0, kMaxQp},
+      .rate_control =
+          {.qp_range = {0, kMaxQp},
            .rc_modes = {VideoEncoderFactoryInterface::RateControlMode::kCbr,
                         VideoEncoderFactoryInterface::RateControlMode::kCqp}},
       .performance = {.encode_on_calling_thread = true,
@@ -839,7 +835,6 @@ LibaomAv1EncoderFactory::GetEncoderCapabilities() const {
                                                kMaxEffortLevel}},
   };
 }
-// clang-format on
 
 std::unique_ptr<VideoEncoderInterface> LibaomAv1EncoderFactory::CreateEncoder(
     const StaticEncoderSettings& settings,
