@@ -104,7 +104,7 @@ class TransformableAudioFrameInterface : public TransformableFrameInterface {
 };
 
 // Objects implement this interface to be notified with the transformed frame.
-class TransformedFrameCallback : public rtc::RefCountInterface {
+class TransformedFrameCallback : public RefCountInterface {
  public:
   virtual void OnTransformedFrame(
       std::unique_ptr<TransformableFrameInterface> frame) = 0;
@@ -121,7 +121,7 @@ class TransformedFrameCallback : public rtc::RefCountInterface {
 
 // Transforms encoded frames. The transformed frame is sent in a callback using
 // the TransformedFrameCallback interface (see above).
-class FrameTransformerInterface : public rtc::RefCountInterface {
+class FrameTransformerInterface : public RefCountInterface {
  public:
   // Transforms `frame` using the implementing class' processing logic.
   virtual void Transform(
