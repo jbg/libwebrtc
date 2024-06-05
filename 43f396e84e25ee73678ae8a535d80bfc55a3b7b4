@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a04dc71_96143b7d",
+        "filename": "modules/audio_mixer/frame_combiner.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-06-05T16:25:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15b9b266_f9e1ff49",
+      "range": {
+        "startLine": 93,
+        "startChar": 2,
+        "endLine": 93,
+        "endChar": 6
+      },
+      "revId": "43f396e84e25ee73678ae8a535d80bfc55a3b7b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b9ed578_c5809591",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-06-05T10:09:10Z",
       "side": 1,
       "message": "Nit: Is the #if #endif needed?\nWon\u0027t the compiler notice that the RTC_DCHECK_EQ compiles to nothing, and remove the empty loop?",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 6
+      },
+      "revId": "43f396e84e25ee73678ae8a535d80bfc55a3b7b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa88280d_dfdc82db",
+        "filename": "modules/audio_mixer/frame_combiner.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-06-05T16:25:26Z",
+      "side": 1,
+      "message": "The compiler _might_ do it but also might not, so I did a little test. The length of the loop is variable (as opposed to a fixed constant) which probably plays a role. I figured there wasn\u0027t a reason to leave it up to chance.\n\nI did a quick test with godbolt and when using -O3 a comparable loop with no body (just iterating over a vector) was removed. But it was not removed with -O2, which is what I think we use by default.",
+      "parentUuid": "6b9ed578_c5809591",
       "range": {
         "startLine": 166,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a19bca61_531fb283",
+        "filename": "modules/audio_mixer/frame_combiner.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-06-05T16:25:26Z",
+      "side": 1,
+      "message": "Done.\n\nBtw `\u0026foo[0]` is the most universally compatible way of getting direct access to an array of elements. It\u0027s what works for all types of arrays, which minimizes required changes to the code if someone is refactoring things, e.g. changing the type.",
+      "parentUuid": "dcc18160_65432416",
+      "range": {
+        "startLine": 193,
+        "startChar": 6,
+        "endLine": 193,
+        "endChar": 24
+      },
+      "revId": "43f396e84e25ee73678ae8a535d80bfc55a3b7b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73a0b770_028e5d13",
@@ -110,6 +182,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8a62d1f_95063f5b",
+        "filename": "modules/audio_mixer/frame_combiner.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-06-05T16:25:26Z",
+      "side": 1,
+      "message": "Done.\nHere is actually an example of this - the code didn\u0027t really need to be changed because it was using the standard way of accessing the elements. But changed to .data() now.",
+      "parentUuid": "73a0b770_028e5d13",
+      "range": {
+        "startLine": 204,
+        "startChar": 6,
+        "endLine": 204,
+        "endChar": 26
+      },
+      "revId": "43f396e84e25ee73678ae8a535d80bfc55a3b7b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd6fddee_176a2294",
@@ -123,6 +219,30 @@
       "writtenOn": "2024-06-05T10:09:10Z",
       "side": 1,
       "message": "I\u0027m not sure about this change.\nAs I understand it the purpose of the MonoView is to store audio samples. For the float type, the audio samples normally have a limited range in the AGC (i.e., the allowed range is -32768.f:32767.f).\n\nWhat is done here though is instead that the MonoView is used to store scaling factors which are not at all samples,and which are not subject to the restrictions that samples have.\n\nI think this is a case where an ArrayView should be used instead. In contrast though, the parameter `signal` probably should be stored as a view.",
+      "range": {
+        "startLine": 76,
+        "startChar": 18,
+        "endLine": 76,
+        "endChar": 67
+      },
+      "revId": "43f396e84e25ee73678ae8a535d80bfc55a3b7b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed11cef5_565ddca2",
+        "filename": "modules/audio_processing/agc2/limiter.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-06-05T16:25:26Z",
+      "side": 1,
+      "message": "Yeah I was debating that.\n\nWhat I was thinking was that, from the pov of the interface of the function:\n* `per_sample_scaling_factors` must be in the same format as `signal` (single channel).\n* It must include exactly the same number of \"samples\"/factors as `signal`.\n\nSo, my thinking was to think of it like an impulse response being applied to signal. MonoView enforces a certain layout while still functionally being ArrayView. Then additionally it avoids being confused with the `.data()` accessor from audio views. Does that make sense? I realize that this is just a small utility function so doesn\u0027t make much of a difference in practice.",
+      "parentUuid": "dd6fddee_176a2294",
       "range": {
         "startLine": 76,
         "startChar": 18,
