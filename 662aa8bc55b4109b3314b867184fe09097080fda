@@ -16,6 +16,23 @@
       "message": "lets not have \"helpers\"",
       "revId": "662aa8bc55b4109b3314b867184fe09097080fda",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "060f0391_2890f708",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2024-06-06T19:38:40Z",
+      "side": 1,
+      "message": "Quite widely used! Perhaps some can drop their dependency on the SSL target... (later CL)",
+      "revId": "662aa8bc55b4109b3314b867184fe09097080fda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
