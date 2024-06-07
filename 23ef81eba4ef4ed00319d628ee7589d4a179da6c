@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "304b8278_60254cb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-06-07T09:25:07Z",
+      "side": 1,
+      "message": "@hta@webrtc.org - wdyt? (see comment below)",
+      "revId": "23ef81eba4ef4ed00319d628ee7589d4a179da6c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3ffee49_8a3fe2ad",
+        "filename": "p2p/base/turn_port_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1525,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-06-07T09:25:07Z",
+      "side": 1,
+      "message": "is it flagged because of this:\n\n```\n  message-\u003eAddAttribute(std::make_unique\u003cStunUInt32Attribute\u003e(\n      STUN_ATTR_CHANNEL_NUMBER, channel_id_ \u003c\u003c 16));\n```\n?\n\nIf so, I think we should follow this up by implementing the property to conform with the `4 bytes long and consists of a 16-bit unsigned integer` requirement.",
+      "revId": "23ef81eba4ef4ed00319d628ee7589d4a179da6c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
