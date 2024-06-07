@@ -33,6 +33,24 @@
       "message": "is it flagged because of this:\n\n```\n  message-\u003eAddAttribute(std::make_unique\u003cStunUInt32Attribute\u003e(\n      STUN_ATTR_CHANNEL_NUMBER, channel_id_ \u003c\u003c 16));\n```\n?\n\nIf so, I think we should follow this up by implementing the property to conform with the `4 bytes long and consists of a 16-bit unsigned integer` requirement.",
       "revId": "23ef81eba4ef4ed00319d628ee7589d4a179da6c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "513e8e76_6a4e9649",
+        "filename": "p2p/base/turn_port_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1525,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2024-06-07T09:39:28Z",
+      "side": 1,
+      "message": "Yes, correct. Let me update the CL desc for future reference.\n\nI agree this needs to be followed-up. I filed https://issues.webrtc.org/issues/345518625 and CC\u0027d hta@ on it.",
+      "parentUuid": "e3ffee49_8a3fe2ad",
+      "revId": "23ef81eba4ef4ed00319d628ee7589d4a179da6c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
