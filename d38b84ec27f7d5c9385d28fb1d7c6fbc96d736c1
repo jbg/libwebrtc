@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f15cd68f_f0a699ef",
+        "filename": "p2p/base/turn_port_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1525,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-06-07T12:38:00Z",
+      "side": 1,
+      "message": "Yes, I agree - right now it\u0027s hitting this check:\n\n```\n  int channel_id \u003d channel_attr-\u003evalue() \u003e\u003e 16;\n  if (channel_id \u003c kMinChannelNumber || channel_id \u003e kMaxChannelNumber) {\n    ...\n```\n\nIsn\u0027t the intent rather to hit this check?\n(i.e. to test the case where the channel isn\u0027t recognized by turn server, as opposed to being an illegal value)\n\n```\n  // Check that this channel id isn\u0027t bound to another transport address, and\n  // that this transport address isn\u0027t bound to another channel id.\n  auto channel1 \u003d FindChannel(channel_id);\n  auto channel2 \u003d FindChannel(peer_attr-\u003eGetAddress());\n  if (channel1 !\u003d channel2) {\n    SendBadRequestResponse(msg);\n    return;\n  }\n```",
+      "parentUuid": "6032bc87_8c745053",
+      "revId": "d38b84ec27f7d5c9385d28fb1d7c6fbc96d736c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a76c0a9_a425e136",
         "filename": "p2p/base/turn_port_unittest.cc",
         "patchSetId": 3
@@ -48,6 +66,24 @@
       "writtenOn": "2024-06-07T11:49:54Z",
       "side": 1,
       "message": "Probably this part never checks that the packets are sent using a send indication rather than a channel.",
+      "revId": "d38b84ec27f7d5c9385d28fb1d7c6fbc96d736c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8694ea97_7ab5b8b2",
+        "filename": "p2p/base/turn_port_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1541,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2024-06-07T12:38:00Z",
+      "side": 1,
+      "message": "yup I think you\u0027re right",
+      "parentUuid": "7a76c0a9_a425e136",
       "revId": "d38b84ec27f7d5c9385d28fb1d7c6fbc96d736c1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
