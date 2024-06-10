@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "066b7764_6ee356f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2024-06-10T11:07:32Z",
+      "side": 1,
+      "message": "Hi Per and Sam, could you please take a look?",
+      "revId": "f2ce0c3c64c184056b3ee8ec54685b067bdfbc43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
