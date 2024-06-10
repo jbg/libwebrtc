@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14b37351_13298ed5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6193
+      },
+      "writtenOn": "2024-06-10T09:19:47Z",
+      "side": 1,
+      "message": "I chose the generic arm64 dimensions rather than apple_m2 etc.",
+      "revId": "ef43e3efdf7f21524e57f085a773778488022db8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
