@@ -1060,6 +1060,8 @@ TEST(AudioProcessingImplTest,
   EXPECT_EQ(ProcessInputVolume(*apm, kOneFrame, /*initial_volume=*/135), 135);
 }
 
+// TODO(bugs.webrtc.org/7494): Remove when "WebRTC-Audio-GainController2" is
+// deprecated.
 TEST(AudioProcessingImplTest,
      Agc2FieldTrialDoNotSwitchToFullAgc2WhenNoAgcIsActive) {
   constexpr AudioProcessing::Config kOriginal{
@@ -1083,6 +1085,8 @@ TEST(AudioProcessingImplTest,
   EXPECT_EQ(adjusted.gain_controller2, kOriginal.gain_controller2);
 }
 
+// TODO(bugs.webrtc.org/7494): Remove when "WebRTC-Audio-GainController2" is
+// deprecated.
 TEST(AudioProcessingImplTest,
      Agc2FieldTrialDoNotSwitchToFullAgc2WithAgc1Agc2InputVolumeControllers) {
   constexpr AudioProcessing::Config kOriginal{
@@ -1108,6 +1112,8 @@ TEST(AudioProcessingImplTest,
   EXPECT_EQ(adjusted.gain_controller2, kOriginal.gain_controller2);
 }
 
+// TODO(bugs.webrtc.org/7494): Remove when "WebRTC-Audio-GainController2" is
+// deprecated.
 class Agc2FieldTrialParametrizedTest
     : public ::testing::TestWithParam<AudioProcessing::Config> {};
 
@@ -1170,7 +1176,7 @@ TEST_P(Agc2FieldTrialParametrizedTest, DoNotSwitchToFullAgc2) {
   EXPECT_EQ(adjusted.gain_controller2, original.gain_controller2);
 }
 
-TEST_P(Agc2FieldTrialParametrizedTest, SwitchToFullAgc2) {
+TEST_P(Agc2FieldTrialParametrizedTest, DoNotAdjustAgc2Config) {
   const AudioProcessing::Config original = GetParam();
   webrtc::test::ScopedFieldTrials field_trials(
       "WebRTC-Audio-GainController2/Enabled,switch_to_agc2:true/");
@@ -1178,23 +1184,31 @@ TEST_P(Agc2FieldTrialParametrizedTest, SwitchToFullAgc2) {
   // Test config application via `AudioProcessing` ctor.
   auto adjusted =
       AudioProcessingBuilder().SetConfig(original).Create()->GetConfig();
-  EXPECT_FALSE(adjusted.gain_controller1.enabled);
-  EXPECT_TRUE(adjusted.gain_controller2.enabled);
-  EXPECT_TRUE(adjusted.gain_controller2.input_volume_controller.enabled);
-  EXPECT_TRUE(adjusted.gain_controller2.adaptive_digital.enabled);
+  EXPECT_EQ(adjusted.gain_controller1.enabled,
+            original.gain_controller1.enabled);
+  EXPECT_EQ(adjusted.gain_controller2.enabled,
+            original.gain_controller2.enabled);
+  EXPECT_EQ(adjusted.gain_controller2.input_volume_controller.enabled,
+            original.gain_controller2.input_volume_controller.enabled);
+  EXPECT_EQ(adjusted.gain_controller2.adaptive_digital.enabled,
+            original.gain_controller2.adaptive_digital.enabled);
 
   // Test config application via `AudioProcessing::ApplyConfig()`.
   auto apm = AudioProcessingBuilder().Create();
   apm->ApplyConfig(original);
   adjusted = apm->GetConfig();
-  EXPECT_FALSE(adjusted.gain_controller1.enabled);
-  EXPECT_TRUE(adjusted.gain_controller2.enabled);
-  EXPECT_TRUE(adjusted.gain_controller2.input_volume_controller.enabled);
-  EXPECT_TRUE(adjusted.gain_controller2.adaptive_digital.enabled);
+  EXPECT_EQ(adjusted.gain_controller1.enabled,
+            original.gain_controller1.enabled);
+  EXPECT_EQ(adjusted.gain_controller2.enabled,
+            original.gain_controller2.enabled);
+  EXPECT_EQ(adjusted.gain_controller2.input_volume_controller.enabled,
+            original.gain_controller2.input_volume_controller.enabled);
+  EXPECT_EQ(adjusted.gain_controller2.adaptive_digital.enabled,
+            original.gain_controller2.adaptive_digital.enabled);
 }
 
 TEST_P(Agc2FieldTrialParametrizedTest,
-       SwitchToFullAgc2AndOverrideInputVolumeControllerParameters) {
+       DoNotAdjustAgc2ConfigAndOverrideInputVolumeControllerParameters) {
   const AudioProcessing::Config original = GetParam();
   webrtc::test::ScopedFieldTrials field_trials(
       "WebRTC-Audio-GainController2/Enabled,switch_to_agc2:true,"
@@ -1213,23 +1227,31 @@ TEST_P(Agc2FieldTrialParametrizedTest,
   // Test config application via `AudioProcessing` ctor.
   auto adjusted =
       AudioProcessingBuilder().SetConfig(original).Create()->GetConfig();
-  EXPECT_FALSE(adjusted.gain_controller1.enabled);
-  EXPECT_TRUE(adjusted.gain_controller2.enabled);
-  EXPECT_TRUE(adjusted.gain_controller2.input_volume_controller.enabled);
-  EXPECT_TRUE(adjusted.gain_controller2.adaptive_digital.enabled);
+  EXPECT_EQ(adjusted.gain_controller1.enabled,
+            original.gain_controller1.enabled);
+  EXPECT_EQ(adjusted.gain_controller2.enabled,
+            original.gain_controller2.enabled);
+  EXPECT_EQ(adjusted.gain_controller2.input_volume_controller.enabled,
+            original.gain_controller2.input_volume_controller.enabled);
+  EXPECT_EQ(adjusted.gain_controller2.adaptive_digital.enabled,
+            original.gain_controller2.adaptive_digital.enabled);
 
   // Test config application via `AudioProcessing::ApplyConfig()`.
   auto apm = AudioProcessingBuilder().Create();
   apm->ApplyConfig(original);
   adjusted = apm->GetConfig();
-  EXPECT_FALSE(adjusted.gain_controller1.enabled);
-  EXPECT_TRUE(adjusted.gain_controller2.enabled);
-  EXPECT_TRUE(adjusted.gain_controller2.input_volume_controller.enabled);
-  EXPECT_TRUE(adjusted.gain_controller2.adaptive_digital.enabled);
+  EXPECT_EQ(adjusted.gain_controller1.enabled,
+            original.gain_controller1.enabled);
+  EXPECT_EQ(adjusted.gain_controller2.enabled,
+            original.gain_controller2.enabled);
+  EXPECT_EQ(adjusted.gain_controller2.input_volume_controller.enabled,
+            original.gain_controller2.input_volume_controller.enabled);
+  EXPECT_EQ(adjusted.gain_controller2.adaptive_digital.enabled,
+            original.gain_controller2.adaptive_digital.enabled);
 }
 
 TEST_P(Agc2FieldTrialParametrizedTest,
-       SwitchToFullAgc2AndOverrideAdaptiveDigitalControllerParameters) {
+       DoNotAdjustAgc2ConfigAndOverrideAdaptiveDigitalControllerParameters) {
   const AudioProcessing::Config original = GetParam();
   webrtc::test::ScopedFieldTrials field_trials(
       "WebRTC-Audio-GainController2/Enabled,switch_to_agc2:true,"
@@ -1242,41 +1264,55 @@ TEST_P(Agc2FieldTrialParametrizedTest,
   // Test config application via `AudioProcessing` ctor.
   auto adjusted =
       AudioProcessingBuilder().SetConfig(original).Create()->GetConfig();
-  EXPECT_FALSE(adjusted.gain_controller1.enabled);
-  EXPECT_TRUE(adjusted.gain_controller2.enabled);
-  EXPECT_TRUE(adjusted.gain_controller2.input_volume_controller.enabled);
-  EXPECT_TRUE(adjusted.gain_controller2.adaptive_digital.enabled);
-  ASSERT_NE(adjusted.gain_controller2.adaptive_digital,
+  EXPECT_EQ(adjusted.gain_controller1.enabled,
+            original.gain_controller1.enabled);
+  EXPECT_EQ(adjusted.gain_controller2.enabled,
+            original.gain_controller2.enabled);
+  EXPECT_EQ(adjusted.gain_controller2.input_volume_controller.enabled,
+            original.gain_controller2.input_volume_controller.enabled);
+  EXPECT_EQ(adjusted.gain_controller2.adaptive_digital.enabled,
+            original.gain_controller2.adaptive_digital.enabled);
+  ASSERT_EQ(adjusted.gain_controller2.adaptive_digital,
             original.gain_controller2.adaptive_digital);
-  EXPECT_EQ(adjusted.gain_controller2.adaptive_digital.headroom_db, 10);
-  EXPECT_EQ(adjusted.gain_controller2.adaptive_digital.max_gain_db, 20);
-  EXPECT_EQ(adjusted.gain_controller2.adaptive_digital.initial_gain_db, 7);
+  EXPECT_EQ(adjusted.gain_controller2.adaptive_digital.headroom_db,
+            original.gain_controller2.adaptive_digital.headroom_db);
+  EXPECT_EQ(adjusted.gain_controller2.adaptive_digital.max_gain_db,
+            original.gain_controller2.adaptive_digital.max_gain_db);
+  EXPECT_EQ(adjusted.gain_controller2.adaptive_digital.initial_gain_db,
+            original.gain_controller2.adaptive_digital.initial_gain_db);
   EXPECT_EQ(
       adjusted.gain_controller2.adaptive_digital.max_gain_change_db_per_second,
-      5);
+      original.gain_controller2.adaptive_digital.max_gain_change_db_per_second);
   EXPECT_EQ(
       adjusted.gain_controller2.adaptive_digital.max_output_noise_level_dbfs,
-      -40);
+      original.gain_controller2.adaptive_digital.max_output_noise_level_dbfs);
 
   // Test config application via `AudioProcessing::ApplyConfig()`.
   auto apm = AudioProcessingBuilder().Create();
   apm->ApplyConfig(original);
   adjusted = apm->GetConfig();
-  EXPECT_FALSE(adjusted.gain_controller1.enabled);
-  EXPECT_TRUE(adjusted.gain_controller2.enabled);
-  EXPECT_TRUE(adjusted.gain_controller2.input_volume_controller.enabled);
-  EXPECT_TRUE(adjusted.gain_controller2.adaptive_digital.enabled);
-  ASSERT_NE(adjusted.gain_controller2.adaptive_digital,
+  EXPECT_EQ(adjusted.gain_controller1.enabled,
+            original.gain_controller1.enabled);
+  EXPECT_EQ(adjusted.gain_controller2.enabled,
+            original.gain_controller2.enabled);
+  EXPECT_EQ(adjusted.gain_controller2.input_volume_controller.enabled,
+            original.gain_controller2.input_volume_controller.enabled);
+  EXPECT_EQ(adjusted.gain_controller2.adaptive_digital.enabled,
+            original.gain_controller2.adaptive_digital.enabled);
+  ASSERT_EQ(adjusted.gain_controller2.adaptive_digital,
             original.gain_controller2.adaptive_digital);
-  EXPECT_EQ(adjusted.gain_controller2.adaptive_digital.headroom_db, 10);
-  EXPECT_EQ(adjusted.gain_controller2.adaptive_digital.max_gain_db, 20);
-  EXPECT_EQ(adjusted.gain_controller2.adaptive_digital.initial_gain_db, 7);
+  EXPECT_EQ(adjusted.gain_controller2.adaptive_digital.headroom_db,
+            original.gain_controller2.adaptive_digital.headroom_db);
+  EXPECT_EQ(adjusted.gain_controller2.adaptive_digital.max_gain_db,
+            original.gain_controller2.adaptive_digital.max_gain_db);
+  EXPECT_EQ(adjusted.gain_controller2.adaptive_digital.initial_gain_db,
+            original.gain_controller2.adaptive_digital.initial_gain_db);
   EXPECT_EQ(
       adjusted.gain_controller2.adaptive_digital.max_gain_change_db_per_second,
-      5);
+      original.gain_controller2.adaptive_digital.max_gain_change_db_per_second);
   EXPECT_EQ(
       adjusted.gain_controller2.adaptive_digital.max_output_noise_level_dbfs,
-      -40);
+      original.gain_controller2.adaptive_digital.max_output_noise_level_dbfs);
 }
 
 TEST_P(Agc2FieldTrialParametrizedTest, ProcessSucceedsWithTs) {
@@ -1464,6 +1500,8 @@ TEST(AudioProcessingImplTest, CanEnableTs) {
   EXPECT_TRUE(adjusted.transient_suppression.enabled);
 }
 
+// TODO(bugs.webrtc.org/7494): Remove when "WebRTC-Audio-GainController2" is
+// deprecated.
 TEST(AudioProcessingImplTest, CanDisableTsWithAgc2FieldTrialDisabled) {
   constexpr AudioProcessing::Config kOriginal = {
       .transient_suppression = {.enabled = false}};
@@ -1482,6 +1520,8 @@ TEST(AudioProcessingImplTest, CanDisableTsWithAgc2FieldTrialDisabled) {
   EXPECT_FALSE(apm->GetConfig().transient_suppression.enabled);
 }
 
+// TODO(bugs.webrtc.org/7494): Remove when "WebRTC-Audio-GainController2" is
+// deprecated.
 TEST(AudioProcessingImplTest, CanEnableTsWithAgc2FieldTrialDisabled) {
   constexpr AudioProcessing::Config kOriginal = {
       .transient_suppression = {.enabled = true}};
@@ -1500,6 +1540,8 @@ TEST(AudioProcessingImplTest, CanEnableTsWithAgc2FieldTrialDisabled) {
   EXPECT_TRUE(adjusted.transient_suppression.enabled);
 }
 
+// TODO(bugs.webrtc.org/7494): Remove when "WebRTC-Audio-GainController2" is
+// deprecated.
 TEST(AudioProcessingImplTest,
      CanDisableTsWithAgc2FieldTrialEnabledAndUsageAllowed) {
   constexpr AudioProcessing::Config kOriginal = {
@@ -1520,6 +1562,8 @@ TEST(AudioProcessingImplTest,
   EXPECT_FALSE(adjusted.transient_suppression.enabled);
 }
 
+// TODO(bugs.webrtc.org/7494): Remove when "WebRTC-Audio-GainController2" is
+// deprecated.
 TEST(AudioProcessingImplTest,
      CanEnableTsWithAgc2FieldTrialEnabledAndUsageAllowed) {
   constexpr AudioProcessing::Config kOriginal = {
@@ -1540,8 +1584,10 @@ TEST(AudioProcessingImplTest,
   EXPECT_TRUE(adjusted.transient_suppression.enabled);
 }
 
+// TODO(bugs.webrtc.org/7494): Remove when "WebRTC-Audio-GainController2" is
+// deprecated.
 TEST(AudioProcessingImplTest,
-     CannotEnableTsWithAgc2FieldTrialEnabledAndUsageDisallowed) {
+     CanEnableTsWithAgc2FieldTrialEnabledAndUsageDisallowed) {
   constexpr AudioProcessing::Config kOriginal = {
       .transient_suppression = {.enabled = true}};
   webrtc::test::ScopedFieldTrials field_trials(
@@ -1551,13 +1597,13 @@ TEST(AudioProcessingImplTest,
   // Test config application via `AudioProcessing` ctor.
   auto adjusted =
       AudioProcessingBuilder().SetConfig(kOriginal).Create()->GetConfig();
-  EXPECT_FALSE(adjusted.transient_suppression.enabled);
+  EXPECT_TRUE(adjusted.transient_suppression.enabled);
 
   // Test config application via `AudioProcessing::ApplyConfig()`.
   auto apm = AudioProcessingBuilder().Create();
   apm->ApplyConfig(kOriginal);
   adjusted = apm->GetConfig();
-  EXPECT_FALSE(apm->GetConfig().transient_suppression.enabled);
+  EXPECT_TRUE(apm->GetConfig().transient_suppression.enabled);
 }
 
 }  // namespace webrtc
