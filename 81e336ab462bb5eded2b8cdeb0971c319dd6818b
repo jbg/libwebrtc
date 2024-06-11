@@ -168,6 +168,24 @@
       "message": "Should this use the analogous `std::remove_if` ?",
       "revId": "81e336ab462bb5eded2b8cdeb0971c319dd6818b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e68db4ba_04aa0bf0",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2024-06-11T12:28:10Z",
+      "side": 1,
+      "message": "Done. Might have been submitted separately as it\u0027s non-relevant code improvement, but it\u0027s probably fine doing it here.",
+      "parentUuid": "67adde7f_abf37b91",
+      "revId": "81e336ab462bb5eded2b8cdeb0971c319dd6818b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
