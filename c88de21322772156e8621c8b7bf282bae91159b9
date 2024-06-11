@@ -22,6 +22,30 @@
       },
       "revId": "c88de21322772156e8621c8b7bf282bae91159b9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d23f144_d2cb0db6",
+        "filename": "modules/audio_processing/audio_processing_impl_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1504,
+      "author": {
+        "id": 17719
+      },
+      "writtenOn": "2024-06-11T08:21:55Z",
+      "side": 1,
+      "message": "There\u0027s a follow-up CL (https://webrtc-review.googlesource.com/c/src/+/354140) to remove the tests as well. I kept them here (with modifications so that they pass) to verify the removal doesn\u0027t break anything but we can delete them already in this CL if that\u0027s preferred?",
+      "parentUuid": "008cda3f_aaed25cd",
+      "range": {
+        "startLine": 1502,
+        "startChar": 0,
+        "endLine": 1504,
+        "endChar": 14
+      },
+      "revId": "c88de21322772156e8621c8b7bf282bae91159b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
