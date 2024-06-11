@@ -34,6 +34,10 @@ struct {
     {SPA_VIDEO_FORMAT_YUY2, VideoType::kYUY2},
     {SPA_VIDEO_FORMAT_UYVY, VideoType::kUYVY},
     {SPA_VIDEO_FORMAT_RGB, VideoType::kRGB24},
+    {SPA_VIDEO_FORMAT_ARGB, VideoType::kARGB},
+    {SPA_VIDEO_FORMAT_ABGR, VideoType::kABGR},
+    {SPA_VIDEO_FORMAT_xRGB, VideoType::kARGB},
+    {SPA_VIDEO_FORMAT_xBGR, VideoType::kABGR},
 };
 
 VideoType VideoCaptureModulePipeWire::PipeWireRawFormatToVideoType(
@@ -302,6 +306,10 @@ void VideoCaptureModulePipeWire::OnFormatChanged(const struct spa_pod* format) {
         break;
       case VideoType::kRGB24:
         stride = configured_capability_.width * 3;
+        break;
+      case VideoType::kARGB:
+      case VideoType::kABGR:
+        stride = configured_capability_.width * 4;
         break;
       default:
         RTC_LOG(LS_ERROR) << "Unsupported video format.";
