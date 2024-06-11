@@ -16,6 +16,57 @@
       "message": "Hmm, this looks strange. I would expect that there is only one event for each id.\nI\u0027ve never seen such duplication. Or are you sharing the PipeWire fd among multiple `PipeWireSession` objects?",
       "revId": "81e336ab462bb5eded2b8cdeb0971c319dd6818b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "026a62c3_00112f09",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8178
+      },
+      "writtenOn": "2024-06-11T10:30:54Z",
+      "side": 1,
+      "message": "LGTM with the two comments considered.",
+      "revId": "81e336ab462bb5eded2b8cdeb0971c319dd6818b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a944b43_97fb66a9",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 8178
+      },
+      "writtenOn": "2024-06-11T10:30:54Z",
+      "side": 1,
+      "message": "I\u0027d prefer find_if so you don\u0027t need to define `operator\u003d\u003d` to satisfy a specific use case. I can\u0027t say whether the `operator\u003d\u003d` as defined here is correct.",
+      "revId": "81e336ab462bb5eded2b8cdeb0971c319dd6818b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67adde7f_abf37b91",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 8178
+      },
+      "writtenOn": "2024-06-11T10:30:54Z",
+      "side": 1,
+      "message": "Should this use the analogous `std::remove_if` ?",
+      "revId": "81e336ab462bb5eded2b8cdeb0971c319dd6818b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
