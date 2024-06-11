@@ -40,7 +40,7 @@ std::unique_ptr<VideoRtpDepacketizer> CreateVideoRtpDepacketizer(
 #ifdef RTC_ENABLE_H265
       return std::make_unique<VideoRtpDepacketizerH265>();
 #else
-      return nullptr;
+      return std::make_unique<VideoRtpDepacketizerGeneric>();
 #endif
     case kVideoCodecGeneric:
       return std::make_unique<VideoRtpDepacketizerGeneric>();
