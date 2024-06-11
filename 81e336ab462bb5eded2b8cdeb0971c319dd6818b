@@ -76,6 +76,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffb9883c_841596fa",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2024-06-11T10:53:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abea4fb1_27866df3",
+      "range": {
+        "startLine": 71,
+        "startChar": 18,
+        "endLine": 71,
+        "endChar": 42
+      },
+      "revId": "81e336ab462bb5eded2b8cdeb0971c319dd6818b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a944b43_97fb66a9",
@@ -89,6 +113,24 @@
       "writtenOn": "2024-06-11T10:30:54Z",
       "side": 1,
       "message": "I\u0027d prefer find_if so you don\u0027t need to define `operator\u003d\u003d` to satisfy a specific use case. I can\u0027t say whether the `operator\u003d\u003d` as defined here is correct.",
+      "revId": "81e336ab462bb5eded2b8cdeb0971c319dd6818b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccd20ce5_edd1e993",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2024-06-11T10:53:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a944b43_97fb66a9",
       "revId": "81e336ab462bb5eded2b8cdeb0971c319dd6818b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
