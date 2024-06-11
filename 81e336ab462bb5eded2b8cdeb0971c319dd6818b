@@ -53,6 +53,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "314a86b7_c8c793ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2024-06-11T11:19:17Z",
+      "side": 1,
+      "message": "Found the issue:\nxdg-desktop-portal: https://github.com/flatpak/xdg-desktop-portal/commit/24d29bf1cc0e68521f082db4673999478a5923c9\n\nDowngrading to xdg-desktop-portal 1.18.2 makes it go away. I asked Robert Mader now and his response is:\n\nYep, that\u0027s a known regression caused by a fix for the portal. I haven\u0027t had time to investigate further, but I think it\u0027s a PW bug around permissions. In any case, with xdp \u003c\u003d 1.18.2 there were issues with cameras often not showing up at all - with \u003e\u003d 1.18.3 you get duplicates. The later is IMO much better, but still should get fixed - or worked around in apps, which usually should be quite simple (Snapshot does it as well IIRC).\n\nTherefore, we need this workaround.",
+      "parentUuid": "350ff2b6_d5ce9091",
+      "revId": "81e336ab462bb5eded2b8cdeb0971c319dd6818b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abea4fb1_27866df3",
