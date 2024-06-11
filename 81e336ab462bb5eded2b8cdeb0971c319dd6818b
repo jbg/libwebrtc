@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "350ff2b6_d5ce9091",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2024-06-11T10:40:22Z",
+      "side": 1,
+      "message": "Yes, it\u0027s strange and I don\u0027t see anything wrong or anything that would cause getting events twice. And no, I don\u0027t share PipeWire fd and I\u0027m not only one who can reproduce this issue. I\u0027m still investigating what\u0027s going on.",
+      "parentUuid": "b69e36ca_ad274922",
+      "revId": "81e336ab462bb5eded2b8cdeb0971c319dd6818b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abea4fb1_27866df3",
