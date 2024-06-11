@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "008cda3f_aaed25cd",
+        "filename": "modules/audio_processing/audio_processing_impl_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1504,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2024-06-11T08:14:11Z",
+      "side": 1,
+      "message": "I think I am missing some piece of information. This comment confuses me: Since the CL is titled \"Deprecate WebRTC-Audio-GainController2 fieldtrial\", the when-condition is already fulfilled and the tests can be deleted. Right?\n\nShould all these tests even be passing? If they set the field trial to different values but the CL removes the field trial parsing in `audio_processing_impl.cc`, the field trial should not have an effect, or?",
+      "range": {
+        "startLine": 1502,
+        "startChar": 0,
+        "endLine": 1504,
+        "endChar": 14
+      },
+      "revId": "c88de21322772156e8621c8b7bf282bae91159b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
