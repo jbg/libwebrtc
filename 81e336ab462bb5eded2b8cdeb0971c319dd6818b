@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b69e36ca_ad274922",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2024-06-11T10:15:06Z",
+      "side": 1,
+      "message": "Hmm, this looks strange. I would expect that there is only one event for each id.\nI\u0027ve never seen such duplication. Or are you sharing the PipeWire fd among multiple `PipeWireSession` objects?",
+      "revId": "81e336ab462bb5eded2b8cdeb0971c319dd6818b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
