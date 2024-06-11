@@ -68,6 +68,10 @@ PipeWireNode::~PipeWireNode() {
   spa_hook_remove(&node_listener_);
 }
 
+bool PipeWireNode::operator==(uint32_t id) {
+  return id == id_;
+}
+
 // static
 void PipeWireNode::OnNodeInfo(void* data, const pw_node_info* info) {
   PipeWireNode* that = static_cast<PipeWireNode*>(data);
@@ -353,6 +357,11 @@ void PipeWireSession::OnRegistryGlobal(void* data,
                                        uint32_t version,
                                        const spa_dict* props) {
   PipeWireSession* that = static_cast<PipeWireSession*>(data);
+
+  // Skip already added nodes to avoid duplicate camera entries
+  if (std::find(that->nodes_.begin(), that->nodes_.end(), id) !=
+      that->nodes_.end())
+    return;
 
   if (type != absl::string_view(PW_TYPE_INTERFACE_Node))
     return;
