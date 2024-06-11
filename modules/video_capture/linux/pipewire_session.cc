@@ -354,6 +354,13 @@ void PipeWireSession::OnRegistryGlobal(void* data,
                                        const spa_dict* props) {
   PipeWireSession* that = static_cast<PipeWireSession*>(data);
 
+  // Skip already added nodes to avoid duplicate camera entries
+  if (std::find_if(that->nodes_.begin(), that->nodes_.end(),
+                   [id](const PipeWireNode& node) {
+                     return node.id() == id;
+                   }) != that->nodes_.end())
+    return;
+
   if (type != absl::string_view(PW_TYPE_INTERFACE_Node))
     return;
 
