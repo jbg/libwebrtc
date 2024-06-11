@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "abea4fb1_27866df3",
+        "filename": "modules/video_capture/linux/pipewire_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2024-06-11T10:34:59Z",
+      "side": 1,
+      "message": "Comparing PipeWireNode to int is very weird. Please use a lambda instead.",
+      "range": {
+        "startLine": 71,
+        "startChar": 18,
+        "endLine": 71,
+        "endChar": 42
+      },
+      "revId": "81e336ab462bb5eded2b8cdeb0971c319dd6818b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4a944b43_97fb66a9",
         "filename": "modules/video_capture/linux/pipewire_session.cc",
         "patchSetId": 3
