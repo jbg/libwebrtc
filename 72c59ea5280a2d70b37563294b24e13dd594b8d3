@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96821f95_9798e16b",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 9816
+      },
+      "writtenOn": "2024-06-12T19:16:51Z",
+      "side": 1,
+      "message": "The original code is definitely wrong. The address needs to be adjusted by `mapoffset`.\nBut I\u0027m not sure if this is correct either: the `offset` argument for `mmap()` must be a multiple of the page size, and I don\u0027t think we can assume that for `mapoffset`.",
+      "revId": "72c59ea5280a2d70b37563294b24e13dd594b8d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
