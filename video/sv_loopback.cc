@@ -585,7 +585,12 @@ void Loopback() {
   BuiltInNetworkBehaviorConfig pipe_config;
   pipe_config.loss_percent = LossPercent();
   pipe_config.avg_burst_loss_length = AvgBurstLossLength();
-  pipe_config.link_capacity = DataRate::KilobitsPerSec(LinkCapacityKbps());
+  int link_capacity_kbps = LinkCapacityKbps();
+  if (link_capacity_kbps > 0) {
+    pipe_config.link_capacity = DataRate::KilobitsPerSec(link_capacity_kbps);
+  } else {
+    pipe_config.link_capacity = DataRate::Infinity();
+  }
   pipe_config.queue_length_packets = QueueSize();
   pipe_config.queue_delay_ms = AvgPropagationDelayMs();
   pipe_config.delay_standard_deviation_ms = StdPropagationDelayMs();
