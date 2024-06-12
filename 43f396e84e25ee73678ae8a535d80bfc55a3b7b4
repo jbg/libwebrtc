@@ -112,6 +112,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05a9e91a_5a358b68",
+        "filename": "modules/audio_mixer/frame_combiner.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2024-06-12T05:54:11Z",
+      "side": 1,
+      "message": "Oh, I would have thought that O2 handled that. Thanks for checking!!!",
+      "parentUuid": "fa88280d_dfdc82db",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 6
+      },
+      "revId": "43f396e84e25ee73678ae8a535d80bfc55a3b7b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dcc18160_65432416",
@@ -149,6 +173,30 @@
       "side": 1,
       "message": "Done.\n\nBtw `\u0026foo[0]` is the most universally compatible way of getting direct access to an array of elements. It\u0027s what works for all types of arrays, which minimizes required changes to the code if someone is refactoring things, e.g. changing the type.",
       "parentUuid": "dcc18160_65432416",
+      "range": {
+        "startLine": 193,
+        "startChar": 6,
+        "endLine": 193,
+        "endChar": 24
+      },
+      "revId": "43f396e84e25ee73678ae8a535d80bfc55a3b7b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "338b61dd_b8e38f2a",
+        "filename": "modules/audio_mixer/frame_combiner.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2024-06-12T05:54:11Z",
+      "side": 1,
+      "message": "Good point! I myself prefer that style as well, but in code where there is mixed usage of that style, and the data() style I tend to favor data().\nHowever, this is definitely an important aspect so maybe this is something to bring in to the style guide?",
+      "parentUuid": "a19bca61_531fb283",
       "range": {
         "startLine": 193,
         "startChar": 6,
