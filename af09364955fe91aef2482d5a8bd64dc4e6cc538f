@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eed55de_1f722e4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2024-06-12T12:11:43Z",
+      "side": 1,
+      "message": "It doesn\u0027t sound right to use Generic depacketizer for H265.\n\nIf H265 support is not enabled, the codec should not be negotiated and \"nullptr dereference\", mentioned in the description, should never happen.",
+      "revId": "af09364955fe91aef2482d5a8bd64dc4e6cc538f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
