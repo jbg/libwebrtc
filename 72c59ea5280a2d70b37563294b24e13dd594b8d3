@@ -16,6 +16,24 @@
       "message": "The original code is definitely wrong. The address needs to be adjusted by `mapoffset`.\nBut I\u0027m not sure if this is correct either: the `offset` argument for `mmap()` must be a multiple of the page size, and I don\u0027t think we can assume that for `mapoffset`.",
       "revId": "72c59ea5280a2d70b37563294b24e13dd594b8d3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1db6e60d_ca41d230",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2024-06-12T19:34:40Z",
+      "side": 1,
+      "message": "I will ask around, but I can see Mutter (for example) doing it the same: https://gitlab.gnome.org/GNOME/mutter/-/blob/main/src/backends/meta-screen-cast-stream-src.c#L1436",
+      "parentUuid": "96821f95_9798e16b",
+      "revId": "72c59ea5280a2d70b37563294b24e13dd594b8d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
