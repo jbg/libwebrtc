@@ -52,6 +52,24 @@
       "parentUuid": "1db6e60d_ca41d230",
       "revId": "72c59ea5280a2d70b37563294b24e13dd594b8d3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfb4f044_30958701",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2024-06-13T11:02:38Z",
+      "side": 1,
+      "message": "The examples in PipeWire are wrong. I already talked to Wim Taymans (PipeWire author) and he will be fixing them. He said PipeWire always set the offset to 0 for memfd buffers it maps or in case a buffer comes e.g. from V4L2, then PipeWire makes sure it\u0027s multiple of the page size.",
+      "parentUuid": "1c89dcf4_6c3499cc",
+      "revId": "72c59ea5280a2d70b37563294b24e13dd594b8d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
