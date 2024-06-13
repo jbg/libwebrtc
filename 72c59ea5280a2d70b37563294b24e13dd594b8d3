@@ -88,6 +88,24 @@
       "parentUuid": "dfb4f044_30958701",
       "revId": "72c59ea5280a2d70b37563294b24e13dd594b8d3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4930acdd_30d225ee",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2024-06-13T12:36:31Z",
+      "side": 1,
+      "message": "It shouldn\u0027t be needed:\nhttps://gitlab.freedesktop.org/pipewire/pipewire/-/commit/0115042adbf2203696c4cb0b385eb0c111d037fe\n\nAlso, providing an offset that is not multiple of page size will just fail and report an invalid value passed so we would either fail on the check or with the mmap call.",
+      "parentUuid": "ae7f7953_d98744ca",
+      "revId": "72c59ea5280a2d70b37563294b24e13dd594b8d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
