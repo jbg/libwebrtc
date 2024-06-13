@@ -106,6 +106,24 @@
       "parentUuid": "ae7f7953_d98744ca",
       "revId": "72c59ea5280a2d70b37563294b24e13dd594b8d3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99adfd88_2f8d5e2d",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2024-06-13T13:00:15Z",
+      "side": 1,
+      "message": "Also all the examples have been updated:\nhttps://gitlab.freedesktop.org/pipewire/pipewire/-/commit/9592b0af2a84f0e64c30225bc80013cbc814e159",
+      "parentUuid": "4930acdd_30d225ee",
+      "revId": "72c59ea5280a2d70b37563294b24e13dd594b8d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
