@@ -32,6 +32,10 @@
 #define JNI_GENERATOR_EXPORT extern "C" JNIEXPORT JNICALL
 #endif
 
+// Temporarily required until webrtc migrates to new rules.
+#define CHECK_NATIVE_PTR(env, jcaller, native_ptr, method_name, ...) \
+  JNI_ZERO_DCHECK(native_ptr);
+
 namespace webrtc {
 using jni_zero::JavaParamRef;
 using jni_zero::JavaRef;
