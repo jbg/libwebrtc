@@ -192,6 +192,30 @@
       },
       "revId": "7c731c5dbfe38fda4ec8e8ae89b7ab253b742752",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cb2e934_1aa74fc0",
+        "filename": "sdk/android/src/java/org/webrtc/RTCErrorOr.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2024-06-13T12:19:40Z",
+      "side": 1,
+      "message": "I\u0027m not sure if this would be necessary. It will throw very weird exceptions, like `IllegalStateException(\"Success\")`. I think it\u0027s better to just return the value, and let the user handle it.",
+      "parentUuid": "f73e2a3c_eba5f5dc",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 5
+      },
+      "revId": "7c731c5dbfe38fda4ec8e8ae89b7ab253b742752",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
