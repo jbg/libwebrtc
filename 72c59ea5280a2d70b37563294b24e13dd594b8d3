@@ -70,6 +70,24 @@
       "parentUuid": "1c89dcf4_6c3499cc",
       "revId": "72c59ea5280a2d70b37563294b24e13dd594b8d3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae7f7953_d98744ca",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2024-06-13T11:14:15Z",
+      "side": 1,
+      "message": "Ok, in that case please add a CHECK here, that mapoffset is divisible by the `sysconf(_SC_PAGE_SIZE)`.",
+      "parentUuid": "dfb4f044_30958701",
+      "revId": "72c59ea5280a2d70b37563294b24e13dd594b8d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
