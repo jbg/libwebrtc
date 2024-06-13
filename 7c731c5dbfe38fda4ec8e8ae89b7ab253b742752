@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbe6c38f_2864f94c",
+        "filename": "sdk/android/api/org/webrtc/RtpTransceiver.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2024-06-13T09:39:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63dbc20b_2aa20e00",
+      "range": {
+        "startLine": 218,
+        "startChar": 9,
+        "endLine": 218,
+        "endChar": 25
+      },
+      "revId": "7c731c5dbfe38fda4ec8e8ae89b7ab253b742752",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f22f92c_6a0c3f3e",
@@ -54,6 +78,24 @@
       "writtenOn": "2024-06-13T08:55:50Z",
       "side": 1,
       "message": "Please name this `RtcError` to follow https://google.github.io/styleguide/javaguide.html#s5.3-camel-case\n\n(Same thing for `RTCException` \u003d\u003e `RtcException`)",
+      "revId": "7c731c5dbfe38fda4ec8e8ae89b7ab253b742752",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "917830b5_efa8575d",
+        "filename": "sdk/android/src/java/org/webrtc/RTCErrorOr.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2024-06-13T09:39:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f22f92c_6a0c3f3e",
       "revId": "7c731c5dbfe38fda4ec8e8ae89b7ab253b742752",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
