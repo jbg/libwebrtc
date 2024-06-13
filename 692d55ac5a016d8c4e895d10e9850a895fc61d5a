@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b98f55d9_14e8d54d",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 1289,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2024-06-13T11:41:14Z",
+      "side": 1,
+      "message": "Do you still need this now that there’s no explicit `Void`?",
+      "range": {
+        "startLine": 1289,
+        "startChar": 0,
+        "endLine": 1289,
+        "endChar": 29
+      },
+      "revId": "692d55ac5a016d8c4e895d10e9850a895fc61d5a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df2f600e_d536f763",
+        "filename": "sdk/android/src/java/org/webrtc/RtcError.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 14994
+      },
+      "writtenOn": "2024-06-13T11:41:14Z",
+      "side": 1,
+      "message": "Could you add a javadoc here, stating that you pass null to represent success?\n\nOr have two separate factory methods, `success()` and `error(RtcException)`\n\n(also, isn’t the native code passing a `String` here, and not an `RtcException`?)",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 5
+      },
+      "revId": "692d55ac5a016d8c4e895d10e9850a895fc61d5a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
