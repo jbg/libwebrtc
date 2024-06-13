@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf6071b2_ebf17d0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6192
+      },
+      "writtenOn": "2024-06-13T11:27:48Z",
+      "side": 1,
+      "message": "Manual roll with required third_party/jdk/current DEPS change",
+      "revId": "2507fbd2040458e689e5e963c40d378a2efe2a18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
