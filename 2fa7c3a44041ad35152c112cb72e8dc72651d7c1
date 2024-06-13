@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b239a85b_b01210db",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2024-06-13T08:44:48Z",
+      "side": 1,
+      "message": "Seems the DEPS has not been removed in Chromium:\nhttps://chromium-review.googlesource.com/c/chromium/src/+/5622892",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 25
+      },
+      "revId": "2fa7c3a44041ad35152c112cb72e8dc72651d7c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
