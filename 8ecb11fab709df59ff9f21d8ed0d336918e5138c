@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51517647_bf17b5b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12299
+      },
+      "writtenOn": "2024-06-13T11:15:29Z",
+      "side": 1,
+      "message": "Note that the device status issue has been fixed:\nhttps://chrome-swarming.appspot.com/botlist?c\u003did\u0026c\u003dtask\u0026c\u003dos\u0026c\u003dstatus\u0026d\u003dasc\u0026f\u003dos%3AiOS-16.7.5\u0026f\u003dcpu%3Ax86-64\u0026f\u003dpool%3Achrome.tests\u0026f\u003ddevice_status%3Aavailable\u0026k\u003ddevice_status\u0026s\u003did",
+      "revId": "8ecb11fab709df59ff9f21d8ed0d336918e5138c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
