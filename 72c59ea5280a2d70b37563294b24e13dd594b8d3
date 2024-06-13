@@ -34,6 +34,24 @@
       "parentUuid": "96821f95_9798e16b",
       "revId": "72c59ea5280a2d70b37563294b24e13dd594b8d3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c89dcf4_6c3499cc",
+        "filename": "modules/video_capture/linux/video_capture_pipewire.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2024-06-13T09:18:00Z",
+      "side": 1,
+      "message": "Some pipewire examples [1]  have maxsize+mapoffset, some don\u0027t [2][3]\n\nIt\u0027s possible, that that one example has an error or it handles the case of `offset` not being a multiple of page size.\n\nAccording to the man[4], `length` of the bytes will be used starting from `offest`. So it makes perfect sence, to use only maxsize, not the maxsize+maxoffset for the mapping.\n\nBut if the offset isn\u0027t multiple of the page size, we must use the 0 offset (as before this CL). However in this case we will have some garbage in the beginnig of the buffer.\n\nI think we should expclicitly check if the offset is the multiple of the page size and then do new or old way of mmaping.\n\n\n[1] https://docs.pipewire.org/export-sink_8c-example.html#a83\n[2] https://docs.pipewire.org/video-src-fixate_8c-example.html#a100\n[3] https://docs.pipewire.org/video-src-reneg_8c-example.html#a72\n[4] https://man7.org/linux/man-pages/man2/mmap.2.html",
+      "parentUuid": "1db6e60d_ca41d230",
+      "revId": "72c59ea5280a2d70b37563294b24e13dd594b8d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
