@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73c539dc_9ae6e826",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6192
+      },
+      "writtenOn": "2024-06-13T09:21:35Z",
+      "side": 1,
+      "message": "Realized I need to make a manual roll alongside the deps change, will abandon this CL.",
+      "revId": "7cd6c1dbf4816ca6a831b0a4c3c5da59bda7e0ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
