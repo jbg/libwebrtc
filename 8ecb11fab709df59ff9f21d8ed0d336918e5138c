@@ -16,6 +16,24 @@
       "message": "Note that the device status issue has been fixed:\nhttps://chrome-swarming.appspot.com/botlist?c\u003did\u0026c\u003dtask\u0026c\u003dos\u0026c\u003dstatus\u0026d\u003dasc\u0026f\u003dos%3AiOS-16.7.5\u0026f\u003dcpu%3Ax86-64\u0026f\u003dpool%3Achrome.tests\u0026f\u003ddevice_status%3Aavailable\u0026k\u003ddevice_status\u0026s\u003did",
       "revId": "8ecb11fab709df59ff9f21d8ed0d336918e5138c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0defed7f_1f9259e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6192
+      },
+      "writtenOn": "2024-06-13T12:02:49Z",
+      "side": 1,
+      "message": "Right, but for https://chrome-swarming.appspot.com/bot?id\u003dmac-438-e504 it\u0027s still unavailable but it lists the iOS version indicating the device is at least recognized thus want to try this.",
+      "parentUuid": "51517647_bf17b5b4",
+      "revId": "8ecb11fab709df59ff9f21d8ed0d336918e5138c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
