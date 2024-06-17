@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2956174_0015a422",
+        "filename": "api/test/network_emulation/schedulable_network_node_builder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2024-06-17T13:26:55Z",
+      "side": 1,
+      "message": "please add a setter similar to set_start_condition. No need to per default set a seed.\nPlease also document what it is used for. It is bit surprising that it is needed by a Schedulable....",
+      "range": {
+        "startLine": 27,
+        "startChar": 15,
+        "endLine": 27,
+        "endChar": 26
+      },
+      "revId": "c116908e06468144024de9b8c1c8bc4714687f09",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
