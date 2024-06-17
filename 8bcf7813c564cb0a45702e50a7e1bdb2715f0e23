@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "49caf718_ee10b4f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2024-06-17T13:56:56Z",
+      "side": 1,
+      "message": "Ideally for tracking purposes I\u0027d like to ask that you file a bug over on the bug tracker with the information in the CL description, then reference that bug in this CL. I know it\u0027s a bit of bookkeeping but it helps us a lot.",
+      "parentUuid": "e6287bed_91f6b5db",
+      "revId": "8bcf7813c564cb0a45702e50a7e1bdb2715f0e23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "052b98e1_fb6eab84",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd5a2452_4bf77b31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2024-06-17T13:56:56Z",
+      "side": 1,
+      "message": "Thanks for the CL! This seems like a good idea and it generally LGTM.",
+      "revId": "bf2fd4e621d5a97e8a9607a7fec6aeeddf4496b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
