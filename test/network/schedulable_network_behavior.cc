@@ -73,8 +73,9 @@ BuiltInNetworkBehaviorConfig GetInitialConfig(
 SchedulableNetworkBehavior::SchedulableNetworkBehavior(
     network_behaviour::NetworkConfigSchedule schedule,
     webrtc::Clock& clock,
-    absl::AnyInvocable<bool(webrtc::Timestamp)> start_callback)
-    : SimulatedNetwork(GetInitialConfig(schedule)),
+    absl::AnyInvocable<bool(webrtc::Timestamp)> start_callback,
+    uint64_t random_seed)
+    : SimulatedNetwork(GetInitialConfig(schedule), random_seed),
       schedule_(std::move(schedule)),
       start_condition_(std::move(start_callback)),
       clock_(clock),

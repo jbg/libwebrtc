@@ -11,6 +11,8 @@
 #ifndef TEST_NETWORK_SCHEDULABLE_NETWORK_BEHAVIOR_H_
 #define TEST_NETWORK_SCHEDULABLE_NETWORK_BEHAVIOR_H_
 
+#include <cstdint>
+
 #include "absl/functional/any_invocable.h"
 #include "api/sequence_checker.h"
 #include "api/test/network_emulation/network_config_schedule.pb.h"
@@ -32,7 +34,8 @@ class SchedulableNetworkBehavior : public SimulatedNetwork {
       network_behaviour::NetworkConfigSchedule schedule,
       Clock& clock,
       absl::AnyInvocable<bool(webrtc::Timestamp)> start_condition =
-          [](webrtc::Timestamp) { return true; });
+          [](webrtc::Timestamp) { return true; },
+      uint64_t random_seed = 1);
 
   bool EnqueuePacket(PacketInFlightInfo packet_info) override;
 
