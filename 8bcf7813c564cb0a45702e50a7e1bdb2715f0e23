@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9653562e_8b83f813",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2024-06-17T00:20:06Z",
+      "side": 1,
+      "message": "Can you add a Bug id for this, like other CLs? For example, `Bug: None`",
+      "revId": "8bcf7813c564cb0a45702e50a7e1bdb2715f0e23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "052b98e1_fb6eab84",
@@ -14,6 +31,23 @@
       "writtenOn": "2024-06-14T15:42:03Z",
       "side": 1,
       "message": "This handles a bug that is reproducible since commit cca2c0e6bbcb749b98c4aa104ad84aae809e0656. The reproduction steps are:\n\n1. Start publishing on iOS using the H264 HW encoder (`VTCompressionSession`). \n2. The incoming `RTCVideoFrame` objects must have their `requiresCropping` method return `NO` (i.e. the incoming video stream is a different aspect ratio than the publish dimensions).\n3. Send the host application into the background, and then return it to the foreground.\n\nThe result will be that no video samples get encoded anymore. Here is the reason for the issue:\n\n1. When backgrounding and foregrounding the host application with an active `VTCompressionSession`, the session will invalidate itself, something that is already explicitly handled here - https://webrtc.googlesource.com/src/+/cca2c0e6bbcb749b98c4aa104ad84aae809e0656/sdk/objc/components/video_codec/RTCVideoEncoderH264.mm#505. \n2. Previously, that line would be reached after the repro steps above, causing an encoder reset and minimal impact to the publish track. However, now that the `CVPixelBufferPoolRef` is pulled on demand instead of cached, the line above (https://webrtc.googlesource.com/src/+/cca2c0e6bbcb749b98c4aa104ad84aae809e0656/sdk/objc/components/video_codec/RTCVideoEncoderH264.mm#421) fails instead of succeeding.\n3. This results in returning an error early and never reaching the \"reset\" code path. This happens for all frames going forward, indefinitely, until the encoder is manually reset (by stopping the publish session and starting a new one, for example).\n\nThis fix works by flagging the `VTCompressionSession` for a reset much earlier in the encode method, in a scenario where:\n1. The `VTCompressionSession` itself exists.\n2. The `VTCompressionSession` cannot provide a valid `CVPixelBufferPoolRef`.",
+      "revId": "8bcf7813c564cb0a45702e50a7e1bdb2715f0e23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adb6bf5f_3d4b5d60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2024-06-17T00:20:06Z",
+      "side": 1,
+      "message": "Kári, I think you\u0027re the appropriate reviewer for this CL. Could you please take a look at it?",
       "revId": "8bcf7813c564cb0a45702e50a7e1bdb2715f0e23",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
