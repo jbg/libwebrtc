@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '5a273f36b5b85cd6e576729a2316811d049dd360',
+  'chromium_revision': '4ac7b986316013260cdce507e78cabf7d7dafeff',
 
   # Fetch the prebuilt binaries for llvm-cov and llvm-profdata. Needed to
   # process the raw profiles produced by instrumented targets (built with
@@ -58,9 +58,9 @@ vars = {
 deps = {
   # TODO(kjellander): Move this to be Android-only.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@01cabbd0a21aa5cf3b7171b2c01c60c046024955',
+    'https://chromium.googlesource.com/chromium/src/base@21aa1c623a46bfbbab7140e986442cbe10f38fcb',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@3fa729187df73ad2857d1c0cbedceaaa2998a44e',
+    'https://chromium.googlesource.com/chromium/src/build@278ff0b63ee41b3c4418f883812e03e2938a4e09',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@8acbed51859808fe82c5c4c079efe05a012ea041',
   # Gradle 6.6.1. Used for testing Android Studio project generation for WebRTC.
@@ -73,9 +73,9 @@ deps = {
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@60d950d84ecc32e23dc01a749deefb39c0beac7c',
+    'https://chromium.googlesource.com/chromium/src/testing@f1863c5ea3f9187d9bca0c5e221ba320e32981f2',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@6dca4b38b01d037d38eb4acdd8b69c6234445777',
+    'https://chromium.googlesource.com/chromium/src/third_party@ffbc0be9d52aa805bc39ab86f83c5377b649884b',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -383,7 +383,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@927447300edeed5f9c2709d6a109aad9c692bf24',
+    'https://chromium.googlesource.com/chromium/src/tools@00068d2aad55ba999d9d0bbf98991a0361132724',
 
   'src/third_party/espresso': {
       'packages': [
