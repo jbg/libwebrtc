@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ecf3d5b_54552672",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3350241
+      },
+      "writtenOn": "2024-06-17T19:58:16Z",
+      "side": 1,
+      "message": "I tried adding a test along these lines:\n  https://gist.github.com/fippo/3739d2166999658b6c580136d2d9450c\nbut the error is not what happens in Chromium.\nI suspect due to the simulated network used by the test.\n\nPrivacy-wise this should be ok, this can already be inferred from the timing.",
+      "revId": "201110e28565709f4071c752f8caafd3912e6fa8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
