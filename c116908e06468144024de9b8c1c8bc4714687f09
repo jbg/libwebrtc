@@ -22,6 +22,30 @@
       },
       "revId": "c116908e06468144024de9b8c1c8bc4714687f09",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89d4fbdc_a50b1e62",
+        "filename": "api/test/network_emulation/schedulable_network_node_builder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2024-06-17T14:01:01Z",
+      "side": 1,
+      "message": "The SchedulableNetwork needs a random seed for loss rate and delay standard deviation.\n\nEventually, I think either\n- the seed should be mandatory, or\n- the builder should track whether a random seed has been set and assign something non-fixed (e.g. based on current time) otherwise.",
+      "parentUuid": "c2956174_0015a422",
+      "range": {
+        "startLine": 27,
+        "startChar": 15,
+        "endLine": 27,
+        "endChar": 26
+      },
+      "revId": "c116908e06468144024de9b8c1c8bc4714687f09",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
