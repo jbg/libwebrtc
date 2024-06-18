@@ -88,6 +88,23 @@
       "parentUuid": "651b610c_eaafb452",
       "revId": "d160e62d5ade13cdeca36e02977cf848597167fa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "339395ed_0d6421a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2024-06-18T07:28:40Z",
+      "side": 1,
+      "message": "Hi @ssilkin@google.com, is there anything you want me to clarify? Can we move forward with this change? I don\u0027t think this is a risky change since it\u0027s something one have to specify during the build and brings benefit for packagers. \n\nWith this change and with https://chromium-review.googlesource.com/c/chromium/src/+/5534771 we can for example avoid replacing code for bundled OpenH264 with noopenh264 during the build and just simply use this build option.",
+      "revId": "d160e62d5ade13cdeca36e02977cf848597167fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
