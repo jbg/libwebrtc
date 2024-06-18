@@ -70,6 +70,30 @@
       },
       "revId": "e0283dc9f2f943e2339386bc66786955861b8b59",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7705d10_f16e5a3f",
+        "filename": "modules/video_coding/codecs/vp9/libvpx_vp9_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2024-06-18T12:38:40Z",
+      "side": 1,
+      "message": "\u003e Which fields you mean?\n\nAt least `codec.VP9()-\u003enumberOfSpatialLayers`. Then `ConvertSvcFrameToSimulcast()` may be a little different, depending on what each specific encoder is producing. There may be some codec specific metadata there beyond \u0027end_of_picture\u0027.\n\n\u003e You can get implementation name from EncoderInfo and restrict this to libvpx\n\nYes, but how would I then enable it for a specific Chrome encoder? \nWell, it\u0027s possible with a new flag in encoderInfo (it works better than a hardcoded list of names). But if each encoder will have to be changed either way for that to work, why not just make the internal conversion for each specific case, without trying to make everything generic and working in all possible scenarios?\n\nI don\u0027t want to pull S-modes logic into the SEA level. It\u0027s supposed to only allow non-simulcast aware encoders to work. Giving it knowledge of S-modes really complicates it beyond it\u0027s original purpose.\n\n\u003e This will be done in (1).\n\nDid you forget to post a link?",
+      "parentUuid": "6a4e1f77_95233d02",
+      "range": {
+        "startLine": 531,
+        "startChar": 0,
+        "endLine": 540,
+        "endChar": 3
+      },
+      "revId": "e0283dc9f2f943e2339386bc66786955861b8b59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
