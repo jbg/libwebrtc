@@ -94,6 +94,30 @@
       },
       "revId": "e0283dc9f2f943e2339386bc66786955861b8b59",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f87e0b9b_c46c1a56",
+        "filename": "modules/video_coding/codecs/vp9/libvpx_vp9_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2024-06-18T12:54:35Z",
+      "side": 1,
+      "message": "\u003e At least codec.VP9()-\u003enumberOfSpatialLayers. Then ConvertSvcFrameToSimulcast()\n\nyou don\u0027t need to set numberOfSpatialLayers if you set scalability_mode (that\u0027s how it is currently implemented in libvpx VP9 encoder wrapper). \n\nYes, encoder wrappers need to set end_of_picture on each layer in S mode. But we don\u0027t really need a generic function like ConvertSvcFrameToSimulcast for this.\n\n\u003e Yes, but how would I then enable it for a specific Chrome encoder?\nWell, it\u0027s possible with a new flag in encoderInfo (it works better than a hardcoded list of names).\n\nWhat is the problem with using implementation name? Ideally, if encoder advertise S mode support we should use it.\n\n\u003e Did you forget to post a link?\n\nI referred to (1) from my first comment: 1. In SEA::InitEncode(), derive S mode from the current simulcast config.",
+      "parentUuid": "a7705d10_f16e5a3f",
+      "range": {
+        "startLine": 531,
+        "startChar": 0,
+        "endLine": 540,
+        "endChar": 3
+      },
+      "revId": "e0283dc9f2f943e2339386bc66786955861b8b59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
