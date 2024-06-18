@@ -142,6 +142,30 @@
       },
       "revId": "e0283dc9f2f943e2339386bc66786955861b8b59",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8184cb80_4486fcc0",
+        "filename": "modules/video_coding/codecs/vp9/libvpx_vp9_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2024-06-18T15:42:36Z",
+      "side": 1,
+      "message": "Based on offline discussion, let\u0027s proceed with the current approach.",
+      "parentUuid": "ab6dd986_7548670e",
+      "range": {
+        "startLine": 531,
+        "startChar": 0,
+        "endLine": 540,
+        "endChar": 3
+      },
+      "revId": "e0283dc9f2f943e2339386bc66786955861b8b59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
