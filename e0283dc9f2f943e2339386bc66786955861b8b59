@@ -22,6 +22,30 @@
       },
       "revId": "e0283dc9f2f943e2339386bc66786955861b8b59",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fe36c42_7752f492",
+        "filename": "modules/video_coding/codecs/vp9/libvpx_vp9_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2024-06-18T11:51:27Z",
+      "side": 1,
+      "message": "The issue is that ConvertSimulcastConfigToSvc isn\u0027t codec agnostic. It populates some codec specific fields. In theory, we could teach it to work with AV1 also, and move the code in some more common place. \n\nBut even still, I\u0027m against doing it in the SEA. it will enable all the external encoders. This is risky and may provide no benifit for some of them. I\u0027d like to manually bring in only encoders, which both support Simulcast-like SVC and are more efficient at it. So each external encoder will call the same code (there\u0027s only one candidate currently).\n\nJust checking for S-mode support isn\u0027t sufficent, additional checks for simulcast format is needed, to ensure that it corresponds to the S-mode.\n\nFinally, I don\u0027t like updating the encoder wrapper to use simulcastStreams[] depending on the S-mode. It will be more error prone and the wrapper code will be very confusing.",
+      "parentUuid": "96cad2ba_884b4440",
+      "range": {
+        "startLine": 531,
+        "startChar": 0,
+        "endLine": 540,
+        "endChar": 3
+      },
+      "revId": "e0283dc9f2f943e2339386bc66786955861b8b59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
