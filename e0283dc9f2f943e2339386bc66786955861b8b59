@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96cad2ba_884b4440",
+        "filename": "modules/video_coding/codecs/vp9/libvpx_vp9_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2024-06-18T11:36:52Z",
+      "side": 1,
+      "message": "How about moving this one layer above encoder wrapper, to SEA, and making this codec-type agnostic?\n\nIt can be something like this:\n\n1. In SEA::InitEncode(), derive S mode from the current simulcast config.\n\n2. Query support of that S mode in encoder factory: https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/api/video_codecs/video_encoder_factory.h;l\u003d87\n\n3. If mode is supported, set VideoCodec::scalability_mode\u003dS\n\n4. Update encoder wrapper(s) to use VideoCodec::simucastStreams[] instead of spatialLayers[] when S mode is used (note that simucastStreams and spatialLayers use the same dtype now).",
+      "range": {
+        "startLine": 531,
+        "startChar": 0,
+        "endLine": 540,
+        "endChar": 3
+      },
+      "revId": "e0283dc9f2f943e2339386bc66786955861b8b59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
