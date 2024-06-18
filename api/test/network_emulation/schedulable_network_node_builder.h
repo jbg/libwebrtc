@@ -10,7 +10,10 @@
 #ifndef API_TEST_NETWORK_EMULATION_SCHEDULABLE_NETWORK_NODE_BUILDER_H_
 #define API_TEST_NETWORK_EMULATION_SCHEDULABLE_NETWORK_NODE_BUILDER_H_
 
+#include <cstdint>
+
 #include "absl/functional/any_invocable.h"
+#include "absl/types/optional.h"
 #include "api/test/network_emulation/network_config_schedule.pb.h"
 #include "api/test/network_emulation_manager.h"
 #include "api/units/timestamp.h"
@@ -30,7 +33,10 @@ class SchedulableNetworkNodeBuilder {
   void set_start_condition(
       absl::AnyInvocable<bool(webrtc::Timestamp)> start_condition);
 
-  webrtc::EmulatedNetworkNode* Build();
+  // If no random seed is provided, one will be created.
+  // The random seed is required for loss rate and to delay standard deviation.
+  webrtc::EmulatedNetworkNode* Build(
+      absl::optional<uint64_t> random_seed = absl::nullopt);
 
  private:
   webrtc::NetworkEmulationManager& net_;

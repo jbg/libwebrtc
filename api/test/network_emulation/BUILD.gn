@@ -28,6 +28,7 @@ if (rtc_enable_protobuf) {
       "../../../test/network:schedulable_network_behavior",
       "../../units:timestamp",
       "//third_party/abseil-cpp/absl/functional:any_invocable",
+      "//third_party/abseil-cpp/absl/types:optional",
     ]
   }
 }
