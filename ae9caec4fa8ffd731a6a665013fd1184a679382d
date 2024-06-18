@@ -16,6 +16,24 @@
       "message": "what\u0027s a \"mater\"?",
       "revId": "ae9caec4fa8ffd731a6a665013fd1184a679382d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de12c015_bc2202f0",
+        "filename": "tools_webrtc/gn_check_autofix.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2024-06-18T13:30:42Z",
+      "side": 1,
+      "message": "No idea. The old version hasn\u0027t worked for me (I think because reclient is misconfigured on my machine), so I tried to keep that codepath unchanged.\nLooking at the mb gen documentation, the flags are\n```\n[-m BUILDER_GROUP] [-b BUILDER] [-c CONFIG]\n```\n(There\u0027s a bunch of other flags but they seem unrelated to selecting a \"configuration\".)",
+      "parentUuid": "53234499_49589393",
+      "revId": "ae9caec4fa8ffd731a6a665013fd1184a679382d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
