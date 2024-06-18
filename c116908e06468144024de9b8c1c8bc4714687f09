@@ -70,6 +70,30 @@
       },
       "revId": "c116908e06468144024de9b8c1c8bc4714687f09",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a222ccf2_4fb124ae",
+        "filename": "api/test/network_emulation/schedulable_network_node_builder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 12234
+      },
+      "writtenOn": "2024-06-18T12:44:17Z",
+      "side": 1,
+      "message": "Made the random seed optional and the builder now creates the seed if none is provided.\n\nCan try to do the same for SimulatedNetworkNode in a follow up CL https://source.chromium.org/chromium/chromium/src/+/main:third_party/webrtc/api/test/network_emulation_manager.h;l\u003d213-215?q\u003dSimulatedNetworkNode",
+      "parentUuid": "f26149f2_56f7f689",
+      "range": {
+        "startLine": 27,
+        "startChar": 15,
+        "endLine": 27,
+        "endChar": 26
+      },
+      "revId": "c116908e06468144024de9b8c1c8bc4714687f09",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
