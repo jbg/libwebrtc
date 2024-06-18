@@ -46,6 +46,30 @@
       },
       "revId": "e0283dc9f2f943e2339386bc66786955861b8b59",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a4e1f77_95233d02",
+        "filename": "modules/video_coding/codecs/vp9/libvpx_vp9_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2024-06-18T12:26:50Z",
+      "side": 1,
+      "message": "\u003e  It populates some codec specific fields.\n\nWhich fields you mean?\n\n\u003eit will enable all the external encoders. This is risky and may provide no benifit for some of them\n\nYou can get implementation name from EncoderInfo and restrict this to libvpx (in case of VP9; for AV1 no need this restrict for now) on SEA level.\n\n\n\u003e additional checks for simulcast format is needed, to ensure that it corresponds to the S-mode.\n\nThis will be done in (1).\n\n\u003e simulcastStreams[] depending on the S-mode. It will be more error prone and the wrapper code will be very confusing.\n\nPartially agreed. simulcastStreams -\u003e spatialLayers conversion should be Ok to do.\n\nI still think this can and should be implemented in more codec type agnostic fashion, at SEA level.",
+      "parentUuid": "0fe36c42_7752f492",
+      "range": {
+        "startLine": 531,
+        "startChar": 0,
+        "endLine": 540,
+        "endChar": 3
+      },
+      "revId": "e0283dc9f2f943e2339386bc66786955861b8b59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
