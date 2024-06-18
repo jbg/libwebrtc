@@ -118,6 +118,30 @@
       },
       "revId": "e0283dc9f2f943e2339386bc66786955861b8b59",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab6dd986_7548670e",
+        "filename": "modules/video_coding/codecs/vp9/libvpx_vp9_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2024-06-18T13:05:00Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t want to pull S-modes logic into the SEA level. It\u0027s supposed to only allow non-simulcast aware encoders to work. Giving it knowledge of S-modes really complicates it beyond it\u0027s original purpose.\n\nWe have passthrough mode in SEA. I.e., SEA is aware of simulcast/S-mode capable encoders. It is really SEA\u0027s task to make sure it uses that aspect of encoder capability properly.",
+      "parentUuid": "f87e0b9b_c46c1a56",
+      "range": {
+        "startLine": 531,
+        "startChar": 0,
+        "endLine": 540,
+        "endChar": 3
+      },
+      "revId": "e0283dc9f2f943e2339386bc66786955861b8b59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
