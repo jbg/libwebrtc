@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "022afa22_6f685acf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2024-06-18T11:30:00Z",
+      "side": 1,
+      "message": "Rasmus; any feedback on exposing this as part of the ObjC API?",
+      "revId": "6e8075f504381b0d47873e5708185f973476cede",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
